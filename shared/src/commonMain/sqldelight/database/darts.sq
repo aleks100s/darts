@@ -1,0 +1,140 @@
+getLastInsertedId:
+SELECT last_insert_rowid();
+
+-- Player
+
+CREATE TABLE playerEntity(
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL
+);
+
+insertPlayerEntity:
+INSERT OR REPLACE INTO playerEntity(
+    id,
+    name
+)
+VALUES(?, ?);
+
+getPlayers:
+SELECT * FROM playerEntity ORDER BY id DESC;
+
+getPlayer:
+SELECT * FROM playerEntity WHERE id = ?;
+
+-- Game
+
+CREATE TABLE gameEntity(
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    game_goal INTEGER NOT NULL,
+    timestamp INTEGER NOT NULL
+);
+
+insertGameEntity:
+INSERT OR REPLACE INTO gameEntity(
+    id,
+    game_goal,
+    timestamp
+)
+VALUES(?, ?, ?);
+
+-- GamePlayer
+
+CREATE TABLE gamePlayerEntity(
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    game_id INTEGER NOT NULL,
+    player_id INTEGER NOT NULL,
+    game_order INTEGER NOT NULL,
+    is_winner INTEGER NOT NULL,
+    FOREIGN KEY (game_id) REFERENCES gameEntity(id) ON DELETE CASCADE,
+    FOREIGN KEY (player_id) REFERENCES playerEntity(id) ON DELETE CASCADE
+);
+
+insertGamePlayerEntity:
+INSERT OR REPLACE INTO gamePlayerEntity(
+    id,
+    game_id,
+    player_id,
+    game_order,
+    is_winner
+)
+VALUES(?, ?, ?, ?, ?);
+
+getGames:
+SELECT
+ge.id AS gameId,
+ge.game_goal AS goal,
+ge.timestamp AS timestamp,
+pe.id AS playerId,
+pe.name AS playerName,
+gpe.game_order AS gameOrder,
+gpe.is_winner AS isWinner
+FROM gameEntity ge
+JOIN gamePlayerEntity gpe ON ge.id = gpe.game_id
+JOIN playerEntity pe ON gpe.player_id = pe.id
+ORDER BY ge.timestamp ASC, gameOrder ASC;
+
+-- Set
+
+CREATE TABLE setEntity(
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    game_id INTEGER NOT NULL,
+    player_id INTEGER NOT NULL,
+    order_number INTEGER NOT NULL,
+    score INTEGER NOT NULL,
+    leftAfter INTEGER NOT NULL,
+    isOverkill INTEGER NOT NULL,
+    FOREIGN KEY (game_id) REFERENCES gameEntity(id) ON DELETE CASCADE,
+    FOREIGN KEY (player_id) REFERENCES playerEntity(id) ON DELETE CASCADE
+);
+
+insertSetEntity:
+INSERT OR REPLACE INTO setEntity(
+    id,
+    game_id,
+    player_id,
+    order_number,
+    score,
+    leftAfter,
+    isOverkill
+)
+VALUES(?, ?, ?, ?, ?, ?, ?);
+
+-- Shot
+
+CREATE TABLE shotEntity(
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    set_id INTEGER NOT NULL,
+    player_id INTEGER NOT NULL,
+    order_number INTEGER NOT NULL,
+    sector INTEGER NOT NULL,
+    shot_value INTEGER NOT NULL,
+    FOREIGN KEY (set_id) REFERENCES setEntity(id) ON DELETE CASCADE,
+    FOREIGN KEY (player_id) REFERENCES playerEntity(id) ON DELETE CASCADE
+);
+
+insertShotEntity:
+INSERT OR REPLACE INTO shotEntity(
+    id,
+    set_id,
+    player_id,
+    order_number,
+    sector,
+    shot_value
+)
+VALUES(?, ?, ?, ?, ?, ?);
+
+-- GetPlayerHistory
+getPlayerHistory:
+SELECT
+se.id AS setId,
+se.order_number AS setOrder,
+se.score AS score,
+se.leftAfter AS leftAfter,
+se.isOverkill AS isOverkill,
+she.order_number AS shotOrder,
+she.sector AS sectorId,
+she.shot_value AS sectorValue
+FROM setEntity se
+JOIN shotEntity she ON se.id = she.set_id
+WHERE se.game_id = ? AND se.player_id = ?
+ORDER BY se.order_number ASC;

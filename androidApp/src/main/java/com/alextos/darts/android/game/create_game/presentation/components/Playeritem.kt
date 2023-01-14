@@ -1,6 +1,5 @@
 package com.alextos.darts.android.game.create_game.presentation.components
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
@@ -20,7 +19,6 @@ fun PlayerItem(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            //.background(MaterialTheme.colors.surface)
             .clickable { onSelect() }
             .padding(horizontal = 16.dp, vertical = 4.dp),
         verticalAlignment = Alignment.CenterVertically

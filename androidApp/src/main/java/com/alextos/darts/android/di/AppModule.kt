@@ -77,10 +77,4 @@ object AppModule {
     fun provideGetGameHistoryUseCase(dataSource: GameDataSource): GetGameHistoryUseCase {
         return GetGameHistoryUseCase(dataSource)
     }
-
-    @Provides
-    @Singleton
-    fun provideGameManager(dataSource: GameDataSource): GameManager {
-        return GameManager(dataSource, listOf(Player(name = "Kek lol"), Player(name = "Lol kek")))
-    }
 }

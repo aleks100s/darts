@@ -1,12 +1,11 @@
 package com.alextos.darts.players.data
 
-import com.alextos.darts.core.util.CommonFlow
-import com.alextos.darts.core.util.toCommonFlow
 import com.alextos.darts.database.DartsDatabase
 import com.alextos.darts.players.domain.models.Player
 import com.alextos.darts.players.domain.PlayerDataSource
 import com.squareup.sqldelight.runtime.coroutines.asFlow
 import com.squareup.sqldelight.runtime.coroutines.mapToList
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 class SqlDelightPlayerDataSource(
@@ -14,14 +13,13 @@ class SqlDelightPlayerDataSource(
 ): PlayerDataSource {
     private val queries = database.dartsQueries
 
-    override fun getPlayers(): CommonFlow<List<Player>> {
+    override fun getPlayers(): Flow<List<Player>> {
         return queries.getPlayers()
             .asFlow()
             .mapToList()
             .map { players ->
                 players.map { it.toPlayer() }
             }
-            .toCommonFlow()
     }
 
     override fun createPlayer(name: String): Player {

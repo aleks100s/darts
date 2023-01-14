@@ -3,7 +3,7 @@ package com.alextos.darts.players.domain.models
 import com.alextos.darts.core.util.initial
 
 data class Player(
-    val id: Long? = null,
+    val id: Long,
     val name: String
 ) {
     fun initials(): String {

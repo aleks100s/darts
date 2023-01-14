@@ -28,7 +28,7 @@ fun CreateGameScreen(
                 text = stringResource(id = R.string.start_game),
                 icon = Icons.Filled.Start
             ) {
-                onEvent(CreateGameEvent.CreateGame)
+                onEvent(CreateGameEvent.CreateGame(state.selectedPlayers, 101))
             }
         }
     ) {

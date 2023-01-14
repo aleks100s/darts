@@ -4,5 +4,5 @@ import com.alextos.darts.players.domain.models.Player
 
 data class PlayerHistory(
     val player: Player,
-    val turns: List<Set>
+    val turns: List<Set> = listOf()
 )

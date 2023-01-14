@@ -11,9 +11,13 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import com.alextos.darts.android.common.util.toPlayerList
+import com.alextos.darts.android.common.util.toStringNavArgument
 import com.alextos.darts.android.game.create_game.presentation.AndroidCreateGameViewModel
 import com.alextos.darts.android.game.create_game.presentation.CreateGameScreen
 import com.alextos.darts.android.game.create_player.presentation.AndroidCreatePlayerViewModel
@@ -37,19 +41,19 @@ fun NavigationRoot() {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
-        startDestination = Routes.GAME_LIST,
+        startDestination = Route.GameList.route,
         modifier = Modifier.background(MaterialTheme.colors.background)
     ) {
-        composable(route = Routes.GAME_LIST) {
+        composable(route = Route.GameList.route) {
             val viewModel = hiltViewModel<AndroidGameListViewModel>()
             val state by viewModel.state.collectAsState(initial = GameListState())
             GameListScreen(state = state, onEvent = {
                 when (it) {
                     is GameListEvent.CreateGame -> {
-                        navController.navigate(route = Routes.CREATE_GAME)
+                        navController.navigate(route = Route.CreateGame.route)
                     }
                     is GameListEvent.SelectGame -> {
-                        navController.navigate(route = Routes.GAME)
+                        navController.navigate(route = Route.Game.route)
                     }
                     else -> {
                         viewModel.onEvent(it)
@@ -58,7 +62,7 @@ fun NavigationRoot() {
             })
         }
 
-        composable(route = Routes.CREATE_GAME) {
+        composable(route = Route.CreateGame.route) {
             val coroutineScope = rememberCoroutineScope()
             val modalSheetState = rememberModalBottomSheetState(
                 initialValue = ModalBottomSheetValue.Hidden,
@@ -99,7 +103,12 @@ fun NavigationRoot() {
                     onEvent = {
                         when(it) {
                             is CreateGameEvent.CreateGame -> {
-                                navController.navigate(route = Routes.GAME)
+                                navController.navigate(
+                                    route = Route.Game.routeWithArgs(
+                                        it.players.toStringNavArgument(),
+                                        it.goal.toString()
+                                    )
+                                )
                             }
                             is CreateGameEvent.CreatePlayer -> {
                                 coroutineScope.launch {
@@ -118,9 +127,19 @@ fun NavigationRoot() {
             }
         }
 
-        composable(route = Routes.GAME) {
+        composable(
+            route = Route.Game.route + "/{list}/{goal}",
+            arguments = listOf(
+                navArgument("list") {
+                    type = NavType.StringType
+                },
+                navArgument("goal") {
+                    type = NavType.StringType
+                }
+            )
+        ) {
             val viewModel = hiltViewModel<AndroidGameViewModel>()
-            val state by viewModel.state.collectAsState(initial = GameState(0))
+            val state by viewModel.state.collectAsState(initial = GameState())
             GameScreen(state = state, onEvent = viewModel::onEvent)
         }
     }

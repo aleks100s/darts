@@ -1,8 +1,12 @@
 package com.alextos.darts.android.game.game.presentation
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.alextos.darts.android.common.util.toPlayerList
+import com.alextos.darts.game.domain.GameDataSource
 import com.alextos.darts.game.domain.useCases.GameManager
+import com.alextos.darts.game.domain.useCases.SaveGameHistoryUseCase
 import com.alextos.darts.game.presentation.game.GameEvent
 import com.alextos.darts.game.presentation.game.GameViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -10,9 +14,13 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AndroidGameViewModel @Inject constructor(
-    private val gameManager: GameManager
+    saveGameHistoryUseCase: SaveGameHistoryUseCase,
+    savedStateHandle: SavedStateHandle
 ): ViewModel() {
     private val viewModel by lazy {
+        val players = savedStateHandle.get<String>("list")?.toPlayerList()
+        val goal = savedStateHandle.get<String>("goal")?.toInt() ?: 0
+        val gameManager = GameManager(saveGameHistoryUseCase, players ?: listOf(), goal)
         GameViewModel(gameManager, viewModelScope)
     }
 

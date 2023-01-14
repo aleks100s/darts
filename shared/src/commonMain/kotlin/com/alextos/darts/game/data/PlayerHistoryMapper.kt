@@ -15,7 +15,6 @@ fun List<GetPlayerHistory>.toPlayerHistory(player: Player): PlayerHistory {
             val shots = group.map { Shot(Sector.getSector(it.sectorId.toInt())) }
             val set = Set(
                 shots = shots,
-                gameOrder = group.first().setOrder.toInt(),
                 leftAfter = group.first().leftAfter.toInt(),
                 isOverkill = group.first().isOverkill == 1L
             )

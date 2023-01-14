@@ -79,7 +79,6 @@ CREATE TABLE setEntity(
     id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     game_id INTEGER NOT NULL,
     player_id INTEGER NOT NULL,
-    order_number INTEGER NOT NULL,
     score INTEGER NOT NULL,
     leftAfter INTEGER NOT NULL,
     isOverkill INTEGER NOT NULL,
@@ -92,12 +91,11 @@ INSERT OR REPLACE INTO setEntity(
     id,
     game_id,
     player_id,
-    order_number,
     score,
     leftAfter,
     isOverkill
 )
-VALUES(?, ?, ?, ?, ?, ?, ?);
+VALUES(?, ?, ?, ?, ?, ?);
 
 -- Shot
 
@@ -127,7 +125,6 @@ VALUES(?, ?, ?, ?, ?, ?);
 getPlayerHistory:
 SELECT
 se.id AS setId,
-se.order_number AS setOrder,
 se.score AS score,
 se.leftAfter AS leftAfter,
 se.isOverkill AS isOverkill,
@@ -137,4 +134,4 @@ she.shot_value AS sectorValue
 FROM setEntity se
 JOIN shotEntity she ON se.id = she.set_id
 WHERE se.game_id = ? AND se.player_id = ?
-ORDER BY se.order_number ASC;
+ORDER BY setId ASC;

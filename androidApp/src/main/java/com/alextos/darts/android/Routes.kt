@@ -1,7 +1,14 @@
 package com.alextos.darts.android
 
-object Routes {
-    const val GAME_LIST = "game_list"
-    const val CREATE_GAME = "create_game"
-    const val GAME = "game"
+sealed class Route(val route: String) {
+    object GameList: Route("game_list")
+    object CreateGame: Route("create_game")
+    object Game: Route("game")
+
+    fun routeWithArgs(vararg args: String): String {
+        return buildString {
+            append(route)
+            args.forEach { append("/$it") }
+        }
+    }
 }

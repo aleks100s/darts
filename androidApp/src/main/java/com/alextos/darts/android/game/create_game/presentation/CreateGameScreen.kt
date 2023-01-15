@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import com.alextos.darts.android.R
-import com.alextos.darts.android.common.FAB
+import com.alextos.darts.android.common.presentation.FAB
 import com.alextos.darts.android.game.create_game.presentation.components.PlayerItem
 import com.alextos.darts.android.game.create_game.presentation.components.SectionHeader
 import com.alextos.darts.game.presentation.create_game.CreateGameEvent
@@ -26,9 +26,13 @@ fun CreateGameScreen(
         floatingActionButton = {
             FAB(
                 text = stringResource(id = R.string.start_game),
-                icon = Icons.Filled.Start
+                icon = Icons.Filled.Start,
+                isEnabled = state.selectedPlayers.isNotEmpty()
             ) {
-                onEvent(CreateGameEvent.CreateGame(state.selectedPlayers, 101))
+                // TODO: просто брать данные из стейта внутри ViewModel
+                if (state.selectedPlayers.isNotEmpty()) {
+                    onEvent(CreateGameEvent.CreateGame(state.selectedPlayers, 101))
+                }
             }
         }
     ) {

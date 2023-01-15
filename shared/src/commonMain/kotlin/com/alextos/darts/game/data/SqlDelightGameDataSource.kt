@@ -51,7 +51,7 @@ class SqlDelightGameDataSource(
                     queries.insertSetEntity(
                         id = null,
                         game_id = gameId,
-                        player_id = player.id!!,
+                        player_id = player.id,
                         score = set.score().toLong(),
                         leftAfter = set.leftAfter.toLong(),
                         isOverkill = if (set.isOverkill) 1 else 0

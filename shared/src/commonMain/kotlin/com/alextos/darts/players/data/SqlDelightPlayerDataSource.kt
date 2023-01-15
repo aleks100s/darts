@@ -22,17 +22,8 @@ class SqlDelightPlayerDataSource(
             }
     }
 
-    override fun createPlayer(name: String): Player {
+    override fun createPlayer(name: String) {
         queries.insertPlayerEntity(id = null, name = name)
-        val id = getLastInsertedId()
-        return getPlayer(id)
-    }
-
-    // TODO: Check if needed (on game creation)
-    private fun getPlayer(id: Long): Player {
-        return queries.getPlayer(id)
-            .executeAsOne()
-            .toPlayer()
     }
 
     private fun getLastInsertedId(): Long {

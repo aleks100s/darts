@@ -5,5 +5,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface PlayerDataSource {
     fun getPlayers(): Flow<List<Player>>
-    fun createPlayer(name: String): Player
+    fun createPlayer(name: String)
 }

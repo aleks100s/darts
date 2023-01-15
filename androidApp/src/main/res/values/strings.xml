@@ -7,4 +7,9 @@
     <string name="add_new_player">Add new player</string>
     <string name="create_player">Create player</string>
     <string name="enter_new_player_name">Enter new player name</string>
+    <string name="shot1">Shot #1</string>
+    <string name="shot2">Shot #2</string>
+    <string name="shot3">Shot #3</string>
+    <string name="shot_sum">Shot sum</string>
+    <string name="reminder">Reminder</string>
 </resources>

@@ -4,6 +4,8 @@ enum class Sector(
     val id: Int,
     val value: Int
 ) {
+    None(-1, 0),
+    Miss(0, 0),
     DoubleBullseye(1, 50),
     SingleBullseye(2, 25),
     // 1
@@ -107,9 +109,18 @@ enum class Sector(
     SingleOuter20(81, 20),
     Double20(82, 40);
 
+    fun uiString(): String {
+        return when (this) {
+            None -> "-"
+            else -> "$value"
+        }
+    }
+
     companion object {
         fun getSector(id: Int): Sector {
             return when(id) {
+                -1 -> None
+                0 -> Miss
                 1 -> DoubleBullseye
                 2 -> SingleBullseye
                 3 -> SingleInner1

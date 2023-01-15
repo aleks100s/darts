@@ -19,7 +19,7 @@ class EvaluateShotUseCase(goal: Int) {
         } else if (value == reminder) {
             ShotResult.Regular(shot, 0)
         } else {
-            reminder =- value
+            reminder -= value
             currentSet.add(shot)
             if (currentSet.count() == 3) {
                 currentSet.clear()

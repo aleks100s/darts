@@ -6,6 +6,8 @@ data class Set(
     val isOverkill: Boolean
 ) {
     fun score(): Int {
-        return shots.fold(0) { acc, shot -> acc + shot.sector.value }
+        return shots.fold(0) { acc, shot -> acc + (shot.sector.value) }
     }
+
+    fun shotsLeft(): Int = 3 - shots.count()
 }

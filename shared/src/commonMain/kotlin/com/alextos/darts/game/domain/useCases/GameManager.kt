@@ -1,9 +1,13 @@
 package com.alextos.darts.game.domain.useCases
 
 import com.alextos.darts.players.domain.models.Player
-import com.alextos.darts.game.domain.GameDataSource
+import com.alextos.darts.game.domain.models.Game
+import com.alextos.darts.game.domain.models.GameHistory
 import com.alextos.darts.game.domain.models.Shot
 import kotlinx.coroutines.flow.*
+import kotlinx.datetime.Clock
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
 
 class GameManager(
     private val saveGameHistoryUseCase: SaveGameHistoryUseCase,
@@ -31,13 +35,23 @@ class GameManager(
     val gameHistory = combine(trackUserHistoryUseCases.map { it.playerHistory }) { array ->
         array.toList()
     }
+        .map {
+            val a = it
+            return@map a
+        }
 
     fun makeShot(shot: Shot) {
         val evaluateShotUseCase = currentEvaluateShotUseCase()
         val result = evaluateShotUseCase.checkShot(shot)
         val trackUserHistoryUseCase = currentTrackUseCaseUseCase()
-        trackUserHistoryUseCase.trackShotResult(result)
-
+        val isSetOver = trackUserHistoryUseCase.trackShotResult(result)
+        if (isSetOver) {
+            if (result.isGameOver()) {
+                finishGame()
+            } else {
+                nextTurn()
+            }
+        }
     }
 
     private fun currentEvaluateShotUseCase(): EvaluateShotUseCase {
@@ -48,33 +62,30 @@ class GameManager(
         return trackUserHistoryUseCases[players.indexOf(currentPlayer.value)]
     }
 
+    private fun finishGame() {
+        _isGameFinished.update { true }
+        val game = Game(
+            players = players,
+            winner = currentPlayer.value,
+            gameGoal = goal,
+            timestamp = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
+        )
+        val gameHistory = GameHistory(
+            game = game,
+            trackUserHistoryUseCases.map { it.playerHistory.value }.sortedBy {
+                game.players.indexOf(it.player)
+            }
+        )
+        saveGameHistoryUseCase.execute(gameHistory = gameHistory)
+    }
+
     private fun nextTurn() {
-        when (players.count()) {
-            1 -> {
-                _currentPlayer.update { players[0] }
-            }
-            2 -> {
-                when (_currentPlayer.value) {
-                    players[0] -> _currentPlayer.update { players[1] }
-                    players[1] -> _currentPlayer.update { players[0] }
-                }
-            }
-            3 -> {
-                when (_currentPlayer.value) {
-                    players[0] -> _currentPlayer.update { players[1] }
-                    players[1] -> _currentPlayer.update { players[2] }
-                    players[2] -> _currentPlayer.update { players[0] }
-                }
-            }
-            4 -> {
-                when (_currentPlayer.value) {
-                    players[0] -> _currentPlayer.update { players[1] }
-                    players[1] -> _currentPlayer.update { players[2] }
-                    players[2] -> _currentPlayer.update { players[3] }
-                    players[3] -> _currentPlayer.update { players[0] }
-                }
-            }
-            else -> {}
+        when (currentPlayer.value) {
+            players.getOrNull(0) -> _currentPlayer.update { players.getOrNull(1) ?: it }
+            players.getOrNull(1) -> _currentPlayer.update { players.getOrNull(2) ?: players[0] }
+            players.getOrNull(2) -> _currentPlayer.update { players.getOrNull(3) ?: players[0] }
+            players.getOrNull(3) -> _currentPlayer.update { players.getOrNull(0) ?: it }
+            else -> { _currentPlayer.update { it }}
         }
     }
 }

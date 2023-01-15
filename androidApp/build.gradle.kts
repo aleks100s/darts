@@ -45,6 +45,7 @@ dependencies {
     implementation(Dependencies.composeIconsExtended)
     implementation(Dependencies.composeNavigation)
     implementation(Dependencies.coilCompose)
+    implementation("com.google.accompanist:accompanist-pager:0.22.0-rc")
 
     implementation(Dependencies.hiltAndroid)
     kapt(Dependencies.hiltAndroidCompiler)

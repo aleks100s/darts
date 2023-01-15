@@ -14,8 +14,17 @@ class GameViewModel(
     private val viewModelScope = coroutineScope ?: CoroutineScope(Dispatchers.Main)
     private val _state: Flow<GameState> = MutableStateFlow(GameState())
 
-    val state = combine(_state, gameManager.gameHistory) { state, history ->
-        state.copy(gameHistory = history)
+    val state = combine(
+        _state,
+        gameManager.gameHistory,
+        gameManager.currentPlayer,
+        gameManager.isGameFinished
+    ) { state, history, player, isGameFinished ->
+        state.copy(
+            gameHistory = history,
+            currentPlayer = player,
+            isGameFinished = isGameFinished
+        )
     }
         .stateIn(
             viewModelScope,

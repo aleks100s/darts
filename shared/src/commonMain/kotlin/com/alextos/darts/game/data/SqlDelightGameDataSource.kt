@@ -5,6 +5,7 @@ import com.alextos.darts.game.domain.GameDataSource
 import com.alextos.darts.game.domain.models.Game
 import com.alextos.darts.game.domain.models.GameHistory
 import com.alextos.darts.game.domain.models.PlayerHistory
+import com.alextos.darts.players.domain.models.Player
 import com.squareup.sqldelight.runtime.coroutines.asFlow
 import com.squareup.sqldelight.runtime.coroutines.mapToList
 import kotlinx.coroutines.flow.Flow
@@ -74,15 +75,15 @@ class SqlDelightGameDataSource(
         }
     }
 
-    override fun getGameHistory(game: Game): GameHistory {
+    override fun getGameHistory(gameId: Long, players: List<Player>): List<PlayerHistory> {
         val playerHistories = mutableListOf<PlayerHistory>()
-        game.players.forEach { player ->
-            queries.getPlayerHistory(game_id = game.id!!, player_id = player.id)
+        players.forEach { player ->
+            queries.getPlayerHistory(game_id = gameId, player_id = player.id)
                 .asFlow()
                 .mapToList()
                 .map { playerHistories.add(it.toPlayerHistory(player)) }
         }
-        return GameHistory(game, playerHistories)
+        return playerHistories
     }
 
     private fun getLastInsertedId(): Long {

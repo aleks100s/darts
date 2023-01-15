@@ -1,4 +1,4 @@
-package com.alextos.darts.android.game.game.presentation.components
+package com.alextos.darts.android.common.presentation.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row

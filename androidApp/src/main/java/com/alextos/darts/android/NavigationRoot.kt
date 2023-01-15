@@ -26,6 +26,8 @@ import com.alextos.darts.android.game.game.presentation.AndroidGameViewModel
 import com.alextos.darts.android.game.game.presentation.GameScreen
 import com.alextos.darts.android.game.game_list.presentation.AndroidGameListViewModel
 import com.alextos.darts.android.game.game_list.presentation.GameListScreen
+import com.alextos.darts.android.game.history.AndroidHistoryViewModel
+import com.alextos.darts.android.game.history.HistoryScreen
 import com.alextos.darts.game.presentation.create_game.CreateGameEvent
 import com.alextos.darts.game.presentation.create_game.CreateGameState
 import com.alextos.darts.game.presentation.create_player.CreatePlayerEvent
@@ -33,6 +35,7 @@ import com.alextos.darts.game.presentation.create_player.CreatePlayerState
 import com.alextos.darts.game.presentation.game.GameState
 import com.alextos.darts.game.presentation.game_list.GameListEvent
 import com.alextos.darts.game.presentation.game_list.GameListState
+import com.alextos.darts.game.presentation.history.HistoryState
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -53,7 +56,12 @@ fun NavigationRoot() {
                         navController.navigate(route = Route.CreateGame.route)
                     }
                     is GameListEvent.SelectGame -> {
-                        navController.navigate(route = Route.Game.route)
+                        navController.navigate(
+                            route = Route.History.routeWithArgs(
+                                it.game.players.toStringNavArgument(),
+                                it.game.id.toString()
+                            )
+                        )
                     }
                     else -> {
                         viewModel.onEvent(it)
@@ -141,6 +149,22 @@ fun NavigationRoot() {
             val viewModel = hiltViewModel<AndroidGameViewModel>()
             val state by viewModel.state.collectAsState(initial = GameState())
             GameScreen(state = state, onEvent = viewModel::onEvent)
+        }
+
+        composable(
+            route = Route.History.route + "/{list}/{gameId}",
+            arguments = listOf(
+                navArgument("list") {
+                    type = NavType.StringType
+                },
+                navArgument("gameId") {
+                    type = NavType.StringType
+                }
+            )
+        ) {
+            val viewModel = hiltViewModel<AndroidHistoryViewModel>()
+            val state by viewModel.state.collectAsState(initial = HistoryState())
+            HistoryScreen(history = state.gameHistory)
         }
     }
 }

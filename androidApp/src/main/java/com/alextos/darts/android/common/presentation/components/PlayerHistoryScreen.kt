@@ -1,4 +1,4 @@
-package com.alextos.darts.android.game.game.presentation.components
+package com.alextos.darts.android.common.presentation.components
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -10,7 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.alextos.darts.android.game.create_game.presentation.components.SectionHeader
-import com.alextos.darts.android.game.game.presentation.components.SetItem
+import com.alextos.darts.android.common.presentation.components.SetItem
 import com.alextos.darts.game.domain.models.PlayerHistory
 
 @Composable

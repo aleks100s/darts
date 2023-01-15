@@ -10,8 +10,8 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 
 class GameListViewModel(
-    private val getGamesUseCase: GetGamesUseCase,
-    private val coroutineScope: CoroutineScope?
+    getGamesUseCase: GetGamesUseCase,
+    coroutineScope: CoroutineScope?
 ) {
     private val viewModelScope = coroutineScope ?: CoroutineScope(Dispatchers.Main)
 

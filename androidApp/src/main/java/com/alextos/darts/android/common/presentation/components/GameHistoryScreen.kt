@@ -1,5 +1,6 @@
-package com.alextos.darts.android.game.game.presentation.components
+package com.alextos.darts.android.common.presentation.components
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
@@ -23,7 +24,7 @@ import kotlinx.coroutines.launch
 fun GameHistoryScreen(
     gameHistory: List<PlayerHistory>,
     currentPage: Int,
-    onShot: (Sector) -> Unit
+    padding: PaddingValues
 ) {
     val pagerState = rememberPagerState(initialPage = currentPage)
     val scope = rememberCoroutineScope()
@@ -34,21 +35,13 @@ fun GameHistoryScreen(
         }
     }
 
-    Scaffold(
-        floatingActionButton = {
-            FAB(text = "Shot", icon = Icons.Filled.Dashboard) {
-                onShot(Sector.Double11)
-            }
-        }
-    ) {
-        HorizontalPager(
-            count = gameHistory.count(),
-            state = pagerState,
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(it)
-        ) { page ->
-            PlayerHistoryScreen(playerHistory = gameHistory[page])
-        }
+    HorizontalPager(
+        count = gameHistory.count(),
+        state = pagerState,
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(padding)
+    ) { page ->
+        PlayerHistoryScreen(playerHistory = gameHistory[page])
     }
 }

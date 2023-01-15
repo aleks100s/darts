@@ -15,6 +15,7 @@ fun List<GetGames>.mapToGames(): List<Game> {
             val entity = group.find { it.isWinner == 1L }!!
             val winner = Player(entity.playerId, entity.playerName)
             return@map Game(
+                id = entity.gameId,
                 players = players,
                 winner = winner,
                 gameGoal = entity.goal.toInt(),

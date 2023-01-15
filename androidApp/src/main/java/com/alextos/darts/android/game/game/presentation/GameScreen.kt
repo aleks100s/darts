@@ -1,8 +1,13 @@
 package com.alextos.darts.android.game.game.presentation
 
 import androidx.activity.compose.BackHandler
+import androidx.compose.material.Scaffold
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Dashboard
 import androidx.compose.runtime.Composable
-import com.alextos.darts.android.game.game.presentation.components.GameHistoryScreen
+import com.alextos.darts.android.common.presentation.FAB
+import com.alextos.darts.android.common.presentation.components.GameHistoryScreen
+import com.alextos.darts.game.domain.models.Sector
 import com.alextos.darts.game.presentation.game.GameEvent
 import com.alextos.darts.game.presentation.game.GameState
 
@@ -12,11 +17,17 @@ fun GameScreen(
     onEvent: (GameEvent) -> Unit
 ) {
     BackHandler(true) {}
-
-    GameHistoryScreen(
-        gameHistory = state.gameHistory,
-        currentPage = state.currentPage()
+    Scaffold(
+        floatingActionButton = {
+            FAB(text = "Shot", icon = Icons.Filled.Dashboard) {
+                onEvent(GameEvent.MakeShot(Sector.Double11))
+            }
+        }
     ) {
-        onEvent(GameEvent.MakeShot(it))
+        GameHistoryScreen(
+            gameHistory = state.gameHistory,
+            currentPage = state.currentPage(),
+            padding = it
+        )
     }
 }

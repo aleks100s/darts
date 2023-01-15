@@ -1,4 +1,4 @@
-package com.alextos.darts.android.game.create_game.presentation.components
+package com.alextos.darts.android.game.create_game.components
 
 import android.graphics.drawable.shapes.OvalShape
 import androidx.compose.foundation.border

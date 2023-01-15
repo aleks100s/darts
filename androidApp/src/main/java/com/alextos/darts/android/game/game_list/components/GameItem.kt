@@ -1,4 +1,4 @@
-package com.alextos.darts.android.game.game_list.presentation.components
+package com.alextos.darts.android.game.game_list.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column

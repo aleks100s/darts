@@ -1,4 +1,4 @@
-package com.alextos.darts.android.game.create_game.presentation.components
+package com.alextos.darts.android.game.create_game.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*

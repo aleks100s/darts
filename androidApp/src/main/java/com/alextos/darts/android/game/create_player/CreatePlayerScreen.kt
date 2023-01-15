@@ -1,4 +1,4 @@
-package com.alextos.darts.android.game.create_player.presentation
+package com.alextos.darts.android.game.create_player
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*

@@ -1,4 +1,4 @@
-package com.alextos.darts.android.game.game_list.presentation
+package com.alextos.darts.android.game.game_list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

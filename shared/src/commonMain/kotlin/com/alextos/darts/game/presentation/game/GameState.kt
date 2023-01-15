@@ -7,7 +7,8 @@ data class GameState(
     val gameHistory: List<PlayerHistory> = listOf(),
     val currentPlayer: Player? = null,
     val isGameFinished: Boolean = false,
-    val isCloseGameDialogOpened: Boolean = false
+    val isCloseGameDialogOpened: Boolean = false,
+    val isInputVisible: Boolean = false
 ) {
     fun currentPage(): Int = currentPlayer?.let { player ->
         gameHistory.map { it.player }.indexOf(player)

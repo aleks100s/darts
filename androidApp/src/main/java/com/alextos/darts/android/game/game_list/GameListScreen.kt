@@ -1,4 +1,4 @@
-package com.alextos.darts.android.game.game_list.presentation
+package com.alextos.darts.android.game.game_list
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,7 +14,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.alextos.darts.android.R
 import com.alextos.darts.android.common.presentation.FAB
-import com.alextos.darts.android.game.game_list.presentation.components.GameItem
+import com.alextos.darts.android.game.game_list.components.GameItem
 import com.alextos.darts.game.presentation.game_list.GameListEvent
 import com.alextos.darts.game.presentation.game_list.GameListState
 

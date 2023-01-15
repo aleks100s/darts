@@ -7,4 +7,6 @@ sealed class GameEvent {
     object BackButtonPressed: GameEvent()
     object CloseGame: GameEvent()
     object ReturnToGame: GameEvent()
+    object ShowGameInput: GameEvent()
+    object HideGameInput: GameEvent()
 }

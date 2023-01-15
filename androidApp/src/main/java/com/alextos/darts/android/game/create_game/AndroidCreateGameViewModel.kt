@@ -1,4 +1,4 @@
-package com.alextos.darts.android.game.create_game.presentation
+package com.alextos.darts.android.game.create_game
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

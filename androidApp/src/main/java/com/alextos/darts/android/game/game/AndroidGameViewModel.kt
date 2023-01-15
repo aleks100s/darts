@@ -1,10 +1,9 @@
-package com.alextos.darts.android.game.game.presentation
+package com.alextos.darts.android.game.game
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alextos.darts.android.common.util.toPlayerList
-import com.alextos.darts.game.domain.GameDataSource
 import com.alextos.darts.game.domain.useCases.GameManager
 import com.alextos.darts.game.domain.useCases.SaveGameHistoryUseCase
 import com.alextos.darts.game.presentation.game.GameEvent

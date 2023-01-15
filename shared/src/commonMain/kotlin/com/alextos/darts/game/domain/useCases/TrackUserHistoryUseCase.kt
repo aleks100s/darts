@@ -33,7 +33,7 @@ class TrackUserHistoryUseCase(player: Player) {
                     turns.add(set)
                     val newSet = createNewSet(shotResult, isOverkill)
                     turns.add(newSet)
-                    isOverkill
+                    isOverkill || shotResult.isGameOver()
                 } else {
                     val newShots = set.shots.toMutableList()
                     newShots.add(shotResult.shot)

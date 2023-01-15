@@ -9,5 +9,9 @@ data class GameState(
     val isGameFinished: Boolean = false,
     val isCloseGameDialogOpened: Boolean = false
 ) {
-    fun currentPage(): Int = currentPlayer?.let { gameHistory.map { it.player }.indexOf(it) } ?: 0
+    fun currentPage(): Int = currentPlayer?.let { player ->
+        gameHistory.map { it.player }.indexOf(player)
+    } ?: 0
+
+    fun getWinnerName() = currentPlayer?.name
 }

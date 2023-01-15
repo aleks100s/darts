@@ -114,8 +114,8 @@ fun NavigationRoot() {
                             is CreateGameEvent.CreateGame -> {
                                 navController.navigate(
                                     route = Route.Game.routeWithArgs(
-                                        it.players.toStringNavArgument(),
-                                        it.goal.toString()
+                                        state.selectedPlayers.toStringNavArgument(),
+                                        state.selectedGoal.toString()
                                     )
                                 )
                             }

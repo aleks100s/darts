@@ -27,7 +27,7 @@ fun GameScreen(
     Scaffold(
         floatingActionButton = {
             FAB(text = "Shot", icon = Icons.Filled.Dashboard) {
-                onEvent(GameEvent.MakeShot(Sector.random()))
+                onEvent(GameEvent.MakeShot(Sector.SingleInner20))
             }
         }
     ) {
@@ -53,6 +53,22 @@ fun GameScreen(
                 dismissButton = {
                     Button(onClick = { onEvent(GameEvent.ReturnToGame) }) {
                         Text(text = stringResource(id = R.string.return_to_game))
+                    }
+                }
+            )
+        }
+        if (state.isGameFinished) {
+            AlertDialog(
+                onDismissRequest = {  },
+                title = {
+                    Text(text = stringResource(id = R.string.game_finished))
+                },
+                text = {
+                    Text(text = stringResource(id = R.string.winner, state.getWinnerName() ?: ""))
+                },
+                confirmButton = {
+                    Button(onClick = { onEvent(GameEvent.CloseGame) }) {
+                        Text(text = stringResource(id = R.string.finish_game))
                     }
                 }
             )

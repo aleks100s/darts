@@ -31,10 +31,7 @@ fun CreateGameScreen(
                 icon = Icons.Filled.Start,
                 isEnabled = state.isReadyToCreateGame()
             ) {
-                // TODO: просто брать данные из стейта внутри ViewModel
-                if (state.selectedPlayers.isNotEmpty()) {
-                    onEvent(CreateGameEvent.CreateGame(state.selectedPlayers, 101))
-                }
+                onEvent(CreateGameEvent.CreateGame)
             }
         }
     ) {
@@ -81,7 +78,7 @@ fun CreateGameScreen(
                 }
             }
 
-            SectionHeader(title = "Game goal")
+            SectionHeader(title = stringResource(id = R.string.game_goal))
 
             GoalSelector(
                 goals = state.goalOptions,

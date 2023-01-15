@@ -20,4 +20,8 @@
     <string name="winner">The winner is %1$s</string>
     <string name="finish_game">Finish game</string>
     <string name="game_goal">Game goal</string>
+    <string name="shoot">Shoot</string>
+    <string name="history">History</string>
+    <string name="game_title">Game %1$d</string>
+    <string name="games">Games</string>
 </resources>

@@ -1,15 +1,17 @@
 package com.alextos.darts.android.game.game
 
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.alextos.darts.android.common.presentation.components.PlayerHistoryHeader
+import com.alextos.darts.android.game.game.components.CurrentSetItem
 import com.alextos.darts.game.domain.models.Sector
+import com.alextos.darts.game.domain.models.Set
 
 val sectors = listOf(
     listOf(Sector.SingleBullseye, Sector.DoubleBullseye),
@@ -36,12 +38,17 @@ val sectors = listOf(
 )
 
 @Composable
-fun GameInputScreen(
+fun GameInput(
+    currentSet: Set,
+    playerName: String,
     onClick: (Sector) -> Unit
 ) {
-    LazyColumn(modifier = Modifier.fillMaxSize()) {
-        items(sectors) {
-            InputRow(sectors = it, onClick = onClick)
+    Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
+        CurrentSetItem(currentSet = currentSet, player = playerName)
+        LazyColumn(modifier = Modifier.fillMaxSize()) {
+            items(sectors) {
+                InputRow(sectors = it, onClick = onClick)
+            }
         }
     }
 }
@@ -63,7 +70,7 @@ fun InputCell(
     sector: Sector,
     onClick: () -> Unit
 ) {
-    Row(modifier = modifier) {
+    Row(modifier = modifier, horizontalArrangement = Arrangement.Center) {
         Button(onClick = { onClick() }) {
             Text(text = sector.uiString())
         }

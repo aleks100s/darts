@@ -27,15 +27,24 @@ fun GameScreen(
     Scaffold(
         floatingActionButton = {
             FAB(
-                text = "Shot",
-                icon = if (state.isInputVisible) Icons.Filled.List else Icons.Filled.PlayArrow
+                text = if (state.isInputVisible)
+                    stringResource(id = R.string.history)
+                else
+                    stringResource(id = R.string.shoot),
+                icon = if (state.isInputVisible)
+                    Icons.Filled.List
+                else
+                    Icons.Filled.PlayArrow
             ) {
                 onEvent(if (state.isInputVisible) GameEvent.HideGameInput else GameEvent.ShowGameInput)
             }
         }
     ) {
         if (state.isInputVisible) {
-            GameInputScreen { sector ->
+            GameInput(
+                currentSet = state.getCurrentSet(),
+                playerName = state.currentPlayer?.name ?: ""
+            ) { sector ->
                 onEvent(GameEvent.MakeShot(sector))
             }
         } else {

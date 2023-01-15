@@ -1,11 +1,14 @@
 package com.alextos.darts.android.game.game_list
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Create
 import androidx.compose.runtime.Composable
@@ -37,9 +40,14 @@ fun GameListScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(padding)
-                .padding(16.dp),
+                .padding(vertical = 32.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
+            item {
+                Row(horizontalArrangement = Arrangement.Center) {
+                    Text(text = stringResource(id = R.string.games), style = MaterialTheme.typography.h1)
+                }
+            }
             items(state.games) {
                 GameItem(game = it) {
                     onEvent(GameListEvent.SelectGame(it))

@@ -9,4 +9,8 @@ data class Game(
     var winner: Player? = null,
     val gameGoal: Int,
     val timestamp: LocalDateTime
-)
+) {
+    fun getDateString(): String {
+        return "${timestamp.dayOfMonth}.${timestamp.monthNumber}.${timestamp.year}"
+    }
+}

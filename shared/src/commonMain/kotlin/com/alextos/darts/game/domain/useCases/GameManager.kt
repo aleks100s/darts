@@ -36,6 +36,8 @@ class GameManager(
         array.toList()
     }
 
+    fun getGoal(): Int = goal
+
     fun makeShot(shot: Shot) {
         if (_isGameFinished.value) {
             return

@@ -23,7 +23,8 @@ class GameViewModel(
         state.copy(
             gameHistory = history,
             currentPlayer = player,
-            isGameFinished = isGameFinished
+            isGameFinished = isGameFinished,
+            gameGoal = gameManager.getGoal()
         )
     }
         .stateIn(
@@ -48,7 +49,7 @@ class GameViewModel(
                 _state.update { it.copy(isInputVisible = true) }
             }
             is GameEvent.HideGameInput -> {
-                _state.update { it.copy(isInputVisible = false) }
+                _state.update { it.copy(isInputVisible = false ) }
             }
             else -> {}
         }

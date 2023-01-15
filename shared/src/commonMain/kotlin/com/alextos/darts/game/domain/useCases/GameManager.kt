@@ -35,10 +35,6 @@ class GameManager(
     val gameHistory = combine(trackUserHistoryUseCases.map { it.playerHistory }) { array ->
         array.toList()
     }
-        .map {
-            val a = it
-            return@map a
-        }
 
     fun makeShot(shot: Shot) {
         if (_isGameFinished.value) {
@@ -66,7 +62,7 @@ class GameManager(
     }
 
     private fun finishGame() {
-        _isGameFinished.value = true
+        _isGameFinished.update { true }
         val game = Game(
             players = players,
             winner = currentPlayer.value,

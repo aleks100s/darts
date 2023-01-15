@@ -48,6 +48,11 @@ class CreateGameViewModel(
                     it.copy(selectedPlayers = list)
                 }
             }
+            is CreateGameEvent.SelectGoal -> {
+                _state.update {
+                    it.copy(selectedGoal = event.option)
+                }
+            }
             else -> {}
         }
     }

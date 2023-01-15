@@ -32,6 +32,7 @@ import com.alextos.darts.game.presentation.create_game.CreateGameEvent
 import com.alextos.darts.game.presentation.create_game.CreateGameState
 import com.alextos.darts.game.presentation.create_player.CreatePlayerEvent
 import com.alextos.darts.game.presentation.create_player.CreatePlayerState
+import com.alextos.darts.game.presentation.game.GameEvent
 import com.alextos.darts.game.presentation.game.GameState
 import com.alextos.darts.game.presentation.game_list.GameListEvent
 import com.alextos.darts.game.presentation.game_list.GameListState
@@ -148,7 +149,18 @@ fun NavigationRoot() {
         ) {
             val viewModel = hiltViewModel<AndroidGameViewModel>()
             val state by viewModel.state.collectAsState(initial = GameState())
-            GameScreen(state = state, onEvent = viewModel::onEvent)
+            GameScreen(
+                state = state,
+                onEvent = {
+                    when (it) {
+                        is GameEvent.CloseGame -> {
+                            navController.popBackStack()
+                            navController.popBackStack()
+                        }
+                        else -> { viewModel.onEvent(it) }
+                    }
+                }
+            )
         }
 
         composable(

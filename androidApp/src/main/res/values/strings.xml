@@ -12,4 +12,8 @@
     <string name="shot3">Shot #3</string>
     <string name="shot_sum">Shot sum</string>
     <string name="reminder">Reminder</string>
+    <string name="leave_game">Leave the game</string>
+    <string name="your_progress_will_be_lost">Your progress will be lost</string>
+    <string name="leave">Leave</string>
+    <string name="return_to_game">Return to game</string>
 </resources>

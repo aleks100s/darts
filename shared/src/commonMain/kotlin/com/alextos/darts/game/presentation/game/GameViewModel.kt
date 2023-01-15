@@ -12,7 +12,7 @@ class GameViewModel(
     coroutineScope: CoroutineScope?
 ) {
     private val viewModelScope = coroutineScope ?: CoroutineScope(Dispatchers.Main)
-    private val _state: Flow<GameState> = MutableStateFlow(GameState())
+    private val _state = MutableStateFlow(GameState())
 
     val state = combine(
         _state,
@@ -38,6 +38,13 @@ class GameViewModel(
             is GameEvent.MakeShot -> {
                 gameManager.makeShot(Shot(event.sector))
             }
+            is GameEvent.BackButtonPressed -> {
+                _state.update { it.copy(isCloseGameDialogOpened = true) }
+            }
+            is GameEvent.ReturnToGame -> {
+                _state.update { it.copy(isCloseGameDialogOpened = false) }
+            }
+            else -> {}
         }
     }
 }

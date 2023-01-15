@@ -20,7 +20,7 @@ fun GameScreen(
     Scaffold(
         floatingActionButton = {
             FAB(text = "Shot", icon = Icons.Filled.Dashboard) {
-                onEvent(GameEvent.MakeShot(Sector.Double11))
+                onEvent(GameEvent.MakeShot(Sector.random()))
             }
         }
     ) {

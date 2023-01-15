@@ -46,13 +46,15 @@ class TrackUserHistoryUseCase(player: Player) {
                         isOverkill = isOverkill
                     )
                     turns.add(newSet)
-                    newShots.count() == 3 || isOverkill && newShots.count() == 2
+                    newShots.count() == 3
+                            || isOverkill && newShots.count() == 2
+                            || shotResult.isGameOver()
                 }
 
             } ?: run {
                 val newSet = createNewSet(shotResult, isOverkill)
                 turns.add(newSet)
-                nextTurn = isOverkill
+                nextTurn = isOverkill || shotResult.isGameOver()
             }
             history.copy(turns = turns)
         }

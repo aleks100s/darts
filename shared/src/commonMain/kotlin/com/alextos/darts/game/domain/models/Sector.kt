@@ -117,6 +117,10 @@ enum class Sector(
     }
 
     companion object {
+        fun random(): Sector {
+            return values().toList().random()
+        }
+
         fun getSector(id: Int): Sector {
             return when(id) {
                 -1 -> None

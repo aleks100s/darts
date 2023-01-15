@@ -15,7 +15,7 @@ class EvaluateShotUseCase(goal: Int) {
                 acc + s.sector.value
             }
             currentSet.clear()
-            ShotResult.Overkill(shot, reminder - value)
+            ShotResult.Overkill(shot, reminder)
         } else if (value == reminder) {
             ShotResult.Regular(shot, 0)
         } else {

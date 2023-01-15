@@ -78,10 +78,9 @@ class SqlDelightGameDataSource(
     override fun getGameHistory(gameId: Long, players: List<Player>): List<PlayerHistory> {
         val playerHistories = mutableListOf<PlayerHistory>()
         players.forEach { player ->
-            queries.getPlayerHistory(game_id = gameId, player_id = player.id)
-                .asFlow()
-                .mapToList()
-                .map { playerHistories.add(it.toPlayerHistory(player)) }
+            val entities = queries.getPlayerHistory(game_id = gameId, player_id = player.id).executeAsList()
+            val playerHistory = entities.toPlayerHistory(player)
+            playerHistories.add(playerHistory)
         }
         return playerHistories
     }

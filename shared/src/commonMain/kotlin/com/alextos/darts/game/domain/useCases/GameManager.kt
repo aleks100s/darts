@@ -41,6 +41,9 @@ class GameManager(
         }
 
     fun makeShot(shot: Shot) {
+        if (_isGameFinished.value) {
+            return
+        }
         val evaluateShotUseCase = currentEvaluateShotUseCase()
         val result = evaluateShotUseCase.checkShot(shot)
         val trackUserHistoryUseCase = currentTrackUseCaseUseCase()
@@ -63,7 +66,7 @@ class GameManager(
     }
 
     private fun finishGame() {
-        _isGameFinished.update { true }
+        _isGameFinished.value = true
         val game = Game(
             players = players,
             winner = currentPlayer.value,

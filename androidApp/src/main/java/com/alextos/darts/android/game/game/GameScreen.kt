@@ -54,6 +54,25 @@ fun GameScreen(
                 padding = it
             )
         }
+        if (state.isTurnChangeDialogOpen) {
+            AlertDialog(
+                onDismissRequest = { onEvent(GameEvent.HideTurnChangeDialog) },
+                title = {
+                    Text(text = stringResource(id = R.string.turn_change_title))
+                },
+                text = {
+                    Text(text = stringResource(
+                        id = R.string.turn_change_text,
+                        state.currentPlayer?.name ?: "")
+                    )
+                },
+                confirmButton = {
+                    Button(onClick = { onEvent(GameEvent.HideTurnChangeDialog) }) {
+                        Text(text = stringResource(id = R.string.ok))
+                    }
+                }
+            )
+        }
         if (state.isCloseGameDialogOpened) {
             AlertDialog(
                 onDismissRequest = { onEvent(GameEvent.ReturnToGame) },

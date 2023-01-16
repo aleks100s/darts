@@ -76,7 +76,7 @@ enum class Sector(
     // 14
     SingleInner14(55, 14),
     Triple14(56, 42),
-    SingleOuter14(57, 16),
+    SingleOuter14(57, 14),
     Double14(58, 28),
     // 15
     SingleInner15(59, 15),
@@ -109,10 +109,113 @@ enum class Sector(
     SingleOuter20(81, 20),
     Double20(82, 40);
 
+    fun isBlack():Boolean {
+        return when (this) {
+            SingleInner20, SingleOuter20, SingleInner18, SingleOuter18,
+            SingleInner13, SingleOuter13, SingleInner10, SingleOuter10,
+            SingleInner2, SingleOuter2, SingleInner3, SingleOuter3,
+            SingleInner7, SingleOuter7, SingleInner8, SingleOuter8,
+            SingleInner14, SingleOuter14, SingleInner12, SingleOuter12 -> {
+                true
+            }
+            else -> false
+        }
+    }
+
+    fun isWhite():Boolean {
+        return when (this) {
+            SingleInner1, SingleOuter1, SingleInner4, SingleOuter4,
+            SingleInner6, SingleOuter6, SingleInner15, SingleOuter15,
+            SingleInner17, SingleOuter17, SingleInner19, SingleOuter19,
+            SingleInner16, SingleOuter16, SingleInner11, SingleOuter11,
+            SingleInner9, SingleOuter9, SingleInner5, SingleOuter5 -> {
+                true
+            }
+            else -> false
+        }
+    }
+
+    fun isGreen():Boolean {
+        return when (this) {
+            Double1, Triple1, Double4, Triple4,
+            Double6, Triple6, Double15, Triple15,
+            Double17, Triple17, Double19, Triple19,
+            Double16, Triple16, Double11, Triple11,
+            Double9, Triple9, Double5, Triple5,
+            SingleBullseye -> {
+                true
+            }
+            else -> false
+        }
+    }
+
+    fun isRed():Boolean {
+        return when (this) {
+            Double20, Triple20, Double18, Triple18,
+            Double13, Triple13, Double10, Triple10,
+            Double2, Triple2, Double3, Triple3,
+            Double7, Triple7, Double8, Triple8,
+            Double14, Triple14, Double12, Triple12,
+            DoubleBullseye -> {
+                true
+            }
+            else -> false
+        }
+    }
+
+    fun isTriple():Boolean {
+        return when (this) {
+            Triple1, Triple2, Triple3, Triple4,
+            Triple5, Triple6, Triple7, Triple8,
+            Triple9, Triple10, Triple11, Triple12,
+            Triple13, Triple14, Triple15, Triple16,
+            Triple17, Triple18, Triple19, Triple20 -> {
+                true
+            }
+            else -> false
+        }
+    }
+
+    fun isDouble():Boolean {
+        return when (this) {
+            Double1, Double2, Double3, Double4,
+            Double5, Double6, Double7, Double8,
+            Double9, Double10, Double11, Double12,
+            Double13, Double14, Double15, Double16,
+            Double17, Double18, Double19, Double20,
+            DoubleBullseye-> {
+                true
+            }
+            else -> false
+        }
+    }
+
+    fun isMiss(): Boolean {
+        return when (this) {
+            Miss -> true
+            else -> false
+        }
+    }
+
+    fun isNone(): Boolean {
+        return when (this) {
+            None -> true
+            else -> false
+        }
+    }
+
     fun uiString(): String {
         return when (this) {
             None -> "-"
-            else -> "$value"
+            else -> if (isDouble()) {
+                return "${value / 2} x2"
+            } else if (isTriple()) {
+                return "${value / 3} x3"
+            } else if (this == None) {
+                return "-"
+            } else {
+                return "$value"
+            }
         }
     }
 

@@ -1,4 +1,4 @@
-package com.alextos.darts.android.game.create_game.presentation.components
+package com.alextos.darts.android.common.presentation.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -20,6 +20,7 @@ fun SectionHeader(title: String) {
             .fillMaxWidth()
             .background(Color.DarkGray)
             .padding(vertical = 8.dp),
-        textAlign = TextAlign.Center
+        textAlign = TextAlign.Center,
+        style = MaterialTheme.typography.h2
     )
 }

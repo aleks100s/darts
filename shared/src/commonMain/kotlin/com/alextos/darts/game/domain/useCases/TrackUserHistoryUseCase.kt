@@ -38,7 +38,7 @@ class TrackUserHistoryUseCase(player: Player) {
                     val newShots = set.shots.toMutableList()
                     newShots.add(shotResult.shot)
                     if (isOverkill && newShots.count() == 2) {
-                        newShots.add(Shot(Sector.Miss))
+                        newShots.add(Shot(Sector.None))
                     }
                     val newSet = set.copy(
                         shots = newShots,
@@ -67,13 +67,13 @@ class TrackUserHistoryUseCase(player: Player) {
     ): com.alextos.darts.game.domain.models.Set {
         return Set(
             shots = if (isOverkill) {
-                        listOf(
-                            shotResult.shot,
-                            Shot(Sector.None),
-                            Shot(Sector.None)
-                        )
-                    } else {
-                        listOf(shotResult.shot)
+                listOf(
+                    shotResult.shot,
+                    Shot(Sector.None),
+                    Shot(Sector.None)
+                )
+            } else {
+                listOf(shotResult.shot)
                    },
             isOverkill = isOverkill,
             leftAfter = shotResult.leftAfter

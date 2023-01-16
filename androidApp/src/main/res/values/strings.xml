@@ -24,4 +24,8 @@
     <string name="history">History</string>
     <string name="game_title">Game %1$d</string>
     <string name="games">Games</string>
+    <string name="turn_change_title">Turn change</string>
+    <string name="turn_change_text">Current player is %1$s</string>
+    <string name="ok">OK</string>
+    <string name="overkill">Oops, overkill</string>
 </resources>

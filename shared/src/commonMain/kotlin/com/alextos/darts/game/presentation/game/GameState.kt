@@ -9,6 +9,7 @@ data class GameState(
     val currentPlayer: Player? = null,
     val isGameFinished: Boolean = false,
     val isCloseGameDialogOpened: Boolean = false,
+    val isTurnChangeDialogOpen: Boolean = false,
     val isInputVisible: Boolean = false,
     val gameGoal: Int = 0
 ) {

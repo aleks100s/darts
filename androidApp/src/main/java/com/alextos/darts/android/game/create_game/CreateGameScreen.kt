@@ -15,7 +15,7 @@ import com.alextos.darts.android.R
 import com.alextos.darts.android.common.presentation.FAB
 import com.alextos.darts.android.game.create_game.components.GoalSelector
 import com.alextos.darts.android.game.create_game.components.PlayerItem
-import com.alextos.darts.android.game.create_game.presentation.components.SectionHeader
+import com.alextos.darts.android.common.presentation.components.SectionHeader
 import com.alextos.darts.game.presentation.create_game.CreateGameEvent
 import com.alextos.darts.game.presentation.create_game.CreateGameState
 

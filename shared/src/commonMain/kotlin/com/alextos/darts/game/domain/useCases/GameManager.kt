@@ -26,6 +26,9 @@ class GameManager(
         }
     }
 
+    private val _isTurnChangingDialogNeeded = MutableStateFlow(false)
+    val isTurnChangingDialogNeeded: StateFlow<Boolean> = _isTurnChangingDialogNeeded
+
     private val _currentPlayer = MutableStateFlow(players[0])
     val currentPlayer: StateFlow<Player> = _currentPlayer
 
@@ -53,6 +56,10 @@ class GameManager(
                 nextTurn()
             }
         }
+    }
+
+    fun turnChanged() {
+        _isTurnChangingDialogNeeded.update { false }
     }
 
     private fun currentEvaluateShotUseCase(): EvaluateShotUseCase {
@@ -88,5 +95,6 @@ class GameManager(
             players.getOrNull(3) -> _currentPlayer.update { players.getOrNull(0) ?: it }
             else -> { _currentPlayer.update { it }}
         }
+        _isTurnChangingDialogNeeded.update { true }
     }
 }

@@ -9,4 +9,5 @@ sealed class GameEvent {
     object ReturnToGame: GameEvent()
     object ShowGameInput: GameEvent()
     object HideGameInput: GameEvent()
+    object HideTurnChangeDialog: GameEvent()
 }

@@ -1,6 +1,6 @@
 package com.alextos.darts.android.common.util
 
-import com.alextos.darts.players.domain.models.Player
+import com.alextos.darts.game.domain.models.Player
 
 fun List<Player>.toStringNavArgument(): String {
     return joinToString(";") { "{id=${it.id},name=${it.name}}" }

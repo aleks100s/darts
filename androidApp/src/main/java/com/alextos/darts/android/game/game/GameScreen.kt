@@ -1,6 +1,8 @@
 package com.alextos.darts.android.game.game
 
 import androidx.activity.compose.BackHandler
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.material.AlertDialog
 import androidx.compose.material.Button
 import androidx.compose.material.Scaffold
@@ -12,10 +14,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import com.alextos.darts.android.R
 import com.alextos.darts.android.common.presentation.FAB
-import com.alextos.darts.android.common.presentation.components.GameHistoryScreen
+import com.alextos.darts.android.common.presentation.components.GameHistoryView
 import com.alextos.darts.game.presentation.game.GameEvent
 import com.alextos.darts.game.presentation.game.GameState
 
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun GameScreen(
     state: GameState,
@@ -40,20 +43,23 @@ fun GameScreen(
             }
         }
     ) {
-        if (state.isInputVisible) {
-            GameInput(
-                currentSet = state.getCurrentSet(),
-                playerName = state.currentPlayer?.name ?: ""
-            ) { sector ->
-                onEvent(GameEvent.MakeShot(sector))
+        AnimatedContent(targetState = state.isInputVisible) { isInputVisible ->
+            if (isInputVisible) {
+                GameInput(
+                    currentSet = state.getCurrentSet(),
+                    playerName = state.currentPlayer?.name ?: ""
+                ) { sector ->
+                    onEvent(GameEvent.MakeShot(sector))
+                }
+            } else {
+                GameHistoryView(
+                    gameHistory = state.gameHistory,
+                    currentPage = state.currentPage(),
+                    padding = it
+                )
             }
-        } else {
-            GameHistoryScreen(
-                gameHistory = state.gameHistory,
-                currentPage = state.currentPage(),
-                padding = it
-            )
         }
+
         if (state.isTurnChangeDialogOpen) {
             AlertDialog(
                 onDismissRequest = { onEvent(GameEvent.HideTurnChangeDialog) },

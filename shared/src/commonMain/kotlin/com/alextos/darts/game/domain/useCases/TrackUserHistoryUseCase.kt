@@ -1,7 +1,7 @@
 package com.alextos.darts.game.domain.useCases
 
 import com.alextos.darts.game.domain.models.*
-import com.alextos.darts.players.domain.models.Player
+import com.alextos.darts.game.domain.models.Player
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update

@@ -1,7 +1,7 @@
 package com.alextos.darts.game.presentation.create_game
 
 import com.alextos.darts.core.util.toCommonFlow
-import com.alextos.darts.players.domain.useCases.GetPlayersUseCase
+import com.alextos.darts.game.domain.useCases.GetPlayersUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*

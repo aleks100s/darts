@@ -2,7 +2,7 @@ package com.alextos.darts.game.presentation.game
 
 import com.alextos.darts.game.domain.models.PlayerHistory
 import com.alextos.darts.game.domain.models.Set
-import com.alextos.darts.players.domain.models.Player
+import com.alextos.darts.game.domain.models.Player
 
 data class GameState(
     val gameHistory: List<PlayerHistory> = listOf(),

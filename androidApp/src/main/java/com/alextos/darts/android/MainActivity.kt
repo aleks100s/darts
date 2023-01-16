@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -27,30 +28,28 @@ fun MyApplicationTheme(
     } else {
         lightColors
     }
+    val monofontoTypeface = FontFamily(
+        Font(resId = R.font.monofonto_rg, weight = FontWeight.Normal)
+    )
     val typography = Typography(
         h1 = TextStyle(
-            fontFamily = FontFamily.Default,
-            fontWeight = FontWeight.Bold,
+            fontFamily = monofontoTypeface,
             fontSize = 30.sp
         ),
         h2 = TextStyle(
-            fontFamily = FontFamily.Default,
-            fontWeight = FontWeight.Bold,
+            fontFamily = monofontoTypeface,
             fontSize = 24.sp
         ),
         h3 = TextStyle(
-            fontFamily = FontFamily.Default,
-            fontWeight = FontWeight.Medium,
+            fontFamily = monofontoTypeface,
             fontSize = 18.sp
         ),
         body1 = TextStyle(
-            fontFamily = FontFamily.Default,
-            fontWeight = FontWeight.Normal,
+            fontFamily = monofontoTypeface,
             fontSize = 14.sp
         ),
         body2 = TextStyle(
-            fontFamily = FontFamily.Default,
-            fontWeight = FontWeight.Normal,
+            fontFamily = monofontoTypeface,
             fontSize = 12.sp
         ),
     )

@@ -1,12 +1,12 @@
 package com.alextos.darts.game.presentation.create_game
 
-import com.alextos.darts.players.domain.models.Player
+import com.alextos.darts.game.domain.models.Player
 
 data class CreateGameState(
     val allPlayers: List<Player> = listOf(),
     val selectedPlayers: List<Player> = listOf(),
     val selectedGoal: Int? = null,
-    val goalOptions: List<Int> = listOf(26, 301, 501)
+    val goalOptions: List<Int> = listOf(101, 301, 501)
 ) {
     fun isReadyToCreateGame() = selectedPlayers.isNotEmpty() && selectedGoal != null
 }

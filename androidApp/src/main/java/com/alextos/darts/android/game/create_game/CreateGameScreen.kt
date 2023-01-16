@@ -62,13 +62,18 @@ fun CreateGameScreen(
                     .weight(1F)
             ) {
                 item {
-                    Button(onClick = {
-                        onEvent(CreateGameEvent.CreatePlayer)
-                    }) {
-                        Text(
-                            text = stringResource(id = R.string.add_new_player),
-                            textAlign = TextAlign.Center
-                        )
+                    Row(
+                        horizontalArrangement = Arrangement.Center,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Button(onClick = {
+                            onEvent(CreateGameEvent.CreatePlayer)
+                        }) {
+                            Text(
+                                text = stringResource(id = R.string.add_new_player),
+                                textAlign = TextAlign.Center
+                            )
+                        }
                     }
                 }
                 items(state.allPlayers) { player ->

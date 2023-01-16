@@ -4,7 +4,7 @@ import com.alextos.darts.game.domain.models.PlayerHistory
 import com.alextos.darts.game.domain.models.Sector
 import com.alextos.darts.game.domain.models.Set
 import com.alextos.darts.game.domain.models.Shot
-import com.alextos.darts.players.domain.models.Player
+import com.alextos.darts.game.domain.models.Player
 import database.GetPlayerHistory
 
 fun List<GetPlayerHistory>.toPlayerHistory(player: Player): PlayerHistory {

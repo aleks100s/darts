@@ -2,7 +2,6 @@ package com.alextos.darts.game.domain.useCases
 
 import com.alextos.darts.game.domain.models.Shot
 import com.alextos.darts.game.domain.models.ShotResult
-import com.alextos.darts.players.domain.models.Player
 
 class EvaluateShotUseCase(goal: Int) {
     private val currentSet = mutableListOf<Shot>()

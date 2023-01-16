@@ -1,6 +1,6 @@
 package com.alextos.darts.game.presentation.create_game
 
-import com.alextos.darts.players.domain.models.Player
+import com.alextos.darts.game.domain.models.Player
 
 sealed class CreateGameEvent {
     data class SelectPlayer(val player: Player): CreateGameEvent()

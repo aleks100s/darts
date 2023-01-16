@@ -21,7 +21,7 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun GameHistoryScreen(
+fun GameHistoryView(
     gameHistory: List<PlayerHistory>,
     currentPage: Int,
     padding: PaddingValues

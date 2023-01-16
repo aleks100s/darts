@@ -1,7 +1,7 @@
 package com.alextos.darts.game.presentation.create_player
 
 import com.alextos.darts.core.util.toCommonFlow
-import com.alextos.darts.players.domain.useCases.CreatePlayerUseCase
+import com.alextos.darts.game.domain.useCases.CreatePlayerUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -27,6 +27,7 @@ class CreatePlayerViewModel(
         when (event) {
             is CreatePlayerEvent.SavePlayer -> {
                 createPlayerUseCase.execute(event.name)
+                _state.update { it.copy(name = "") }
             }
             is CreatePlayerEvent.ChangeNewPlayerName -> {
                 _state.update { it.copy(name = event.name) }

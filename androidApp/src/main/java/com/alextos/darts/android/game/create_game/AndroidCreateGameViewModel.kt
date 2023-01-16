@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alextos.darts.game.presentation.create_game.CreateGameEvent
 import com.alextos.darts.game.presentation.create_game.CreateGameViewModel
-import com.alextos.darts.players.domain.useCases.GetPlayersUseCase
+import com.alextos.darts.game.domain.useCases.GetPlayersUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

@@ -9,7 +9,7 @@ data class GameState(
     val currentPlayer: Player? = null,
     val isGameFinished: Boolean = false,
     val isCloseGameDialogOpened: Boolean = false,
-    val isTurnChangeDialogOpen: Boolean = false,
+    val turnState: TurnState = TurnState.IsOngoing,
     val isInputVisible: Boolean = false,
     val gameGoal: Int = 0
 ) {
@@ -25,7 +25,7 @@ data class GameState(
             gameHistory.firstOrNull { it.player == player }?.let { history ->
                 history.turns.lastOrNull()?.let { set ->
                     leftAfter = set.leftAfter
-                    if (set.shots.count() < 3) {
+                    if (turnState is TurnState.IsOver || set.shots.count() < 3) {
                         return set
                     }
                 } ?: kotlin.run {
@@ -39,4 +39,9 @@ data class GameState(
             isOverkill = false
         )
     }
+}
+
+sealed class TurnState {
+    object IsOngoing: TurnState()
+    data class IsOver(val result: Int): TurnState()
 }

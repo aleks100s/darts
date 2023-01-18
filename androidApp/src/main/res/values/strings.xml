@@ -24,8 +24,8 @@
     <string name="history">History</string>
     <string name="game_title">Game %1$d</string>
     <string name="games">Games</string>
-    <string name="turn_change_title">Turn change</string>
-    <string name="turn_change_text">Current player is %1$s</string>
-    <string name="ok">OK</string>
-    <string name="overkill">Oops, overkill</string>
+    <string name="turn_is_over">Your turn is over</string>
+    <string name="proceed_to_the_next_turn">Your result is %1$d\nProceed to the next turn?</string>
+    <string name="reset_turn">Reset this turn</string>
+    <string name="next_turn">Next turn</string>
 </resources>

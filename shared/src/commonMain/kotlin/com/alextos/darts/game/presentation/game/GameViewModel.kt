@@ -19,13 +19,13 @@ class GameViewModel(
         gameManager.gameHistory,
         gameManager.currentPlayer,
         gameManager.isGameFinished,
-        gameManager.isTurnChangingDialogNeeded
-    ) { state, history, player, isGameFinished, isTurnChangingDialogNeeded ->
+        gameManager.turnState
+    ) { state, history, player, isGameFinished, turnState ->
         state.copy(
             gameHistory = history,
             currentPlayer = player,
             isGameFinished = isGameFinished,
-            isTurnChangeDialogOpen = isTurnChangingDialogNeeded,
+            turnState = turnState,
             gameGoal = gameManager.getGoal()
         )
     }
@@ -53,8 +53,11 @@ class GameViewModel(
             is GameEvent.HideGameInput -> {
                 _state.update { it.copy(isInputVisible = false ) }
             }
-            is GameEvent.HideTurnChangeDialog -> {
-                gameManager.turnChanged()
+            is GameEvent.ResetCurrentTurn -> {
+                gameManager.resetTurn()
+            }
+            is GameEvent.ChangeTurn -> {
+                gameManager.changeTurn()
             }
             else -> {}
         }

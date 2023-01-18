@@ -17,6 +17,7 @@ import com.alextos.darts.android.common.presentation.FAB
 import com.alextos.darts.android.common.presentation.components.GameHistoryView
 import com.alextos.darts.game.presentation.game.GameEvent
 import com.alextos.darts.game.presentation.game.GameState
+import com.alextos.darts.game.presentation.game.TurnState
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
@@ -60,24 +61,32 @@ fun GameScreen(
             }
         }
 
-        if (state.isTurnChangeDialogOpen) {
-            AlertDialog(
-                onDismissRequest = { onEvent(GameEvent.HideTurnChangeDialog) },
-                title = {
-                    Text(text = stringResource(id = R.string.turn_change_title))
-                },
-                text = {
-                    Text(text = stringResource(
-                        id = R.string.turn_change_text,
-                        state.currentPlayer?.name ?: "")
-                    )
-                },
-                confirmButton = {
-                    Button(onClick = { onEvent(GameEvent.HideTurnChangeDialog) }) {
-                        Text(text = stringResource(id = R.string.ok))
+        when (val turnState = state.turnState) {
+            is TurnState.IsOver -> {
+                AlertDialog(
+                    onDismissRequest = { onEvent(GameEvent.ChangeTurn) },
+                    title = {
+                        Text(text = stringResource(id = R.string.turn_is_over))
+                    },
+                    text = {
+                        Text(text = stringResource(
+                            id = R.string.proceed_to_the_next_turn,
+                            turnState.result)
+                        )
+                    },
+                    confirmButton = {
+                        Button(onClick = { onEvent(GameEvent.ChangeTurn) }) {
+                            Text(text = stringResource(id = R.string.next_turn))
+                        }
+                    },
+                    dismissButton = {
+                        Button(onClick = { onEvent(GameEvent.ResetCurrentTurn) }) {
+                            Text(text = stringResource(id = R.string.reset_turn))
+                        }
                     }
-                }
-            )
+                )
+            }
+            else -> {}
         }
         if (state.isCloseGameDialogOpened) {
             AlertDialog(

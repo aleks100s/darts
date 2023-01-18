@@ -10,6 +10,18 @@ class TrackUserHistoryUseCase(player: Player) {
     private val _playerHistory = MutableStateFlow(PlayerHistory(player))
     val playerHistory: StateFlow<PlayerHistory> = _playerHistory
 
+    fun resetCurrentTurn() {
+        _playerHistory.update { playerHistory ->
+            val turns = playerHistory.turns.toMutableList()
+            turns.removeLast()
+            playerHistory.copy(turns = turns)
+        }
+    }
+
+    fun currentTurnResult(): Int {
+        return _playerHistory.value.turns.lastOrNull()?.score() ?: 0
+    }
+
     fun trackShotResult(shotResult: ShotResult): Boolean {
         return when (shotResult) {
             is ShotResult.Overkill -> {

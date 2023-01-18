@@ -4,6 +4,7 @@ import com.alextos.darts.game.domain.models.Player
 import com.alextos.darts.game.domain.models.Game
 import com.alextos.darts.game.domain.models.GameHistory
 import com.alextos.darts.game.domain.models.Shot
+import com.alextos.darts.game.presentation.game.TurnState
 import kotlinx.coroutines.flow.*
 import kotlinx.datetime.Clock
 import kotlinx.datetime.TimeZone
@@ -26,8 +27,8 @@ class GameManager(
         }
     }
 
-    private val _isTurnChangingDialogNeeded = MutableStateFlow(false)
-    val isTurnChangingDialogNeeded: StateFlow<Boolean> = _isTurnChangingDialogNeeded
+    private val _turnState: MutableStateFlow<TurnState> = MutableStateFlow(TurnState.IsOngoing)
+    val turnState: StateFlow<TurnState> = _turnState
 
     private val _currentPlayer = MutableStateFlow(players[0])
     val currentPlayer: StateFlow<Player> = _currentPlayer
@@ -50,16 +51,25 @@ class GameManager(
         val trackUserHistoryUseCase = currentTrackUseCaseUseCase()
         val isSetOver = trackUserHistoryUseCase.trackShotResult(result)
         if (isSetOver) {
+            _turnState.update { TurnState.IsOver(trackUserHistoryUseCase.currentTurnResult()) }
+        }
+    }
+
+    fun resetTurn() {
+        _turnState.update { TurnState.IsOngoing }
+        currentEvaluateShotUseCase().resetCurrentTurn()
+        currentTrackUseCaseUseCase().resetCurrentTurn()
+    }
+
+    fun changeTurn() {
+        _turnState.update { TurnState.IsOngoing }
+        currentEvaluateShotUseCase().currentShotResult?.let { result ->
             if (result.isGameOver()) {
                 finishGame()
             } else {
                 nextTurn()
             }
         }
-    }
-
-    fun turnChanged() {
-        _isTurnChangingDialogNeeded.update { false }
     }
 
     private fun currentEvaluateShotUseCase(): EvaluateShotUseCase {
@@ -95,6 +105,5 @@ class GameManager(
             players.getOrNull(3) -> _currentPlayer.update { players.getOrNull(0) ?: it }
             else -> { _currentPlayer.update { it }}
         }
-        _isTurnChangingDialogNeeded.update { true }
     }
 }

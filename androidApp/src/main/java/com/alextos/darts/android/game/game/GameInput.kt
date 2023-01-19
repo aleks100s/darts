@@ -43,12 +43,16 @@ val sectors = listOf(
 fun GameInput(
     currentSet: Set,
     playerName: String,
+    leaderScore: Int,
     onClick: (Sector) -> Unit
 ) {
-    Column(modifier = Modifier
-        .fillMaxSize()
-        .padding(bottom = 64.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-        CurrentSetItem(currentSet = currentSet, player = playerName)
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(bottom = 64.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        CurrentSetItem(currentSet = currentSet, player = playerName, leaderScore = leaderScore)
         LazyColumn(modifier = Modifier.fillMaxSize()) {
             items(sectors) {
                 InputRow(sectors = it, onClick = onClick)

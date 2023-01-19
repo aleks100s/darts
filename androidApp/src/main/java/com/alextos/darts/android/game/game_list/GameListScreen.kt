@@ -33,7 +33,7 @@ fun GameListScreen(
             }
         }
     ) { padding ->
-        Column(modifier = Modifier.padding(top = 32.dp, bottom = 64.dp)) {
+        Column(modifier = Modifier.padding(top = 32.dp, bottom = 72.dp)) {
             Row(
                 horizontalArrangement = Arrangement.Center,
                 modifier = Modifier.padding(horizontal = 16.dp)

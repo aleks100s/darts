@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.alextos.darts.android.common.presentation.FAB
 import com.alextos.darts.game.domain.models.PlayerHistory
 import com.alextos.darts.game.domain.models.Sector
@@ -41,6 +42,7 @@ fun GameHistoryView(
         modifier = Modifier
             .fillMaxSize()
             .padding(padding)
+            .padding(bottom = 72.dp)
     ) { page ->
         PlayerHistoryScreen(playerHistory = gameHistory[page])
     }

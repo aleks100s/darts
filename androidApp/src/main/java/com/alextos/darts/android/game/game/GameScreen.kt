@@ -48,7 +48,8 @@ fun GameScreen(
             if (isInputVisible) {
                 GameInput(
                     currentSet = state.getCurrentSet(),
-                    playerName = state.currentPlayer?.name ?: ""
+                    playerName = state.currentPlayer?.name ?: "",
+                    leaderScore = state.leaderResult()
                 ) { sector ->
                     onEvent(GameEvent.MakeShot(sector))
                 }

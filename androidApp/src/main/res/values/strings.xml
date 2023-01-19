@@ -28,4 +28,5 @@
     <string name="proceed_to_the_next_turn">Your result is %1$d\nProceed to the next turn?</string>
     <string name="reset_turn">Reset this turn</string>
     <string name="next_turn">Next turn</string>
+    <string name="leader_score">Leader score: %1$d</string>
 </resources>

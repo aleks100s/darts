@@ -19,6 +19,12 @@ data class GameState(
 
     fun getWinnerName() = currentPlayer?.name
 
+    fun leaderResult(): Int {
+        return gameHistory.minByOrNull { playerHistory ->
+            playerHistory.turns.lastOrNull()?.leftAfter ?: gameGoal
+        }?.turns?.lastOrNull()?.leftAfter ?: gameGoal
+    }
+
     fun getCurrentSet(): Set {
         var leftAfter = 0
         currentPlayer?.let { player ->

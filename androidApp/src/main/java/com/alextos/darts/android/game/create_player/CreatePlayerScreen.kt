@@ -39,7 +39,7 @@ fun CreatePlayerScreen(
             onClick = {
                 onEvent(CreatePlayerEvent.SavePlayer(state.name))
             },
-            enabled = state.name.isNotEmpty()
+            enabled = state.isNameValid()
         ) {
             Text(text = stringResource(id = R.string.create_player))
         }

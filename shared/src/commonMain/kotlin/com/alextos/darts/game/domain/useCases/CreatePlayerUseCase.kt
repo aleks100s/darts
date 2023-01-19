@@ -7,6 +7,6 @@ class CreatePlayerUseCase(
 ) {
 
     fun execute(name: String) {
-        return dataSource.createPlayer(name = name)
+        return dataSource.createPlayer(name = name.trim())
     }
 }

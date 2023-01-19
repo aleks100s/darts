@@ -33,24 +33,24 @@ fun GameListScreen(
             }
         }
     ) { padding ->
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(padding)
-                .padding(vertical = 64.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
-            item {
-                Row(
-                    horizontalArrangement = Arrangement.Center,
-                    modifier = Modifier.padding(horizontal = 16.dp)
-                ) {
-                    Text(text = stringResource(id = R.string.games), style = MaterialTheme.typography.h1)
-                }
+        Column(modifier = Modifier.padding(top = 32.dp, bottom = 64.dp)) {
+            Row(
+                horizontalArrangement = Arrangement.Center,
+                modifier = Modifier.padding(horizontal = 16.dp)
+            ) {
+                Text(text = stringResource(id = R.string.games), style = MaterialTheme.typography.h1)
             }
-            items(state.games) {
-                GameItem(game = it) {
-                    onEvent(GameListEvent.SelectGame(it))
+
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(padding),
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                items(state.games) {
+                    GameItem(game = it) {
+                        onEvent(GameListEvent.SelectGame(it))
+                    }
                 }
             }
         }

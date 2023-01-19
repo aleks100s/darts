@@ -5,8 +5,6 @@ data class Player(
     val name: String
 ) {
     fun initials(): String {
-        return name.first()
-            .toString()
-            .uppercase()
+        return name.substring(0 until 2)
     }
 }

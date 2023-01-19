@@ -8,9 +8,10 @@ import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.alextos.darts.game.domain.models.PlayerHistory
+import com.alextos.darts.game.domain.models.Set
 
 @Composable
-fun PlayerHistoryScreen(playerHistory: PlayerHistory) {
+fun PlayerHistoryScreen(playerHistory: PlayerHistory, onSelect: (Set) -> Unit) {
     Scaffold {
         LazyColumn(
             modifier = Modifier
@@ -22,7 +23,9 @@ fun PlayerHistoryScreen(playerHistory: PlayerHistory) {
                 PlayerHistoryHeader()
             }
             items(playerHistory.turns) { set ->
-                SetItem(set = set)
+                SetItem(set = set) {
+                    onSelect(set)
+                }
             }
         }
     }

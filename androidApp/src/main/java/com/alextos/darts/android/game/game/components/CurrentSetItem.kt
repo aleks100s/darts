@@ -14,6 +14,6 @@ fun CurrentSetItem(currentSet: Set, player: String, leaderScore: Int) {
         SectionHeader(title = player)
         LeaderItem(score = leaderScore)
         PlayerHistoryHeader()
-        SetItem(set = currentSet)
+        SetItem(set = currentSet, onSelect = {})
     }
 }

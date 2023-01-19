@@ -18,6 +18,7 @@ import com.alextos.darts.android.common.presentation.components.GameHistoryView
 import com.alextos.darts.game.presentation.game.GameEvent
 import com.alextos.darts.game.presentation.game.GameState
 import com.alextos.darts.game.presentation.game.TurnState
+import com.alextos.darts.game.presentation.history.HistoryEvent
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
@@ -57,7 +58,10 @@ fun GameScreen(
                 GameHistoryView(
                     gameHistory = state.gameHistory,
                     currentPage = state.currentPage(),
-                    padding = it
+                    padding = it,
+                    onSelect = { turns, set ->
+                        onEvent(GameEvent.ShowDarts(turns, set))
+                    }
                 )
             }
         }

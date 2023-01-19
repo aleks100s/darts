@@ -109,6 +109,32 @@ enum class Sector(
     SingleOuter20(81, 20),
     Double20(82, 40);
 
+    fun sectorOrder(): Int {
+        return when(this) {
+            None, Miss, SingleBullseye, DoubleBullseye -> 0
+            Double20, SingleOuter20, Triple20, SingleInner20 -> 1
+            Double1, SingleOuter1, Triple1, SingleInner1 -> 2
+            Double18, SingleOuter18, Triple18, SingleInner18 -> 3
+            Double4, SingleOuter4, Triple4, SingleInner4 -> 4
+            Double13, SingleOuter13, Triple13, SingleInner13 -> 5
+            Double6, SingleOuter6, Triple6, SingleInner6 -> 6
+            Double10, SingleOuter10, Triple10, SingleInner10 -> 7
+            Double15, SingleOuter15, Triple15, SingleInner15 -> 8
+            Double2, SingleOuter2, Triple2, SingleInner2 -> 9
+            Double17, SingleOuter17, Triple17, SingleInner17 -> 10
+            Double3, SingleOuter3, Triple3, SingleInner3 -> 11
+            Double19, SingleOuter19, Triple19, SingleInner19 -> 12
+            Double7, SingleOuter7, Triple7, SingleInner7 -> 13
+            Double16, SingleOuter16, Triple16, SingleInner16 -> 14
+            Double8, SingleOuter8, Triple8, SingleInner8 -> 15
+            Double11, SingleOuter11, Triple11, SingleInner11 -> 16
+            Double14, SingleOuter14, Triple14, SingleInner14 -> 17
+            Double9, SingleOuter9, Triple9, SingleInner9 -> 18
+            Double12, SingleOuter12, Triple12, SingleInner12 -> 19
+            Double5, SingleOuter5, Triple5, SingleInner5 -> 20
+        }
+    }
+
     fun isBlack():Boolean {
         return when (this) {
             SingleInner20, SingleOuter20, SingleInner18, SingleOuter18,
@@ -163,7 +189,7 @@ enum class Sector(
         }
     }
 
-    fun isTriple():Boolean {
+    fun isTriplet():Boolean {
         return when (this) {
             Triple1, Triple2, Triple3, Triple4,
             Triple5, Triple6, Triple7, Triple8,
@@ -182,8 +208,33 @@ enum class Sector(
             Double5, Double6, Double7, Double8,
             Double9, Double10, Double11, Double12,
             Double13, Double14, Double15, Double16,
-            Double17, Double18, Double19, Double20,
-            DoubleBullseye-> {
+            Double17, Double18, Double19, Double20 -> {
+                true
+            }
+            else -> false
+        }
+    }
+
+    fun isInner(): Boolean {
+        return when (this) {
+            SingleInner1, SingleInner2, SingleInner3, SingleInner4,
+            SingleInner5, SingleInner6, SingleInner7, SingleInner8,
+            SingleInner9, SingleInner10, SingleInner11, SingleInner12,
+            SingleInner13, SingleInner14, SingleInner15, SingleInner16,
+            SingleInner17, SingleInner18, SingleInner19, SingleInner20 -> {
+                true
+            }
+            else -> false
+        }
+    }
+
+    fun isOuter(): Boolean {
+        return when (this) {
+            SingleOuter1, SingleOuter2, SingleOuter3, SingleOuter4,
+            SingleOuter5, SingleOuter6, SingleOuter7, SingleOuter8,
+            SingleOuter9, SingleOuter10, SingleOuter11, SingleOuter12,
+            SingleOuter13, SingleOuter14, SingleOuter15, SingleOuter16,
+            SingleOuter17, SingleOuter18, SingleOuter19, SingleOuter20 -> {
                 true
             }
             else -> false
@@ -209,7 +260,7 @@ enum class Sector(
             None -> "-"
             else -> if (isDouble()) {
                 return "${value / 2} x2"
-            } else if (isTriple()) {
+            } else if (isTriplet()) {
                 return "${value / 3} x3"
             } else if (this == None) {
                 return "-"
@@ -220,6 +271,30 @@ enum class Sector(
     }
 
     companion object {
+        val sectors = listOf(
+            listOf(SingleBullseye, DoubleBullseye, Miss),
+            listOf(SingleInner1, Triple1, SingleOuter1, Double1),
+            listOf(SingleInner2, Triple2, SingleOuter2, Double2),
+            listOf(SingleInner3, Triple3, SingleOuter3, Double3),
+            listOf(SingleInner4, Triple4, SingleOuter4, Double4),
+            listOf(SingleInner5, Triple5, SingleOuter5, Double5),
+            listOf(SingleInner6, Triple6, SingleOuter6, Double6),
+            listOf(SingleInner7, Triple7, SingleOuter7, Double7),
+            listOf(SingleInner8, Triple8, SingleOuter8, Double8),
+            listOf(SingleInner9, Triple9, SingleOuter9, Double9),
+            listOf(SingleInner10, Triple10, SingleOuter10, Double10),
+            listOf(SingleInner11, Triple11, SingleOuter11, Double11),
+            listOf(SingleInner12, Triple12, SingleOuter12, Double12),
+            listOf(SingleInner13, Triple13, SingleOuter13, Double13),
+            listOf(SingleInner14, Triple14, SingleOuter14, Double14),
+            listOf(SingleInner15, Triple15, SingleOuter15, Double15),
+            listOf(SingleInner16, Triple16, SingleOuter16, Double16),
+            listOf(SingleInner17, Triple17, SingleOuter17, Double17),
+            listOf(SingleInner18, Triple18, SingleOuter18, Double18),
+            listOf(SingleInner19, Triple19, SingleOuter19, Double19),
+            listOf(SingleInner20, Triple20, SingleOuter20, Double20),
+        )
+
         fun random(): Sector {
             return values().toList().random()
         }

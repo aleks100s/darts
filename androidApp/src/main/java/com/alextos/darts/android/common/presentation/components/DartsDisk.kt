@@ -1,9 +1,8 @@
-package com.alextos.darts.android.game.game
+package com.alextos.darts.android.common.presentation.components
 
 import android.util.Log
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.gestures.detectDragGestures
-import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -15,9 +14,10 @@ import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.dp
+import com.alextos.darts.game.domain.models.Sector
 
 @Composable
-fun DartsDisk() {
+fun DartsDisk(selectedSector: Sector) {
     Canvas(
         modifier = Modifier
             .fillMaxWidth()
@@ -43,64 +43,76 @@ fun DartsDisk() {
                 )
             }
     ) {
-        drawMiss()
-        drawDoubles()
-        drawOuters()
-        drawTriplets()
-        drawInners()
-        drawBullseye()
-        drawDoubleBullseye()
+        drawMiss(selectedSector)
+        drawDoubles(selectedSector)
+        drawOuters(selectedSector)
+        drawTriplets(selectedSector)
+        drawInners(selectedSector)
+        drawBullseye(selectedSector)
+        drawDoubleBullseye(selectedSector)
     }
 }
 
-fun DrawScope.drawMiss() {
-    drawSector(multiplier = 1f, width = 0.1f, color = Color.Black)
+fun DrawScope.drawMiss(sector: Sector) {
+    drawSector(
+        multiplier = 1f,
+        width = 0.1f,
+        color = if (sector == Sector.Miss) Color.Yellow else Color.Black
+    )
 }
 
-fun DrawScope.drawDoubles() {
+fun DrawScope.drawDoubles(sector: Sector) {
     drawSectorLevel(
         radiusFrom = 0.85f,
         width = 0.1f,
-        firstColor = Color.Red,
-        secondColor = Color.Green
+        firstColor = Color.Green,
+        secondColor = Color.Red,
+        sector = if (sector.isDouble()) sector else null
     )
 }
 
-fun DrawScope.drawOuters() {
+fun DrawScope.drawOuters(sector: Sector) {
     drawSectorLevel(
         radiusFrom = 0.55f,
         width = 0.3f,
-        firstColor = Color.Black,
-        secondColor = Color.White
+        firstColor = Color.White,
+        secondColor = Color.Black,
+        sector = if (sector.isOuter()) sector else null
     )
 }
 
-fun DrawScope.drawTriplets() {
+fun DrawScope.drawTriplets(sector: Sector) {
     drawSectorLevel(
         radiusFrom = 0.45f,
         width = 0.1f,
-        firstColor = Color.Red,
-        secondColor = Color.Green
+        firstColor = Color.Green,
+        secondColor = Color.Red,
+        sector = if (sector.isTriplet()) sector else null
     )
 }
 
-fun DrawScope.drawInners() {
+fun DrawScope.drawInners(sector: Sector) {
     drawSectorLevel(
         radiusFrom = 0.15f,
         width = 0.3f,
-        firstColor = Color.Black,
-        secondColor = Color.White
+        firstColor = Color.White,
+        secondColor = Color.Black,
+        sector = if (sector.isInner()) sector else null
     )
 }
 
-fun DrawScope.drawBullseye() {
-    drawSector(multiplier = 0.1f, width = 0.1f, color = Color.Green)
+fun DrawScope.drawBullseye(sector: Sector) {
+    drawSector(
+        multiplier = 0.1f,
+        width = 0.1f,
+        color = if (sector == Sector.SingleBullseye) Color.Yellow else Color.Green
+    )
 }
 
-fun DrawScope.drawDoubleBullseye() {
+fun DrawScope.drawDoubleBullseye(sector: Sector) {
     val arcRadius = size.width / 2
     drawCircle(
-        color = Color.Red,
+        color = if (sector == Sector.DoubleBullseye) Color.Yellow else Color.Red,
         radius = arcRadius * 0.05f
     )
 }
@@ -109,7 +121,8 @@ fun DrawScope.drawSectorLevel(
     radiusFrom: Float,
     width: Float,
     firstColor: Color,
-    secondColor: Color
+    secondColor: Color,
+    sector: Sector?
 ) {
     val arcRadius = size.width / 2
     val multiplier = radiusFrom + width / 2
@@ -119,18 +132,19 @@ fun DrawScope.drawSectorLevel(
         width = arcRadius * width,
         offset = offset,
         firstColor = firstColor,
-        secondColor = secondColor
+        secondColor = secondColor,
+        sector = sector
     )
 }
 
-fun DrawScope.drawSector(multiplier: Float, width: Float, color: Color) {
+fun DrawScope.drawSector(multiplier: Float, width: Float, color: Color, useCenter: Boolean = false) {
     val arcRadius = size.width / 2
     val offset = arcRadius * (1 - multiplier)
     drawArc(
         color = color,
         startAngle = 0f,
         sweepAngle = 360f,
-        useCenter = false,
+        useCenter = useCenter,
         size = size.times(multiplier),
         style = Stroke(width = arcRadius * width),
         topLeft = Offset(offset, offset)
@@ -142,15 +156,17 @@ fun DrawScope.circle(
     width: Float,
     offset: Float,
     firstColor: Color,
-    secondColor: Color
+    secondColor: Color,
+    sector: Sector?
 ) {
     (1..20).forEach {
+        val isSelected = sector?.sectorOrder() == it
         arc(
             sizeMultiplier = sizeMultiplier,
             width = width,
             offset = Offset(offset, offset),
-            startAngle = -99f + it * 18f,
-            color = if (it % 2 == 0) firstColor else secondColor
+            startAngle = -117f + it * 18f,
+            color = if (isSelected) Color.Yellow else if (it % 2 == 0) firstColor else secondColor
         )
     }
 }

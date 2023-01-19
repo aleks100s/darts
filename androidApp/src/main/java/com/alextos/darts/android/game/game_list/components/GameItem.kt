@@ -9,7 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.unit.dp
-import com.alextos.darts.android.common.presentation.getTitle
+import com.alextos.darts.android.common.presentation.extensions.getTitle
 import com.alextos.darts.game.domain.models.Game
 
 @Composable

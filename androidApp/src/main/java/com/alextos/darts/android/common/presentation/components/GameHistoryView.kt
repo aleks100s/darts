@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.dp
 import com.alextos.darts.android.common.presentation.FAB
 import com.alextos.darts.game.domain.models.PlayerHistory
 import com.alextos.darts.game.domain.models.Sector
+import com.alextos.darts.game.domain.models.Set
 import com.alextos.darts.game.domain.models.Shot
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
@@ -25,7 +26,8 @@ import kotlinx.coroutines.launch
 fun GameHistoryView(
     gameHistory: List<PlayerHistory>,
     currentPage: Int,
-    padding: PaddingValues
+    padding: PaddingValues,
+    onSelect: (List<Set>, Set) -> Unit
 ) {
     val pagerState = rememberPagerState(initialPage = currentPage)
     val scope = rememberCoroutineScope()
@@ -44,6 +46,9 @@ fun GameHistoryView(
             .padding(padding)
             .padding(bottom = 72.dp)
     ) { page ->
-        PlayerHistoryScreen(playerHistory = gameHistory[page])
+        PlayerHistoryScreen(
+            playerHistory = gameHistory[page]) {
+            onSelect(gameHistory[page].turns, it)
+        }
     }
 }

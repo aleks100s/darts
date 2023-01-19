@@ -5,6 +5,7 @@ sealed class Route(val route: String) {
     object CreateGame: Route("create_game")
     object Game: Route("game")
     object History: Route("history")
+    object Darts: Route("darts")
 
     fun routeWithArgs(vararg args: String): String {
         return buildString {

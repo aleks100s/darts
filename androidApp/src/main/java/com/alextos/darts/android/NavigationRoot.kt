@@ -21,6 +21,8 @@ import com.alextos.darts.android.game.create_game.AndroidCreateGameViewModel
 import com.alextos.darts.android.game.create_game.CreateGameScreen
 import com.alextos.darts.android.game.create_player.AndroidCreatePlayerViewModel
 import com.alextos.darts.android.game.create_player.CreatePlayerScreen
+import com.alextos.darts.android.game.darts.AndroidDartsViewModel
+import com.alextos.darts.android.game.darts.DartsScreen
 import com.alextos.darts.android.game.game.AndroidGameViewModel
 import com.alextos.darts.android.game.game.GameScreen
 import com.alextos.darts.android.game.game_list.AndroidGameListViewModel
@@ -31,10 +33,13 @@ import com.alextos.darts.game.presentation.create_game.CreateGameEvent
 import com.alextos.darts.game.presentation.create_game.CreateGameState
 import com.alextos.darts.game.presentation.create_player.CreatePlayerEvent
 import com.alextos.darts.game.presentation.create_player.CreatePlayerState
+import com.alextos.darts.game.presentation.darts.DartsState
+import com.alextos.darts.game.presentation.darts.DartsViewModel
 import com.alextos.darts.game.presentation.game.GameEvent
 import com.alextos.darts.game.presentation.game.GameState
 import com.alextos.darts.game.presentation.game_list.GameListEvent
 import com.alextos.darts.game.presentation.game_list.GameListState
+import com.alextos.darts.game.presentation.history.HistoryEvent
 import com.alextos.darts.game.presentation.history.HistoryState
 import kotlinx.coroutines.launch
 
@@ -150,13 +155,19 @@ fun NavigationRoot() {
             val state by viewModel.state.collectAsState(initial = GameState())
             GameScreen(
                 state = state,
-                onEvent = {
-                    when (it) {
+                onEvent = { event ->
+                    when (event) {
                         is GameEvent.CloseGame -> {
                             navController.popBackStack()
                             navController.popBackStack()
                         }
-                        else -> { viewModel.onEvent(it) }
+                        is GameEvent.ShowDarts -> {
+                            navController.navigate(Route.Darts.routeWithArgs(
+                                event.turns.map { it.shots }.map { it.map { it.sector }}.toStringNavArgument(),
+                                event.turns.indexOf(event.currentSet).toString()
+                            ))
+                        }
+                        else -> { viewModel.onEvent(event) }
                     }
                 }
             )
@@ -175,7 +186,32 @@ fun NavigationRoot() {
         ) {
             val viewModel = hiltViewModel<AndroidHistoryViewModel>()
             val state by viewModel.state.collectAsState(initial = HistoryState())
-            HistoryScreen(history = state.gameHistory)
+            HistoryScreen(history = state.gameHistory) { event ->
+                when (event) {
+                    is HistoryEvent.ShowDarts -> {
+                        navController.navigate(Route.Darts.routeWithArgs(
+                            event.turns.map { it.shots }.map { it.map { it.sector }}.toStringNavArgument(),
+                            event.turns.indexOf(event.currentSet).toString()
+                        ))
+                    }
+                }
+            }
+        }
+
+        composable(
+            route = Route.Darts.route + "/{turns}/{currentPage}",
+            arguments = listOf(
+                navArgument("turns") {
+                    type = NavType.StringType
+                },
+                navArgument("currentPage") {
+                    type = NavType.StringType
+                }
+            )
+        ) {
+            val viewModel: AndroidDartsViewModel = hiltViewModel()
+            val state by viewModel.state.collectAsState(initial = DartsState())
+            DartsScreen(state = state)
         }
     }
 }

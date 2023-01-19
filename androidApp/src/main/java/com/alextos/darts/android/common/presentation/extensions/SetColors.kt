@@ -1,4 +1,4 @@
-package com.alextos.darts.android.common.presentation
+package com.alextos.darts.android.common.presentation.extensions
 
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable

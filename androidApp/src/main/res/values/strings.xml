@@ -34,4 +34,9 @@
     <string name="outer">Outer</string>
     <string name="double_">Double</string>
     <string name="triplet">Triplet</string>
+    <string name="best_set_statistics">Best set statistics</string>
+    <string name="game">Game</string>
+    <string name="statistics">Statistics</string>
+    <string name="arrow_right_description">Show</string>
+    <string name="best_set_of_all_players">Best set of all players</string>
 </resources>

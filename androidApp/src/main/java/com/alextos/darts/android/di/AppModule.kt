@@ -10,6 +10,10 @@ import com.alextos.darts.game.domain.useCases.GetGamesUseCase
 import com.alextos.darts.game.domain.useCases.SaveGameHistoryUseCase
 import com.alextos.darts.game.domain.useCases.CreatePlayerUseCase
 import com.alextos.darts.game.domain.useCases.GetPlayersUseCase
+import com.alextos.darts.statistics.data.SqlDelightStatisticsDataSource
+import com.alextos.darts.statistics.domain.StatisticsDataSource
+import com.alextos.darts.statistics.domain.use_cases.GetBestSetUseCase
+import com.alextos.darts.statistics.domain.use_cases.GetPlayersBestSetsUseCase
 import com.squareup.sqldelight.db.SqlDriver
 import dagger.Module
 import dagger.Provides
@@ -66,5 +70,23 @@ object AppModule {
     @Singleton
     fun provideGetGameHistoryUseCase(dataSource: GameDataSource): GetGameHistoryUseCase {
         return GetGameHistoryUseCase(dataSource)
+    }
+
+    @Provides
+    @Singleton
+    fun provideStatisticsDataSource(database: DartsDatabase): StatisticsDataSource {
+        return SqlDelightStatisticsDataSource(database)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetBestSetUseCase(dataSource: StatisticsDataSource): GetBestSetUseCase {
+        return GetBestSetUseCase(dataSource)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetPlayersBestSetsUseCase(dataSource: StatisticsDataSource): GetPlayersBestSetsUseCase {
+        return GetPlayersBestSetsUseCase(dataSource)
     }
 }

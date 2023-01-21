@@ -1,4 +1,4 @@
-package com.alextos.darts.android
+package com.alextos.darts.android.navigation.game
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
@@ -34,7 +34,6 @@ import com.alextos.darts.game.presentation.create_game.CreateGameState
 import com.alextos.darts.game.presentation.create_player.CreatePlayerEvent
 import com.alextos.darts.game.presentation.create_player.CreatePlayerState
 import com.alextos.darts.game.presentation.darts.DartsState
-import com.alextos.darts.game.presentation.darts.DartsViewModel
 import com.alextos.darts.game.presentation.game.GameEvent
 import com.alextos.darts.game.presentation.game.GameState
 import com.alextos.darts.game.presentation.game_list.GameListEvent
@@ -45,24 +44,24 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun NavigationRoot() {
+fun GameNavigationRoot() {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
-        startDestination = Route.GameList.route,
+        startDestination = GameRoute.GameList.route,
         modifier = Modifier.background(MaterialTheme.colors.background)
     ) {
-        composable(route = Route.GameList.route) {
+        composable(route = GameRoute.GameList.route) {
             val viewModel = hiltViewModel<AndroidGameListViewModel>()
             val state by viewModel.state.collectAsState(initial = GameListState())
             GameListScreen(state = state, onEvent = {
                 when (it) {
                     is GameListEvent.CreateGame -> {
-                        navController.navigate(route = Route.CreateGame.route)
+                        navController.navigate(route = GameRoute.CreateGame.route)
                     }
                     is GameListEvent.SelectGame -> {
                         navController.navigate(
-                            route = Route.History.routeWithArgs(
+                            route = GameRoute.History.routeWithArgs(
                                 it.game.players.toStringNavArgument(),
                                 it.game.id.toString()
                             )
@@ -75,7 +74,7 @@ fun NavigationRoot() {
             })
         }
 
-        composable(route = Route.CreateGame.route) {
+        composable(route = GameRoute.CreateGame.route) {
             val coroutineScope = rememberCoroutineScope()
             val modalSheetState = rememberModalBottomSheetState(
                 initialValue = ModalBottomSheetValue.Hidden,
@@ -117,7 +116,7 @@ fun NavigationRoot() {
                         when(it) {
                             is CreateGameEvent.CreateGame -> {
                                 navController.navigate(
-                                    route = Route.Game.routeWithArgs(
+                                    route = GameRoute.Game.routeWithArgs(
                                         state.selectedPlayers.toStringNavArgument(),
                                         state.selectedGoal.toString()
                                     )
@@ -141,7 +140,7 @@ fun NavigationRoot() {
         }
 
         composable(
-            route = Route.Game.route + "/{list}/{goal}",
+            route = GameRoute.Game.route + "/{list}/{goal}",
             arguments = listOf(
                 navArgument("list") {
                     type = NavType.StringType
@@ -162,7 +161,8 @@ fun NavigationRoot() {
                             navController.popBackStack()
                         }
                         is GameEvent.ShowDarts -> {
-                            navController.navigate(Route.Darts.routeWithArgs(
+                            navController.navigate(
+                                GameRoute.Darts.routeWithArgs(
                                 event.turns.map { it.shots }.map { it.map { it.sector }}.toStringNavArgument(),
                                 event.turns.indexOf(event.currentSet).toString()
                             ))
@@ -174,7 +174,7 @@ fun NavigationRoot() {
         }
 
         composable(
-            route = Route.History.route + "/{list}/{gameId}",
+            route = GameRoute.History.route + "/{list}/{gameId}",
             arguments = listOf(
                 navArgument("list") {
                     type = NavType.StringType
@@ -189,7 +189,8 @@ fun NavigationRoot() {
             HistoryScreen(history = state.gameHistory) { event ->
                 when (event) {
                     is HistoryEvent.ShowDarts -> {
-                        navController.navigate(Route.Darts.routeWithArgs(
+                        navController.navigate(
+                            GameRoute.Darts.routeWithArgs(
                             event.turns.map { it.shots }.map { it.map { it.sector }}.toStringNavArgument(),
                             event.turns.indexOf(event.currentSet).toString()
                         ))
@@ -199,7 +200,7 @@ fun NavigationRoot() {
         }
 
         composable(
-            route = Route.Darts.route + "/{turns}/{currentPage}",
+            route = GameRoute.Darts.route + "/{turns}/{currentPage}",
             arguments = listOf(
                 navArgument("turns") {
                     type = NavType.StringType

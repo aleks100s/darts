@@ -1,0 +1,85 @@
+package com.alextos.darts.android.navigation.statistics
+
+import androidx.compose.foundation.background
+import androidx.compose.material.MaterialTheme
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavType
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import com.alextos.darts.android.common.util.toStringNavArgument
+import com.alextos.darts.android.game.darts.AndroidDartsViewModel
+import com.alextos.darts.android.game.darts.DartsScreen
+import com.alextos.darts.android.navigation.game.GameRoute
+import com.alextos.darts.android.statistics.best_set.AndroidBestSetViewModel
+import com.alextos.darts.android.statistics.best_set.BestSetScreen
+import com.alextos.darts.android.statistics.statistics.StatisticsScreen
+import com.alextos.darts.game.presentation.darts.DartsState
+import com.alextos.darts.statistics.presentation.best_set.BestSetEvent
+import com.alextos.darts.statistics.presentation.best_set.BestSetState
+import com.alextos.darts.statistics.presentation.statistics.StatisticsEvent
+
+@Composable
+fun StatisticsNavigationRoot() {
+    val navController = rememberNavController()
+    NavHost(
+        navController = navController,
+        startDestination = StatisticsRoute.Statistics.route,
+        modifier = Modifier.background(MaterialTheme.colors.background)
+    ) {
+        composable(route = StatisticsRoute.Statistics.route) {
+            StatisticsScreen { event ->
+                when(event) {
+                    is StatisticsEvent.ShowBestSet -> {
+                        navController.navigate(route = StatisticsRoute.BestSet.route)
+                    }
+                }
+            }
+        }
+
+        composable(route = StatisticsRoute.BestSet.route) {
+            val viewModel: AndroidBestSetViewModel = hiltViewModel()
+            val state by viewModel.state.collectAsState(initial = BestSetState())
+            BestSetScreen(state = state) { event ->
+                when(event) {
+                    is BestSetEvent.ShowBestSetOfAll -> {
+                        navController.navigate(
+                            route = StatisticsRoute.Darts.routeWithArgs(
+                                listOf(event.set).map { set ->
+                                    set.shots.map { it.sector }
+                                }.toStringNavArgument()
+                            )
+                        )
+                    }
+                    is BestSetEvent.ShowBestSetOfPlayer -> {
+                        navController.navigate(
+                            route = StatisticsRoute.Darts.routeWithArgs(
+                                listOf(event.set).map { set ->
+                                    set.shots.map { it.sector }
+                                }.toStringNavArgument()
+                            )
+                        )
+                    }
+                }
+            }
+        }
+
+        composable(
+            route = GameRoute.Darts.route + "/{turns}",
+            arguments = listOf(
+                navArgument("turns") {
+                    type = NavType.StringType
+                }
+            )
+        ) {
+            val viewModel: AndroidDartsViewModel = hiltViewModel()
+            val state by viewModel.state.collectAsState(initial = DartsState())
+            DartsScreen(state = state)
+        }
+    }
+}

@@ -135,3 +135,31 @@ FROM setEntity se
 JOIN shotEntity she ON se.id = she.set_id
 WHERE se.game_id = ? AND se.player_id = ?
 ORDER BY setId ASC;
+
+--Statistics
+getBestSet:
+SELECT
+se.id AS setId,
+se.score AS score,
+se.leftAfter AS leftAfter,
+se.isOverkill AS isOverkill,
+she.order_number AS shotOrder,
+she.sector AS sectorId,
+she.shot_value AS sectorValue
+FROM setEntity se
+JOIN shotEntity she ON se.id = she.set_id
+WHERE score = (SELECT MAX(score) FROM setEntity);
+
+getPlayerBestSet:
+SELECT
+se.id AS setId,
+se.score AS score,
+se.leftAfter AS leftAfter,
+se.isOverkill AS isOverkill,
+she.order_number AS shotOrder,
+she.sector AS sectorId,
+she.shot_value AS sectorValue
+FROM setEntity se
+JOIN shotEntity she ON se.id = she.set_id
+WHERE score = (SELECT MAX(score) FROM setEntity WHERE setEntity.player_id = ?)
+AND se.player_id = ?;

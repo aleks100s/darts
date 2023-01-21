@@ -1,6 +1,5 @@
 package com.alextos.darts.android.game.create_game.components
 
-import android.graphics.drawable.shapes.OvalShape
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.padding

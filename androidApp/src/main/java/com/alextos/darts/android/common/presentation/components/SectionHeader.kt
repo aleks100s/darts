@@ -18,7 +18,7 @@ fun SectionHeader(title: String) {
         color = MaterialTheme.colors.onSurface,
         modifier = Modifier
             .fillMaxWidth()
-            .background(Color.DarkGray)
+            .background(MaterialTheme.colors.surface)
             .padding(vertical = 8.dp),
         textAlign = TextAlign.Center,
         style = MaterialTheme.typography.h2

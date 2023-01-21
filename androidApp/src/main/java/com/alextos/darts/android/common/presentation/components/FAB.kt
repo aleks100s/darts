@@ -16,7 +16,11 @@ fun FAB(
     onClick: () -> Unit
 ) {
     ExtendedFloatingActionButton(
-        onClick = onClick,
+        onClick = {
+                  if (isEnabled) {
+                      onClick()
+                  }
+                  },
         icon = {
             Icon(
                 icon,

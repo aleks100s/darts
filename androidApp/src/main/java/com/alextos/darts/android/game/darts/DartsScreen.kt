@@ -31,8 +31,8 @@ fun DartsScreen(state: DartsState) {
         state = pagerState,
         modifier = Modifier
             .fillMaxSize()
-            .padding(top = 64.dp, start = 16.dp, end = 16.dp)
+            .padding(top = 16.dp, start = 16.dp, end = 16.dp)
     ) { page ->
-        DartsSetView(set = state.turns[page])
+        DartsSetView(set = state.turns[page].filter { !it.sector.isNone() })
     }
 }

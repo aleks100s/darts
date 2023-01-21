@@ -35,12 +35,12 @@ fun DartsDisk(selectedSector: Sector) {
 //                    }
 //                )
 
-                detectDragGestures(
-                    onDrag = { drag, _ ->
-                        // during
-                        Log.i("Tag", "Dragged $drag")
-                    }
-                )
+//                detectDragGestures(
+//                    onDrag = { drag, _ ->
+//                        // during
+//                        Log.i("Tag", "Dragged $drag")
+//                    }
+//                )
             }
     ) {
         drawMiss(selectedSector)

@@ -12,6 +12,7 @@ import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import com.alextos.darts.android.R
 import com.alextos.darts.android.common.presentation.FAB
 import com.alextos.darts.android.common.presentation.components.GameHistoryView
@@ -59,6 +60,7 @@ fun GameScreen(
                     gameHistory = state.gameHistory,
                     currentPage = state.currentPage(),
                     padding = it,
+                    bottomPadding = 72.dp,
                     onSelect = { turns, set ->
                         onEvent(GameEvent.ShowDarts(turns, set))
                     }

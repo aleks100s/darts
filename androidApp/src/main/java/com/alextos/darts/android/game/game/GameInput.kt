@@ -1,5 +1,8 @@
 package com.alextos.darts.android.game.game
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -8,6 +11,7 @@ import androidx.compose.material.ButtonDefaults.textButtonColors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.alextos.darts.android.R
@@ -33,7 +37,9 @@ fun GameInput(
     ) {
         CurrentSetItem(currentSet = currentSet, player = playerName, leaderScore = leaderScore)
         HintRow()
-        LazyColumn(modifier = Modifier.fillMaxSize()) {
+        LazyColumn(
+            modifier = Modifier.fillMaxSize()
+        ) {
             items(Sector.sectors) {
                 InputRow(sectors = it, onClick = onClick)
             }
@@ -73,15 +79,14 @@ private fun InputCell(
     sector: Sector,
     onClick: () -> Unit
 ) {
-    Row(modifier = modifier, horizontalArrangement = Arrangement.Center) {
-        Button(
-            onClick = { onClick() },
-            colors = textButtonColors(
-                backgroundColor = sector.color(),
-                contentColor = sector.textColor()
-            )
-        ) {
-            Text(text = sector.uiString())
-        }
+    Row(
+        modifier = modifier
+            .background(sector.color())
+            .border(1.dp, Color.DarkGray)
+            .clickable { onClick() }
+            .padding(vertical = 12.dp),
+        horizontalArrangement = Arrangement.Center
+    ) {
+        Text(text = sector.uiString(), color = sector.textColor())
     }
 }

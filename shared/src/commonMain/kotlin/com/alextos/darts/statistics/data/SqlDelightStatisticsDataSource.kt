@@ -34,4 +34,16 @@ class SqlDelightStatisticsDataSource(
             .executeAsList()
             .playerSectorsToShots()
     }
+
+    override fun getBiggestFinalSet(): Set? {
+        return queries.getBiggestFinalSet()
+            .executeAsList()
+            .biggestFinalSetToSet()
+    }
+
+    override fun getPlayerBiggestFinalSet(player: Player): Set? {
+        return queries.getPlayerBiggestFinalSet(player.id)
+            .executeAsList()
+            .playerBiggestFinalSetToSet()
+    }
 }

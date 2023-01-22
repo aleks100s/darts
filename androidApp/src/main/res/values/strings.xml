@@ -36,9 +36,11 @@
     <string name="triplet">Triplet</string>
     <string name="best_set_statistics">Best set statistics</string>
     <string name="most_frequent_shots_statistics">Most frequent shots statistics</string>
+    <string name="biggest_final_set_statistics">Biggest final set statistics</string>
     <string name="game">Game</string>
     <string name="statistics">Statistics</string>
     <string name="arrow_right_description">Show</string>
     <string name="best_set_of_all_players">Best set of all players</string>
     <string name="most_frequent_shots_of_all_players">Most frequent shots of all players</string>
+    <string name="biggest_final_set_of_all_players">Biggest final set of all players</string>
 </resources>

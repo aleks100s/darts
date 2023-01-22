@@ -9,4 +9,6 @@ interface StatisticsDataSource {
     fun getPlayerBestSet(player: Player): Set?
     fun getMostFrequentShots(): List<Shot>
     fun getPlayerMostFrequentShots(player: Player): List<Shot>
+    fun getBiggestFinalSet(): Set?
+    fun getPlayerBiggestFinalSet(player: Player): Set?
 }

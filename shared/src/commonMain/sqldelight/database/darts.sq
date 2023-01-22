@@ -180,3 +180,36 @@ WHERE she.player_id = ?
 GROUP BY she.sector
 ORDER BY COUNT(she.sector) DESC
 LIMIT 3;
+
+
+getBiggestFinalSet:
+SELECT
+se.id AS setId,
+se.score AS score,
+se.leftAfter AS leftAfter,
+se.isOverkill AS isOverkill,
+she.order_number AS shotOrder,
+she.sector AS sectorId,
+she.shot_value AS sectorValue
+FROM setEntity se
+JOIN shotEntity she ON se.id = she.set_id
+WHERE leftAfter = 0
+ORDER BY se.score DESC, se.id ASC
+LIMIT 3;
+
+
+getPlayerBiggestFinalSet:
+SELECT
+se.id AS setId,
+se.score AS score,
+se.leftAfter AS leftAfter,
+se.isOverkill AS isOverkill,
+she.order_number AS shotOrder,
+she.sector AS sectorId,
+she.shot_value AS sectorValue
+FROM setEntity se
+JOIN shotEntity she ON se.id = she.set_id
+WHERE she.player_id = ?
+AND leftAfter = 0
+ORDER BY se.score DESC, se.id ASC
+LIMIT 3;

@@ -2,7 +2,7 @@ package com.alextos.darts.android.statistics.most_frequent_shots
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.alextos.darts.game.domain.useCases.GetPlayersUseCase
+import com.alextos.darts.core.domain.GetPlayersUseCase
 import com.alextos.darts.statistics.domain.use_cases.most_frequent_shots.GetMostFrequentShotsUseCase
 import com.alextos.darts.statistics.domain.use_cases.most_frequent_shots.GetPlayersMostFrequentShotsUseCase
 import com.alextos.darts.statistics.presentation.most_frequent_shots.MostFrequentShotsViewModel

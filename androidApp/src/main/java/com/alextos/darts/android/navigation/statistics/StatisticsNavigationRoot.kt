@@ -24,6 +24,8 @@ import com.alextos.darts.android.statistics.biggest_final_set.AndroidBiggestFina
 import com.alextos.darts.android.statistics.biggest_final_set.BiggestFinalSetScreen
 import com.alextos.darts.android.statistics.most_frequent_shots.AndroidMostFrequentShotsViewModel
 import com.alextos.darts.android.statistics.most_frequent_shots.MostFrequentShotsScreen
+import com.alextos.darts.android.statistics.shot_distribution.AndroidShotDistributionViewModel
+import com.alextos.darts.android.statistics.shot_distribution.ShotDistributionScreen
 import com.alextos.darts.android.statistics.statistics.StatisticsScreen
 import com.alextos.darts.game.presentation.darts.DartsState
 import com.alextos.darts.statistics.presentation.average_values.AverageValuesState
@@ -33,6 +35,7 @@ import com.alextos.darts.statistics.presentation.biggest_final_set.BiggestFinalS
 import com.alextos.darts.statistics.presentation.biggest_final_set.BiggestFinalSetState
 import com.alextos.darts.statistics.presentation.most_frequent_shots.MostFrequentShotsEvent
 import com.alextos.darts.statistics.presentation.most_frequent_shots.MostFrequentShotsState
+import com.alextos.darts.statistics.presentation.shot_distribution.ShotDistributionState
 import com.alextos.darts.statistics.presentation.statistics.StatisticsEvent
 
 @Composable
@@ -57,6 +60,9 @@ fun StatisticsNavigationRoot() {
                     }
                     is StatisticsEvent.ShowAverageValues -> {
                         navController.navigate(route = StatisticsRoute.AverageValues.route)
+                    }
+                    is StatisticsEvent.ShowShotDistribution -> {
+                        navController.navigate(route = StatisticsRoute.ShotDistribution.route)
                     }
                 }
             }
@@ -143,6 +149,12 @@ fun StatisticsNavigationRoot() {
             val viewModel: AndroidAverageValuesViewModel = hiltViewModel()
             val state by viewModel.state.collectAsState(initial = AverageValuesState())
             AverageValuesScreen(state = state)
+        }
+
+        composable(route = StatisticsRoute.ShotDistribution.route) {
+            val viewModel: AndroidShotDistributionViewModel = hiltViewModel()
+            val state by viewModel.state.collectAsState(initial = ShotDistributionState())
+            ShotDistributionScreen(state = state)
         }
 
         composable(

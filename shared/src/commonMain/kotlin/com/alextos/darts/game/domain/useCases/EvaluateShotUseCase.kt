@@ -1,6 +1,6 @@
 package com.alextos.darts.game.domain.useCases
 
-import com.alextos.darts.game.domain.models.Shot
+import com.alextos.darts.core.domain.Shot
 import com.alextos.darts.game.domain.models.ShotResult
 
 class EvaluateShotUseCase(goal: Int) {

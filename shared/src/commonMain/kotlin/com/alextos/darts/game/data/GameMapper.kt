@@ -1,7 +1,7 @@
 package com.alextos.darts.game.data
 
 import com.alextos.darts.game.domain.models.Game
-import com.alextos.darts.game.domain.models.Player
+import com.alextos.darts.core.domain.Player
 import database.GetGames
 import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone

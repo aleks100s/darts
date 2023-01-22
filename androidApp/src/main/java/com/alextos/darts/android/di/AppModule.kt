@@ -2,6 +2,8 @@ package com.alextos.darts.android.di
 
 import android.app.Application
 import com.alextos.darts.core.data.DatabaseDriverFactory
+import com.alextos.darts.core.data.SqlDelightPlayersDataSource
+import com.alextos.darts.core.domain.PlayersDataSource
 import com.alextos.darts.database.DartsDatabase
 import com.alextos.darts.game.data.SqlDelightGameDataSource
 import com.alextos.darts.game.domain.GameDataSource
@@ -9,7 +11,7 @@ import com.alextos.darts.game.domain.useCases.GetGameHistoryUseCase
 import com.alextos.darts.game.domain.useCases.GetGamesUseCase
 import com.alextos.darts.game.domain.useCases.SaveGameHistoryUseCase
 import com.alextos.darts.game.domain.useCases.CreatePlayerUseCase
-import com.alextos.darts.game.domain.useCases.GetPlayersUseCase
+import com.alextos.darts.core.domain.GetPlayersUseCase
 import com.alextos.darts.statistics.data.SqlDelightStatisticsDataSource
 import com.alextos.darts.statistics.domain.StatisticsDataSource
 import com.alextos.darts.statistics.domain.use_cases.average_values.GetAverageSetScoreUseCase
@@ -21,6 +23,7 @@ import com.alextos.darts.statistics.domain.use_cases.biggest_final_set.GetBigges
 import com.alextos.darts.statistics.domain.use_cases.biggest_final_set.GetPlayersBiggestFinalSetUseCase
 import com.alextos.darts.statistics.domain.use_cases.most_frequent_shots.GetMostFrequentShotsUseCase
 import com.alextos.darts.statistics.domain.use_cases.most_frequent_shots.GetPlayersMostFrequentShotsUseCase
+import com.alextos.darts.statistics.domain.use_cases.shot_distribution.GetPlayersShotDistributionUseCase
 import com.squareup.sqldelight.db.SqlDriver
 import dagger.Module
 import dagger.Provides
@@ -45,14 +48,20 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideCreatePlayerUseCase(dataSource: GameDataSource): CreatePlayerUseCase {
-       return CreatePlayerUseCase(dataSource)
+    fun providePlayersDataSource(dartsDatabase: DartsDatabase): PlayersDataSource {
+        return SqlDelightPlayersDataSource(dartsDatabase)
     }
 
     @Provides
     @Singleton
-    fun provideGetPlayersUseCase(dataSource: GameDataSource): GetPlayersUseCase {
+    fun provideGetPlayersUseCase(dataSource: PlayersDataSource): GetPlayersUseCase {
         return GetPlayersUseCase(dataSource)
+    }
+
+    @Provides
+    @Singleton
+    fun provideCreatePlayerUseCase(dataSource: GameDataSource): CreatePlayerUseCase {
+       return CreatePlayerUseCase(dataSource)
     }
 
     @Provides
@@ -137,5 +146,11 @@ object AppModule {
     @Singleton
     fun providesGetPlayersAverageValuesUseCase(dataSource: StatisticsDataSource): GetPlayersAverageValuesUseCase {
         return GetPlayersAverageValuesUseCase(dataSource)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetPlayersShotDistributionUseCase(dataSource: StatisticsDataSource): GetPlayersShotDistributionUseCase {
+        return GetPlayersShotDistributionUseCase(dataSource)
     }
 }

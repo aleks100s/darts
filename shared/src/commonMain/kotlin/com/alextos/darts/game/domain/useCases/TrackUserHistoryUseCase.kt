@@ -1,7 +1,10 @@
 package com.alextos.darts.game.domain.useCases
 
 import com.alextos.darts.game.domain.models.*
-import com.alextos.darts.game.domain.models.Player
+import com.alextos.darts.core.domain.Player
+import com.alextos.darts.core.domain.Sector
+import com.alextos.darts.core.domain.Set
+import com.alextos.darts.core.domain.Shot
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
@@ -76,7 +79,7 @@ class TrackUserHistoryUseCase(player: Player) {
     private fun createNewSet(
         shotResult: ShotResult,
         isOverkill: Boolean
-    ): com.alextos.darts.game.domain.models.Set {
+    ): Set {
         return Set(
             shots = if (isOverkill) {
                 listOf(

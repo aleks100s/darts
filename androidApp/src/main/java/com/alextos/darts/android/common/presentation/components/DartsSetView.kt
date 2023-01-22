@@ -11,8 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.alextos.darts.game.domain.models.Set
-import com.alextos.darts.game.domain.models.Shot
+import com.alextos.darts.core.domain.Shot
 
 @Composable
 fun DartsSetView(set: List<Shot>) {

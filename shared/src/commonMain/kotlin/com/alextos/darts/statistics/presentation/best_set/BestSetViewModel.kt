@@ -1,7 +1,7 @@
 package com.alextos.darts.statistics.presentation.best_set
 
 import com.alextos.darts.core.util.toCommonFlow
-import com.alextos.darts.game.domain.useCases.GetPlayersUseCase
+import com.alextos.darts.core.domain.GetPlayersUseCase
 import com.alextos.darts.statistics.domain.use_cases.best_set.GetBestSetUseCase
 import com.alextos.darts.statistics.domain.use_cases.best_set.GetPlayersBestSetsUseCase
 import kotlinx.coroutines.CoroutineScope

@@ -1,7 +1,7 @@
 package com.alextos.darts.statistics.presentation.biggest_final_set
 
 import com.alextos.darts.core.util.toCommonFlow
-import com.alextos.darts.game.domain.useCases.GetPlayersUseCase
+import com.alextos.darts.core.domain.GetPlayersUseCase
 import com.alextos.darts.statistics.domain.use_cases.biggest_final_set.GetBiggestFinalSetUseCase
 import com.alextos.darts.statistics.domain.use_cases.biggest_final_set.GetPlayersBiggestFinalSetUseCase
 import kotlinx.coroutines.CoroutineScope

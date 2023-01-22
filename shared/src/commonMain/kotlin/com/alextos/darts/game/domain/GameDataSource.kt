@@ -3,11 +3,10 @@ package com.alextos.darts.game.domain
 import com.alextos.darts.game.domain.models.Game
 import com.alextos.darts.game.domain.models.GameHistory
 import com.alextos.darts.game.domain.models.PlayerHistory
-import com.alextos.darts.game.domain.models.Player
+import com.alextos.darts.core.domain.Player
 import kotlinx.coroutines.flow.Flow
 
 interface GameDataSource {
-    fun getPlayers(): Flow<List<Player>>
     fun createPlayer(name: String)
     fun getGames(): Flow<List<Game>>
     fun saveGameHistory(gameHistory: GameHistory)

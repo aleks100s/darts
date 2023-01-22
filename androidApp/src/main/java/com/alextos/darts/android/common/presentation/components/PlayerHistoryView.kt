@@ -8,7 +8,7 @@ import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.alextos.darts.game.domain.models.PlayerHistory
-import com.alextos.darts.game.domain.models.Set
+import com.alextos.darts.core.domain.Set
 
 @Composable
 fun PlayerHistoryScreen(playerHistory: PlayerHistory, onSelect: (Set) -> Unit) {

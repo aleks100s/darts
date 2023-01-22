@@ -46,7 +46,7 @@ dependencies {
     implementation(Dependencies.composeNavigation)
     implementation(Dependencies.coilCompose)
     implementation("com.google.accompanist:accompanist-pager:0.22.0-rc")
-
+    implementation("com.github.tehras:charts:0.2.4-alpha")
     implementation(Dependencies.hiltAndroid)
     kapt(Dependencies.hiltAndroidCompiler)
     kapt(Dependencies.hiltCompiler)

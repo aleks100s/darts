@@ -1,8 +1,8 @@
 package com.alextos.darts.statistics.data
 
-import com.alextos.darts.game.domain.models.Sector
-import com.alextos.darts.game.domain.models.Set
-import com.alextos.darts.game.domain.models.Shot
+import com.alextos.darts.core.domain.Sector
+import com.alextos.darts.core.domain.Set
+import com.alextos.darts.core.domain.Shot
 import database.GetBestSet
 import database.GetBiggestFinalSet
 import database.GetPlayerBestSet

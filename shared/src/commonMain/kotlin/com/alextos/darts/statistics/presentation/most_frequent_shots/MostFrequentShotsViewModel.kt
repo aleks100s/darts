@@ -1,7 +1,7 @@
 package com.alextos.darts.statistics.presentation.most_frequent_shots
 
 import com.alextos.darts.core.util.toCommonFlow
-import com.alextos.darts.game.domain.useCases.GetPlayersUseCase
+import com.alextos.darts.core.domain.GetPlayersUseCase
 import com.alextos.darts.statistics.domain.use_cases.most_frequent_shots.GetMostFrequentShotsUseCase
 import com.alextos.darts.statistics.domain.use_cases.most_frequent_shots.GetPlayersMostFrequentShotsUseCase
 import kotlinx.coroutines.CoroutineScope

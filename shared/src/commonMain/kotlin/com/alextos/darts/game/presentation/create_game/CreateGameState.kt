@@ -1,6 +1,6 @@
 package com.alextos.darts.game.presentation.create_game
 
-import com.alextos.darts.game.domain.models.Player
+import com.alextos.darts.core.domain.Player
 
 data class CreateGameState(
     val allPlayers: List<Player> = listOf(),

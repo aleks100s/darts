@@ -1,6 +1,6 @@
 package com.alextos.darts.statistics.domain.use_cases.most_frequent_shots
 
-import com.alextos.darts.game.domain.models.Shot
+import com.alextos.darts.core.domain.Shot
 import com.alextos.darts.statistics.domain.StatisticsDataSource
 
 class GetMostFrequentShotsUseCase(

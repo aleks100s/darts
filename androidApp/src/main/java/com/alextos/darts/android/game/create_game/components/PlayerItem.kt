@@ -9,7 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.unit.dp
-import com.alextos.darts.game.domain.models.Player
+import com.alextos.darts.core.domain.Player
 
 @Composable
 fun PlayerItem(

@@ -1,10 +1,12 @@
 package com.alextos.darts.statistics.data
 
 import com.alextos.darts.database.DartsDatabase
-import com.alextos.darts.game.domain.models.Player
-import com.alextos.darts.game.domain.models.Set
-import com.alextos.darts.game.domain.models.Shot
+import com.alextos.darts.core.domain.Player
+import com.alextos.darts.core.domain.Set
+import com.alextos.darts.core.domain.Shot
 import com.alextos.darts.statistics.domain.StatisticsDataSource
+import com.alextos.darts.statistics.domain.models.PlayerShotDistribution
+import com.alextos.darts.statistics.domain.models.ShotDistribution
 
 class SqlDelightStatisticsDataSource(
     database: DartsDatabase
@@ -69,5 +71,17 @@ class SqlDelightStatisticsDataSource(
         return queries.getPlayerAverageShotValue(player.id)
             .executeAsOne()
             .averageShotValue
+    }
+
+    override fun getShotDistribution(): ShotDistribution {
+        return queries.getShotDistribution()
+            .executeAsOne()
+            .toShotDistribution()
+    }
+
+    override fun getPlayerShotDistribution(player: Player): PlayerShotDistribution {
+        return queries.getPlayerShotDistribution(player.id, player.id, player.id, player.id, player.id, player.id)
+            .executeAsOne()
+            .toPlayerShotDistribution(player)
     }
 }

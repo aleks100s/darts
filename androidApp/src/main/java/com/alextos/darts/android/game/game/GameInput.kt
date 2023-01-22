@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
-import androidx.compose.material.ButtonDefaults.textButtonColors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -19,8 +18,8 @@ import com.alextos.darts.android.common.presentation.components.Cell
 import com.alextos.darts.android.common.presentation.extensions.color
 import com.alextos.darts.android.common.presentation.extensions.textColor
 import com.alextos.darts.android.game.game.components.CurrentSetItem
-import com.alextos.darts.game.domain.models.Sector
-import com.alextos.darts.game.domain.models.Set
+import com.alextos.darts.core.domain.Sector
+import com.alextos.darts.core.domain.Set
 
 @Composable
 fun GameInput(

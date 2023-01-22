@@ -6,7 +6,7 @@ import androidx.compose.ui.Alignment
 import com.alextos.darts.android.common.presentation.components.PlayerHistoryHeader
 import com.alextos.darts.android.common.presentation.components.SectionHeader
 import com.alextos.darts.android.common.presentation.components.SetItem
-import com.alextos.darts.game.domain.models.Set
+import com.alextos.darts.core.domain.Set
 
 @Composable
 fun CurrentSetItem(currentSet: Set, player: String, leaderScore: Int) {

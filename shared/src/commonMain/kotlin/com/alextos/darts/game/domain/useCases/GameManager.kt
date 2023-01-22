@@ -1,9 +1,9 @@
 package com.alextos.darts.game.domain.useCases
 
-import com.alextos.darts.game.domain.models.Player
+import com.alextos.darts.core.domain.Player
 import com.alextos.darts.game.domain.models.Game
 import com.alextos.darts.game.domain.models.GameHistory
-import com.alextos.darts.game.domain.models.Shot
+import com.alextos.darts.core.domain.Shot
 import com.alextos.darts.game.presentation.game.TurnState
 import kotlinx.coroutines.flow.*
 import kotlinx.datetime.Clock

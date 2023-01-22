@@ -2,7 +2,7 @@ package com.alextos.darts.android.common.presentation.extensions
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
-import com.alextos.darts.game.domain.models.Sector
+import com.alextos.darts.core.domain.Sector
 
 @Composable
 fun Sector.color(): Color {

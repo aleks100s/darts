@@ -1,8 +1,6 @@
 package com.alextos.darts.android.common.presentation.components
 
-import android.util.Log
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -14,7 +12,7 @@ import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.dp
-import com.alextos.darts.game.domain.models.Sector
+import com.alextos.darts.core.domain.Sector
 
 @Composable
 fun DartsDisk(selectedSector: Sector) {

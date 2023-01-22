@@ -1,5 +1,6 @@
 package com.alextos.darts.game.domain.models
 
+import com.alextos.darts.core.domain.Player
 import kotlinx.datetime.LocalDateTime
 
 data class Game(

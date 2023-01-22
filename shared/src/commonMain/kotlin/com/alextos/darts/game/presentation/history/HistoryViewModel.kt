@@ -2,7 +2,7 @@ package com.alextos.darts.game.presentation.history
 
 import com.alextos.darts.core.util.toCommonFlow
 import com.alextos.darts.game.domain.useCases.GetGameHistoryUseCase
-import com.alextos.darts.game.domain.models.Player
+import com.alextos.darts.core.domain.Player
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*

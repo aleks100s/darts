@@ -1,4 +1,4 @@
-package com.alextos.darts.game.domain.models
+package com.alextos.darts.core.domain
 
 enum class Sector(
     val id: Int,

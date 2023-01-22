@@ -1,7 +1,7 @@
 package com.alextos.darts.android.common.util
 
-import com.alextos.darts.game.domain.models.Sector
-import com.alextos.darts.game.domain.models.Shot
+import com.alextos.darts.core.domain.Sector
+import com.alextos.darts.core.domain.Shot
 
 fun List<List<Sector>>.toStringNavArgument(): String {
     return joinToString(";") { sectors ->

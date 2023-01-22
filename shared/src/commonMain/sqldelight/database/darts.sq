@@ -238,3 +238,22 @@ AVG(she.shot_value) AS averageShotValue
 FROM shotEntity she
 WHERE she.player_id = ?
 AND she.sector >= 0;
+
+getShotDistribution:
+SELECT
+(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she WHERE she.sector = 0) AS missesCount,
+(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she WHERE she.sector = 1) AS doubleBullseyeCount,
+(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she WHERE she.sector = 2) AS singleBullseyeCount,
+(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she WHERE she.sector IN (3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 39, 41, 43, 45, 47, 49, 51, 53, 55, 57, 59, 61, 63, 65, 67, 69, 71, 73, 75, 77, 79, 81)) AS singlesCount,
+(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she WHERE she.sector IN (6, 10, 14, 18, 22, 26, 30, 34, 38, 42, 46, 50, 54, 58, 62, 66, 70, 74, 78, 82)) AS doublesCount,
+(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she WHERE she.sector IN (4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, 68, 72, 76, 80)) AS triplesCount;
+
+
+getPlayerShotDistribution:
+SELECT
+(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she WHERE she.sector = 0 AND she.player_id = ?) AS missesCount,
+(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she WHERE she.sector = 1 AND she.player_id = ?) AS doubleBullseyeCount,
+(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she WHERE she.sector = 2 AND she.player_id = ?) AS singleBullseyeCount,
+(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she WHERE she.sector IN (3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 39, 41, 43, 45, 47, 49, 51, 53, 55, 57, 59, 61, 63, 65, 67, 69, 71, 73, 75, 77, 79, 81) AND she.player_id = ?) AS singlesCount,
+(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she WHERE she.sector IN (6, 10, 14, 18, 22, 26, 30, 34, 38, 42, 46, 50, 54, 58, 62, 66, 70, 74, 78, 82) AND she.player_id = ?) AS doublesCount,
+(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she WHERE she.sector IN (4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, 68, 72, 76, 80) AND she.player_id = ?) AS triplesCount;

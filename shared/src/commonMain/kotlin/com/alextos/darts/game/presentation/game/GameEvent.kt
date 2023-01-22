@@ -1,7 +1,7 @@
 package com.alextos.darts.game.presentation.game
 
-import com.alextos.darts.game.domain.models.Sector
-import com.alextos.darts.game.domain.models.Set
+import com.alextos.darts.core.domain.Sector
+import com.alextos.darts.core.domain.Set
 
 sealed class GameEvent {
     data class MakeShot(val sector: Sector): GameEvent()

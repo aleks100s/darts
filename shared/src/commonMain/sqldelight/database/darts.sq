@@ -168,6 +168,7 @@ getMostFrequentSectors:
 SELECT
 she.sector AS sector
 FROM shotEntity she
+WHERE sector > 0
 GROUP BY she.sector
 ORDER BY COUNT(she.sector) DESC
 LIMIT 3;
@@ -177,6 +178,7 @@ SELECT
 she.sector AS sector
 FROM shotEntity she
 WHERE she.player_id = ?
+AND sector > 0
 GROUP BY she.sector
 ORDER BY COUNT(she.sector) DESC
 LIMIT 3;

@@ -14,12 +14,12 @@ fun MostFrequentShotsScreen(
     onEvent: (MostFrequentShotsEvent) -> Unit
 ) {
     Screen(title = stringResource(id = R.string.most_frequent_shots_statistics)) {
-        val allPlayersValue = stringResource(id = R.string.most_frequent_shots_of_all_players) to state.mostFrequentShots.count().toString()
+        val allPlayersValue = stringResource(id = R.string.most_frequent_shots_of_all_players) to ""
 
         StatisticsListView(
             allPlayersValue = allPlayersValue,
             values = state.mostFrequentShots.map { shots ->
-                shots.player.name to shots.shots.count().toString()
+                shots.player.name to ""
             },
             onAllPlayersValueClick = {
                 if (state.mostFrequentShots.isNotEmpty()) {

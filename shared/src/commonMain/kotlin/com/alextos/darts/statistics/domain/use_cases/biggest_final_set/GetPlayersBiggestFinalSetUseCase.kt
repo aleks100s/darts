@@ -4,7 +4,7 @@ import com.alextos.darts.game.domain.models.Player
 import com.alextos.darts.statistics.domain.StatisticsDataSource
 import com.alextos.darts.statistics.domain.models.StatisticsSet
 
-class GetPlayerBiggestFinalSetUseCase(
+class GetPlayersBiggestFinalSetUseCase(
     private val dataSource: StatisticsDataSource
 ) {
     fun execute(players: List<Player>): List<StatisticsSet> {

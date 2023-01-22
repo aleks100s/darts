@@ -16,6 +16,8 @@ import com.alextos.darts.android.common.util.toStringNavArgument
 import com.alextos.darts.android.common.presentation.screens.darts.AndroidDartsViewModel
 import com.alextos.darts.android.common.presentation.screens.darts.DartsScreen
 import com.alextos.darts.android.navigation.game.GameRoute
+import com.alextos.darts.android.statistics.average_values.AndroidAverageValuesViewModel
+import com.alextos.darts.android.statistics.average_values.AverageValuesScreen
 import com.alextos.darts.android.statistics.best_set.AndroidBestSetViewModel
 import com.alextos.darts.android.statistics.best_set.BestSetScreen
 import com.alextos.darts.android.statistics.biggest_final_set.AndroidBiggestFinalSetViewModel
@@ -24,6 +26,7 @@ import com.alextos.darts.android.statistics.most_frequent_shots.AndroidMostFrequ
 import com.alextos.darts.android.statistics.most_frequent_shots.MostFrequentShotsScreen
 import com.alextos.darts.android.statistics.statistics.StatisticsScreen
 import com.alextos.darts.game.presentation.darts.DartsState
+import com.alextos.darts.statistics.presentation.average_values.AverageValuesState
 import com.alextos.darts.statistics.presentation.best_set.BestSetEvent
 import com.alextos.darts.statistics.presentation.best_set.BestSetState
 import com.alextos.darts.statistics.presentation.biggest_final_set.BiggestFinalSetEvent
@@ -51,6 +54,9 @@ fun StatisticsNavigationRoot() {
                     }
                     is StatisticsEvent.ShowBiggestFinalSet -> {
                         navController.navigate(route = StatisticsRoute.BiggestFinalSet.route)
+                    }
+                    is StatisticsEvent.ShowAverageValues -> {
+                        navController.navigate(route = StatisticsRoute.AverageValues.route)
                     }
                 }
             }
@@ -131,6 +137,12 @@ fun StatisticsNavigationRoot() {
                     }
                 }
             }
+        }
+
+        composable(route = StatisticsRoute.AverageValues.route) {
+            val viewModel: AndroidAverageValuesViewModel = hiltViewModel()
+            val state by viewModel.state.collectAsState(initial = AverageValuesState())
+            AverageValuesScreen(state = state)
         }
 
         composable(

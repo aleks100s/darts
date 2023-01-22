@@ -46,4 +46,28 @@ class SqlDelightStatisticsDataSource(
             .executeAsList()
             .playerBiggestFinalSetToSet()
     }
+
+    override fun getAverageSetScore(): Double? {
+        return queries.getAverageSetScore()
+            .executeAsOne()
+            .averageScore
+    }
+
+    override fun getPlayerAverageSetScore(player: Player): Double? {
+        return queries.getPlayerAverageSetScore(player.id)
+            .executeAsOne()
+            .averageScore
+    }
+
+    override fun getAverageShotValue(): Double? {
+        return queries.getAverageShotValue()
+            .executeAsOne()
+            .averageShotValue
+    }
+
+    override fun getPlayerAverageShotValue(player: Player): Double? {
+        return queries.getPlayerAverageShotValue(player.id)
+            .executeAsOne()
+            .averageShotValue
+    }
 }

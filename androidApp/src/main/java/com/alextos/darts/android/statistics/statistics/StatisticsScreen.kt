@@ -16,7 +16,8 @@ fun StatisticsScreen(onEvent: (StatisticsEvent) -> Unit) {
     val events = listOf(
         StatisticsEvent.ShowBestSet to stringResource(id = R.string.best_set_statistics),
         StatisticsEvent.ShowMostFrequentShots to stringResource(id = R.string.most_frequent_shots_statistics),
-        StatisticsEvent.ShowBiggestFinalSet to stringResource(id = R.string.biggest_final_set_statistics)
+        StatisticsEvent.ShowBiggestFinalSet to stringResource(id = R.string.biggest_final_set_statistics),
+        StatisticsEvent.ShowAverageValues to stringResource(id = R.string.average_values_statistics)
     )
     Screen(title = stringResource(id = R.string.statistics)) {
         LazyColumn(

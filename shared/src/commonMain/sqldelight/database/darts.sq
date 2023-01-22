@@ -215,3 +215,26 @@ WHERE she.player_id = ?
 AND leftAfter = 0
 ORDER BY se.score DESC, se.id ASC
 LIMIT 3;
+
+getAverageSetScore:
+SELECT
+AVG(se.score) AS averageScore
+FROM setEntity se;
+
+getPlayerAverageSetScore:
+SELECT
+AVG(se.score) AS averageScore
+FROM setEntity se
+WHERE se.player_id = ?;
+
+getAverageShotValue:
+SELECT
+AVG(she.shot_value) AS averageShotValue
+FROM shotEntity she;
+
+getPlayerAverageShotValue:
+SELECT
+AVG(she.shot_value) AS averageShotValue
+FROM shotEntity she
+WHERE she.player_id = ?
+AND she.sector >= 0;

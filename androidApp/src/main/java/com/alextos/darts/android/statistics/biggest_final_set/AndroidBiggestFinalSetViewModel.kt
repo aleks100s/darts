@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alextos.darts.game.domain.useCases.GetPlayersUseCase
 import com.alextos.darts.statistics.domain.use_cases.biggest_final_set.GetBiggestFinalSetUseCase
-import com.alextos.darts.statistics.domain.use_cases.biggest_final_set.GetPlayerBiggestFinalSetUseCase
+import com.alextos.darts.statistics.domain.use_cases.biggest_final_set.GetPlayersBiggestFinalSetUseCase
 import com.alextos.darts.statistics.presentation.biggest_final_set.BiggestFinalSetViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -13,12 +13,12 @@ import javax.inject.Inject
 class AndroidBiggestFinalSetViewModel @Inject constructor(
     getPlayersUseCase: GetPlayersUseCase,
     getBiggestFinalSetUseCase: GetBiggestFinalSetUseCase,
-    getPlayerBiggestFinalSetUseCase: GetPlayerBiggestFinalSetUseCase
+    getPlayersBiggestFinalSetUseCase: GetPlayersBiggestFinalSetUseCase
 ): ViewModel() {
     private val viewModel = BiggestFinalSetViewModel(
         getPlayersUseCase,
         getBiggestFinalSetUseCase,
-        getPlayerBiggestFinalSetUseCase,
+        getPlayersBiggestFinalSetUseCase,
         viewModelScope
     )
 

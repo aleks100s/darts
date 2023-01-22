@@ -1,4 +1,4 @@
-package com.alextos.darts.android.game.darts
+package com.alextos.darts.android.common.presentation.screens.darts
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -33,6 +33,6 @@ fun DartsScreen(state: DartsState) {
             .fillMaxSize()
             .padding(top = 16.dp, start = 16.dp, end = 16.dp)
     ) { page ->
-        DartsSetView(set = state.turns[page].filter { !it.sector.isNone() })
+        DartsSetView(set = state.turns[page])
     }
 }

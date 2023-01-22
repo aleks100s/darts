@@ -3,8 +3,8 @@ package com.alextos.darts.android.statistics.best_set
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alextos.darts.game.domain.useCases.GetPlayersUseCase
-import com.alextos.darts.statistics.domain.use_cases.GetBestSetUseCase
-import com.alextos.darts.statistics.domain.use_cases.GetPlayersBestSetsUseCase
+import com.alextos.darts.statistics.domain.use_cases.best_set.GetBestSetUseCase
+import com.alextos.darts.statistics.domain.use_cases.best_set.GetPlayersBestSetsUseCase
 import com.alextos.darts.statistics.presentation.best_set.BestSetViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject

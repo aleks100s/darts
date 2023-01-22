@@ -13,15 +13,19 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.alextos.darts.android.common.util.toStringNavArgument
-import com.alextos.darts.android.game.darts.AndroidDartsViewModel
-import com.alextos.darts.android.game.darts.DartsScreen
+import com.alextos.darts.android.common.presentation.screens.darts.AndroidDartsViewModel
+import com.alextos.darts.android.common.presentation.screens.darts.DartsScreen
 import com.alextos.darts.android.navigation.game.GameRoute
 import com.alextos.darts.android.statistics.best_set.AndroidBestSetViewModel
 import com.alextos.darts.android.statistics.best_set.BestSetScreen
+import com.alextos.darts.android.statistics.most_frequent_shots.AndroidMostFrequentShotsViewModel
+import com.alextos.darts.android.statistics.most_frequent_shots.MostFrequentShotsScreen
 import com.alextos.darts.android.statistics.statistics.StatisticsScreen
 import com.alextos.darts.game.presentation.darts.DartsState
 import com.alextos.darts.statistics.presentation.best_set.BestSetEvent
 import com.alextos.darts.statistics.presentation.best_set.BestSetState
+import com.alextos.darts.statistics.presentation.most_frequent_shots.MostFrequentShotsEvent
+import com.alextos.darts.statistics.presentation.most_frequent_shots.MostFrequentShotsState
 import com.alextos.darts.statistics.presentation.statistics.StatisticsEvent
 
 @Composable
@@ -37,6 +41,9 @@ fun StatisticsNavigationRoot() {
                 when(event) {
                     is StatisticsEvent.ShowBestSet -> {
                         navController.navigate(route = StatisticsRoute.BestSet.route)
+                    }
+                    is StatisticsEvent.ShowMostFrequentShots -> {
+                        navController.navigate(route = StatisticsRoute.MostFrequentShots.route)
                     }
                 }
             }
@@ -62,6 +69,29 @@ fun StatisticsNavigationRoot() {
                                 listOf(event.set).map { set ->
                                     set.shots.map { it.sector }
                                 }.toStringNavArgument()
+                            )
+                        )
+                    }
+                }
+            }
+        }
+
+        composable(route = StatisticsRoute.MostFrequentShots.route) {
+            val viewModel: AndroidMostFrequentShotsViewModel = hiltViewModel()
+            val state by viewModel.state.collectAsState(initial = MostFrequentShotsState())
+            MostFrequentShotsScreen(state = state) { event ->
+                when (event) {
+                    is MostFrequentShotsEvent.ShowMostFrequentShotsOfAll -> {
+                        navController.navigate(
+                            StatisticsRoute.Darts.routeWithArgs(
+                                listOf(event.shots.map { it.sector }).toStringNavArgument()
+                            )
+                        )
+                    }
+                    is MostFrequentShotsEvent.ShowPlayerMostFrequentShots -> {
+                        navController.navigate(
+                            StatisticsRoute.Darts.routeWithArgs(
+                                listOf(event.shots.map { it.sector }).toStringNavArgument()
                             )
                         )
                     }

@@ -12,8 +12,10 @@ import com.alextos.darts.game.domain.useCases.CreatePlayerUseCase
 import com.alextos.darts.game.domain.useCases.GetPlayersUseCase
 import com.alextos.darts.statistics.data.SqlDelightStatisticsDataSource
 import com.alextos.darts.statistics.domain.StatisticsDataSource
-import com.alextos.darts.statistics.domain.use_cases.GetBestSetUseCase
-import com.alextos.darts.statistics.domain.use_cases.GetPlayersBestSetsUseCase
+import com.alextos.darts.statistics.domain.use_cases.best_set.GetBestSetUseCase
+import com.alextos.darts.statistics.domain.use_cases.best_set.GetPlayersBestSetsUseCase
+import com.alextos.darts.statistics.domain.use_cases.most_frequent_shots.GetMostFrequentShotsUseCase
+import com.alextos.darts.statistics.domain.use_cases.most_frequent_shots.GetPlayersMostFrequentShotsUseCase
 import com.squareup.sqldelight.db.SqlDriver
 import dagger.Module
 import dagger.Provides
@@ -88,5 +90,17 @@ object AppModule {
     @Singleton
     fun provideGetPlayersBestSetsUseCase(dataSource: StatisticsDataSource): GetPlayersBestSetsUseCase {
         return GetPlayersBestSetsUseCase(dataSource)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetMostFrequentShotsUseCase(dataSource: StatisticsDataSource): GetMostFrequentShotsUseCase {
+        return GetMostFrequentShotsUseCase(dataSource)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetPlayersMostFrequentShotsUseCase(dataSource: StatisticsDataSource): GetPlayersMostFrequentShotsUseCase {
+        return GetPlayersMostFrequentShotsUseCase(dataSource)
     }
 }

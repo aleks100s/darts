@@ -163,3 +163,20 @@ FROM setEntity se
 JOIN shotEntity she ON se.id = she.set_id
 WHERE score = (SELECT MAX(score) FROM setEntity WHERE setEntity.player_id = ?)
 AND se.player_id = ?;
+
+getMostFrequentSectors:
+SELECT
+she.sector AS sector
+FROM shotEntity she
+GROUP BY she.sector
+ORDER BY COUNT(she.sector) DESC
+LIMIT 3;
+
+getPlayerMostFrequentSectors:
+SELECT
+she.sector AS sector
+FROM shotEntity she
+WHERE she.player_id = ?
+GROUP BY she.sector
+ORDER BY COUNT(she.sector) DESC
+LIMIT 3;

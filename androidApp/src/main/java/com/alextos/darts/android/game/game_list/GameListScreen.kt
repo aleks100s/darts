@@ -14,6 +14,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.alextos.darts.android.R
 import com.alextos.darts.android.common.presentation.FAB
+import com.alextos.darts.android.common.presentation.screens.Screen
 import com.alextos.darts.android.game.game_list.components.GameItem
 import com.alextos.darts.game.presentation.game_list.GameListEvent
 import com.alextos.darts.game.presentation.game_list.GameListState
@@ -33,14 +34,7 @@ fun GameListScreen(
             }
         }
     ) { padding ->
-        Column(modifier = Modifier.padding(top = 32.dp, bottom = 72.dp)) {
-            Row(
-                horizontalArrangement = Arrangement.Center,
-                modifier = Modifier.padding(horizontal = 16.dp)
-            ) {
-                Text(text = stringResource(id = R.string.games), style = MaterialTheme.typography.h1)
-            }
-
+        Screen(title = stringResource(id = R.string.games)) {
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()

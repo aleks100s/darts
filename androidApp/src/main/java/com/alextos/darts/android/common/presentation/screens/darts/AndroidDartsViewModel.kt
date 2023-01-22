@@ -1,4 +1,4 @@
-package com.alextos.darts.android.game.darts
+package com.alextos.darts.android.common.presentation.screens.darts
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel

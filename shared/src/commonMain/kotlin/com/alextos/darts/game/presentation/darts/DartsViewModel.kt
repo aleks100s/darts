@@ -15,7 +15,11 @@ class DartsViewModel(
     coroutineScope: CoroutineScope?
 ) {
     private val viewModelScope = coroutineScope ?: CoroutineScope(Dispatchers.Main)
-    private val _state = MutableStateFlow(DartsState(turns = turns, currentPage = currentPage))
+    private val _state = MutableStateFlow(
+        DartsState(
+            turns = turns.map { turn -> turn.filter { !it.sector.isNone() }},
+            currentPage = currentPage)
+    )
 
     val state = _state
         .stateIn(

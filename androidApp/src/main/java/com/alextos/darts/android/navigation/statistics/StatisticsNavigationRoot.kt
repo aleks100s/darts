@@ -24,6 +24,8 @@ import com.alextos.darts.android.statistics.biggest_final_set.AndroidBiggestFina
 import com.alextos.darts.android.statistics.biggest_final_set.BiggestFinalSetScreen
 import com.alextos.darts.android.statistics.most_frequent_shots.AndroidMostFrequentShotsViewModel
 import com.alextos.darts.android.statistics.most_frequent_shots.MostFrequentShotsScreen
+import com.alextos.darts.android.statistics.player_list.AndroidPlayerListViewModel
+import com.alextos.darts.android.statistics.player_list.PlayerListScreen
 import com.alextos.darts.android.statistics.shot_distribution.AndroidShotDistributionViewModel
 import com.alextos.darts.android.statistics.shot_distribution.ShotDistributionScreen
 import com.alextos.darts.android.statistics.statistics.StatisticsScreen
@@ -35,6 +37,8 @@ import com.alextos.darts.statistics.presentation.biggest_final_set.BiggestFinalS
 import com.alextos.darts.statistics.presentation.biggest_final_set.BiggestFinalSetState
 import com.alextos.darts.statistics.presentation.most_frequent_shots.MostFrequentShotsEvent
 import com.alextos.darts.statistics.presentation.most_frequent_shots.MostFrequentShotsState
+import com.alextos.darts.statistics.presentation.player_list.PlayerListEvent
+import com.alextos.darts.statistics.presentation.player_list.PlayerListState
 import com.alextos.darts.statistics.presentation.shot_distribution.ShotDistributionState
 import com.alextos.darts.statistics.presentation.statistics.StatisticsEvent
 
@@ -62,7 +66,7 @@ fun StatisticsNavigationRoot() {
                         navController.navigate(route = StatisticsRoute.AverageValues.route)
                     }
                     is StatisticsEvent.ShowShotDistribution -> {
-                        navController.navigate(route = StatisticsRoute.ShotDistribution.route)
+                        navController.navigate(route = StatisticsRoute.PlayerList.route)
                     }
                 }
             }
@@ -151,7 +155,30 @@ fun StatisticsNavigationRoot() {
             AverageValuesScreen(state = state)
         }
 
-        composable(route = StatisticsRoute.ShotDistribution.route) {
+        composable(route = StatisticsRoute.PlayerList.route) {
+            val viewModel: AndroidPlayerListViewModel = hiltViewModel()
+            val state by viewModel.state.collectAsState(initial = PlayerListState())
+            PlayerListScreen(state = state) { event ->
+                when (event) {
+                    is PlayerListEvent.SelectPlayer -> {
+                        navController.navigate(
+                            StatisticsRoute.ShotDistribution.routeWithArgs(
+                                listOf(event.player).toStringNavArgument()
+                            )
+                        )
+                    }
+                }
+            }
+        }
+
+        composable(
+            route = StatisticsRoute.ShotDistribution.route + "/{player}",
+            arguments = listOf(
+                navArgument("player") {
+                    type = NavType.StringType
+                }
+            )
+        ) {
             val viewModel: AndroidShotDistributionViewModel = hiltViewModel()
             val state by viewModel.state.collectAsState(initial = ShotDistributionState())
             ShotDistributionScreen(state = state)

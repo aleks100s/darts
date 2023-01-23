@@ -14,7 +14,7 @@ fun MostFrequentShotsScreen(
     onEvent: (MostFrequentShotsEvent) -> Unit
 ) {
     Screen(title = stringResource(id = R.string.most_frequent_shots_statistics)) {
-        val allPlayersValue = stringResource(id = R.string.most_frequent_shots_of_all_players) to ""
+        val allPlayersValue = stringResource(id = R.string.most_frequent_shots_of_all_players).uppercase() to ""
 
         StatisticsListView(
             allPlayersValue = allPlayersValue,

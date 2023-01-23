@@ -12,6 +12,6 @@ class GetPlayersBestSetsUseCase(
             dataSource.getPlayerBestSet(player)?.let { set ->
                 StatisticsSet(player = player, set)
             }
-        }
+        }.sortedByDescending { it.set.score() }
     }
 }

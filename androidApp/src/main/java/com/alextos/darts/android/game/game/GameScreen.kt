@@ -19,7 +19,6 @@ import com.alextos.darts.android.common.presentation.components.GameHistoryView
 import com.alextos.darts.game.presentation.game.GameEvent
 import com.alextos.darts.game.presentation.game.GameState
 import com.alextos.darts.game.presentation.game.TurnState
-import com.alextos.darts.game.presentation.history.HistoryEvent
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
@@ -48,7 +47,7 @@ fun GameScreen(
     ) {
         AnimatedContent(targetState = state.isInputVisible) { isInputVisible ->
             if (isInputVisible) {
-                GameInput(
+                GameInputView(
                     currentSet = state.getCurrentSet(),
                     playerName = state.currentPlayer?.name ?: "",
                     leaderScore = state.leaderResult()
@@ -60,7 +59,6 @@ fun GameScreen(
                     gameHistory = state.gameHistory,
                     currentPage = state.currentPage(),
                     padding = it,
-                    bottomPadding = 72.dp,
                     onSelect = { turns, set ->
                         onEvent(GameEvent.ShowDarts(turns, set))
                     }

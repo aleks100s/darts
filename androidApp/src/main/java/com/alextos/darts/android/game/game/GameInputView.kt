@@ -22,7 +22,7 @@ import com.alextos.darts.core.domain.Sector
 import com.alextos.darts.core.domain.Set
 
 @Composable
-fun GameInput(
+fun GameInputView(
     currentSet: Set,
     playerName: String,
     leaderScore: Int,
@@ -30,8 +30,7 @@ fun GameInput(
 ) {
     Column(
         modifier = Modifier
-            .fillMaxSize()
-            .padding(bottom = 64.dp),
+            .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         CurrentSetItem(currentSet = currentSet, player = playerName, leaderScore = leaderScore)
@@ -41,6 +40,9 @@ fun GameInput(
         ) {
             items(Sector.sectors) {
                 InputRow(sectors = it, onClick = onClick)
+            }
+            item {
+                Spacer(modifier = Modifier.height(72.dp))
             }
         }
     }

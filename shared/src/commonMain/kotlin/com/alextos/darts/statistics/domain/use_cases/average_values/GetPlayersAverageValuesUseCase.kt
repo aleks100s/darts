@@ -19,5 +19,7 @@ class GetPlayersAverageValuesUseCase(
                 )
             } else null
         }
+            .sortedByDescending { it.setScore }
+            .sortedByDescending { it.shotValue }
     }
 }

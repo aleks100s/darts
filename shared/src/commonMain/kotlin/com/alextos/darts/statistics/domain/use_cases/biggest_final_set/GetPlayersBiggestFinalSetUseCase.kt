@@ -12,6 +12,6 @@ class GetPlayersBiggestFinalSetUseCase(
             dataSource.getPlayerBiggestFinalSet(player)?.let { set ->
                 StatisticsSet(player = player, set)
             }
-        }
+        }.sortedByDescending { it.set.score() }
     }
 }

@@ -18,7 +18,6 @@ fun StatisticsListView(
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
-            .padding(top = 32.dp)
     ) {
         item {
             DoubleSelectableItem(

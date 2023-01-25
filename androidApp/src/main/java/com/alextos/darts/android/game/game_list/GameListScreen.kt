@@ -44,6 +44,10 @@ fun GameListScreen(
                         onEvent(GameListEvent.SelectGame(it))
                     }
                 }
+
+                item {
+                    Spacer(modifier = Modifier.height(72.dp))
+                }
             }
         }
     }

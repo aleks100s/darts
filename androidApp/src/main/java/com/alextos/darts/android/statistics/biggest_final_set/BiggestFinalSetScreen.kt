@@ -17,7 +17,7 @@ fun BiggestFinalSetScreen(
         val allPlayersValue = stringResource(id = R.string.biggest_final_set_of_all_players).uppercase() to state.biggestFinalSetOfAll?.score().toString()
         StatisticsListView(
             allPlayersValue = allPlayersValue,
-            values = state.playersBiggestFinalSets.map { it.player.name to it.set.score().toString() },
+            values = state.playersBiggestFinalSets.map { it.player to it.set.score().toString() },
             onAllPlayersValueClick = {
                 state.biggestFinalSetOfAll?.let { set ->
                     onEvent(BiggestFinalSetEvent.ShowBiggestFinalSetOfAll(set))

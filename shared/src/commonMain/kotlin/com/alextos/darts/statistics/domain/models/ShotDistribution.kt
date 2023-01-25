@@ -8,6 +8,8 @@ data class ShotDistribution(
     val doublesCount: Int,
     val triplesCount: Int
 ) {
+    fun isEmpty(): Boolean = totalCount() == 0
+
     fun missesPercent(): Float {
         return missesCount.toFloat() / totalCount() * 100
     }
@@ -32,7 +34,7 @@ data class ShotDistribution(
         return triplesCount.toFloat() / totalCount() * 100
     }
 
-    private fun totalCount(): Int {
+    fun totalCount(): Int {
         return missesCount + doubleBullseyeCount + bullseyeCount + singlesCount + doublesCount + triplesCount
     }
 }

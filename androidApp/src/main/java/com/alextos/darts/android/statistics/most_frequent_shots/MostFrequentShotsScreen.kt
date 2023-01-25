@@ -19,7 +19,7 @@ fun MostFrequentShotsScreen(
         StatisticsListView(
             allPlayersValue = allPlayersValue,
             values = state.mostFrequentShots.map { shots ->
-                shots.player.name to ""
+                shots.player to ""
             },
             onAllPlayersValueClick = {
                 if (state.mostFrequentShots.isNotEmpty()) {

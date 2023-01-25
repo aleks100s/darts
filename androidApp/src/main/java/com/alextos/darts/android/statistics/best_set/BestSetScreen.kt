@@ -19,7 +19,7 @@ fun BestSetScreen(
         StatisticsListView(
             allPlayersValue = allPlayersValue,
             values = state.playersBestSets.map { set ->
-                set.player.name to set.set.score().toString()
+                set.player to set.set.score().toString()
             },
             onAllPlayersValueClick = {
                 state.bestSetOfAll?.let {

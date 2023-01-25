@@ -2,12 +2,14 @@ package com.alextos.darts.android.statistics.shot_distribution
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.alextos.darts.android.R
 import com.alextos.darts.android.common.presentation.screens.Screen
@@ -26,7 +28,11 @@ fun ShotDistributionScreen(
                 modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center
             ) {
-                PlayerDistributionItem(distribution = distribution.distribution)
+                if (distribution.distribution.isEmpty()) {
+                    Text(text = stringResource(id = R.string.no_statistics, distribution.player.name))
+                } else {
+                    PlayerDistributionItem(distribution = distribution.distribution)
+                }
             }
         }
     }
@@ -52,54 +58,65 @@ private fun PlayerDistributionItem(distribution: ShotDistribution) {
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.padding(vertical = 24.dp)
     ) {
-        PieChart(
-            pieChartData = PieChartData(slices),
+        Box(
             modifier = Modifier
                 .fillMaxWidth(0.8f)
-                .aspectRatio(1f)
-        )
+                .aspectRatio(1f),
+            contentAlignment = Alignment.Center
+        ) {
+            PieChart(
+                pieChartData = PieChartData(slices),
+                modifier = Modifier.fillMaxSize()
+            )
+
+            Text(
+                text = stringResource(id = R.string.throws_count, distribution.totalCount()),
+                style = MaterialTheme.typography.h3,
+                textAlign = TextAlign.Center
+            )
+        }
 
         Spacer(modifier = Modifier.height(16.dp))
 
         if (missesPercent > 0) {
             LegendItem(
                 color = Color.Gray,
-                text = "${missesPercent}% ${stringResource(id = R.string.misses_percent)}"
+                text = stringResource(id = R.string.misses_percent, missesPercent)
             )
         }
 
         if (singlesPercent > 0) {
             LegendItem(
                 color = Color.Magenta,
-                text = "${singlesPercent}% ${stringResource(id = R.string.singles_percent)}"
+                text = stringResource(id = R.string.singles_percent, singlesPercent)
             )
         }
 
         if (doublesPercent > 0) {
             LegendItem(
                 color = Color.Cyan,
-                text = "${doublesPercent}% ${stringResource(id = R.string.doubles_percent)}"
+                text = stringResource(id = R.string.doubles_percent, doublesPercent)
             )
         }
 
         if (triplesPercent > 0) {
             LegendItem(
                 color = Color.Yellow,
-                text = "${triplesPercent}% ${stringResource(id = R.string.triplets_percent)}"
+                text = stringResource(id = R.string.triplets_percent, triplesPercent)
             )
         }
 
         if (bullseyePercent > 0) {
             LegendItem(
                 color = Color.Red,
-                text = "${bullseyePercent}% ${stringResource(id = R.string.bullseye_percent)}"
+                text = stringResource(id = R.string.bullseye_percent, bullseyePercent)
             )
         }
 
         if (doubleBullseyePercent > 0) {
             LegendItem(
                 color = Color.Green,
-                text = "${doubleBullseyePercent}% ${stringResource(id = R.string.double_bullseye_percent)}"
+                text = stringResource(id = R.string.double_bullseye_percent, doubleBullseyePercent)
             )
         }
     }

@@ -7,5 +7,5 @@ import com.alextos.darts.game.domain.models.Game
 
 @Composable
 fun Game.getTitle(): String {
-    return stringResource(id = R.string.game_title, id ?: 0)
+    return stringResource(id = R.string.game_title, id ?: 0, gameGoal)
 }

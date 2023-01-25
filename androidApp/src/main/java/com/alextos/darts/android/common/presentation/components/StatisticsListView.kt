@@ -7,11 +7,12 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.alextos.darts.core.domain.Player
 
 @Composable
 fun StatisticsListView(
     allPlayersValue: Pair<String, String>,
-    values: List<Pair<String, String>>,
+    values: List<Pair<Player, String>>,
     onAllPlayersValueClick: () -> Unit,
     onValueClick: (Int) -> Unit
 ) {
@@ -29,8 +30,7 @@ fun StatisticsListView(
         }
 
         items(values) { value ->
-            DoubleSelectableItem(
-                leftText = value.first, rightText = value.second) {
+            PlayerDisclosureItem(player = value.first, rightText = value.second) {
                 onValueClick(values.indexOf(value))
             }
         }

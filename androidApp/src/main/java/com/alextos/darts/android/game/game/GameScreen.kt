@@ -3,14 +3,15 @@ package com.alextos.darts.android.game.game
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.material.AlertDialog
-import androidx.compose.material.Button
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.alextos.darts.android.R
@@ -74,9 +75,10 @@ fun GameScreen(
                         Text(text = stringResource(id = R.string.turn_is_over))
                     },
                     text = {
-                        Text(text = stringResource(
-                            id = R.string.proceed_to_the_next_turn,
-                            turnState.result)
+                        Text(
+                            text = stringResource(
+                                id = R.string.proceed_to_the_next_turn, turnState.result
+                            )
                         )
                     },
                     confirmButton = {
@@ -85,7 +87,10 @@ fun GameScreen(
                         }
                     },
                     dismissButton = {
-                        Button(onClick = { onEvent(GameEvent.ResetCurrentTurn) }) {
+                        Button(
+                            onClick = { onEvent(GameEvent.ResetCurrentTurn) },
+                            colors = ButtonDefaults.buttonColors(backgroundColor = Color.Transparent)
+                        ) {
                             Text(text = stringResource(id = R.string.reset_turn))
                         }
                     }

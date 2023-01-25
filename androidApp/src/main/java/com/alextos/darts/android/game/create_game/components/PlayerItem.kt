@@ -40,10 +40,6 @@ fun PlayerItem(
 
         Spacer(modifier = Modifier.width(16.dp))
 
-        Text(
-            text = player.name,
-            modifier = Modifier.fillMaxWidth(1F),
-            style = MaterialTheme.typography.body1
-        )
+        Text(text = player.name)
     }
 }

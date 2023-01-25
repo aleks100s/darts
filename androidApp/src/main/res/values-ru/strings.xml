@@ -56,4 +56,6 @@
     <string name="double_bullseye_percent">%.2f%% сердцевина</string>
     <string name="no_statistics">Для игрока %1$s еще нет статистики</string>
     <string name="throws_count">Всего бросков: %1$d</string>
+    <string name="throw_number">Бросок №%1$d</string>
+    <string name="progress">Прогресс</string>
 </resources>

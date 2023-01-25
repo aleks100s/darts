@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alextos.darts.android.common.util.toPlayerList
 import com.alextos.darts.game.domain.useCases.GetGameHistoryUseCase
+import com.alextos.darts.game.presentation.history.HistoryEvent
 import com.alextos.darts.game.presentation.history.HistoryViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -26,4 +27,8 @@ class AndroidHistoryViewModel @Inject constructor(
     }
 
     val state = viewModel.state
+
+    fun onEvent(event: HistoryEvent) {
+        viewModel.onEvent(event)
+    }
 }

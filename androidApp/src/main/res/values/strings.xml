@@ -56,4 +56,6 @@
     <string name="double_bullseye_percent">%.2f%% double bullseye</string>
     <string name="no_statistics">There\'s no statistics for %1$s yet</string>
     <string name="throws_count">Throws total: %1$d</string>
+    <string name="throw_number">Throw #%1$d</string>
+    <string name="progress">Progress</string>
 </resources>

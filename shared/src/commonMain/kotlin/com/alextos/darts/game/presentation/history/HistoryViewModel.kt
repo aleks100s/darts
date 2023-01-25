@@ -28,4 +28,16 @@ class HistoryViewModel(
         val history = getGameHistoryUseCase.execute(gameId, players)
         _state.update { it.copy(gameHistory = history) }
     }
+
+    fun onEvent(event: HistoryEvent) {
+        when (event) {
+            is HistoryEvent.ShowProgress -> {
+                _state.update { it.copy(isProgressVisible = true) }
+            }
+            is HistoryEvent.ShowHistory -> {
+                _state.update { it.copy(isProgressVisible = false) }
+            }
+            else -> {}
+        }
+    }
 }

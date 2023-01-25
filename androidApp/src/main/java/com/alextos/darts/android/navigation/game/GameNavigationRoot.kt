@@ -186,7 +186,7 @@ fun GameNavigationRoot() {
         ) {
             val viewModel = hiltViewModel<AndroidHistoryViewModel>()
             val state by viewModel.state.collectAsState(initial = HistoryState())
-            HistoryScreen(history = state.gameHistory) { event ->
+            HistoryScreen(state = state) { event ->
                 when (event) {
                     is HistoryEvent.ShowDarts -> {
                         navController.navigate(
@@ -194,6 +194,9 @@ fun GameNavigationRoot() {
                             event.turns.map { it.shots }.map { it.map { it.sector }}.toStringNavArgument(),
                             event.turns.indexOf(event.currentSet).toString()
                         ))
+                    }
+                    else -> {
+                        viewModel.onEvent(event)
                     }
                 }
             }

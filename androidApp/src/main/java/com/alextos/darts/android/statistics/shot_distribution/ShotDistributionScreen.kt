@@ -1,13 +1,16 @@
 package com.alextos.darts.android.statistics.shot_distribution
 
+import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -24,14 +27,15 @@ fun ShotDistributionScreen(
 ) {
     state.distribution?.let { distribution ->
         Screen(title = distribution.player.name) {
-            Box(
+            LazyColumn(
                 modifier = Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center
             ) {
-                if (distribution.distribution.isEmpty()) {
-                    Text(text = stringResource(id = R.string.no_statistics, distribution.player.name))
-                } else {
-                    PlayerDistributionItem(distribution = distribution.distribution)
+                item {
+                    if (distribution.distribution.isEmpty()) {
+                        Text(text = stringResource(id = R.string.no_statistics, distribution.player.name))
+                    } else {
+                        PlayerDistributionItem(distribution = distribution.distribution)
+                    }
                 }
             }
         }
@@ -58,10 +62,16 @@ private fun PlayerDistributionItem(distribution: ShotDistribution) {
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.padding(vertical = 24.dp)
     ) {
+        val configuration = LocalConfiguration.current
         Box(
-            modifier = Modifier
-                .fillMaxWidth(0.8f)
-                .aspectRatio(1f),
+            modifier = if (configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                Modifier
+                    .size(300.dp)
+            } else {
+                Modifier
+                    .fillMaxWidth(0.8f)
+                    .aspectRatio(1f)
+            },
             contentAlignment = Alignment.Center
         ) {
             PieChart(

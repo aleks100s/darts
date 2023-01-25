@@ -22,7 +22,7 @@ fun GameProgressView(
     history: List<PlayerHistory>
 ) {
     val maxSize = history.numberOfTurns()
-    val colors = listOf(Color.Red, Color.Green, Color.Blue, Color.Yellow)
+    val colors = listOf(Color.Yellow, Color.Red, Color.Green, Color.Blue)
     Box(
         modifier = Modifier.fillMaxSize().background(MaterialTheme.colors.surface),
         contentAlignment = Alignment.Center
@@ -42,7 +42,7 @@ fun GameProgressView(
             modifier = Modifier.fillMaxSize(0.8f),
             pointDrawer = FilledCircularPointDrawer(),
             horizontalOffset = 5f,
-            labels = history.numberOfTurns().rangeTo(1).map {
+            labels = (1..history.numberOfTurns()).map {
                 stringResource(id = R.string.throw_number, it)
             }
         )

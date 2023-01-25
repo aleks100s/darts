@@ -32,7 +32,13 @@ fun ShotDistributionScreen(
             ) {
                 item {
                     if (distribution.distribution.isEmpty()) {
-                        Text(text = stringResource(id = R.string.no_statistics, distribution.player.name))
+                        Box(
+                            modifier = Modifier.fillMaxSize()
+                                .padding(vertical = 32.dp),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(text = stringResource(id = R.string.no_statistics, distribution.player.name))
+                        }
                     } else {
                         PlayerDistributionItem(distribution = distribution.distribution)
                     }

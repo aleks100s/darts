@@ -4,7 +4,7 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.List
@@ -16,7 +16,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.alextos.darts.android.R
 import com.alextos.darts.android.common.presentation.FAB
+import com.alextos.darts.android.common.presentation.ScreenType
 import com.alextos.darts.android.common.presentation.components.GameHistoryView
+import com.alextos.darts.android.common.presentation.rememberScreenType
 import com.alextos.darts.game.presentation.game.GameEvent
 import com.alextos.darts.game.presentation.game.GameState
 import com.alextos.darts.game.presentation.game.TurnState
@@ -46,26 +48,57 @@ fun GameScreen(
             }
         }
     ) {
-        AnimatedContent(targetState = state.isInputVisible) { isInputVisible ->
-            if (isInputVisible) {
-                GameInputView(
-                    currentSet = state.getCurrentSet(),
-                    playerName = state.currentPlayer?.name ?: "",
-                    leaderScore = state.leaderResult()
-                ) { sector ->
-                    onEvent(GameEvent.MakeShot(sector))
-                }
-            } else {
-                GameHistoryView(
-                    gameHistory = state.gameHistory,
-                    currentPage = state.currentPage(),
-                    padding = it,
-                    onSelect = { turns, set ->
-                        onEvent(GameEvent.ShowDarts(turns, set))
+        when (rememberScreenType()) {
+            is ScreenType.Compact -> {
+                AnimatedContent(targetState = state.isInputVisible) { isInputVisible ->
+                    if (isInputVisible) {
+                        GameInputView(
+                            currentSet = state.getCurrentSet(),
+                            playerName = state.currentPlayer?.name ?: "",
+                            leaderScore = state.leaderResult()
+                        ) { sector ->
+                            onEvent(GameEvent.MakeShot(sector))
+                        }
+                    } else {
+                        GameHistoryView(
+                            gameHistory = state.gameHistory,
+                            currentPage = state.currentPage(),
+                            padding = it,
+                            onSelect = { turns, set ->
+                                onEvent(GameEvent.ShowDarts(turns, set))
+                            }
+                        )
                     }
-                )
+                }
+            }
+            is ScreenType.Large -> {
+                Row(modifier = Modifier.fillMaxSize()) {
+                    Box(Modifier.weight(1f)) {
+                        GameHistoryView(
+                            gameHistory = state.gameHistory,
+                            currentPage = state.currentPage(),
+                            padding = it,
+                            onSelect = { turns, set ->
+                                onEvent(GameEvent.ShowDarts(turns, set))
+                            }
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.width(2.dp))
+
+                    Box(Modifier.weight(1f)) {
+                        GameInputView(
+                            currentSet = state.getCurrentSet(),
+                            playerName = state.currentPlayer?.name ?: "",
+                            leaderScore = state.leaderResult()
+                        ) { sector ->
+                            onEvent(GameEvent.MakeShot(sector))
+                        }
+                    }
+                }
             }
         }
+
 
         when (val turnState = state.turnState) {
             is TurnState.IsOver -> {

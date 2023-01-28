@@ -4,5 +4,5 @@ import com.alextos.darts.game.domain.models.PlayerHistory
 
 data class HistoryState(
     val gameHistory: List<PlayerHistory> = listOf(),
-    val isProgressVisible: Boolean = false
+    val isRecapVisible: Boolean = false
 )

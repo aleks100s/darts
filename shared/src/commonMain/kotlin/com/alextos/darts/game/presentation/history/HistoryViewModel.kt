@@ -32,10 +32,10 @@ class HistoryViewModel(
     fun onEvent(event: HistoryEvent) {
         when (event) {
             is HistoryEvent.ShowProgress -> {
-                _state.update { it.copy(isProgressVisible = true) }
+                _state.update { it.copy(isRecapVisible = true) }
             }
             is HistoryEvent.ShowHistory -> {
-                _state.update { it.copy(isProgressVisible = false) }
+                _state.update { it.copy(isRecapVisible = false) }
             }
             else -> {}
         }

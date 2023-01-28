@@ -15,6 +15,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.alextos.darts.android.R
+import com.alextos.darts.android.common.presentation.components.ChartLegendItem
 import com.alextos.darts.android.common.presentation.screens.Screen
 import com.alextos.darts.statistics.domain.models.ShotDistribution
 import com.alextos.darts.statistics.presentation.shot_distribution.ShotDistributionState
@@ -95,63 +96,45 @@ private fun PlayerDistributionItem(distribution: ShotDistribution) {
         Spacer(modifier = Modifier.height(16.dp))
 
         if (missesPercent > 0) {
-            LegendItem(
+            ChartLegendItem(
                 color = Color.Gray,
                 text = stringResource(id = R.string.misses_percent, missesPercent)
             )
         }
 
         if (singlesPercent > 0) {
-            LegendItem(
+            ChartLegendItem(
                 color = Color.Magenta,
                 text = stringResource(id = R.string.singles_percent, singlesPercent)
             )
         }
 
         if (doublesPercent > 0) {
-            LegendItem(
+            ChartLegendItem(
                 color = Color.Cyan,
                 text = stringResource(id = R.string.doubles_percent, doublesPercent)
             )
         }
 
         if (triplesPercent > 0) {
-            LegendItem(
+            ChartLegendItem(
                 color = Color.Yellow,
                 text = stringResource(id = R.string.triplets_percent, triplesPercent)
             )
         }
 
         if (bullseyePercent > 0) {
-            LegendItem(
+            ChartLegendItem(
                 color = Color.Red,
                 text = stringResource(id = R.string.bullseye_percent, bullseyePercent)
             )
         }
 
         if (doubleBullseyePercent > 0) {
-            LegendItem(
+            ChartLegendItem(
                 color = Color.Green,
                 text = stringResource(id = R.string.double_bullseye_percent, doubleBullseyePercent)
             )
         }
-    }
-}
-
-@Composable
-private fun LegendItem(color: Color, text: String) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 4.dp, horizontal = 16.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Box(modifier = Modifier
-            .size(24.dp)
-            .background(color))
-
-        Spacer(Modifier.width(8.dp))
-
-        Text(text = text)
     }
 }

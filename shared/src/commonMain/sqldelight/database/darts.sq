@@ -71,7 +71,7 @@ gpe.is_winner AS isWinner
 FROM gameEntity ge
 JOIN gamePlayerEntity gpe ON ge.id = gpe.game_id
 JOIN playerEntity pe ON gpe.player_id = pe.id
-ORDER BY ge.timestamp ASC, gameOrder ASC;
+ORDER BY ge.timestamp DESC, gameOrder ASC;
 
 -- Set
 
@@ -257,3 +257,8 @@ SELECT
 (SELECT COUNT(she.id) AS shotsCount FROM shotEntity she WHERE she.sector IN (3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 39, 41, 43, 45, 47, 49, 51, 53, 55, 57, 59, 61, 63, 65, 67, 69, 71, 73, 75, 77, 79, 81) AND she.player_id = ?) AS singlesCount,
 (SELECT COUNT(she.id) AS shotsCount FROM shotEntity she WHERE she.sector IN (6, 10, 14, 18, 22, 26, 30, 34, 38, 42, 46, 50, 54, 58, 62, 66, 70, 74, 78, 82) AND she.player_id = ?) AS doublesCount,
 (SELECT COUNT(she.id) AS shotsCount FROM shotEntity she WHERE she.sector IN (4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, 68, 72, 76, 80) AND she.player_id = ?) AS triplesCount;
+
+getVictoryDistribution:
+SELECT
+(SELECT COUNT(gpe.id) FROM gamePlayerEntity gpe WHERE gpe.player_id = ? AND gpe.is_winner = 1) AS victoriesCount,
+(SELECT COUNT(gpe.id) FROM gamePlayerEntity gpe WHERE gpe.player_id = ?) AS gamesCount;

@@ -39,6 +39,7 @@
     <string name="biggest_final_set_statistics">Biggest final turn statistics</string>
     <string name="average_values_statistics">Average turn score and hit value</string>
     <string name="shot_distribution_statistics">Hit distribution statistics</string>
+    <string name="victory_distribution_statistics">Victory distribution statistics</string>
     <string name="game">Game</string>
     <string name="statistics">Statistics</string>
     <string name="arrow_right_description">Show</string>
@@ -58,4 +59,7 @@
     <string name="throws_count">Hits total: %1$d</string>
     <string name="throw_number">#%1$d</string>
     <string name="progress">Recap</string>
+    <string name="games_count">Games total: %1$d</string>
+    <string name="victory_percent">%.2f%% victories</string>
+    <string name="lose_percent">%.2f%% losses</string>
 </resources>

@@ -24,6 +24,7 @@ import com.alextos.darts.statistics.domain.use_cases.biggest_final_set.GetPlayer
 import com.alextos.darts.statistics.domain.use_cases.most_frequent_shots.GetMostFrequentShotsUseCase
 import com.alextos.darts.statistics.domain.use_cases.most_frequent_shots.GetPlayersMostFrequentShotsUseCase
 import com.alextos.darts.statistics.domain.use_cases.shot_distribution.GetPlayerShotDistributionUseCase
+import com.alextos.darts.statistics.domain.use_cases.victory_distribution.GetPlayerVictoryDistributionUseCase
 import com.squareup.sqldelight.db.SqlDriver
 import dagger.Module
 import dagger.Provides
@@ -152,5 +153,11 @@ object AppModule {
     @Singleton
     fun provideGetPlayerShotDistributionUseCase(dataSource: StatisticsDataSource): GetPlayerShotDistributionUseCase {
         return GetPlayerShotDistributionUseCase(dataSource)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetPlayerVictoryDistributionUseCase(dataSource: StatisticsDataSource): GetPlayerVictoryDistributionUseCase {
+        return GetPlayerVictoryDistributionUseCase(dataSource)
     }
 }

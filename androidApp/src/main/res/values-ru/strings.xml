@@ -39,6 +39,7 @@
     <string name="biggest_final_set_statistics">Самая большая добивка</string>
     <string name="average_values_statistics">Средний результат за подход/бросок</string>
     <string name="shot_distribution_statistics">Распределение бросков</string>
+    <string name="victory_distribution_statistics">Распределение побед</string>
     <string name="game">Игра</string>
     <string name="statistics">Статистика</string>
     <string name="arrow_right_description">Показать</string>
@@ -58,4 +59,7 @@
     <string name="throws_count">Всего бросков: %1$d</string>
     <string name="throw_number">№%1$d</string>
     <string name="progress">Сведения</string>
+    <string name="games_count">Всего игр: %1$d</string>
+    <string name="victory_percent">%.2f%% побед</string>
+    <string name="lose_percent">%.2f%% поражений</string>
 </resources>

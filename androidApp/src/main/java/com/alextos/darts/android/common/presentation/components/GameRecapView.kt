@@ -1,9 +1,7 @@
 package com.alextos.darts.android.common.presentation.components
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -25,8 +23,7 @@ fun GameRecapView(
 ) {
     LazyColumn(
         modifier = Modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colors.surface),
+            .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         item {

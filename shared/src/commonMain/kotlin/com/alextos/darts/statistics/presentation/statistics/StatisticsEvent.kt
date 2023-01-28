@@ -6,4 +6,5 @@ sealed class StatisticsEvent {
     object ShowBiggestFinalSet: StatisticsEvent()
     object ShowAverageValues: StatisticsEvent()
     object ShowShotDistribution: StatisticsEvent()
+    object ShowVictoryDistribution: StatisticsEvent()
 }

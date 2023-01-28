@@ -18,7 +18,8 @@ fun StatisticsScreen(onEvent: (StatisticsEvent) -> Unit) {
         StatisticsEvent.ShowMostFrequentShots to stringResource(id = R.string.most_frequent_shots_statistics),
         StatisticsEvent.ShowBiggestFinalSet to stringResource(id = R.string.biggest_final_set_statistics),
         StatisticsEvent.ShowAverageValues to stringResource(id = R.string.average_values_statistics),
-        StatisticsEvent.ShowShotDistribution to stringResource(id = R.string.shot_distribution_statistics)
+        StatisticsEvent.ShowShotDistribution to stringResource(id = R.string.shot_distribution_statistics),
+        StatisticsEvent.ShowVictoryDistribution to stringResource(id = R.string.victory_distribution_statistics)
     )
     Screen(title = stringResource(id = R.string.statistics)) {
         LazyColumn(

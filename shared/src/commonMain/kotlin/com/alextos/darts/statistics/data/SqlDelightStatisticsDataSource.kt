@@ -6,6 +6,7 @@ import com.alextos.darts.core.domain.Set
 import com.alextos.darts.core.domain.Shot
 import com.alextos.darts.statistics.domain.StatisticsDataSource
 import com.alextos.darts.statistics.domain.models.PlayerShotDistribution
+import com.alextos.darts.statistics.domain.models.PlayerVictoryDistribution
 import com.alextos.darts.statistics.domain.models.ShotDistribution
 
 class SqlDelightStatisticsDataSource(
@@ -83,5 +84,11 @@ class SqlDelightStatisticsDataSource(
         return queries.getPlayerShotDistribution(player.id, player.id, player.id, player.id, player.id, player.id)
             .executeAsOne()
             .toPlayerShotDistribution(player)
+    }
+
+    override fun getPlayerVictoryDistribution(player: Player): PlayerVictoryDistribution {
+        return queries.getVictoryDistribution(player.id, player.id)
+            .executeAsOne()
+            .toPlayerVictoryDistribution(player)
     }
 }

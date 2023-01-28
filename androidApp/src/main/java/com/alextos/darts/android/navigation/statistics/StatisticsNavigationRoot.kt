@@ -29,6 +29,8 @@ import com.alextos.darts.android.statistics.player_list.PlayerListScreen
 import com.alextos.darts.android.statistics.shot_distribution.AndroidShotDistributionViewModel
 import com.alextos.darts.android.statistics.shot_distribution.ShotDistributionScreen
 import com.alextos.darts.android.statistics.statistics.StatisticsScreen
+import com.alextos.darts.android.statistics.victory_distribution.AndroidVictoryDistributionViewModel
+import com.alextos.darts.android.statistics.victory_distribution.VictoryDistributionScreen
 import com.alextos.darts.game.presentation.darts.DartsState
 import com.alextos.darts.statistics.presentation.average_values.AverageValuesState
 import com.alextos.darts.statistics.presentation.best_set.BestSetEvent
@@ -41,6 +43,7 @@ import com.alextos.darts.statistics.presentation.player_list.PlayerListEvent
 import com.alextos.darts.statistics.presentation.player_list.PlayerListState
 import com.alextos.darts.statistics.presentation.shot_distribution.ShotDistributionState
 import com.alextos.darts.statistics.presentation.statistics.StatisticsEvent
+import com.alextos.darts.statistics.presentation.victory_distribution.VictoryDistributionState
 
 @Composable
 fun StatisticsNavigationRoot() {
@@ -66,7 +69,10 @@ fun StatisticsNavigationRoot() {
                         navController.navigate(route = StatisticsRoute.AverageValues.route)
                     }
                     is StatisticsEvent.ShowShotDistribution -> {
-                        navController.navigate(route = StatisticsRoute.PlayerList.route)
+                        navController.navigate(route = StatisticsRoute.PlayerList.routeWithArgs("shot"))
+                    }
+                    is StatisticsEvent.ShowVictoryDistribution -> {
+                        navController.navigate(route = StatisticsRoute.PlayerList.routeWithArgs("victory"))
                     }
                 }
             }
@@ -155,17 +161,36 @@ fun StatisticsNavigationRoot() {
             AverageValuesScreen(state = state)
         }
 
-        composable(route = StatisticsRoute.PlayerList.route) {
+        composable(
+            route = StatisticsRoute.PlayerList.route + "/{mode}",
+            arguments = listOf(
+                navArgument("mode") {
+                    type = NavType.StringType
+                }
+            )
+        ) {
+            val mode = it.arguments?.getString("mode")
             val viewModel: AndroidPlayerListViewModel = hiltViewModel()
             val state by viewModel.state.collectAsState(initial = PlayerListState())
             PlayerListScreen(state = state) { event ->
                 when (event) {
                     is PlayerListEvent.SelectPlayer -> {
-                        navController.navigate(
-                            StatisticsRoute.ShotDistribution.routeWithArgs(
-                                listOf(event.player).toStringNavArgument()
-                            )
-                        )
+                        when (mode) {
+                            "shot" -> {
+                                navController.navigate(
+                                    StatisticsRoute.ShotDistribution.routeWithArgs(
+                                        listOf(event.player).toStringNavArgument()
+                                    )
+                                )
+                            }
+                            "victory" -> {
+                                navController.navigate(
+                                    StatisticsRoute.VictoryDistribution.routeWithArgs(
+                                        listOf(event.player).toStringNavArgument()
+                                    )
+                                )
+                            }
+                        }
                     }
                 }
             }
@@ -182,6 +207,19 @@ fun StatisticsNavigationRoot() {
             val viewModel: AndroidShotDistributionViewModel = hiltViewModel()
             val state by viewModel.state.collectAsState(initial = ShotDistributionState())
             ShotDistributionScreen(state = state)
+        }
+
+        composable(
+            route = StatisticsRoute.VictoryDistribution.route + "/{player}",
+            arguments = listOf(
+                navArgument("player") {
+                    type = NavType.StringType
+                }
+            )
+        ) {
+            val viewModel: AndroidVictoryDistributionViewModel = hiltViewModel()
+            val state by viewModel.state.collectAsState(initial = VictoryDistributionState())
+            VictoryDistributionScreen(state = state)
         }
 
         composable(

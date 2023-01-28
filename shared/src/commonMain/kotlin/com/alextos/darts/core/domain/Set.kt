@@ -10,4 +10,8 @@ data class Set(
     }
 
     fun shotsLeft(): Int = 3 - shots.count()
+
+    fun numberOfMisses(): Int {
+        return shots.count { it.sector == Sector.Miss }
+    }
 }

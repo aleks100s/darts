@@ -15,4 +15,22 @@ data class PlayerHistory(
                 turns.map { it.leftAfter.toFloat() } +
                 additionalValues
     }
+
+    fun biggestSet(): Set? {
+        return turns.maxByOrNull { it.score() }
+    }
+
+    fun smallestSet(): Set? {
+        return turns.minByOrNull { it.score() }
+    }
+
+    fun numberOfMisses(): Int {
+        return turns.fold(0) { sum, set ->
+            sum + set.numberOfMisses()
+        }
+    }
+
+    fun numberOfOverkills(): Int {
+        return turns.count { it.isOverkill }
+    }
 }

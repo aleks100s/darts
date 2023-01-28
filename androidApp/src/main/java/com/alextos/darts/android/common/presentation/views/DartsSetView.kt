@@ -1,4 +1,4 @@
-package com.alextos.darts.android.common.presentation.components
+package com.alextos.darts.android.common.presentation.views
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.alextos.darts.android.common.presentation.components.DartsDisk
 import com.alextos.darts.core.domain.Shot
 
 @Composable

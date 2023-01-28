@@ -1,4 +1,4 @@
-package com.alextos.darts.android.common.presentation.components
+package com.alextos.darts.android.common.presentation.views
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -18,6 +18,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun GameHistoryView(
     gameHistory: List<PlayerHistory>,
+    goal: Int,
     currentPage: Int,
     padding: PaddingValues,
     onSelect: (List<Set>, Set) -> Unit
@@ -39,7 +40,9 @@ fun GameHistoryView(
             .padding(padding)
     ) { page ->
         PlayerHistoryView(
-            playerHistory = gameHistory[page]) {
+            playerHistory = gameHistory[page],
+            goal = goal
+        ) {
             onSelect(gameHistory[page].turns, it)
         }
     }

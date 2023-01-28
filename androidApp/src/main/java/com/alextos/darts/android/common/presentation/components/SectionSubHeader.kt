@@ -1,4 +1,4 @@
-package com.alextos.darts.android.game.game.components
+package com.alextos.darts.android.common.presentation.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -6,14 +6,12 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import com.alextos.darts.android.R
 
 @Composable
-fun LeaderItem(score: Int) {
+fun SectionSubHeader(subtitle: String) {
     Text(
-        text = stringResource(id = R.string.leader_score, score),
+        text = subtitle,
         textAlign = TextAlign.Center,
         modifier = Modifier
             .fillMaxWidth()

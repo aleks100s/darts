@@ -11,11 +11,12 @@ class HistoryViewModel(
     getGameHistoryUseCase: GetGameHistoryUseCase,
     coroutineScope: CoroutineScope?,
     gameId: Long,
+    gameGoal: Int,
     players: List<Player>
 ) {
     private val viewModelScope = coroutineScope ?: CoroutineScope(Dispatchers.Main)
 
-    private val _state = MutableStateFlow(HistoryState())
+    private val _state = MutableStateFlow(HistoryState(gameGoal = gameGoal))
     val state = _state
         .stateIn(
             viewModelScope,

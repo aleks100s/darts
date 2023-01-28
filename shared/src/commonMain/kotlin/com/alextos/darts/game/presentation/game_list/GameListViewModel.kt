@@ -35,12 +35,8 @@ class GameListViewModel(
 
     fun onEvent(event: GameListEvent) {
         when (event) {
-            is GameListEvent.CreateGame -> {
-                // TODO: create game
-            }
-            is GameListEvent.SelectGame -> {
-                // TODO: select game
-            }
+            is GameListEvent.CreateGame -> {}
+            is GameListEvent.SelectGame -> {}
         }
     }
 }

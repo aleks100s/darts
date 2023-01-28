@@ -17,10 +17,10 @@ fun FAB(
 ) {
     ExtendedFloatingActionButton(
         onClick = {
-                  if (isEnabled) {
-                      onClick()
-                  }
-                  },
+            if (isEnabled) {
+                onClick()
+            }
+        },
         icon = {
             Icon(
                 icon,

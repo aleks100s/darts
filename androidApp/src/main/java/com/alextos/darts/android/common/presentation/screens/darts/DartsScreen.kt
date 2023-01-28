@@ -7,7 +7,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.alextos.darts.android.common.presentation.components.DartsSetView
+import com.alextos.darts.android.common.presentation.views.DartsSetView
 import com.alextos.darts.game.presentation.darts.DartsState
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager

@@ -12,12 +12,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.alextos.darts.android.R
-import com.alextos.darts.android.common.presentation.components.Cell
+import com.alextos.darts.android.common.presentation.components.*
 import com.alextos.darts.android.common.presentation.extensions.color
 import com.alextos.darts.android.common.presentation.extensions.textColor
-import com.alextos.darts.android.game.game.components.CurrentSetItem
 import com.alextos.darts.core.domain.Sector
 import com.alextos.darts.core.domain.Set
 
@@ -29,8 +29,7 @@ fun GameInputView(
     onClick: (Sector) -> Unit
 ) {
     Column(
-        modifier = Modifier
-            .fillMaxSize(),
+        modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         CurrentSetItem(currentSet = currentSet, player = playerName, leaderScore = leaderScore)
@@ -45,6 +44,16 @@ fun GameInputView(
                 Spacer(modifier = Modifier.height(72.dp))
             }
         }
+    }
+}
+
+@Composable
+private fun CurrentSetItem(currentSet: Set, player: String, leaderScore: Int) {
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        SectionHeader(title = player)
+        SectionSubHeader(stringResource(id = R.string.leader_score, leaderScore))
+        PlayerHistoryHeader()
+        SetItem(set = currentSet, onSelect = {})
     }
 }
 

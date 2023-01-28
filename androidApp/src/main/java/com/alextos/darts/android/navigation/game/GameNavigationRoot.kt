@@ -63,7 +63,8 @@ fun GameNavigationRoot() {
                         navController.navigate(
                             route = GameRoute.History.routeWithArgs(
                                 it.game.players.toStringNavArgument(),
-                                it.game.id.toString()
+                                it.game.id.toString(),
+                                it.game.gameGoal.toString()
                             )
                         )
                     }
@@ -174,12 +175,15 @@ fun GameNavigationRoot() {
         }
 
         composable(
-            route = GameRoute.History.route + "/{list}/{gameId}",
+            route = GameRoute.History.route + "/{list}/{gameId}/{gameGoal}",
             arguments = listOf(
                 navArgument("list") {
                     type = NavType.StringType
                 },
                 navArgument("gameId") {
+                    type = NavType.StringType
+                },
+                navArgument("gameGoal") {
                     type = NavType.StringType
                 }
             )

@@ -62,4 +62,9 @@
     <string name="games_count">Games total: %1$d</string>
     <string name="victory_percent">%.2f%% victories</string>
     <string name="lose_percent">%.2f%% losses</string>
+    <string name="biggest_sets">Best turns</string>
+    <string name="smallest_sets">Smallest turns</string>
+    <string name="misses_count">Number of misses</string>
+    <string name="overkill_count">Number of overkills</string>
+    <string name="game_goal_value">Game goal %1$d</string>
 </resources>

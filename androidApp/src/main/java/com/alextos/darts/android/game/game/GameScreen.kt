@@ -3,7 +3,6 @@ package com.alextos.darts.android.game.game
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -17,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import com.alextos.darts.android.R
 import com.alextos.darts.android.common.presentation.FAB
 import com.alextos.darts.android.common.presentation.ScreenType
-import com.alextos.darts.android.common.presentation.components.GameHistoryView
+import com.alextos.darts.android.common.presentation.views.GameHistoryView
 import com.alextos.darts.android.common.presentation.rememberScreenType
 import com.alextos.darts.game.presentation.game.GameEvent
 import com.alextos.darts.game.presentation.game.GameState
@@ -62,6 +61,7 @@ fun GameScreen(
                     } else {
                         GameHistoryView(
                             gameHistory = state.gameHistory,
+                            goal = state.gameGoal,
                             currentPage = state.currentPage(),
                             padding = it,
                             onSelect = { turns, set ->
@@ -76,6 +76,7 @@ fun GameScreen(
                     Box(Modifier.weight(1f)) {
                         GameHistoryView(
                             gameHistory = state.gameHistory,
+                            goal = state.gameGoal,
                             currentPage = state.currentPage(),
                             padding = it,
                             onSelect = { turns, set ->

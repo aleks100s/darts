@@ -21,25 +21,6 @@ fun DartsDisk(selectedSector: Sector) {
             .fillMaxWidth()
             .aspectRatio(1f)
             .padding(16.dp)
-            .pointerInput(key1 = Unit) {
-//                detectTapGestures(
-//                    onTap = { offset ->
-//                        // end
-//                        Log.i("Tag", "Tap at $offset")
-//                    },
-//                    onPress = { offset ->
-//                        // start
-//                        Log.i("Tag", "Press at $offset")
-//                    }
-//                )
-
-//                detectDragGestures(
-//                    onDrag = { drag, _ ->
-//                        // during
-//                        Log.i("Tag", "Dragged $drag")
-//                    }
-//                )
-            }
     ) {
         drawMiss(selectedSector)
         drawDoubles(selectedSector)

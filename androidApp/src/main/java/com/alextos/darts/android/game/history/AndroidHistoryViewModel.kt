@@ -18,10 +18,12 @@ class AndroidHistoryViewModel @Inject constructor(
     private val viewModel by lazy {
         val players = savedStateHandle.get<String>("list")?.toPlayerList() ?: listOf()
         val gameId = savedStateHandle.get<String>("gameId")?.toLong() ?: 0
+        val gameGoal = savedStateHandle.get<String>("gameGoal")?.toInt() ?: 0
         HistoryViewModel(
             getGameHistoryUseCase,
             coroutineScope = viewModelScope,
             gameId = gameId,
+            gameGoal = gameGoal,
             players = players
         )
     }

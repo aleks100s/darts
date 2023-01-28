@@ -11,7 +11,7 @@
     <string name="shot1">1й бросок</string>
     <string name="shot2">2й бросок</string>
     <string name="shot3">3й бросок</string>
-    <string name="shot_sum">Сумма бросков</string>
+    <string name="shot_sum">Сумма</string>
     <string name="reminder">Остаток</string>
     <string name="leave_game">Покинуть игру</string>
     <string name="your_progress_will_be_lost">Ваш прогресс будет потерян</string>
@@ -62,4 +62,9 @@
     <string name="games_count">Всего игр: %1$d</string>
     <string name="victory_percent">%.2f%% побед</string>
     <string name="lose_percent">%.2f%% поражений</string>
+    <string name="biggest_sets">Лучшие подходы</string>
+    <string name="smallest_sets">Худшие подходы</string>
+    <string name="misses_count">Количество промахов</string>
+    <string name="overkill_count">Количество переборов</string>
+    <string name="game_goal_value">Цель игры %1$d</string>
 </resources>

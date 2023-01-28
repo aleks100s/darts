@@ -10,14 +10,12 @@ fun List<List<Sector>>.toStringNavArgument(): String {
 }
 
 fun String.toShots(): List<List<Shot>> {
-    val bb = split(";")
+    return split(";")
         .map { it.trim('{', '}') }
         .map { sectorsString ->
-            val aaa = sectorsString.split(",")
+            sectorsString.split(",")
                 .map { it.toInt() }
                 .map { Sector.getSector(it) }
                 .map { Shot(it) }
-                aaa
         }
-    return bb
 }

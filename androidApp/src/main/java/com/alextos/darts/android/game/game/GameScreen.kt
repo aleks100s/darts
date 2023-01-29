@@ -9,15 +9,14 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import com.alextos.darts.android.R
 import com.alextos.darts.android.common.presentation.FAB
 import com.alextos.darts.android.common.presentation.ScreenType
 import com.alextos.darts.android.common.presentation.views.GameHistoryView
 import com.alextos.darts.android.common.presentation.rememberScreenType
+import com.alextos.darts.android.common.presentation.screens.TabletScreen
 import com.alextos.darts.game.presentation.game.GameEvent
 import com.alextos.darts.game.presentation.game.GameState
 import com.alextos.darts.game.presentation.game.TurnState
@@ -51,123 +50,136 @@ fun GameScreen(
             is ScreenType.Compact -> {
                 AnimatedContent(targetState = state.isInputVisible) { isInputVisible ->
                     if (isInputVisible) {
-                        GameInputView(
-                            currentSet = state.getCurrentSet(),
-                            playerName = state.currentPlayer?.name ?: "",
-                            leaderScore = state.leaderResult()
-                        ) { sector ->
-                            onEvent(GameEvent.MakeShot(sector))
-                        }
+                        GameInput(state = state, onEvent = onEvent)
                     } else {
-                        GameHistoryView(
-                            gameHistory = state.gameHistory,
-                            goal = state.gameGoal,
-                            currentPage = state.currentPage(),
-                            padding = it,
-                            onSelect = { turns, set ->
-                                onEvent(GameEvent.ShowDarts(turns, set))
-                            }
-                        )
+                        GameHistory(paddingValues = it, state = state, onEvent = onEvent)
                     }
                 }
             }
             is ScreenType.Large -> {
-                Row(modifier = Modifier.fillMaxSize()) {
-                    Box(Modifier.weight(1f)) {
-                        GameHistoryView(
-                            gameHistory = state.gameHistory,
-                            goal = state.gameGoal,
-                            currentPage = state.currentPage(),
-                            padding = it,
-                            onSelect = { turns, set ->
-                                onEvent(GameEvent.ShowDarts(turns, set))
-                            }
-                        )
-                    }
-
-                    Spacer(modifier = Modifier.width(2.dp))
-
-                    Box(Modifier.weight(1f)) {
-                        GameInputView(
-                            currentSet = state.getCurrentSet(),
-                            playerName = state.currentPlayer?.name ?: "",
-                            leaderScore = state.leaderResult()
-                        ) { sector ->
-                            onEvent(GameEvent.MakeShot(sector))
-                        }
-                    }
-                }
-            }
-        }
-
-
-        when (val turnState = state.turnState) {
-            is TurnState.IsOver -> {
-                AlertDialog(
-                    onDismissRequest = { onEvent(GameEvent.ChangeTurn) },
-                    title = {
-                        Text(text = stringResource(id = R.string.turn_is_over))
+                TabletScreen(
+                    content1 = {
+                        GameHistory(paddingValues = it, state = state, onEvent = onEvent)
                     },
-                    text = {
-                        Text(
-                            text = stringResource(
-                                id = R.string.proceed_to_the_next_turn, turnState.result
-                            )
-                        )
-                    },
-                    confirmButton = {
-                        Button(onClick = { onEvent(GameEvent.ChangeTurn) }) {
-                            Text(text = stringResource(id = R.string.next_turn))
-                        }
-                    },
-                    dismissButton = {
-                        Button(
-                            onClick = { onEvent(GameEvent.ResetCurrentTurn) },
-                            colors = ButtonDefaults.buttonColors(backgroundColor = Color.Transparent)
-                        ) {
-                            Text(text = stringResource(id = R.string.reset_turn))
-                        }
+                    content2 = {
+                        GameInput(state = state, onEvent = onEvent)
                     }
                 )
             }
+        }
+
+        when (val turnState = state.turnState) {
+            is TurnState.IsOver -> {
+                TurnOverDialog(result = turnState.result, onEvent = onEvent)
+            }
             else -> {}
         }
+
         if (state.isCloseGameDialogOpened) {
-            AlertDialog(
-                onDismissRequest = { onEvent(GameEvent.ReturnToGame) },
-                title = {
-                    Text(text = stringResource(id = R.string.leave_game))
-                },
-                text = {
-                    Text(text = stringResource(id = R.string.your_progress_will_be_lost))
-                },
-                confirmButton = {
-                    Button(onClick = { onEvent(GameEvent.CloseGame) }) {
-                        Text(text = stringResource(id = R.string.leave))
-                    }
-                },
-                dismissButton = {
-                    Button(onClick = { onEvent(GameEvent.ReturnToGame) }) {
-                        Text(text = stringResource(id = R.string.return_to_game))
-                    }
-                }
-            )
+            CloseGameDialog(onEvent = onEvent)
         }
+
         if (state.isGameFinished) {
-            AlertDialog(
-                onDismissRequest = {  },
-                title = {
-                    Text(text = stringResource(id = R.string.game_finished))
-                },
-                text = {
-                    Text(text = stringResource(id = R.string.winner, state.getWinnerName() ?: ""))
-                },
-                confirmButton = {
-                    Button(onClick = { onEvent(GameEvent.CloseGame) }) {
-                        Text(text = stringResource(id = R.string.finish_game))
-                    }
-                }
-            )
+            GameFinishedDialog(winner = state.getWinnerName() ?: "", onEvent = onEvent)
         }
     }
+}
+
+@Composable
+private fun GameHistory(
+    paddingValues: PaddingValues,
+    state: GameState,
+    onEvent: (GameEvent) -> Unit
+) {
+    GameHistoryView(
+        gameHistory = state.gameHistory,
+        goal = state.gameGoal,
+        currentPage = state.currentPage(),
+        padding = paddingValues,
+        onSelect = { turns, set ->
+            onEvent(GameEvent.ShowDarts(turns, set))
+        }
+    )
+}
+
+@Composable
+private fun GameInput(state: GameState, onEvent: (GameEvent) -> Unit) {
+    GameInputView(
+        currentSet = state.getCurrentSet(),
+        playerName = state.currentPlayer?.name ?: "",
+        leaderScore = state.leaderResult()
+    ) { sector ->
+        onEvent(GameEvent.MakeShot(sector))
+    }
+}
+
+@Composable
+private fun TurnOverDialog(result: Int, onEvent: (GameEvent) -> Unit) {
+    AlertDialog(
+        onDismissRequest = { onEvent(GameEvent.ChangeTurn) },
+        title = {
+            Text(text = stringResource(id = R.string.turn_is_over))
+        },
+        text = {
+            Text(
+                text = stringResource(
+                    id = R.string.proceed_to_the_next_turn, result
+                )
+            )
+        },
+        confirmButton = {
+            Button(onClick = { onEvent(GameEvent.ChangeTurn) }) {
+                Text(text = stringResource(id = R.string.next_turn))
+            }
+        },
+        dismissButton = {
+            Button(
+                onClick = { onEvent(GameEvent.ResetCurrentTurn) },
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color.Transparent)
+            ) {
+                Text(text = stringResource(id = R.string.reset_turn))
+            }
+        }
+    )
+}
+
+@Composable
+private fun CloseGameDialog(onEvent: (GameEvent) -> Unit) {
+    AlertDialog(
+        onDismissRequest = { onEvent(GameEvent.ReturnToGame) },
+        title = {
+            Text(text = stringResource(id = R.string.leave_game))
+        },
+        text = {
+            Text(text = stringResource(id = R.string.your_progress_will_be_lost))
+        },
+        confirmButton = {
+            Button(onClick = { onEvent(GameEvent.CloseGame) }) {
+                Text(text = stringResource(id = R.string.leave))
+            }
+        },
+        dismissButton = {
+            Button(onClick = { onEvent(GameEvent.ReturnToGame) }) {
+                Text(text = stringResource(id = R.string.return_to_game))
+            }
+        }
+    )
+}
+
+@Composable
+private fun GameFinishedDialog(winner: String, onEvent: (GameEvent) -> Unit) {
+    AlertDialog(
+        onDismissRequest = {  },
+        title = {
+            Text(text = stringResource(id = R.string.game_finished))
+        },
+        text = {
+            Text(text = stringResource(id = R.string.winner, winner))
+        },
+        confirmButton = {
+            Button(onClick = { onEvent(GameEvent.CloseGame) }) {
+                Text(text = stringResource(id = R.string.finish_game))
+            }
+        }
+    )
 }

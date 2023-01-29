@@ -1,5 +1,6 @@
 package com.alextos.darts.android.game.history
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.List
@@ -8,6 +9,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import com.alextos.darts.android.R
 import com.alextos.darts.android.common.presentation.FAB
+import com.alextos.darts.android.common.presentation.ScreenType
+import com.alextos.darts.android.common.presentation.rememberScreenType
+import com.alextos.darts.android.common.presentation.screens.TabletScreen
 import com.alextos.darts.android.common.presentation.views.GameHistoryView
 import com.alextos.darts.android.common.presentation.views.GameRecapView
 import com.alextos.darts.game.presentation.history.HistoryEvent
@@ -40,24 +44,60 @@ fun HistoryScreen(
             }
         }
     ) {
-        if (state.isRecapVisible) {
-            GameRecapView(
-                history = state.gameHistory,
-                biggestSets = state.biggestSets(),
-                smallestSets = state.smallestSets(),
-                misses = state.misses(),
-                overkills = state.overkills()
-            )
-        } else {
-            GameHistoryView(
-                gameHistory = state.gameHistory,
-                currentPage = 0,
-                goal = state.gameGoal,
-                padding = it,
-                onSelect = { turns, set ->
-                    onEvent(HistoryEvent.ShowDarts(turns, set))
+        when (rememberScreenType()) {
+            is ScreenType.Compact -> {
+                if (state.isRecapVisible) {
+                    GameRecap(state = state)
+                } else {
+                    GameHistory(
+                        paddingValues = it,
+                        state = state,
+                        onEvent = onEvent
+                    )
                 }
-            )
+            }
+            is ScreenType.Large -> {
+                TabletScreen(
+                    content1 = {
+                        GameHistory(
+                            paddingValues = it,
+                            state = state,
+                            onEvent = onEvent
+                        )
+                    },
+                    content2 = {
+                        GameRecap(state = state)
+                    }
+                )
+            }
         }
     }
+}
+
+@Composable
+private fun GameHistory(
+    paddingValues: PaddingValues,
+    state: HistoryState,
+    onEvent: (HistoryEvent) -> Unit
+) {
+    GameHistoryView(
+        gameHistory = state.gameHistory,
+        currentPage = 0,
+        goal = state.gameGoal,
+        padding = paddingValues,
+        onSelect = { turns, set ->
+            onEvent(HistoryEvent.ShowDarts(turns, set))
+        }
+    )
+}
+
+@Composable
+private fun GameRecap(state: HistoryState) {
+    GameRecapView(
+        history = state.gameHistory,
+        biggestSets = state.biggestSets(),
+        smallestSets = state.smallestSets(),
+        misses = state.misses(),
+        overkills = state.overkills()
+    )
 }

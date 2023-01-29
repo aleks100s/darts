@@ -3,7 +3,7 @@
     <string name="app_name">Darts Score</string>
     <string name="create_game">Create game</string>
     <string name="start_game">Start game</string>
-    <string name="selected_players">Selected players</string>
+    <string name="select_players">Select players</string>
     <string name="all_players">All players</string>
     <string name="add_new_player">Add new player</string>
     <string name="create_player">Create player</string>

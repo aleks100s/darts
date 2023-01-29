@@ -3,7 +3,7 @@
     <string name="app_name">Darts Score</string>
     <string name="create_game">Создать игру</string>
     <string name="start_game">Начать игру</string>
-    <string name="selected_players">Выбранные игроки</string>
+    <string name="select_players">Выбор игроков</string>
     <string name="all_players">Все игроки</string>
     <string name="add_new_player">Добавить нового игрока</string>
     <string name="create_player">Создать игрока</string>

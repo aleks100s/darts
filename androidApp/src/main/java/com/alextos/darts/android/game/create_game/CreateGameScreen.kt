@@ -69,16 +69,11 @@ fun CreateGameScreen(
             }
 
             items(state.allPlayers) { player ->
-                val isChecked = state.selectedPlayers.contains(player)
                 PlayerCheckbox(
                     player = player,
-                    isChecked = isChecked,
+                    isChecked = state.selectedPlayers.contains(player),
                 ) {
-                    if (isChecked) {
-                        onEvent(CreateGameEvent.DeselectPlayer(player))
-                    } else {
-                        onEvent(CreateGameEvent.SelectPlayer(player))
-                    }
+                    onEvent(CreateGameEvent.SelectPlayer(player))
                 }
             }
 

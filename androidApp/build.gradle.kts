@@ -11,9 +11,9 @@ android {
     compileSdk = Dependencies.targetSDKVersion
     defaultConfig {
         applicationId = "com.alextos.darts.android"
-        minSdk = 28
+        minSdk = Dependencies.minimumSDKVersion
         targetSdk = Dependencies.targetSDKVersion
-        versionCode = 1
+        versionCode = 6
         versionName = "1.0"
     }
     buildFeatures {
@@ -45,19 +45,19 @@ dependencies {
     implementation(Dependencies.composeIconsExtended)
     implementation(Dependencies.composeNavigation)
     implementation(Dependencies.coilCompose)
-    implementation("com.google.accompanist:accompanist-pager:0.22.0-rc")
-    implementation("com.github.tehras:charts:0.2.4-alpha")
+    implementation(Dependencies.charts)
+    implementation(Dependencies.pager)
+    implementation(Dependencies.revenueCat)
     implementation(Dependencies.hiltAndroid)
     kapt(Dependencies.hiltAndroidCompiler)
     kapt(Dependencies.hiltCompiler)
     implementation(Dependencies.hiltNavigationCompose)
-
 
     androidTestImplementation(Dependencies.testRunner)
     androidTestImplementation(Dependencies.jUnit)
     androidTestImplementation(Dependencies.composeTesting)
     debugImplementation(Dependencies.composeTestManifest)
 
-   kaptAndroidTest(Dependencies.hiltAndroidCompiler)
+    kaptAndroidTest(Dependencies.hiltAndroidCompiler)
     androidTestImplementation(Dependencies.hiltTesting)
 }

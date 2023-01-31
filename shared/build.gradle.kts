@@ -68,7 +68,7 @@ android {
     namespace = "com.alextos.darts"
     compileSdk = Dependencies.targetSDKVersion
     defaultConfig {
-        minSdk = 28
+        minSdk = Dependencies.minimumSDKVersion
         targetSdk = Dependencies.targetSDKVersion
     }
 }

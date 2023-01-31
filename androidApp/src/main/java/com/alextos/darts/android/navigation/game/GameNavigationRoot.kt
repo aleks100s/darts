@@ -1,6 +1,5 @@
 package com.alextos.darts.android.navigation.game
 
-import android.widget.Toast
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -10,7 +9,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavType
@@ -56,16 +54,6 @@ fun GameNavigationRoot() {
         composable(route = GameRoute.GameList.route) {
             val viewModel = hiltViewModel<AndroidGameListViewModel>()
             val state by viewModel.state.collectAsState(initial = GameListState())
-
-            val context = LocalContext.current
-            val error = viewModel.error.collectAsState()
-            val billing = viewModel.billing.collectAsState()
-            if (error.value != null) {
-                Toast.makeText(context, "error ${error.value.toString()}", Toast.LENGTH_LONG).show()
-            }
-            if (billing.value != null) {
-                Toast.makeText(context, "offerings: ${billing.value.toString()}", Toast.LENGTH_LONG).show()
-            }
 
             GameListScreen(state = state, onEvent = {
                 when (it) {

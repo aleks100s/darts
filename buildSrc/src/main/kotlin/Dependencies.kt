@@ -1,5 +1,6 @@
 object Dependencies {
     const val targetSDKVersion = 33
+    const val minimumSDKVersion = 28
 
     // COMPOSE
     private const val activityComposeVersion = "1.6.1"
@@ -18,6 +19,15 @@ object Dependencies {
 
     private const val coilComposeVersion = "2.1.0"
     const val coilCompose = "io.coil-kt:coil-compose:$coilComposeVersion"
+
+    private const val pagerVersion = "0.22.0-rc"
+    const val pager = "com.google.accompanist:accompanist-pager:$pagerVersion"
+
+    private const val chartsVersion = "0.2.4-alpha"
+    const val charts = "com.github.tehras:charts:$chartsVersion"
+
+    private const val revenueCatVersion = "5.4.0"
+    const val revenueCat = "com.revenuecat.purchases:purchases:$revenueCatVersion"
 
     // KOTLIN DATE TIME
     private const val dateTimeVersion = "0.4.0"

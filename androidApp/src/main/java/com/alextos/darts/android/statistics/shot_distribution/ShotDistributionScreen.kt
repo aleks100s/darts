@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import com.alextos.darts.android.R
 import com.alextos.darts.android.common.presentation.components.ChartLegendItem
 import com.alextos.darts.android.common.presentation.screens.Screen
+import com.alextos.darts.android.common.presentation.views.NoDataView
 import com.alextos.darts.statistics.domain.models.ShotDistribution
 import com.alextos.darts.statistics.presentation.shot_distribution.ShotDistributionState
 import com.github.tehras.charts.piechart.PieChart
@@ -33,13 +34,7 @@ fun ShotDistributionScreen(
             ) {
                 item {
                     if (distribution.distribution.isEmpty()) {
-                        Box(
-                            modifier = Modifier.fillMaxSize()
-                                .padding(vertical = 32.dp),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Text(text = stringResource(id = R.string.no_statistics, distribution.player.name))
-                        }
+                        NoDataView()
                     } else {
                         PlayerDistributionItem(distribution = distribution.distribution)
                     }

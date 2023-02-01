@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import com.alextos.darts.android.R
 import com.alextos.darts.android.common.presentation.components.ChartLegendItem
 import com.alextos.darts.android.common.presentation.screens.Screen
+import com.alextos.darts.android.common.presentation.views.NoDataView
 import com.alextos.darts.statistics.domain.models.PlayerVictoryDistribution
 import com.alextos.darts.statistics.presentation.victory_distribution.VictoryDistributionState
 import com.github.tehras.charts.piechart.PieChart
@@ -32,13 +33,7 @@ fun VictoryDistributionScreen(
             ) {
                 item {
                     if (distribution.isEmpty()) {
-                        Box(
-                            modifier = Modifier.fillMaxSize()
-                                .padding(vertical = 32.dp),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Text(text = stringResource(id = R.string.no_statistics, distribution.player.name))
-                        }
+                        NoDataView()
                     } else {
                         VictoryDistributionChart(distribution = distribution)
                     }

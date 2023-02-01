@@ -14,10 +14,11 @@ import com.alextos.darts.statistics.presentation.player_list.PlayerListState
 
 @Composable
 fun PlayerListScreen(
+    title: String,
     state: PlayerListState,
     onEvent: (PlayerListEvent) -> Unit
 ) {
-    Screen(title = stringResource(id = R.string.shot_distribution_statistics)) {
+    Screen(title = title) {
         LazyColumn(modifier = Modifier.fillMaxSize()) {
             items(state.players) { player ->
                 PlayerDisclosureItem(player = player) {

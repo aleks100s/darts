@@ -5,6 +5,7 @@ import androidx.compose.ui.res.stringResource
 import com.alextos.darts.android.R
 import com.alextos.darts.android.common.presentation.views.StatisticPlayersListView
 import com.alextos.darts.android.common.presentation.screens.Screen
+import com.alextos.darts.android.common.presentation.views.NoDataView
 import com.alextos.darts.statistics.presentation.most_frequent_shots.MostFrequentShotsEvent
 import com.alextos.darts.statistics.presentation.most_frequent_shots.MostFrequentShotsState
 
@@ -14,21 +15,25 @@ fun MostFrequentShotsScreen(
     onEvent: (MostFrequentShotsEvent) -> Unit
 ) {
     Screen(title = stringResource(id = R.string.most_frequent_shots_statistics)) {
-        val allPlayersValue = stringResource(id = R.string.most_frequent_shots_of_all_players).uppercase() to ""
+        if (state.mostFrequentShots.isEmpty()) {
+            NoDataView()
+        } else {
+            val allPlayersValue = stringResource(id = R.string.most_frequent_shots_of_all_players).uppercase() to ""
 
-        StatisticPlayersListView(
-            allPlayersValue = allPlayersValue,
-            values = state.mostFrequentShots.map { shots ->
-                shots.player to ""
-            },
-            onAllPlayersValueClick = {
-                if (state.mostFrequentShots.isNotEmpty()) {
-                    onEvent(MostFrequentShotsEvent.ShowMostFrequentShotsOfAll(state.mostFrequentShotsOfAll))
+            StatisticPlayersListView(
+                allPlayersValue = allPlayersValue,
+                values = state.mostFrequentShots.map { shots ->
+                    shots.player to ""
+                },
+                onAllPlayersValueClick = {
+                    if (state.mostFrequentShots.isNotEmpty()) {
+                        onEvent(MostFrequentShotsEvent.ShowMostFrequentShotsOfAll(state.mostFrequentShotsOfAll))
+                    }
+                },
+                onValueClick = { index ->
+                    onEvent(MostFrequentShotsEvent.ShowPlayerMostFrequentShots(state.mostFrequentShots[index].shots))
                 }
-            },
-            onValueClick = { index ->
-                onEvent(MostFrequentShotsEvent.ShowPlayerMostFrequentShots(state.mostFrequentShots[index].shots))
-            }
-        )
+            )
+        }
     }
 }

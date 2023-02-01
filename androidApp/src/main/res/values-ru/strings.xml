@@ -55,7 +55,7 @@
     <string name="triplets_percent">%.2f%% тройные броски</string>
     <string name="bullseye_percent">%.2f%% яблочко</string>
     <string name="double_bullseye_percent">%.2f%% сердцевина</string>
-    <string name="no_statistics">Для игрока %1$s еще нет статистики</string>
+    <string name="no_statistics">В этом разделе пока нет данных</string>
     <string name="throws_count">Всего бросков: %1$d</string>
     <string name="throw_number">№%1$d</string>
     <string name="progress">Сведения</string>

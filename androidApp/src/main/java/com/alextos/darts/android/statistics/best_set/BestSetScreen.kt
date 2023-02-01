@@ -5,6 +5,7 @@ import androidx.compose.ui.res.stringResource
 import com.alextos.darts.android.R
 import com.alextos.darts.android.common.presentation.views.StatisticPlayersListView
 import com.alextos.darts.android.common.presentation.screens.Screen
+import com.alextos.darts.android.common.presentation.views.NoDataView
 import com.alextos.darts.statistics.presentation.best_set.BestSetEvent
 import com.alextos.darts.statistics.presentation.best_set.BestSetState
 
@@ -14,21 +15,24 @@ fun BestSetScreen(
     onEvent: (BestSetEvent) -> Unit
 ) {
     Screen(title = stringResource(id = R.string.best_set_statistics)) {
-        val allPlayersValue = stringResource(id = R.string.best_set_of_all_players).uppercase() to state.bestSetOfAll?.score().toString()
-
-        StatisticPlayersListView(
-            allPlayersValue = allPlayersValue,
-            values = state.playersBestSets.map { set ->
-                set.player to set.set.score().toString()
-            },
-            onAllPlayersValueClick = {
-                state.bestSetOfAll?.let {
-                    onEvent(BestSetEvent.ShowBestSetOfAll(it))
+        val score = state.bestSetOfAll?.score()
+        if (score == null) {
+            NoDataView()
+        } else {
+            StatisticPlayersListView(
+                allPlayersValue = stringResource(id = R.string.best_set_of_all_players).uppercase() to score.toString(),
+                values = state.playersBestSets.map { set ->
+                    set.player to set.set.score().toString()
+                },
+                onAllPlayersValueClick = {
+                    state.bestSetOfAll?.let {
+                        onEvent(BestSetEvent.ShowBestSetOfAll(it))
+                    }
+                },
+                onValueClick = { index ->
+                    onEvent(BestSetEvent.ShowBestSetOfPlayer(state.playersBestSets[index].set))
                 }
-            },
-            onValueClick = { index ->
-                onEvent(BestSetEvent.ShowBestSetOfPlayer(state.playersBestSets[index].set))
-            }
-        )
+            )
+        }
     }
 }

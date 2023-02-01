@@ -11,27 +11,33 @@ import com.alextos.darts.core.domain.Player
 
 @Composable
 fun StatisticPlayersListView(
-    allPlayersValue: Pair<String, String>,
+    allPlayersValue: Pair<String, String>?,
     values: List<Pair<Player, String>>,
     onAllPlayersValueClick: () -> Unit,
     onValueClick: (Int) -> Unit
 ) {
-    LazyColumn(
-        modifier = Modifier
-            .fillMaxSize()
-    ) {
-        item {
-            DoubleSelectableItem(
-                leftText = allPlayersValue.first,
-                rightText = allPlayersValue.second
-            ) {
-                onAllPlayersValueClick()
+    if (allPlayersValue == null) {
+        NoDataView()
+    } else {
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+        ) {
+            allPlayersValue?.let { allPlayersValue ->
+                item {
+                    DoubleSelectableItem(
+                        leftText = allPlayersValue.first,
+                        rightText = allPlayersValue.second
+                    ) {
+                        onAllPlayersValueClick()
+                    }
+                }
             }
-        }
 
-        items(values) { value ->
-            PlayerDisclosureItem(player = value.first, rightText = value.second) {
-                onValueClick(values.indexOf(value))
+            items(values) { value ->
+                PlayerDisclosureItem(player = value.first, rightText = value.second) {
+                    onValueClick(values.indexOf(value))
+                }
             }
         }
     }

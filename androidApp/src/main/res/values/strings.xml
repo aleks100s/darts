@@ -55,7 +55,7 @@
     <string name="triplets_percent">%.2f%% triplets</string>
     <string name="bullseye_percent">%.2f%% bullseye</string>
     <string name="double_bullseye_percent">%.2f%% double bullseye</string>
-    <string name="no_statistics">There\'s no statistics for %1$s yet</string>
+    <string name="no_statistics">There is no data yet</string>
     <string name="throws_count">Hits total: %1$d</string>
     <string name="throw_number">#%1$d</string>
     <string name="progress">Recap</string>

@@ -16,6 +16,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.alextos.darts.android.R
 import com.alextos.darts.android.common.presentation.screens.Screen
+import com.alextos.darts.android.common.presentation.views.NoDataView
 import com.alextos.darts.statistics.presentation.average_values.AverageValuesState
 import okhttp3.internal.format
 
@@ -24,22 +25,29 @@ fun AverageValuesScreen(
     state: AverageValuesState
 ) {
     Screen(title = stringResource(id = R.string.average_values_statistics)) {
-        Header()
-        LazyColumn {
-            item {
-                PlayerValues(
-                    title = stringResource(id = R.string.all_players),
-                    avgSetScore = state.averageSetOfAll,
-                    avgShotValue = state.averageShotOfAll
-                )
-            }
+        if (state.averageShotOfAll == 0.0) {
+            NoDataView()
+        } else {
+            LazyColumn {
+                item {
+                    Header()
+                }
 
-            items(state.playersAverageValues) { value ->
-                PlayerValues(
-                    title = value.player.name,
-                    avgSetScore = value.setScore,
-                    avgShotValue = value.shotValue
-                )
+                item {
+                    PlayerValues(
+                        title = stringResource(id = R.string.all_players),
+                        avgSetScore = state.averageSetOfAll,
+                        avgShotValue = state.averageShotOfAll
+                    )
+                }
+
+                items(state.playersAverageValues) { value ->
+                    PlayerValues(
+                        title = value.player.name,
+                        avgSetScore = value.setScore,
+                        avgShotValue = value.shotValue
+                    )
+                }
             }
         }
     }
@@ -52,7 +60,9 @@ private fun PlayerValues(
     avgShotValue: Double
 ) {
     Row(
-        modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp, vertical = 8.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceEvenly
     ) {

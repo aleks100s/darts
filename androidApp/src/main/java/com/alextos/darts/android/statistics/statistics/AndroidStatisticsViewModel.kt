@@ -11,7 +11,7 @@ import javax.inject.Inject
 @HiltViewModel
 class AndroidStatisticsViewModel @Inject constructor(): ViewModel() {
 
-    private val _isStatisticsAvailable = MutableStateFlow(false)
+    private val _isStatisticsAvailable = MutableStateFlow(true)
     val isStatisticsAvailable: StateFlow<Boolean> = _isStatisticsAvailable
 
     private val _pack = MutableStateFlow<Package?>(null)
@@ -38,7 +38,7 @@ class AndroidStatisticsViewModel @Inject constructor(): ViewModel() {
     private fun fetchPremiumPackage() {
         Purchases.sharedInstance.getOfferingsWith(
             onSuccess = { offerings ->
-                offerings["premium_statistics"]?.get("Lifetime")?.let { p ->
+                offerings["premium_statistics"]?.availablePackages?.first()?.let { p ->
                     _pack.update { p }
                 }
             }

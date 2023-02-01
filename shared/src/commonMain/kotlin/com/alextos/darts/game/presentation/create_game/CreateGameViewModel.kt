@@ -34,11 +34,12 @@ class CreateGameViewModel(
         when(event) {
             is CreateGameEvent.SelectPlayer -> {
                 _state.update {
+                    val player = event.player
                     val list = it.selectedPlayers.toMutableList()
-                    if (list.contains(event.player)) {
-                        list.remove(event.player)
+                    if (list.contains(player)) {
+                        list.remove(player)
                     } else {
-                        list.add(event.player)
+                        list.add(player)
                     }
                     it.copy(selectedPlayers = list)
                 }

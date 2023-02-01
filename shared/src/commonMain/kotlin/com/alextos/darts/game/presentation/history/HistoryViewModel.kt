@@ -32,7 +32,7 @@ class HistoryViewModel(
 
     fun onEvent(event: HistoryEvent) {
         when (event) {
-            is HistoryEvent.ShowProgress -> {
+            is HistoryEvent.ShowRecap -> {
                 _state.update { it.copy(isRecapVisible = true) }
             }
             is HistoryEvent.ShowHistory -> {

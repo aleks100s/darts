@@ -21,7 +21,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.alextos.darts.android.R
-import com.alextos.darts.android.common.presentation.FAB
+import com.alextos.darts.android.common.presentation.components.FAB
 import com.alextos.darts.android.common.presentation.components.SectionHeader
 import com.alextos.darts.core.domain.Player
 import com.alextos.darts.game.presentation.create_game.CreateGameEvent
@@ -73,7 +73,7 @@ fun CreateGameScreen(
                     player = player,
                     isChecked = state.selectedPlayers.contains(player),
                 ) {
-                    onEvent(CreateGameEvent.SelectPlayer(player))
+                    onEvent(CreateGameEvent.SelectPlayer(it))
                 }
             }
 
@@ -101,12 +101,12 @@ fun CreateGameScreen(
 private fun PlayerCheckbox(
     player: Player,
     isChecked: Boolean,
-    onClick: () -> Unit
+    onClick: (Player) -> Unit
 ) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable { onClick() },
+            .clickable { onClick(player) },
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {

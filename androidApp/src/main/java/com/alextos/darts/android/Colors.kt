@@ -13,15 +13,6 @@ val LightBlueGrey = Color(Colors.LightBlueGrey)
 val TextBlack = Color(Colors.TextBlack)
 val DarkGrey = Color(Colors.DarkGrey)
 
-val lightColors = lightColors(
-    primary = AccentViolet,
-    onPrimary = Color.White,
-    background = LightBlue,
-    onBackground = TextBlack,
-    surface = LightBlueGrey,
-    onSurface = TextBlack
-)
-
 val darkColors = darkColors(
     primary = AccentViolet,
     onPrimary = Color.White,
@@ -30,6 +21,8 @@ val darkColors = darkColors(
     surface = DarkGrey,
     onSurface = Color.White
 )
+
+val lightColors = darkColors
 
 @Composable
 fun highSurfaceColor(): Color {

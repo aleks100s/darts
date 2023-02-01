@@ -58,7 +58,7 @@
     <string name="no_statistics">В этом разделе пока нет данных</string>
     <string name="throws_count">Всего бросков: %1$d</string>
     <string name="throw_number">№%1$d</string>
-    <string name="progress">Сведения</string>
+    <string name="progress">Результаты</string>
     <string name="games_count">Всего игр: %1$d</string>
     <string name="victory_percent">%.2f%% побед</string>
     <string name="lose_percent">%.2f%% поражений</string>
@@ -69,4 +69,6 @@
     <string name="game_goal_value">Цель игры %1$d</string>
     <string name="premium_info">Разблокируйте статистику, чтобы увидеть самые лучшие подходы, самые частые броски, распределение побед и многое другое</string>
     <string name="buy_premium">Купить доступ</string>
+    <string name="game_recap">Результаты игры</string>
+    <string name="average_set_recap">Средний подход</string>
 </resources>

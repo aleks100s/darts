@@ -1,4 +1,4 @@
-package com.alextos.darts.android.common.presentation
+package com.alextos.darts.android.common.presentation.components
 
 import androidx.compose.material.ExtendedFloatingActionButton
 import androidx.compose.material.Icon
@@ -31,7 +31,7 @@ fun FAB(
         backgroundColor = if (isEnabled) {
             MaterialTheme.colors.secondary
         } else {
-            MaterialTheme.colors.secondary.copy(alpha = 0.5f)
+            Color.Gray
         },
         contentColor = if (isEnabled) {
             MaterialTheme.colors.onSecondary

@@ -16,7 +16,7 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.alextos.darts.android.R
-import com.alextos.darts.android.common.presentation.FAB
+import com.alextos.darts.android.common.presentation.components.FAB
 import com.alextos.darts.android.common.presentation.extensions.getTitle
 import com.alextos.darts.android.common.presentation.screens.Screen
 import com.alextos.darts.game.domain.models.Game

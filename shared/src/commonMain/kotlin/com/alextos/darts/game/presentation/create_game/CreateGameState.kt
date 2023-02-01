@@ -8,5 +8,5 @@ data class CreateGameState(
     val selectedGoal: Int? = null,
     val goalOptions: List<Int> = listOf(101, 301, 501)
 ) {
-    fun isReadyToCreateGame() = selectedPlayers.isNotEmpty() && selectedGoal != null
+    fun isReadyToCreateGame() = selectedPlayers.count() > 1 && selectedGoal != null
 }

@@ -8,7 +8,7 @@ import androidx.compose.material.icons.filled.ShowChart
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import com.alextos.darts.android.R
-import com.alextos.darts.android.common.presentation.FAB
+import com.alextos.darts.android.common.presentation.components.FAB
 import com.alextos.darts.android.common.presentation.ScreenType
 import com.alextos.darts.android.common.presentation.rememberScreenType
 import com.alextos.darts.android.common.presentation.screens.TabletScreen
@@ -39,7 +39,7 @@ fun HistoryScreen(
                 if (state.isRecapVisible) {
                     onEvent(HistoryEvent.ShowHistory)
                 } else {
-                    onEvent(HistoryEvent.ShowProgress)
+                    onEvent(HistoryEvent.ShowRecap)
                 }
             }
         }
@@ -95,6 +95,7 @@ private fun GameHistory(
 private fun GameRecap(state: HistoryState) {
     GameRecapView(
         history = state.gameHistory,
+        averageSets = state.averageSets(),
         biggestSets = state.biggestSets(),
         smallestSets = state.smallestSets(),
         misses = state.misses(),

@@ -12,7 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import com.alextos.darts.android.R
-import com.alextos.darts.android.common.presentation.FAB
+import com.alextos.darts.android.common.presentation.components.FAB
 import com.alextos.darts.android.common.presentation.ScreenType
 import com.alextos.darts.android.common.presentation.views.GameHistoryView
 import com.alextos.darts.android.common.presentation.rememberScreenType

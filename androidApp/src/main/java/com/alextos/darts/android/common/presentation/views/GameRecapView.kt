@@ -1,5 +1,6 @@
 package com.alextos.darts.android.common.presentation.views
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Text
@@ -12,6 +13,7 @@ import androidx.compose.ui.unit.dp
 import com.alextos.darts.android.R
 import com.alextos.darts.android.common.presentation.components.ChartLegendItem
 import com.alextos.darts.android.common.presentation.components.SectionHeader
+import com.alextos.darts.android.common.presentation.screens.Screen
 import com.alextos.darts.core.domain.Player
 import com.alextos.darts.core.util.numberOfTurns
 import com.alextos.darts.game.domain.models.PlayerGameValue
@@ -20,42 +22,49 @@ import com.github.tehras.charts.line.LineChart
 import com.github.tehras.charts.line.LineChartData
 import com.github.tehras.charts.line.renderer.line.SolidLineDrawer
 import com.github.tehras.charts.line.renderer.point.FilledCircularPointDrawer
+import com.github.tehras.charts.piechart.animation.simpleChartAnimation
 
 private val colors = listOf(Color.Yellow, Color.Red, Color.Green, Color.Blue)
 
 @Composable
 fun GameRecapView(
     history: List<PlayerHistory>,
+    averageSets: List<PlayerGameValue>,
     biggestSets: List<PlayerGameValue>,
     smallestSets: List<PlayerGameValue>,
     misses: List<PlayerGameValue>,
     overkills: List<PlayerGameValue>
 ) {
-    LazyColumn(
-        modifier = Modifier
-            .fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        item {
-            RecapLineChart(history = history)
-        }
-        item {
-            RecapLineChartLegend(players = history.map { it.player })
-        }
-        item {
-            ValuesBlock(values = biggestSets, title = stringResource(id = R.string.biggest_sets))
-        }
-        item {
-            ValuesBlock(values = smallestSets, title = stringResource(id = R.string.smallest_sets))
-        }
-        item {
-            ValuesBlock(values = misses, title = stringResource(id = R.string.misses_count))
-        }
-        item {
-            ValuesBlock(values = overkills, title = stringResource(id = R.string.overkill_count))
-        }
-        item {
-            Spacer(modifier = Modifier.height(72.dp))
+    Screen(title = stringResource(id = R.string.game_recap)) {
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            item {
+                RecapLineChart(history = history)
+            }
+            item {
+                RecapLineChartLegend(players = history.map { it.player })
+            }
+            item {
+                ValuesBlock(values = averageSets, title = stringResource(id = R.string.average_set_recap))
+            }
+            item {
+                ValuesBlock(values = biggestSets, title = stringResource(id = R.string.biggest_sets))
+            }
+            item {
+                ValuesBlock(values = smallestSets, title = stringResource(id = R.string.smallest_sets))
+            }
+            item {
+                ValuesBlock(values = misses, title = stringResource(id = R.string.misses_count))
+            }
+            item {
+                ValuesBlock(values = overkills, title = stringResource(id = R.string.overkill_count))
+            }
+            item {
+                Spacer(modifier = Modifier.height(72.dp))
+            }
         }
     }
 }
@@ -96,13 +105,15 @@ private fun RecapLineChart(history: List<PlayerHistory>) {
             },
             lineDrawer = SolidLineDrawer(
                 color = colors.getOrNull(history.indexOf(playerHistory)) ?: Color.Magenta
-            )
+            ),
+            startAtZero = true
         )
     }
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .aspectRatio(1f),
+            .aspectRatio(1f)
+            .background(Color.White),
         contentAlignment = Alignment.Center
     ) {
         LineChart(
@@ -110,7 +121,8 @@ private fun RecapLineChart(history: List<PlayerHistory>) {
             modifier = Modifier.fillMaxSize(0.8f),
             pointDrawer = FilledCircularPointDrawer(),
             horizontalOffset = 5f,
-            labels = listOf()
+            labels = listOf(),
+            animation = simpleChartAnimation()
         )
     }
 }

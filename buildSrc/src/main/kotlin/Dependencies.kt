@@ -26,9 +26,6 @@ object Dependencies {
     private const val chartsVersion = "0.2.4-alpha"
     const val charts = "com.github.tehras:charts:$chartsVersion"
 
-    private const val revenueCatVersion = "5.4.0"
-    const val revenueCat = "com.revenuecat.purchases:purchases:$revenueCatVersion"
-
     // KOTLIN DATE TIME
     private const val dateTimeVersion = "0.4.0"
     const val kotlinDateTime = "org.jetbrains.kotlinx:kotlinx-datetime:$dateTimeVersion"

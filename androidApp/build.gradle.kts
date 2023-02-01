@@ -13,7 +13,7 @@ android {
         applicationId = "com.alextos.darts.android"
         minSdk = Dependencies.minimumSDKVersion
         targetSdk = Dependencies.targetSDKVersion
-        versionCode = 10
+        versionCode = 11
         versionName = "1.0"
     }
     buildFeatures {
@@ -47,7 +47,6 @@ dependencies {
     implementation(Dependencies.coilCompose)
     implementation(Dependencies.charts)
     implementation(Dependencies.pager)
-    implementation(Dependencies.revenueCat)
     implementation(Dependencies.hiltAndroid)
     kapt(Dependencies.hiltAndroidCompiler)
     kapt(Dependencies.hiltCompiler)

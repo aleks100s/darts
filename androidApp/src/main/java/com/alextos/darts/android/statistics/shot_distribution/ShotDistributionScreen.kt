@@ -29,13 +29,13 @@ fun ShotDistributionScreen(
 ) {
     state.distribution?.let { distribution ->
         Screen(title = distribution.player.name) {
-            LazyColumn(
-                modifier = Modifier.fillMaxSize(),
-            ) {
-                item {
-                    if (distribution.distribution.isEmpty()) {
-                        NoDataView()
-                    } else {
+            if (distribution.distribution.isEmpty()) {
+                NoDataView()
+            } else {
+                LazyColumn(
+                    modifier = Modifier.fillMaxSize(),
+                ) {
+                    item {
                         PlayerDistributionItem(distribution = distribution.distribution)
                     }
                 }

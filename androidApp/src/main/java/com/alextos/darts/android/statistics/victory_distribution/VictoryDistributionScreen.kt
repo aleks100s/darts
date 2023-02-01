@@ -28,13 +28,13 @@ fun VictoryDistributionScreen(
 ) {
     state.distribution?.let { distribution ->
         Screen(title = distribution.player.name) {
-            LazyColumn(
-                modifier = Modifier.fillMaxSize(),
-            ) {
-                item {
-                    if (distribution.isEmpty()) {
-                        NoDataView()
-                    } else {
+            if (distribution.isEmpty()) {
+                NoDataView()
+            } else {
+                LazyColumn(
+                    modifier = Modifier.fillMaxSize(),
+                ) {
+                    item {
                         VictoryDistributionChart(distribution = distribution)
                     }
                 }

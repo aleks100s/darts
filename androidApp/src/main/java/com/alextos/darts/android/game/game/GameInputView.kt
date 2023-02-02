@@ -5,14 +5,16 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.alextos.darts.android.R
 import com.alextos.darts.android.common.presentation.components.*
@@ -20,19 +22,19 @@ import com.alextos.darts.android.common.presentation.extensions.color
 import com.alextos.darts.android.common.presentation.extensions.textColor
 import com.alextos.darts.core.domain.Sector
 import com.alextos.darts.core.domain.Set
+import com.alextos.darts.game.domain.models.GamePlayerResult
 
 @Composable
 fun GameInputView(
     currentSet: Set,
-    playerName: String,
-    leaderScore: Int,
+    results: List<GamePlayerResult>,
     onClick: (Sector) -> Unit
 ) {
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        CurrentSetItem(currentSet = currentSet, player = playerName, leaderScore = leaderScore)
+        CurrentTurnItem(currentSet = currentSet, results = results)
         HintRow()
         LazyColumn(
             modifier = Modifier.fillMaxSize()
@@ -48,12 +50,60 @@ fun GameInputView(
 }
 
 @Composable
-private fun CurrentSetItem(currentSet: Set, player: String, leaderScore: Int) {
+private fun CurrentTurnItem(
+    results: List<GamePlayerResult>,
+    currentSet: Set
+) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        SectionHeader(title = player)
-        SectionSubHeader(stringResource(id = R.string.leader_score, leaderScore))
+        GamePlayers(list = results)
         PlayerHistoryHeader()
         SetItem(set = currentSet, onSelect = {})
+    }
+}
+
+@Composable
+private fun GamePlayers(list: List<GamePlayerResult>) {
+    val screenWidth = LocalConfiguration.current.screenWidthDp.dp
+    val itemWidth = if (list.count() < 4) {
+        screenWidth / list.count()
+    } else {
+        screenWidth / 3
+    }
+    LazyRow {
+        items(list) { result ->
+            GamePlayerItem(result = result, width = itemWidth)
+        }
+    }
+}
+
+@Composable
+private fun GamePlayerItem(result: GamePlayerResult, width: Dp) {
+    val backgroundColor = if (result.isCurrentPlayer) {
+        MaterialTheme.colors.secondary
+    } else {
+        MaterialTheme.colors.surface
+    }
+    val textColor = if (result.isCurrentPlayer) {
+        MaterialTheme.colors.onSecondary
+    } else {
+        MaterialTheme.colors.onSurface
+    }
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier
+            .background(backgroundColor)
+            .width(width)
+            .padding(vertical = 24.dp)
+    ) {
+        Text(
+            text = result.player.name,
+            color = textColor,
+            style = MaterialTheme.typography.h3
+        )
+        Text(
+            text = stringResource(id = R.string.game_player_result, result.result),
+            color = textColor
+        )
     }
 }
 

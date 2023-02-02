@@ -29,7 +29,6 @@
     <string name="proceed_to_the_next_turn">Your result is %1$d\nProceed to the next turn?</string>
     <string name="reset_turn">Reset this turn</string>
     <string name="next_turn">Next turn</string>
-    <string name="leader_score">Leader score: %1$d</string>
     <string name="inner">Inner</string>
     <string name="outer">Outer</string>
     <string name="double_">Double</string>
@@ -71,4 +70,5 @@
     <string name="buy_premium">Buy access</string>
     <string name="game_recap">Game recap</string>
     <string name="average_set_recap">Average turn</string>
+    <string name="game_player_result">Result: %1$d</string>
 </resources>

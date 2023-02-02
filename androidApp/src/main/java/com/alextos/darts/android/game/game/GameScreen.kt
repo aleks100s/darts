@@ -106,8 +106,7 @@ private fun GameHistory(
 private fun GameInput(state: GameState, onEvent: (GameEvent) -> Unit) {
     GameInputView(
         currentSet = state.getCurrentSet(),
-        playerName = state.currentPlayer?.name ?: "",
-        leaderScore = state.leaderResult()
+        results = state.currentResults()
     ) { sector ->
         onEvent(GameEvent.MakeShot(sector))
     }

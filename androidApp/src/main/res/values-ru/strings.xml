@@ -29,7 +29,6 @@
     <string name="proceed_to_the_next_turn">Результат %1$d\nПерейти к следующему ходу?</string>
     <string name="reset_turn">Сбросить этот ход</string>
     <string name="next_turn">Следующий ход</string>
-    <string name="leader_score">Результат лидера: %1$d</string>
     <string name="inner">Внутренний</string>
     <string name="outer">Внешний</string>
     <string name="double_">Двойной</string>
@@ -71,4 +70,5 @@
     <string name="buy_premium">Купить доступ</string>
     <string name="game_recap">Результаты игры</string>
     <string name="average_set_recap">Средний подход</string>
+    <string name="game_player_result">Результат: %1$d</string>
 </resources>

@@ -36,34 +36,36 @@ fun GameRecapView(
     overkills: List<PlayerGameValue>
 ) {
     Screen(title = stringResource(id = R.string.game_recap)) {
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            item {
-                RecapLineChart(history = history)
-            }
-            item {
-                RecapLineChartLegend(players = history.map { it.player })
-            }
-            item {
-                ValuesBlock(values = averageSets, title = stringResource(id = R.string.average_set_recap))
-            }
-            item {
-                ValuesBlock(values = biggestSets, title = stringResource(id = R.string.biggest_sets))
-            }
-            item {
-                ValuesBlock(values = smallestSets, title = stringResource(id = R.string.smallest_sets))
-            }
-            item {
-                ValuesBlock(values = misses, title = stringResource(id = R.string.misses_count))
-            }
-            item {
-                ValuesBlock(values = overkills, title = stringResource(id = R.string.overkill_count))
-            }
-            item {
-                Spacer(modifier = Modifier.height(72.dp))
+        if (history.isNotEmpty()) {
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                item {
+                    RecapLineChart(history = history)
+                }
+                item {
+                    RecapLineChartLegend(players = history.map { it.player })
+                }
+                item {
+                    ValuesBlock(values = averageSets, title = stringResource(id = R.string.average_set_recap))
+                }
+                item {
+                    ValuesBlock(values = biggestSets, title = stringResource(id = R.string.biggest_sets))
+                }
+                item {
+                    ValuesBlock(values = smallestSets, title = stringResource(id = R.string.smallest_sets))
+                }
+                item {
+                    ValuesBlock(values = misses, title = stringResource(id = R.string.misses_count))
+                }
+                item {
+                    ValuesBlock(values = overkills, title = stringResource(id = R.string.overkill_count))
+                }
+                item {
+                    Spacer(modifier = Modifier.height(72.dp))
+                }
             }
         }
     }

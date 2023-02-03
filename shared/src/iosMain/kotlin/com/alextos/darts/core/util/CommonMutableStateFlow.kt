@@ -17,8 +17,8 @@ actual open class CommonMutableStateFlow<T> actual constructor(
     override val subscriptionCount: StateFlow<Int>
         get() = flow.subscriptionCount
 
-    override suspend fun emit(value: T) {
-        flow.emit(value)
+    override fun compareAndSet(expect: T, update: T): Boolean {
+        return flow.compareAndSet(expect, update)
     }
 
     @ExperimentalCoroutinesApi
@@ -30,7 +30,9 @@ actual open class CommonMutableStateFlow<T> actual constructor(
         return flow.tryEmit(value)
     }
 
-    override fun compareAndSet(expect: T, update: T): Boolean {
-        return flow.compareAndSet(expect, update)
+    override suspend fun emit(value: T) {
+        flow.emit(value)
     }
+
+
 }

@@ -93,7 +93,7 @@ private fun GamePlayerItem(result: GamePlayerResult, width: Dp) {
         modifier = Modifier
             .background(backgroundColor)
             .width(width)
-            .padding(vertical = 24.dp)
+            .padding(vertical = 16.dp)
     ) {
         Text(
             text = result.player.name,

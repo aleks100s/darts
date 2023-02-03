@@ -18,7 +18,7 @@ data class GameState(
         return gameHistory.map { playerHistory ->
             GamePlayerResult(
                 player = playerHistory.player,
-                result = playerHistory.turns.lastOrNull()?.leftAfter ?: 0,
+                result = playerHistory.turns.lastOrNull()?.leftAfter ?: gameGoal,
                 isCurrentPlayer = playerHistory.player == currentPlayer
             )
         }

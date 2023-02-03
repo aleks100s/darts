@@ -4,7 +4,6 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.flow.collect
 
 actual open class CommonFlow<T> actual constructor(
     private val flow: Flow<T>
@@ -18,9 +17,6 @@ actual open class CommonFlow<T> actual constructor(
         val job = coroutineScope.launch(dispatcher) {
             flow.collect(onCollect)
         }
-
-        return DisposableHandle {
-            job.cancel()
-        }
+        return DisposableHandle { job.cancel() }
     }
 }

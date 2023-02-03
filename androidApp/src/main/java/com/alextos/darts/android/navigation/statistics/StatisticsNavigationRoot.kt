@@ -95,12 +95,13 @@ fun StatisticsNavigationRoot() {
                         )
                     }
                     is BestSetEvent.ShowBestSetOfPlayer -> {
+                        val route = StatisticsRoute.Darts.routeWithArgs(
+                            listOf(event.set).map { set ->
+                                set.shots.map { it.sector }
+                            }.toStringNavArgument()
+                        )
                         navController.navigate(
-                            route = StatisticsRoute.Darts.routeWithArgs(
-                                listOf(event.set).map { set ->
-                                    set.shots.map { it.sector }
-                                }.toStringNavArgument()
-                            )
+                            route = route
                         )
                     }
                 }

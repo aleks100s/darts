@@ -1,5 +1,6 @@
 package com.alextos.darts.core.util
 
+import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.flow.StateFlow
 
@@ -11,7 +12,8 @@ actual open class CommonStateFlow<T> actual constructor(
     override val value: T
         get() = flow.value
 
-    override suspend fun collect(collector: FlowCollector<T>): Nothing {
+    @InternalCoroutinesApi
+    override suspend fun collect(collector: FlowCollector<T>) {
         flow.collect(collector)
     }
 }

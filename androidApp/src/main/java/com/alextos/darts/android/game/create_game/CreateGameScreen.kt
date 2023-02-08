@@ -43,56 +43,46 @@ fun CreateGameScreen(
             }
         }
     ) {
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(it)
-        ) {
-            item {
-                SectionHeader(title = stringResource(id = R.string.select_players))
-            }
+        Column(modifier = Modifier.fillMaxSize().padding(it)) {
+            SectionHeader(title = stringResource(id = R.string.select_players))
 
-            item {
-                Row(
-                    horizontalArrangement = Arrangement.Center,
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Button(onClick = {
-                        onEvent(CreateGameEvent.CreatePlayer)
-                    }) {
-                        Text(
-                            text = stringResource(id = R.string.add_new_player),
-                            textAlign = TextAlign.Center
-                        )
+            LazyColumn(modifier = Modifier.weight(1f)) {
+                item {
+                    Row(
+                        horizontalArrangement = Arrangement.Center,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Button(onClick = {
+                            onEvent(CreateGameEvent.CreatePlayer)
+                        }) {
+                            Text(
+                                text = stringResource(id = R.string.add_new_player),
+                                textAlign = TextAlign.Center
+                            )
+                        }
+                    }
+                }
+
+                items(state.allPlayers) { player ->
+                    PlayerCheckbox(
+                        player = player,
+                        isChecked = state.selectedPlayers.contains(player),
+                    ) {
+                        onEvent(CreateGameEvent.SelectPlayer(it))
                     }
                 }
             }
 
-            items(state.allPlayers) { player ->
-                PlayerCheckbox(
-                    player = player,
-                    isChecked = state.selectedPlayers.contains(player),
-                ) {
-                    onEvent(CreateGameEvent.SelectPlayer(it))
-                }
+            SectionHeader(title = stringResource(id = R.string.game_goal))
+
+            GoalSelector(
+                goals = state.goalOptions,
+                selectedGoal = state.selectedGoal
+            ) { goal ->
+                onEvent(CreateGameEvent.SelectGoal(goal))
             }
 
-            item {
-                SectionHeader(title = stringResource(id = R.string.game_goal))
-            }
-
-            item {
-                GoalSelector(
-                    goals = state.goalOptions,
-                    selectedGoal = state.selectedGoal
-                ) { goal ->
-                    onEvent(CreateGameEvent.SelectGoal(goal))
-                }
-            }
-
-            item {
-                Spacer(modifier = Modifier.height(64.dp))
-            }
+            Spacer(modifier = Modifier.height(64.dp))
         }
     }
 }

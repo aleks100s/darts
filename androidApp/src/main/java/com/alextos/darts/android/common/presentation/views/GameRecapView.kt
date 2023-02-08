@@ -24,7 +24,7 @@ import com.github.tehras.charts.line.renderer.line.SolidLineDrawer
 import com.github.tehras.charts.line.renderer.point.FilledCircularPointDrawer
 import com.github.tehras.charts.piechart.animation.simpleChartAnimation
 
-private val colors = listOf(Color.Yellow, Color.Red, Color.Green, Color.Blue)
+private val colors = listOf(Color.Red, Color.Green, Color.Blue, Color.Yellow, Color.Magenta, Color.Cyan)
 
 @Composable
 fun GameRecapView(
@@ -106,7 +106,7 @@ private fun RecapLineChart(history: List<PlayerHistory>) {
                 LineChartData.Point(value, value.toString())
             },
             lineDrawer = SolidLineDrawer(
-                color = colors.getOrNull(history.indexOf(playerHistory)) ?: Color.Magenta
+                color = colors.getOrNull(history.indexOf(playerHistory)) ?: Color.DarkGray
             ),
             startAtZero = true
         )
@@ -133,7 +133,8 @@ private fun RecapLineChart(history: List<PlayerHistory>) {
 private fun RecapLineChartLegend(players: List<Player>) {
     Column(modifier = Modifier.padding(horizontal = 16.dp)) {
         players.forEach {
-            ChartLegendItem(text = it.name, color = colors[players.indexOf(it)])
+            val color = colors.getOrNull(players.indexOf(it)) ?: Color.DarkGray
+            ChartLegendItem(text = it.name, color = color)
         }
     }
 }

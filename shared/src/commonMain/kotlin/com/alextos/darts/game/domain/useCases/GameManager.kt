@@ -98,12 +98,10 @@ class GameManager(
     }
 
     private fun nextTurn() {
-        when (currentPlayer.value) {
-            players.getOrNull(0) -> _currentPlayer.update { players.getOrNull(1) ?: it }
-            players.getOrNull(1) -> _currentPlayer.update { players.getOrNull(2) ?: players[0] }
-            players.getOrNull(2) -> _currentPlayer.update { players.getOrNull(3) ?: players[0] }
-            players.getOrNull(3) -> _currentPlayer.update { players.getOrNull(0) ?: it }
-            else -> { _currentPlayer.update { it }}
+        val index = players.indexOf(currentPlayer.value)
+        val nextPlayer = players.getOrNull(index + 1) ?: kotlin.run {
+            players[0]
         }
+        _currentPlayer.update { nextPlayer }
     }
 }

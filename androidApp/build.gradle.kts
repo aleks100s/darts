@@ -13,8 +13,8 @@ android {
         applicationId = "com.alextos.darts.android"
         minSdk = Dependencies.minimumSDKVersion
         targetSdk = Dependencies.targetSDKVersion
-        versionCode = 15
-        versionName = "1.0"
+        versionCode = 16
+        versionName = "1.0.1"
     }
     buildFeatures {
         compose = true

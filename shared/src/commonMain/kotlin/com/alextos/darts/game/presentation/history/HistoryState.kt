@@ -12,7 +12,11 @@ data class HistoryState(
         return gameHistory.map { playerHistory ->
             val sum =  playerHistory.turns.sumOf { it.score() }
             val count = playerHistory.turns.count()
-            PlayerGameValue(playerHistory.player, sum / count)
+            if (count != 0) {
+                PlayerGameValue(playerHistory.player, sum / count)
+            } else {
+                PlayerGameValue(playerHistory.player, gameGoal)
+            }
         }
     }
 

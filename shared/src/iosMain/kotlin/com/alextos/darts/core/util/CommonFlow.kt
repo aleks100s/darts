@@ -2,7 +2,6 @@ package com.alextos.darts.core.util
 
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
 
 actual open class CommonFlow<T> actual constructor(
     private val flow: Flow<T>
@@ -19,6 +18,7 @@ actual open class CommonFlow<T> actual constructor(
         return DisposableHandle { job.cancel() }
     }
 
+    @OptIn(DelicateCoroutinesApi::class)
     fun subscribe(
         onCollect: (T) -> Unit
     ): DisposableHandle {

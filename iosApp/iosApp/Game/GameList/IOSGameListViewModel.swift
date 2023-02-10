@@ -5,13 +5,11 @@ import Foundation
 internal final class IOSGameListViewModel: ObservableObject {
 	@Published var state = GameListState(games: [])
 	
-	private let getGamesUseCase: GetGamesUseCase
 	private let viewModel: GameListViewModel
 	
 	private var handle: DisposableHandle?
 	
 	init(getGamesUseCase: GetGamesUseCase) {
-		self.getGamesUseCase = getGamesUseCase
 		self.viewModel = GameListViewModel(getGamesUseCase: getGamesUseCase, coroutineScope: nil)
 	}
 	

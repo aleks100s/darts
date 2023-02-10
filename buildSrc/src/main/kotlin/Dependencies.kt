@@ -26,6 +26,9 @@ object Dependencies {
     private const val chartsVersion = "0.2.4-alpha"
     const val charts = "com.github.tehras:charts:$chartsVersion"
 
+    private const val coroutinesVersion = "1.6.4"
+    const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
+
     // KOTLIN DATE TIME
     private const val dateTimeVersion = "0.4.0"
     const val kotlinDateTime = "org.jetbrains.kotlinx:kotlinx-datetime:$dateTimeVersion"

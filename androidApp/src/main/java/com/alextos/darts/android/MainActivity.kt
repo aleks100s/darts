@@ -10,9 +10,6 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.rememberNavController
@@ -29,28 +26,21 @@ fun MyApplicationTheme(
     } else {
         lightColors
     }
-    val monofontoTypeface = FontFamily(
-        Font(resId = R.font.monofonto_rg, weight = FontWeight.Normal)
-    )
+
     val typography = Typography(
         h1 = TextStyle(
-            fontFamily = monofontoTypeface,
             fontSize = 30.sp
         ),
         h2 = TextStyle(
-            fontFamily = monofontoTypeface,
             fontSize = 24.sp
         ),
         h3 = TextStyle(
-            fontFamily = monofontoTypeface,
             fontSize = 18.sp
         ),
         body1 = TextStyle(
-            fontFamily = monofontoTypeface,
             fontSize = 14.sp
         ),
         body2 = TextStyle(
-            fontFamily = monofontoTypeface,
             fontSize = 12.sp
         ),
     )

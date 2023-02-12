@@ -5,6 +5,6 @@ data class Player(
     val name: String
 ) {
     fun initials(): String {
-        return name.substring(0 until 2)
+        return name.substring(0 until 1)
     }
 }

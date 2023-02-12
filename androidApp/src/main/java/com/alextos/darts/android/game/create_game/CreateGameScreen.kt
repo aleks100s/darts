@@ -15,13 +15,13 @@ import androidx.compose.material.icons.filled.Start
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.alextos.darts.android.R
 import com.alextos.darts.android.common.presentation.components.FAB
+import com.alextos.darts.android.common.presentation.components.PlayerItem
 import com.alextos.darts.android.common.presentation.components.SectionHeader
 import com.alextos.darts.core.domain.Player
 import com.alextos.darts.game.presentation.create_game.CreateGameEvent
@@ -43,7 +43,9 @@ fun CreateGameScreen(
             }
         }
     ) {
-        Column(modifier = Modifier.fillMaxSize().padding(it)) {
+        Column(modifier = Modifier
+            .fillMaxSize()
+            .padding(it)) {
             SectionHeader(title = stringResource(id = R.string.select_players))
 
             LazyColumn(modifier = Modifier.weight(1f)) {
@@ -110,34 +112,6 @@ private fun PlayerCheckbox(
             contentDescription = "",
             modifier = Modifier.padding(end = 16.dp)
         )
-    }
-}
-
-@Composable
-fun PlayerItem(player: Player) {
-    Row(
-        modifier = Modifier
-            .padding(horizontal = 16.dp, vertical = 4.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        val color = MaterialTheme.colors.primary
-        Text(
-            text = player.initials(),
-            color = MaterialTheme.colors.onPrimary,
-            style = MaterialTheme.typography.h3,
-            modifier = Modifier
-                .padding(16.dp)
-                .drawBehind {
-                    drawCircle(
-                        color = color,
-                        radius = this.size.maxDimension
-                    )
-                }
-        )
-
-        Spacer(modifier = Modifier.width(16.dp))
-
-        Text(text = player.name)
     }
 }
 

@@ -71,4 +71,5 @@
     <string name="game_recap">Результаты игры</string>
     <string name="average_set_recap">Средний подход</string>
     <string name="game_player_result">Результат: %1$d</string>
+    <string name="view_turn">Просмотр хода</string>
 </resources>

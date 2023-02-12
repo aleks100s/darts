@@ -10,9 +10,10 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.dp
 import com.alextos.darts.core.domain.Sector
+
+private val hitColor = Color.Blue
 
 @Composable
 fun DartsDisk(selectedSector: Sector) {
@@ -36,7 +37,7 @@ fun DrawScope.drawMiss(sector: Sector) {
     drawSector(
         multiplier = 1f,
         width = 0.1f,
-        color = if (sector == Sector.Miss) Color.Yellow else Color.Black
+        color = if (sector == Sector.Miss) hitColor else Color.Black
     )
 }
 
@@ -84,14 +85,14 @@ fun DrawScope.drawBullseye(sector: Sector) {
     drawSector(
         multiplier = 0.1f,
         width = 0.1f,
-        color = if (sector == Sector.SingleBullseye) Color.Yellow else Color.Green
+        color = if (sector == Sector.SingleBullseye) hitColor else Color.Green
     )
 }
 
 fun DrawScope.drawDoubleBullseye(sector: Sector) {
     val arcRadius = size.width / 2
     drawCircle(
-        color = if (sector == Sector.DoubleBullseye) Color.Yellow else Color.Red,
+        color = if (sector == Sector.DoubleBullseye) hitColor else Color.Red,
         radius = arcRadius * 0.05f
     )
 }
@@ -145,7 +146,7 @@ fun DrawScope.circle(
             width = width,
             offset = Offset(offset, offset),
             startAngle = -117f + it * 18f,
-            color = if (isSelected) Color.Yellow else if (it % 2 == 0) firstColor else secondColor
+            color = if (isSelected) hitColor else if (it % 2 == 0) firstColor else secondColor
         )
     }
 }

@@ -72,6 +72,11 @@ class GameManager(
         }
     }
 
+    fun eraseTurn() {
+        currentEvaluateShotUseCase().eraseShot()
+        currentTrackUseCaseUseCase().eraseShot()
+    }
+
     private fun currentEvaluateShotUseCase(): EvaluateShotUseCase {
         return evaluateShotUseCases[players.indexOf(currentPlayer.value)]
     }

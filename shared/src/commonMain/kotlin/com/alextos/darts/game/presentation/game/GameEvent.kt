@@ -13,4 +13,5 @@ sealed class GameEvent {
     object HideGameInput: GameEvent()
     object ResetCurrentTurn: GameEvent()
     object ChangeTurn: GameEvent()
+    object EraseHit: GameEvent()
 }

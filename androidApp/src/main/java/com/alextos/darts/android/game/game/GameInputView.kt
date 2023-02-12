@@ -28,23 +28,36 @@ import com.alextos.darts.game.domain.models.GamePlayerResult
 fun GameInputView(
     currentSet: Set,
     results: List<GamePlayerResult>,
+    eraseShot: () -> Unit,
     onClick: (Sector) -> Unit
 ) {
-    Column(
+    Box(
         modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally
+        contentAlignment = Alignment.BottomStart
     ) {
-        CurrentTurnItem(currentSet = currentSet, results = results)
-        HintRow()
-        LazyColumn(
-            modifier = Modifier.fillMaxSize()
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            items(Sector.sectors) {
-                InputRow(sectors = it, onClick = onClick)
+            CurrentTurnItem(currentSet = currentSet, results = results)
+            HintRow()
+            LazyColumn(
+                modifier = Modifier.fillMaxSize()
+            ) {
+                items(Sector.sectors) {
+                    InputRow(sectors = it, onClick = onClick)
+                }
+                item {
+                    Spacer(modifier = Modifier.height(72.dp))
+                }
             }
-            item {
-                Spacer(modifier = Modifier.height(72.dp))
-            }
+        }
+
+        Button(
+            onClick = { eraseShot() },
+            modifier = Modifier.padding(16.dp)
+        ) {
+            Text(stringResource(id = R.string.erase_hit))
         }
     }
 }

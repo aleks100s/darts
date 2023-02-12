@@ -15,6 +15,13 @@ class EvaluateShotUseCase(goal: Int) {
         currentShotResult = null
     }
 
+    fun eraseShot() {
+        currentSet.removeLastOrNull()?.let {
+            reminder += it.sector.value
+            currentShotResult = null
+        }
+    }
+
     fun checkShot(shot: Shot): ShotResult {
         currentShotResult = null
         if (currentSet.count() == 3) {

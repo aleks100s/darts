@@ -106,7 +106,8 @@ private fun GameHistory(
 private fun GameInput(state: GameState, onEvent: (GameEvent) -> Unit) {
     GameInputView(
         currentSet = state.getCurrentSet(),
-        results = state.currentResults()
+        results = state.currentResults(),
+        eraseShot = { onEvent(GameEvent.EraseHit) }
     ) { sector ->
         onEvent(GameEvent.MakeShot(sector))
     }

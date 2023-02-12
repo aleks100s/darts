@@ -21,6 +21,26 @@ class TrackUserHistoryUseCase(player: Player) {
         }
     }
 
+    fun eraseShot() {
+        _playerHistory.update { playerHistory ->
+            val turns = playerHistory.turns.toMutableList()
+            val lastTurn = turns.removeLastOrNull()
+            val lastShots = lastTurn?.shots?.toMutableList()
+            if (lastShots?.isEmpty() != false) {
+                return@update playerHistory.copy(turns = turns)
+            }
+
+            val lastShot = lastShots.removeLastOrNull()
+            val set = Set(
+                shots = lastShots,
+                isOverkill = false,
+                leftAfter = lastTurn.leftAfter + (lastShot?.sector?.value ?: 0)
+            )
+            turns.add(set)
+            playerHistory.copy(turns = turns)
+        }
+    }
+
     fun currentTurnResult(): Int {
         return _playerHistory.value.turns.lastOrNull()?.score() ?: 0
     }

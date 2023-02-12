@@ -59,6 +59,9 @@ class GameViewModel(
             is GameEvent.ChangeTurn -> {
                 gameManager.changeTurn()
             }
+            is GameEvent.EraseHit -> {
+                gameManager.eraseTurn()
+            }
             else -> {}
         }
     }

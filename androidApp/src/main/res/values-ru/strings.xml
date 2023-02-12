@@ -72,4 +72,7 @@
     <string name="average_set_recap">Средний подход</string>
     <string name="game_player_result">Результат: %1$d</string>
     <string name="view_turn">Просмотр хода</string>
+    <string name="delete_player">Удалить игрока</string>
+    <string name="player_data_will_be_lost">Данные игрока будут потеряны</string>
+    <string name="erase_hit">Стереть бросок</string>
 </resources>

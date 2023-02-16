@@ -89,6 +89,18 @@ class SqlDelightGameDataSource(
         return playerHistories
     }
 
+    override fun deleteGame(game: Game) {
+        game.id?.let {gameId ->
+            queries.getGameSets(gameId).executeAsList()
+                .forEach {
+                    queries.deleteShots(it.id)
+                }
+            queries.deleteSet(gameId)
+            queries.deleteGamePlayer(gameId)
+            queries.deleteGame(gameId)
+        }
+    }
+
     private fun getLastInsertedId(): Long {
         return queries.getLastInsertedId().executeAsOne()
     }

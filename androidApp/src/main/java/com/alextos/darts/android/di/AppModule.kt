@@ -7,11 +7,8 @@ import com.alextos.darts.core.domain.PlayersDataSource
 import com.alextos.darts.database.DartsDatabase
 import com.alextos.darts.game.data.SqlDelightGameDataSource
 import com.alextos.darts.game.domain.GameDataSource
-import com.alextos.darts.game.domain.useCases.GetGameHistoryUseCase
-import com.alextos.darts.game.domain.useCases.GetGamesUseCase
-import com.alextos.darts.game.domain.useCases.SaveGameHistoryUseCase
-import com.alextos.darts.game.domain.useCases.CreatePlayerUseCase
 import com.alextos.darts.core.domain.GetPlayersUseCase
+import com.alextos.darts.game.domain.useCases.*
 import com.alextos.darts.statistics.data.SqlDelightStatisticsDataSource
 import com.alextos.darts.statistics.domain.StatisticsDataSource
 import com.alextos.darts.statistics.domain.use_cases.average_values.GetAverageSetScoreUseCase
@@ -159,5 +156,11 @@ object AppModule {
     @Singleton
     fun provideGetPlayerVictoryDistributionUseCase(dataSource: StatisticsDataSource): GetPlayerVictoryDistributionUseCase {
         return GetPlayerVictoryDistributionUseCase(dataSource)
+    }
+
+    @Provides
+    @Singleton
+    fun provideDeleteGameUseCase(dataSource: GameDataSource): DeleteGameUseCase {
+        return DeleteGameUseCase(dataSource)
     }
 }

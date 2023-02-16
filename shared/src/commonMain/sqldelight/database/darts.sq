@@ -37,6 +37,10 @@ INSERT OR REPLACE INTO gameEntity(
 )
 VALUES(?, ?, ?);
 
+deleteGame:
+DELETE FROM gameEntity
+WHERE id = ?;
+
 -- GamePlayer
 
 CREATE TABLE gamePlayerEntity(
@@ -48,6 +52,10 @@ CREATE TABLE gamePlayerEntity(
     FOREIGN KEY (game_id) REFERENCES gameEntity(id) ON DELETE CASCADE,
     FOREIGN KEY (player_id) REFERENCES playerEntity(id) ON DELETE CASCADE
 );
+
+deleteGamePlayer:
+DELETE FROM gamePlayerEntity
+WHERE game_id = ?;
 
 insertGamePlayerEntity:
 INSERT OR REPLACE INTO gamePlayerEntity(
@@ -97,6 +105,14 @@ INSERT OR REPLACE INTO setEntity(
 )
 VALUES(?, ?, ?, ?, ?, ?);
 
+getGameSets:
+SELECT * FROM setEntity
+WHERE game_id = ?;
+
+deleteSet:
+DELETE FROM setEntity
+WHERE game_id = ?;
+
 -- Shot
 
 CREATE TABLE shotEntity(
@@ -120,6 +136,10 @@ INSERT OR REPLACE INTO shotEntity(
     shot_value
 )
 VALUES(?, ?, ?, ?, ?, ?);
+
+deleteShots:
+DELETE FROM shotEntity
+WHERE set_id = ?;
 
 -- GetPlayerHistory
 getPlayerHistory:
@@ -183,7 +203,6 @@ GROUP BY she.sector
 ORDER BY COUNT(she.sector) DESC
 LIMIT 3;
 
-
 getBiggestFinalSet:
 SELECT
 se.id AS setId,
@@ -198,7 +217,6 @@ JOIN shotEntity she ON se.id = she.set_id
 WHERE leftAfter = 0
 ORDER BY se.score DESC, se.id ASC
 LIMIT 3;
-
 
 getPlayerBiggestFinalSet:
 SELECT

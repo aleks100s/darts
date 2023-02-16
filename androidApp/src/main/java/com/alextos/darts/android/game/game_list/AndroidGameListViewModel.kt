@@ -2,6 +2,7 @@ package com.alextos.darts.android.game.game_list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.alextos.darts.game.domain.useCases.DeleteGameUseCase
 import com.alextos.darts.game.domain.useCases.GetGamesUseCase
 import com.alextos.darts.game.presentation.game_list.GameListEvent
 import com.alextos.darts.game.presentation.game_list.GameListViewModel
@@ -10,10 +11,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AndroidGameListViewModel @Inject constructor(
-    private val getGamesUseCase: GetGamesUseCase
+    private val getGamesUseCase: GetGamesUseCase,
+    private val deleteGameUseCase: DeleteGameUseCase
 ): ViewModel() {
     private val viewModel by lazy {
-        GameListViewModel(getGamesUseCase, viewModelScope)
+        GameListViewModel(deleteGameUseCase, getGamesUseCase, viewModelScope)
     }
 
     val state = viewModel.state

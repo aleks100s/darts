@@ -11,4 +11,5 @@ interface GameDataSource {
     fun getGames(): Flow<List<Game>>
     fun saveGameHistory(gameHistory: GameHistory)
     fun getGameHistory(gameId: Long, players: List<Player>): List<PlayerHistory>
+    fun deleteGame(game: Game)
 }

@@ -3,6 +3,7 @@ package com.alextos.darts.android.di
 import android.app.Application
 import com.alextos.darts.core.data.DatabaseDriverFactory
 import com.alextos.darts.core.data.SqlDelightPlayersDataSource
+import com.alextos.darts.core.domain.DeletePlayerUseCase
 import com.alextos.darts.core.domain.PlayersDataSource
 import com.alextos.darts.database.DartsDatabase
 import com.alextos.darts.game.data.SqlDelightGameDataSource
@@ -162,5 +163,11 @@ object AppModule {
     @Singleton
     fun provideDeleteGameUseCase(dataSource: GameDataSource): DeleteGameUseCase {
         return DeleteGameUseCase(dataSource)
+    }
+
+    @Provides
+    @Singleton
+    fun provideDeletePlayerUseCase(dataSource: PlayersDataSource): DeletePlayerUseCase {
+        return DeletePlayerUseCase(dataSource)
     }
 }

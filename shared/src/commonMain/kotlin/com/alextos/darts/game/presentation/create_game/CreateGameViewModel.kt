@@ -1,5 +1,6 @@
 package com.alextos.darts.game.presentation.create_game
 
+import com.alextos.darts.core.domain.DeletePlayerUseCase
 import com.alextos.darts.core.util.toCommonFlow
 import com.alextos.darts.core.domain.GetPlayersUseCase
 import kotlinx.coroutines.CoroutineScope
@@ -7,6 +8,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 
 class CreateGameViewModel(
+    private val deletePlayerUseCase: DeletePlayerUseCase,
     getPlayersUseCase: GetPlayersUseCase,
     coroutineScope: CoroutineScope?
 ) {
@@ -47,6 +49,29 @@ class CreateGameViewModel(
             is CreateGameEvent.SelectGoal -> {
                 _state.update {
                     it.copy(selectedGoal = event.option)
+                }
+            }
+            is CreateGameEvent.ShowDeletePlayerDialog -> {
+                _state.update {
+                    it.copy(
+                        isDeletePlayerDialogShown = true,
+                        playerToDelete = event.player
+                    )
+                }
+            }
+            is CreateGameEvent.HideDeletePlayerDialog -> {
+                _state.update {
+                    it.copy(isDeletePlayerDialogShown = false)
+                }
+            }
+            is CreateGameEvent.DeletePlayer -> {
+                _state.value.playerToDelete?.let {
+                    deletePlayerUseCase.execute(it)
+                }
+                _state.update {
+                    it.copy(
+                        isDeletePlayerDialogShown = false
+                    )
                 }
             }
             else -> {}

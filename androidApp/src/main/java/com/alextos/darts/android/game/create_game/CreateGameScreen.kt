@@ -1,7 +1,9 @@
 package com.alextos.darts.android.game.create_game
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
@@ -69,9 +71,13 @@ fun CreateGameScreen(
                     PlayerCheckbox(
                         player = player,
                         isChecked = state.selectedPlayers.contains(player),
-                    ) {
-                        onEvent(CreateGameEvent.SelectPlayer(it))
-                    }
+                        onClick = {
+                            onEvent(CreateGameEvent.SelectPlayer(it))
+                        },
+                        onLongClick = {
+                            onEvent(CreateGameEvent.ShowDeletePlayerDialog(it))
+                        }
+                    )
                 }
             }
 
@@ -86,19 +92,72 @@ fun CreateGameScreen(
 
             Spacer(modifier = Modifier.height(64.dp))
         }
+
+        if (state.isDeletePlayerDialogShown) {
+            DeletePlayerDialog(
+                onClick = {
+                    onEvent(CreateGameEvent.DeletePlayer)
+                },
+                onDismiss = {
+                    onEvent(CreateGameEvent.HideDeletePlayerDialog)
+                }
+            )
+        }
     }
 }
 
 @Composable
+private fun DeletePlayerDialog(
+    onClick: () -> Unit,
+    onDismiss: () -> Unit
+) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = {
+            Text(text = stringResource(id = R.string.delete_player))
+        },
+        text = {
+            Text(
+                text = stringResource(
+                    id = R.string.this_cannot_be_undone
+                )
+            )
+        },
+        confirmButton = {
+            Button(onClick = onClick) {
+                Text(text = stringResource(id = R.string.delete))
+            }
+        },
+        dismissButton = {
+            Button(
+                onClick = onDismiss,
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color.Transparent)
+            ) {
+                Text(text = stringResource(id = R.string.cancel))
+            }
+        }
+    )
+}
+
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
 private fun PlayerCheckbox(
     player: Player,
     isChecked: Boolean,
-    onClick: (Player) -> Unit
+    onClick: (Player) -> Unit,
+    onLongClick: (Player) -> Unit
 ) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable { onClick(player) },
+            .combinedClickable(
+                onClick = {
+                    onClick(player)
+                },
+                onLongClick = {
+                    onLongClick(player)
+                }
+            ),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {

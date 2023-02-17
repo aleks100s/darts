@@ -15,6 +15,10 @@ INSERT OR REPLACE INTO playerEntity(
 )
 VALUES(?, ?);
 
+deletePlayer:
+DELETE FROM playerEntity
+WHERE id = ?;
+
 getPlayers:
 SELECT * FROM playerEntity ORDER BY id DESC;
 
@@ -29,44 +33,6 @@ CREATE TABLE gameEntity(
     timestamp INTEGER NOT NULL
 );
 
-insertGameEntity:
-INSERT OR REPLACE INTO gameEntity(
-    id,
-    game_goal,
-    timestamp
-)
-VALUES(?, ?, ?);
-
-deleteGame:
-DELETE FROM gameEntity
-WHERE id = ?;
-
--- GamePlayer
-
-CREATE TABLE gamePlayerEntity(
-    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    game_id INTEGER NOT NULL,
-    player_id INTEGER NOT NULL,
-    game_order INTEGER NOT NULL,
-    is_winner INTEGER NOT NULL,
-    FOREIGN KEY (game_id) REFERENCES gameEntity(id) ON DELETE CASCADE,
-    FOREIGN KEY (player_id) REFERENCES playerEntity(id) ON DELETE CASCADE
-);
-
-deleteGamePlayer:
-DELETE FROM gamePlayerEntity
-WHERE game_id = ?;
-
-insertGamePlayerEntity:
-INSERT OR REPLACE INTO gamePlayerEntity(
-    id,
-    game_id,
-    player_id,
-    game_order,
-    is_winner
-)
-VALUES(?, ?, ?, ?, ?);
-
 getGames:
 SELECT
 ge.id AS gameId,
@@ -80,6 +46,59 @@ FROM gameEntity ge
 JOIN gamePlayerEntity gpe ON ge.id = gpe.game_id
 JOIN playerEntity pe ON gpe.player_id = pe.id
 ORDER BY ge.timestamp DESC, gameOrder ASC;
+
+insertGameEntity:
+INSERT OR REPLACE INTO gameEntity(
+    id,
+    game_goal,
+    timestamp
+)
+VALUES(?, ?, ?);
+
+deleteGame:
+DELETE FROM gameEntity
+WHERE id = ?;
+
+getPlayerGames:
+SELECT
+ge.id AS gameId,
+ge.game_goal AS goal,
+ge.timestamp AS timestamp,
+pe.id AS playerId,
+pe.name AS playerName,
+gpe.game_order AS gameOrder,
+gpe.is_winner AS isWinner
+FROM gameEntity ge
+JOIN gamePlayerEntity gpe ON ge.id = gpe.game_id
+JOIN playerEntity pe ON gpe.player_id = pe.id
+WHERE gpe.player_id = ?
+ORDER BY ge.timestamp DESC, gameOrder ASC;
+
+-- GamePlayer
+
+CREATE TABLE gamePlayerEntity(
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    game_id INTEGER NOT NULL,
+    player_id INTEGER NOT NULL,
+    game_order INTEGER NOT NULL,
+    is_winner INTEGER NOT NULL,
+    FOREIGN KEY (game_id) REFERENCES gameEntity(id) ON DELETE CASCADE,
+    FOREIGN KEY (player_id) REFERENCES playerEntity(id) ON DELETE CASCADE
+);
+
+insertGamePlayerEntity:
+INSERT OR REPLACE INTO gamePlayerEntity(
+    id,
+    game_id,
+    player_id,
+    game_order,
+    is_winner
+)
+VALUES(?, ?, ?, ?, ?);
+
+deleteGamePlayer:
+DELETE FROM gamePlayerEntity
+WHERE game_id = ?;
 
 -- Set
 

@@ -72,7 +72,7 @@
     <string name="average_set_recap">Average turn</string>
     <string name="game_player_result">Result: %1$d</string>
     <string name="view_turn">View turn</string>
-    <string name="delete_player">Delete player</string>
+    <string name="delete_player">Delete player and all related games</string>
     <string name="player_data_will_be_lost">Player data will be lost</string>
     <string name="erase_hit">Erase hit</string>
     <string name="delete_game">Delete game</string>

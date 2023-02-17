@@ -4,4 +4,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface PlayersDataSource {
     fun getPlayers(): Flow<List<Player>>
+    fun deletePlayer(player: Player)
 }

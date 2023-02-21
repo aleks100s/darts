@@ -70,7 +70,7 @@
     <string name="buy_premium">Buy access</string>
     <string name="game_recap">Game recap</string>
     <string name="average_set_recap">Average turn</string>
-    <string name="game_player_result">Result: %1$d</string>
+    <string name="game_player_result">Reminder: %1$d</string>
     <string name="view_turn">View turn</string>
     <string name="delete_player">Delete player and all related games</string>
     <string name="player_data_will_be_lost">Player data will be lost</string>
@@ -79,4 +79,5 @@
     <string name="this_cannot_be_undone">This cannot be undone</string>
     <string name="delete">Delete</string>
     <string name="cancel">Cancel</string>
+    <string name="back_to_game">Back to the game</string>
 </resources>

@@ -6,14 +6,14 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import com.alextos.darts.android.R
-import com.alextos.darts.android.common.presentation.components.FAB
 import com.alextos.darts.android.common.presentation.ScreenType
+import com.alextos.darts.android.common.presentation.components.FAB
 import com.alextos.darts.android.common.presentation.views.GameHistoryView
 import com.alextos.darts.android.common.presentation.rememberScreenType
 import com.alextos.darts.android.common.presentation.screens.TabletScreen
@@ -30,29 +30,27 @@ fun GameScreen(
     BackHandler(true) {
         onEvent(GameEvent.BackButtonPressed)
     }
-    Scaffold(
-        floatingActionButton = {
-            FAB(
-                text = if (state.isInputVisible)
-                    stringResource(id = R.string.history)
-                else
-                    stringResource(id = R.string.shoot),
-                icon = if (state.isInputVisible)
-                    Icons.Filled.List
-                else
-                    Icons.Filled.PlayArrow
-            ) {
-                onEvent(if (state.isInputVisible) GameEvent.HideGameInput else GameEvent.ShowGameInput)
-            }
-        }
-    ) {
+    Scaffold {
         when (rememberScreenType()) {
             is ScreenType.Compact -> {
                 AnimatedContent(targetState = state.isInputVisible) { isInputVisible ->
                     if (isInputVisible) {
                         GameInput(state = state, onEvent = onEvent)
                     } else {
-                        GameHistory(paddingValues = it, state = state, onEvent = onEvent)
+                        Column(modifier = Modifier.padding(it)) {
+                            Scaffold(
+                                floatingActionButton = {
+                                    FAB(
+                                        text = stringResource(id = R.string.back_to_game),
+                                        icon = Icons.Default.PlayArrow
+                                    ) {
+                                        onEvent(GameEvent.ShowGameInput)
+                                    }
+                                }
+                            ) {
+                                GameHistory(paddingValues = it, state = state, onEvent = onEvent)
+                            }
+                        }
                     }
                 }
             }
@@ -107,10 +105,15 @@ private fun GameInput(state: GameState, onEvent: (GameEvent) -> Unit) {
     GameInputView(
         currentSet = state.getCurrentSet(),
         results = state.currentResults(),
-        eraseShot = { onEvent(GameEvent.EraseHit) }
-    ) { sector ->
-        onEvent(GameEvent.MakeShot(sector))
-    }
+        eraseShot = { onEvent(GameEvent.EraseHit) },
+        currentPlayerIndex = state.currentPage(),
+        onInputClick = { sector ->
+            onEvent(GameEvent.MakeShot(sector))
+        },
+        onPlayerClick = {
+            onEvent(GameEvent.HideGameInput)
+        }
+    )
 }
 
 @Composable

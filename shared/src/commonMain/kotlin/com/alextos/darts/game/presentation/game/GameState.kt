@@ -11,7 +11,7 @@ data class GameState(
     val isGameFinished: Boolean = false,
     val isCloseGameDialogOpened: Boolean = false,
     val turnState: TurnState = TurnState.IsOngoing,
-    val isInputVisible: Boolean = false,
+    val isInputVisible: Boolean = true,
     val gameGoal: Int = 0
 ) {
     fun currentResults(): List<GamePlayerResult> {

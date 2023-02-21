@@ -70,7 +70,7 @@
     <string name="buy_premium">Купить доступ</string>
     <string name="game_recap">Результаты игры</string>
     <string name="average_set_recap">Средний подход</string>
-    <string name="game_player_result">Результат: %1$d</string>
+    <string name="game_player_result">Остаток: %1$d</string>
     <string name="view_turn">Просмотр хода</string>
     <string name="delete_player">Удалить игрока и все связанные с ним игры</string>
     <string name="player_data_will_be_lost">Данные игрока будут потеряны</string>
@@ -79,4 +79,5 @@
     <string name="this_cannot_be_undone">Это действие необратимо</string>
     <string name="delete">Удалить</string>
     <string name="cancel">Отмена</string>
+    <string name="back_to_game">Назад к игре</string>
 </resources>

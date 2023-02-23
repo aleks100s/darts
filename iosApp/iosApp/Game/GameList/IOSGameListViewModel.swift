@@ -3,14 +3,17 @@ import Foundation
 
 @MainActor
 internal final class IOSGameListViewModel: ObservableObject {
-	@Published var state = GameListState(games: [])
+	@Published var state = GameListState(games: [], isDeleteGameDialogShown: false, gameToDelete: nil)
 	
 	private let viewModel: GameListViewModel
-	
 	private var handle: DisposableHandle?
 	
-	init(getGamesUseCase: GetGamesUseCase) {
-		self.viewModel = GameListViewModel(getGamesUseCase: getGamesUseCase, coroutineScope: nil)
+	init(getGamesUseCase: GetGamesUseCase, deleteGameUseCase: DeleteGameUseCase) {
+		self.viewModel = GameListViewModel(
+			deleteGameUseCase: deleteGameUseCase,
+			getGamesUseCase: getGamesUseCase,
+			coroutineScope: nil
+		)
 	}
 	
 	func startObserving() {

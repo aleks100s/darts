@@ -12,20 +12,27 @@ internal final class IOSCreateGameViewModel: ObservableObject {
 	)
 	
 	private let viewModel: CreateGameViewModel
-	private let onEvent: (CreateGameEvent) -> ()
+	private let createPlayer: () -> ()
+	private let startGame: ([Player], Int32) -> ()
 	private var handle: DisposableHandle?
 	
 	init(
 		getPlayersUseCase: GetPlayersUseCase,
 		deletePlayerUseCase: DeletePlayerUseCase,
-		onEvent: @escaping (CreateGameEvent) -> ()
+		createPlayer: @escaping () -> (),
+		startGame: @escaping ([Player], Int32) -> ()
 	) {
 		viewModel = CreateGameViewModel(
 			deletePlayerUseCase: deletePlayerUseCase,
 			getPlayersUseCase: getPlayersUseCase,
 			coroutineScope: nil
 		)
-		self.onEvent = onEvent
+		self.createPlayer = createPlayer
+		self.startGame = startGame
+	}
+	
+	func start() {
+		startGame(state.selectedPlayers, state.selectedGoal?.int32Value ?? 0)
 	}
 	
 	func startObserving() {
@@ -37,8 +44,13 @@ internal final class IOSCreateGameViewModel: ObservableObject {
 	}
 	
 	func onEvent(_ event: CreateGameEvent) {
-		viewModel.onEvent(event: event)
-		onEvent(event)
+		switch event {
+		case .CreatePlayer():
+			createPlayer()
+			
+		default:
+			viewModel.onEvent(event: event)
+		}
 	}
 	
 	func dispose() {

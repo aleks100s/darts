@@ -5,6 +5,7 @@ internal struct GameTab: View {
 	let module: AppModule
 	
 	@State private var navigationStack: [GameNavigation] = []
+	@State private var isCreatePlayerShown: Bool = false
 	
 	var body: some View {
 		NavigationStack(path: $navigationStack) {
@@ -20,6 +21,12 @@ internal struct GameTab: View {
 					navigate(to: $0)
 				}
 		}
+		.sheet(isPresented: $isCreatePlayerShown) {
+			CreatePlayerScene.create(using: module) {
+				isCreatePlayerShown = false
+			}
+			.presentationDetents([.medium])
+		}
 	}
 	
 	@MainActor
@@ -27,20 +34,18 @@ internal struct GameTab: View {
 	private func navigate(to scene: GameNavigation) -> some View {
 		switch scene {
 		case .createGame:
-			CreateGameScene.create(using: module) { event in
-				switch event {
-				case .CreatePlayer():
-					navigationStack.append(.createPlayer)
-					
-				default:
-					break
+			CreateGameScene.create(
+				using: module,
+				createPlayer: {
+					isCreatePlayerShown = true
+				},
+				startGame: { players, goal in
+					navigationStack.append(.game(players: players, goal: goal))
 				}
-			}
+			)
 			
-		case .createPlayer:
-			CreatePlayerScene.create(using: module) {
-				_ = navigationStack.popLast()
-			}
+		case let .game(players, goal):
+			GameScene.create(using: module, players: players, goal: goal)
 		}
 	}
 }

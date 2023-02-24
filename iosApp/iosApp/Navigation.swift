@@ -1,6 +1,8 @@
-internal enum GameNavigation {
+import shared
+
+internal enum GameNavigation: Hashable {
 	case createGame
-	case createPlayer
+	case game(players: [Player], goal: Int32)
 }
 
 internal enum StatisticsNavigation {

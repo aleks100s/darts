@@ -26,6 +26,9 @@
 		279827ED29A7CDE100D497F2 /* IOSCreatePlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279827EC29A7CDE100D497F2 /* IOSCreatePlayerViewModel.swift */; };
 		279827EF29A7D50A00D497F2 /* Player+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279827EE29A7D50A00D497F2 /* Player+Extensions.swift */; };
 		279827F129A7D5C100D497F2 /* KotlinInt+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279827F029A7D5C100D497F2 /* KotlinInt+Extensions.swift */; };
+		27CF107329A8BBB600174D02 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CF107229A8BBB600174D02 /* GameScene.swift */; };
+		27CF107529A8BBBE00174D02 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CF107429A8BBBE00174D02 /* GameView.swift */; };
+		27CF107729A8BBC800174D02 /* IOSGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CF107629A8BBC800174D02 /* IOSGameViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -61,6 +64,9 @@
 		279827EC29A7CDE100D497F2 /* IOSCreatePlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSCreatePlayerViewModel.swift; sourceTree = "<group>"; };
 		279827EE29A7D50A00D497F2 /* Player+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Player+Extensions.swift"; sourceTree = "<group>"; };
 		279827F029A7D5C100D497F2 /* KotlinInt+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KotlinInt+Extensions.swift"; sourceTree = "<group>"; };
+		27CF107229A8BBB600174D02 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		27CF107429A8BBBE00174D02 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		27CF107629A8BBC800174D02 /* IOSGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSGameViewModel.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -87,6 +93,7 @@
 		279827CC298E655A00D497F2 /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				27CF107129A8BBA800174D02 /* Game */,
 				279827E729A7CDB900D497F2 /* CreatePlayer */,
 				279827E029A7CD8800D497F2 /* CreateGame */,
 				279827D9298E6F0300D497F2 /* GameList */,
@@ -141,6 +148,16 @@
 				279827EC29A7CDE100D497F2 /* IOSCreatePlayerViewModel.swift */,
 			);
 			path = CreatePlayer;
+			sourceTree = "<group>";
+		};
+		27CF107129A8BBA800174D02 /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				27CF107229A8BBB600174D02 /* GameScene.swift */,
+				27CF107429A8BBBE00174D02 /* GameView.swift */,
+				27CF107629A8BBC800174D02 /* IOSGameViewModel.swift */,
+			);
+			path = Game;
 			sourceTree = "<group>";
 		};
 		7555FF72242A565900829871 = {
@@ -281,12 +298,15 @@
 				279827ED29A7CDE100D497F2 /* IOSCreatePlayerViewModel.swift in Sources */,
 				279827E429A7CD9F00D497F2 /* CreateGameScene.swift in Sources */,
 				279827DB298E6F2600D497F2 /* IOSGameListViewModel.swift in Sources */,
+				27CF107729A8BBC800174D02 /* IOSGameViewModel.swift in Sources */,
 				279827D5298E65A600D497F2 /* ContentView.swift in Sources */,
 				279827CE298E655A00D497F2 /* GameTab.swift in Sources */,
 				279827EB29A7CDCE00D497F2 /* CreatePlayerScene.swift in Sources */,
 				279827D3298E657600D497F2 /* Navigation.swift in Sources */,
 				279827EF29A7D50A00D497F2 /* Player+Extensions.swift in Sources */,
 				279827E929A7CDC500D497F2 /* CreatePlayerView.swift in Sources */,
+				27CF107329A8BBB600174D02 /* GameScene.swift in Sources */,
+				27CF107529A8BBBE00174D02 /* GameView.swift in Sources */,
 				279827E629A7CDB100D497F2 /* IOSCreateGameViewModel.swift in Sources */,
 				279827DD298E71E000D497F2 /* GameListView.swift in Sources */,
 				279827E229A7CD9700D497F2 /* CreateGameView.swift in Sources */,

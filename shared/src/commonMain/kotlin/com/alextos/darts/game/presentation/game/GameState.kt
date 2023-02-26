@@ -14,6 +14,27 @@ data class GameState(
     val isInputVisible: Boolean = true,
     val gameGoal: Int = 0
 ) {
+    fun isTurnOver(): Boolean {
+        return when (turnState) {
+            is TurnState.IsOver -> {
+                true
+            }
+            else -> {
+                false
+            }
+        }
+    }
+
+    fun turnResult(): Int {
+        return when (turnState) {
+            is TurnState.IsOver -> {
+                turnState.result
+            }
+            else -> {
+                0
+            }
+        }
+    }
     fun currentResults(): List<GamePlayerResult> {
         return gameHistory.map { playerHistory ->
             GamePlayerResult(

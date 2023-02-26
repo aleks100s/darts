@@ -2,6 +2,7 @@ import Combine
 import shared
 
 internal final class IOSCreateGameViewModel: ObservableObject {
+	@Published var isDeletePlayerDialogShown = false
 	@Published var state = CreateGameState(
 		allPlayers: [],
 		selectedPlayers: [],
@@ -40,6 +41,7 @@ internal final class IOSCreateGameViewModel: ObservableObject {
 			.subscribe { [weak self] state in
 				guard let state else { return }
 				self?.state = state
+				self?.isDeletePlayerDialogShown = state.isDeletePlayerDialogShown
 			}
 	}
 	

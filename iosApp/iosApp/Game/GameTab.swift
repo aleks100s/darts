@@ -45,7 +45,11 @@ internal struct GameTab: View {
 			)
 			
 		case let .game(players, goal):
-			GameScene.create(using: module, players: players, goal: goal)
+			GameScene.create(using: module, players: players, goal: goal) {
+				navigationStack = []
+			}
+				.navigationTitle("Game")
+				.navigationBarBackButtonHidden()
 		}
 	}
 }

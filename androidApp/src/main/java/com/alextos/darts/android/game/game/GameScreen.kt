@@ -66,11 +66,8 @@ fun GameScreen(
             }
         }
 
-        when (val turnState = state.turnState) {
-            is TurnState.IsOver -> {
-                TurnOverDialog(result = turnState.result, onEvent = onEvent)
-            }
-            else -> {}
+        if (state.isTurnOver()) {
+            TurnOverDialog(result = state.turnResult(), onEvent = onEvent)
         }
 
         if (state.isCloseGameDialogOpened) {

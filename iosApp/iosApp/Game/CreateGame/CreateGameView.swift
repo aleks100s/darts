@@ -3,7 +3,6 @@ import shared
 
 internal struct CreateGameView: View {
 	@StateObject var viewModel: IOSCreateGameViewModel
-	@State private var isDeletePlayerDialogShown = false
 	
 	var body: some View {
 		List {
@@ -23,7 +22,6 @@ internal struct CreateGameView: View {
 				.onDelete { indexSet in
 					let player = viewModel.state.allPlayers[indexSet.first!]
 					viewModel.onEvent(.ShowDeletePlayerDialog(player: player))
-					isDeletePlayerDialogShown = true
 				}
 			}
 			
@@ -36,7 +34,7 @@ internal struct CreateGameView: View {
 				}
 			}
 		}
-		.alert("Delete player", isPresented: $isDeletePlayerDialogShown) {
+		.alert("Delete player", isPresented: $viewModel.isDeletePlayerDialogShown) {
 			Button {
 				viewModel.onEvent(.DeletePlayer())
 			} label: {
@@ -45,11 +43,9 @@ internal struct CreateGameView: View {
 
 			Button {
 				viewModel.onEvent(.HideDeletePlayerDialog())
-				isDeletePlayerDialogShown = false
 			} label: {
 				Text("Cancel")
 			}
-
 		}
 		.toolbar {
 			Button {

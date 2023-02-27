@@ -6,11 +6,11 @@ internal struct CreateGameView: View {
 	
 	var body: some View {
 		List {
-			Section("Players") {
+			Section("all_players") {
 				Button {
 					viewModel.onEvent(.CreatePlayer())
 				} label: {
-					Text("Add new player")
+					Text("add_new_player")
 				}
 
 				ForEach(viewModel.state.allPlayers) { player in
@@ -25,7 +25,7 @@ internal struct CreateGameView: View {
 				}
 			}
 			
-			Section("Game goal") {
+			Section("game_goal") {
 				ForEach(viewModel.state.goalOptions) { option in
 					let isSelected = viewModel.state.selectedGoal == option
 					GoalOption(option: option.intValue, isSelected: isSelected) {
@@ -34,24 +34,24 @@ internal struct CreateGameView: View {
 				}
 			}
 		}
-		.alert("Delete player", isPresented: $viewModel.isDeletePlayerDialogShown) {
+		.alert("delete_player", isPresented: $viewModel.isDeletePlayerDialogShown) {
 			Button {
 				viewModel.onEvent(.DeletePlayer())
 			} label: {
-				Text("Delete")
+				Text("delete")
 			}
 
 			Button {
 				viewModel.onEvent(.HideDeletePlayerDialog())
 			} label: {
-				Text("Cancel")
+				Text("cancel")
 			}
 		}
 		.toolbar {
 			Button {
 				viewModel.start()
 			} label: {
-				Text("Start game")
+				Text("start_game")
 			}
 			.disabled(!viewModel.state.isReadyToCreateGame())
 		}

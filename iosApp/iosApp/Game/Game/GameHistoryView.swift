@@ -9,7 +9,7 @@ internal struct GameHistoryView: View {
 			Button {
 				onShowGameInputClick()
 			} label: {
-				Text("Back to game")
+				Text("back_to_game")
 			}
 		}
 	}

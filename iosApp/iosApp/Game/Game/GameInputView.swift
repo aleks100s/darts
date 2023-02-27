@@ -46,6 +46,7 @@ internal struct GameInputView: View {
 				}
 			}
 		}
+		.scrollIndicators(.hidden)
 	}
 	
 	@ViewBuilder
@@ -58,7 +59,7 @@ internal struct GameInputView: View {
 		
 		VStack(spacing: 8) {
 			Text(result.player.name)
-			Text("Reminder: \(result.result)")
+			Text("game_player_result")
 		}
 		.foregroundColor(textColor)
 		.padding(16)
@@ -76,10 +77,10 @@ internal struct GameInputView: View {
 	@ViewBuilder
 	private var hintRow: some View {
 		let cells = [
-			"Inner",
-			"Outer",
-			"Double",
-			"Triplet"
+			String(localized: "inner"),
+			String(localized: "outer"),
+			String(localized: "double_"),
+			String(localized: "triplet")
 		]
 		Row(cells: cells, spacing: 0)
 	}

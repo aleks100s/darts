@@ -66,8 +66,6 @@
     <string name="misses_count">Количество промахов</string>
     <string name="overkill_count">Количество переборов</string>
     <string name="game_goal_value">Цель игры %1$d</string>
-    <string name="premium_info">Разблокируйте статистику, чтобы увидеть самые лучшие подходы, самые частые броски, распределение побед и многое другое</string>
-    <string name="buy_premium">Купить доступ</string>
     <string name="game_recap">Результаты игры</string>
     <string name="average_set_recap">Средний подход</string>
     <string name="game_player_result">Остаток: %1$d</string>

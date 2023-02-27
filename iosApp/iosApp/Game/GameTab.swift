@@ -14,7 +14,7 @@ internal struct GameTab: View {
 					Button {
 						navigationStack.append(.createGame)
 					} label: {
-						Label("Create game", systemImage: "plus")
+						Label("create_game", systemImage: "plus")
 					}
 				}
 				.navigationDestination(for: GameNavigation.self) {
@@ -48,7 +48,7 @@ internal struct GameTab: View {
 			GameScene.create(using: module, players: players, goal: goal) {
 				navigationStack = []
 			}
-				.navigationTitle("Game")
+				.navigationTitle("game")
 				.navigationBarBackButtonHidden()
 		}
 	}

@@ -66,8 +66,6 @@
     <string name="misses_count">Number of misses</string>
     <string name="overkill_count">Number of overkills</string>
     <string name="game_goal_value">Game goal %1$d</string>
-    <string name="premium_info">Unlock access to statistics to see the best turns, the most frequent shots, victory distribution and more</string>
-    <string name="buy_premium">Buy access</string>
     <string name="game_recap">Game recap</string>
     <string name="average_set_recap">Average turn</string>
     <string name="game_player_result">Reminder: %1$d</string>

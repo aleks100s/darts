@@ -5,38 +5,38 @@ internal struct GameView: View {
 	
 	var body: some View {
 		return gameView
-			.alert("Game over", isPresented: $viewModel.isGameFinishedDialogShown) {
+			.alert("game_finished", isPresented: $viewModel.isGameFinishedDialogShown) {
 				Button {
 					viewModel.onEvent(.CloseGame())
 					viewModel.finishGame()
 				} label: {
-					Text("Ok")
+					Text("OK")
 				}
 			}
-			.alert("Turn is over", isPresented: $viewModel.isTurnOverDialogShown) {
+			.alert("turn_is_over", isPresented: $viewModel.isTurnOverDialogShown) {
 				Button {
 					viewModel.onEvent(.ChangeTurn())
 				} label: {
-					Text("Next turn")
+					Text("next_turn")
 				}
 				
 				Button {
 					viewModel.onEvent(.ResetCurrentTurn())
 				} label: {
-					Text("Reset turn")
+					Text("reset_turn")
 				}
 			}
-			.alert("Leave the game", isPresented: $viewModel.isCloseGameDialogShown) {
+			.alert("leave_game", isPresented: $viewModel.isCloseGameDialogShown) {
 				Button {
 					viewModel.onEvent(.CloseGame())
 				} label: {
-					Text("Leave")
+					Text("leave")
 				}
 
 				Button {
 					viewModel.onEvent(.ReturnToGame())
 				} label: {
-					Text("Cancel")
+					Text("cancel")
 				}
 			}
 			.toolbar {
@@ -44,7 +44,7 @@ internal struct GameView: View {
 					Button {
 						viewModel.onEvent(.BackButtonPressed())
 					} label: {
-						Text("Leave")
+						Text("leave")
 					}
 				}
 			}

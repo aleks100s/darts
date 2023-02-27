@@ -6,11 +6,11 @@ internal struct CreatePlayerView: View {
 	
 	var body: some View {
 		VStack(spacing: 16) {
-			TextField("Enter player name", text: $playerName)
+			TextField("enter_new_player_name", text: $playerName)
 			Button {
 				viewModel.onEvent(.SavePlayer(name: playerName))
 			} label: {
-				Text("Save")
+				Text("create_player")
 			}
 			.disabled(playerName.count < 3)
 		}

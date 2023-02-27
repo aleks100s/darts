@@ -9,7 +9,10 @@ internal struct GameTab: View {
 	
 	var body: some View {
 		NavigationStack(path: $navigationStack) {
-			GameListScene.create(using: module)
+			GameListScene.create(using: module) { game in
+				navigationStack.append(.history(game: game))
+			}
+				.navigationTitle("games")
 				.toolbar {
 					Button {
 						navigationStack.append(.createGame)
@@ -50,6 +53,10 @@ internal struct GameTab: View {
 			}
 				.navigationTitle("game")
 				.navigationBarBackButtonHidden()
+			
+		case let .history(game):
+			HistoryScene.create(using: module, game: game)
+				.navigationTitle("history")
 		}
 	}
 }

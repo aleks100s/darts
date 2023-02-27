@@ -21,7 +21,7 @@
 "game_goal" = "Цель игры";
 "shoot" = "Бросок";
 "history" = "История";
-"game_title" = "Игра №%@, цель %@";
+"game_title %d %d" = "Игра №%d, цель %d";
 "games" = "Игры";
 "turn_is_over" = "Ваш ход окончен";
 "proceed_to_the_next_turn" = "Результат %@\nПерейти к следующему ходу?";
@@ -66,7 +66,7 @@
 "game_goal_value" = "Цель игры %@";
 "game_recap" = "Результаты игры";
 "average_set_recap" = "Средний подход";
-"game_player_result" = "Остаток: %@";
+"game_player_result %d" = "Остаток: %d";
 "view_turn" = "Просмотр хода";
 "delete_player" = "Удалить игрока и все связанные с ним игры";
 "player_data_will_be_lost" = "Данные игрока будут потеряны";

@@ -6,9 +6,15 @@ internal final class IOSGameListViewModel: ObservableObject {
 	@Published var state = GameListState(games: [], isDeleteGameDialogShown: false, gameToDelete: nil)
 	
 	private let viewModel: GameListViewModel
+	private let onGameSelected: (Game) -> Void
 	private var handle: DisposableHandle?
 	
-	init(getGamesUseCase: GetGamesUseCase, deleteGameUseCase: DeleteGameUseCase) {
+	init(
+		getGamesUseCase: GetGamesUseCase,
+		deleteGameUseCase: DeleteGameUseCase,
+		onGameSelected: @escaping (Game) -> Void
+	) {
+		self.onGameSelected = onGameSelected
 		self.viewModel = GameListViewModel(
 			deleteGameUseCase: deleteGameUseCase,
 			getGamesUseCase: getGamesUseCase,
@@ -22,6 +28,10 @@ internal final class IOSGameListViewModel: ObservableObject {
 				guard let state else { return }
 				self?.state = state
 			}
+	}
+	
+	func select(game: Game) {
+		onGameSelected(game)
 	}
 	
 	func onEvent(_ event: GameListEvent) {

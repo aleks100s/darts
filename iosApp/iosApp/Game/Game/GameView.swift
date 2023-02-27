@@ -28,7 +28,7 @@ internal struct GameView: View {
 			}
 			.alert("leave_game", isPresented: $viewModel.isCloseGameDialogShown) {
 				Button {
-					viewModel.onEvent(.CloseGame())
+					viewModel.finishGame()
 				} label: {
 					Text("leave")
 				}
@@ -69,8 +69,14 @@ internal struct GameView: View {
 				}
 			)
 		} else {
-			GameHistoryView {
-				viewModel.onEvent(.ShowGameInput())
+			VStack {
+				GameHistoryView()
+				
+				Button {
+					viewModel.onEvent(.ShowGameInput())
+				} label: {
+					Text("back_to_game")
+				}
 			}
 		}
 	}

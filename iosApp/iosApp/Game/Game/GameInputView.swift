@@ -59,7 +59,7 @@ internal struct GameInputView: View {
 		
 		VStack(spacing: 8) {
 			Text(result.player.name)
-			Text("game_player_result")
+			Text("game_player_result \(result.result)")
 		}
 		.foregroundColor(textColor)
 		.padding(16)

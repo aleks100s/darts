@@ -21,7 +21,7 @@
 "game_goal" = "Game goal";
 "shoot" = "Hit";
 "history" = "History";
-"game_title" = "Game %@, goal is %@";
+"game_title %d %d" = "Game %d, goal is %d";
 "games" = "Games";
 "turn_is_over" = "Your turn is over";
 "proceed_to_the_next_turn" = "Your result is %@\nProceed to the next turn?";
@@ -66,7 +66,7 @@
 "game_goal_value" = "Game goal %@";
 "game_recap" = "Game recap";
 "average_set_recap" = "Average turn";
-"game_player_result" = "Reminder: %@";
+"game_player_result %d" = "Reminder: %d";
 "view_turn" = "View turn";
 "delete_player" = "Delete player and all related games";
 "player_data_will_be_lost" = "Player data will be lost";

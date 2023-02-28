@@ -10,8 +10,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AndroidPlayerListViewModel @Inject constructor(
-    getPlayersUseCase: GetPlayersUseCase,
-    savedStateHandle: SavedStateHandle
+    getPlayersUseCase: GetPlayersUseCase
 ): ViewModel() {
     private val viewModel by lazy {
         PlayerListViewModel(getPlayersUseCase, viewModelScope)

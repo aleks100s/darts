@@ -23,14 +23,12 @@ fun StatisticPlayersListView(
             modifier = Modifier
                 .fillMaxSize()
         ) {
-            allPlayersValue?.let { allPlayersValue ->
-                item {
-                    DoubleSelectableItem(
-                        leftText = allPlayersValue.first,
-                        rightText = allPlayersValue.second
-                    ) {
-                        onAllPlayersValueClick()
-                    }
+            item {
+                DoubleSelectableItem(
+                    leftText = allPlayersValue.first,
+                    rightText = allPlayersValue.second
+                ) {
+                    onAllPlayersValueClick()
                 }
             }
 

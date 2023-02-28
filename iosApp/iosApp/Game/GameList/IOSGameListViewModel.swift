@@ -3,6 +3,7 @@ import Foundation
 
 @MainActor
 internal final class IOSGameListViewModel: ObservableObject {
+	@Published var isDeleteGameDialogShown = false
 	@Published var state = GameListState(games: [], isDeleteGameDialogShown: false, gameToDelete: nil)
 	
 	private let viewModel: GameListViewModel
@@ -27,6 +28,7 @@ internal final class IOSGameListViewModel: ObservableObject {
 			.subscribe { [weak self] state in
 				guard let state else { return }
 				self?.state = state
+				self?.isDeleteGameDialogShown = state.isDeleteGameDialogShown
 			}
 	}
 	

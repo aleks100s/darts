@@ -12,6 +12,23 @@ internal struct GameListView: View {
 						viewModel.select(game: game)
 					}
 			}
+			.onDelete { indexSet in
+				let game = viewModel.state.games[indexSet.first!]
+				viewModel.onEvent(.ShowDeleteGameDialog(game: game))
+			}
+		}
+		.alert("delete_game", isPresented: $viewModel.isDeleteGameDialogShown) {
+			Button {
+				viewModel.onEvent(.DeleteGame())
+			} label: {
+				Text("delete")
+			}
+			
+			Button {
+				viewModel.onEvent(.HideDeleteGameDialog())
+			} label: {
+				Text("cancel")
+			}
 		}
 			.onAppear {
 				viewModel.startObserving()

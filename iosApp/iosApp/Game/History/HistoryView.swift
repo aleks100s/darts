@@ -4,7 +4,10 @@ internal struct HistoryView: View {
 	@StateObject var viewModel: IOSHistoryViewModel
 	
 	var body: some View {
-		GameHistoryView()
+		GameHistoryView(
+			gameHistory: viewModel.state.gameHistory,
+			gameGoal: viewModel.state.gameGoal
+		)
 			.onAppear {
 				viewModel.startObserving()
 			}

@@ -16,6 +16,7 @@ internal struct GameInputView: View {
 				inputTable
 			}
 		}
+		.background(Color.background)
 	}
 	
 	@ViewBuilder

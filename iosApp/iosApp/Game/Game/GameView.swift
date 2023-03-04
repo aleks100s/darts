@@ -70,7 +70,10 @@ internal struct GameView: View {
 			)
 		} else {
 			VStack {
-				GameHistoryView()
+				GameHistoryView(
+					gameHistory: viewModel.state.gameHistory,
+					gameGoal: viewModel.state.gameGoal
+				)
 				
 				Button {
 					viewModel.onEvent(.ShowGameInput())
@@ -78,6 +81,7 @@ internal struct GameView: View {
 					Text("back_to_game")
 				}
 			}
+			.background(Color.background)
 		}
 	}
 }

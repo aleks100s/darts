@@ -12,3 +12,7 @@ internal extension Set {
 		}
 	}
 }
+
+extension Set: Identifiable {
+	
+}

@@ -63,7 +63,7 @@
 "smallest_sets" = "Худшие подходы";
 "misses_count" = "Количество промахов";
 "overkill_count" = "Количество переборов";
-"game_goal_value" = "Цель игры %@";
+"game_goal_value %d" = "Цель игры %d";
 "game_recap" = "Результаты игры";
 "average_set_recap" = "Средний подход";
 "game_player_result %d" = "Остаток: %d";

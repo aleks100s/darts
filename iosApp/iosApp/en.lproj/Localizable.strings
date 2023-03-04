@@ -63,7 +63,7 @@
 "smallest_sets" = "Smallest turns";
 "misses_count" = "Number of misses";
 "overkill_count" = "Number of overkills";
-"game_goal_value" = "Game goal %@";
+"game_goal_value %d" = "Game goal %d";
 "game_recap" = "Game recap";
 "average_set_recap" = "Average turn";
 "game_player_result %d" = "Reminder: %d";

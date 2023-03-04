@@ -1,14 +1,15 @@
 import SwiftUI
 
-internal struct Cell: View {
-	let text: String
+internal struct SectionHeader: View {
+	let title: String
 	
 	var body: some View {
 		HStack(alignment: .center) {
-			Text(text)
+			Text(title)
 				.foregroundColor(Color.onSurface)
 		}
-		.padding(.vertical, 12)
 		.frame(maxWidth: .infinity)
+		.padding(.vertical, 8)
+		.background(Color.surface)
 	}
 }

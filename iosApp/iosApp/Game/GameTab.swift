@@ -46,6 +46,8 @@ internal struct GameTab: View {
 					navigationStack.append(.game(players: players, goal: goal))
 				}
 			)
+			.navigationTitle("create_game")
+			.navigationBarTitleDisplayMode(.inline)
 			
 		case let .game(players, goal):
 			GameScene.create(
@@ -60,14 +62,17 @@ internal struct GameTab: View {
 				}
 			)
 				.navigationTitle("game")
+				.navigationBarTitleDisplayMode(.inline)
 				.navigationBarBackButtonHidden()
 			
 		case let .history(game):
 			HistoryScene.create(using: module, game: game)
+				.navigationBarTitleDisplayMode(.inline)
 				.navigationTitle("history")
 			
 		case let .inGameHistory(gameHistory, goal):
 			GameHistoryView(gameHistory: gameHistory, gameGoal: goal)
+				.navigationBarTitleDisplayMode(.inline)
 				.navigationTitle("history")
 		}
 	}

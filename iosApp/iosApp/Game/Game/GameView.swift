@@ -58,30 +58,14 @@ internal struct GameView: View {
 	
 	@ViewBuilder
 	private var gameView: some View {
-		if viewModel.state.isInputVisible {
-			GameInputView(
-				state: viewModel.state,
-				onInputClick: { sector in
-					viewModel.onEvent(.MakeShot(sector: sector))
-				},
-				onPlayerClick: {
-					viewModel.onEvent(.HideGameInput())
-				}
-			)
-		} else {
-			VStack {
-				GameHistoryView(
-					gameHistory: viewModel.state.gameHistory,
-					gameGoal: viewModel.state.gameGoal
-				)
-				
-				Button {
-					viewModel.onEvent(.ShowGameInput())
-				} label: {
-					Text("back_to_game")
-				}
+		GameInputView(
+			state: viewModel.state,
+			onInputClick: { sector in
+				viewModel.onEvent(.MakeShot(sector: sector))
+			},
+			onPlayerClick: {
+				viewModel.showGameHistory()
 			}
-			.background(Color.background)
-		}
+		)
 	}
 }

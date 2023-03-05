@@ -6,7 +6,8 @@ internal enum GameScene {
 		using module: AppModule,
 		players: [Player],
 		goal: Int32,
-		onGameFinished: @escaping () -> Void
+		onGameFinished: @escaping () -> Void,
+		onShowInGameHistory: @escaping ([PlayerHistory], Int32) -> Void
 	) -> some View {
 		let saveGameHistoryUseCase = SaveGameHistoryUseCase(dataSource: module.gameDataSource)
 		let gameManager = GameManager(
@@ -14,7 +15,11 @@ internal enum GameScene {
 			players: players,
 			goal: goal
 		)
-		let viewModel = IOSGameViewModel(gameManager: gameManager, onGameFinished: onGameFinished)
+		let viewModel = IOSGameViewModel(
+			gameManager: gameManager,
+			onGameFinished: onGameFinished,
+			onShowInGameHistory: onShowInGameHistory
+		)
 		return GameView(viewModel: viewModel)
 	}
 }

@@ -16,10 +16,16 @@ internal final class IOSGameViewModel: ObservableObject {
 	
 	private let viewModel: GameViewModel
 	private let onGameFinished: () -> Void
+	private let onShowInGameHistory: ([PlayerHistory], Int32) -> Void
 	private var handle: DisposableHandle?
 	
-	init(gameManager: GameManager, onGameFinished: @escaping () -> Void) {
+	init(
+		gameManager: GameManager,
+		onGameFinished: @escaping () -> Void,
+		onShowInGameHistory: @escaping ([PlayerHistory], Int32) -> Void
+	) {
 		self.onGameFinished = onGameFinished
+		self.onShowInGameHistory = onShowInGameHistory
 		viewModel = GameViewModel(
 			gameManager: gameManager,
 			coroutineScope: nil
@@ -28,6 +34,10 @@ internal final class IOSGameViewModel: ObservableObject {
 	
 	func finishGame() {
 		onGameFinished()
+	}
+	
+	func showGameHistory() {
+		onShowInGameHistory(state.gameHistory, state.gameGoal)
 	}
 	
 	func startObserving() {

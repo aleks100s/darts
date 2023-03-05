@@ -61,6 +61,7 @@ internal struct GameTab: View {
 					navigationStack.append(.inGameHistory(gameHistory: history, goal: goal))
 				}
 			)
+				.toolbar(.hidden, for: .tabBar)
 				.navigationTitle("game")
 				.navigationBarTitleDisplayMode(.inline)
 				.navigationBarBackButtonHidden()

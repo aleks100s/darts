@@ -47,6 +47,13 @@ internal struct GameView: View {
 						Text("leave")
 					}
 				}
+				ToolbarItem(placement: .navigationBarTrailing) {
+					Button {
+						viewModel.onEvent(.EraseHit())
+					} label: {
+						Text("erase_hit")
+					}
+				}
 			}
 			.onAppear {
 				viewModel.startObserving()

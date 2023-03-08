@@ -15,8 +15,8 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.alextos.darts.android.R
 import com.alextos.darts.android.common.util.toStringNavArgument
-import com.alextos.darts.android.common.presentation.screens.darts.AndroidDartsViewModel
-import com.alextos.darts.android.common.presentation.screens.darts.DartsScreen
+import com.alextos.darts.android.common.presentation.screens.DartsScreen
+import com.alextos.darts.android.common.util.toShots
 import com.alextos.darts.android.navigation.game.GameRoute
 import com.alextos.darts.android.statistics.average_values.AndroidAverageValuesViewModel
 import com.alextos.darts.android.statistics.average_values.AverageValuesScreen
@@ -33,7 +33,6 @@ import com.alextos.darts.android.statistics.shot_distribution.ShotDistributionSc
 import com.alextos.darts.android.statistics.statistics.StatisticsScreen
 import com.alextos.darts.android.statistics.victory_distribution.AndroidVictoryDistributionViewModel
 import com.alextos.darts.android.statistics.victory_distribution.VictoryDistributionScreen
-import com.alextos.darts.game.presentation.darts.DartsState
 import com.alextos.darts.statistics.presentation.average_values.AverageValuesState
 import com.alextos.darts.statistics.presentation.best_set.BestSetEvent
 import com.alextos.darts.statistics.presentation.best_set.BestSetState
@@ -240,10 +239,10 @@ fun StatisticsNavigationRoot() {
                     type = NavType.StringType
                 }
             )
-        ) {
-            val viewModel: AndroidDartsViewModel = hiltViewModel()
-            val state by viewModel.state.collectAsState(initial = DartsState())
-            DartsScreen(state = state)
+        ) { backStackEntry ->
+            val turns = backStackEntry.arguments?.getString("turns")?.toShots() ?: listOf()
+            val currentPage = backStackEntry.arguments?.getString("currentPage")?.toInt() ?: 0
+            DartsScreen(turns, currentPage)
         }
     }
 }

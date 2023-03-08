@@ -21,8 +21,8 @@ import com.alextos.darts.android.game.create_game.AndroidCreateGameViewModel
 import com.alextos.darts.android.game.create_game.CreateGameScreen
 import com.alextos.darts.android.game.create_player.AndroidCreatePlayerViewModel
 import com.alextos.darts.android.game.create_player.CreatePlayerScreen
-import com.alextos.darts.android.common.presentation.screens.darts.AndroidDartsViewModel
-import com.alextos.darts.android.common.presentation.screens.darts.DartsScreen
+import com.alextos.darts.android.common.presentation.screens.DartsScreen
+import com.alextos.darts.android.common.util.toShots
 import com.alextos.darts.android.game.game.AndroidGameViewModel
 import com.alextos.darts.android.game.game.GameScreen
 import com.alextos.darts.android.game.game_list.AndroidGameListViewModel
@@ -33,7 +33,6 @@ import com.alextos.darts.game.presentation.create_game.CreateGameEvent
 import com.alextos.darts.game.presentation.create_game.CreateGameState
 import com.alextos.darts.game.presentation.create_player.CreatePlayerEvent
 import com.alextos.darts.game.presentation.create_player.CreatePlayerState
-import com.alextos.darts.game.presentation.darts.DartsState
 import com.alextos.darts.game.presentation.game.GameEvent
 import com.alextos.darts.game.presentation.game.GameState
 import com.alextos.darts.game.presentation.game_list.GameListEvent
@@ -217,10 +216,10 @@ fun GameNavigationRoot() {
                     type = NavType.StringType
                 }
             )
-        ) {
-            val viewModel: AndroidDartsViewModel = hiltViewModel()
-            val state by viewModel.state.collectAsState(initial = DartsState())
-            DartsScreen(state = state)
+        ) { backStackEntry ->
+            val turns = backStackEntry.arguments?.getString("turns")?.toShots() ?: listOf()
+            val currentPage = backStackEntry.arguments?.getString("currentPage")?.toInt() ?: 0
+            DartsScreen(turns = turns, currentPage = currentPage)
         }
     }
 }

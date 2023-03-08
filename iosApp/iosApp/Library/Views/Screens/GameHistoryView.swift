@@ -3,9 +3,11 @@ import SwiftUIPager
 import shared
 
 internal struct GameHistoryView: View {
-	@StateObject var page: Page = .first()
 	let gameHistory: [PlayerHistory]
 	let gameGoal: Int32
+	let onTurnSelected: (Set) -> Void
+	
+	@StateObject var page: Page = .first()
 	
 	var body: some View {
 		Pager(
@@ -13,7 +15,11 @@ internal struct GameHistoryView: View {
 			data: gameHistory,
 			id: \.player.id,
 			content: { playerHistory in
-				PlayerHistoryView(playerHistory: playerHistory, gameGoal: gameGoal)
+				PlayerHistoryView(
+					playerHistory: playerHistory,
+					gameGoal: gameGoal,
+					onTurnSelected: onTurnSelected
+				)
 			}
 		)
 	}

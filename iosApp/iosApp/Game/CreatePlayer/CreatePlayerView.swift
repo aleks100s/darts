@@ -14,6 +14,7 @@ internal struct CreatePlayerView: View {
 			}
 			.disabled(playerName.count < 3)
 		}
+		.padding()
 			.onAppear {
 				viewModel.startObserving()
 			}

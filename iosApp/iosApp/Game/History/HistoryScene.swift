@@ -4,7 +4,8 @@ import shared
 internal enum HistoryScene {
 	static func create(
 		using module: AppModule,
-		game: Game
+		game: Game,
+		onTurnSelected: @escaping (Set) -> Void
 	) -> some View {
 		let getGameHistoryUseCase = GetGameHistoryUseCase(dataSource: module.gameDataSource)
 		let viewModel = HistoryViewModel(
@@ -14,7 +15,7 @@ internal enum HistoryScene {
 		   gameGoal: game.gameGoal,
 		   players: game.players
 		)
-		let iOSViewModel = IOSHistoryViewModel(viewModel: viewModel)
+		let iOSViewModel = IOSHistoryViewModel(viewModel: viewModel, onTurnSelected: onTurnSelected)
 		return HistoryView(viewModel: iOSViewModel)
 	}
 }

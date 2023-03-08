@@ -49,6 +49,7 @@
 		27D659ED29B3B97E00A921C6 /* PlayerHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D659EC29B3B97E00A921C6 /* PlayerHistoryView.swift */; };
 		27D659F029B3BC0800A921C6 /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D659EF29B3BC0800A921C6 /* SectionHeader.swift */; };
 		27D659F529B493DD00A921C6 /* DartsBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D659F429B493DD00A921C6 /* DartsBoard.swift */; };
+		27D659F729B91E0400A921C6 /* DartsBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D659F629B91E0400A921C6 /* DartsBoardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -107,6 +108,7 @@
 		27D659EC29B3B97E00A921C6 /* PlayerHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerHistoryView.swift; sourceTree = "<group>"; };
 		27D659EF29B3BC0800A921C6 /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
 		27D659F429B493DD00A921C6 /* DartsBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DartsBoard.swift; sourceTree = "<group>"; };
+		27D659F629B91E0400A921C6 /* DartsBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DartsBoardView.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -247,6 +249,7 @@
 			children = (
 				27D659EC29B3B97E00A921C6 /* PlayerHistoryView.swift */,
 				27CF107C29AB952400174D02 /* GameHistoryView.swift */,
+				27D659F629B91E0400A921C6 /* DartsBoardView.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -408,6 +411,7 @@
 				27D659F029B3BC0800A921C6 /* SectionHeader.swift in Sources */,
 				27CF107729A8BBC800174D02 /* IOSGameViewModel.swift in Sources */,
 				279827D5298E65A600D497F2 /* ContentView.swift in Sources */,
+				27D659F729B91E0400A921C6 /* DartsBoardView.swift in Sources */,
 				279827CE298E655A00D497F2 /* GameTab.swift in Sources */,
 				279827EB29A7CDCE00D497F2 /* CreatePlayerScene.swift in Sources */,
 				279827D3298E657600D497F2 /* Navigation.swift in Sources */,

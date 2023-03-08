@@ -4,6 +4,7 @@ import shared
 internal struct PlayerHistoryView: View {
 	let playerHistory: PlayerHistory
 	let gameGoal: Int32
+	let onTurnSelected: (Set) -> Void
 	
 	var body: some View {
 		VStack(spacing: 0) {
@@ -12,7 +13,7 @@ internal struct PlayerHistoryView: View {
 			PlayerHistoryHeader()
 			ForEach(playerHistory.turns) { turn in
 				TurnItem(turn: turn, shotsLeft: Int(turn.shotsLeft())) {
-					print("show turn")
+					onTurnSelected(turn)
 				}
 			}
 				.background(Color.background)

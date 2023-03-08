@@ -15,6 +15,7 @@ internal struct GameInputView: View {
 			ScrollView {
 				inputTable
 			}
+			.background(Color.background)
 		}
 	}
 	
@@ -36,42 +37,53 @@ internal struct GameInputView: View {
 		results: [GamePlayerResult],
 		onClick: @escaping () -> Void
 	) -> some View {
-		ScrollView(.horizontal) {
-			HStack(spacing: 0) {
-				ForEach(results) { result in
-					gamePlayerItem(
-						result: result,
-						onClick: onClick
-					)
+		GeometryReader { geometry in
+			let width = geometry.size.width
+			let itemWidth = results.count < 4 ? width / CGFloat(results.count) : width / 3
+			
+			ScrollView(.horizontal) {
+				HStack(spacing: 0) {
+					ForEach(results) { result in
+						gamePlayerItem(
+							result: result,
+							itemWidth: itemWidth,
+							onClick: onClick
+						)
+					}
 				}
 			}
+			.scrollIndicators(.hidden)
 		}
-		.scrollIndicators(.hidden)
+		.frame(height: 80)
 	}
 	
 	@ViewBuilder
 	private func gamePlayerItem(
 		result: GamePlayerResult,
+		itemWidth: CGFloat,
 		onClick: @escaping () -> Void
 	) -> some View {
 		let backgroundColor = result.isCurrentPlayer ? Color.secondary : Color.surface
 		let textColor = result.isCurrentPlayer ? Color.onSecondary : Color.onSurface
 		
-		VStack(spacing: 8) {
-			Text(result.player.name)
-			Text("game_player_result \(result.result)")
-		}
-		.foregroundColor(textColor)
-		.padding(16)
-		.background(backgroundColor)
-		.onTapGesture {
+		Button {
 			onClick()
+		} label: {
+			VStack(spacing: 8) {
+				Text(result.player.name)
+				Text("game_player_result \(result.result)")
+			}
+			.padding(16)
+			.frame(minWidth: itemWidth)
+			.background(backgroundColor)
 		}
+		.tint(textColor)
 	}
 	
 	@ViewBuilder
 	private func currentTurn(turn: Set) -> some View {
 		TurnItem(turn: turn, shotsLeft: Int(turn.shotsLeft()), onSelect: {})
+			.background(Color.background)
 	}
 	
 	@ViewBuilder
@@ -92,7 +104,6 @@ internal struct GameInputView: View {
 				InputRow(sectors: sectors, onInputClick: onInputClick)
 			}
 			.listRowSeparator(.hidden)
-			.background(Color.background)
 		}
 	}
 	
@@ -117,15 +128,16 @@ internal struct GameInputView: View {
 		sector: Sector,
 		onInputClick: @escaping () -> ()
 	) -> some View {
-		HStack(alignment: .center) {
-			Text(sector.uiString())
-				.foregroundColor(sector.textColor)
-		}
-		.padding(.vertical, 12)
-		.frame(maxWidth: .infinity)
-		.background(sector.backgroundColor)
-		.onTapGesture {
+		Button {
 			onInputClick()
+		} label: {
+			HStack(alignment: .center) {
+				Text(sector.uiString())
+			}
+			.padding(.vertical, 12)
+			.frame(maxWidth: .infinity)
+			.background(sector.backgroundColor)
 		}
+		.tint(sector.textColor)
 	}
 }

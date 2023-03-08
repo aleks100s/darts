@@ -6,7 +6,8 @@ internal struct HistoryView: View {
 	var body: some View {
 		GameHistoryView(
 			gameHistory: viewModel.state.gameHistory,
-			gameGoal: viewModel.state.gameGoal
+			gameGoal: viewModel.state.gameGoal,
+			onTurnSelected: viewModel.select
 		)
 			.onAppear {
 				viewModel.startObserving()

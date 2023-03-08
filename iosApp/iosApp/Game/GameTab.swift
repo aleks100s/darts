@@ -67,14 +67,31 @@ internal struct GameTab: View {
 				.navigationBarBackButtonHidden()
 			
 		case let .history(game):
-			HistoryScene.create(using: module, game: game)
+			HistoryScene.create(
+				using: module,
+				game: game,
+				onTurnSelected: { turn in
+					navigationStack.append(.darts(turn))
+				}
+			)
 				.navigationBarTitleDisplayMode(.inline)
 				.navigationTitle("history")
 			
 		case let .inGameHistory(gameHistory, goal):
-			GameHistoryView(gameHistory: gameHistory, gameGoal: goal)
+			GameHistoryView(
+				gameHistory: gameHistory,
+				gameGoal: goal,
+				onTurnSelected: { turn in
+					navigationStack.append(.darts(turn))
+				}
+			)
 				.navigationBarTitleDisplayMode(.inline)
 				.navigationTitle("history")
+			
+		case let .darts(turn):
+			DartsBoardView(turn: turn)
+				.navigationBarTitleDisplayMode(.inline)
+				.navigationTitle("view_turn")
 		}
 	}
 }

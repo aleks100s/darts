@@ -20,14 +20,14 @@ internal struct GameView: View {
 					Text("next_turn")
 				}
 				
-				Button {
+				Button(role: .destructive) {
 					viewModel.onEvent(.ResetCurrentTurn())
 				} label: {
 					Text("reset_turn")
 				}
 			}
 			.alert("leave_game", isPresented: $viewModel.isCloseGameDialogShown) {
-				Button {
+				Button(role: .destructive) {
 					viewModel.finishGame()
 				} label: {
 					Text("leave")
@@ -41,7 +41,7 @@ internal struct GameView: View {
 			}
 			.toolbar {
 				ToolbarItem(placement: .navigationBarLeading) {
-					Button {
+					Button(role: .destructive) {
 						viewModel.onEvent(.BackButtonPressed())
 					} label: {
 						Text("leave")

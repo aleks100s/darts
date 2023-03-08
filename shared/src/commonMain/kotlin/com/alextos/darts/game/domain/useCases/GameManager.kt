@@ -72,7 +72,7 @@ class GameManager(
         }
     }
 
-    fun eraseTurn() {
+    fun eraseShot() {
         currentEvaluateShotUseCase().eraseShot()
         currentTrackUseCaseUseCase().eraseShot()
     }

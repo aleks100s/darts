@@ -60,7 +60,7 @@ class GameViewModel(
                 gameManager.changeTurn()
             }
             is GameEvent.EraseHit -> {
-                gameManager.eraseTurn()
+                gameManager.eraseShot()
             }
             else -> {}
         }

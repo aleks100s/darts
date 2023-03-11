@@ -8,11 +8,8 @@ import com.alextos.darts.statistics.domain.models.PlayerVictoryDistribution
 import com.alextos.darts.statistics.domain.models.ShotDistribution
 
 interface StatisticsDataSource {
-    fun getBestSet(): Set?
     fun getPlayerBestSet(player: Player): Set?
-    fun getMostFrequentShots(): List<Shot>
     fun getPlayerMostFrequentShots(player: Player): List<Shot>
-    fun getBiggestFinalSet(): Set?
     fun getPlayerBiggestFinalSet(player: Player): Set?
     fun getAverageSetScore(): Double?
     fun getPlayerAverageSetScore(player: Player): Double?

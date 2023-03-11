@@ -42,9 +42,6 @@
     <string name="game">Game</string>
     <string name="statistics">Statistics</string>
     <string name="arrow_right_description">Show</string>
-    <string name="best_set_of_all_players">Best turn of all players</string>
-    <string name="most_frequent_shots_of_all_players">Most frequent hits of all players</string>
-    <string name="biggest_final_set_of_all_players">Biggest final turn of all players</string>
     <string name="player">Player</string>
     <string name="average_set">Avg. turn</string>
     <string name="average_shot">Avg. hit</string>

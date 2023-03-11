@@ -84,15 +84,6 @@ fun StatisticsNavigationRoot() {
             val state by viewModel.state.collectAsState(initial = BestSetState())
             BestSetScreen(state = state) { event ->
                 when(event) {
-                    is BestSetEvent.ShowBestSetOfAll -> {
-                        navController.navigate(
-                            route = StatisticsRoute.Darts.routeWithArgs(
-                                listOf(event.set).map { set ->
-                                    set.shots.map { it.sector }
-                                }.toStringNavArgument()
-                            )
-                        )
-                    }
                     is BestSetEvent.ShowBestSetOfPlayer -> {
                         val route = StatisticsRoute.Darts.routeWithArgs(
                             listOf(event.set).map { set ->
@@ -112,13 +103,6 @@ fun StatisticsNavigationRoot() {
             val state by viewModel.state.collectAsState(initial = MostFrequentShotsState())
             MostFrequentShotsScreen(state = state) { event ->
                 when (event) {
-                    is MostFrequentShotsEvent.ShowMostFrequentShotsOfAll -> {
-                        navController.navigate(
-                            StatisticsRoute.Darts.routeWithArgs(
-                                listOf(event.shots.map { it.sector }).toStringNavArgument()
-                            )
-                        )
-                    }
                     is MostFrequentShotsEvent.ShowPlayerMostFrequentShots -> {
                         navController.navigate(
                             StatisticsRoute.Darts.routeWithArgs(
@@ -135,15 +119,6 @@ fun StatisticsNavigationRoot() {
             val state by viewModel.state.collectAsState(initial = BiggestFinalSetState())
             BiggestFinalSetScreen(state = state) { event ->
                 when (event) {
-                    is BiggestFinalSetEvent.ShowBiggestFinalSetOfAll -> {
-                        navController.navigate(
-                            route = StatisticsRoute.Darts.routeWithArgs(
-                                listOf(event.set).map { set ->
-                                    set.shots.map { it.sector }
-                                }.toStringNavArgument()
-                            )
-                        )
-                    }
                     is BiggestFinalSetEvent.ShowBiggestFinalSetOfPlayer -> {
                         navController.navigate(
                             route = StatisticsRoute.Darts.routeWithArgs(

@@ -15,11 +15,8 @@ import com.alextos.darts.statistics.domain.StatisticsDataSource
 import com.alextos.darts.statistics.domain.use_cases.average_values.GetAverageSetScoreUseCase
 import com.alextos.darts.statistics.domain.use_cases.average_values.GetAverageShotValueUseCase
 import com.alextos.darts.statistics.domain.use_cases.average_values.GetPlayersAverageValuesUseCase
-import com.alextos.darts.statistics.domain.use_cases.best_set.GetBestSetUseCase
 import com.alextos.darts.statistics.domain.use_cases.best_set.GetPlayersBestSetsUseCase
-import com.alextos.darts.statistics.domain.use_cases.biggest_final_set.GetBiggestFinalSetUseCase
 import com.alextos.darts.statistics.domain.use_cases.biggest_final_set.GetPlayersBiggestFinalSetUseCase
-import com.alextos.darts.statistics.domain.use_cases.most_frequent_shots.GetMostFrequentShotsUseCase
 import com.alextos.darts.statistics.domain.use_cases.most_frequent_shots.GetPlayersMostFrequentShotsUseCase
 import com.alextos.darts.statistics.domain.use_cases.shot_distribution.GetPlayerShotDistributionUseCase
 import com.alextos.darts.statistics.domain.use_cases.victory_distribution.GetPlayerVictoryDistributionUseCase
@@ -95,32 +92,14 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideGetBestSetUseCase(dataSource: StatisticsDataSource): GetBestSetUseCase {
-        return GetBestSetUseCase(dataSource)
-    }
-
-    @Provides
-    @Singleton
     fun provideGetPlayersBestSetsUseCase(dataSource: StatisticsDataSource): GetPlayersBestSetsUseCase {
         return GetPlayersBestSetsUseCase(dataSource)
     }
 
     @Provides
     @Singleton
-    fun provideGetMostFrequentShotsUseCase(dataSource: StatisticsDataSource): GetMostFrequentShotsUseCase {
-        return GetMostFrequentShotsUseCase(dataSource)
-    }
-
-    @Provides
-    @Singleton
     fun provideGetPlayersMostFrequentShotsUseCase(dataSource: StatisticsDataSource): GetPlayersMostFrequentShotsUseCase {
         return GetPlayersMostFrequentShotsUseCase(dataSource)
-    }
-
-    @Provides
-    @Singleton
-    fun provideGetBiggestFinalSetUseCase(dataSource: StatisticsDataSource): GetBiggestFinalSetUseCase {
-        return GetBiggestFinalSetUseCase(dataSource)
     }
 
     @Provides

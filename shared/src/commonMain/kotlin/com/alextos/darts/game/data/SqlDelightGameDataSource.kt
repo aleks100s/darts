@@ -86,7 +86,7 @@ class SqlDelightGameDataSource(
     }
 
     override fun deleteGame(game: Game) {
-        game.id?.let {gameId ->
+        game.id?.let { gameId ->
             queries.getGameSets(gameId).executeAsList()
                 .forEach {
                     queries.deleteShots(it.id)

@@ -15,19 +15,12 @@ fun BestSetScreen(
     onEvent: (BestSetEvent) -> Unit
 ) {
     Screen(title = stringResource(id = R.string.best_set_statistics)) {
-        val score = state.bestSetOfAll?.score()
-        if (score == null) {
+        if (state.playersBestSets.isEmpty()) {
             NoDataView()
         } else {
             StatisticPlayersListView(
-                allPlayersValue = stringResource(id = R.string.best_set_of_all_players).uppercase() to score.toString(),
                 values = state.playersBestSets.map { set ->
                     set.player to set.set.score().toString()
-                },
-                onAllPlayersValueClick = {
-                    state.bestSetOfAll?.let {
-                        onEvent(BestSetEvent.ShowBestSetOfAll(it))
-                    }
                 },
                 onValueClick = { index ->
                     onEvent(BestSetEvent.ShowBestSetOfPlayer(state.playersBestSets[index].set))

@@ -32,8 +32,14 @@ class SqlDelightPlayersDataSource(
             .executeAsList()
             .mapToGames()
         games.forEach { game ->
-            game.id?.let {
-                queries.deleteGame(it)
+            game.id?.let { gameId ->
+                queries.getGameSets(gameId).executeAsList()
+                    .forEach {
+                        queries.deleteShots(it.id)
+                    }
+                queries.deleteSet(gameId)
+                queries.deleteGamePlayer(gameId)
+                queries.deleteGame(gameId)
             }
         }
         queries.deletePlayer(player.id)

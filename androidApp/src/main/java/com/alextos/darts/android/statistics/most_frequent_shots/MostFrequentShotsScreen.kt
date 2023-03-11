@@ -18,17 +18,9 @@ fun MostFrequentShotsScreen(
         if (state.mostFrequentShots.isEmpty()) {
             NoDataView()
         } else {
-            val allPlayersValue = stringResource(id = R.string.most_frequent_shots_of_all_players).uppercase() to ""
-
             StatisticPlayersListView(
-                allPlayersValue = allPlayersValue,
                 values = state.mostFrequentShots.map { shots ->
                     shots.player to ""
-                },
-                onAllPlayersValueClick = {
-                    if (state.mostFrequentShots.isNotEmpty()) {
-                        onEvent(MostFrequentShotsEvent.ShowMostFrequentShotsOfAll(state.mostFrequentShotsOfAll))
-                    }
                 },
                 onValueClick = { index ->
                     onEvent(MostFrequentShotsEvent.ShowPlayerMostFrequentShots(state.mostFrequentShots[index].shots))

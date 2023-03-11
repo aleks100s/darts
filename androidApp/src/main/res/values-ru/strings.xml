@@ -42,9 +42,6 @@
     <string name="game">Игра</string>
     <string name="statistics">Статистика</string>
     <string name="arrow_right_description">Показать</string>
-    <string name="best_set_of_all_players">Лучший подход среди игроков</string>
-    <string name="most_frequent_shots_of_all_players">Самые частые сектора среди игроков</string>
-    <string name="biggest_final_set_of_all_players">Самая большая добивка среди игроков</string>
     <string name="player">Игрок</string>
     <string name="average_set">Средний подход</string>
     <string name="average_shot">Средний бросок</string>

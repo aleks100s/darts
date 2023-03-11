@@ -4,6 +4,5 @@ import com.alextos.darts.core.domain.Shot
 import com.alextos.darts.statistics.domain.models.StatisticsShots
 
 data class MostFrequentShotsState(
-    val mostFrequentShotsOfAll: List<Shot> = listOf(),
     val mostFrequentShots: List<StatisticsShots> = listOf()
 )

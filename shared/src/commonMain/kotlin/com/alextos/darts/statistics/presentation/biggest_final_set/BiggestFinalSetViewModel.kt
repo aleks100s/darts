@@ -2,7 +2,6 @@ package com.alextos.darts.statistics.presentation.biggest_final_set
 
 import com.alextos.darts.core.util.toCommonFlow
 import com.alextos.darts.core.domain.GetPlayersUseCase
-import com.alextos.darts.statistics.domain.use_cases.biggest_final_set.GetBiggestFinalSetUseCase
 import com.alextos.darts.statistics.domain.use_cases.biggest_final_set.GetPlayersBiggestFinalSetUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -10,7 +9,6 @@ import kotlinx.coroutines.flow.*
 
 class BiggestFinalSetViewModel(
     getPlayersUseCase: GetPlayersUseCase,
-    getBiggestFinalSetUseCase: GetBiggestFinalSetUseCase,
     getPlayersBiggestFinalSetUseCase: GetPlayersBiggestFinalSetUseCase,
     coroutineScope: CoroutineScope?
 ) {
@@ -22,10 +20,7 @@ class BiggestFinalSetViewModel(
             getPlayersBiggestFinalSetUseCase.execute(players)
         }
         .combine(_state) { playersSets, state ->
-            state.copy(
-                biggestFinalSetOfAll = getBiggestFinalSetUseCase.execute(),
-                playersBiggestFinalSets = playersSets
-            )
+            state.copy(playersBiggestFinalSets = playersSets)
         }
         .stateIn(
             viewModelScope,

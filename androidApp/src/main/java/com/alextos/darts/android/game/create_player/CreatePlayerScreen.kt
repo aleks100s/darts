@@ -41,8 +41,10 @@ fun CreatePlayerScreen(
             modifier = Modifier.fillMaxWidth(),
             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
             keyboardActions = KeyboardActions(onDone = {
-                onEvent(CreatePlayerEvent.SavePlayer(state.name))
-                keyboardController?.hide()
+                if (state.isNameValid()) {
+                    onEvent(CreatePlayerEvent.SavePlayer(state.name))
+                    keyboardController?.hide()
+                }
             })
         )
 

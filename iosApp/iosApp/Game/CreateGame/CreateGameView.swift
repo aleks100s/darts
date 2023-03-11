@@ -39,7 +39,10 @@ internal struct CreateGameView: View {
 			TextField("enter_new_player_name", text: $newPlayerName)
 			
 			Button {
-				viewModel.onEvent(.SavePlayer(name: newPlayerName))
+				if newPlayerName.trimmingCharacters(in: .whitespacesAndNewlines).count > 2 {
+					viewModel.createPlayer(name: newPlayerName)
+					newPlayerName = ""
+				}
 			} label: {
 				Text("create_player")
 			}

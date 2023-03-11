@@ -12,11 +12,13 @@ internal final class IOSCreateGameViewModel: ObservableObject {
 		playerToDelete: nil,
 		isDeletePlayerDialogShown: false
 	)
+	@Published var createPlayerState = CreatePlayerState(name: "", allPlayers: [])
 	
 	private let viewModel: CreateGameViewModel
 	private let createPlayerViewModel: CreatePlayerViewModel
 	private let startGame: ([Player], Int32) -> ()
 	private var handle: DisposableHandle?
+	private var createPlayerHandle: DisposableHandle?
 	
 	init(
 		viewModel: CreateGameViewModel,
@@ -39,6 +41,12 @@ internal final class IOSCreateGameViewModel: ObservableObject {
 				self?.state = state
 				self?.isDeletePlayerDialogShown = state.isDeletePlayerDialogShown
 			}
+		
+		createPlayerHandle = createPlayerViewModel.state
+			.subscribe { [weak self] state in
+				guard let state else { return }
+				self?.createPlayerState = state
+			}
 	}
 	
 	func onEvent(_ event: CreateGameEvent) {
@@ -51,15 +59,20 @@ internal final class IOSCreateGameViewModel: ObservableObject {
 		}
 	}
 	
-	func onEvent(_ event: CreatePlayerEvent) {
-		createPlayerViewModel.onEvent(event: event)
+	func createPlayer(name: String) {
+		let name = name.trimmingCharacters(in: .whitespacesAndNewlines)
+		if !createPlayerState.allPlayers.map(\.name).contains(name), name.count > 2 {
+			createPlayerViewModel.onEvent(event: .SavePlayer(name: name))
+		}
 	}
 	
 	func dispose() {
 		handle?.dispose()
+		createPlayerHandle?.dispose()
 	}
 	
 	deinit {
 		handle?.dispose()
+		createPlayerHandle?.dispose()
 	}
 }

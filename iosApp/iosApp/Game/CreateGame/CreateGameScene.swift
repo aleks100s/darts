@@ -17,6 +17,7 @@ internal enum CreateGameScene {
 		let createPlayerUseCase = CreatePlayerUseCase(dataSource: module.playerDataSource)
 		let createPlayerViewModel = CreatePlayerViewModel(
 			createPlayerUseCase: createPlayerUseCase,
+			getPlayersUseCase: getPlayersUseCase,
 			coroutineScope: nil
 		)
 		let viewModel = IOSCreateGameViewModel(

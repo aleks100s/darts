@@ -1,9 +1,9 @@
 package com.alextos.darts.game.domain.useCases
 
-import com.alextos.darts.game.domain.GameDataSource
+import com.alextos.darts.core.domain.PlayersDataSource
 
 class CreatePlayerUseCase(
-    private val dataSource: GameDataSource
+    private val dataSource: PlayersDataSource
 ) {
 
     fun execute(name: String) {

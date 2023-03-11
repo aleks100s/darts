@@ -21,9 +21,6 @@
 		279827E229A7CD9700D497F2 /* CreateGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279827E129A7CD9700D497F2 /* CreateGameView.swift */; };
 		279827E429A7CD9F00D497F2 /* CreateGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279827E329A7CD9F00D497F2 /* CreateGameScene.swift */; };
 		279827E629A7CDB100D497F2 /* IOSCreateGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279827E529A7CDB100D497F2 /* IOSCreateGameViewModel.swift */; };
-		279827E929A7CDC500D497F2 /* CreatePlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279827E829A7CDC500D497F2 /* CreatePlayerView.swift */; };
-		279827EB29A7CDCE00D497F2 /* CreatePlayerScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279827EA29A7CDCE00D497F2 /* CreatePlayerScene.swift */; };
-		279827ED29A7CDE100D497F2 /* IOSCreatePlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279827EC29A7CDE100D497F2 /* IOSCreatePlayerViewModel.swift */; };
 		279827EF29A7D50A00D497F2 /* Player+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279827EE29A7D50A00D497F2 /* Player+Extensions.swift */; };
 		279827F129A7D5C100D497F2 /* KotlinInt+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279827F029A7D5C100D497F2 /* KotlinInt+Extensions.swift */; };
 		27CF107329A8BBB600174D02 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CF107229A8BBB600174D02 /* GameScene.swift */; };
@@ -84,9 +81,6 @@
 		279827E129A7CD9700D497F2 /* CreateGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGameView.swift; sourceTree = "<group>"; };
 		279827E329A7CD9F00D497F2 /* CreateGameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGameScene.swift; sourceTree = "<group>"; };
 		279827E529A7CDB100D497F2 /* IOSCreateGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSCreateGameViewModel.swift; sourceTree = "<group>"; };
-		279827E829A7CDC500D497F2 /* CreatePlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePlayerView.swift; sourceTree = "<group>"; };
-		279827EA29A7CDCE00D497F2 /* CreatePlayerScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePlayerScene.swift; sourceTree = "<group>"; };
-		279827EC29A7CDE100D497F2 /* IOSCreatePlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSCreatePlayerViewModel.swift; sourceTree = "<group>"; };
 		279827EE29A7D50A00D497F2 /* Player+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Player+Extensions.swift"; sourceTree = "<group>"; };
 		279827F029A7D5C100D497F2 /* KotlinInt+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KotlinInt+Extensions.swift"; sourceTree = "<group>"; };
 		27CF107229A8BBB600174D02 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -144,9 +138,9 @@
 		279827CC298E655A00D497F2 /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				27D65A0129BC9B2100A921C6 /* DartsBoard */,
 				27CF109829AD2A4700174D02 /* History */,
 				27CF107129A8BBA800174D02 /* Game */,
-				279827E729A7CDB900D497F2 /* CreatePlayer */,
 				279827E029A7CD8800D497F2 /* CreateGame */,
 				279827D9298E6F0300D497F2 /* GameList */,
 				279827CD298E655A00D497F2 /* GameTab.swift */,
@@ -189,16 +183,6 @@
 				279827E529A7CDB100D497F2 /* IOSCreateGameViewModel.swift */,
 			);
 			path = CreateGame;
-			sourceTree = "<group>";
-		};
-		279827E729A7CDB900D497F2 /* CreatePlayer */ = {
-			isa = PBXGroup;
-			children = (
-				279827E829A7CDC500D497F2 /* CreatePlayerView.swift */,
-				279827EA29A7CDCE00D497F2 /* CreatePlayerScene.swift */,
-				279827EC29A7CDE100D497F2 /* IOSCreatePlayerViewModel.swift */,
-			);
-			path = CreatePlayer;
 			sourceTree = "<group>";
 		};
 		27CF107129A8BBA800174D02 /* Game */ = {
@@ -260,10 +244,17 @@
 			children = (
 				27D659EC29B3B97E00A921C6 /* PlayerHistoryView.swift */,
 				27CF107C29AB952400174D02 /* GameHistoryView.swift */,
-				27D659F629B91E0400A921C6 /* DartsBoardView.swift */,
 				27D659F929BC78AA00A921C6 /* GameRecapView.swift */,
 			);
 			path = Screens;
+			sourceTree = "<group>";
+		};
+		27D65A0129BC9B2100A921C6 /* DartsBoard */ = {
+			isa = PBXGroup;
+			children = (
+				27D659F629B91E0400A921C6 /* DartsBoardView.swift */,
+			);
+			path = DartsBoard;
 			sourceTree = "<group>";
 		};
 		7555FF72242A565900829871 = {
@@ -417,7 +408,6 @@
 				279827DF298E723D00D497F2 /* GameListScene.swift in Sources */,
 				27CF109729AD273B00174D02 /* Game+Extensions.swift in Sources */,
 				27CF109E29AD2C9E00174D02 /* HistoryView.swift in Sources */,
-				279827ED29A7CDE100D497F2 /* IOSCreatePlayerViewModel.swift in Sources */,
 				27CF108129AB981700174D02 /* Cell.swift in Sources */,
 				279827E429A7CD9F00D497F2 /* CreateGameScene.swift in Sources */,
 				279827DB298E6F2600D497F2 /* IOSGameListViewModel.swift in Sources */,
@@ -427,10 +417,8 @@
 				279827D5298E65A600D497F2 /* ContentView.swift in Sources */,
 				27D659F729B91E0400A921C6 /* DartsBoardView.swift in Sources */,
 				279827CE298E655A00D497F2 /* GameTab.swift in Sources */,
-				279827EB29A7CDCE00D497F2 /* CreatePlayerScene.swift in Sources */,
 				279827D3298E657600D497F2 /* Navigation.swift in Sources */,
 				279827EF29A7D50A00D497F2 /* Player+Extensions.swift in Sources */,
-				279827E929A7CDC500D497F2 /* CreatePlayerView.swift in Sources */,
 				27CF108329AB99CB00174D02 /* String+Extensions.swift in Sources */,
 				27CF107329A8BBB600174D02 /* GameScene.swift in Sources */,
 				27CF108F29ABA2CE00174D02 /* Set+Extensions.swift in Sources */,

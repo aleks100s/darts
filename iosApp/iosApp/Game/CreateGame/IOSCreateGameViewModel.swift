@@ -2,6 +2,7 @@ import Combine
 import shared
 
 internal final class IOSCreateGameViewModel: ObservableObject {
+	@Published var isCreatePlayerDialogShown = false
 	@Published var isDeletePlayerDialogShown = false
 	@Published var state = CreateGameState(
 		allPlayers: [],
@@ -13,22 +14,17 @@ internal final class IOSCreateGameViewModel: ObservableObject {
 	)
 	
 	private let viewModel: CreateGameViewModel
-	private let createPlayer: () -> ()
+	private let createPlayerViewModel: CreatePlayerViewModel
 	private let startGame: ([Player], Int32) -> ()
 	private var handle: DisposableHandle?
 	
 	init(
-		getPlayersUseCase: GetPlayersUseCase,
-		deletePlayerUseCase: DeletePlayerUseCase,
-		createPlayer: @escaping () -> (),
+		viewModel: CreateGameViewModel,
+		createPlayerViewModel: CreatePlayerViewModel,
 		startGame: @escaping ([Player], Int32) -> ()
 	) {
-		viewModel = CreateGameViewModel(
-			deletePlayerUseCase: deletePlayerUseCase,
-			getPlayersUseCase: getPlayersUseCase,
-			coroutineScope: nil
-		)
-		self.createPlayer = createPlayer
+		self.viewModel = viewModel
+		self.createPlayerViewModel = createPlayerViewModel
 		self.startGame = startGame
 	}
 	
@@ -48,11 +44,15 @@ internal final class IOSCreateGameViewModel: ObservableObject {
 	func onEvent(_ event: CreateGameEvent) {
 		switch event {
 		case .CreatePlayer():
-			createPlayer()
+			isCreatePlayerDialogShown = true
 			
 		default:
 			viewModel.onEvent(event: event)
 		}
+	}
+	
+	func onEvent(_ event: CreatePlayerEvent) {
+		createPlayerViewModel.onEvent(event: event)
 	}
 	
 	func dispose() {

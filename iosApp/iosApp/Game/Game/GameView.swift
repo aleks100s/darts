@@ -14,7 +14,7 @@ internal struct GameView: View {
 				}
 			}
 			.alert("turn_is_over", isPresented: $viewModel.isTurnOverDialogShown) {
-				Button {
+				Button(role: .cancel) {
 					viewModel.onEvent(.ChangeTurn())
 				} label: {
 					Text("next_turn")
@@ -33,7 +33,7 @@ internal struct GameView: View {
 					Text("leave")
 				}
 
-				Button {
+				Button(role: .cancel) {
 					viewModel.onEvent(.ReturnToGame())
 				} label: {
 					Text("cancel")
@@ -41,7 +41,7 @@ internal struct GameView: View {
 			}
 			.toolbar {
 				ToolbarItem(placement: .navigationBarLeading) {
-					Button(role: .destructive) {
+					Button {
 						viewModel.onEvent(.BackButtonPressed())
 					} label: {
 						Text("leave")

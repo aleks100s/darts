@@ -7,7 +7,6 @@ import com.alextos.darts.core.domain.Player
 import kotlinx.coroutines.flow.Flow
 
 interface GameDataSource {
-    fun createPlayer(name: String)
     fun getGames(): Flow<List<Game>>
     fun saveGameHistory(gameHistory: GameHistory)
     fun getGameHistory(gameId: Long, players: List<Player>): List<PlayerHistory>

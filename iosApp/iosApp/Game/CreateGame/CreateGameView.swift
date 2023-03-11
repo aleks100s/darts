@@ -3,6 +3,7 @@ import shared
 
 internal struct CreateGameView: View {
 	@StateObject var viewModel: IOSCreateGameViewModel
+	@State private var newPlayerName = ""
 	
 	var body: some View {
 		List {
@@ -34,14 +35,30 @@ internal struct CreateGameView: View {
 				}
 			}
 		}
-		.alert("delete_player", isPresented: $viewModel.isDeletePlayerDialogShown) {
+		.alert("enter_new_player_name", isPresented: $viewModel.isCreatePlayerDialogShown) {
+			TextField("enter_new_player_name", text: $newPlayerName)
+			
 			Button {
+				viewModel.onEvent(.SavePlayer(name: newPlayerName))
+			} label: {
+				Text("create_player")
+			}
+
+			Button {
+				viewModel.isCreatePlayerDialogShown = false
+				newPlayerName = ""
+			} label: {
+				Text("cancel")
+			}
+		}
+		.alert("delete_player", isPresented: $viewModel.isDeletePlayerDialogShown) {
+			Button(role: .destructive) {
 				viewModel.onEvent(.DeletePlayer())
 			} label: {
 				Text("delete")
 			}
 
-			Button {
+			Button(role: .cancel) {
 				viewModel.onEvent(.HideDeletePlayerDialog())
 			} label: {
 				Text("cancel")

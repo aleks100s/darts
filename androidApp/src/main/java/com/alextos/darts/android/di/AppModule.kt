@@ -59,7 +59,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideCreatePlayerUseCase(dataSource: GameDataSource): CreatePlayerUseCase {
+    fun provideCreatePlayerUseCase(dataSource: PlayersDataSource): CreatePlayerUseCase {
        return CreatePlayerUseCase(dataSource)
     }
 

@@ -24,12 +24,6 @@ internal struct GameTab: View {
 					navigate(to: $0)
 				}
 		}
-		.sheet(isPresented: $isCreatePlayerShown) {
-			CreatePlayerScene.create(using: module) {
-				isCreatePlayerShown = false
-			}
-			.presentationDetents([.medium])
-		}
 	}
 	
 	@MainActor
@@ -39,9 +33,6 @@ internal struct GameTab: View {
 		case .createGame:
 			CreateGameScene.create(
 				using: module,
-				createPlayer: {
-					isCreatePlayerShown = true
-				},
 				startGame: { players, goal in
 					navigationStack.append(.game(players: players, goal: goal))
 				}

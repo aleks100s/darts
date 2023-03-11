@@ -18,13 +18,13 @@ internal struct GameListView: View {
 			}
 		}
 		.alert("delete_game", isPresented: $viewModel.isDeleteGameDialogShown) {
-			Button {
+			Button(role: .destructive) {
 				viewModel.onEvent(.DeleteGame())
 			} label: {
 				Text("delete")
 			}
 			
-			Button {
+			Button(role: .cancel) {
 				viewModel.onEvent(.HideDeleteGameDialog())
 			} label: {
 				Text("cancel")

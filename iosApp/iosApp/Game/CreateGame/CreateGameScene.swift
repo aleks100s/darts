@@ -5,15 +5,23 @@ internal enum CreateGameScene {
 	@MainActor
 	static func create(
 		using module: AppModule,
-		createPlayer: @escaping () -> (),
 		startGame: @escaping ([Player], Int32) -> ()
 	) -> some View {
 		let getPlayersUseCase = GetPlayersUseCase(dataSource: module.playerDataSource)
 		let deletePlayerUseCase = DeletePlayerUseCase(dataSource: module.playerDataSource)
-		let viewModel = IOSCreateGameViewModel(
-			getPlayersUseCase: getPlayersUseCase,
+		let createGameViewModel = CreateGameViewModel(
 			deletePlayerUseCase: deletePlayerUseCase,
-			createPlayer: createPlayer,
+			getPlayersUseCase: getPlayersUseCase,
+			coroutineScope: nil
+		)
+		let createPlayerUseCase = CreatePlayerUseCase(dataSource: module.playerDataSource)
+		let createPlayerViewModel = CreatePlayerViewModel(
+			createPlayerUseCase: createPlayerUseCase,
+			coroutineScope: nil
+		)
+		let viewModel = IOSCreateGameViewModel(
+			viewModel: createGameViewModel,
+			createPlayerViewModel: createPlayerViewModel,
 			startGame: startGame
 		)
 		return CreateGameView(viewModel: viewModel)

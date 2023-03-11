@@ -17,10 +17,6 @@ class SqlDelightGameDataSource(
 ): GameDataSource {
     private val queries = database.dartsQueries
 
-    override fun createPlayer(name: String) {
-        queries.insertPlayerEntity(id = null, name = name)
-    }
-
     override fun getGames(): Flow<List<Game>> {
         return queries.getGames()
             .asFlow()

@@ -6,6 +6,7 @@ internal enum GameNavigation: Hashable {
 	case inGameHistory(gameHistory: [PlayerHistory], goal: Int32)
 	case history(game: Game)
 	case darts(Set)
+	case gameRecap(historyState: HistoryState)
 }
 
 internal enum StatisticsNavigation {

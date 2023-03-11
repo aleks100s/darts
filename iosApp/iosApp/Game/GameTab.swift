@@ -72,6 +72,9 @@ internal struct GameTab: View {
 				game: game,
 				onTurnSelected: { turn in
 					navigationStack.append(.darts(turn))
+				},
+				onShowRecap: { state in
+					navigationStack.append(.gameRecap(historyState: state))
 				}
 			)
 				.navigationBarTitleDisplayMode(.inline)
@@ -92,6 +95,18 @@ internal struct GameTab: View {
 			DartsBoardView(turn: turn)
 				.navigationBarTitleDisplayMode(.inline)
 				.navigationTitle("view_turn")
+			
+		case let .gameRecap(historyState):
+			GameRecapView(
+				history: historyState.gameHistory,
+				averageSets: historyState.averageSets(),
+				biggestSets: historyState.biggestSets(),
+				smallestSets: historyState.smallestSets(),
+				misses: historyState.misses(),
+				overkills: historyState.overkills()
+			)
+			.navigationBarTitleDisplayMode(.inline)
+			.navigationTitle("game_recap")
 		}
 	}
 }

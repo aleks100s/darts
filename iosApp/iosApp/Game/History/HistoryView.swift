@@ -9,6 +9,14 @@ internal struct HistoryView: View {
 			gameGoal: viewModel.state.gameGoal,
 			onTurnSelected: viewModel.select
 		)
+		.toolbar {
+			Button {
+				viewModel.showRecap()
+			} label: {
+				Text("progress")
+			}
+
+		}
 			.onAppear {
 				viewModel.startObserving()
 			}

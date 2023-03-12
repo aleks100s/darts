@@ -11,7 +11,7 @@ internal struct ContentView: View {
 					Label("Game", systemImage: "play")
 				}
 			
-			StatisticsTab()
+			StatisticsTab(module: module)
 				.tabItem {
 					Label("Statistics", systemImage: "chart.pie")
 				}

@@ -1,6 +1,5 @@
 package com.alextos.darts.android.statistics.player_list
 
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alextos.darts.core.domain.GetPlayersUseCase

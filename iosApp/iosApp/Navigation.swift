@@ -10,5 +10,10 @@ internal enum GameNavigation: Hashable {
 }
 
 internal enum StatisticsNavigation {
-	
+	case victoryDistribution
+	case shotDistribution
+	case biggestFinalSet
+	case mostFrequentShots
+	case bestSet
+	case averageValues
 }

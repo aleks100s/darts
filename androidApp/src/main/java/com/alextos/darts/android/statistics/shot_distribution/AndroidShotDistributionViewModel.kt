@@ -4,7 +4,6 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alextos.darts.android.common.util.toPlayerList
-import com.alextos.darts.core.domain.GetPlayersUseCase
 import com.alextos.darts.statistics.domain.use_cases.shot_distribution.GetPlayerShotDistributionUseCase
 import com.alextos.darts.statistics.presentation.shot_distribution.ShotDistributionViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

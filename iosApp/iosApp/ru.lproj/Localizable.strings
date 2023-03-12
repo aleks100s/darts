@@ -40,9 +40,6 @@
 "game" = "Игра";
 "statistics" = "Статистика";
 "arrow_right_description" = "Показать";
-"best_set_of_all_players" = "Лучший подход среди игроков";
-"most_frequent_shots_of_all_players" = "Самые частые сектора среди игроков";
-"biggest_final_set_of_all_players" = "Самая большая добивка среди игроков";
 "player" = "Игрок";
 "average_set" = "Средний подход";
 "average_shot" = "Средний бросок";

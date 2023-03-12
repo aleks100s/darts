@@ -40,9 +40,6 @@
 "game" = "Game";
 "statistics" = "Statistics";
 "arrow_right_description" = "Show";
-"best_set_of_all_players" = "Best turn of all players";
-"most_frequent_shots_of_all_players" = "Most frequent hits of all players";
-"biggest_final_set_of_all_players" = "Biggest final turn of all players";
 "player" = "Player";
 "average_set" = "Avg. turn";
 "average_shot" = "Avg. hit";

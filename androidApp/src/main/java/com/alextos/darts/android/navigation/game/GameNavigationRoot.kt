@@ -21,7 +21,7 @@ import com.alextos.darts.android.game.create_game.AndroidCreateGameViewModel
 import com.alextos.darts.android.game.create_game.CreateGameScreen
 import com.alextos.darts.android.game.create_player.AndroidCreatePlayerViewModel
 import com.alextos.darts.android.game.create_player.CreatePlayerScreen
-import com.alextos.darts.android.common.presentation.screens.DartsScreen
+import com.alextos.darts.android.game.darts_board.DartsScreen
 import com.alextos.darts.android.common.util.toShots
 import com.alextos.darts.android.game.game.AndroidGameViewModel
 import com.alextos.darts.android.game.game.GameScreen

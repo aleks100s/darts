@@ -5,8 +5,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
-import com.alextos.darts.android.R
 import com.alextos.darts.android.common.presentation.components.PlayerDisclosureItem
 import com.alextos.darts.android.common.presentation.screens.Screen
 import com.alextos.darts.statistics.presentation.player_list.PlayerListEvent

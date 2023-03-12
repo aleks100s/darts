@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AndroidHistoryViewModel @Inject constructor(
-    private val getGameHistoryUseCase: GetGameHistoryUseCase,
+    getGameHistoryUseCase: GetGameHistoryUseCase,
     savedStateHandle: SavedStateHandle
 ): ViewModel() {
     private val viewModel by lazy {

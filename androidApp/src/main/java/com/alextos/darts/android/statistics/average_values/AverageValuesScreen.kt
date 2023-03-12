@@ -25,7 +25,7 @@ fun AverageValuesScreen(
     state: AverageValuesState
 ) {
     Screen(title = stringResource(id = R.string.average_values_statistics)) {
-        if (state.averageShotOfAll == 0.0) {
+        if (state.isEmpty()) {
             NoDataView()
         } else {
             LazyColumn {

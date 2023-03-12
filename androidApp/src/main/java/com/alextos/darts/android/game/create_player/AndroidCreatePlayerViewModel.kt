@@ -11,8 +11,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AndroidCreatePlayerViewModel @Inject constructor(
-    private val createPlayerUseCase: CreatePlayerUseCase,
-    private val getPlayerUseCase: GetPlayersUseCase
+    createPlayerUseCase: CreatePlayerUseCase,
+    getPlayerUseCase: GetPlayersUseCase
 ): ViewModel() {
     private val viewModel by lazy {
         CreatePlayerViewModel(createPlayerUseCase, getPlayerUseCase, viewModelScope)

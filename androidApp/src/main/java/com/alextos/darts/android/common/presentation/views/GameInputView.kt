@@ -1,4 +1,4 @@
-package com.alextos.darts.android.game.game
+package com.alextos.darts.android.common.presentation.views
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -26,7 +26,6 @@ import com.alextos.darts.android.common.presentation.components.*
 import com.alextos.darts.android.common.presentation.extensions.color
 import com.alextos.darts.android.common.presentation.extensions.textColor
 import com.alextos.darts.android.common.presentation.rememberScreenType
-import com.alextos.darts.core.domain.Player
 import com.alextos.darts.core.domain.Sector
 import com.alextos.darts.core.domain.Set
 import com.alextos.darts.game.domain.models.GamePlayerResult

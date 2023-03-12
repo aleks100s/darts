@@ -1,4 +1,4 @@
-package com.alextos.darts.android.common.presentation.screens
+package com.alextos.darts.android.game.darts_board
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
@@ -7,6 +7,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.alextos.darts.android.R
+import com.alextos.darts.android.common.presentation.screens.Screen
 import com.alextos.darts.android.common.presentation.views.DartsSetView
 import com.alextos.darts.core.domain.Shot
 import com.google.accompanist.pager.ExperimentalPagerApi

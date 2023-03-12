@@ -6,4 +6,6 @@ data class AverageValuesState(
     val averageSetOfAll: Double = 0.0,
     val averageShotOfAll: Double = 0.0,
     val playersAverageValues: List<AveragePlayerValue> = listOf()
-)
+) {
+    fun isEmpty() = averageShotOfAll == 0.0
+}

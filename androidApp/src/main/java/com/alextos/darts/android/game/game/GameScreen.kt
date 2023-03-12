@@ -17,9 +17,9 @@ import com.alextos.darts.android.common.presentation.components.FAB
 import com.alextos.darts.android.common.presentation.views.GameHistoryView
 import com.alextos.darts.android.common.presentation.rememberScreenType
 import com.alextos.darts.android.common.presentation.screens.TabletScreen
+import com.alextos.darts.android.common.presentation.views.GameInputView
 import com.alextos.darts.game.presentation.game.GameEvent
 import com.alextos.darts.game.presentation.game.GameState
-import com.alextos.darts.game.presentation.game.TurnState
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable

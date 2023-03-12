@@ -1,7 +1,6 @@
 package com.alextos.darts.android.statistics.shot_distribution
 
 import android.content.res.Configuration
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.MaterialTheme

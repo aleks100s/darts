@@ -5,5 +5,4 @@ import com.alextos.darts.core.domain.Player
 data class PlayerGameValue(
     val player: Player,
     val value: Int
-) {
-}
+)

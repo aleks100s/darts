@@ -21,7 +21,6 @@
     <string name="winner">The winner is %1$s</string>
     <string name="finish_game">Finish game</string>
     <string name="game_goal">Game goal</string>
-    <string name="shoot">Hit</string>
     <string name="history">History</string>
     <string name="game_title">Game %1$d, goal is %2$d</string>
     <string name="games">Games</string>
@@ -53,7 +52,6 @@
     <string name="double_bullseye_percent">%.2f%% double bullseye</string>
     <string name="no_statistics">There is no data yet</string>
     <string name="throws_count">Hits total: %1$d</string>
-    <string name="throw_number">#%1$d</string>
     <string name="progress">Recap</string>
     <string name="games_count">Games total: %1$d</string>
     <string name="victory_percent">%.2f%% victories</string>
@@ -68,7 +66,6 @@
     <string name="game_player_result">Reminder: %1$d</string>
     <string name="view_turn">View turn</string>
     <string name="delete_player">Delete player and all related games</string>
-    <string name="player_data_will_be_lost">Player data will be lost</string>
     <string name="erase_hit">Erase hit</string>
     <string name="delete_game">Delete game</string>
     <string name="this_cannot_be_undone">This cannot be undone</string>

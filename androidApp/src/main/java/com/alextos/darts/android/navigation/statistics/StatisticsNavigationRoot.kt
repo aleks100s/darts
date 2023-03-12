@@ -15,7 +15,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.alextos.darts.android.R
 import com.alextos.darts.android.common.util.toStringNavArgument
-import com.alextos.darts.android.common.presentation.screens.DartsScreen
+import com.alextos.darts.android.game.darts_board.DartsScreen
 import com.alextos.darts.android.common.util.toShots
 import com.alextos.darts.android.navigation.game.GameRoute
 import com.alextos.darts.android.statistics.average_values.AndroidAverageValuesViewModel

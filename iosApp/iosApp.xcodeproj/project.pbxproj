@@ -51,6 +51,15 @@
 		27D659FC29BC7ADB00A921C6 /* GamePlayerValue+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D659FB29BC7ADB00A921C6 /* GamePlayerValue+Extensions.swift */; };
 		27D659FE29BC866F00A921C6 /* PlayerHistory+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D659FD29BC866F00A921C6 /* PlayerHistory+Extensions.swift */; };
 		27D65A0029BC86F400A921C6 /* KotlinFloat+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D659FF29BC86F400A921C6 /* KotlinFloat+Extensions.swift */; };
+		27D65A0529BDEA9400A921C6 /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D65A0429BDEA9400A921C6 /* StatisticsView.swift */; };
+		27D65A0729BDEAC900A921C6 /* SingleSelectableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D65A0629BDEAC900A921C6 /* SingleSelectableItem.swift */; };
+		27D65A0929BDEC0900A921C6 /* DoubleSelectableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D65A0829BDEC0900A921C6 /* DoubleSelectableItem.swift */; };
+		27D65A0B29BDED5800A921C6 /* StatisticsEvent+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D65A0A29BDED5800A921C6 /* StatisticsEvent+Extensions.swift */; };
+		27D65A0F29BDF2D500A921C6 /* NoDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D65A0E29BDF2D500A921C6 /* NoDataView.swift */; };
+		27D65A1129BDF34900A921C6 /* IOSAverageValuesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D65A1029BDF34900A921C6 /* IOSAverageValuesViewModel.swift */; };
+		27D65A1329BDF40800A921C6 /* AverageValuesScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D65A1229BDF40800A921C6 /* AverageValuesScene.swift */; };
+		27D65A1529BDF41600A921C6 /* AverageValuesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D65A1429BDF41600A921C6 /* AverageValuesView.swift */; };
+		27D65A1729BDF7E900A921C6 /* AveragePlayerValue+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D65A1629BDF7E900A921C6 /* AveragePlayerValue+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -111,6 +120,15 @@
 		27D659FB29BC7ADB00A921C6 /* GamePlayerValue+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GamePlayerValue+Extensions.swift"; sourceTree = "<group>"; };
 		27D659FD29BC866F00A921C6 /* PlayerHistory+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlayerHistory+Extensions.swift"; sourceTree = "<group>"; };
 		27D659FF29BC86F400A921C6 /* KotlinFloat+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KotlinFloat+Extensions.swift"; sourceTree = "<group>"; };
+		27D65A0429BDEA9400A921C6 /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
+		27D65A0629BDEAC900A921C6 /* SingleSelectableItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleSelectableItem.swift; sourceTree = "<group>"; };
+		27D65A0829BDEC0900A921C6 /* DoubleSelectableItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleSelectableItem.swift; sourceTree = "<group>"; };
+		27D65A0A29BDED5800A921C6 /* StatisticsEvent+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StatisticsEvent+Extensions.swift"; sourceTree = "<group>"; };
+		27D65A0E29BDF2D500A921C6 /* NoDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoDataView.swift; sourceTree = "<group>"; };
+		27D65A1029BDF34900A921C6 /* IOSAverageValuesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSAverageValuesViewModel.swift; sourceTree = "<group>"; };
+		27D65A1229BDF40800A921C6 /* AverageValuesScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AverageValuesScene.swift; sourceTree = "<group>"; };
+		27D65A1429BDF41600A921C6 /* AverageValuesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AverageValuesView.swift; sourceTree = "<group>"; };
+		27D65A1629BDF7E900A921C6 /* AveragePlayerValue+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AveragePlayerValue+Extensions.swift"; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -151,6 +169,8 @@
 		279827CF298E656400D497F2 /* Statistics */ = {
 			isa = PBXGroup;
 			children = (
+				27D65A0D29BDF2A500A921C6 /* AverageValues */,
+				27D65A0329BDEA7000A921C6 /* Statistics */,
 				279827D0298E656400D497F2 /* StatisticsTab.swift */,
 			);
 			path = Statistics;
@@ -159,7 +179,8 @@
 		279827D6298E6B7F00D497F2 /* Library */ = {
 			isa = PBXGroup;
 			children = (
-				27CF107F29AB981000174D02 /* Views */,
+				27D659EE29B3BAE900A921C6 /* Views */,
+				27D65A0229BD0D0200A921C6 /* Components */,
 				27CF107E29AB980300174D02 /* Extensions */,
 			);
 			path = Library;
@@ -211,22 +232,10 @@
 				27D659FB29BC7ADB00A921C6 /* GamePlayerValue+Extensions.swift */,
 				27D659FD29BC866F00A921C6 /* PlayerHistory+Extensions.swift */,
 				27D659FF29BC86F400A921C6 /* KotlinFloat+Extensions.swift */,
+				27D65A0A29BDED5800A921C6 /* StatisticsEvent+Extensions.swift */,
+				27D65A1629BDF7E900A921C6 /* AveragePlayerValue+Extensions.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		27CF107F29AB981000174D02 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				27D659EE29B3BAE900A921C6 /* Screens */,
-				27CF108029AB981700174D02 /* Cell.swift */,
-				27CF108429AB9A8100174D02 /* PlayerHistoryHeader.swift */,
-				27CF108629AB9AA500174D02 /* Row.swift */,
-				27CF108A29ABA17200174D02 /* TurnItem.swift */,
-				27D659EF29B3BC0800A921C6 /* SectionHeader.swift */,
-				27D659F429B493DD00A921C6 /* DartsBoard.swift */,
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		27CF109829AD2A4700174D02 /* History */ = {
@@ -239,14 +248,16 @@
 			path = History;
 			sourceTree = "<group>";
 		};
-		27D659EE29B3BAE900A921C6 /* Screens */ = {
+		27D659EE29B3BAE900A921C6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				27D659EC29B3B97E00A921C6 /* PlayerHistoryView.swift */,
 				27CF107C29AB952400174D02 /* GameHistoryView.swift */,
 				27D659F929BC78AA00A921C6 /* GameRecapView.swift */,
+				27D65A0E29BDF2D500A921C6 /* NoDataView.swift */,
 			);
-			path = Screens;
+			name = Views;
+			path = Views/Views;
 			sourceTree = "<group>";
 		};
 		27D65A0129BC9B2100A921C6 /* DartsBoard */ = {
@@ -255,6 +266,39 @@
 				27D659F629B91E0400A921C6 /* DartsBoardView.swift */,
 			);
 			path = DartsBoard;
+			sourceTree = "<group>";
+		};
+		27D65A0229BD0D0200A921C6 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				27CF108029AB981700174D02 /* Cell.swift */,
+				27CF108429AB9A8100174D02 /* PlayerHistoryHeader.swift */,
+				27CF108629AB9AA500174D02 /* Row.swift */,
+				27CF108A29ABA17200174D02 /* TurnItem.swift */,
+				27D659EF29B3BC0800A921C6 /* SectionHeader.swift */,
+				27D659F429B493DD00A921C6 /* DartsBoard.swift */,
+				27D65A0629BDEAC900A921C6 /* SingleSelectableItem.swift */,
+				27D65A0829BDEC0900A921C6 /* DoubleSelectableItem.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		27D65A0329BDEA7000A921C6 /* Statistics */ = {
+			isa = PBXGroup;
+			children = (
+				27D65A0429BDEA9400A921C6 /* StatisticsView.swift */,
+			);
+			path = Statistics;
+			sourceTree = "<group>";
+		};
+		27D65A0D29BDF2A500A921C6 /* AverageValues */ = {
+			isa = PBXGroup;
+			children = (
+				27D65A1029BDF34900A921C6 /* IOSAverageValuesViewModel.swift */,
+				27D65A1229BDF40800A921C6 /* AverageValuesScene.swift */,
+				27D65A1429BDF41600A921C6 /* AverageValuesView.swift */,
+			);
+			path = AverageValues;
 			sourceTree = "<group>";
 		};
 		7555FF72242A565900829871 = {
@@ -398,11 +442,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27D65A0729BDEAC900A921C6 /* SingleSelectableItem.swift in Sources */,
 				27CF108529AB9A8100174D02 /* PlayerHistoryHeader.swift in Sources */,
 				279827D1298E656400D497F2 /* StatisticsTab.swift in Sources */,
 				279827D8298E6B8A00D497F2 /* Color+Extension.swift in Sources */,
+				27D65A1529BDF41600A921C6 /* AverageValuesView.swift in Sources */,
 				27CF107D29AB952400174D02 /* GameHistoryView.swift in Sources */,
+				27D65A1329BDF40800A921C6 /* AverageValuesScene.swift in Sources */,
 				27D65A0029BC86F400A921C6 /* KotlinFloat+Extensions.swift in Sources */,
+				27D65A0B29BDED5800A921C6 /* StatisticsEvent+Extensions.swift in Sources */,
 				27CF109A29AD2A5600174D02 /* HistoryScene.swift in Sources */,
 				27D659F529B493DD00A921C6 /* DartsBoard.swift in Sources */,
 				279827DF298E723D00D497F2 /* GameListScene.swift in Sources */,
@@ -411,6 +459,8 @@
 				27CF108129AB981700174D02 /* Cell.swift in Sources */,
 				279827E429A7CD9F00D497F2 /* CreateGameScene.swift in Sources */,
 				279827DB298E6F2600D497F2 /* IOSGameListViewModel.swift in Sources */,
+				27D65A0529BDEA9400A921C6 /* StatisticsView.swift in Sources */,
+				27D65A1129BDF34900A921C6 /* IOSAverageValuesViewModel.swift in Sources */,
 				27D659F029B3BC0800A921C6 /* SectionHeader.swift in Sources */,
 				27D659FA29BC78AB00A921C6 /* GameRecapView.swift in Sources */,
 				27CF107729A8BBC800174D02 /* IOSGameViewModel.swift in Sources */,
@@ -418,7 +468,9 @@
 				27D659F729B91E0400A921C6 /* DartsBoardView.swift in Sources */,
 				279827CE298E655A00D497F2 /* GameTab.swift in Sources */,
 				279827D3298E657600D497F2 /* Navigation.swift in Sources */,
+				27D65A0929BDEC0900A921C6 /* DoubleSelectableItem.swift in Sources */,
 				279827EF29A7D50A00D497F2 /* Player+Extensions.swift in Sources */,
+				27D65A0F29BDF2D500A921C6 /* NoDataView.swift in Sources */,
 				27CF108329AB99CB00174D02 /* String+Extensions.swift in Sources */,
 				27CF107329A8BBB600174D02 /* GameScene.swift in Sources */,
 				27CF108F29ABA2CE00174D02 /* Set+Extensions.swift in Sources */,
@@ -434,6 +486,7 @@
 				27CF107929A9049900174D02 /* GameInputView.swift in Sources */,
 				27CF108B29ABA17200174D02 /* TurnItem.swift in Sources */,
 				27CF107B29A905A600174D02 /* Sector+Extensions.swift in Sources */,
+				27D65A1729BDF7E900A921C6 /* AveragePlayerValue+Extensions.swift in Sources */,
 				27D659ED29B3B97E00A921C6 /* PlayerHistoryView.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				279827F129A7D5C100D497F2 /* KotlinInt+Extensions.swift in Sources */,
@@ -578,6 +631,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
+				DEVELOPMENT_TEAM = WMG862Q25D;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)";
 				INFOPLIST_FILE = iosApp/Info.plist;
@@ -593,7 +647,7 @@
 					shared,
 					"-lsqlite3",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = orgIdentifier.iosApp;
+				PRODUCT_BUNDLE_IDENTIFIER = "alextos.darts-score";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -606,6 +660,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
+				DEVELOPMENT_TEAM = WMG862Q25D;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)";
 				INFOPLIST_FILE = iosApp/Info.plist;
@@ -621,7 +676,7 @@
 					shared,
 					"-lsqlite3",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = orgIdentifier.iosApp;
+				PRODUCT_BUNDLE_IDENTIFIER = "alextos.darts-score";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

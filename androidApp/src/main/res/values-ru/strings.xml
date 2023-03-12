@@ -21,7 +21,6 @@
     <string name="winner">Победитель %1$s</string>
     <string name="finish_game">Закончить игру</string>
     <string name="game_goal">Цель игры</string>
-    <string name="shoot">Бросок</string>
     <string name="history">История</string>
     <string name="game_title">Игра №%1$d, цель %2$d</string>
     <string name="games">Игры</string>
@@ -53,7 +52,6 @@
     <string name="double_bullseye_percent">%.2f%% сердцевина</string>
     <string name="no_statistics">В этом разделе пока нет данных</string>
     <string name="throws_count">Всего бросков: %1$d</string>
-    <string name="throw_number">№%1$d</string>
     <string name="progress">Результаты</string>
     <string name="games_count">Всего игр: %1$d</string>
     <string name="victory_percent">%.2f%% побед</string>
@@ -68,7 +66,6 @@
     <string name="game_player_result">Остаток: %1$d</string>
     <string name="view_turn">Просмотр хода</string>
     <string name="delete_player">Удалить игрока и все связанные с ним игры</string>
-    <string name="player_data_will_be_lost">Данные игрока будут потеряны</string>
     <string name="erase_hit">Стереть бросок</string>
     <string name="delete_game">Удалить игру</string>
     <string name="this_cannot_be_undone">Это действие необратимо</string>

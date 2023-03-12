@@ -70,6 +70,15 @@
 		27D65A2A29BE49C800A921C6 /* IOSBiggestFinalSetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D65A2929BE49C800A921C6 /* IOSBiggestFinalSetViewModel.swift */; };
 		27D65A2C29BE4A5900A921C6 /* BiggestFinalSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D65A2B29BE4A5900A921C6 /* BiggestFinalSetView.swift */; };
 		27D65A2E29BE4ADE00A921C6 /* BiggestFinalSetScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D65A2D29BE4ADE00A921C6 /* BiggestFinalSetScene.swift */; };
+		27D65A3129BE4D5200A921C6 /* IOSPlayerListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D65A3029BE4D5200A921C6 /* IOSPlayerListViewModel.swift */; };
+		27D65A3329BE4E1900A921C6 /* PlayerListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D65A3229BE4E1900A921C6 /* PlayerListView.swift */; };
+		27D65A3529BE4E5B00A921C6 /* PlayerListScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D65A3429BE4E5B00A921C6 /* PlayerListScene.swift */; };
+		27D65A3829BE504300A921C6 /* IOSShotDistributionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D65A3729BE504300A921C6 /* IOSShotDistributionViewModel.swift */; };
+		27D65A3A29BE50B800A921C6 /* ShotDistributionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D65A3929BE50B800A921C6 /* ShotDistributionView.swift */; };
+		27D65A3C29BE511500A921C6 /* ShotDistributionScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D65A3B29BE511500A921C6 /* ShotDistributionScene.swift */; };
+		27D65A3F29BE524000A921C6 /* IOSVictoryDistributionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D65A3E29BE524000A921C6 /* IOSVictoryDistributionViewModel.swift */; };
+		27D65A4129BE529C00A921C6 /* VictoryDistributionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D65A4029BE529C00A921C6 /* VictoryDistributionView.swift */; };
+		27D65A4329BE52E400A921C6 /* VictoryDistributionScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D65A4229BE52E400A921C6 /* VictoryDistributionScene.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -149,6 +158,15 @@
 		27D65A2929BE49C800A921C6 /* IOSBiggestFinalSetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSBiggestFinalSetViewModel.swift; sourceTree = "<group>"; };
 		27D65A2B29BE4A5900A921C6 /* BiggestFinalSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiggestFinalSetView.swift; sourceTree = "<group>"; };
 		27D65A2D29BE4ADE00A921C6 /* BiggestFinalSetScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiggestFinalSetScene.swift; sourceTree = "<group>"; };
+		27D65A3029BE4D5200A921C6 /* IOSPlayerListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSPlayerListViewModel.swift; sourceTree = "<group>"; };
+		27D65A3229BE4E1900A921C6 /* PlayerListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerListView.swift; sourceTree = "<group>"; };
+		27D65A3429BE4E5B00A921C6 /* PlayerListScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerListScene.swift; sourceTree = "<group>"; };
+		27D65A3729BE504300A921C6 /* IOSShotDistributionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSShotDistributionViewModel.swift; sourceTree = "<group>"; };
+		27D65A3929BE50B800A921C6 /* ShotDistributionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShotDistributionView.swift; sourceTree = "<group>"; };
+		27D65A3B29BE511500A921C6 /* ShotDistributionScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShotDistributionScene.swift; sourceTree = "<group>"; };
+		27D65A3E29BE524000A921C6 /* IOSVictoryDistributionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSVictoryDistributionViewModel.swift; sourceTree = "<group>"; };
+		27D65A4029BE529C00A921C6 /* VictoryDistributionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VictoryDistributionView.swift; sourceTree = "<group>"; };
+		27D65A4229BE52E400A921C6 /* VictoryDistributionScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VictoryDistributionScene.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -189,6 +207,9 @@
 		279827CF298E656400D497F2 /* Statistics */ = {
 			isa = PBXGroup;
 			children = (
+				27D65A3D29BE522D00A921C6 /* VictoryDistribution */,
+				27D65A3629BE503100A921C6 /* ShotDistribution */,
+				27D65A2F29BE4D4000A921C6 /* PlayerList */,
 				27D65A2829BE49B600A921C6 /* BiggestFinalSet */,
 				27D65A2129BE46EE00A921C6 /* MostFrequentShots */,
 				27D65A1A29BE42C300A921C6 /* BestTurn */,
@@ -355,6 +376,36 @@
 			path = BiggestFinalSet;
 			sourceTree = "<group>";
 		};
+		27D65A2F29BE4D4000A921C6 /* PlayerList */ = {
+			isa = PBXGroup;
+			children = (
+				27D65A3029BE4D5200A921C6 /* IOSPlayerListViewModel.swift */,
+				27D65A3229BE4E1900A921C6 /* PlayerListView.swift */,
+				27D65A3429BE4E5B00A921C6 /* PlayerListScene.swift */,
+			);
+			path = PlayerList;
+			sourceTree = "<group>";
+		};
+		27D65A3629BE503100A921C6 /* ShotDistribution */ = {
+			isa = PBXGroup;
+			children = (
+				27D65A3729BE504300A921C6 /* IOSShotDistributionViewModel.swift */,
+				27D65A3929BE50B800A921C6 /* ShotDistributionView.swift */,
+				27D65A3B29BE511500A921C6 /* ShotDistributionScene.swift */,
+			);
+			path = ShotDistribution;
+			sourceTree = "<group>";
+		};
+		27D65A3D29BE522D00A921C6 /* VictoryDistribution */ = {
+			isa = PBXGroup;
+			children = (
+				27D65A3E29BE524000A921C6 /* IOSVictoryDistributionViewModel.swift */,
+				27D65A4029BE529C00A921C6 /* VictoryDistributionView.swift */,
+				27D65A4229BE52E400A921C6 /* VictoryDistributionScene.swift */,
+			);
+			path = VictoryDistribution;
+			sourceTree = "<group>";
+		};
 		7555FF72242A565900829871 = {
 			isa = PBXGroup;
 			children = (
@@ -507,6 +558,7 @@
 				27D65A0029BC86F400A921C6 /* KotlinFloat+Extensions.swift in Sources */,
 				27D65A0B29BDED5800A921C6 /* StatisticsEvent+Extensions.swift in Sources */,
 				27CF109A29AD2A5600174D02 /* HistoryScene.swift in Sources */,
+				27D65A3C29BE511500A921C6 /* ShotDistributionScene.swift in Sources */,
 				27D659F529B493DD00A921C6 /* DartsBoard.swift in Sources */,
 				279827DF298E723D00D497F2 /* GameListScene.swift in Sources */,
 				27CF109729AD273B00174D02 /* Game+Extensions.swift in Sources */,
@@ -514,6 +566,7 @@
 				27CF108129AB981700174D02 /* Cell.swift in Sources */,
 				279827E429A7CD9F00D497F2 /* CreateGameScene.swift in Sources */,
 				279827DB298E6F2600D497F2 /* IOSGameListViewModel.swift in Sources */,
+				27D65A4129BE529C00A921C6 /* VictoryDistributionView.swift in Sources */,
 				27D65A0529BDEA9400A921C6 /* StatisticsView.swift in Sources */,
 				27D65A1929BE414700A921C6 /* StatisticsPlayerListView.swift in Sources */,
 				27D65A1129BDF34900A921C6 /* IOSAverageValuesViewModel.swift in Sources */,
@@ -529,8 +582,11 @@
 				279827EF29A7D50A00D497F2 /* Player+Extensions.swift in Sources */,
 				27D65A0F29BDF2D500A921C6 /* NoDataView.swift in Sources */,
 				27D65A2C29BE4A5900A921C6 /* BiggestFinalSetView.swift in Sources */,
+				27D65A3529BE4E5B00A921C6 /* PlayerListScene.swift in Sources */,
 				27CF108329AB99CB00174D02 /* String+Extensions.swift in Sources */,
 				27CF107329A8BBB600174D02 /* GameScene.swift in Sources */,
+				27D65A3129BE4D5200A921C6 /* IOSPlayerListViewModel.swift in Sources */,
+				27D65A3829BE504300A921C6 /* IOSShotDistributionViewModel.swift in Sources */,
 				27CF108F29ABA2CE00174D02 /* Set+Extensions.swift in Sources */,
 				27CF107529A8BBBE00174D02 /* GameView.swift in Sources */,
 				27CF108729AB9AA500174D02 /* Row.swift in Sources */,
@@ -538,10 +594,13 @@
 				27D65A2329BE471300A921C6 /* IOSMostFrequentShotsViewModel.swift in Sources */,
 				27CF108D29ABA23F00174D02 /* Shot+Extensions.swift in Sources */,
 				279827DD298E71E000D497F2 /* GameListView.swift in Sources */,
+				27D65A4329BE52E400A921C6 /* VictoryDistributionScene.swift in Sources */,
 				27D65A2E29BE4ADE00A921C6 /* BiggestFinalSetScene.swift in Sources */,
+				27D65A3A29BE50B800A921C6 /* ShotDistributionView.swift in Sources */,
 				27D65A2529BE478A00A921C6 /* MostFrequentShotsView.swift in Sources */,
 				279827E229A7CD9700D497F2 /* CreateGameView.swift in Sources */,
 				27CF109C29AD2A6B00174D02 /* IOSHistoryViewModel.swift in Sources */,
+				27D65A3F29BE524000A921C6 /* IOSVictoryDistributionViewModel.swift in Sources */,
 				27D659FE29BC866F00A921C6 /* PlayerHistory+Extensions.swift in Sources */,
 				27D659FC29BC7ADB00A921C6 /* GamePlayerValue+Extensions.swift in Sources */,
 				27CF107929A9049900174D02 /* GameInputView.swift in Sources */,
@@ -553,6 +612,7 @@
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				27D65A2A29BE49C800A921C6 /* IOSBiggestFinalSetViewModel.swift in Sources */,
 				279827F129A7D5C100D497F2 /* KotlinInt+Extensions.swift in Sources */,
+				27D65A3329BE4E1900A921C6 /* PlayerListView.swift in Sources */,
 				27D65A1C29BE42EC00A921C6 /* IOSBestTurnViewModel.swift in Sources */,
 				27CF108929AB9FCD00174D02 /* GamePlayerResult+Extensions.swift in Sources */,
 			);

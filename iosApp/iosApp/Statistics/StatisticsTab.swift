@@ -12,10 +12,10 @@ internal struct StatisticsTab: View {
 				onSelect: { event in
 					switch event {
 					case .ShowVictoryDistribution():
-						navigationStack.append(.victoryDistribution)
+						navigationStack.append(.players(.victoryDistribution))
 						
 					case .ShowShotDistribution():
-						navigationStack.append(.shotDistribution)
+						navigationStack.append(.players(.shotDistribution))
 						
 					case .ShowBiggestFinalSet():
 						navigationStack.append(.biggestFinalSet)
@@ -45,11 +45,28 @@ internal struct StatisticsTab: View {
 	@ViewBuilder
 	private func navigate(to scene: StatisticsNavigation) -> some View {
 		switch scene {
-		case .victoryDistribution:
-			Text("victory_distribution_statistics")
+		case let .victoryDistribution(player):
+			VictoryDistributionScene.create(module: module, player: player)
+				.navigationTitle(player.name)
+				.navigationBarTitleDisplayMode(.inline)
+
+		case let .shotDistribution(player):
+			ShotDistributionScene.create(module: module, player: player)
+				.navigationTitle(player.name)
+				.navigationBarTitleDisplayMode(.inline)
 			
-		case .shotDistribution:
-			Text("shot_distribution_statistics")
+		case let .players(mode):
+			PlayerListScene.create(module: module) { player in
+				switch mode {
+				case .victoryDistribution:
+					navigationStack.append(.victoryDistribution(player))
+					
+				case .shotDistribution:
+					navigationStack.append(.shotDistribution(player))
+				}
+			}
+			.navigationTitle(mode.title)
+			.navigationBarTitleDisplayMode(.inline)
 			
 		case .biggestFinalSet:
 			BiggestFinalSetScene.create(module: module) { turn in

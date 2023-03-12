@@ -64,6 +64,9 @@
 		27D65A1C29BE42EC00A921C6 /* IOSBestTurnViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D65A1B29BE42EC00A921C6 /* IOSBestTurnViewModel.swift */; };
 		27D65A1E29BE435C00A921C6 /* BestTurnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D65A1D29BE435C00A921C6 /* BestTurnView.swift */; };
 		27D65A2029BE43A000A921C6 /* BestTurnScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D65A1F29BE43A000A921C6 /* BestTurnScene.swift */; };
+		27D65A2329BE471300A921C6 /* IOSMostFrequentShotsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D65A2229BE471300A921C6 /* IOSMostFrequentShotsViewModel.swift */; };
+		27D65A2529BE478A00A921C6 /* MostFrequentShotsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D65A2429BE478A00A921C6 /* MostFrequentShotsView.swift */; };
+		27D65A2729BE48B100A921C6 /* MostFrequentShotsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D65A2629BE48B100A921C6 /* MostFrequentShotsScene.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -137,6 +140,9 @@
 		27D65A1B29BE42EC00A921C6 /* IOSBestTurnViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSBestTurnViewModel.swift; sourceTree = "<group>"; };
 		27D65A1D29BE435C00A921C6 /* BestTurnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestTurnView.swift; sourceTree = "<group>"; };
 		27D65A1F29BE43A000A921C6 /* BestTurnScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestTurnScene.swift; sourceTree = "<group>"; };
+		27D65A2229BE471300A921C6 /* IOSMostFrequentShotsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSMostFrequentShotsViewModel.swift; sourceTree = "<group>"; };
+		27D65A2429BE478A00A921C6 /* MostFrequentShotsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MostFrequentShotsView.swift; sourceTree = "<group>"; };
+		27D65A2629BE48B100A921C6 /* MostFrequentShotsScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MostFrequentShotsScene.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -177,6 +183,7 @@
 		279827CF298E656400D497F2 /* Statistics */ = {
 			isa = PBXGroup;
 			children = (
+				27D65A2129BE46EE00A921C6 /* MostFrequentShots */,
 				27D65A1A29BE42C300A921C6 /* BestTurn */,
 				27D65A0D29BDF2A500A921C6 /* AverageValues */,
 				27D65A0329BDEA7000A921C6 /* Statistics */,
@@ -319,6 +326,16 @@
 				27D65A1F29BE43A000A921C6 /* BestTurnScene.swift */,
 			);
 			path = BestTurn;
+			sourceTree = "<group>";
+		};
+		27D65A2129BE46EE00A921C6 /* MostFrequentShots */ = {
+			isa = PBXGroup;
+			children = (
+				27D65A2229BE471300A921C6 /* IOSMostFrequentShotsViewModel.swift */,
+				27D65A2429BE478A00A921C6 /* MostFrequentShotsView.swift */,
+				27D65A2629BE48B100A921C6 /* MostFrequentShotsScene.swift */,
+			);
+			path = MostFrequentShots;
 			sourceTree = "<group>";
 		};
 		7555FF72242A565900829871 = {
@@ -489,6 +506,7 @@
 				279827D5298E65A600D497F2 /* ContentView.swift in Sources */,
 				27D659F729B91E0400A921C6 /* DartsBoardView.swift in Sources */,
 				279827CE298E655A00D497F2 /* GameTab.swift in Sources */,
+				27D65A2729BE48B100A921C6 /* MostFrequentShotsScene.swift in Sources */,
 				279827D3298E657600D497F2 /* Navigation.swift in Sources */,
 				27D65A0929BDEC0900A921C6 /* DoubleSelectableItem.swift in Sources */,
 				279827EF29A7D50A00D497F2 /* Player+Extensions.swift in Sources */,
@@ -499,8 +517,10 @@
 				27CF107529A8BBBE00174D02 /* GameView.swift in Sources */,
 				27CF108729AB9AA500174D02 /* Row.swift in Sources */,
 				279827E629A7CDB100D497F2 /* IOSCreateGameViewModel.swift in Sources */,
+				27D65A2329BE471300A921C6 /* IOSMostFrequentShotsViewModel.swift in Sources */,
 				27CF108D29ABA23F00174D02 /* Shot+Extensions.swift in Sources */,
 				279827DD298E71E000D497F2 /* GameListView.swift in Sources */,
+				27D65A2529BE478A00A921C6 /* MostFrequentShotsView.swift in Sources */,
 				279827E229A7CD9700D497F2 /* CreateGameView.swift in Sources */,
 				27CF109C29AD2A6B00174D02 /* IOSHistoryViewModel.swift in Sources */,
 				27D659FE29BC866F00A921C6 /* PlayerHistory+Extensions.swift in Sources */,

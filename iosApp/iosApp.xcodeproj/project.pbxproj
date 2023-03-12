@@ -60,6 +60,10 @@
 		27D65A1329BDF40800A921C6 /* AverageValuesScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D65A1229BDF40800A921C6 /* AverageValuesScene.swift */; };
 		27D65A1529BDF41600A921C6 /* AverageValuesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D65A1429BDF41600A921C6 /* AverageValuesView.swift */; };
 		27D65A1729BDF7E900A921C6 /* AveragePlayerValue+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D65A1629BDF7E900A921C6 /* AveragePlayerValue+Extensions.swift */; };
+		27D65A1929BE414700A921C6 /* StatisticsPlayerListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D65A1829BE414700A921C6 /* StatisticsPlayerListView.swift */; };
+		27D65A1C29BE42EC00A921C6 /* IOSBestTurnViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D65A1B29BE42EC00A921C6 /* IOSBestTurnViewModel.swift */; };
+		27D65A1E29BE435C00A921C6 /* BestTurnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D65A1D29BE435C00A921C6 /* BestTurnView.swift */; };
+		27D65A2029BE43A000A921C6 /* BestTurnScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D65A1F29BE43A000A921C6 /* BestTurnScene.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -129,6 +133,10 @@
 		27D65A1229BDF40800A921C6 /* AverageValuesScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AverageValuesScene.swift; sourceTree = "<group>"; };
 		27D65A1429BDF41600A921C6 /* AverageValuesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AverageValuesView.swift; sourceTree = "<group>"; };
 		27D65A1629BDF7E900A921C6 /* AveragePlayerValue+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AveragePlayerValue+Extensions.swift"; sourceTree = "<group>"; };
+		27D65A1829BE414700A921C6 /* StatisticsPlayerListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsPlayerListView.swift; sourceTree = "<group>"; };
+		27D65A1B29BE42EC00A921C6 /* IOSBestTurnViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSBestTurnViewModel.swift; sourceTree = "<group>"; };
+		27D65A1D29BE435C00A921C6 /* BestTurnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestTurnView.swift; sourceTree = "<group>"; };
+		27D65A1F29BE43A000A921C6 /* BestTurnScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestTurnScene.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -169,6 +177,7 @@
 		279827CF298E656400D497F2 /* Statistics */ = {
 			isa = PBXGroup;
 			children = (
+				27D65A1A29BE42C300A921C6 /* BestTurn */,
 				27D65A0D29BDF2A500A921C6 /* AverageValues */,
 				27D65A0329BDEA7000A921C6 /* Statistics */,
 				279827D0298E656400D497F2 /* StatisticsTab.swift */,
@@ -255,6 +264,7 @@
 				27CF107C29AB952400174D02 /* GameHistoryView.swift */,
 				27D659F929BC78AA00A921C6 /* GameRecapView.swift */,
 				27D65A0E29BDF2D500A921C6 /* NoDataView.swift */,
+				27D65A1829BE414700A921C6 /* StatisticsPlayerListView.swift */,
 			);
 			name = Views;
 			path = Views/Views;
@@ -299,6 +309,16 @@
 				27D65A1429BDF41600A921C6 /* AverageValuesView.swift */,
 			);
 			path = AverageValues;
+			sourceTree = "<group>";
+		};
+		27D65A1A29BE42C300A921C6 /* BestTurn */ = {
+			isa = PBXGroup;
+			children = (
+				27D65A1B29BE42EC00A921C6 /* IOSBestTurnViewModel.swift */,
+				27D65A1D29BE435C00A921C6 /* BestTurnView.swift */,
+				27D65A1F29BE43A000A921C6 /* BestTurnScene.swift */,
+			);
+			path = BestTurn;
 			sourceTree = "<group>";
 		};
 		7555FF72242A565900829871 = {
@@ -443,6 +463,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				27D65A0729BDEAC900A921C6 /* SingleSelectableItem.swift in Sources */,
+				27D65A2029BE43A000A921C6 /* BestTurnScene.swift in Sources */,
 				27CF108529AB9A8100174D02 /* PlayerHistoryHeader.swift in Sources */,
 				279827D1298E656400D497F2 /* StatisticsTab.swift in Sources */,
 				279827D8298E6B8A00D497F2 /* Color+Extension.swift in Sources */,
@@ -460,6 +481,7 @@
 				279827E429A7CD9F00D497F2 /* CreateGameScene.swift in Sources */,
 				279827DB298E6F2600D497F2 /* IOSGameListViewModel.swift in Sources */,
 				27D65A0529BDEA9400A921C6 /* StatisticsView.swift in Sources */,
+				27D65A1929BE414700A921C6 /* StatisticsPlayerListView.swift in Sources */,
 				27D65A1129BDF34900A921C6 /* IOSAverageValuesViewModel.swift in Sources */,
 				27D659F029B3BC0800A921C6 /* SectionHeader.swift in Sources */,
 				27D659FA29BC78AB00A921C6 /* GameRecapView.swift in Sources */,
@@ -484,12 +506,14 @@
 				27D659FE29BC866F00A921C6 /* PlayerHistory+Extensions.swift in Sources */,
 				27D659FC29BC7ADB00A921C6 /* GamePlayerValue+Extensions.swift in Sources */,
 				27CF107929A9049900174D02 /* GameInputView.swift in Sources */,
+				27D65A1E29BE435C00A921C6 /* BestTurnView.swift in Sources */,
 				27CF108B29ABA17200174D02 /* TurnItem.swift in Sources */,
 				27CF107B29A905A600174D02 /* Sector+Extensions.swift in Sources */,
 				27D65A1729BDF7E900A921C6 /* AveragePlayerValue+Extensions.swift in Sources */,
 				27D659ED29B3B97E00A921C6 /* PlayerHistoryView.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				279827F129A7D5C100D497F2 /* KotlinInt+Extensions.swift in Sources */,
+				27D65A1C29BE42EC00A921C6 /* IOSBestTurnViewModel.swift in Sources */,
 				27CF108929AB9FCD00174D02 /* GamePlayerResult+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

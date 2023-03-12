@@ -15,7 +15,6 @@ internal struct DoubleSelectableItem: View {
 				Text(rightText)
 				Image(systemName: "chevron.right")
 			}
-			.padding(.horizontal, 16)
 			.padding(.vertical, 4)
 		}
 		.tint(Color.onBackground)

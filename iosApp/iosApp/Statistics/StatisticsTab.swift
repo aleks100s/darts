@@ -58,12 +58,21 @@ internal struct StatisticsTab: View {
 			Text("most_frequent_shots_statistics")
 			
 		case .bestSet:
-			Text("best_set_statistics")
+			BestTurnScene.create(module: module) { turn in
+				navigationStack.append(.dartsBoard(turn))
+			}
+				.navigationTitle("best_set_statistics")
+				.navigationBarTitleDisplayMode(.inline)
 			
 		case .averageValues:
 			AverageValuesScene.create(module: module)
 				.navigationTitle("average_values_statistics")
 				.navigationBarTitleDisplayMode(.inline)
+			
+		case let .dartsBoard(turn):
+			DartsBoardView(turn: turn)
+				.navigationBarTitleDisplayMode(.inline)
+				.navigationTitle("view_turn")
 		}
 	}
 }

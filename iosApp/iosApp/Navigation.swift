@@ -5,15 +5,16 @@ internal enum GameNavigation: Hashable {
 	case game(players: [Player], goal: Int32)
 	case inGameHistory(gameHistory: [PlayerHistory], goal: Int32)
 	case history(game: Game)
-	case darts(Set)
+	case dartsBoard(Set)
 	case gameRecap(historyState: HistoryState)
 }
 
-internal enum StatisticsNavigation {
+internal enum StatisticsNavigation: Hashable {
 	case victoryDistribution
 	case shotDistribution
 	case biggestFinalSet
 	case mostFrequentShots
 	case bestSet
 	case averageValues
+	case dartsBoard(Set)
 }

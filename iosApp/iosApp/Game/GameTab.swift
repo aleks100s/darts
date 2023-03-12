@@ -62,7 +62,7 @@ internal struct GameTab: View {
 				using: module,
 				game: game,
 				onTurnSelected: { turn in
-					navigationStack.append(.darts(turn))
+					navigationStack.append(.dartsBoard(turn))
 				},
 				onShowRecap: { state in
 					navigationStack.append(.gameRecap(historyState: state))
@@ -76,13 +76,13 @@ internal struct GameTab: View {
 				gameHistory: gameHistory,
 				gameGoal: goal,
 				onTurnSelected: { turn in
-					navigationStack.append(.darts(turn))
+					navigationStack.append(.dartsBoard(turn))
 				}
 			)
 				.navigationBarTitleDisplayMode(.inline)
 				.navigationTitle("history")
 			
-		case let .darts(turn):
+		case let .dartsBoard(turn):
 			DartsBoardView(turn: turn)
 				.navigationBarTitleDisplayMode(.inline)
 				.navigationTitle("view_turn")

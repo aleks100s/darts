@@ -79,6 +79,8 @@
 		27D65A3F29BE524000A921C6 /* IOSVictoryDistributionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D65A3E29BE524000A921C6 /* IOSVictoryDistributionViewModel.swift */; };
 		27D65A4129BE529C00A921C6 /* VictoryDistributionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D65A4029BE529C00A921C6 /* VictoryDistributionView.swift */; };
 		27D65A4329BE52E400A921C6 /* VictoryDistributionScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D65A4229BE52E400A921C6 /* VictoryDistributionScene.swift */; };
+		27D65A4529BE56AD00A921C6 /* Pie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D65A4429BE56AD00A921C6 /* Pie.swift */; };
+		27D65A4729BE5E2D00A921C6 /* ChartLegend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D65A4629BE5E2D00A921C6 /* ChartLegend.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -167,6 +169,8 @@
 		27D65A3E29BE524000A921C6 /* IOSVictoryDistributionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSVictoryDistributionViewModel.swift; sourceTree = "<group>"; };
 		27D65A4029BE529C00A921C6 /* VictoryDistributionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VictoryDistributionView.swift; sourceTree = "<group>"; };
 		27D65A4229BE52E400A921C6 /* VictoryDistributionScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VictoryDistributionScene.swift; sourceTree = "<group>"; };
+		27D65A4429BE56AD00A921C6 /* Pie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pie.swift; sourceTree = "<group>"; };
+		27D65A4629BE5E2D00A921C6 /* ChartLegend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartLegend.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -324,6 +328,8 @@
 				27D659F429B493DD00A921C6 /* DartsBoard.swift */,
 				27D65A0629BDEAC900A921C6 /* SingleSelectableItem.swift */,
 				27D65A0829BDEC0900A921C6 /* DoubleSelectableItem.swift */,
+				27D65A4429BE56AD00A921C6 /* Pie.swift */,
+				27D65A4629BE5E2D00A921C6 /* ChartLegend.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -577,6 +583,7 @@
 				27D659F729B91E0400A921C6 /* DartsBoardView.swift in Sources */,
 				279827CE298E655A00D497F2 /* GameTab.swift in Sources */,
 				27D65A2729BE48B100A921C6 /* MostFrequentShotsScene.swift in Sources */,
+				27D65A4529BE56AD00A921C6 /* Pie.swift in Sources */,
 				279827D3298E657600D497F2 /* Navigation.swift in Sources */,
 				27D65A0929BDEC0900A921C6 /* DoubleSelectableItem.swift in Sources */,
 				279827EF29A7D50A00D497F2 /* Player+Extensions.swift in Sources */,
@@ -609,6 +616,7 @@
 				27CF107B29A905A600174D02 /* Sector+Extensions.swift in Sources */,
 				27D65A1729BDF7E900A921C6 /* AveragePlayerValue+Extensions.swift in Sources */,
 				27D659ED29B3B97E00A921C6 /* PlayerHistoryView.swift in Sources */,
+				27D65A4729BE5E2D00A921C6 /* ChartLegend.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				27D65A2A29BE49C800A921C6 /* IOSBiggestFinalSetViewModel.swift in Sources */,
 				279827F129A7D5C100D497F2 /* KotlinInt+Extensions.swift in Sources */,

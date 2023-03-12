@@ -1,7 +1,9 @@
 import shared
+import SwiftUI
 
 internal final class IOSVictoryDistributionViewModel: ObservableObject {
-	@Published var state = VictoryDistributionState(distribution: nil)
+	@Published var data: [(Float, Color)] = []
+	@Published var legend: [(Color, String)] = []
 	
 	private let viewModel: VictoryDistributionViewModel
 	private var handle: DisposableHandle?
@@ -13,8 +15,17 @@ internal final class IOSVictoryDistributionViewModel: ObservableObject {
 	func startObserving() {
 		handle = viewModel.state
 			.subscribe { [weak self] state in
-				guard let state else { return }
-				self?.state = state
+				guard let distribution = state?.distribution else { return }
+				
+				self?.data = [
+					(distribution.losePercent(), .gray),
+					(distribution.victoryPercent(), .green)
+				]
+				
+				self?.legend = [
+					(.gray, String(format: String(localized: "lose_percent"), distribution.losePercent())),
+					(.green, String(format: String(localized: "victory_percent"), distribution.victoryPercent()))
+				]
 			}
 	}
 	

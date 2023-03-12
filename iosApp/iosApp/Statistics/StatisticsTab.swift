@@ -52,7 +52,11 @@ internal struct StatisticsTab: View {
 			Text("shot_distribution_statistics")
 			
 		case .biggestFinalSet:
-			Text("biggest_final_set_statistics")
+			BiggestFinalSetScene.create(module: module) { turn in
+				navigationStack.append(.dartsBoard(turn))
+			}
+			.navigationTitle("biggest_final_set_statistics")
+			.navigationBarTitleDisplayMode(.inline)
 			
 		case .mostFrequentShots:
 			MostFrequentShotsScene.create(module: module) { turn in

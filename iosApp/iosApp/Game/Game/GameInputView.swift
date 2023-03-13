@@ -17,6 +17,12 @@ internal struct GameInputView: View {
 			}
 			.background(Color.background)
 		}
+		.onAppear {
+			UIScrollView.appearance().bounces = false
+		}
+		.onDisappear {
+			UIScrollView.appearance().bounces = true
+		}
 	}
 	
 	@ViewBuilder

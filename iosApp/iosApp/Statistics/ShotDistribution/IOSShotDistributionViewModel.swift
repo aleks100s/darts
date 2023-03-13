@@ -4,6 +4,7 @@ import SwiftUI
 internal final class IOSShotDistributionViewModel: ObservableObject {
 	@Published var data: [(Float, Color)] = []
 	@Published var legend: [(Color, String)] = []
+	@Published var totalCount: Int32 = 0
 	
 	private let viewModel: ShotDistributionViewModel
 	private var handle: DisposableHandle?
@@ -35,6 +36,8 @@ internal final class IOSShotDistributionViewModel: ObservableObject {
 					distribution.doubleBullseyePercent() > 0 ? (.green, String(format: String(localized: "double_bullseye_percent"), distribution.doubleBullseyePercent())) : nil
 				]
 					.compactMap { $0 }
+				
+				self?.totalCount = distribution.totalCount()
 			}
 	}
 	

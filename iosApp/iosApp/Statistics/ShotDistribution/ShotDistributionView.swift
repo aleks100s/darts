@@ -6,7 +6,10 @@ internal struct ShotDistributionView: View {
 	var body: some View {
 		ScrollView {
 			VStack(spacing: 32) {
-				Pie(slices: $viewModel.data)
+				ZStack {
+					Pie(slices: $viewModel.data)
+					Text("throws_count \(viewModel.totalCount)")
+				}
 				ChartLegend(legend: $viewModel.legend)
 			}
 		}

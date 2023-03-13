@@ -4,6 +4,7 @@ import SwiftUI
 internal final class IOSVictoryDistributionViewModel: ObservableObject {
 	@Published var data: [(Float, Color)] = []
 	@Published var legend: [(Color, String)] = []
+	@Published var totalCount: Int32 = 0
 	
 	private let viewModel: VictoryDistributionViewModel
 	private var handle: DisposableHandle?
@@ -26,6 +27,8 @@ internal final class IOSVictoryDistributionViewModel: ObservableObject {
 					(.gray, String(format: String(localized: "lose_percent"), distribution.losePercent())),
 					(.green, String(format: String(localized: "victory_percent"), distribution.victoryPercent()))
 				]
+				
+				self?.totalCount = distribution.gamesCount
 			}
 	}
 	

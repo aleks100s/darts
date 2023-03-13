@@ -23,6 +23,9 @@ class TrackUserHistoryUseCase(player: Player) {
 
     fun eraseShot() {
         val turns = _playerHistory.value.turns.toMutableList()
+        if (turns.lastOrNull()?.shots?.count() == 3) {
+            return
+        }
         turns.removeLastOrNull()?.let { lastTurn ->
             if (lastTurn.shots.isNotEmpty()) {
                 val lastShots = lastTurn.shots.toMutableList()

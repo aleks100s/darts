@@ -7,7 +7,10 @@ internal struct VictoryDistributionView: View {
 	var body: some View {
 		ScrollView {
 			VStack(spacing: 32) {
-				Pie(slices: $viewModel.data)
+				ZStack {
+					Pie(slices: $viewModel.data)
+					Text("games_count \(viewModel.totalCount)")
+				}
 				ChartLegend(legend: $viewModel.legend)
 			}
 		}

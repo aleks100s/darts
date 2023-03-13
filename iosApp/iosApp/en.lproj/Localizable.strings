@@ -50,10 +50,10 @@
 "bullseye_percent" = "%.2f%% bullseye";
 "double_bullseye_percent" = "%.2f%% double bullseye";
 "no_statistics" = "There is no data yet";
-"throws_count" = "Hits total: %@";
+"throws_count %d" = "Hits total: %d";
 "throw_number" = "#%@";
 "progress" = "Recap";
-"games_count" = "Games total: %@";
+"games_count %d" = "Games total: %d";
 "victory_percent" = "%.2f%% victories";
 "lose_percent" = "%.2f%% losses";
 "biggest_sets" = "Best turns";

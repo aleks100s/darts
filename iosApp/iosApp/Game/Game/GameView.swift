@@ -12,6 +12,8 @@ internal struct GameView: View {
 				} label: {
 					Text("OK")
 				}
+			} message: {
+				Text("winner \(viewModel.state.getWinnerName() ?? "")")
 			}
 			.alert("turn_is_over", isPresented: $viewModel.isTurnOverDialogShown) {
 				Button(role: .cancel) {
@@ -25,6 +27,8 @@ internal struct GameView: View {
 				} label: {
 					Text("reset_turn")
 				}
+			} message: {
+				Text("proceed_to_the_next_turn \(viewModel.state.turnResult())")
 			}
 			.alert("leave_game", isPresented: $viewModel.isCloseGameDialogShown) {
 				Button(role: .destructive) {
@@ -38,6 +42,8 @@ internal struct GameView: View {
 				} label: {
 					Text("cancel")
 				}
+			} message: {
+				Text("your_progress_will_be_lost")
 			}
 			.toolbar {
 				ToolbarItem(placement: .navigationBarLeading) {

@@ -16,7 +16,7 @@
 "leave" = "Leave";
 "return_to_game" = "Return to game";
 "game_finished" = "Game is over";
-"winner" = "The winner is %@";
+"winner %@" = "The winner is %@";
 "finish_game" = "Finish game";
 "game_goal" = "Game goal";
 "shoot" = "Hit";
@@ -24,7 +24,7 @@
 "game_title %d %d" = "Game %d, goal is %d";
 "games" = "Games";
 "turn_is_over" = "Your turn is over";
-"proceed_to_the_next_turn" = "Your result is %@\nProceed to the next turn?";
+"proceed_to_the_next_turn %d" = "Your result is %d\nProceed to the next turn?";
 "reset_turn" = "Reset this turn";
 "next_turn" = "Next turn";
 "inner" = "Inner";

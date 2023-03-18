@@ -260,7 +260,6 @@
 				27CF107229A8BBB600174D02 /* GameScene.swift */,
 				27CF107429A8BBBE00174D02 /* GameView.swift */,
 				27CF107629A8BBC800174D02 /* IOSGameViewModel.swift */,
-				27CF107829A9049900174D02 /* GameInputView.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -299,6 +298,7 @@
 		27D659EE29B3BAE900A921C6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				27CF107829A9049900174D02 /* GameInputView.swift */,
 				27D659EC29B3B97E00A921C6 /* PlayerHistoryView.swift */,
 				27CF107C29AB952400174D02 /* GameHistoryView.swift */,
 				27D659F929BC78AA00A921C6 /* GameRecapView.swift */,

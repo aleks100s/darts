@@ -161,7 +161,7 @@ private fun PlayerCheckbox(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        PlayerItem(player = player)
+        PlayerItem(player = player, modifier = Modifier.weight(1f))
         Icon(
             imageVector = if (isChecked) {
                 Icons.Filled.CheckBox

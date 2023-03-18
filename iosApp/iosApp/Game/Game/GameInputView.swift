@@ -79,8 +79,9 @@ internal struct GameInputView: View {
 				Text(result.player.name)
 				Text("game_player_result \(result.result)")
 			}
+			.lineLimit(1)
 			.padding(16)
-			.frame(minWidth: itemWidth)
+			.frame(minWidth: itemWidth, maxWidth: itemWidth)
 			.background(backgroundColor)
 		}
 		.tint(textColor)

@@ -152,7 +152,8 @@ private fun GamePlayerItem(
         Text(
             text = result.player.name,
             color = textColor,
-            style = MaterialTheme.typography.h3
+            style = MaterialTheme.typography.h3,
+            maxLines = 1
         )
         Text(
             text = stringResource(id = R.string.game_player_result, result.result),

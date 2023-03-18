@@ -12,9 +12,9 @@ import androidx.compose.ui.unit.dp
 import com.alextos.darts.core.domain.Player
 
 @Composable
-fun PlayerItem(player: Player) {
+fun PlayerItem(player: Player, modifier: Modifier) {
     Row(
-        modifier = Modifier
+        modifier = modifier
             .padding(horizontal = 16.dp, vertical = 8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {

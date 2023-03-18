@@ -7,6 +7,7 @@ data class CreatePlayerState(
     val allPlayers: List<Player> = listOf()
  ) {
     fun isNameValid(): Boolean {
-        return name.trim().length > 2 && !allPlayers.map { it.name }.contains(name.trim())
+        return name.trim().length in 3..30
+                && !allPlayers.map { it.name }.contains(name.trim())
     }
 }

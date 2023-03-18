@@ -19,7 +19,8 @@ fun Screen(
         ) {
             Text(
                 text = title,
-                style = MaterialTheme.typography.h1
+                style = MaterialTheme.typography.h1,
+                maxLines = 1
             )
         }
 

@@ -27,7 +27,7 @@ fun PlayerDisclosureItem(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        PlayerItem(player = player)
+        PlayerItem(player = player, Modifier.weight(1f))
 
         Row(verticalAlignment = Alignment.CenterVertically) {
             Text(text = rightText)

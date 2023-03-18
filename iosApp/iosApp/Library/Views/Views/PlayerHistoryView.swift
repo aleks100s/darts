@@ -13,15 +13,17 @@ internal struct PlayerHistoryView: View {
 			PlayerHistoryHeader()
 			
 			ScrollView(showsIndicators: false) {
-				ForEach(playerHistory.turns) { turn in
-					TurnItem(turn: turn, shotsLeft: Int(turn.shotsLeft())) {
-						onTurnSelected(turn)
+				VStack(spacing: 0) {
+					ForEach(playerHistory.turns) { turn in
+						TurnItem(turn: turn, shotsLeft: Int(turn.shotsLeft())) {
+							onTurnSelected(turn)
+						}
 					}
+						.background(Color.background)
+						.listRowSeparator(.hidden)
+						.listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+					Spacer()
 				}
-					.background(Color.background)
-					.listRowSeparator(.hidden)
-					.listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
-				Spacer()
 			}
 		}
 		.frame(maxWidth: .infinity, maxHeight: .infinity)

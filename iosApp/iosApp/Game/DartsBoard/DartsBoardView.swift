@@ -4,10 +4,12 @@ import shared
 internal struct DartsBoardView: View {
 	let turn: Set
 	
+	private var idiom : UIUserInterfaceIdiom { UIDevice.current.userInterfaceIdiom }
+	
 	var body: some View {
-		ScrollView {
+		ScrollView(showsIndicators: false) {
 			VStack(spacing: 32) {
-				ForEach(turn.shots) { shot in
+				ForEach(turn.shots.filter { !$0.sector.isNone() }) { shot in
 					dartsBoardItem(shot: shot)
 				}
 			}
@@ -22,6 +24,6 @@ internal struct DartsBoardView: View {
 			DartsBoard(highlightedSector: shot.sector)
 				.padding()
 		}
-		.frame(minWidth: 400, minHeight: 400)
+		.frame(minHeight: idiom == .pad ? 800 : 400)
 	}
 }

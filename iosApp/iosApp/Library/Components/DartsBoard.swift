@@ -3,6 +3,7 @@ import shared
 
 internal struct DartsBoard: View {
 	let highlightedSector: Sector
+	
 	private let hitColor = Color.cyan
 	
 	var body: some View {

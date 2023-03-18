@@ -52,6 +52,9 @@ internal struct GameTab: View {
 					navigationStack.append(
 						.inGameHistory(gameHistory: history, goal: goal, page: page)
 					)
+				},
+				onTurnSelected: { turn in
+					navigationStack.append(.dartsBoard(turn))
 				}
 			)
 				.toolbar(.hidden, for: .tabBar)

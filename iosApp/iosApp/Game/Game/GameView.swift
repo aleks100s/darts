@@ -3,6 +3,8 @@ import SwiftUI
 internal struct GameView: View {
 	@StateObject var viewModel: IOSGameViewModel
 	
+	private var idiom : UIUserInterfaceIdiom { UIDevice.current.userInterfaceIdiom }
+	
 	var body: some View {
 		return gameView
 			.alert("game_finished", isPresented: $viewModel.isGameFinishedDialogShown) {
@@ -71,6 +73,23 @@ internal struct GameView: View {
 	
 	@ViewBuilder
 	private var gameView: some View {
+		if idiom == .pad {
+			TabletView(
+				view1: {
+					gameInput
+						.frame(minWidth: 0, maxWidth: .infinity)
+				},
+				view2: {
+					gameHistory
+						.frame(minWidth: 0, maxWidth: .infinity)
+				}
+			)
+		} else {
+			gameInput
+		}
+	}
+	
+	@ViewBuilder var gameInput: some View {
 		GameInputView(
 			state: viewModel.state,
 			onInputClick: { sector in
@@ -78,6 +97,17 @@ internal struct GameView: View {
 			},
 			onPlayerClick: { index in
 				viewModel.showGameHistory(index: index)
+			}
+		)
+	}
+	
+	@ViewBuilder var gameHistory: some View {
+		GameHistoryView(
+			gameHistory: viewModel.state.gameHistory,
+			gameGoal: viewModel.state.gameGoal,
+			page: Int(viewModel.state.currentPage()),
+			onTurnSelected: { turn in
+				viewModel.selectTurn(turn: turn)
 			}
 		)
 	}

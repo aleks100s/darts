@@ -6,8 +6,7 @@ internal struct GameHistoryView: View {
 	let gameHistory: [PlayerHistory]
 	let gameGoal: Int32
 	let onTurnSelected: (Set) -> Void
-	
-	@StateObject var page: Page = .first()
+	let page: Page
 	
 	var body: some View {
 		Pager(
@@ -22,5 +21,17 @@ internal struct GameHistoryView: View {
 				)
 			}
 		)
+	}
+	
+	init(
+		gameHistory: [PlayerHistory],
+		gameGoal: Int32,
+		page: Int,
+		onTurnSelected: @escaping (Set) -> Void
+	) {
+		self.gameHistory = gameHistory
+		self.gameGoal = gameGoal
+		self.page = .withIndex(page)
+		self.onTurnSelected = onTurnSelected
 	}
 }

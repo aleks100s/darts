@@ -76,8 +76,8 @@ internal struct GameView: View {
 			onInputClick: { sector in
 				viewModel.onEvent(.MakeShot(sector: sector))
 			},
-			onPlayerClick: {
-				viewModel.showGameHistory()
+			onPlayerClick: { index in
+				viewModel.showGameHistory(index: index)
 			}
 		)
 	}

@@ -16,13 +16,13 @@ internal final class IOSGameViewModel: ObservableObject {
 	
 	private let viewModel: GameViewModel
 	private let onGameFinished: () -> Void
-	private let onShowInGameHistory: ([PlayerHistory], Int32) -> Void
+	private let onShowInGameHistory: ([PlayerHistory], Int32, Int) -> Void
 	private var handle: DisposableHandle?
 	
 	init(
 		gameManager: GameManager,
 		onGameFinished: @escaping () -> Void,
-		onShowInGameHistory: @escaping ([PlayerHistory], Int32) -> Void
+		onShowInGameHistory: @escaping ([PlayerHistory], Int32, Int) -> Void
 	) {
 		self.onGameFinished = onGameFinished
 		self.onShowInGameHistory = onShowInGameHistory
@@ -36,8 +36,8 @@ internal final class IOSGameViewModel: ObservableObject {
 		onGameFinished()
 	}
 	
-	func showGameHistory() {
-		onShowInGameHistory(state.gameHistory, state.gameGoal)
+	func showGameHistory(index: Int) {
+		onShowInGameHistory(state.gameHistory, state.gameGoal, index)
 	}
 	
 	func startObserving() {

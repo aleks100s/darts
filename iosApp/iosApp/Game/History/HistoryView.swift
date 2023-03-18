@@ -7,6 +7,7 @@ internal struct HistoryView: View {
 		GameHistoryView(
 			gameHistory: viewModel.state.gameHistory,
 			gameGoal: viewModel.state.gameGoal,
+			page: 0,
 			onTurnSelected: viewModel.select
 		)
 		.toolbar {

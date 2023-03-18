@@ -4,7 +4,7 @@ import shared
 internal struct GameInputView: View {
 	let state: GameState
 	let onInputClick: (Sector) -> ()
-	let onPlayerClick: () -> ()
+	let onPlayerClick: (Int) -> ()
 	
 	var body: some View {
 		VStack(spacing: 0) {
@@ -16,12 +16,6 @@ internal struct GameInputView: View {
 				inputTable
 			}
 			.background(Color.background)
-		}
-		.onAppear {
-			UIScrollView.appearance().bounces = false
-		}
-		.onDisappear {
-			UIScrollView.appearance().bounces = true
 		}
 	}
 	
@@ -41,7 +35,7 @@ internal struct GameInputView: View {
 	@ViewBuilder
 	private func gamePlayers(
 		results: [GamePlayerResult],
-		onClick: @escaping () -> Void
+		onClick: @escaping (Int) -> Void
 	) -> some View {
 		GeometryReader { geometry in
 			let width = geometry.size.width
@@ -53,7 +47,7 @@ internal struct GameInputView: View {
 						gamePlayerItem(
 							result: result,
 							itemWidth: itemWidth,
-							onClick: onClick
+							onClick: { onClick(results.index(of: result) ?? 0) }
 						)
 					}
 				}

@@ -48,8 +48,10 @@ internal struct GameTab: View {
 				onGameFinished: {
 					navigationStack = []
 				},
-				onShowInGameHistory: { history, goal in
-					navigationStack.append(.inGameHistory(gameHistory: history, goal: goal))
+				onShowInGameHistory: { history, goal, page in
+					navigationStack.append(
+						.inGameHistory(gameHistory: history, goal: goal, page: page)
+					)
 				}
 			)
 				.toolbar(.hidden, for: .tabBar)
@@ -71,10 +73,11 @@ internal struct GameTab: View {
 				.navigationBarTitleDisplayMode(.inline)
 				.navigationTitle("history")
 			
-		case let .inGameHistory(gameHistory, goal):
+		case let .inGameHistory(gameHistory, goal, page):
 			GameHistoryView(
 				gameHistory: gameHistory,
 				gameGoal: goal,
+				page: page,
 				onTurnSelected: { turn in
 					navigationStack.append(.dartsBoard(turn))
 				}

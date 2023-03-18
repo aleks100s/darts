@@ -3,7 +3,7 @@ import shared
 internal enum GameNavigation: Hashable {
 	case createGame
 	case game(players: [Player], goal: Int32)
-	case inGameHistory(gameHistory: [PlayerHistory], goal: Int32)
+	case inGameHistory(gameHistory: [PlayerHistory], goal: Int32, page: Int)
 	case history(game: Game)
 	case dartsBoard(Set)
 	case gameRecap(historyState: HistoryState)

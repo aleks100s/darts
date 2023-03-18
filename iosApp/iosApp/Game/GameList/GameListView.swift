@@ -5,19 +5,7 @@ internal struct GameListView: View {
 	@StateObject var viewModel: IOSGameListViewModel
 	
 	var body: some View {
-		List {
-			ForEach(viewModel.state.games) { game in
-				gameItem(game: game)
-					.contentShape(Rectangle())
-					.onTapGesture {
-						viewModel.select(game: game)
-					}
-			}
-			.onDelete { indexSet in
-				let game = viewModel.state.games[indexSet.first!]
-				viewModel.onEvent(.ShowDeleteGameDialog(game: game))
-			}
-		}
+		content
 		.alert("delete_game", isPresented: $viewModel.isDeleteGameDialogShown) {
 			Button(role: .destructive) {
 				viewModel.onEvent(.DeleteGame())
@@ -37,6 +25,27 @@ internal struct GameListView: View {
 			.onDisappear {
 				viewModel.dispose()
 			}
+	}
+	
+	@ViewBuilder
+	private var content: some View {
+		if viewModel.state.games.isEmpty {
+			NoDataView()
+		} else {
+			List {
+				ForEach(viewModel.state.games) { game in
+					gameItem(game: game)
+						.contentShape(Rectangle())
+						.onTapGesture {
+							viewModel.select(game: game)
+						}
+				}
+				.onDelete { indexSet in
+					let game = viewModel.state.games[indexSet.first!]
+					viewModel.onEvent(.ShowDeleteGameDialog(game: game))
+				}
+			}
+		}
 	}
 	
 	@ViewBuilder

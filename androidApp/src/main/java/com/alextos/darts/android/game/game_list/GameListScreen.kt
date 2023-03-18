@@ -18,6 +18,7 @@ import com.alextos.darts.android.R
 import com.alextos.darts.android.common.presentation.components.FAB
 import com.alextos.darts.android.common.presentation.extensions.getTitle
 import com.alextos.darts.android.common.presentation.screens.Screen
+import com.alextos.darts.android.common.presentation.views.NoDataView
 import com.alextos.darts.game.domain.models.Game
 import com.alextos.darts.game.presentation.game_list.GameListEvent
 import com.alextos.darts.game.presentation.game_list.GameListState
@@ -38,26 +39,30 @@ fun GameListScreen(
         }
     ) { padding ->
         Screen(title = stringResource(id = R.string.games)) {
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(padding),
-                verticalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                items(state.games) {
-                    GameItem(
-                        game = it,
-                        onClick = {
-                            onEvent(GameListEvent.SelectGame(it))
-                        },
-                        onLongClick = {
-                            onEvent(GameListEvent.ShowDeleteGameDialog(it))
-                        }
-                    )
-                }
+            if (state.games.isEmpty()) {
+                NoDataView()
+            } else {
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(padding),
+                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                ) {
+                    items(state.games) {
+                        GameItem(
+                            game = it,
+                            onClick = {
+                                onEvent(GameListEvent.SelectGame(it))
+                            },
+                            onLongClick = {
+                                onEvent(GameListEvent.ShowDeleteGameDialog(it))
+                            }
+                        )
+                    }
 
-                item {
-                    Spacer(modifier = Modifier.height(72.dp))
+                    item {
+                        Spacer(modifier = Modifier.height(72.dp))
+                    }
                 }
             }
         }

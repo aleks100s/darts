@@ -8,6 +8,7 @@ internal struct GameListView: View {
 		List {
 			ForEach(viewModel.state.games) { game in
 				gameItem(game: game)
+					.contentShape(Rectangle())
 					.onTapGesture {
 						viewModel.select(game: game)
 					}

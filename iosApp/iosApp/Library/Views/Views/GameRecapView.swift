@@ -40,6 +40,7 @@ internal struct GameRecapView: View {
 				.symbol(by: .value("Player", playerHistory.id))
 			}
 		}
+		.frame(height: 300)
 		.padding()
 	}
 	

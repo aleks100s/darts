@@ -47,7 +47,7 @@ internal struct GameInputView: View {
 						gamePlayerItem(
 							result: result,
 							itemWidth: itemWidth,
-							onClick: { onClick(results.index(of: result) ?? 0) }
+							onClick: { onClick(results.firstIndex(of: result) ?? 0) }
 						)
 					}
 				}
@@ -90,8 +90,7 @@ internal struct GameInputView: View {
 	@ViewBuilder
 	private var hintRow: some View {
 		let cells = [
-			String(localized: "inner"),
-			String(localized: "outer"),
+			String(localized: "single"),
 			String(localized: "double_"),
 			String(localized: "triplet")
 		]

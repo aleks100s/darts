@@ -221,7 +221,12 @@ enum class Sector(
             SingleInner5, SingleInner6, SingleInner7, SingleInner8,
             SingleInner9, SingleInner10, SingleInner11, SingleInner12,
             SingleInner13, SingleInner14, SingleInner15, SingleInner16,
-            SingleInner17, SingleInner18, SingleInner19, SingleInner20 -> {
+            SingleInner17, SingleInner18, SingleInner19, SingleInner20,
+            SingleOuter1, SingleOuter2, SingleOuter3, SingleOuter4,
+            SingleOuter5, SingleOuter6, SingleOuter7, SingleOuter8,
+            SingleOuter9, SingleOuter10, SingleOuter11, SingleOuter12,
+            SingleOuter13, SingleOuter14, SingleOuter15, SingleOuter16,
+            SingleOuter17, SingleOuter18, SingleOuter19, SingleOuter20 -> {
                 true
             }
             else -> false
@@ -230,6 +235,11 @@ enum class Sector(
 
     fun isOuter(): Boolean {
         return when (this) {
+            SingleInner1, SingleInner2, SingleInner3, SingleInner4,
+            SingleInner5, SingleInner6, SingleInner7, SingleInner8,
+            SingleInner9, SingleInner10, SingleInner11, SingleInner12,
+            SingleInner13, SingleInner14, SingleInner15, SingleInner16,
+            SingleInner17, SingleInner18, SingleInner19, SingleInner20,
             SingleOuter1, SingleOuter2, SingleOuter3, SingleOuter4,
             SingleOuter5, SingleOuter6, SingleOuter7, SingleOuter8,
             SingleOuter9, SingleOuter10, SingleOuter11, SingleOuter12,
@@ -272,32 +282,28 @@ enum class Sector(
 
     companion object {
         val sectors = listOf(
-            listOf(SingleInner1, SingleOuter1, Double1, Triple1),
-            listOf(SingleInner2, SingleOuter2, Double2, Triple2),
-            listOf(SingleInner3, SingleOuter3, Double3, Triple3),
-            listOf(SingleInner4, SingleOuter4, Double4, Triple4),
-            listOf(SingleInner5, SingleOuter5, Double5, Triple5),
-            listOf(SingleInner6, SingleOuter6, Double6, Triple6),
-            listOf(SingleInner7, SingleOuter7, Double7, Triple7),
-            listOf(SingleInner8, SingleOuter8, Double8, Triple8),
-            listOf(SingleInner9, SingleOuter9, Double9, Triple9),
-            listOf(SingleInner10, SingleOuter10, Double10,  Triple10),
-            listOf(SingleInner11, SingleOuter11, Double11,  Triple11),
-            listOf(SingleInner12, SingleOuter12, Double12,  Triple12),
-            listOf(SingleInner13, SingleOuter13, Double13,  Triple13),
-            listOf(SingleInner14, SingleOuter14, Double14,  Triple14),
-            listOf(SingleInner15, SingleOuter15, Double15,  Triple15),
-            listOf(SingleInner16, SingleOuter16, Double16,  Triple16),
-            listOf(SingleInner17, SingleOuter17, Double17,  Triple17),
-            listOf(SingleInner18, SingleOuter18, Double18,  Triple18),
-            listOf(SingleInner19, SingleOuter19, Double19,  Triple19),
-            listOf(SingleInner20, SingleOuter20, Double20,  Triple20),
+            listOf(SingleInner1, Double1, Triple1),
+            listOf(SingleInner2, Double2, Triple2),
+            listOf(SingleInner3, Double3, Triple3),
+            listOf(SingleInner4, Double4, Triple4),
+            listOf(SingleInner5, Double5, Triple5),
+            listOf(SingleInner6, Double6, Triple6),
+            listOf(SingleInner7, Double7, Triple7),
+            listOf(SingleInner8, Double8, Triple8),
+            listOf(SingleInner9, Double9, Triple9),
+            listOf(SingleInner10, Double10,  Triple10),
+            listOf(SingleInner11, Double11,  Triple11),
+            listOf(SingleInner12, Double12,  Triple12),
+            listOf(SingleInner13, Double13,  Triple13),
+            listOf(SingleInner14, Double14,  Triple14),
+            listOf(SingleInner15, Double15,  Triple15),
+            listOf(SingleInner16, Double16,  Triple16),
+            listOf(SingleInner17, Double17,  Triple17),
+            listOf(SingleInner18, Double18,  Triple18),
+            listOf(SingleInner19, Double19,  Triple19),
+            listOf(SingleInner20, Double20,  Triple20),
             listOf(SingleBullseye, DoubleBullseye, Miss),
         )
-
-        fun random(): Sector {
-            return values().toList().random()
-        }
 
         fun getSector(id: Int): Sector {
             return when(id) {

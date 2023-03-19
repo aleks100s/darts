@@ -27,8 +27,7 @@
 "proceed_to_the_next_turn %d" = "Результат %d\nПерейти к следующему ходу?";
 "reset_turn" = "Сбросить этот ход";
 "next_turn" = "Следующий ход";
-"inner" = "Внутренний";
-"outer" = "Внешний";
+"single" = "Одинарный";
 "double_" = "Двойной";
 "triplet" = "Тройной";
 "best_set_statistics" = "Лучший подход";

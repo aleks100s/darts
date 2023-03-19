@@ -27,8 +27,7 @@
 "proceed_to_the_next_turn %d" = "Your result is %d\nProceed to the next turn?";
 "reset_turn" = "Reset this turn";
 "next_turn" = "Next turn";
-"inner" = "Inner";
-"outer" = "Outer";
+"single" = "Single";
 "double_" = "Double";
 "triplet" = "Triplet";
 "best_set_statistics" = "Best turn statistics";

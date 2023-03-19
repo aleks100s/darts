@@ -165,8 +165,7 @@ private fun GamePlayerItem(
 @Composable
 private fun HintRow() {
     val strings = listOf(
-        stringResource(id = R.string.inner),
-        stringResource(id = R.string.outer),
+        stringResource(id = R.string.single),
         stringResource(id = R.string.double_),
         stringResource(id = R.string.triplet)
     )

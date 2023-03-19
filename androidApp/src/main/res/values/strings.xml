@@ -28,8 +28,7 @@
     <string name="proceed_to_the_next_turn">Your result is %1$d\nProceed to the next turn?</string>
     <string name="reset_turn">Reset this turn</string>
     <string name="next_turn">Next turn</string>
-    <string name="inner">Inner</string>
-    <string name="outer">Outer</string>
+    <string name="single">Single</string>
     <string name="double_">Double</string>
     <string name="triplet">Triplet</string>
     <string name="best_set_statistics">Best turn statistics</string>

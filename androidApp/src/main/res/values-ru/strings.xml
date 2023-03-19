@@ -28,8 +28,7 @@
     <string name="proceed_to_the_next_turn">Результат %1$d\nПерейти к следующему ходу?</string>
     <string name="reset_turn">Сбросить этот ход</string>
     <string name="next_turn">Следующий ход</string>
-    <string name="inner">Внутренний</string>
-    <string name="outer">Внешний</string>
+    <string name="single">Одинарный</string>
     <string name="double_">Двойной</string>
     <string name="triplet">Тройной</string>
     <string name="best_set_statistics">Лучший подход</string>

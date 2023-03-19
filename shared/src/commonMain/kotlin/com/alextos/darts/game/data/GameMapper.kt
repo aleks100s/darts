@@ -12,14 +12,15 @@ fun List<GetGames>.mapToGames(): List<Game> {
         .entries
         .map { (_, group)  ->
             val players = group.map { Player(it.playerId, it.playerName) }
-            val entity = group.find { it.isWinner == 1L }!!
-            val winner = Player(entity.playerId, entity.playerName)
+            val gameEntity = group.firstOrNull()
+            val winnerEntity = group.find { it.isWinner == 1L }
+            val winner = if (winnerEntity == null) null else Player(winnerEntity.playerId, winnerEntity.playerName)
             return@map Game(
-                id = entity.gameId,
+                id = gameEntity?.gameId ?: 0,
                 players = players,
                 winner = winner,
-                gameGoal = entity.goal.toInt(),
-                timestamp = Instant.fromEpochMilliseconds(entity.timestamp)
+                gameGoal = gameEntity?.goal?.toInt() ?: 0,
+                timestamp = Instant.fromEpochMilliseconds(gameEntity?.timestamp ?: 0)
                     .toLocalDateTime(TimeZone.currentSystemDefault())
             )
         }

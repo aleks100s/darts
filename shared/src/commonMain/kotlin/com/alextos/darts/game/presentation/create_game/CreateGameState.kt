@@ -10,5 +10,5 @@ data class CreateGameState(
     val playerToDelete: Player? = null,
     val isDeletePlayerDialogShown: Boolean = false
 ) {
-    fun isReadyToCreateGame() = selectedPlayers.count() > 1 && selectedGoal != null
+    fun isReadyToCreateGame() = selectedPlayers.isNotEmpty() && selectedGoal != null
 }

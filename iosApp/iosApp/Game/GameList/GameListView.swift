@@ -52,13 +52,19 @@ internal struct GameListView: View {
 	private func gameItem(game: Game) -> some View {
 		HStack(alignment: .center, spacing: 16) {
 			VStack(alignment: .leading) {
-				Text("game_title \(game.id?.int32Value ?? 0) \(game.gameGoal)")
+				if game.winner == nil {
+					Text("training \(game.id?.int32Value ?? 0) \(game.gameGoal)")
+				} else {
+					Text("game_title \(game.id?.int32Value ?? 0) \(game.gameGoal)")
+				}
 				Text(game.getDateString())
 			}
 			
 			Spacer()
 			
-			Text("🏆 \(game.winner?.name ?? "") 🏆")
+			if let winner = game.winner {
+				Text("🏆 \(winner.name) 🏆")
+			}
 		}
 		.lineLimit(1)
 	}

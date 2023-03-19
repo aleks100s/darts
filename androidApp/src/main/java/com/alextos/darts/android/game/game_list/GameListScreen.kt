@@ -137,6 +137,8 @@ private fun GameItem(
 
         Spacer(modifier = Modifier.weight(1f))
 
-        Text(text = "\uD83C\uDFC6 ${game.winner?.name!!} \uD83C\uDFC6")
+        game.winner?.let { winner ->
+            Text(text = "\uD83C\uDFC6 ${winner.name} \uD83C\uDFC6")
+        }
     }
 }

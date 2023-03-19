@@ -49,7 +49,13 @@ data class GameState(
         gameHistory.map { it.player }.indexOf(player)
     } ?: 0
 
-    fun getWinnerName() = currentPlayer?.name
+    fun getWinnerName(): String? {
+        return if (gameHistory.count() == 1) {
+            null
+        } else {
+            currentPlayer?.name
+        }
+    }
 
     fun getCurrentSet(): Set {
         var leftAfter = 0

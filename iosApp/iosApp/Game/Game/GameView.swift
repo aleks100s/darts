@@ -15,7 +15,7 @@ internal struct GameView: View {
 					Text("OK")
 				}
 			} message: {
-				Text("winner \(viewModel.state.getWinnerName() ?? "")")
+				Text(gameFinishedMessage)
 			}
 			.alert("turn_is_over", isPresented: $viewModel.isTurnOverDialogShown) {
 				Button(role: .cancel) {
@@ -89,7 +89,8 @@ internal struct GameView: View {
 		}
 	}
 	
-	@ViewBuilder var gameInput: some View {
+	@ViewBuilder
+	var gameInput: some View {
 		GameInputView(
 			state: viewModel.state,
 			onInputClick: { sector in
@@ -101,7 +102,8 @@ internal struct GameView: View {
 		)
 	}
 	
-	@ViewBuilder var gameHistory: some View {
+	@ViewBuilder
+	var gameHistory: some View {
 		GameHistoryView(
 			gameHistory: viewModel.state.gameHistory,
 			gameGoal: viewModel.state.gameGoal,
@@ -110,5 +112,13 @@ internal struct GameView: View {
 				viewModel.selectTurn(turn: turn)
 			}
 		)
+	}
+	
+	private var gameFinishedMessage: String {
+		if let winner = viewModel.state.getWinnerName() {
+			return "winner \(winner)"
+		} else {
+			return ""
+		}
 	}
 }

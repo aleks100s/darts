@@ -75,7 +75,7 @@ fun GameScreen(
         }
 
         if (state.isGameFinished) {
-            GameFinishedDialog(winner = state.getWinnerName() ?: "", onEvent = onEvent)
+            GameFinishedDialog(winner = state.getWinnerName(), onEvent = onEvent)
         }
     }
 }
@@ -167,14 +167,16 @@ private fun CloseGameDialog(onEvent: (GameEvent) -> Unit) {
 }
 
 @Composable
-private fun GameFinishedDialog(winner: String, onEvent: (GameEvent) -> Unit) {
+private fun GameFinishedDialog(winner: String?, onEvent: (GameEvent) -> Unit) {
     AlertDialog(
         onDismissRequest = {  },
         title = {
             Text(text = stringResource(id = R.string.game_finished))
         },
         text = {
-            Text(text = stringResource(id = R.string.winner, winner))
+            winner?.let {
+                Text(text = stringResource(id = R.string.winner, it))
+            }
         },
         confirmButton = {
             Button(onClick = { onEvent(GameEvent.CloseGame) }) {

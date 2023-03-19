@@ -87,9 +87,10 @@ class GameManager(
 
     private fun finishGame() {
         _isGameFinished.update { true }
+        val winner = if (players.count() == 1) null else currentPlayer.value
         val game = Game(
             players = players,
-            winner = currentPlayer.value,
+            winner = winner,
             gameGoal = goal,
             timestamp = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
         )

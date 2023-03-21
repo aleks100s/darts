@@ -116,7 +116,7 @@ internal struct GameView: View {
 	
 	private var gameFinishedMessage: String {
 		if let winner = viewModel.state.getWinnerName() {
-			return "winner \(winner)"
+			return String(localized: "winner \(winner)")
 		} else {
 			return ""
 		}

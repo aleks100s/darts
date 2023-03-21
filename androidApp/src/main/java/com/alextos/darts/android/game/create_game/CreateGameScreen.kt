@@ -70,7 +70,7 @@ fun CreateGameScreen(
                 items(state.allPlayers) { player ->
                     PlayerCheckbox(
                         player = player,
-                        isChecked = state.selectedPlayers.contains(player),
+                        isChecked = state.isPlayerSelected(player),
                         onClick = {
                             onEvent(CreateGameEvent.SelectPlayer(it))
                         },

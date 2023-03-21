@@ -16,12 +16,16 @@ internal enum GameScene {
 			players: players,
 			goal: goal
 		)
-		let viewModel = IOSGameViewModel(
-			gameManager: gameManager,
+		let viewModel = GameViewModel(
+		   gameManager: gameManager,
+		   coroutineScope: nil
+		)
+		let iOSViewModel = IOSGameViewModel(
+			viewModel: viewModel,
 			onGameFinished: onGameFinished,
 			onShowInGameHistory: onShowInGameHistory,
 			onTurnSelected: onTurnSelected
 		)
-		return GameView(viewModel: viewModel)
+		return GameView(viewModel: iOSViewModel)
 	}
 }

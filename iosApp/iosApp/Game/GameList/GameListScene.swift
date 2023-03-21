@@ -9,12 +9,16 @@ internal enum GameListScene {
 	) -> some View {
 		let getGamesUseCase = GetGamesUseCase(dataSource: module.gameDataSource)
 		let deleteGameUseCase = DeleteGameUseCase(dataSource: module.gameDataSource)
-		let viewModel = IOSGameListViewModel(
-			getGamesUseCase: getGamesUseCase,
+		let viewModel = GameListViewModel(
 			deleteGameUseCase: deleteGameUseCase,
+			getGamesUseCase: getGamesUseCase,
+			coroutineScope: nil
+		)
+		let iOSViewModel = IOSGameListViewModel(
+			viewModel: viewModel,
 			onGameSelected: onGameSelected
 		)
-		let view = GameListView(viewModel: viewModel)
+		let view = GameListView(viewModel: iOSViewModel)
 		return view
 	}
 }

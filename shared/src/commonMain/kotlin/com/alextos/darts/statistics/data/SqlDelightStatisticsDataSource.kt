@@ -87,8 +87,7 @@ class SqlDelightStatisticsDataSource(
         }
         return SectorHeatmapDistribution(
             distribution = map,
-            player = player,
-            shotsTotal = map.values.reduce { acc, count -> acc + count }
+            player = player
         )
     }
 }

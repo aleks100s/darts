@@ -5,8 +5,7 @@ import com.alextos.darts.core.domain.Sector
 
 data class SectorHeatmapDistribution(
     val player: Player,
-    val distribution: Map<Sector, Int> = mapOf(),
-    val shotsTotal: Int = 0
+    val distribution: Map<Sector, Int> = mapOf()
 ) {
     fun getOuters(): List<SectorHeat> {
         return distribution.keys.filter { it.isInner() || it.isOuter() }
@@ -41,9 +40,14 @@ data class SectorHeatmapDistribution(
     }
 
     private fun getSectorFrequency(sector: Sector): Float {
-        if (shotsTotal == 0) {
+        val count = getBiggestShotCount()
+        if (count == 0) {
             return 0f
         }
-        return (distribution[sector]?.toFloat() ?: 0f) / shotsTotal
+        return (distribution[sector]?.toFloat() ?: 0f) / count
+    }
+
+    private fun getBiggestShotCount(): Int {
+        return distribution.values.maxBy { it }
     }
 }

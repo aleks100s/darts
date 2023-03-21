@@ -21,7 +21,7 @@ internal final class IOSGameViewModel: ObservableObject {
 	private var handle: DisposableHandle?
 	
 	init(
-		gameManager: GameManager,
+		viewModel: GameViewModel,
 		onGameFinished: @escaping () -> Void,
 		onShowInGameHistory: @escaping ([PlayerHistory], Int32, Int) -> Void,
 		onTurnSelected: @escaping (Set) -> Void
@@ -29,10 +29,7 @@ internal final class IOSGameViewModel: ObservableObject {
 		self.onGameFinished = onGameFinished
 		self.onShowInGameHistory = onShowInGameHistory
 		self.onTurnSelected = onTurnSelected
-		viewModel = GameViewModel(
-			gameManager: gameManager,
-			coroutineScope: nil
-		)
+		self.viewModel = viewModel
 	}
 	
 	func finishGame() {

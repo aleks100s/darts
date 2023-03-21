@@ -36,6 +36,7 @@
 "average_values_statistics" = "Average turn score and hit value";
 "shot_distribution_statistics" = "Hit distribution statistics";
 "victory_distribution_statistics" = "Victory distribution statistics";
+"sector_heatmap_statistics" = "Sector heatmap statistics";
 "game" = "Game";
 "statistics" = "Statistics";
 "arrow_right_description" = "Show";

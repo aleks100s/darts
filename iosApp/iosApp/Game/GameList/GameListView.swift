@@ -41,8 +41,9 @@ internal struct GameListView: View {
 						}
 				}
 				.onDelete { indexSet in
-					let game = viewModel.state.games[indexSet.first!]
-					viewModel.onEvent(.ShowDeleteGameDialog(game: game))
+					if let index = indexSet.first {
+						viewModel.deleteGame(index: index)
+					}
 				}
 			}
 		}

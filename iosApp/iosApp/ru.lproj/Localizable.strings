@@ -36,6 +36,7 @@
 "average_values_statistics" = "Средний результат за подход/бросок";
 "shot_distribution_statistics" = "Распределение бросков";
 "victory_distribution_statistics" = "Распределение побед";
+"sector_heatmap_statistics" = "Тепловая карта секторов";
 "game" = "Игра";
 "statistics" = "Статистика";
 "arrow_right_description" = "Показать";

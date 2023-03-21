@@ -15,20 +15,21 @@ internal struct CreateGameView: View {
 				}
 
 				ForEach(viewModel.state.allPlayers) { player in
-					let isChecked = viewModel.state.selectedPlayers.contains(player)
+					let isChecked = viewModel.state.isPlayerSelected(player: player)
 					PlayerCheckbox(player: player, isChecked: isChecked) {
 						viewModel.onEvent(.SelectPlayer(player: player))
 					}
 				}
 				.onDelete { indexSet in
-					let player = viewModel.state.allPlayers[indexSet.first!]
-					viewModel.onEvent(.ShowDeletePlayerDialog(player: player))
+					if let index = indexSet.first {
+						viewModel.deletePlayer(index: index)
+					}
 				}
 			}
 			
 			Section("game_goal") {
 				ForEach(viewModel.state.goalOptions) { option in
-					let isSelected = viewModel.state.selectedGoal == option
+					let isSelected = viewModel.state.isGoalSelected(goal: option.int32Value)
 					GoalOption(option: option.intValue, isSelected: isSelected) {
 						viewModel.onEvent(.SelectGoal(option: option.int32Value))
 					}

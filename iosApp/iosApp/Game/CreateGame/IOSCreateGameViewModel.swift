@@ -59,6 +59,11 @@ internal final class IOSCreateGameViewModel: ObservableObject {
 		}
 	}
 	
+	func deletePlayer(index: Int) {
+		let player = state.allPlayers[index]
+		onEvent(.ShowDeletePlayerDialog(player: player))
+	}
+	
 	func createPlayer(name: String) {
 		let name = name.trimmingCharacters(in: .whitespacesAndNewlines)
 		if !createPlayerState.allPlayers.map(\.name).contains(name), name.count > 2 {

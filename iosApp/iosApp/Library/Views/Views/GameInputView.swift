@@ -8,28 +8,45 @@ internal struct GameInputView: View {
 	
 	var body: some View {
 		VStack(spacing: 0) {
-			header()
-			
+			header
 			hintRow
-			
-			ScrollView {
-				inputTable
-			}
-			.background(Color.background)
+			inputTable
 		}
 	}
 	
 	@ViewBuilder
-	private func header() -> some View {
+	private var header: some View {
 		let turn = state.getCurrentSet()
 		let currentResults = state.currentResults()
+		
 		VStack(spacing: 0) {
 			gamePlayers(results: currentResults, onClick: onPlayerClick)
-			
 			PlayerHistoryHeader()
-			
 			currentTurn(turn: turn)
 		}
+	}
+	
+	@ViewBuilder
+	private var hintRow: some View {
+		let cells = [
+			String(localized: "single"),
+			String(localized: "double_"),
+			String(localized: "triplet")
+		]
+		Row(cells: cells, spacing: 0)
+	}
+	
+	@ViewBuilder
+	private var inputTable: some View {
+		ScrollView {
+			VStack(spacing: 2) {
+				ForEach(Sector.companion.sectors) { sectors in
+					InputRow(sectors: sectors, onInputClick: onInputClick)
+				}
+				.listRowSeparator(.hidden)
+			}
+		}
+		.background(Color.background)
 	}
 	
 	@ViewBuilder
@@ -85,26 +102,6 @@ internal struct GameInputView: View {
 	private func currentTurn(turn: Set) -> some View {
 		TurnItem(turn: turn, shotsLeft: Int(turn.shotsLeft()), onSelect: {})
 			.background(Color.background)
-	}
-	
-	@ViewBuilder
-	private var hintRow: some View {
-		let cells = [
-			String(localized: "single"),
-			String(localized: "double_"),
-			String(localized: "triplet")
-		]
-		Row(cells: cells, spacing: 0)
-	}
-	
-	@ViewBuilder
-	private var inputTable: some View {
-		VStack(spacing: 2) {
-			ForEach(Sector.companion.sectors) { sectors in
-				InputRow(sectors: sectors, onInputClick: onInputClick)
-			}
-			.listRowSeparator(.hidden)
-		}
 	}
 	
 	@ViewBuilder

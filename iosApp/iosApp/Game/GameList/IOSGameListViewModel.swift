@@ -11,16 +11,11 @@ internal final class IOSGameListViewModel: ObservableObject {
 	private var handle: DisposableHandle?
 	
 	init(
-		getGamesUseCase: GetGamesUseCase,
-		deleteGameUseCase: DeleteGameUseCase,
+		viewModel: GameListViewModel,
 		onGameSelected: @escaping (Game) -> Void
 	) {
 		self.onGameSelected = onGameSelected
-		self.viewModel = GameListViewModel(
-			deleteGameUseCase: deleteGameUseCase,
-			getGamesUseCase: getGamesUseCase,
-			coroutineScope: nil
-		)
+		self.viewModel = viewModel
 	}
 	
 	func startObserving() {
@@ -30,6 +25,11 @@ internal final class IOSGameListViewModel: ObservableObject {
 				self?.state = state
 				self?.isDeleteGameDialogShown = state.isDeleteGameDialogShown
 			}
+	}
+	
+	func deleteGame(index: Int) {
+		let game = state.games[index]
+		onEvent(.ShowDeleteGameDialog(game: game))
 	}
 	
 	func select(game: Game) {

@@ -2,11 +2,11 @@ import SwiftUI
 
 internal struct PlayerHistoryHeader: View {
 	private let cells = [
-		"Hit #1",
-		"Hit #2",
-		"Hit #3",
-		"Sum",
-		"Reminder"
+		String(localized: "shot1"),
+		String(localized: "shot2"),
+		String(localized: "shot3"),
+		String(localized: "shot_sum"),
+		String(localized: "reminder")
 	]
 	
 	var body: some View {

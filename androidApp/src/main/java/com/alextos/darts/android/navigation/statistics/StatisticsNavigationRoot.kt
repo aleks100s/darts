@@ -24,6 +24,8 @@ import com.alextos.darts.android.statistics.best_set.AndroidBestSetViewModel
 import com.alextos.darts.android.statistics.best_set.BestSetScreen
 import com.alextos.darts.android.statistics.biggest_final_set.AndroidBiggestFinalSetViewModel
 import com.alextos.darts.android.statistics.biggest_final_set.BiggestFinalSetScreen
+import com.alextos.darts.android.statistics.heatmap.AndroidSectorHeatmapViewModel
+import com.alextos.darts.android.statistics.heatmap.SectorHeatmapScreen
 import com.alextos.darts.android.statistics.most_frequent_shots.AndroidMostFrequentShotsViewModel
 import com.alextos.darts.android.statistics.most_frequent_shots.MostFrequentShotsScreen
 import com.alextos.darts.android.statistics.player_list.AndroidPlayerListViewModel
@@ -38,6 +40,7 @@ import com.alextos.darts.statistics.presentation.best_set.BestSetEvent
 import com.alextos.darts.statistics.presentation.best_set.BestSetState
 import com.alextos.darts.statistics.presentation.biggest_final_set.BiggestFinalSetEvent
 import com.alextos.darts.statistics.presentation.biggest_final_set.BiggestFinalSetState
+import com.alextos.darts.statistics.presentation.heatmap.SectorHeatmapState
 import com.alextos.darts.statistics.presentation.most_frequent_shots.MostFrequentShotsEvent
 import com.alextos.darts.statistics.presentation.most_frequent_shots.MostFrequentShotsState
 import com.alextos.darts.statistics.presentation.player_list.PlayerListEvent
@@ -74,6 +77,9 @@ fun StatisticsNavigationRoot() {
                     }
                     is StatisticsEvent.ShowVictoryDistribution -> {
                         navController.navigate(route = StatisticsRoute.PlayerList.routeWithArgs("victory"))
+                    }
+                    is StatisticsEvent.ShowSectorHeatmapDistribution -> {
+                        navController.navigate(route = StatisticsRoute.PlayerList.routeWithArgs("heatmap"))
                     }
                 }
             }
@@ -152,6 +158,7 @@ fun StatisticsNavigationRoot() {
             val title = when (mode) {
                 "shot" -> stringResource(id = R.string.shot_distribution_statistics)
                 "victory" -> stringResource(id = R.string.victory_distribution_statistics)
+                "heatmap" -> stringResource(id = R.string.sector_heatmap_statistics)
                 else -> ""
             }
             PlayerListScreen(
@@ -171,6 +178,13 @@ fun StatisticsNavigationRoot() {
                             "victory" -> {
                                 navController.navigate(
                                     StatisticsRoute.VictoryDistribution.routeWithArgs(
+                                        listOf(event.player).toStringNavArgument()
+                                    )
+                                )
+                            }
+                            "heatmap" -> {
+                                navController.navigate(
+                                    StatisticsRoute.SectorHeatmapDistribution.routeWithArgs(
                                         listOf(event.player).toStringNavArgument()
                                     )
                                 )
@@ -205,6 +219,19 @@ fun StatisticsNavigationRoot() {
             val viewModel: AndroidVictoryDistributionViewModel = hiltViewModel()
             val state by viewModel.state.collectAsState(initial = VictoryDistributionState())
             VictoryDistributionScreen(state = state)
+        }
+
+        composable(
+            route = StatisticsRoute.SectorHeatmapDistribution.route + "/{player}",
+            arguments = listOf(
+                navArgument("player") {
+                    type = NavType.StringType
+                }
+            )
+        ) {
+            val viewModel: AndroidSectorHeatmapViewModel = hiltViewModel()
+            val state by viewModel.state.collectAsState(initial = SectorHeatmapState())
+            SectorHeatmapScreen(state = state)
         }
 
         composable(

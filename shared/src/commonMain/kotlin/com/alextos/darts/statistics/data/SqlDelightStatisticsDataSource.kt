@@ -2,11 +2,13 @@ package com.alextos.darts.statistics.data
 
 import com.alextos.darts.database.DartsDatabase
 import com.alextos.darts.core.domain.Player
+import com.alextos.darts.core.domain.Sector
 import com.alextos.darts.core.domain.Set
 import com.alextos.darts.core.domain.Shot
 import com.alextos.darts.statistics.domain.StatisticsDataSource
 import com.alextos.darts.statistics.domain.models.PlayerShotDistribution
 import com.alextos.darts.statistics.domain.models.PlayerVictoryDistribution
+import com.alextos.darts.statistics.domain.models.SectorHeatmapDistribution
 import com.alextos.darts.statistics.domain.models.ShotDistribution
 
 class SqlDelightStatisticsDataSource(
@@ -72,5 +74,21 @@ class SqlDelightStatisticsDataSource(
         return queries.getVictoryDistribution(player.id, player.id)
             .executeAsOne()
             .toPlayerVictoryDistribution(player)
+    }
+
+    override fun getSectorHeatmap(
+        player: Player,
+        sectors: List<Sector>
+    ): SectorHeatmapDistribution {
+        val map = mutableMapOf<Sector, Int>()
+        sectors.forEach { sector ->
+            val count = queries.getSectorCount(sector.id.toLong(), player.id).executeAsOne()
+            map[sector] = count.toInt()
+        }
+        return SectorHeatmapDistribution(
+            distribution = map,
+            player = player,
+            shotsTotal = map.values.reduce { acc, count -> acc + count }
+        )
     }
 }

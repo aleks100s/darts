@@ -37,6 +37,7 @@
     <string name="average_values_statistics">Average turn score and hit value</string>
     <string name="shot_distribution_statistics">Hit distribution statistics</string>
     <string name="victory_distribution_statistics">Victory distribution statistics</string>
+    <string name="sector_heatmap_statistics">Sector heatmap statistics</string>
     <string name="game">Game</string>
     <string name="statistics">Statistics</string>
     <string name="arrow_right_description">Show</string>

@@ -17,6 +17,7 @@ import com.alextos.darts.statistics.domain.use_cases.average_values.GetAverageSh
 import com.alextos.darts.statistics.domain.use_cases.average_values.GetPlayersAverageValuesUseCase
 import com.alextos.darts.statistics.domain.use_cases.best_set.GetPlayersBestSetsUseCase
 import com.alextos.darts.statistics.domain.use_cases.biggest_final_set.GetPlayersBiggestFinalSetUseCase
+import com.alextos.darts.statistics.domain.use_cases.heatmap.GetSectorHeatmapUseCase
 import com.alextos.darts.statistics.domain.use_cases.most_frequent_shots.GetPlayersMostFrequentShotsUseCase
 import com.alextos.darts.statistics.domain.use_cases.shot_distribution.GetPlayerShotDistributionUseCase
 import com.alextos.darts.statistics.domain.use_cases.victory_distribution.GetPlayerVictoryDistributionUseCase
@@ -136,6 +137,12 @@ object AppModule {
     @Singleton
     fun provideGetPlayerVictoryDistributionUseCase(dataSource: StatisticsDataSource): GetPlayerVictoryDistributionUseCase {
         return GetPlayerVictoryDistributionUseCase(dataSource)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetSectorHeatmapDistributionUseCase(dataSource: StatisticsDataSource): GetSectorHeatmapUseCase {
+        return GetSectorHeatmapUseCase(dataSource)
     }
 
     @Provides

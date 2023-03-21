@@ -9,6 +9,7 @@ sealed class StatisticsRoute(val route: String) {
     object PlayerList: StatisticsRoute("player_list")
     object ShotDistribution: StatisticsRoute("shot_distribution")
     object VictoryDistribution: StatisticsRoute("victory_distribution")
+    object SectorHeatmapDistribution: StatisticsRoute("sector_heatmap")
     object Darts: StatisticsRoute("darts")
 
     fun routeWithArgs(vararg args: String): String {

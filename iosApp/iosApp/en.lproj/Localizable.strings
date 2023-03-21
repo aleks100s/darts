@@ -62,7 +62,7 @@
 "game_goal_value %d" = "Game goal %d";
 "game_recap" = "Game recap";
 "average_set_recap" = "Average turn";
-"game_player_result %d" = "Reminder: %d";
+"game_player_result %d" = "%d";
 "view_turn" = "View turn";
 "delete_player" = "Delete player and all related games";
 "player_data_will_be_lost" = "Player data will be lost";

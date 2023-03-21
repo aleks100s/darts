@@ -251,6 +251,20 @@ enum class Sector(
         }
     }
 
+    fun isBullseye(): Boolean {
+        return when (this) {
+            SingleBullseye -> true
+            else -> false
+        }
+    }
+
+    fun isDoubleBullseye(): Boolean {
+        return when (this) {
+            DoubleBullseye -> true
+            else -> false
+        }
+    }
+
     fun isMiss(): Boolean {
         return when (this) {
             Miss -> true
@@ -303,6 +317,30 @@ enum class Sector(
             listOf(SingleInner19, Double19,  Triple19),
             listOf(SingleInner20, Double20,  Triple20),
             listOf(SingleBullseye, DoubleBullseye, Miss),
+        )
+
+        val heatmapSectors = listOf(
+            SingleInner1, Double1, Triple1,
+            SingleInner2, Double2, Triple2,
+            SingleInner3, Double3, Triple3,
+            SingleInner4, Double4, Triple4,
+            SingleInner5, Double5, Triple5,
+            SingleInner6, Double6, Triple6,
+            SingleInner7, Double7, Triple7,
+            SingleInner8, Double8, Triple8,
+            SingleInner9, Double9, Triple9,
+            SingleInner10, Double10,  Triple10,
+            SingleInner11, Double11,  Triple11,
+            SingleInner12, Double12,  Triple12,
+            SingleInner13, Double13,  Triple13,
+            SingleInner14, Double14,  Triple14,
+            SingleInner15, Double15,  Triple15,
+            SingleInner16, Double16,  Triple16,
+            SingleInner17, Double17,  Triple17,
+            SingleInner18, Double18,  Triple18,
+            SingleInner19, Double19,  Triple19,
+            SingleInner20, Double20,  Triple20,
+            SingleBullseye, DoubleBullseye
         )
 
         fun getSector(id: Int): Sector {

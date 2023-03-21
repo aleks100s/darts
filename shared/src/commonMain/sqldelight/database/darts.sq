@@ -262,3 +262,6 @@ getVictoryDistribution:
 SELECT
 (SELECT COUNT(gpe.id) FROM gamePlayerEntity gpe WHERE gpe.player_id = ? AND gpe.is_winner = 1) AS victoriesCount,
 (SELECT COUNT(gpe.id) FROM gamePlayerEntity gpe WHERE gpe.player_id = ?) AS gamesCount;
+
+getSectorCount:
+SELECT COUNT (she.id) AS sectorCount FROM shotEntity she WHERE she.sector = ? AND she.player_id = ?;

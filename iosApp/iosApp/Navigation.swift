@@ -33,7 +33,6 @@ internal enum StatisticsNavigation: Hashable {
 	case victoryDistribution(Player)
 	case shotDistribution(Player)
 	case biggestFinalSet
-	case mostFrequentShots
 	case bestSet
 	case averageValues
 	case players(Mode)

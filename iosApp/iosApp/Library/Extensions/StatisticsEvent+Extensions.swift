@@ -14,9 +14,6 @@ extension StatisticsEvent {
 		case .ShowBiggestFinalSet():
 			return String(localized: "biggest_final_set_statistics")
 			
-		case .ShowMostFrequentShots():
-			return String(localized: "most_frequent_shots_statistics")
-			
 		case .ShowBestSet():
 			return String(localized: "best_set_statistics")
 			

@@ -31,7 +31,6 @@
 "double_" = "Double";
 "triplet" = "Triplet";
 "best_set_statistics" = "Best turn statistics";
-"most_frequent_shots_statistics" = "Most frequent hits statistics";
 "biggest_final_set_statistics" = "Best final turn statistics";
 "average_values_statistics" = "Average turn score and hit value";
 "shot_distribution_statistics" = "Hit distribution statistics";

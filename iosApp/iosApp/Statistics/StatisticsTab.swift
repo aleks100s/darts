@@ -20,9 +20,6 @@ internal struct StatisticsTab: View {
 					case .ShowBiggestFinalSet():
 						navigationStack.append(.biggestFinalSet)
 						
-					case .ShowMostFrequentShots():
-						navigationStack.append(.mostFrequentShots)
-						
 					case .ShowBestSet():
 						navigationStack.append(.bestSet)
 						
@@ -84,13 +81,6 @@ internal struct StatisticsTab: View {
 				navigationStack.append(.dartsBoard(turn))
 			}
 			.navigationTitle("biggest_final_set_statistics")
-			.navigationBarTitleDisplayMode(.inline)
-			
-		case .mostFrequentShots:
-			MostFrequentShotsScene.create(module: module) { turn in
-				navigationStack.append(.dartsBoard(turn))
-			}
-			.navigationTitle("most_frequent_shots_statistics")
 			.navigationBarTitleDisplayMode(.inline)
 			
 		case .bestSet:

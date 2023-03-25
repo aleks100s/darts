@@ -32,7 +32,6 @@
     <string name="double_">Double</string>
     <string name="triplet">Triplet</string>
     <string name="best_set_statistics">Best turn statistics</string>
-    <string name="most_frequent_shots_statistics">Most frequent hits statistics</string>
     <string name="biggest_final_set_statistics">Best final turn statistics</string>
     <string name="average_values_statistics">Average turn score and hit value</string>
     <string name="shot_distribution_statistics">Hit distribution statistics</string>

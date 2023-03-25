@@ -19,12 +19,6 @@ class SqlDelightStatisticsDataSource(
             .playerBestSetToSet()
     }
 
-    override fun getPlayerMostFrequentShots(player: Player): List<Shot> {
-        return queries.getPlayerMostFrequentSectors(player.id)
-            .executeAsList()
-            .playerSectorsToShots()
-    }
-
     override fun getPlayerBiggestFinalSet(player: Player): Set? {
         return queries.getPlayerBiggestFinalSet(player.id)
             .executeAsList()

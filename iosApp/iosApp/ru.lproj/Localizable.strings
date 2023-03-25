@@ -31,7 +31,6 @@
 "double_" = "Двойной";
 "triplet" = "Тройной";
 "best_set_statistics" = "Лучший подход";
-"most_frequent_shots_statistics" = "Самые частые сектора";
 "biggest_final_set_statistics" = "Самая большая добивка";
 "average_values_statistics" = "Средний результат за подход/бросок";
 "shot_distribution_statistics" = "Распределение бросков";

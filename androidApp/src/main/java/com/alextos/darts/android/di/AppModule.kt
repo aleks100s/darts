@@ -18,7 +18,6 @@ import com.alextos.darts.statistics.domain.use_cases.average_values.GetPlayersAv
 import com.alextos.darts.statistics.domain.use_cases.best_set.GetPlayersBestSetsUseCase
 import com.alextos.darts.statistics.domain.use_cases.biggest_final_set.GetPlayersBiggestFinalSetUseCase
 import com.alextos.darts.statistics.domain.use_cases.heatmap.GetSectorHeatmapUseCase
-import com.alextos.darts.statistics.domain.use_cases.most_frequent_shots.GetPlayersMostFrequentShotsUseCase
 import com.alextos.darts.statistics.domain.use_cases.shot_distribution.GetPlayerShotDistributionUseCase
 import com.alextos.darts.statistics.domain.use_cases.victory_distribution.GetPlayerVictoryDistributionUseCase
 import com.squareup.sqldelight.db.SqlDriver
@@ -95,12 +94,6 @@ object AppModule {
     @Singleton
     fun provideGetPlayersBestSetsUseCase(dataSource: StatisticsDataSource): GetPlayersBestSetsUseCase {
         return GetPlayersBestSetsUseCase(dataSource)
-    }
-
-    @Provides
-    @Singleton
-    fun provideGetPlayersMostFrequentShotsUseCase(dataSource: StatisticsDataSource): GetPlayersMostFrequentShotsUseCase {
-        return GetPlayersMostFrequentShotsUseCase(dataSource)
     }
 
     @Provides

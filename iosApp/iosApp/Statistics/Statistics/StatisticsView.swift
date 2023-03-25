@@ -4,7 +4,6 @@ import shared
 internal struct StatisticsView: View {
 	let data: [StatisticsEvent] = [
 		.ShowBestSet(),
-		.ShowMostFrequentShots(),
 		.ShowBiggestFinalSet(),
 		.ShowAverageValues(),
 		.ShowShotDistribution(),

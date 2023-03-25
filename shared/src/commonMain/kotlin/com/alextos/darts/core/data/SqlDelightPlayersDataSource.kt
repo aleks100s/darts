@@ -28,20 +28,22 @@ class SqlDelightPlayersDataSource(
     }
 
     override fun deletePlayer(player: Player) {
-        val games = queries.getPlayerGames(player_id = player.id)
-            .executeAsList()
-            .mapToGames()
-        games.forEach { game ->
-            game.id?.let { gameId ->
-                queries.getGameSets(gameId).executeAsList()
-                    .forEach {
-                        queries.deleteShots(it.id)
-                    }
-                queries.deleteSet(gameId)
-                queries.deleteGamePlayer(gameId)
-                queries.deleteGame(gameId)
+        queries.transaction {
+            val games = queries.getPlayerGames(player_id = player.id)
+                .executeAsList()
+                .mapToGames()
+            games.forEach { game ->
+                game.id?.let { gameId ->
+                    queries.getGameSets(gameId).executeAsList()
+                        .forEach {
+                            queries.deleteShots(it.id)
+                        }
+                    queries.deleteSet(gameId)
+                    queries.deleteGamePlayer(gameId)
+                    queries.deleteGame(gameId)
+                }
             }
+            queries.deletePlayer(player.id)
         }
-        queries.deletePlayer(player.id)
     }
 }

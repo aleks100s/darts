@@ -2,7 +2,7 @@ import SwiftUI
 import shared
 
 internal struct SectorHeatmapView: View {
-	@ObservedObject var viewModel: IOSSectorHeatmapViewModel
+	@StateObject var viewModel: IOSSectorHeatmapViewModel
 	
 	var body: some View {
 		content

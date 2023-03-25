@@ -73,4 +73,5 @@
     <string name="cancel">Отмена</string>
     <string name="back_to_game">Назад к игре</string>
     <string name="training">Тренировка №%1$d, цель %2$d</string>
+    <string name="sector_count">%1$s (%2$d попаданий)</string>
 </resources>

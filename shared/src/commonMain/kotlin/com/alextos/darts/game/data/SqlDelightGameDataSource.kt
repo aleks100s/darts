@@ -75,25 +75,23 @@ class SqlDelightGameDataSource(
         }
     }
 
-    override fun getGameHistory(gameId: Long, players: List<Player>): List<PlayerHistory> {
-        val playerHistories = mutableListOf<PlayerHistory>()
-        players.forEach { player ->
-            val entities = queries.getPlayerHistory(game_id = gameId, player_id = player.id).executeAsList()
-            val playerHistory = entities.toPlayerHistory(player)
-            playerHistories.add(playerHistory)
-        }
-        return playerHistories
+    override fun getPlayerHistory(gameId: Long, player: Player): PlayerHistory {
+        return queries.getPlayerHistory(game_id = gameId, player_id = player.id)
+            .executeAsList()
+            .toPlayerHistory(player)
     }
 
     override fun deleteGame(game: Game) {
         game.id?.let { gameId ->
-            queries.getGameSets(gameId).executeAsList()
-                .forEach {
-                    queries.deleteShots(it.id)
-                }
-            queries.deleteSet(gameId)
-            queries.deleteGamePlayer(gameId)
-            queries.deleteGame(gameId)
+            queries.transaction {
+                queries.getGameSets(gameId).executeAsList()
+                    .forEach {
+                        queries.deleteShots(it.id)
+                    }
+                queries.deleteSet(gameId)
+                queries.deleteGamePlayer(gameId)
+                queries.deleteGame(gameId)
+            }
         }
     }
 

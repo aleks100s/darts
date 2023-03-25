@@ -20,5 +20,5 @@ interface StatisticsDataSource {
     fun getShotDistribution(): ShotDistribution
     fun getPlayerShotDistribution(player: Player): PlayerShotDistribution
     fun getPlayerVictoryDistribution(player: Player): PlayerVictoryDistribution
-    fun getSectorHeatmap(player: Player, sectors: List<Sector>): SectorHeatmapDistribution
+    fun getSectorCount(player: Player, sector: Sector): Int
 }

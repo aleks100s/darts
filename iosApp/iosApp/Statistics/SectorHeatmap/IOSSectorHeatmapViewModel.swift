@@ -13,6 +13,7 @@ internal final class IOSSectorHeatmapViewModel: ObservableObject {
 	func startObserving() {
 		handle = viewModel.state
 			.subscribe { [weak self] state in
+				print(state)
 				guard let state else { return }
 				self?.state = state
 			}

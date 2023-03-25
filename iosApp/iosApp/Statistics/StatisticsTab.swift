@@ -29,6 +29,9 @@ internal struct StatisticsTab: View {
 					case .ShowAverageValues():
 						navigationStack.append(.averageValues)
 						
+					case .ShowSectorHeatmapDistribution():
+						navigationStack.append(.players(.heatmapDistribution))
+						
 					default:
 						break
 					}
@@ -45,6 +48,11 @@ internal struct StatisticsTab: View {
 	@ViewBuilder
 	private func navigate(to scene: StatisticsNavigation) -> some View {
 		switch scene {
+		case let .heatmapDistribution(player):
+			SectorHeatmapScene.create(module: module, player: player)
+				.navigationTitle(player.name)
+				.navigationBarTitleDisplayMode(.inline)
+			
 		case let .victoryDistribution(player):
 			VictoryDistributionScene.create(module: module, player: player)
 				.navigationTitle(player.name)
@@ -63,6 +71,9 @@ internal struct StatisticsTab: View {
 					
 				case .shotDistribution:
 					navigationStack.append(.shotDistribution(player))
+					
+				case .heatmapDistribution:
+					navigationStack.append(.heatmapDistribution(player))
 				}
 			}
 			.navigationTitle(mode.title)

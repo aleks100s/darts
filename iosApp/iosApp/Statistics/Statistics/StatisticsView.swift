@@ -8,7 +8,8 @@ internal struct StatisticsView: View {
 		.ShowBiggestFinalSet(),
 		.ShowAverageValues(),
 		.ShowShotDistribution(),
-		.ShowVictoryDistribution()
+		.ShowVictoryDistribution(),
+		.ShowSectorHeatmapDistribution()
 	]
 	let onSelect: (StatisticsEvent) -> Void
 	

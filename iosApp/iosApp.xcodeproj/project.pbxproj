@@ -10,6 +10,11 @@
 		058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557BA273AAA24004C7B11 /* Assets.xcassets */; };
 		058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */; };
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
+		274E404429CEE9F0000E9027 /* SectorHeatmapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274E404329CEE9F0000E9027 /* SectorHeatmapView.swift */; };
+		274E404629CEEA24000E9027 /* IOSSectorHeatmapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274E404529CEEA24000E9027 /* IOSSectorHeatmapViewModel.swift */; };
+		274E404829CEEA5D000E9027 /* SectorHeatmapScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274E404729CEEA5D000E9027 /* SectorHeatmapScene.swift */; };
+		274E404A29CEECF7000E9027 /* Arc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274E404929CEECF7000E9027 /* Arc.swift */; };
+		274E404C29CEEE73000E9027 /* SectorHeat+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274E404B29CEEE73000E9027 /* SectorHeat+Extensions.swift */; };
 		275B871F29C617B800505281 /* TabletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275B871E29C617B800505281 /* TabletView.swift */; };
 		279827CE298E655A00D497F2 /* GameTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279827CD298E655A00D497F2 /* GameTab.swift */; };
 		279827D1298E656400D497F2 /* StatisticsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279827D0298E656400D497F2 /* StatisticsTab.swift */; };
@@ -101,6 +106,11 @@
 		058557BA273AAA24004C7B11 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2152FB032600AC8F00CF470E /* iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSApp.swift; sourceTree = "<group>"; };
+		274E404329CEE9F0000E9027 /* SectorHeatmapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectorHeatmapView.swift; sourceTree = "<group>"; };
+		274E404529CEEA24000E9027 /* IOSSectorHeatmapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSSectorHeatmapViewModel.swift; sourceTree = "<group>"; };
+		274E404729CEEA5D000E9027 /* SectorHeatmapScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectorHeatmapScene.swift; sourceTree = "<group>"; };
+		274E404929CEECF7000E9027 /* Arc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arc.swift; sourceTree = "<group>"; };
+		274E404B29CEEE73000E9027 /* SectorHeat+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SectorHeat+Extensions.swift"; sourceTree = "<group>"; };
 		275B871E29C617B800505281 /* TabletView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabletView.swift; sourceTree = "<group>"; };
 		279827CD298E655A00D497F2 /* GameTab.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameTab.swift; sourceTree = "<group>"; };
 		279827D0298E656400D497F2 /* StatisticsTab.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticsTab.swift; sourceTree = "<group>"; };
@@ -197,6 +207,16 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		274E404229CEE9D9000E9027 /* SectorHeatmap */ = {
+			isa = PBXGroup;
+			children = (
+				274E404329CEE9F0000E9027 /* SectorHeatmapView.swift */,
+				274E404529CEEA24000E9027 /* IOSSectorHeatmapViewModel.swift */,
+				274E404729CEEA5D000E9027 /* SectorHeatmapScene.swift */,
+			);
+			path = SectorHeatmap;
+			sourceTree = "<group>";
+		};
 		279827CC298E655A00D497F2 /* Game */ = {
 			isa = PBXGroup;
 			children = (
@@ -213,6 +233,7 @@
 		279827CF298E656400D497F2 /* Statistics */ = {
 			isa = PBXGroup;
 			children = (
+				274E404229CEE9D9000E9027 /* SectorHeatmap */,
 				27D65A3D29BE522D00A921C6 /* VictoryDistribution */,
 				27D65A3629BE503100A921C6 /* ShotDistribution */,
 				27D65A2F29BE4D4000A921C6 /* PlayerList */,
@@ -283,6 +304,7 @@
 				27D659FF29BC86F400A921C6 /* KotlinFloat+Extensions.swift */,
 				27D65A0A29BDED5800A921C6 /* StatisticsEvent+Extensions.swift */,
 				27D65A1629BDF7E900A921C6 /* AveragePlayerValue+Extensions.swift */,
+				274E404B29CEEE73000E9027 /* SectorHeat+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -333,6 +355,7 @@
 				27D65A0829BDEC0900A921C6 /* DoubleSelectableItem.swift */,
 				27D65A4429BE56AD00A921C6 /* Pie.swift */,
 				27D65A4629BE5E2D00A921C6 /* ChartLegend.swift */,
+				274E404929CEECF7000E9027 /* Arc.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -561,15 +584,18 @@
 				27CF108529AB9A8100174D02 /* PlayerHistoryHeader.swift in Sources */,
 				279827D1298E656400D497F2 /* StatisticsTab.swift in Sources */,
 				279827D8298E6B8A00D497F2 /* Color+Extension.swift in Sources */,
+				274E404829CEEA5D000E9027 /* SectorHeatmapScene.swift in Sources */,
 				27D65A1529BDF41600A921C6 /* AverageValuesView.swift in Sources */,
 				27CF107D29AB952400174D02 /* GameHistoryView.swift in Sources */,
 				27D65A1329BDF40800A921C6 /* AverageValuesScene.swift in Sources */,
+				274E404A29CEECF7000E9027 /* Arc.swift in Sources */,
 				27D65A0029BC86F400A921C6 /* KotlinFloat+Extensions.swift in Sources */,
 				27D65A0B29BDED5800A921C6 /* StatisticsEvent+Extensions.swift in Sources */,
 				27CF109A29AD2A5600174D02 /* HistoryScene.swift in Sources */,
 				27D65A3C29BE511500A921C6 /* ShotDistributionScene.swift in Sources */,
 				27D659F529B493DD00A921C6 /* DartsBoard.swift in Sources */,
 				279827DF298E723D00D497F2 /* GameListScene.swift in Sources */,
+				274E404629CEEA24000E9027 /* IOSSectorHeatmapViewModel.swift in Sources */,
 				27CF109729AD273B00174D02 /* Game+Extensions.swift in Sources */,
 				27CF109E29AD2C9E00174D02 /* HistoryView.swift in Sources */,
 				27CF108129AB981700174D02 /* Cell.swift in Sources */,
@@ -610,6 +636,7 @@
 				27D65A3A29BE50B800A921C6 /* ShotDistributionView.swift in Sources */,
 				27D65A2529BE478A00A921C6 /* MostFrequentShotsView.swift in Sources */,
 				279827E229A7CD9700D497F2 /* CreateGameView.swift in Sources */,
+				274E404C29CEEE73000E9027 /* SectorHeat+Extensions.swift in Sources */,
 				27CF109C29AD2A6B00174D02 /* IOSHistoryViewModel.swift in Sources */,
 				27D65A3F29BE524000A921C6 /* IOSVictoryDistributionViewModel.swift in Sources */,
 				27D659FE29BC866F00A921C6 /* PlayerHistory+Extensions.swift in Sources */,
@@ -617,6 +644,7 @@
 				27CF107929A9049900174D02 /* GameInputView.swift in Sources */,
 				27D65A1E29BE435C00A921C6 /* BestTurnView.swift in Sources */,
 				27CF108B29ABA17200174D02 /* TurnItem.swift in Sources */,
+				274E404429CEE9F0000E9027 /* SectorHeatmapView.swift in Sources */,
 				27CF107B29A905A600174D02 /* Sector+Extensions.swift in Sources */,
 				27D65A1729BDF7E900A921C6 /* AveragePlayerValue+Extensions.swift in Sources */,
 				27D659ED29B3B97E00A921C6 /* PlayerHistoryView.swift in Sources */,

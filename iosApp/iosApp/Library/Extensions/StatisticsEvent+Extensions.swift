@@ -23,6 +23,9 @@ extension StatisticsEvent {
 		case .ShowAverageValues():
 			return String(localized: "average_values_statistics")
 			
+		case .ShowSectorHeatmapDistribution():
+			return String(localized: "sector_heatmap_statistics")
+			
 		default:
 			return ""
 		}

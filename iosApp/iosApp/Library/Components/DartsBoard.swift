@@ -130,28 +130,6 @@ internal struct DartsBoard: View {
 	}
 }
 
-internal struct Arc: View {
-	let center: CGPoint
-	let radius: CGFloat
-	let startAngle: Angle
-	let endAngle: Angle
-	let color: Color
-
-	var body: some View {
-		Path { path in
-			path.move(to: center)
-			path.addArc(
-				center: center,
-				radius: radius,
-				startAngle: startAngle,
-				endAngle: endAngle,
-				clockwise: true
-			)
-		}
-		.fill(color)
-	}
-}
-
 internal struct DartsBoard_Preview: PreviewProvider {
 	static var previews: some View {
 		DartsBoard(highlightedSector: .singleinner20)

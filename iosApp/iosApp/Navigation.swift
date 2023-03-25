@@ -13,6 +13,7 @@ internal enum StatisticsNavigation: Hashable {
 	enum Mode {
 		case victoryDistribution
 		case shotDistribution
+		case heatmapDistribution
 		
 		var title: String {
 			switch self {
@@ -21,10 +22,14 @@ internal enum StatisticsNavigation: Hashable {
 				
 			case .victoryDistribution:
 				return String(localized: "victory_distribution_statistics")
+				
+			case .heatmapDistribution:
+				return String(localized: "sector_heatmap_statistics")
 			}
 		}
 	}
 
+	case heatmapDistribution(Player)
 	case victoryDistribution(Player)
 	case shotDistribution(Player)
 	case biggestFinalSet

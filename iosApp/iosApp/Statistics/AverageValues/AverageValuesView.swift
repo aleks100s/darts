@@ -4,7 +4,8 @@ internal struct AverageValuesView: View {
 	@StateObject var viewModel: IOSAverageValuesViewModel
 	
 	var body: some View {
-		view
+		content
+			.background(Color.background)
 			.onAppear {
 				viewModel.startObserving()
 			}
@@ -14,7 +15,7 @@ internal struct AverageValuesView: View {
 	}
 	
 	@ViewBuilder
-	private var view: some View {
+	private var content: some View {
 		if viewModel.state.isEmpty() {
 			NoDataView()
 		} else {
@@ -35,7 +36,6 @@ internal struct AverageValuesView: View {
 							avgShotScore: value.shotValue
 						)
 					}
-					.background(Color.background)
 				}
 			}
 		}
@@ -68,5 +68,6 @@ internal struct AverageValuesView: View {
 			],
 			spacing: 0
 		)
+		.background(Color.background)
 	}
 }

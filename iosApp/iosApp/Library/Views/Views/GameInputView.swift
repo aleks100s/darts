@@ -34,6 +34,7 @@ internal struct GameInputView: View {
 			String(localized: "triplet")
 		]
 		Row(cells: cells, spacing: 0)
+			.background(Color.surface)
 	}
 	
 	@ViewBuilder

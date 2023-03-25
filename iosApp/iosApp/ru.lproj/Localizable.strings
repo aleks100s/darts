@@ -6,9 +6,9 @@
 "add_new_player" = "Добавить нового игрока";
 "create_player" = "Создать игрока";
 "enter_new_player_name" = "Введите имя игрока";
-"shot1" = "1й бросок";
-"shot2" = "2й бросок";
-"shot3" = "3й бросок";
+"shot1" = "1й";
+"shot2" = "2й";
+"shot3" = "3й";
 "shot_sum" = "Сумма";
 "reminder" = "Остаток";
 "leave_game" = "Покинуть игру";

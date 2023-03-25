@@ -9,7 +9,6 @@ internal struct Row: View {
 			ForEach(cells) { cell in
 				Cell(text: cell)
 			}
-			.background(Color.surface)
 		}
 		.frame(maxWidth: .infinity)
 	}

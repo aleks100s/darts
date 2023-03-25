@@ -4,10 +4,9 @@ import shared
 internal struct SectorHeatmapView: View {
 	@StateObject var viewModel: IOSSectorHeatmapViewModel
 	
-	private var idiom : UIUserInterfaceIdiom { UIDevice.current.userInterfaceIdiom }
-
 	var body: some View {
 		content
+			.background(Color.background)
 			.onAppear {
 				viewModel.startObserving()
 			}
@@ -71,7 +70,8 @@ internal struct SectorHeatmapView: View {
 				}
 			}
 		}
-		.frame(minHeight: idiom == .pad ? 800 : 400)
+		.aspectRatio(1, contentMode: .fit)
+		.padding()
 	}
 	
 	@ViewBuilder

@@ -21,6 +21,7 @@ internal struct GameRecapView: View {
 				valuesBlock(values: overkills, title: String(localized: "overkill_count"))
 			}
 		}
+		.background(Color.background)
 	}
 	
 	@ViewBuilder private var chart: some View {

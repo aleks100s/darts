@@ -3,9 +3,7 @@ import shared
 
 internal struct DartsBoardView: View {
 	let turn: Set
-	
-	private var idiom : UIUserInterfaceIdiom { UIDevice.current.userInterfaceIdiom }
-	
+		
 	var body: some View {
 		ScrollView(showsIndicators: false) {
 			VStack(spacing: 32) {
@@ -24,6 +22,5 @@ internal struct DartsBoardView: View {
 			DartsBoard(highlightedSector: shot.sector)
 				.padding()
 		}
-		.frame(minHeight: idiom == .pad ? 800 : 400)
 	}
 }

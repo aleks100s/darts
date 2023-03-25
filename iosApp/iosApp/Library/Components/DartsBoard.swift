@@ -9,7 +9,7 @@ internal struct DartsBoard: View {
 	var body: some View {
 		GeometryReader { geometry in
 			let center = CGPoint(x: geometry.size.width / 2, y: geometry.size.height / 2)
-			let radius = geometry.size.width / 2
+			let radius = min(geometry.size.width, geometry.size.height) / 2
 
 			ZStack {
 				misses(center: center, radius: radius)
@@ -21,6 +21,7 @@ internal struct DartsBoard: View {
 				doubleBullseye(center: center, radius: radius * 0.05)
 			}
 		}
+		.aspectRatio(1, contentMode: .fit)
 	}
 	
 	@ViewBuilder

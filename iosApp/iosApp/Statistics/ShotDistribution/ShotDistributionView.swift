@@ -5,6 +5,7 @@ internal struct ShotDistributionView: View {
 	
 	var body: some View {
 		content
+			.background(Color.background)
 			.onAppear {
 				viewModel.startObserving()
 			}
@@ -26,6 +27,7 @@ internal struct ShotDistributionView: View {
 					}
 					ChartLegend(legend: $viewModel.legend)
 				}
+				.padding()
 			}
 		}
 	}

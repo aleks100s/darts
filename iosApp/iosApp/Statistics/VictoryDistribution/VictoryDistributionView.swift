@@ -6,6 +6,7 @@ internal struct VictoryDistributionView: View {
 	
 	var body: some View {
 		content
+			.background(Color.background)
 			.onAppear {
 				viewModel.startObserving()
 			}
@@ -27,6 +28,7 @@ internal struct VictoryDistributionView: View {
 					}
 					ChartLegend(legend: $viewModel.legend)
 				}
+				.padding()
 			}
 		}
 	}

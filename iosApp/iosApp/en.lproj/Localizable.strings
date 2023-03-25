@@ -6,9 +6,9 @@
 "add_new_player" = "Add new player";
 "create_player" = "Create player";
 "enter_new_player_name" = "Enter new player name";
-"shot1" = "Hit #1";
-"shot2" = "Hit #2";
-"shot3" = "Hit #3";
+"shot1" = "#1";
+"shot2" = "#2";
+"shot3" = "#3";
 "shot_sum" = "Hits sum";
 "reminder" = "Reminder";
 "leave_game" = "Leave the game";

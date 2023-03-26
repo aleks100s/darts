@@ -2,6 +2,7 @@ package com.alextos.darts.android
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.darkColors
+import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import com.alextos.darts.core.presentation.Colors
@@ -19,7 +20,14 @@ val darkColors = darkColors(
     onSurface = Color.White
 )
 
-val lightColors = darkColors
+val lightColors = lightColors(
+    primary = AccentViolet,
+    onPrimary = Color.White,
+    background = Color(Colors.LightBackground),
+    onBackground = TextBlack,
+    surface = Color(Colors.LightSurface),
+    onSurface = TextBlack
+)
 
 @Composable
 fun highSurfaceColor(): Color {

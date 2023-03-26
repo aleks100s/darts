@@ -36,7 +36,7 @@ internal extension Sector {
 		} else if isRed() {
 			return .red
 		} else {
-			return .darkGrey
+			return .gray
 		}
 	}
 }

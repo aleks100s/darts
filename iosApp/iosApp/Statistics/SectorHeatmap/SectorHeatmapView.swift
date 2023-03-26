@@ -81,7 +81,7 @@ internal struct SectorHeatmapView: View {
 			radius: radius,
 			startAngle: .degrees(0),
 			endAngle: .degrees(360),
-			color: .darkGrey
+			color: .gray
 		)
 	}
 	

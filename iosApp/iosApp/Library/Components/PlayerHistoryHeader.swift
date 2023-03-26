@@ -11,5 +11,6 @@ internal struct PlayerHistoryHeader: View {
 	
 	var body: some View {
 		Row(cells: cells, spacing: 0)
+			.background(Color.surface)
 	}
 }

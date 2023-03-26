@@ -12,20 +12,18 @@ internal extension Color {
 		)
 	}
 		
-	static let lightBlue = Color(hex: colors.LightBlue)
-	static let lightBlueGrey = Color(hex: colors.LightBlueGrey)
-	static let accentViolet = Color(hex: colors.AccentViolet)
+	static let lightBackground = Color(hex: colors.LightBackground)
+	static let lightSurface = Color(hex: colors.LightSurface)
+	static let darkBackground = Color(hex: colors.DarkBackground)
+	static let darkSurface = Color(hex: colors.DarkSurface)
 	static let salat = Color(hex: 0xFF00FF90)
 	static let textBlack = Color(hex: colors.TextBlack)
-	static let darkGrey = Color(hex: colors.DarkGrey)
 	
-	static let primary = Color(light: .accentViolet, dark: .accentViolet)
-	static let onPrimary = Color(light: .white, dark: .white)
 	static let secondary = Color(light: salat, dark: salat)
 	static let onSecondary = Color(light: .textBlack, dark: .textBlack)
-	static let background = Color(light: .lightBlue, dark: .textBlack)
+	static let background = Color(light: .lightBackground, dark: .darkBackground)
 	static let onBackground = Color(light: .textBlack, dark: .white)
-	static let surface = Color(light: .lightBlueGrey, dark: .darkGrey)
+	static let surface = Color(light: .lightSurface, dark: .darkSurface)
 	static let onSurface = Color(light: .textBlack, dark: .white)
 	
 	private static let colors = Colors()

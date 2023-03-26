@@ -28,12 +28,3 @@ val lightColors = lightColors(
     surface = Color(Colors.LightSurface),
     onSurface = TextBlack
 )
-
-@Composable
-fun highSurfaceColor(): Color {
-    return if (isSystemInDarkTheme()) {
-        Color.DarkGray
-    } else {
-        Color.White
-    }
-}

@@ -46,6 +46,9 @@ internal struct GameInputView: View {
 				}
 				.listRowSeparator(.hidden)
 			}
+			.background(ScrollViewConfigurator {
+				$0?.bounces = false
+			})
 		}
 		.background(Color.background)
 	}
@@ -137,5 +140,31 @@ internal struct GameInputView: View {
 			.background(sector.backgroundColor)
 		}
 		.tint(sector.textColor)
+	}
+}
+
+struct ScrollViewConfigurator: UIViewRepresentable {
+	let configure: (UIScrollView?) -> ()
+	func makeUIView(context: Context) -> UIView {
+		let view = UIView()
+		DispatchQueue.main.async {
+			configure(view.enclosingScrollView())
+		}
+		return view
+	}
+
+	func updateUIView(_ uiView: UIView, context: Context) {}
+}
+
+extension UIView {
+	func enclosingScrollView() -> UIScrollView? {
+		var next: UIView? = self
+		repeat {
+			next = next?.superview
+			if let scrollview = next as? UIScrollView {
+				return scrollview
+			}
+		} while next != nil
+		return nil
 	}
 }

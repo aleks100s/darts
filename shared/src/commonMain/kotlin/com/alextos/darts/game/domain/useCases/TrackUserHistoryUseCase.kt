@@ -52,6 +52,9 @@ class TrackUserHistoryUseCase(player: Player) {
             is ShotResult.Overkill -> {
                 handle(shotResult, isOverkill = true)
             }
+            is ShotResult.IncorrectShot -> {
+                handle(shotResult, isOverkill = true)
+            }
             is ShotResult.Regular -> {
                 handle(shotResult, isOverkill = false)
             }

@@ -18,7 +18,7 @@ class GameManager(
 ) {
     private val evaluateShotUseCases by lazy {
         players.map {
-            EvaluateShotUseCase(goal)
+            EvaluateShotUseCase(goal, finishWithDoubles)
         }
     }
 

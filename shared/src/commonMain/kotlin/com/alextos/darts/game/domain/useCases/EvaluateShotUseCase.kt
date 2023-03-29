@@ -3,7 +3,7 @@ package com.alextos.darts.game.domain.useCases
 import com.alextos.darts.core.domain.Shot
 import com.alextos.darts.game.domain.models.ShotResult
 
-class EvaluateShotUseCase(goal: Int) {
+class EvaluateShotUseCase(goal: Int, private val finishWithDoubles: Boolean) {
     var currentShotResult: ShotResult? = null
 
     private val currentSet = mutableListOf<Shot>()
@@ -27,24 +27,48 @@ class EvaluateShotUseCase(goal: Int) {
 
     fun checkShot(shot: Shot): ShotResult {
         currentShotResult = null
-        if (currentSet.count() == 3) {
-            currentSet.clear()
-        }
+        clearCurrentSetIfNeeded()
         val value = shot.sector.value
         val currentShotResult = if (value > reminder) {
-            reminder += currentSet.fold(0) { acc, s ->
-                acc + s.sector.value
-            }
-            currentSet.clear()
+            restoreState()
             ShotResult.Overkill(shot, reminder)
         } else if (value == reminder) {
-            ShotResult.Regular(shot, 0)
+            if (finishWithDoubles) {
+                if (shot.sector.isDouble() || shot.sector.isDoubleBullseye()) {
+                    countShot(shot)
+                } else {
+                    restoreState()
+                    ShotResult.IncorrectShot(shot, reminder)
+                }
+            } else {
+                countShot(shot)
+            }
+        }  else if (finishWithDoubles && reminder - value == 1) {
+            restoreState()
+            ShotResult.IncorrectShot(shot, reminder)
         } else {
-            reminder -= value
-            currentSet.add(shot)
-            ShotResult.Regular(shot, reminder)
+            countShot(shot)
         }
         this.currentShotResult = currentShotResult
         return currentShotResult
+    }
+
+    private fun clearCurrentSetIfNeeded() {
+        if (currentSet.count() == 3) {
+            currentSet.clear()
+        }
+    }
+
+    private fun countShot(shot: Shot): ShotResult {
+        reminder -= shot.sector.value
+        currentSet.add(shot)
+        return ShotResult.Regular(shot, reminder)
+    }
+
+    private fun restoreState() {
+        reminder += currentSet.fold(0) { acc, s ->
+            acc + s.sector.value
+        }
+        currentSet.clear()
     }
 }

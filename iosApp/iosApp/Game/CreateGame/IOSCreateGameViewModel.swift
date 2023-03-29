@@ -10,28 +10,33 @@ internal final class IOSCreateGameViewModel: ObservableObject {
 		selectedGoal: nil,
 		goalOptions: [101, 301, 501],
 		playerToDelete: nil,
-		isDeletePlayerDialogShown: false
+		isDeletePlayerDialogShown: false,
+		isFinishWithDoublesChecked: false
 	)
 	@Published var createPlayerState = CreatePlayerState(name: "", allPlayers: [])
 	
 	private let viewModel: CreateGameViewModel
 	private let createPlayerViewModel: CreatePlayerViewModel
-	private let startGame: ([Player], Int32) -> ()
+	private let startGame: ([Player], Int32, Bool) -> ()
 	private var handle: DisposableHandle?
 	private var createPlayerHandle: DisposableHandle?
 	
 	init(
 		viewModel: CreateGameViewModel,
 		createPlayerViewModel: CreatePlayerViewModel,
-		startGame: @escaping ([Player], Int32) -> ()
+		startGame: @escaping ([Player], Int32, Bool) -> ()
 	) {
 		self.viewModel = viewModel
 		self.createPlayerViewModel = createPlayerViewModel
 		self.startGame = startGame
 	}
 	
-	func start() {
-		startGame(state.selectedPlayers, state.selectedGoal?.int32Value ?? 0)
+	func start(isFinishWithDoubles: Bool) {
+		startGame(
+			state.selectedPlayers,
+			state.selectedGoal?.int32Value ?? 0,
+			isFinishWithDoubles
+		)
 	}
 	
 	func startObserving() {

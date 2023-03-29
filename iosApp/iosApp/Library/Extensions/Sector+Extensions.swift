@@ -1,9 +1,7 @@
 import shared
 import SwiftUI
 
-extension Sector: Identifiable {
-	
-}
+extension Sector: Identifiable {}
 
 extension [Sector]: Identifiable {
 	public var id: Int32 {

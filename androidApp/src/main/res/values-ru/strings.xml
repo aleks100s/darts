@@ -73,4 +73,6 @@
     <string name="back_to_game">Назад к игре</string>
     <string name="training">Тренировка №%1$d, цель %2$d</string>
     <string name="sector_count">%1$s (%2$d попаданий)</string>
+    <string name="additional_settings">Дополнительные настройки</string>
+    <string name="finish_with_doubles">Заканчивать двойным броском</string>
 </resources>

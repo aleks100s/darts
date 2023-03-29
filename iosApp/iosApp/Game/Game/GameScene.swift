@@ -6,6 +6,7 @@ internal enum GameScene {
 		using module: AppModule,
 		players: [Player],
 		goal: Int32,
+		isFinishWithDoublesChecked: Bool,
 		onGameFinished: @escaping () -> Void,
 		onShowInGameHistory: @escaping ([PlayerHistory], Int32, Int) -> Void,
 		onTurnSelected: @escaping (Set) -> Void
@@ -14,7 +15,8 @@ internal enum GameScene {
 		let gameManager = GameManager(
 			saveGameHistoryUseCase: saveGameHistoryUseCase,
 			players: players,
-			goal: goal
+			goal: goal,
+			finishWithDoubles: isFinishWithDoublesChecked
 		)
 		let viewModel = GameViewModel(
 		   gameManager: gameManager,

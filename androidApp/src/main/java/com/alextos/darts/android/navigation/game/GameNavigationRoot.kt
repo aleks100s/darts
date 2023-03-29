@@ -119,7 +119,8 @@ fun GameNavigationRoot() {
                                 navController.navigate(
                                     route = GameRoute.Game.routeWithArgs(
                                         state.selectedPlayers.toStringNavArgument(),
-                                        state.selectedGoal.toString()
+                                        state.selectedGoal.toString(),
+                                        state.isFinishWithDoublesChecked.toString()
                                     )
                                 )
                             }
@@ -141,13 +142,16 @@ fun GameNavigationRoot() {
         }
 
         composable(
-            route = GameRoute.Game.route + "/{list}/{goal}",
+            route = GameRoute.Game.route + "/{list}/{goal}/{doubles}",
             arguments = listOf(
                 navArgument("list") {
                     type = NavType.StringType
                 },
                 navArgument("goal") {
                     type = NavType.StringType
+                },
+                navArgument("doubles") {
+                    type = NavType.BoolType
                 }
             )
         ) {

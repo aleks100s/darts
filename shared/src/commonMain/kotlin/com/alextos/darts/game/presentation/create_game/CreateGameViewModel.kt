@@ -74,6 +74,11 @@ class CreateGameViewModel(
                     )
                 }
             }
+            is CreateGameEvent.ToggleFinishWithDoubles -> {
+                _state.update {
+                    it.copy(isFinishWithDoublesChecked = event.isChecked)
+                }
+            }
             else -> {}
         }
     }

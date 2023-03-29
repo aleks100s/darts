@@ -8,7 +8,8 @@ data class CreateGameState(
     val selectedGoal: Int? = null,
     val goalOptions: List<Int> = listOf(101, 301, 501),
     val playerToDelete: Player? = null,
-    val isDeletePlayerDialogShown: Boolean = false
+    val isDeletePlayerDialogShown: Boolean = false,
+    val isFinishWithDoublesChecked: Boolean = false
 ) {
     fun isReadyToCreateGame() = selectedPlayers.isNotEmpty() && selectedGoal != null
 

@@ -4,6 +4,7 @@ import shared
 internal struct CreateGameView: View {
 	@StateObject var viewModel: IOSCreateGameViewModel
 	@State private var newPlayerName = ""
+	@State private var isFinishWithDoublesChecked = false
 	
 	var body: some View {
 		List {
@@ -34,6 +35,10 @@ internal struct CreateGameView: View {
 						viewModel.onEvent(.SelectGoal(option: option.int32Value))
 					}
 				}
+			}
+			
+			Section("additional_settings") {
+				Toggle("finish_with_doubles", isOn: $isFinishWithDoublesChecked)
 			}
 		}
 		.alert("enter_new_player_name", isPresented: $viewModel.isCreatePlayerDialogShown) {
@@ -70,7 +75,7 @@ internal struct CreateGameView: View {
 		}
 		.toolbar {
 			Button {
-				viewModel.start()
+				viewModel.start(isFinishWithDoubles: isFinishWithDoublesChecked)
 			} label: {
 				Text("start_game")
 			}

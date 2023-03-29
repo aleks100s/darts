@@ -74,3 +74,5 @@
 "back_to_game" = "Назад к игре";
 "training %d %d" = "Тренировка №%d, цель %d";
 "sector_count %@ %d" = "%@ (%d попаданий)";
+"additional_settings" = "Дополнительные настройки";
+"finish_with_doubles" = "Заканчивать двойным броском";

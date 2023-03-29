@@ -58,7 +58,7 @@
 "biggest_sets" = "Best turns";
 "smallest_sets" = "Smallest turns";
 "misses_count" = "Number of misses";
-"overkill_count" = "Number of overkills";
+"overkill_count" = "Number of busts";
 "game_goal_value %d" = "Game goal %d";
 "game_recap" = "Game recap";
 "average_set_recap" = "Average turn";
@@ -74,3 +74,5 @@
 "back_to_game" = "Back to the game";
 "training %d %d" = "Training %d, goal is %d";
 "sector_count %@ %d" = "%@ (%d hits)";
+"additional_settings" = "Additional settings";
+"finish_with_doubles" = "Finish with doubles";

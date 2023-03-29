@@ -13,7 +13,8 @@ import kotlinx.datetime.toLocalDateTime
 class GameManager(
     private val saveGameHistoryUseCase: SaveGameHistoryUseCase,
     private val players: List<Player>,
-    private val goal: Int
+    private val goal: Int,
+    private val finishWithDoubles: Boolean
 ) {
     private val evaluateShotUseCases by lazy {
         players.map {

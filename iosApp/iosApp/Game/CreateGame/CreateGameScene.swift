@@ -5,7 +5,7 @@ internal enum CreateGameScene {
 	@MainActor
 	static func create(
 		using module: AppModule,
-		startGame: @escaping ([Player], Int32) -> ()
+		startGame: @escaping ([Player], Int32, Bool) -> ()
 	) -> some View {
 		let getPlayersUseCase = GetPlayersUseCase(dataSource: module.playerDataSource)
 		let deletePlayerUseCase = DeletePlayerUseCase(dataSource: module.playerDataSource)

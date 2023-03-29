@@ -17,9 +17,15 @@ class AndroidGameViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
 ): ViewModel() {
     private val viewModel by lazy {
-        val players = savedStateHandle.get<String>("list")?.toPlayerList()
+        val players = savedStateHandle.get<String>("list")?.toPlayerList() ?: listOf()
         val goal = savedStateHandle.get<String>("goal")?.toInt() ?: 0
-        val gameManager = GameManager(saveGameHistoryUseCase, players ?: listOf(), goal)
+        val finishWithDoubles = savedStateHandle.get<Boolean>("doubles") ?: false
+        val gameManager = GameManager(
+            saveGameHistoryUseCase,
+            players,
+            goal,
+            finishWithDoubles
+        )
         GameViewModel(gameManager, viewModelScope)
     }
 

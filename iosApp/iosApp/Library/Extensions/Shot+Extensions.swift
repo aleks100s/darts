@@ -1,5 +1,3 @@
 import shared
 
-extension Shot: Identifiable {
-	
-}
+extension Shot: Identifiable {}

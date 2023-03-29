@@ -90,6 +90,15 @@ fun CreateGameScreen(
                 onEvent(CreateGameEvent.SelectGoal(goal))
             }
 
+            SectionHeader(title = stringResource(id = R.string.additional_settings))
+
+            FinishWithDoublesItem(
+                isChecked = state.isFinishWithDoublesChecked,
+                onCheckedChanged = { isChecked ->
+                    onEvent(CreateGameEvent.ToggleFinishWithDoubles(isChecked))
+                }
+            )
+
             Spacer(modifier = Modifier.height(64.dp))
         }
 
@@ -210,4 +219,21 @@ fun GoalOptionItem(
         text = goal.toString(),
         textAlign = TextAlign.Center
     )
+}
+
+@Composable
+fun FinishWithDoublesItem(
+    isChecked: Boolean,
+    onCheckedChanged: (Boolean) -> Unit
+) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier.padding(horizontal = 16.dp)
+    ) {
+        Text(
+            modifier = Modifier.weight(1f),
+            text = stringResource(id = R.string.finish_with_doubles)
+        )
+        Switch(checked = isChecked, onCheckedChange = onCheckedChanged)
+    }
 }

@@ -781,7 +781,7 @@
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)";
 				INFOPLIST_FILE = iosApp/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Darts Score";
+				INFOPLIST_KEY_CFBundleDisplayName = "Darts Helper";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -810,7 +810,7 @@
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)";
 				INFOPLIST_FILE = iosApp/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Darts Score";
+				INFOPLIST_KEY_CFBundleDisplayName = "Darts Helper";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

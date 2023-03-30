@@ -6,6 +6,10 @@ data class SectorHeatmapDistribution(
     val player: Player,
     val heatmap: List<SectorHeat> = listOf()
 ) {
+    fun isEmpty(): Boolean {
+        return heatmap.isEmpty()
+    }
+
     fun getOuters(): List<SectorHeat> {
         return heatmap.filter { it.sector.isInner() || it.sector.isOuter() }
     }

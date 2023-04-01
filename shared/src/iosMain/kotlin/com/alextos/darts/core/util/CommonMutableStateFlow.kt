@@ -33,6 +33,4 @@ actual open class CommonMutableStateFlow<T> actual constructor(
     override suspend fun emit(value: T) {
         flow.emit(value)
     }
-
-
 }

@@ -16,10 +16,13 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.alextos.darts.android.R
-import com.alextos.darts.android.common.presentation.components.drawSector
+import com.alextos.darts.android.common.presentation.extensions.arc
 import com.alextos.darts.android.common.presentation.extensions.color
+import com.alextos.darts.android.common.presentation.extensions.drawNumbers
+import com.alextos.darts.android.common.presentation.extensions.drawSector
 import com.alextos.darts.android.common.presentation.screens.Screen
 import com.alextos.darts.android.common.presentation.views.NoDataView
+import com.alextos.darts.core.domain.Sector
 import com.alextos.darts.statistics.domain.models.SectorHeat
 import com.alextos.darts.statistics.domain.models.SectorHeatmapDistribution
 import com.alextos.darts.statistics.presentation.heatmap.SectorHeatmapState
@@ -78,20 +81,21 @@ private fun HeatmapDartsDisk(distribution: SectorHeatmapDistribution) {
         distribution.getDoubleBullseye()?.let {
             drawHeatmapDoubleBullseye(it)
         }
+        drawNumbers(Sector.sectorNumbers)
     }
 }
 
 private fun DrawScope.drawHeatmapMiss() {
     drawSector(
-        multiplier = 1f,
-        width = 0.1f,
+        multiplier = 0.95f,
+        width = 0.2f,
         color = Color.DarkGray
     )
 }
 
 private fun DrawScope.drawHeatmapDoubles(sectors: List<SectorHeat>) {
     drawHeatmapSectorLevel(
-        radiusFrom = 0.85f,
+        radiusFrom = 0.8f,
         width = 0.1f,
         sectors = sectors
     )
@@ -99,7 +103,7 @@ private fun DrawScope.drawHeatmapDoubles(sectors: List<SectorHeat>) {
 
 private fun DrawScope.drawHeatmapOuters(sectors: List<SectorHeat>) {
     drawHeatmapSectorLevel(
-        radiusFrom = 0.55f,
+        radiusFrom = 0.5f,
         width = 0.3f,
         sectors = sectors
     )
@@ -107,7 +111,7 @@ private fun DrawScope.drawHeatmapOuters(sectors: List<SectorHeat>) {
 
 private fun DrawScope.drawHeatmapTriplets(sectors: List<SectorHeat>) {
     drawHeatmapSectorLevel(
-        radiusFrom = 0.45f,
+        radiusFrom = 0.4f,
         width = 0.1f,
         sectors = sectors
     )
@@ -115,14 +119,14 @@ private fun DrawScope.drawHeatmapTriplets(sectors: List<SectorHeat>) {
 
 private fun DrawScope.drawHeatmapInners(sectors: List<SectorHeat>) {
     drawHeatmapSectorLevel(
-        radiusFrom = 0.15f,
+        radiusFrom = 0.1f,
         width = 0.3f,
         sectors = sectors
     )
 }
 
 private fun DrawScope.drawHeatmapBullseye(sector: SectorHeat) {
-    val multiplier = 0.1f
+    val multiplier = 0.5f
     val width = 0.1f
     val arcRadius = size.width / 2
     val offset = arcRadius * (1 - multiplier)
@@ -168,7 +172,7 @@ private fun DrawScope.circleHeatmap(
     sectors: List<SectorHeat>
 ) {
     sectors.forEach {
-        arcHeatmap(
+        arc(
             sizeMultiplier = sizeMultiplier,
             width = width,
             offset = Offset(offset, offset),
@@ -176,22 +180,4 @@ private fun DrawScope.circleHeatmap(
             color = it.color()
         )
     }
-}
-
-private fun DrawScope.arcHeatmap(
-    sizeMultiplier: Float,
-    width: Float,
-    offset: Offset,
-    startAngle: Float,
-    color: Color
-) {
-    drawArc(
-        color = color,
-        startAngle = startAngle,
-        sweepAngle = 18f,
-        useCenter = false,
-        size = size.times(sizeMultiplier),
-        style = Stroke(width = width),
-        topLeft = offset
-    )
 }

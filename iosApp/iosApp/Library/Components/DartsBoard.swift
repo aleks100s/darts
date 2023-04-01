@@ -4,7 +4,7 @@ import shared
 internal struct DartsBoard: View {
 	let highlightedSector: Sector
 	
-	private let hitColor = Color.cyan
+	private let hitColor = Color.blue
 	
 	var body: some View {
 		GeometryReader { geometry in
@@ -13,26 +13,27 @@ internal struct DartsBoard: View {
 
 			ZStack {
 				misses(center: center, radius: radius)
-				doubles(center: center, radius: radius * 0.9)
-				outers(center: center, radius: radius * 0.8)
-				triples(center: center, radius: radius * 0.5)
-				inners(center: center, radius: radius * 0.4)
-				bullseye(center: center, radius: radius * 0.15)
+				doubles(center: center, radius: radius * 0.85)
+				outers(center: center, radius: radius * 0.75)
+				triples(center: center, radius: radius * 0.45)
+				inners(center: center, radius: radius * 0.35)
+				bullseye(center: center, radius: radius * 0.1)
 				doubleBullseye(center: center, radius: radius * 0.05)
+				DartsNumbers(center: center, radius: radius)
 			}
 		}
 		.aspectRatio(1, contentMode: .fit)
+		.padding()
 	}
 	
 	@ViewBuilder
 	private func misses(center: CGPoint, radius: CGFloat) -> some View {
-		let color = highlightedSector == Sector.miss ? hitColor : .black
 		Arc(
 			center: center,
 			radius: radius,
 			startAngle: .degrees(0),
 			endAngle: .degrees(360),
-			color: color
+			color: .black
 		)
 	}
 	

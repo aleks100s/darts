@@ -20,7 +20,6 @@ internal struct DartsBoardView: View {
 		VStack(alignment: .center) {
 			Text(shot.sector.inputString)
 			DartsBoard(highlightedSector: shot.sector)
-				.padding()
 		}
 	}
 }

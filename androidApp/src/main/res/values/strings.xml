@@ -8,9 +8,9 @@
     <string name="add_new_player">Add new player</string>
     <string name="create_player">Create player</string>
     <string name="enter_new_player_name">Enter new player name</string>
-    <string name="shot1">Hit #1</string>
-    <string name="shot2">Hit #2</string>
-    <string name="shot3">Hit #3</string>
+    <string name="shot1">#1</string>
+    <string name="shot2">#2</string>
+    <string name="shot3">#3</string>
     <string name="shot_sum">Hits sum</string>
     <string name="reminder">Reminder</string>
     <string name="leave_game">Leave the game</string>
@@ -65,7 +65,7 @@
     <string name="game_player_result">Reminder: %1$d</string>
     <string name="view_turn">View turn</string>
     <string name="delete_player">Delete player and all related games</string>
-    <string name="erase_hit">Erase hit</string>
+    <string name="erase_hit">Undo</string>
     <string name="delete_game">Delete game</string>
     <string name="this_cannot_be_undone">This cannot be undone</string>
     <string name="delete">Delete</string>
@@ -75,4 +75,5 @@
     <string name="sector_count">%1$s (%2$d hits)</string>
     <string name="additional_settings">Additional settings</string>
     <string name="finish_with_doubles">Finish with doubles</string>
+    <string name="miss">Miss</string>
 </resources>

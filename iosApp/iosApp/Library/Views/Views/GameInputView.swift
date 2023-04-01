@@ -133,7 +133,7 @@ internal struct GameInputView: View {
 			onInputClick()
 		} label: {
 			HStack(alignment: .center) {
-				Text(sector.uiString())
+				Text(sector.inputString)
 			}
 			.padding(.vertical, 12)
 			.frame(maxWidth: .infinity)

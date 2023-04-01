@@ -279,7 +279,7 @@ enum class Sector(
         }
     }
 
-    fun uiString(): String {
+    fun valueString(): String {
         return when (this) {
             None -> "-"
             else -> if (isDouble()) {
@@ -296,6 +296,7 @@ enum class Sector(
 
     companion object {
         val sectors = listOf(
+            listOf(Miss),
             listOf(SingleInner1, Double1, Triple1),
             listOf(SingleInner2, Double2, Triple2),
             listOf(SingleInner3, Double3, Triple3),
@@ -316,7 +317,7 @@ enum class Sector(
             listOf(SingleInner18, Double18,  Triple18),
             listOf(SingleInner19, Double19,  Triple19),
             listOf(SingleInner20, Double20,  Triple20),
-            listOf(SingleBullseye, DoubleBullseye, Miss),
+            listOf(SingleBullseye, DoubleBullseye),
         )
 
         val heatmapSectors = listOf(

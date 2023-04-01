@@ -9,7 +9,13 @@ extension [Sector]: Identifiable {
 	}
 }
 
-internal extension Sector {
+extension Sector {
+	var inputString: String {
+		isMiss() ? String(localized: "miss") : valueString()
+	}
+}
+
+extension Sector {
 	var textColor: Color {
 		if isWhite() {
 			return .black

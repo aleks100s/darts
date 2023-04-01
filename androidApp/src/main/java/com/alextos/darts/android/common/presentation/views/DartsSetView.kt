@@ -12,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.alextos.darts.android.common.presentation.components.DartsDisk
+import com.alextos.darts.android.common.presentation.extensions.inputString
 import com.alextos.darts.core.domain.Shot
 
 @Composable
@@ -29,7 +30,7 @@ private fun DartsShotView(shot: Shot) {
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.padding(vertical = 16.dp)
     ) {
-        Text(text = shot.sector.uiString())
+        Text(text = shot.sector.inputString())
         Spacer(Modifier.height(16.dp))
         DartsDisk(selectedSector = shot.sector)
     }

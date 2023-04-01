@@ -66,7 +66,7 @@
 "view_turn" = "Просмотр хода";
 "delete_player" = "Удалить игрока и все связанные с ним игры";
 "player_data_will_be_lost" = "Данные игрока будут потеряны";
-"erase_hit" = "Стереть бросок";
+"erase_hit" = "Отменить";
 "delete_game" = "Удалить игру";
 "this_cannot_be_undone" = "Это действие необратимо";
 "delete" = "Удалить";
@@ -76,3 +76,4 @@
 "sector_count %@ %d" = "%@ (%d попаданий)";
 "additional_settings" = "Дополнительные настройки";
 "finish_with_doubles" = "Заканчивать двойным броском";
+"miss" = "Промах";

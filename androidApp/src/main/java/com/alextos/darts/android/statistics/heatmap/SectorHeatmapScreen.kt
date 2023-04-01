@@ -55,7 +55,7 @@ private fun SectorItem(sectorHeat: SectorHeat) {
             .size(24.dp)
             .background(sectorHeat.color()))
         Spacer(modifier = Modifier.width(16.dp))
-        Text(stringResource(id = R.string.sector_count, sectorHeat.sector.uiString(), sectorHeat.count))
+        Text(stringResource(id = R.string.sector_count, sectorHeat.sector.valueString(), sectorHeat.count))
     }
 }
 

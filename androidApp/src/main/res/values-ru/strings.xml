@@ -8,9 +8,9 @@
     <string name="add_new_player">Добавить нового игрока</string>
     <string name="create_player">Создать игрока</string>
     <string name="enter_new_player_name">Введите имя игрока</string>
-    <string name="shot1">1й бросок</string>
-    <string name="shot2">2й бросок</string>
-    <string name="shot3">3й бросок</string>
+    <string name="shot1">1й</string>
+    <string name="shot2">2й</string>
+    <string name="shot3">3й</string>
     <string name="shot_sum">Сумма</string>
     <string name="reminder">Остаток</string>
     <string name="leave_game">Покинуть игру</string>
@@ -65,7 +65,7 @@
     <string name="game_player_result">Остаток: %1$d</string>
     <string name="view_turn">Просмотр хода</string>
     <string name="delete_player">Удалить игрока и все связанные с ним игры</string>
-    <string name="erase_hit">Стереть бросок</string>
+    <string name="erase_hit">Отменить</string>
     <string name="delete_game">Удалить игру</string>
     <string name="this_cannot_be_undone">Это действие необратимо</string>
     <string name="delete">Удалить</string>
@@ -75,4 +75,5 @@
     <string name="sector_count">%1$s (%2$d попаданий)</string>
     <string name="additional_settings">Дополнительные настройки</string>
     <string name="finish_with_doubles">Заканчивать двойным броском</string>
+    <string name="miss">Промах</string>
 </resources>

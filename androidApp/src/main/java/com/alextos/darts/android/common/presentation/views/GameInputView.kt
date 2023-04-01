@@ -24,6 +24,7 @@ import com.alextos.darts.android.R
 import com.alextos.darts.android.common.presentation.ScreenType
 import com.alextos.darts.android.common.presentation.components.*
 import com.alextos.darts.android.common.presentation.extensions.color
+import com.alextos.darts.android.common.presentation.extensions.inputString
 import com.alextos.darts.android.common.presentation.extensions.textColor
 import com.alextos.darts.android.common.presentation.rememberScreenType
 import com.alextos.darts.core.domain.Sector
@@ -201,6 +202,6 @@ private fun InputCell(
             .padding(vertical = 12.dp),
         horizontalArrangement = Arrangement.Center
     ) {
-        Text(text = sector.uiString(), color = sector.textColor())
+        Text(text = sector.inputString(), color = sector.textColor())
     }
 }

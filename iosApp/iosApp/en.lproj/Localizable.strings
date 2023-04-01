@@ -66,7 +66,7 @@
 "view_turn" = "View turn";
 "delete_player" = "Delete player and all related games";
 "player_data_will_be_lost" = "Player data will be lost";
-"erase_hit" = "Erase hit";
+"erase_hit" = "Undo";
 "delete_game" = "Delete game";
 "this_cannot_be_undone" = "This cannot be undone";
 "delete" = "Delete";
@@ -76,3 +76,4 @@
 "sector_count %@ %d" = "%@ (%d hits)";
 "additional_settings" = "Additional settings";
 "finish_with_doubles" = "Finish with doubles";
+"miss" = "Miss";

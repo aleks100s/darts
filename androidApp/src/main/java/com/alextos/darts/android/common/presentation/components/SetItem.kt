@@ -21,7 +21,7 @@ fun SetItem(set: Set, onSelect: () -> Unit) {
             .padding(16.dp)
     ) {
         set.shots.forEach {
-            Cell(modifier = Modifier.weight(1f), text = it.sector.uiString())
+            Cell(modifier = Modifier.weight(1f), text = it.sector.valueString())
         }
         (0 until set.shotsLeft()).forEach { _ ->
             Cell(modifier = Modifier.weight(1f), text = "")

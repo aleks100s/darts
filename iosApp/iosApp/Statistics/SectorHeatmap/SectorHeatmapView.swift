@@ -45,7 +45,7 @@ internal struct SectorHeatmapView: View {
 		HStack(alignment: .center) {
 			Image(systemName: "square.fill")
 				.foregroundColor(heat.color)
-			Text("sector_count \(heat.sector.uiString()) \(heat.count)")
+			Text("sector_count \(heat.sector.valueString()) \(heat.count)")
 			Spacer()
 		}
 	}

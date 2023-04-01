@@ -9,7 +9,7 @@ internal struct TurnItem: View {
 	var body: some View {
 		HStack(spacing: 0) {
 			ForEach(turn.shots) { shot in
-				Cell(text: shot.sector.uiString())
+				Cell(text: shot.sector.valueString())
 			}
 			if shotsLeft == 3 {
 				ForEach(0 ..< 3) { _ in

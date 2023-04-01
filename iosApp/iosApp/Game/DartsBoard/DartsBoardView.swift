@@ -18,7 +18,7 @@ internal struct DartsBoardView: View {
 	@ViewBuilder
 	private func dartsBoardItem(shot: Shot) -> some View {
 		VStack(alignment: .center) {
-			Text(shot.sector.uiString())
+			Text(shot.sector.inputString)
 			DartsBoard(highlightedSector: shot.sector)
 				.padding()
 		}

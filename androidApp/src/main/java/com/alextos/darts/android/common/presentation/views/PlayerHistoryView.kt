@@ -14,7 +14,7 @@ import com.alextos.darts.android.common.presentation.components.SectionHeader
 import com.alextos.darts.android.common.presentation.components.SectionSubHeader
 import com.alextos.darts.android.common.presentation.components.SetItem
 import com.alextos.darts.game.domain.models.PlayerHistory
-import com.alextos.darts.core.domain.Set
+import com.alextos.darts.core.domain.model.Set
 
 @Composable
 fun PlayerHistoryView(

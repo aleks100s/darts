@@ -1,15 +1,15 @@
-package com.alextos.darts.game.domain.useCases
+package com.alextos.darts.game.domain.game_manager
 
 import com.alextos.darts.game.domain.models.*
-import com.alextos.darts.core.domain.Player
-import com.alextos.darts.core.domain.Sector
-import com.alextos.darts.core.domain.Set
-import com.alextos.darts.core.domain.Shot
+import com.alextos.darts.core.domain.model.Player
+import com.alextos.darts.core.domain.model.Sector
+import com.alextos.darts.core.domain.model.Set
+import com.alextos.darts.core.domain.model.Shot
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 
-class TrackUserHistoryUseCase(player: Player) {
+class UserHistoryManager(player: Player) {
     private val _playerHistory = MutableStateFlow(PlayerHistory(player))
     val playerHistory: StateFlow<PlayerHistory> = _playerHistory
 
@@ -112,9 +112,7 @@ class TrackUserHistoryUseCase(player: Player) {
                     Shot(Sector.None),
                     Shot(Sector.None)
                 )
-            } else {
-                listOf(shotResult.shot)
-                   },
+            } else { listOf(shotResult.shot) },
             isOverkill = isOverkill,
             leftAfter = shotResult.leftAfter
         )

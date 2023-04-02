@@ -1,6 +1,6 @@
 package com.alextos.darts.statistics.presentation.victory_distribution
 
-import com.alextos.darts.core.domain.Player
+import com.alextos.darts.core.domain.model.Player
 import com.alextos.darts.core.util.toCommonStateFlow
 import com.alextos.darts.statistics.domain.use_cases.victory_distribution.GetPlayerVictoryDistributionUseCase
 import kotlinx.coroutines.CoroutineScope

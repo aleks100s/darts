@@ -1,6 +1,6 @@
 package com.alextos.darts.game.presentation.create_player
 
-import com.alextos.darts.core.domain.Player
+import com.alextos.darts.core.domain.model.Player
 
 data class CreatePlayerState(
     val name: String = "",

@@ -2,7 +2,7 @@ package com.alextos.darts.android.statistics.biggest_final_set
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.alextos.darts.core.domain.GetPlayersUseCase
+import com.alextos.darts.core.domain.useCases.GetPlayersUseCase
 import com.alextos.darts.statistics.domain.use_cases.biggest_final_set.GetPlayersBiggestFinalSetUseCase
 import com.alextos.darts.statistics.presentation.biggest_final_set.BiggestFinalSetViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

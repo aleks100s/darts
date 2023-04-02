@@ -1,7 +1,7 @@
 package com.alextos.darts.game.domain.models
 
-import com.alextos.darts.core.domain.Player
-import com.alextos.darts.core.domain.Set
+import com.alextos.darts.core.domain.model.Player
+import com.alextos.darts.core.domain.model.Set
 
 data class PlayerHistory(
     val player: Player,

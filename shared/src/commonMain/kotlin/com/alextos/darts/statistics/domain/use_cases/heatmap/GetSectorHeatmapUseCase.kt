@@ -1,7 +1,7 @@
 package com.alextos.darts.statistics.domain.use_cases.heatmap
 
-import com.alextos.darts.core.domain.Player
-import com.alextos.darts.core.domain.Sector
+import com.alextos.darts.core.domain.model.Player
+import com.alextos.darts.core.domain.model.Sector
 import com.alextos.darts.statistics.domain.StatisticsDataSource
 import com.alextos.darts.statistics.domain.models.SectorHeat
 import com.alextos.darts.statistics.domain.models.SectorHeatmapDistribution

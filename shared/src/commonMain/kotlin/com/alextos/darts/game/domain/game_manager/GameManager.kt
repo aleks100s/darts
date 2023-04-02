@@ -1,9 +1,10 @@
-package com.alextos.darts.game.domain.useCases
+package com.alextos.darts.game.domain.game_manager
 
-import com.alextos.darts.core.domain.Player
+import com.alextos.darts.core.domain.model.Player
 import com.alextos.darts.game.domain.models.Game
 import com.alextos.darts.game.domain.models.GameHistory
-import com.alextos.darts.core.domain.Shot
+import com.alextos.darts.core.domain.model.Shot
+import com.alextos.darts.game.domain.useCases.SaveGameHistoryUseCase
 import com.alextos.darts.game.presentation.game.TurnState
 import kotlinx.coroutines.flow.*
 import kotlinx.datetime.Clock
@@ -16,15 +17,15 @@ class GameManager(
     private val goal: Int,
     private val finishWithDoubles: Boolean
 ) {
-    private val evaluateShotUseCases by lazy {
+    private val currentSetManagers by lazy {
         players.map {
-            EvaluateShotUseCase(goal, finishWithDoubles)
+            CurrentSetManager(goal, finishWithDoubles)
         }
     }
 
-    private val trackUserHistoryUseCases by lazy {
+    private val userHistoryManagers by lazy {
         players.map {
-            TrackUserHistoryUseCase(it)
+            UserHistoryManager(it)
         }
     }
 
@@ -37,7 +38,7 @@ class GameManager(
     private val _isGameFinished = MutableStateFlow(false)
     val isGameFinished: StateFlow<Boolean> = _isGameFinished
 
-    val gameHistory = combine(trackUserHistoryUseCases.map { it.playerHistory }) { array ->
+    val gameHistory = combine(userHistoryManagers.map { it.playerHistory }) { array ->
         array.toList()
     }
 
@@ -88,7 +89,7 @@ class GameManager(
         )
         val gameHistory = GameHistory(
             game = game,
-            trackUserHistoryUseCases.map { it.playerHistory.value }.sortedBy {
+            userHistoryManagers.map { it.playerHistory.value }.sortedBy {
                 game.players.indexOf(it.player)
             }
         )
@@ -96,17 +97,17 @@ class GameManager(
         _isGameFinished.update { true }
     }
 
-    private fun currentEvaluateShotUseCase(): EvaluateShotUseCase {
-        return evaluateShotUseCases[players.indexOf(currentPlayer.value)]
+    private fun currentEvaluateShotUseCase(): CurrentSetManager {
+        return currentSetManagers[players.indexOf(currentPlayer.value)]
     }
 
-    private fun currentTrackUseCaseUseCase(): TrackUserHistoryUseCase {
-        return trackUserHistoryUseCases[players.indexOf(currentPlayer.value)]
+    private fun currentTrackUseCaseUseCase(): UserHistoryManager {
+        return userHistoryManagers[players.indexOf(currentPlayer.value)]
     }
 
     private fun nextTurn() {
         val index = players.indexOf(currentPlayer.value)
-        val nextPlayer = players.getOrNull(index + 1) ?: kotlin.run {
+        val nextPlayer = players.getOrNull(index + 1) ?: run {
             players[0]
         }
         _currentPlayer.update { nextPlayer }

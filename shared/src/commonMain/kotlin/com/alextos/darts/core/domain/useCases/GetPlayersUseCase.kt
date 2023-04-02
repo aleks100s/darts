@@ -1,5 +1,7 @@
-package com.alextos.darts.core.domain
+package com.alextos.darts.core.domain.useCases
 
+import com.alextos.darts.core.domain.model.Player
+import com.alextos.darts.core.domain.PlayersDataSource
 import kotlinx.coroutines.flow.Flow
 
 class GetPlayersUseCase(

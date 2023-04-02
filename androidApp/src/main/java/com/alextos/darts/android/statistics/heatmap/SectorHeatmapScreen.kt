@@ -20,7 +20,7 @@ import com.alextos.darts.android.common.presentation.extensions.color
 import com.alextos.darts.android.common.presentation.extensions.drawNumbers
 import com.alextos.darts.android.common.presentation.screens.Screen
 import com.alextos.darts.android.common.presentation.views.NoDataView
-import com.alextos.darts.core.domain.Sector
+import com.alextos.darts.core.domain.model.Sector
 import com.alextos.darts.statistics.domain.models.SectorHeat
 import com.alextos.darts.statistics.domain.models.SectorHeatmapDistribution
 import com.alextos.darts.statistics.presentation.heatmap.SectorHeatmapState

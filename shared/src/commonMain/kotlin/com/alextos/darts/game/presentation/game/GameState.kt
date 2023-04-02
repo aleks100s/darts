@@ -1,8 +1,8 @@
 package com.alextos.darts.game.presentation.game
 
 import com.alextos.darts.game.domain.models.PlayerHistory
-import com.alextos.darts.core.domain.Set
-import com.alextos.darts.core.domain.Player
+import com.alextos.darts.core.domain.model.Set
+import com.alextos.darts.core.domain.model.Player
 import com.alextos.darts.game.domain.models.GamePlayerResult
 
 data class GameState(

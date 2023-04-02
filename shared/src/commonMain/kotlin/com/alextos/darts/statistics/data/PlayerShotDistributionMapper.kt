@@ -1,6 +1,6 @@
 package com.alextos.darts.statistics.data
 
-import com.alextos.darts.core.domain.Player
+import com.alextos.darts.core.domain.model.Player
 import com.alextos.darts.statistics.domain.models.PlayerShotDistribution
 import com.alextos.darts.statistics.domain.models.ShotDistribution
 import database.GetPlayerShotDistribution

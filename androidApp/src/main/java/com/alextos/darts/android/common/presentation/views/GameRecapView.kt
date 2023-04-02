@@ -14,7 +14,7 @@ import com.alextos.darts.android.R
 import com.alextos.darts.android.common.presentation.components.ChartLegendItem
 import com.alextos.darts.android.common.presentation.components.SectionHeader
 import com.alextos.darts.android.common.presentation.screens.Screen
-import com.alextos.darts.core.domain.Player
+import com.alextos.darts.core.domain.model.Player
 import com.alextos.darts.core.util.numberOfTurns
 import com.alextos.darts.game.domain.models.PlayerGameValue
 import com.alextos.darts.game.domain.models.PlayerHistory

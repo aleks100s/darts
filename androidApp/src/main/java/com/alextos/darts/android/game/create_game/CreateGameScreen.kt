@@ -25,7 +25,7 @@ import com.alextos.darts.android.R
 import com.alextos.darts.android.common.presentation.components.FAB
 import com.alextos.darts.android.common.presentation.components.PlayerItem
 import com.alextos.darts.android.common.presentation.components.SectionHeader
-import com.alextos.darts.core.domain.Player
+import com.alextos.darts.core.domain.model.Player
 import com.alextos.darts.game.presentation.create_game.CreateGameEvent
 import com.alextos.darts.game.presentation.create_game.CreateGameState
 

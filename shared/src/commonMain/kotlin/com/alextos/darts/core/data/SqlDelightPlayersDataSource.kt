@@ -1,6 +1,6 @@
 package com.alextos.darts.core.data
 
-import com.alextos.darts.core.domain.Player
+import com.alextos.darts.core.domain.model.Player
 import com.alextos.darts.core.domain.PlayersDataSource
 import com.alextos.darts.database.DartsDatabase
 import com.alextos.darts.game.data.toPlayer

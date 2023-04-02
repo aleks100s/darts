@@ -1,6 +1,6 @@
 package com.alextos.darts.game.presentation.create_player
 
-import com.alextos.darts.core.domain.GetPlayersUseCase
+import com.alextos.darts.core.domain.useCases.GetPlayersUseCase
 import com.alextos.darts.core.util.toCommonStateFlow
 import com.alextos.darts.game.domain.useCases.CreatePlayerUseCase
 import kotlinx.coroutines.CoroutineScope

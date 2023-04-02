@@ -1,7 +1,7 @@
 package com.alextos.darts.game.presentation.create_game
 
-import com.alextos.darts.core.domain.DeletePlayerUseCase
-import com.alextos.darts.core.domain.GetPlayersUseCase
+import com.alextos.darts.core.domain.useCases.DeletePlayerUseCase
+import com.alextos.darts.core.domain.useCases.GetPlayersUseCase
 import com.alextos.darts.core.util.toCommonStateFlow
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

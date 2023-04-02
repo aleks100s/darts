@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.alextos.darts.android.common.presentation.components.DartsDisk
 import com.alextos.darts.android.common.presentation.extensions.inputString
-import com.alextos.darts.core.domain.Shot
+import com.alextos.darts.core.domain.model.Shot
 
 @Composable
 fun DartsSetView(set: List<Shot>) {

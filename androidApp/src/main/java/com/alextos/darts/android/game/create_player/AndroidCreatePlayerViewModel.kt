@@ -2,7 +2,7 @@ package com.alextos.darts.android.game.create_player
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.alextos.darts.core.domain.GetPlayersUseCase
+import com.alextos.darts.core.domain.useCases.GetPlayersUseCase
 import com.alextos.darts.game.presentation.create_player.CreatePlayerEvent
 import com.alextos.darts.game.presentation.create_player.CreatePlayerViewModel
 import com.alextos.darts.game.domain.useCases.CreatePlayerUseCase

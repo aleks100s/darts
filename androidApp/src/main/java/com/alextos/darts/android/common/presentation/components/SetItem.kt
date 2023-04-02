@@ -9,7 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.alextos.darts.android.common.presentation.extensions.rowColor
-import com.alextos.darts.core.domain.Set
+import com.alextos.darts.core.domain.model.Set
 
 @Composable
 fun SetItem(set: Set, onSelect: () -> Unit) {

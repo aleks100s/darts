@@ -1,6 +1,6 @@
 package com.alextos.darts.statistics.domain.models
 
-import com.alextos.darts.core.domain.Sector
+import com.alextos.darts.core.domain.model.Sector
 
 data class SectorHeat(
     val sector: Sector,

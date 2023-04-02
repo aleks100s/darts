@@ -9,7 +9,7 @@ import androidx.compose.ui.res.stringResource
 import com.alextos.darts.android.R
 import com.alextos.darts.android.common.presentation.screens.Screen
 import com.alextos.darts.android.common.presentation.views.DartsSetView
-import com.alextos.darts.core.domain.Shot
+import com.alextos.darts.core.domain.model.Shot
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState

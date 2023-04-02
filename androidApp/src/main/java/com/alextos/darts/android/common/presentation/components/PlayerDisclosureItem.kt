@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.alextos.darts.android.R
-import com.alextos.darts.core.domain.Player
+import com.alextos.darts.core.domain.model.Player
 
 @Composable
 fun PlayerDisclosureItem(

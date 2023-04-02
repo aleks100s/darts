@@ -1,6 +1,6 @@
 package com.alextos.darts.statistics.domain.use_cases.average_values
 
-import com.alextos.darts.core.domain.Player
+import com.alextos.darts.core.domain.model.Player
 import com.alextos.darts.statistics.domain.StatisticsDataSource
 import com.alextos.darts.statistics.domain.models.AveragePlayerValue
 import kotlinx.coroutines.flow.Flow

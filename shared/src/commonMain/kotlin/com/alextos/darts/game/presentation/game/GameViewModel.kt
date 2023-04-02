@@ -1,8 +1,8 @@
 package com.alextos.darts.game.presentation.game
 
-import com.alextos.darts.core.domain.Shot
+import com.alextos.darts.core.domain.model.Shot
 import com.alextos.darts.core.util.toCommonStateFlow
-import com.alextos.darts.game.domain.useCases.GameManager
+import com.alextos.darts.game.domain.game_manager.GameManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*

@@ -1,5 +1,6 @@
 package com.alextos.darts.core.domain
 
+import com.alextos.darts.core.domain.model.Player
 import kotlinx.coroutines.flow.Flow
 
 interface PlayersDataSource {

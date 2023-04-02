@@ -1,10 +1,9 @@
 package com.alextos.darts.statistics.data
 
 import com.alextos.darts.database.DartsDatabase
-import com.alextos.darts.core.domain.Player
-import com.alextos.darts.core.domain.Sector
-import com.alextos.darts.core.domain.Set
-import com.alextos.darts.core.domain.Shot
+import com.alextos.darts.core.domain.model.Player
+import com.alextos.darts.core.domain.model.Sector
+import com.alextos.darts.core.domain.model.Set
 import com.alextos.darts.statistics.domain.StatisticsDataSource
 import com.alextos.darts.statistics.domain.models.*
 import com.squareup.sqldelight.runtime.coroutines.asFlow

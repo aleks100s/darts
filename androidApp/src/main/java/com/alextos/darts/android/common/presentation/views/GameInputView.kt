@@ -27,8 +27,8 @@ import com.alextos.darts.android.common.presentation.extensions.color
 import com.alextos.darts.android.common.presentation.extensions.inputString
 import com.alextos.darts.android.common.presentation.extensions.textColor
 import com.alextos.darts.android.common.presentation.rememberScreenType
-import com.alextos.darts.core.domain.Sector
-import com.alextos.darts.core.domain.Set
+import com.alextos.darts.core.domain.model.Sector
+import com.alextos.darts.core.domain.model.Set
 import com.alextos.darts.game.domain.models.GamePlayerResult
 
 @Composable

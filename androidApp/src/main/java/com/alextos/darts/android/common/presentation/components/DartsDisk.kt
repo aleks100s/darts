@@ -12,7 +12,7 @@ import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.unit.dp
 import com.alextos.darts.android.common.presentation.extensions.arc
 import com.alextos.darts.android.common.presentation.extensions.drawNumbers
-import com.alextos.darts.core.domain.Sector
+import com.alextos.darts.core.domain.model.Sector
 
 private val hitColor = Color.Blue
 

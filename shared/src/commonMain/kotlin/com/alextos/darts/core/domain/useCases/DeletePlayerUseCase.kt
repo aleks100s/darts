@@ -1,15 +1,17 @@
-package com.alextos.darts.game.domain.useCases
+package com.alextos.darts.core.domain.useCases
 
+import com.alextos.darts.core.domain.model.Player
 import com.alextos.darts.core.domain.PlayersDataSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class CreatePlayerUseCase(
+class DeletePlayerUseCase(
     private val dataSource: PlayersDataSource
 ) {
-    suspend fun execute(name: String) {
+
+    suspend fun execute(player: Player) {
         withContext(Dispatchers.Default) {
-            dataSource.createPlayer(name = name.trim())
+            dataSource.deletePlayer(player)
         }
     }
 }

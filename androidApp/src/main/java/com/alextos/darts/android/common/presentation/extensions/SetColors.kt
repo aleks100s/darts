@@ -3,7 +3,7 @@ package com.alextos.darts.android.common.presentation.extensions
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
-import com.alextos.darts.core.domain.Set
+import com.alextos.darts.core.domain.model.Set
 
 @Composable
 fun Set.rowColor(): Color {

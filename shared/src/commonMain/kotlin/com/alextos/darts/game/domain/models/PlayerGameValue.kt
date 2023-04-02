@@ -1,6 +1,6 @@
 package com.alextos.darts.game.domain.models
 
-import com.alextos.darts.core.domain.Player
+import com.alextos.darts.core.domain.model.Player
 
 data class PlayerGameValue(
     val player: Player,

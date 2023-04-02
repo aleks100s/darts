@@ -1,9 +1,9 @@
-package com.alextos.darts.game.domain.useCases
+package com.alextos.darts.game.domain.game_manager
 
-import com.alextos.darts.core.domain.Shot
+import com.alextos.darts.core.domain.model.Shot
 import com.alextos.darts.game.domain.models.ShotResult
 
-class EvaluateShotUseCase(goal: Int, private val finishWithDoubles: Boolean) {
+class CurrentSetManager(goal: Int, private val finishWithDoubles: Boolean) {
     var currentShotResult: ShotResult? = null
 
     private val currentSet = mutableListOf<Shot>()

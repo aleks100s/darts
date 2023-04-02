@@ -7,6 +7,16 @@ internal enum GameNavigation: Hashable {
 	case history(game: Game)
 	case dartsBoard(Set)
 	case gameRecap(historyState: HistoryState)
+	
+	var urlComponent: String? {
+		switch self {
+		case .createGame:
+			return "createGame"
+			
+		default:
+			return nil
+		}
+	}
 }
 
 internal enum StatisticsNavigation: Hashable {

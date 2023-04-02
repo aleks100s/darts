@@ -1,11 +1,14 @@
 package com.alextos.darts.statistics.domain.use_cases.average_values
 
 import com.alextos.darts.statistics.domain.StatisticsDataSource
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.mapNotNull
 
 class GetAverageSetScoreUseCase(
     private val dataSource: StatisticsDataSource
 ) {
-    fun execute(): Double {
-        return dataSource.getAverageSetScore() ?: 0.0
+    fun execute(): Flow<Double> {
+        return dataSource.getAverageSetScore()
+            .mapNotNull { it ?: 0.0 }
     }
 }

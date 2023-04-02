@@ -1,16 +1,11 @@
 package com.alextos.darts.statistics.presentation.heatmap
 
 import com.alextos.darts.core.domain.Player
-import com.alextos.darts.core.util.toCommonFlow
 import com.alextos.darts.core.util.toCommonStateFlow
 import com.alextos.darts.statistics.domain.use_cases.heatmap.GetSectorHeatmapUseCase
-import com.alextos.darts.statistics.presentation.shot_distribution.ShotDistributionState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.*
 
 class SectorHeatmapViewModel(
     getSectorHeatmapUseCase: GetSectorHeatmapUseCase,
@@ -20,8 +15,8 @@ class SectorHeatmapViewModel(
     private val viewModelScope = coroutineScope ?: CoroutineScope(Dispatchers.Main)
 
     private val _state = MutableStateFlow(SectorHeatmapState())
-    val state = _state.map { state ->
-        state.copy(distribution = getSectorHeatmapUseCase.execute(player))
+    val state = _state.combine(getSectorHeatmapUseCase.execute(player)) { state, distribution ->
+        state.copy(distribution = distribution)
     }
         .stateIn(
             viewModelScope,

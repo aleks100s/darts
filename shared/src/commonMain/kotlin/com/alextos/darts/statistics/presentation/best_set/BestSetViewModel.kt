@@ -1,6 +1,5 @@
 package com.alextos.darts.statistics.presentation.best_set
 
-import com.alextos.darts.core.util.toCommonFlow
 import com.alextos.darts.core.domain.GetPlayersUseCase
 import com.alextos.darts.core.util.toCommonStateFlow
 import com.alextos.darts.statistics.domain.use_cases.best_set.GetPlayersBestSetsUseCase
@@ -16,11 +15,13 @@ class BestSetViewModel(
     private val viewModelScope = coroutineScope ?: CoroutineScope(Dispatchers.Main)
 
     private val _state = MutableStateFlow(BestSetState())
-    val state = getPlayersUseCase.execute()
-        .map { players ->
-            getPlayersBestSetsUseCase.execute(players)
-        }
-        .combine(_state) { playersSets, state ->
+    val state = _state
+        .combine(
+            getPlayersUseCase.execute()
+                .flatMapLatest { players ->
+                    getPlayersBestSetsUseCase.execute(players)
+                }
+        ) { state, playersSets ->
             state.copy(playersBestSets = playersSets)
         }
         .stateIn(

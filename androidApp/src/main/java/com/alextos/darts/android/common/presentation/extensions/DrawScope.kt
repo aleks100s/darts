@@ -17,8 +17,8 @@ fun DrawScope.drawNumbers(numbers: List<Int>) {
         numbers.forEach { number ->
             val text = "$number"
             val index = numbers.indexOf(number)
-            val x = radius * 0.98 * cos(index * Math.PI / 10 - Math.PI / 2) + size.center.x
-            val y = radius * 0.98 * sin(index * Math.PI / 10 - Math.PI / 2) + size.center.y
+            val x = radius * 0.925 * cos(index * Math.PI / 10 - Math.PI / 2) + size.center.x
+            val y = radius * 0.925 * sin(index * Math.PI / 10 - Math.PI / 2) + size.center.y
             val paint = Paint()
             paint.color = android.graphics.Color.WHITE
             paint.textSize = radius / 8
@@ -32,20 +32,6 @@ fun DrawScope.drawNumbers(numbers: List<Int>) {
             )
         }
     }
-}
-
-fun DrawScope.drawSector(multiplier: Float, width: Float, color: Color, useCenter: Boolean = false) {
-    val arcRadius = size.width / 2
-    val offset = arcRadius * (1 - multiplier)
-    drawArc(
-        color = color,
-        startAngle = 0f,
-        sweepAngle = 360f,
-        useCenter = useCenter,
-        size = size.times(multiplier),
-        style = Stroke(width = arcRadius * width),
-        topLeft = Offset(offset, offset)
-    )
 }
 
 fun DrawScope.arc(

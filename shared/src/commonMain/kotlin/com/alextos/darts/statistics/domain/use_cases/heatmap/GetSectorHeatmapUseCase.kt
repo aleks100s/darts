@@ -5,26 +5,30 @@ import com.alextos.darts.core.domain.Sector
 import com.alextos.darts.statistics.domain.StatisticsDataSource
 import com.alextos.darts.statistics.domain.models.SectorHeat
 import com.alextos.darts.statistics.domain.models.SectorHeatmapDistribution
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.combine
 
 class GetSectorHeatmapUseCase(
     private val dataSource: StatisticsDataSource
 ) {
-    fun execute(player: Player): SectorHeatmapDistribution? {
-        val list: MutableList<Pair<Sector, Int>> = mutableListOf()
-        Sector.heatmapSectors.forEach { sector ->
-            val count = dataSource.getSectorCount(player, sector)
-            list.add(sector to count)
+    fun execute(player: Player): Flow<SectorHeatmapDistribution?> {
+        val flows = Sector.heatmapSectors.map { sector ->
+            dataSource.getSectorCount(player, sector)
         }
-        list.sortByDescending { it.second }
-        val maxCount = (list.firstOrNull()?.second ?: 0).toFloat()
-        return if (maxCount == 0f) {
-            null
-        } else {
-            val heatmap = list.map { SectorHeat(it.first, count = it.second, heat = it.second.toFloat() / maxCount) }
-            SectorHeatmapDistribution(
-                heatmap = heatmap,
-                player = player
-            )
+        return combine(flows) { data ->
+            val list = data.toList()
+                .sortedByDescending { it.second }
+            val maxCount = (list.firstOrNull()?.second ?: 0).toFloat()
+
+            return@combine if (maxCount == 0f) {
+                null
+            } else {
+                val heatmap = list.map { SectorHeat(it.first, count = it.second, heat = it.second.toFloat() / maxCount) }
+                SectorHeatmapDistribution(
+                    heatmap = heatmap,
+                    player = player
+                )
+            }
         }
     }
 }

@@ -58,15 +58,12 @@ class GameViewModel(
                 gameManager.resetTurn()
             }
             is GameEvent.ChangeTurn -> {
-                gameManager.changeTurn()
+                viewModelScope.launch {
+                    gameManager.changeTurn()
+                }
             }
             is GameEvent.EraseHit -> {
                 gameManager.eraseShot()
-            }
-            is GameEvent.FinishGame -> {
-                viewModelScope.launch {
-                    gameManager.finishGame()
-                }
             }
             else -> {}
         }

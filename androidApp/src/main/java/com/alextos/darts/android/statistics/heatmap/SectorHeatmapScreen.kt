@@ -12,14 +12,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.DrawScope
-import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.alextos.darts.android.R
 import com.alextos.darts.android.common.presentation.extensions.arc
 import com.alextos.darts.android.common.presentation.extensions.color
 import com.alextos.darts.android.common.presentation.extensions.drawNumbers
-import com.alextos.darts.android.common.presentation.extensions.drawSector
 import com.alextos.darts.android.common.presentation.screens.Screen
 import com.alextos.darts.android.common.presentation.views.NoDataView
 import com.alextos.darts.core.domain.Sector
@@ -75,27 +73,23 @@ private fun HeatmapDartsDisk(distribution: SectorHeatmapDistribution) {
         drawHeatmapOuters(distribution.getOuters())
         drawHeatmapTriplets(distribution.getTriples())
         drawHeatmapInners(distribution.getInners())
-        distribution.getBullseye()?.let {
-            drawHeatmapBullseye(it)
-        }
-        distribution.getDoubleBullseye()?.let {
-            drawHeatmapDoubleBullseye(it)
-        }
+        drawHeatmapBullseye(distribution.getBullseye())
+        drawHeatmapDoubleBullseye(distribution.getDoubleBullseye())
         drawNumbers(Sector.sectorNumbers)
     }
 }
 
 private fun DrawScope.drawHeatmapMiss() {
-    drawSector(
-        multiplier = 0.95f,
-        width = 0.2f,
-        color = Color.DarkGray
+    val boardRadius = size.width / 2
+    drawCircle(
+        color = Color.Black,
+        radius = boardRadius
     )
 }
 
 private fun DrawScope.drawHeatmapDoubles(sectors: List<SectorHeat>) {
     drawHeatmapSectorLevel(
-        radiusFrom = 0.8f,
+        radiusFrom = 0.75f,
         width = 0.1f,
         sectors = sectors
     )
@@ -103,7 +97,7 @@ private fun DrawScope.drawHeatmapDoubles(sectors: List<SectorHeat>) {
 
 private fun DrawScope.drawHeatmapOuters(sectors: List<SectorHeat>) {
     drawHeatmapSectorLevel(
-        radiusFrom = 0.5f,
+        radiusFrom = 0.45f,
         width = 0.3f,
         sectors = sectors
     )
@@ -111,7 +105,7 @@ private fun DrawScope.drawHeatmapOuters(sectors: List<SectorHeat>) {
 
 private fun DrawScope.drawHeatmapTriplets(sectors: List<SectorHeat>) {
     drawHeatmapSectorLevel(
-        radiusFrom = 0.4f,
+        radiusFrom = 0.35f,
         width = 0.1f,
         sectors = sectors
     )
@@ -120,32 +114,24 @@ private fun DrawScope.drawHeatmapTriplets(sectors: List<SectorHeat>) {
 private fun DrawScope.drawHeatmapInners(sectors: List<SectorHeat>) {
     drawHeatmapSectorLevel(
         radiusFrom = 0.1f,
-        width = 0.3f,
+        width = 0.25f,
         sectors = sectors
     )
 }
 
-private fun DrawScope.drawHeatmapBullseye(sector: SectorHeat) {
-    val multiplier = 0.5f
-    val width = 0.1f
-    val arcRadius = size.width / 2
-    val offset = arcRadius * (1 - multiplier)
-    drawArc(
-        color = sector.color(),
-        startAngle = 0f,
-        sweepAngle = 360f,
-        useCenter = false,
-        size = size.times(multiplier),
-        style = Stroke(width = arcRadius * width),
-        topLeft = Offset(offset, offset)
+private fun DrawScope.drawHeatmapBullseye(sector: SectorHeat?) {
+    val boardRadius = size.width / 2
+    drawCircle(
+        color = sector?.color() ?: Color.Black,
+        radius = boardRadius * 0.1f
     )
 }
 
-private fun DrawScope.drawHeatmapDoubleBullseye(sector: SectorHeat) {
-    val arcRadius = size.width / 2
+private fun DrawScope.drawHeatmapDoubleBullseye(sector: SectorHeat?) {
+    val boardRadius = size.width / 2
     drawCircle(
-        color = sector.color(),
-        radius = arcRadius * 0.05f
+        color = sector?.color() ?: Color.Black,
+        radius = boardRadius * 0.05f
     )
 }
 
@@ -154,12 +140,12 @@ private fun DrawScope.drawHeatmapSectorLevel(
     width: Float,
     sectors: List<SectorHeat>
 ) {
-    val arcRadius = size.width / 2
+    val boardRadius = size.width / 2
     val multiplier = radiusFrom + width / 2
-    val offset = arcRadius * (1 - multiplier)
+    val offset = boardRadius * (1 - multiplier)
     circleHeatmap(
         sizeMultiplier = multiplier,
-        width = arcRadius * width,
+        width = boardRadius * width,
         offset = offset,
         sectors = sectors
     )

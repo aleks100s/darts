@@ -3,15 +3,24 @@ package com.alextos.darts.statistics.domain.use_cases.biggest_final_set
 import com.alextos.darts.core.domain.Player
 import com.alextos.darts.statistics.domain.StatisticsDataSource
 import com.alextos.darts.statistics.domain.models.StatisticsSet
+import kotlinx.coroutines.flow.*
 
 class GetPlayersBiggestFinalSetUseCase(
     private val dataSource: StatisticsDataSource
 ) {
-    fun execute(players: List<Player>): List<StatisticsSet> {
-        return players.mapNotNull { player ->
-            dataSource.getPlayerBiggestFinalSet(player)?.let { set ->
-                StatisticsSet(player = player, set)
-            }
-        }.sortedByDescending { it.set.score() }
+    fun execute(players: List<Player>): Flow<List<StatisticsSet>> {
+        val flows = players.map { player ->
+            dataSource.getPlayerBiggestFinalSet(player)
+                .map { set ->
+                    set?.let {
+                        StatisticsSet(player, set)
+                    }
+                }
+        }
+        return combine(flows) { data ->
+            data.asList()
+                .mapNotNull { it }
+                .sortedByDescending { it.set.score() }
+        }
     }
 }

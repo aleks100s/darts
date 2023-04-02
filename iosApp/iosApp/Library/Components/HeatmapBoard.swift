@@ -34,7 +34,7 @@ internal struct HeatmapBoard: View {
 			radius: radius,
 			startAngle: .degrees(0),
 			endAngle: .degrees(360),
-			color: .gray
+			color: .black
 		)
 	}
 	

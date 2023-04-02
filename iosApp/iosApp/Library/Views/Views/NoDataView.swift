@@ -7,5 +7,6 @@ internal struct NoDataView: View {
 			Text("no_statistics")
 			Spacer()
 		}
+		.frame(maxWidth: .infinity)
 	}
 }

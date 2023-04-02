@@ -7,69 +7,79 @@ import com.alextos.darts.core.domain.Set
 import com.alextos.darts.core.domain.Shot
 import com.alextos.darts.statistics.domain.StatisticsDataSource
 import com.alextos.darts.statistics.domain.models.*
+import com.squareup.sqldelight.runtime.coroutines.asFlow
+import com.squareup.sqldelight.runtime.coroutines.mapToList
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 class SqlDelightStatisticsDataSource(
     database: DartsDatabase
 ): StatisticsDataSource {
     private val queries = database.dartsQueries
 
-    override fun getPlayerBestSet(player: Player): Set? {
+    override fun getPlayerBestSet(player: Player): Flow<Set?> {
         return queries.getPlayerBestSet(player.id, player.id)
-            .executeAsList()
-            .playerBestSetToSet()
+            .asFlow()
+            .mapToList()
+            .map { it.playerBestSetToSet() }
     }
 
-    override fun getPlayerBiggestFinalSet(player: Player): Set? {
+    override fun getPlayerBiggestFinalSet(player: Player): Flow<Set?> {
         return queries.getPlayerBiggestFinalSet(player.id)
-            .executeAsList()
-            .playerBiggestFinalSetToSet()
+            .asFlow()
+            .mapToList()
+            .map { it.playerBiggestFinalSetToSet() }
     }
 
-    override fun getAverageSetScore(): Double? {
+    override fun getAverageSetScore(): Flow<Double?> {
         return queries.getAverageSetScore()
-            .executeAsOne()
-            .averageScore
+            .asFlow()
+            .map { it.executeAsOne().averageScore }
     }
 
-    override fun getPlayerAverageSetScore(player: Player): Double? {
+    override fun getPlayerAverageSetScore(player: Player): Flow<Double?> {
         return queries.getPlayerAverageSetScore(player.id)
-            .executeAsOne()
-            .averageScore
+            .asFlow()
+            .map { it.executeAsOne().averageScore }
     }
 
-    override fun getAverageShotValue(): Double? {
+    override fun getAverageShotValue(): Flow<Double?> {
         return queries.getAverageShotValue()
-            .executeAsOne()
-            .averageShotValue
+            .asFlow()
+            .map { it.executeAsOne().averageShotValue }
     }
 
-    override fun getPlayerAverageShotValue(player: Player): Double? {
+    override fun getPlayerAverageShotValue(player: Player): Flow<Double?> {
         return queries.getPlayerAverageShotValue(player.id)
-            .executeAsOne()
-            .averageShotValue
+            .asFlow()
+            .map { it.executeAsOne().averageShotValue }
     }
 
-    override fun getShotDistribution(): ShotDistribution {
+    override fun getShotDistribution(): Flow<ShotDistribution> {
         return queries.getShotDistribution()
-            .executeAsOne()
-            .toShotDistribution()
+            .asFlow()
+            .map { it.executeAsOne() }
+            .map { it.toShotDistribution() }
     }
 
-    override fun getPlayerShotDistribution(player: Player): PlayerShotDistribution {
+    override fun getPlayerShotDistribution(player: Player): Flow<PlayerShotDistribution> {
         return queries.getPlayerShotDistribution(player.id, player.id, player.id, player.id, player.id, player.id)
-            .executeAsOne()
-            .toPlayerShotDistribution(player)
+            .asFlow()
+            .map { it.executeAsOne() }
+            .map { it.toPlayerShotDistribution(player) }
     }
 
-    override fun getPlayerVictoryDistribution(player: Player): PlayerVictoryDistribution {
+    override fun getPlayerVictoryDistribution(player: Player): Flow<PlayerVictoryDistribution> {
         return queries.getVictoryDistribution(player.id, player.id)
-            .executeAsOne()
-            .toPlayerVictoryDistribution(player)
+            .asFlow()
+            .map { it.executeAsOne() }
+            .map { it.toPlayerVictoryDistribution(player) }
     }
 
-    override fun getSectorCount(player: Player, sector: Sector): Int {
+    override fun getSectorCount(player: Player, sector: Sector): Flow<Pair<Sector, Int>> {
         return queries.getSectorCount(sector.id.toLong(), player.id)
-            .executeAsOne()
-            .toInt()
+            .asFlow()
+            .map { it.executeAsOne() }
+            .map { sector to it.toInt() }
     }
 }

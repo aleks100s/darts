@@ -12,7 +12,6 @@ import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.unit.dp
 import com.alextos.darts.android.common.presentation.extensions.arc
 import com.alextos.darts.android.common.presentation.extensions.drawNumbers
-import com.alextos.darts.android.common.presentation.extensions.drawSector
 import com.alextos.darts.core.domain.Sector
 
 private val hitColor = Color.Blue
@@ -37,16 +36,16 @@ fun DartsDisk(selectedSector: Sector) {
 }
 
 private fun DrawScope.drawMiss() {
-    drawSector(
-        multiplier = 0.95f,
-        width = 0.2f,
-        color = Color.Black
+    val boardRadius = size.width / 2
+    drawCircle(
+        color = Color.Black,
+        radius = boardRadius
     )
 }
 
 private fun DrawScope.drawDoubles(sector: Sector) {
     drawSectorLevel(
-        radiusFrom = 0.8f,
+        radiusFrom = 0.75f,
         width = 0.1f,
         firstColor = Color.Green,
         secondColor = Color.Red,
@@ -56,7 +55,7 @@ private fun DrawScope.drawDoubles(sector: Sector) {
 
 private fun DrawScope.drawOuters(sector: Sector) {
     drawSectorLevel(
-        radiusFrom = 0.5f,
+        radiusFrom = 0.45f,
         width = 0.3f,
         firstColor = Color.White,
         secondColor = Color.Black,
@@ -66,7 +65,7 @@ private fun DrawScope.drawOuters(sector: Sector) {
 
 private fun DrawScope.drawTriplets(sector: Sector) {
     drawSectorLevel(
-        radiusFrom = 0.4f,
+        radiusFrom = 0.35f,
         width = 0.1f,
         firstColor = Color.Green,
         secondColor = Color.Red,
@@ -77,7 +76,7 @@ private fun DrawScope.drawTriplets(sector: Sector) {
 private fun DrawScope.drawInners(sector: Sector) {
     drawSectorLevel(
         radiusFrom = 0.1f,
-        width = 0.3f,
+        width = 0.25f,
         firstColor = Color.White,
         secondColor = Color.Black,
         sector = if (sector.isInner()) sector else null
@@ -85,18 +84,18 @@ private fun DrawScope.drawInners(sector: Sector) {
 }
 
 private fun DrawScope.drawBullseye(sector: Sector) {
-    drawSector(
-        multiplier = 0.05f,
-        width = 0.1f,
-        color = if (sector == Sector.SingleBullseye) hitColor else Color.Green
+    val boardRadius = size.width / 2
+    drawCircle(
+        color = if (sector == Sector.SingleBullseye) hitColor else Color.Green,
+        radius = boardRadius * 0.1f
     )
 }
 
 private fun DrawScope.drawDoubleBullseye(sector: Sector) {
-    val arcRadius = size.width / 2
+    val boardRadius = size.width / 2
     drawCircle(
         color = if (sector == Sector.DoubleBullseye) hitColor else Color.Red,
-        radius = arcRadius * 0.05f
+        radius = boardRadius * 0.05f
     )
 }
 
@@ -107,12 +106,12 @@ private fun DrawScope.drawSectorLevel(
     secondColor: Color,
     sector: Sector?
 ) {
-    val arcRadius = size.width / 2
+    val boardRadius = size.width / 2
     val multiplier = radiusFrom + width / 2
-    val offset = arcRadius * (1 - multiplier)
+    val offset = boardRadius * (1 - multiplier)
     circle(
         sizeMultiplier = multiplier,
-        width = arcRadius * width,
+        width = boardRadius * width,
         offset = offset,
         firstColor = firstColor,
         secondColor = secondColor,

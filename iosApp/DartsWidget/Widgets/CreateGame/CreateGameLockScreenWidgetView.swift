@@ -6,7 +6,7 @@ struct CreateGameLockScreenWidgetView: View {
 			RingView()
 			ViewThatFits(in: .horizontal) {
 				VStack {
-					Text("Play")
+					Text("play")
 					Text("🎯")
 				}
 				.padding(.horizontal, 8)
@@ -17,7 +17,7 @@ struct CreateGameLockScreenWidgetView: View {
 		.font(.system(size: 12))
 		.widgetURL(.createGame)
 		.accessibilityElement()
-		.accessibilityLabel("Play darts")
+		.accessibilityLabel("play_darts")
 		.accessibilityAddTraits(.isButton)
 	}
 }

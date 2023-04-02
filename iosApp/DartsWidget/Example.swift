@@ -32,10 +32,3 @@ struct SimpleEntry: TimelineEntry {
     let date: Date
     let configuration: ConfigurationIntent
 }
-
-struct DartsWidget_Previews: PreviewProvider {
-    static var previews: some View {
-        CreateGameWidgetEntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent()))
-            .previewContext(WidgetPreviewContext(family: .systemSmall))
-    }
-}

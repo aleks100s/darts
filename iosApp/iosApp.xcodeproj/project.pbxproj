@@ -45,6 +45,14 @@
 		279E826129D9B57600CDCA1E /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279E825F29D9B56A00CDCA1E /* URL+Extensions.swift */; };
 		279E826529D9BACB00CDCA1E /* CreateGameWidgetEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279E826429D9BACB00CDCA1E /* CreateGameWidgetEntryView.swift */; };
 		279E826729D9BB3700CDCA1E /* CreateGameWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279E826629D9BB3700CDCA1E /* CreateGameWidget.swift */; };
+		279E826B29D9E7E200CDCA1E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 279E826D29D9E7E200CDCA1E /* Localizable.strings */; };
+		279E827329D9F27400CDCA1E /* LastGamesWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279E827229D9F27400CDCA1E /* LastGamesWidget.swift */; };
+		279E827529D9F2B700CDCA1E /* CreateGameProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279E827429D9F2B700CDCA1E /* CreateGameProvider.swift */; };
+		279E827729D9F32800CDCA1E /* CreateGameEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279E827629D9F32800CDCA1E /* CreateGameEntry.swift */; };
+		279E827929D9F34400CDCA1E /* LastGamesEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279E827829D9F34400CDCA1E /* LastGamesEntry.swift */; };
+		279E827B29D9F3B400CDCA1E /* LastGamesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279E827A29D9F3B400CDCA1E /* LastGamesProvider.swift */; };
+		279E827D29D9F3C700CDCA1E /* LastGamesWidgetEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279E827C29D9F3C700CDCA1E /* LastGamesWidgetEntryView.swift */; };
+		279E827F29D9F51600CDCA1E /* LastGamesMediumWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279E827E29D9F51600CDCA1E /* LastGamesMediumWidgetView.swift */; };
 		27CF107329A8BBB600174D02 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CF107229A8BBB600174D02 /* GameScene.swift */; };
 		27CF107529A8BBBE00174D02 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CF107429A8BBBE00174D02 /* GameView.swift */; };
 		27CF107729A8BBC800174D02 /* IOSGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CF107629A8BBC800174D02 /* IOSGameViewModel.swift */; };
@@ -174,6 +182,16 @@
 		279E825F29D9B56A00CDCA1E /* URL+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extensions.swift"; sourceTree = "<group>"; };
 		279E826429D9BACB00CDCA1E /* CreateGameWidgetEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGameWidgetEntryView.swift; sourceTree = "<group>"; };
 		279E826629D9BB3700CDCA1E /* CreateGameWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGameWidget.swift; sourceTree = "<group>"; };
+		279E826C29D9E7E200CDCA1E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		279E826E29D9E7E500CDCA1E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		279E827229D9F27400CDCA1E /* LastGamesWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastGamesWidget.swift; sourceTree = "<group>"; };
+		279E827429D9F2B700CDCA1E /* CreateGameProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGameProvider.swift; sourceTree = "<group>"; };
+		279E827629D9F32800CDCA1E /* CreateGameEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGameEntry.swift; sourceTree = "<group>"; };
+		279E827829D9F34400CDCA1E /* LastGamesEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastGamesEntry.swift; sourceTree = "<group>"; };
+		279E827A29D9F3B400CDCA1E /* LastGamesProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastGamesProvider.swift; sourceTree = "<group>"; };
+		279E827C29D9F3C700CDCA1E /* LastGamesWidgetEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastGamesWidgetEntryView.swift; sourceTree = "<group>"; };
+		279E827E29D9F51600CDCA1E /* LastGamesMediumWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastGamesMediumWidgetView.swift; sourceTree = "<group>"; };
+		279E828229D9FAC000CDCA1E /* Configuration.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Configuration.xcconfig; sourceTree = "<group>"; };
 		27CF107229A8BBB600174D02 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		27CF107429A8BBBE00174D02 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		27CF107629A8BBC800174D02 /* IOSGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSGameViewModel.swift; sourceTree = "<group>"; };
@@ -334,6 +352,7 @@
 		279E824229D9AC5900CDCA1E /* DartsWidget */ = {
 			isa = PBXGroup;
 			children = (
+				279E826829D9E7C200CDCA1E /* Localization */,
 				279E825A29D9B41800CDCA1E /* Views */,
 				279E825429D9B25500CDCA1E /* Widgets */,
 				279E824329D9AC5900CDCA1E /* DartsWidgetBundle.swift */,
@@ -348,6 +367,7 @@
 		279E825429D9B25500CDCA1E /* Widgets */ = {
 			isa = PBXGroup;
 			children = (
+				279E826F29D9ED7600CDCA1E /* Last */,
 				279E826329D9BABB00CDCA1E /* CreateGame */,
 			);
 			path = Widgets;
@@ -375,8 +395,30 @@
 				279E825529D9B26D00CDCA1E /* CreateGameLockScreenWidgetView.swift */,
 				279E826429D9BACB00CDCA1E /* CreateGameWidgetEntryView.swift */,
 				279E826629D9BB3700CDCA1E /* CreateGameWidget.swift */,
+				279E827429D9F2B700CDCA1E /* CreateGameProvider.swift */,
+				279E827629D9F32800CDCA1E /* CreateGameEntry.swift */,
 			);
 			path = CreateGame;
+			sourceTree = "<group>";
+		};
+		279E826829D9E7C200CDCA1E /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				279E826D29D9E7E200CDCA1E /* Localizable.strings */,
+			);
+			path = Localization;
+			sourceTree = "<group>";
+		};
+		279E826F29D9ED7600CDCA1E /* Last */ = {
+			isa = PBXGroup;
+			children = (
+				279E827829D9F34400CDCA1E /* LastGamesEntry.swift */,
+				279E827A29D9F3B400CDCA1E /* LastGamesProvider.swift */,
+				279E827229D9F27400CDCA1E /* LastGamesWidget.swift */,
+				279E827C29D9F3C700CDCA1E /* LastGamesWidgetEntryView.swift */,
+				279E827E29D9F51600CDCA1E /* LastGamesMediumWidgetView.swift */,
+			);
+			path = Last;
 			sourceTree = "<group>";
 		};
 		27CF107129A8BBA800174D02 /* Game */ = {
@@ -561,10 +603,11 @@
 				279827D2298E657600D497F2 /* Navigation.swift */,
 				279827D4298E65A600D497F2 /* ContentView.swift */,
 				2152FB032600AC8F00CF470E /* iOSApp.swift */,
+				27CF109429AD126300174D02 /* Localizable.strings */,
 				058557BA273AAA24004C7B11 /* Assets.xcassets */,
 				7555FF8C242A565B00829871 /* Info.plist */,
+				279E828229D9FAC000CDCA1E /* Configuration.xcconfig */,
 				058557D7273AAEEB004C7B11 /* Preview Content */,
-				27CF109429AD126300174D02 /* Localizable.strings */,
 			);
 			path = iosApp;
 			sourceTree = "<group>";
@@ -669,6 +712,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				279E824929D9AC5900CDCA1E /* Assets.xcassets in Resources */,
+				279E826B29D9E7E200CDCA1E /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -709,13 +753,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				279E827B29D9F3B400CDCA1E /* LastGamesProvider.swift in Sources */,
+				279E827329D9F27400CDCA1E /* LastGamesWidget.swift in Sources */,
+				279E827F29D9F51600CDCA1E /* LastGamesMediumWidgetView.swift in Sources */,
 				279E825D29D9B43B00CDCA1E /* RingView.swift in Sources */,
 				279E826129D9B57600CDCA1E /* URL+Extensions.swift in Sources */,
 				279E824629D9AC5900CDCA1E /* Example.swift in Sources */,
+				279E827529D9F2B700CDCA1E /* CreateGameProvider.swift in Sources */,
+				279E827729D9F32800CDCA1E /* CreateGameEntry.swift in Sources */,
 				279E826729D9BB3700CDCA1E /* CreateGameWidget.swift in Sources */,
 				279E826529D9BACB00CDCA1E /* CreateGameWidgetEntryView.swift in Sources */,
 				279E825729D9B2B400CDCA1E /* CreateGameLockScreenWidgetView.swift in Sources */,
 				279E824429D9AC5900CDCA1E /* DartsWidgetBundle.swift in Sources */,
+				279E827D29D9F3C700CDCA1E /* LastGamesWidgetEntryView.swift in Sources */,
+				279E827929D9F34400CDCA1E /* LastGamesEntry.swift in Sources */,
 				279E824B29D9AC5900CDCA1E /* DartsWidget.intentdefinition in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -815,6 +866,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		279E826D29D9E7E200CDCA1E /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				279E826C29D9E7E200CDCA1E /* en */,
+				279E826E29D9E7E500CDCA1E /* ru */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		27CF109429AD126300174D02 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -829,6 +889,7 @@
 /* Begin XCBuildConfiguration section */
 		279E825129D9AC5900CDCA1E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 279E828229D9FAC000CDCA1E /* Configuration.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
@@ -841,13 +902,13 @@
 				INFOPLIST_FILE = DartsWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = DartsWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2023 orgName. All rights reserved.";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "alextos.darts-score.DartsWidget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -859,6 +920,7 @@
 		};
 		279E825229D9AC5900CDCA1E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 279E828229D9FAC000CDCA1E /* Configuration.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
@@ -870,13 +932,13 @@
 				INFOPLIST_FILE = DartsWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = DartsWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2023 orgName. All rights reserved.";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "alextos.darts-score.DartsWidget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -888,6 +950,7 @@
 		};
 		7555FFA3242A565B00829871 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 279E828229D9FAC000CDCA1E /* Configuration.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -938,7 +1001,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -950,6 +1013,7 @@
 		};
 		7555FFA4242A565B00829871 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 279E828229D9FAC000CDCA1E /* Configuration.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -994,7 +1058,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1006,6 +1070,7 @@
 		};
 		7555FFA6242A565B00829871 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 279E828229D9FAC000CDCA1E /* Configuration.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1037,6 +1102,7 @@
 		};
 		7555FFA7242A565B00829871 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 279E828229D9FAC000CDCA1E /* Configuration.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;

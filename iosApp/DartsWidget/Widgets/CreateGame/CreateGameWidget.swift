@@ -8,12 +8,12 @@ struct CreateGameWidget: Widget {
 		IntentConfiguration(
 			kind: kind,
 			intent: ConfigurationIntent.self,
-			provider: Provider()
+			provider: CreateGameProvider()
 		) { entry in
 			CreateGameWidgetEntryView(entry: entry)
 		}
-		.configurationDisplayName("Lock Screen Widget")
-		.description("This widget can navigate you directly to game creation!")
+		.configurationDisplayName("lock_screen_widget")
+		.description("lock_screen_widget_description")
 		.supportedFamilies([.accessoryCircular])
 	}
 }

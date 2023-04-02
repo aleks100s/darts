@@ -1,0 +1,6 @@
+"play" = "Играть";
+"play_darts" = "Играть в дартс";
+"lock_screen_widget" = "Виджет на экран блокировки";
+"lock_screen_widget_description" = "Этот виджет направит вас прямо в создание игры!";
+"last_games_widget" = "Виджет с последними играми";
+"last_games_widget_description" = "Этот виджет показывает результаты последних игр.";

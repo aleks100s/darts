@@ -12,7 +12,7 @@ internal struct DartsBoardView: View {
 				}
 			}
 		}
-		.background(Color.background)
+		.background(Color.surface)
 	}
 	
 	@ViewBuilder

@@ -6,7 +6,7 @@ internal struct SectorHeatmapView: View {
 	
 	var body: some View {
 		content
-			.background(Color.background)
+			.background(Color.surface)
 			.onAppear {
 				viewModel.startObserving()
 			}

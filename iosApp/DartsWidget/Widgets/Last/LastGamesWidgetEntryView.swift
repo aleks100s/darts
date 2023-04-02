@@ -1,7 +1,7 @@
 import SwiftUI
 
-struct CreateGameWidgetEntryView: View {
-	let entry: CreateGameEntry
+struct LastGamesWidgetEntryView: View {
+	let entry: LastGamesEntry
 	
 	@Environment(\.widgetFamily) private var family
 
@@ -12,8 +12,8 @@ struct CreateGameWidgetEntryView: View {
 	@ViewBuilder
 	private var content: some View {
 		switch family {
-		case .accessoryCircular:
-			CreateGameLockScreenWidgetView()
+		case .systemMedium:
+			LastGamesMediumWidgetView(entry: entry)
 			
 		default:
 			EmptyView()

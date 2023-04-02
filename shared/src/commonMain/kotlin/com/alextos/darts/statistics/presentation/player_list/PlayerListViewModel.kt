@@ -2,6 +2,7 @@ package com.alextos.darts.statistics.presentation.player_list
 
 import com.alextos.darts.core.domain.GetPlayersUseCase
 import com.alextos.darts.core.util.toCommonFlow
+import com.alextos.darts.core.util.toCommonStateFlow
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
@@ -22,5 +23,5 @@ class PlayerListViewModel(
             SharingStarted.WhileSubscribed(5000),
             PlayerListState()
         )
-        .toCommonFlow()
+        .toCommonStateFlow()
 }

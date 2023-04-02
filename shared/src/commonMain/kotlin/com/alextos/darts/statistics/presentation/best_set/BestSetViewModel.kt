@@ -2,6 +2,7 @@ package com.alextos.darts.statistics.presentation.best_set
 
 import com.alextos.darts.core.util.toCommonFlow
 import com.alextos.darts.core.domain.GetPlayersUseCase
+import com.alextos.darts.core.util.toCommonStateFlow
 import com.alextos.darts.statistics.domain.use_cases.best_set.GetPlayersBestSetsUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -27,5 +28,5 @@ class BestSetViewModel(
             SharingStarted.WhileSubscribed(5000),
             BestSetState()
         )
-        .toCommonFlow()
+        .toCommonStateFlow()
 }

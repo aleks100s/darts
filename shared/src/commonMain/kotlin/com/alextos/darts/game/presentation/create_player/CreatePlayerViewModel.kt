@@ -1,11 +1,12 @@
 package com.alextos.darts.game.presentation.create_player
 
 import com.alextos.darts.core.domain.GetPlayersUseCase
-import com.alextos.darts.core.util.toCommonFlow
+import com.alextos.darts.core.util.toCommonStateFlow
 import com.alextos.darts.game.domain.useCases.CreatePlayerUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 
 class CreatePlayerViewModel(
     private val createPlayerUseCase: CreatePlayerUseCase,
@@ -29,12 +30,14 @@ class CreatePlayerViewModel(
         SharingStarted.WhileSubscribed(5000),
         CreatePlayerState()
     )
-        .toCommonFlow()
+        .toCommonStateFlow()
 
     fun onEvent(event: CreatePlayerEvent) {
         when (event) {
             is CreatePlayerEvent.SavePlayer -> {
-                createPlayerUseCase.execute(event.name.trim())
+                viewModelScope.launch {
+                    createPlayerUseCase.execute(event.name.trim())
+                }
                 _state.update { it.copy(name = "") }
             }
             is CreatePlayerEvent.ChangeNewPlayerName -> {

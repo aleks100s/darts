@@ -4,6 +4,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface PlayersDataSource {
     fun getPlayers(): Flow<List<Player>>
-    fun createPlayer(name: String)
-    fun deletePlayer(player: Player)
+    suspend fun createPlayer(name: String)
+    suspend fun deletePlayer(player: Player)
 }

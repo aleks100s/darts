@@ -2,6 +2,7 @@ package com.alextos.darts.statistics.presentation.victory_distribution
 
 import com.alextos.darts.core.domain.Player
 import com.alextos.darts.core.util.toCommonFlow
+import com.alextos.darts.core.util.toCommonStateFlow
 import com.alextos.darts.statistics.domain.use_cases.victory_distribution.GetPlayerVictoryDistributionUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -26,5 +27,5 @@ class VictoryDistributionViewModel(
             SharingStarted.WhileSubscribed(5000),
             VictoryDistributionState()
         )
-        .toCommonFlow()
+        .toCommonStateFlow()
 }

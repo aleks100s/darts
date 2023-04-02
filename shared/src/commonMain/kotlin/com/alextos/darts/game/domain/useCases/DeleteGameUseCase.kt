@@ -7,7 +7,7 @@ class DeleteGameUseCase(
     private val dataSource: GameDataSource
 ) {
 
-    fun execute(game: Game) {
+    suspend fun execute(game: Game) {
         dataSource.deleteGame(game)
     }
 }

@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface GameDataSource {
     fun getGames(): Flow<List<Game>>
-    fun saveGameHistory(gameHistory: GameHistory)
-    fun getPlayerHistory(gameId: Long, player: Player): PlayerHistory
-    fun deleteGame(game: Game)
+    suspend fun saveGameHistory(gameHistory: GameHistory)
+    fun getPlayerHistory(gameId: Long, player: Player): Flow<PlayerHistory>
+    suspend fun deleteGame(game: Game)
 }

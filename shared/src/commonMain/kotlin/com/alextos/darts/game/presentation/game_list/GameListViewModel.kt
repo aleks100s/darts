@@ -1,11 +1,12 @@
 package com.alextos.darts.game.presentation.game_list
 
-import com.alextos.darts.core.util.toCommonFlow
+import com.alextos.darts.core.util.toCommonStateFlow
 import com.alextos.darts.game.domain.useCases.DeleteGameUseCase
 import com.alextos.darts.game.domain.useCases.GetGamesUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 
 class GameListViewModel(
     private val deleteGameUseCase: DeleteGameUseCase,
@@ -30,7 +31,7 @@ class GameListViewModel(
             SharingStarted.WhileSubscribed(5000),
             GameListState()
         )
-        .toCommonFlow()
+        .toCommonStateFlow()
 
     fun onEvent(event: GameListEvent) {
         when (event) {
@@ -38,7 +39,9 @@ class GameListViewModel(
             is GameListEvent.SelectGame -> {}
             is GameListEvent.DeleteGame -> {
                 _state.value.gameToDelete?.let {
-                    deleteGameUseCase.execute(it)
+                    viewModelScope.launch {
+                        deleteGameUseCase.execute(it)
+                    }
                     _state.update {
                         it.copy(isDeleteGameDialogShown = false)
                     }

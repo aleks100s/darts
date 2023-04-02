@@ -2,6 +2,7 @@ package com.alextos.darts.statistics.presentation.shot_distribution
 
 import com.alextos.darts.core.domain.Player
 import com.alextos.darts.core.util.toCommonFlow
+import com.alextos.darts.core.util.toCommonStateFlow
 import com.alextos.darts.statistics.domain.use_cases.shot_distribution.GetPlayerShotDistributionUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -23,5 +24,5 @@ class ShotDistributionViewModel(
             SharingStarted.WhileSubscribed(5000),
             ShotDistributionState()
         )
-        .toCommonFlow()
+        .toCommonStateFlow()
 }

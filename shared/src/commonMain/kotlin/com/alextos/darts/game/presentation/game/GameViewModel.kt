@@ -1,11 +1,12 @@
 package com.alextos.darts.game.presentation.game
 
-import com.alextos.darts.core.util.toCommonFlow
 import com.alextos.darts.core.domain.Shot
+import com.alextos.darts.core.util.toCommonStateFlow
 import com.alextos.darts.game.domain.useCases.GameManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 
 class GameViewModel(
     private val gameManager: GameManager,
@@ -34,7 +35,7 @@ class GameViewModel(
             SharingStarted.WhileSubscribed(5000),
             GameState()
         )
-        .toCommonFlow()
+        .toCommonStateFlow()
 
     fun onEvent(event: GameEvent) {
         when (event) {
@@ -61,6 +62,11 @@ class GameViewModel(
             }
             is GameEvent.EraseHit -> {
                 gameManager.eraseShot()
+            }
+            is GameEvent.FinishGame -> {
+                viewModelScope.launch {
+                    gameManager.finishGame()
+                }
             }
             else -> {}
         }

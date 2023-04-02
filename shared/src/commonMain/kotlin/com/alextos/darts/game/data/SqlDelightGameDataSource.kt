@@ -24,7 +24,7 @@ class SqlDelightGameDataSource(
             .map { it.mapToGames() }
     }
 
-    override fun saveGameHistory(gameHistory: GameHistory) {
+    override suspend fun saveGameHistory(gameHistory: GameHistory) {
         val game = gameHistory.game
 
         queries.transaction {
@@ -75,13 +75,16 @@ class SqlDelightGameDataSource(
         }
     }
 
-    override fun getPlayerHistory(gameId: Long, player: Player): PlayerHistory {
+    override fun getPlayerHistory(gameId: Long, player: Player): Flow<PlayerHistory> {
         return queries.getPlayerHistory(game_id = gameId, player_id = player.id)
-            .executeAsList()
-            .toPlayerHistory(player)
+            .asFlow()
+            .mapToList()
+            .map {
+                it.toPlayerHistory(player)
+            }
     }
 
-    override fun deleteGame(game: Game) {
+    override suspend fun deleteGame(game: Game) {
         game.id?.let { gameId ->
             queries.transaction {
                 queries.getGameSets(gameId).executeAsList()

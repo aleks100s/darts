@@ -1,11 +1,12 @@
 package com.alextos.darts.game.presentation.create_game
 
 import com.alextos.darts.core.domain.DeletePlayerUseCase
-import com.alextos.darts.core.util.toCommonFlow
 import com.alextos.darts.core.domain.GetPlayersUseCase
+import com.alextos.darts.core.util.toCommonStateFlow
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 
 class CreateGameViewModel(
     private val deletePlayerUseCase: DeletePlayerUseCase,
@@ -30,7 +31,7 @@ class CreateGameViewModel(
             SharingStarted.WhileSubscribed(5000),
             CreateGameState()
         )
-        .toCommonFlow()
+        .toCommonStateFlow()
 
     fun onEvent(event: CreateGameEvent) {
         when(event) {
@@ -66,7 +67,9 @@ class CreateGameViewModel(
             }
             is CreateGameEvent.DeletePlayer -> {
                 _state.value.playerToDelete?.let {
-                    deletePlayerUseCase.execute(it)
+                    viewModelScope.launch {
+                        deletePlayerUseCase.execute(it)
+                    }
                 }
                 _state.update {
                     it.copy(

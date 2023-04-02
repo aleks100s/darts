@@ -7,7 +7,7 @@ class SaveGameHistoryUseCase(
     private val dataSource: GameDataSource
 ) {
 
-    fun execute(gameHistory: GameHistory) {
+    suspend fun execute(gameHistory: GameHistory) {
         dataSource.saveGameHistory(gameHistory)
     }
 }

@@ -23,11 +23,11 @@ class SqlDelightPlayersDataSource(
             }
     }
 
-    override fun createPlayer(name: String) {
+    override suspend fun createPlayer(name: String) {
         queries.insertPlayerEntity(id = null, name = name)
     }
 
-    override fun deletePlayer(player: Player) {
+    override suspend fun deletePlayer(player: Player) {
         queries.transaction {
             val games = queries.getPlayerGames(player_id = player.id)
                 .executeAsList()

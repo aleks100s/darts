@@ -66,7 +66,7 @@ class GameManager(
         _turnState.update { TurnState.IsOngoing }
         currentEvaluateShotUseCase().currentShotResult?.let { result ->
             if (result.isGameOver()) {
-                finishGame()
+                _isGameFinished.update { true }
             } else {
                 nextTurn()
             }
@@ -78,16 +78,7 @@ class GameManager(
         currentTrackUseCaseUseCase().eraseShot()
     }
 
-    private fun currentEvaluateShotUseCase(): EvaluateShotUseCase {
-        return evaluateShotUseCases[players.indexOf(currentPlayer.value)]
-    }
-
-    private fun currentTrackUseCaseUseCase(): TrackUserHistoryUseCase {
-        return trackUserHistoryUseCases[players.indexOf(currentPlayer.value)]
-    }
-
-    private fun finishGame() {
-        _isGameFinished.update { true }
+    suspend fun finishGame() {
         val winner = if (players.count() == 1) null else currentPlayer.value
         val game = Game(
             players = players,
@@ -102,6 +93,14 @@ class GameManager(
             }
         )
         saveGameHistoryUseCase.execute(gameHistory = gameHistory)
+    }
+
+    private fun currentEvaluateShotUseCase(): EvaluateShotUseCase {
+        return evaluateShotUseCases[players.indexOf(currentPlayer.value)]
+    }
+
+    private fun currentTrackUseCaseUseCase(): TrackUserHistoryUseCase {
+        return trackUserHistoryUseCases[players.indexOf(currentPlayer.value)]
     }
 
     private fun nextTurn() {

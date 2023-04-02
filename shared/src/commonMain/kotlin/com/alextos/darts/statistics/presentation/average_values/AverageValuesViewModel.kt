@@ -2,6 +2,7 @@ package com.alextos.darts.statistics.presentation.average_values
 
 import com.alextos.darts.core.util.toCommonFlow
 import com.alextos.darts.core.domain.GetPlayersUseCase
+import com.alextos.darts.core.util.toCommonStateFlow
 import com.alextos.darts.statistics.domain.use_cases.average_values.GetAverageSetScoreUseCase
 import com.alextos.darts.statistics.domain.use_cases.average_values.GetPlayersAverageValuesUseCase
 import com.alextos.darts.statistics.domain.use_cases.average_values.GetAverageShotValueUseCase
@@ -35,5 +36,5 @@ class AverageValuesViewModel(
             SharingStarted.WhileSubscribed(5000),
             AverageValuesState()
         )
-        .toCommonFlow()
+        .toCommonStateFlow()
 }

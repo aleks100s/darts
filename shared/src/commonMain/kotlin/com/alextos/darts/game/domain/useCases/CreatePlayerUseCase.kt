@@ -6,7 +6,7 @@ class CreatePlayerUseCase(
     private val dataSource: PlayersDataSource
 ) {
 
-    fun execute(name: String) {
+    suspend fun execute(name: String) {
         return dataSource.createPlayer(name = name.trim())
     }
 }

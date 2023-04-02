@@ -2,6 +2,7 @@ package com.alextos.darts.statistics.presentation.heatmap
 
 import com.alextos.darts.core.domain.Player
 import com.alextos.darts.core.util.toCommonFlow
+import com.alextos.darts.core.util.toCommonStateFlow
 import com.alextos.darts.statistics.domain.use_cases.heatmap.GetSectorHeatmapUseCase
 import com.alextos.darts.statistics.presentation.shot_distribution.ShotDistributionState
 import kotlinx.coroutines.CoroutineScope
@@ -27,5 +28,5 @@ class SectorHeatmapViewModel(
             SharingStarted.WhileSubscribed(5000),
             SectorHeatmapState()
         )
-        .toCommonFlow()
+        .toCommonStateFlow()
 }

@@ -26,7 +26,9 @@ internal struct GameTab: View {
 		}
 		.onOpenURL { url in
 			if url.canBeNavigated(to: GameNavigation.createGame.urlComponent)  {
-				navigationStack.append(.createGame)
+				if !navigationStack.isGameRunning {
+					navigationStack = [.createGame]
+				}
 			}
 		}
 	}

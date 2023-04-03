@@ -19,6 +19,21 @@ internal enum GameNavigation: Hashable {
 	}
 }
 
+extension [GameNavigation] {
+	var isGameRunning: Bool {
+		for element in self {
+			switch element {
+			case .game:
+				return true
+				
+			default:
+				continue
+			}
+		}
+		return false
+	}
+}
+
 internal enum StatisticsNavigation: Hashable {
 	enum Mode {
 		case victoryDistribution

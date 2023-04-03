@@ -13,7 +13,7 @@ struct CreateGameProvider: IntentTimelineProvider {
 	}
 
 	func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<CreateGameEntry>) -> ()) {
-		let entries = [CreateGameEntry]()
+		let entries = [CreateGameEntry(date: Date(), configuration: configuration)]
 		let timeline = Timeline(entries: entries, policy: .atEnd)
 		completion(timeline)
 	}

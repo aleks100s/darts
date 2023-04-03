@@ -36,8 +36,6 @@
 		279E824429D9AC5900CDCA1E /* DartsWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279E824329D9AC5900CDCA1E /* DartsWidgetBundle.swift */; };
 		279E824629D9AC5900CDCA1E /* Example.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279E824529D9AC5900CDCA1E /* Example.swift */; };
 		279E824929D9AC5900CDCA1E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 279E824829D9AC5900CDCA1E /* Assets.xcassets */; };
-		279E824B29D9AC5900CDCA1E /* DartsWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 279E824729D9AC5900CDCA1E /* DartsWidget.intentdefinition */; };
-		279E824C29D9AC5900CDCA1E /* DartsWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 279E824729D9AC5900CDCA1E /* DartsWidget.intentdefinition */; };
 		279E824F29D9AC5900CDCA1E /* DartsWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 279E823D29D9AC5900CDCA1E /* DartsWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		279E825729D9B2B400CDCA1E /* CreateGameLockScreenWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279E825529D9B26D00CDCA1E /* CreateGameLockScreenWidgetView.swift */; };
 		279E825D29D9B43B00CDCA1E /* RingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279E825B29D9B42000CDCA1E /* RingView.swift */; };
@@ -53,6 +51,8 @@
 		279E827B29D9F3B400CDCA1E /* LastGamesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279E827A29D9F3B400CDCA1E /* LastGamesProvider.swift */; };
 		279E827D29D9F3C700CDCA1E /* LastGamesWidgetEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279E827C29D9F3C700CDCA1E /* LastGamesWidgetEntryView.swift */; };
 		279E827F29D9F51600CDCA1E /* LastGamesMediumWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279E827E29D9F51600CDCA1E /* LastGamesMediumWidgetView.swift */; };
+		279E829329DA058200CDCA1E /* DartsWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 279E829629DA058200CDCA1E /* DartsWidget.intentdefinition */; };
+		279E829429DA058200CDCA1E /* DartsWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 279E829629DA058200CDCA1E /* DartsWidget.intentdefinition */; };
 		27CF107329A8BBB600174D02 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CF107229A8BBB600174D02 /* GameScene.swift */; };
 		27CF107529A8BBBE00174D02 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CF107429A8BBBE00174D02 /* GameView.swift */; };
 		27CF107729A8BBC800174D02 /* IOSGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CF107629A8BBC800174D02 /* IOSGameViewModel.swift */; };
@@ -174,7 +174,6 @@
 		279E824029D9AC5900CDCA1E /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		279E824329D9AC5900CDCA1E /* DartsWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DartsWidgetBundle.swift; sourceTree = "<group>"; };
 		279E824529D9AC5900CDCA1E /* Example.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example.swift; sourceTree = "<group>"; };
-		279E824729D9AC5900CDCA1E /* DartsWidget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = DartsWidget.intentdefinition; sourceTree = "<group>"; };
 		279E824829D9AC5900CDCA1E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		279E824A29D9AC5900CDCA1E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		279E825529D9B26D00CDCA1E /* CreateGameLockScreenWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGameLockScreenWidgetView.swift; sourceTree = "<group>"; };
@@ -192,6 +191,9 @@
 		279E827C29D9F3C700CDCA1E /* LastGamesWidgetEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastGamesWidgetEntryView.swift; sourceTree = "<group>"; };
 		279E827E29D9F51600CDCA1E /* LastGamesMediumWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastGamesMediumWidgetView.swift; sourceTree = "<group>"; };
 		279E828229D9FAC000CDCA1E /* Configuration.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Configuration.xcconfig; sourceTree = "<group>"; };
+		279E829529DA058200CDCA1E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; name = Base; path = Base.lproj/DartsWidget.intentdefinition; sourceTree = "<group>"; };
+		279E829829DA058300CDCA1E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/DartsWidget.strings; sourceTree = "<group>"; };
+		279E829A29DA058400CDCA1E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/DartsWidget.strings; sourceTree = "<group>"; };
 		27CF107229A8BBB600174D02 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		27CF107429A8BBBE00174D02 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		27CF107629A8BBC800174D02 /* IOSGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSGameViewModel.swift; sourceTree = "<group>"; };
@@ -357,7 +359,7 @@
 				279E825429D9B25500CDCA1E /* Widgets */,
 				279E824329D9AC5900CDCA1E /* DartsWidgetBundle.swift */,
 				279E824529D9AC5900CDCA1E /* Example.swift */,
-				279E824729D9AC5900CDCA1E /* DartsWidget.intentdefinition */,
+				279E829629DA058200CDCA1E /* DartsWidget.intentdefinition */,
 				279E824829D9AC5900CDCA1E /* Assets.xcassets */,
 				279E824A29D9AC5900CDCA1E /* Info.plist */,
 			);
@@ -767,7 +769,7 @@
 				279E824429D9AC5900CDCA1E /* DartsWidgetBundle.swift in Sources */,
 				279E827D29D9F3C700CDCA1E /* LastGamesWidgetEntryView.swift in Sources */,
 				279E827929D9F34400CDCA1E /* LastGamesEntry.swift in Sources */,
-				279E824B29D9AC5900CDCA1E /* DartsWidget.intentdefinition in Sources */,
+				279E829429DA058200CDCA1E /* DartsWidget.intentdefinition in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -823,7 +825,7 @@
 				27D65A3129BE4D5200A921C6 /* IOSPlayerListViewModel.swift in Sources */,
 				27D65A3829BE504300A921C6 /* IOSShotDistributionViewModel.swift in Sources */,
 				27CF108F29ABA2CE00174D02 /* Set+Extensions.swift in Sources */,
-				279E824C29D9AC5900CDCA1E /* DartsWidget.intentdefinition in Sources */,
+				279E829329DA058200CDCA1E /* DartsWidget.intentdefinition in Sources */,
 				27CF107529A8BBBE00174D02 /* GameView.swift in Sources */,
 				27CF108729AB9AA500174D02 /* Row.swift in Sources */,
 				279827E629A7CDB100D497F2 /* IOSCreateGameViewModel.swift in Sources */,
@@ -873,6 +875,16 @@
 				279E826E29D9E7E500CDCA1E /* ru */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		279E829629DA058200CDCA1E /* DartsWidget.intentdefinition */ = {
+			isa = PBXVariantGroup;
+			children = (
+				279E829529DA058200CDCA1E /* Base */,
+				279E829829DA058300CDCA1E /* en */,
+				279E829A29DA058400CDCA1E /* ru */,
+			);
+			name = DartsWidget.intentdefinition;
 			sourceTree = "<group>";
 		};
 		27CF109429AD126300174D02 /* Localizable.strings */ = {

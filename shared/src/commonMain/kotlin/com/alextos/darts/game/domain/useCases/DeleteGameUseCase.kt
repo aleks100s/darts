@@ -8,10 +8,7 @@ import kotlinx.coroutines.withContext
 class DeleteGameUseCase(
     private val dataSource: GameDataSource
 ) {
-
     suspend fun execute(game: Game) {
-        withContext(Dispatchers.Default) {
-            dataSource.deleteGame(game)
-        }
+        dataSource.deleteGame(game)
     }
 }

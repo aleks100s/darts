@@ -39,7 +39,7 @@ class GameListViewModel(
             is GameListEvent.SelectGame -> {}
             is GameListEvent.DeleteGame -> {
                 _state.value.gameToDelete?.let {
-                    viewModelScope.launch {
+                    viewModelScope.launch(Dispatchers.Default) {
                         deleteGameUseCase.execute(it)
                     }
                     _state.update {

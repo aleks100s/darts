@@ -8,8 +8,6 @@ class CreatePlayerUseCase(
     private val dataSource: PlayersDataSource
 ) {
     suspend fun execute(name: String) {
-        withContext(Dispatchers.Default) {
-            dataSource.createPlayer(name = name.trim())
-        }
+        dataSource.createPlayer(name = name.trim())
     }
 }

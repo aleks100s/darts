@@ -10,8 +10,6 @@ class SaveGameHistoryUseCase(
 ) {
 
     suspend fun execute(gameHistory: GameHistory) {
-        withContext(Dispatchers.Default) {
-            dataSource.saveGameHistory(gameHistory)
-        }
+        dataSource.saveGameHistory(gameHistory)
     }
 }

@@ -67,7 +67,7 @@ class CreateGameViewModel(
             }
             is CreateGameEvent.DeletePlayer -> {
                 _state.value.playerToDelete?.let {
-                    viewModelScope.launch {
+                    viewModelScope.launch(Dispatchers.Default) {
                         deletePlayerUseCase.execute(it)
                     }
                 }

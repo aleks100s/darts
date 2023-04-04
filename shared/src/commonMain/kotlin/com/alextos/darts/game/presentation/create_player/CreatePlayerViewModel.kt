@@ -35,7 +35,7 @@ class CreatePlayerViewModel(
     fun onEvent(event: CreatePlayerEvent) {
         when (event) {
             is CreatePlayerEvent.SavePlayer -> {
-                viewModelScope.launch {
+                viewModelScope.launch(Dispatchers.Default) {
                     createPlayerUseCase.execute(event.name.trim())
                 }
                 _state.update { it.copy(name = "") }

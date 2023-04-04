@@ -10,8 +10,6 @@ class DeletePlayerUseCase(
 ) {
 
     suspend fun execute(player: Player) {
-        withContext(Dispatchers.Default) {
-            dataSource.deletePlayer(player)
-        }
+        dataSource.deletePlayer(player)
     }
 }

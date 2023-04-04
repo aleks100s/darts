@@ -58,7 +58,7 @@ class GameViewModel(
                 gameManager.resetTurn()
             }
             is GameEvent.ChangeTurn -> {
-                viewModelScope.launch {
+                viewModelScope.launch(Dispatchers.Default) {
                     gameManager.changeTurn()
                 }
             }

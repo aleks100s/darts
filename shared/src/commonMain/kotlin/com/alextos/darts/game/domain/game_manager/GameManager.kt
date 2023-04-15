@@ -17,15 +17,9 @@ class GameManager(
     private val goal: Int,
     private val finishWithDoubles: Boolean
 ) {
-    private val currentSetManagers by lazy {
-        players.map {
-            CurrentSetManager(goal, finishWithDoubles)
-        }
-    }
-
     private val userHistoryManagers by lazy {
         players.map {
-            UserHistoryManager(it)
+            UserHistoryManager(it, goal, finishWithDoubles)
         }
     }
 
@@ -48,35 +42,27 @@ class GameManager(
         if (_isGameFinished.value) {
             return
         }
-        val evaluateShotUseCase = currentEvaluateShotUseCase()
-        val result = evaluateShotUseCase.checkShot(shot)
         val trackUserHistoryUseCase = currentTrackUseCaseUseCase()
-        val isSetOver = trackUserHistoryUseCase.trackShotResult(result)
-        if (isSetOver) {
-            _turnState.update { TurnState.IsOver(trackUserHistoryUseCase.currentTurnResult()) }
-        }
+        val turnState = trackUserHistoryUseCase.makeShot(shot)
+        _turnState.update { turnState }
     }
 
     fun resetTurn() {
         _turnState.update { TurnState.IsOngoing }
-        currentEvaluateShotUseCase().resetCurrentTurn()
         currentTrackUseCaseUseCase().resetCurrentTurn()
     }
 
     suspend fun changeTurn() {
         _turnState.update { TurnState.IsOngoing }
-        currentEvaluateShotUseCase().currentShotResult?.let { result ->
-            if (result.isGameOver()) {
-                finishGame()
-            } else {
-                nextTurn()
-            }
+        if (currentTrackUseCaseUseCase().isGameOver()) {
+            finishGame()
+        } else {
+            nextTurn()
         }
     }
 
     fun eraseShot() {
-        currentEvaluateShotUseCase().eraseShot()
-        currentTrackUseCaseUseCase().eraseShot()
+        currentTrackUseCaseUseCase().undoLastShot()
     }
 
     private suspend fun finishGame() {
@@ -97,15 +83,12 @@ class GameManager(
         _isGameFinished.update { true }
     }
 
-    private fun currentEvaluateShotUseCase(): CurrentSetManager {
-        return currentSetManagers[players.indexOf(currentPlayer.value)]
-    }
-
     private fun currentTrackUseCaseUseCase(): UserHistoryManager {
         return userHistoryManagers[players.indexOf(currentPlayer.value)]
     }
 
     private fun nextTurn() {
+        currentTrackUseCaseUseCase().finishTurn()
         val index = players.indexOf(currentPlayer.value)
         val nextPlayer = players.getOrNull(index + 1) ?: run {
             players[0]

@@ -2,7 +2,7 @@ import SwiftUI
 import shared
 
 internal struct DartsBoardView: View {
-	let turn: Set
+	let turn: Turn
 		
 	var body: some View {
 		ScrollView(showsIndicators: false) {

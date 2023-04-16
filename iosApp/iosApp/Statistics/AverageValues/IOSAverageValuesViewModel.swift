@@ -2,7 +2,7 @@ import shared
 
 internal final class IOSAverageValuesViewModel: ObservableObject {
 	@Published var state = AverageValuesState(
-		averageSetOfAll: 0,
+		averageTurnOfAll: 0,
 		averageShotOfAll: 0,
 		playersAverageValues: []
 	)

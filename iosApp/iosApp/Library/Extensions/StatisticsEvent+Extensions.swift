@@ -11,10 +11,10 @@ extension StatisticsEvent {
 		case .ShowShotDistribution():
 			return String(localized: "shot_distribution_statistics")
 			
-		case .ShowBiggestFinalSet():
+		case .ShowBiggestFinalTurn():
 			return String(localized: "biggest_final_set_statistics")
 			
-		case .ShowBestSet():
+		case .ShowBestTurn():
 			return String(localized: "best_set_statistics")
 			
 		case .ShowAverageValues():

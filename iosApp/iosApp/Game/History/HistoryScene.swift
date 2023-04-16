@@ -5,7 +5,7 @@ internal enum HistoryScene {
 	static func create(
 		using module: AppModule,
 		game: Game,
-		onTurnSelected: @escaping (Set) -> Void,
+		onTurnSelected: @escaping (Turn) -> Void,
 		onShowRecap: @escaping (HistoryState) -> Void
 	) -> some View {
 		let getGameHistoryUseCase = GetGameHistoryUseCase(dataSource: module.gameDataSource)

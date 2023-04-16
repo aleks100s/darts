@@ -31,7 +31,7 @@ class AverageValuesViewModel(
         getAverageShotValueUseCase.execute()
     ) { state, playersValues, averageSet, averageShot ->
             state.copy(
-                averageSetOfAll = averageSet,
+                averageTurnOfAll = averageSet,
                 averageShotOfAll = averageShot,
                 playersAverageValues = playersValues
             )

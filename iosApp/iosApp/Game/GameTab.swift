@@ -104,9 +104,9 @@ internal struct GameTab: View {
 		case let .gameRecap(historyState):
 			GameRecapView(
 				history: historyState.gameHistory,
-				averageSets: historyState.averageSets(),
-				biggestSets: historyState.biggestSets(),
-				smallestSets: historyState.smallestSets(),
+				averageTurns: historyState.averageTurns(),
+				biggestTurns: historyState.biggestTurns(),
+				smallestTurns: historyState.smallestTurns(),
 				misses: historyState.misses(),
 				overkills: historyState.overkills()
 			)

@@ -16,13 +16,13 @@ internal struct BestTurnView: View {
 	
 	@ViewBuilder
 	private var content: some View {
-		if viewModel.state.playersBestSets.isEmpty {
+		if viewModel.state.playersBestTurns.isEmpty {
 			NoDataView()
 		} else {
 			StatisticsPlayerListView(
-				values: viewModel.state.playersBestSets.map { ($0.player, "\($0.set.score())") },
+				values: viewModel.state.playersBestTurns.map { ($0.player, "\($0.set.score())") },
 				onValueSelected: { index in
-					viewModel.select(turn: viewModel.state.playersBestSets[index].set)
+					viewModel.select(turn: viewModel.state.playersBestTurns[index].set)
 				}
 			)
 		}

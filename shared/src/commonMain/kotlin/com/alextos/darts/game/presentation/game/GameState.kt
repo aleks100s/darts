@@ -57,7 +57,7 @@ data class GameState(
         }
     }
 
-    fun getCurrentSet(): Turn {
+    fun getCurrentTurn(): Turn {
         var leftAfter = 0
         currentPlayer?.let { player ->
             gameHistory.firstOrNull { it.player == player }?.let { history ->

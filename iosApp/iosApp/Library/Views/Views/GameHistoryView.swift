@@ -5,7 +5,7 @@ import shared
 internal struct GameHistoryView: View {
 	let gameHistory: [PlayerHistory]
 	let gameGoal: Int32
-	let onTurnSelected: (Set) -> Void
+	let onTurnSelected: (Turn) -> Void
 	let page: Page
 	
 	var body: some View {
@@ -27,7 +27,7 @@ internal struct GameHistoryView: View {
 		gameHistory: [PlayerHistory],
 		gameGoal: Int32,
 		page: Int,
-		onTurnSelected: @escaping (Set) -> Void
+		onTurnSelected: @escaping (Turn) -> Void
 	) {
 		self.gameHistory = gameHistory
 		self.gameGoal = gameGoal

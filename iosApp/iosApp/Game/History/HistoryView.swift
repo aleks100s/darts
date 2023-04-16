@@ -49,9 +49,9 @@ internal struct HistoryView: View {
 	private var recap: some View {
 		GameRecapView(
 			history: viewModel.state.gameHistory,
-			averageSets: viewModel.state.averageSets(),
-			biggestSets: viewModel.state.biggestSets(),
-			smallestSets: viewModel.state.smallestSets(),
+			averageTurns: viewModel.state.averageTurns(),
+			biggestTurns: viewModel.state.biggestTurns(),
+			smallestTurns: viewModel.state.smallestTurns(),
 			misses: viewModel.state.misses(),
 			overkills: viewModel.state.overkills()
 		)

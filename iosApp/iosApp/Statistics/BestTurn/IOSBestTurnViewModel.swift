@@ -1,21 +1,21 @@
 import shared
 
 internal final class IOSBestTurnViewModel: ObservableObject {
-	@Published var state = BestSetState(playersBestSets: [])
+	@Published var state = BestTurnState(playersBestTurns: [])
 	
-	private let viewModel: BestSetViewModel
-	private let onTurnSelected: (Set) -> Void
+	private let viewModel: BestTurnViewModel
+	private let onTurnSelected: (Turn) -> Void
 	private var handle: DisposableHandle?
 	
 	init(
-		viewModel: BestSetViewModel,
-		onTurnSelected: @escaping (Set) -> Void
+		viewModel: BestTurnViewModel,
+		onTurnSelected: @escaping (Turn) -> Void
 	) {
 		self.viewModel = viewModel
 		self.onTurnSelected = onTurnSelected
 	}
 	
-	func select(turn: Set) {
+	func select(turn: Turn) {
 		onTurnSelected(turn)
 	}
 	

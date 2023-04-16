@@ -95,9 +95,9 @@ private fun GameHistory(
 private fun GameRecap(state: HistoryState) {
     GameRecapView(
         history = state.gameHistory,
-        averageSets = state.averageSets(),
-        biggestSets = state.biggestSets(),
-        smallestSets = state.smallestSets(),
+        averageSets = state.averageTurns(),
+        biggestSets = state.biggestTurns(),
+        smallestSets = state.smallestTurns(),
         misses = state.misses(),
         overkills = state.overkills()
     )

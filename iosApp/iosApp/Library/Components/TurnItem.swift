@@ -2,7 +2,7 @@ import SwiftUI
 import shared
 
 internal struct TurnItem: View {
-	let turn: Set
+	let turn: Turn
 	let shotsLeft: Int
 	let onSelect: () -> Void
 	

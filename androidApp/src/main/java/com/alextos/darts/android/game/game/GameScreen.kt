@@ -100,7 +100,7 @@ private fun GameHistory(
 @Composable
 private fun GameInput(state: GameState, onEvent: (GameEvent) -> Unit) {
     GameInputView(
-        currentTurn = state.getCurrentSet(),
+        currentTurn = state.getCurrentTurn(),
         results = state.currentResults(),
         eraseShot = { onEvent(GameEvent.EraseHit) },
         currentPlayerIndex = state.currentPage(),

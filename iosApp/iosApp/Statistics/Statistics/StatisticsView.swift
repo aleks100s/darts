@@ -3,8 +3,8 @@ import shared
 
 internal struct StatisticsView: View {
 	let data: [StatisticsEvent] = [
-		.ShowBestSet(),
-		.ShowBiggestFinalSet(),
+		.ShowBestTurn(),
+		.ShowBiggestFinalTurn(),
 		.ShowAverageValues(),
 		.ShowShotDistribution(),
 		.ShowVictoryDistribution(),

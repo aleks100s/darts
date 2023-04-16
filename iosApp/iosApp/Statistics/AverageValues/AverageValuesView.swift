@@ -25,14 +25,14 @@ internal struct AverageValuesView: View {
 					
 					averageValues(
 						title: String(localized: "all_players"),
-						avgSetScore: viewModel.state.averageSetOfAll,
+						avgTurnScore: viewModel.state.averageTurnOfAll,
 						avgShotScore: viewModel.state.averageShotOfAll
 					)
 					
 					ForEach(viewModel.state.playersAverageValues) { value in
 						averageValues(
 							title: value.player.name,
-							avgSetScore: value.setScore,
+							avgTurnScore: value.setScore,
 							avgShotScore: value.shotValue
 						)
 					}
@@ -57,13 +57,13 @@ internal struct AverageValuesView: View {
 	@ViewBuilder
 	private func averageValues(
 		title: String,
-		avgSetScore: Double,
+		avgTurnScore: Double,
 		avgShotScore: Double
 	) -> some View {
 		Row(
 			cells: [
 				title,
-				String(format: "%.2f", avgSetScore),
+				String(format: "%.2f", avgTurnScore),
 				String(format: "%.2f", avgShotScore)
 			],
 			spacing: 0

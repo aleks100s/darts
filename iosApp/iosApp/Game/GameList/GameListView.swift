@@ -40,8 +40,8 @@ internal struct GameListView: View {
 							viewModel.select(game: game)
 						}
 				}
-				.onDelete { indexSet in
-					if let index = indexSet.first {
+				.onDelete { indexTurn in
+					if let index = indexTurn.first {
 						viewModel.deleteGame(index: index)
 					}
 				}

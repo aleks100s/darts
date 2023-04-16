@@ -8,7 +8,7 @@ data class HistoryState(
     val isRecapVisible: Boolean = false,
     val gameGoal: Int = 0
 ) {
-    fun averageSets(): List<PlayerGameValue> {
+    fun averageTurns(): List<PlayerGameValue> {
         return gameHistory.map { playerHistory ->
             val sum =  playerHistory.turns.sumOf { it.score() }
             val count = playerHistory.turns.count()
@@ -20,13 +20,13 @@ data class HistoryState(
         }
     }
 
-    fun biggestSets(): List<PlayerGameValue> {
+    fun biggestTurns(): List<PlayerGameValue> {
         return gameHistory.map { playerHistory ->
             PlayerGameValue(playerHistory.player, playerHistory.biggestSet()?.score() ?: 0)
         }
     }
 
-    fun smallestSets(): List<PlayerGameValue> {
+    fun smallestTurns(): List<PlayerGameValue> {
         return gameHistory.map { playerHistory ->
             PlayerGameValue(playerHistory.player, playerHistory.smallestSet()?.score() ?: 0)
         }

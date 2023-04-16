@@ -4,13 +4,13 @@ import SwiftUI
 internal enum BestTurnScene {
 	static func create(
 		module: AppModule,
-		onTurnSelected: @escaping (Set) -> Void
+		onTurnSelected: @escaping (Turn) -> Void
 	) -> some View {
 		let getPlayersUseCase = GetPlayersUseCase(dataSource: module.playerDataSource)
-		let getPlayersBestSetsUseCase = GetPlayersBestSetsUseCase(dataSource: module.statisticsDataSource)
-		let viewModel = BestSetViewModel(
+		let getPlayersBestTurnsUseCase = GetPlayersBestTurnsUseCase(dataSource: module.statisticsDataSource)
+		let viewModel = BestTurnViewModel(
 			getPlayersUseCase: getPlayersUseCase,
-			getPlayersBestSetsUseCase: getPlayersBestSetsUseCase,
+			getPlayersBestTurnsUseCase: getPlayersBestTurnsUseCase,
 			coroutineScope: nil
 		)
 		let iOSViewModel = IOSBestTurnViewModel(viewModel: viewModel, onTurnSelected: onTurnSelected)

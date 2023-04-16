@@ -16,7 +16,7 @@ internal struct GameInputView: View {
 	
 	@ViewBuilder
 	private var header: some View {
-		let turn = state.getCurrentSet()
+		let turn = state.getCurrentTurn()
 		let currentResults = state.currentResults()
 		
 		VStack(spacing: 0) {
@@ -103,7 +103,7 @@ internal struct GameInputView: View {
 	}
 	
 	@ViewBuilder
-	private func currentTurn(turn: Set) -> some View {
+	private func currentTurn(turn: Turn) -> some View {
 		TurnItem(turn: turn, shotsLeft: Int(turn.shotsLeft()), onSelect: {})
 			.background(Color.background)
 	}

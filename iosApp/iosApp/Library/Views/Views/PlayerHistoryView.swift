@@ -4,7 +4,7 @@ import shared
 internal struct PlayerHistoryView: View {
 	let playerHistory: PlayerHistory
 	let gameGoal: Int32
-	let onTurnSelected: (Set) -> Void
+	let onTurnSelected: (Turn) -> Void
 	
 	var body: some View {
 		VStack(spacing: 0) {

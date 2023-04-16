@@ -17,11 +17,11 @@ internal struct StatisticsTab: View {
 					case .ShowShotDistribution():
 						navigationStack.append(.players(.shotDistribution))
 						
-					case .ShowBiggestFinalSet():
-						navigationStack.append(.biggestFinalSet)
+					case .ShowBiggestFinalTurn():
+						navigationStack.append(.biggestFinalTurn)
 						
-					case .ShowBestSet():
-						navigationStack.append(.bestSet)
+					case .ShowBestTurn():
+						navigationStack.append(.bestTurn)
 						
 					case .ShowAverageValues():
 						navigationStack.append(.averageValues)
@@ -76,14 +76,14 @@ internal struct StatisticsTab: View {
 			.navigationTitle(mode.title)
 			.navigationBarTitleDisplayMode(.inline)
 			
-		case .biggestFinalSet:
-			BiggestFinalSetScene.create(module: module) { turn in
+		case .biggestFinalTurn:
+			BiggestFinalTurnScene.create(module: module) { turn in
 				navigationStack.append(.dartsBoard(turn))
 			}
 			.navigationTitle("biggest_final_set_statistics")
 			.navigationBarTitleDisplayMode(.inline)
 			
-		case .bestSet:
+		case .bestTurn:
 			BestTurnScene.create(module: module) { turn in
 				navigationStack.append(.dartsBoard(turn))
 			}

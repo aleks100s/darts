@@ -1,19 +1,19 @@
 import SwiftUI
 import shared
 
-internal final class IOSBiggestFinalSetViewModel: ObservableObject {
-	@Published var state = BiggestFinalSetState(playersBiggestFinalSets: [])
+internal final class IOSBiggestFinalTurnViewModel: ObservableObject {
+	@Published var state = BiggestFinalTurnState(playersBiggestFinalTurns: [])
 	
-	private let viewModel: BiggestFinalSetViewModel
-	private let onTurnSelected: (Set) -> Void
+	private let viewModel: BiggestFinalTurnViewModel
+	private let onTurnSelected: (Turn) -> Void
 	private var handle: DisposableHandle?
 	
-	init(viewModel: BiggestFinalSetViewModel, onTurnSelected: @escaping (Set) -> Void) {
+	init(viewModel: BiggestFinalTurnViewModel, onTurnSelected: @escaping (Turn) -> Void) {
 		self.viewModel = viewModel
 		self.onTurnSelected = onTurnSelected
 	}
 	
-	func select(turn: Set) {
+	func select(turn: Turn) {
 		onTurnSelected(turn)
 	}
 	

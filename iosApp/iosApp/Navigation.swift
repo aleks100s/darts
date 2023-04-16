@@ -5,7 +5,7 @@ internal enum GameNavigation: Hashable {
 	case game(players: [Player], goal: Int32, isFinishWithDoublesChecked: Bool)
 	case inGameHistory(gameHistory: [PlayerHistory], goal: Int32, page: Int)
 	case history(game: Game)
-	case dartsBoard(Set)
+	case dartsBoard(Turn)
 	case gameRecap(historyState: HistoryState)
 	
 	var urlComponent: String? {
@@ -57,9 +57,9 @@ internal enum StatisticsNavigation: Hashable {
 	case heatmapDistribution(Player)
 	case victoryDistribution(Player)
 	case shotDistribution(Player)
-	case biggestFinalSet
-	case bestSet
+	case biggestFinalTurn
+	case bestTurn
 	case averageValues
 	case players(Mode)
-	case dartsBoard(Set)
+	case dartsBoard(Turn)
 }

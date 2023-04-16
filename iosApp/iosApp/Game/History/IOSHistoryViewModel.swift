@@ -3,14 +3,14 @@ import shared
 internal final class IOSHistoryViewModel: ObservableObject {
 	@Published var state = HistoryState(gameHistory: [], isRecapVisible: false, gameGoal: 0)
 	
-	private let onTurnSelected: (Set) -> Void
+	private let onTurnSelected: (Turn) -> Void
 	private let onShowRecap: (HistoryState) -> Void
 	private let viewModel: HistoryViewModel
 	private var handle: DisposableHandle?
 	
 	init(
 		viewModel: HistoryViewModel,
-		onTurnSelected: @escaping (Set) -> Void,
+		onTurnSelected: @escaping (Turn) -> Void,
 		onShowRecap: @escaping (HistoryState) -> Void
 	) {
 		self.viewModel = viewModel
@@ -26,7 +26,7 @@ internal final class IOSHistoryViewModel: ObservableObject {
 			}
 	}
 	
-	func select(turn: Set) {
+	func select(turn: Turn) {
 		onTurnSelected(turn)
 	}
 	

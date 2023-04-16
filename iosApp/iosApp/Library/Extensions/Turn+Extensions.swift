@@ -1,7 +1,7 @@
 import shared
 import SwiftUI
 
-internal extension Set {
+internal extension Turn {
 	var rowColor: Color {
 		if isOverkill {
 			return .red
@@ -13,6 +13,6 @@ internal extension Set {
 	}
 }
 
-extension Set: Identifiable {
+extension Turn: Identifiable {
 	
 }

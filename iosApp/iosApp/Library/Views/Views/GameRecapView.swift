@@ -4,9 +4,9 @@ import Charts
 
 internal struct GameRecapView: View {
 	let history: [PlayerHistory]
-	let averageSets: [PlayerGameValue]
-	let biggestSets: [PlayerGameValue]
-	let smallestSets: [PlayerGameValue]
+	let averageTurns: [PlayerGameValue]
+	let biggestTurns: [PlayerGameValue]
+	let smallestTurns: [PlayerGameValue]
 	let misses: [PlayerGameValue]
 	let overkills: [PlayerGameValue]
 	
@@ -14,9 +14,9 @@ internal struct GameRecapView: View {
 		ScrollView {
 			VStack {
 				chart
-				valuesBlock(values: averageSets, title: String(localized: "average_set_recap"))
-				valuesBlock(values: biggestSets, title: String(localized: "biggest_sets"))
-				valuesBlock(values: smallestSets, title: String(localized: "smallest_sets"))
+				valuesBlock(values: averageTurns, title: String(localized: "average_set_recap"))
+				valuesBlock(values: biggestTurns, title: String(localized: "biggest_sets"))
+				valuesBlock(values: smallestTurns, title: String(localized: "smallest_sets"))
 				valuesBlock(values: misses, title: String(localized: "misses_count"))
 				valuesBlock(values: overkills, title: String(localized: "overkill_count"))
 			}

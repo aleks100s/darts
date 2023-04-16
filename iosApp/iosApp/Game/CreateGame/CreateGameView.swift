@@ -21,8 +21,8 @@ internal struct CreateGameView: View {
 						viewModel.onEvent(.SelectPlayer(player: player))
 					}
 				}
-				.onDelete { indexSet in
-					if let index = indexSet.first {
+				.onDelete { indexTurn in
+					if let index = indexTurn.first {
 						viewModel.deletePlayer(index: index)
 					}
 				}

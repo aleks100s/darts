@@ -9,7 +9,7 @@ internal enum GameScene {
 		isFinishWithDoublesChecked: Bool,
 		onGameFinished: @escaping () -> Void,
 		onShowInGameHistory: @escaping ([PlayerHistory], Int32, Int) -> Void,
-		onTurnSelected: @escaping (Set) -> Void
+		onTurnSelected: @escaping (Turn) -> Void
 	) -> some View {
 		let saveGameHistoryUseCase = SaveGameHistoryUseCase(dataSource: module.gameDataSource)
 		let gameManager = GameManager(

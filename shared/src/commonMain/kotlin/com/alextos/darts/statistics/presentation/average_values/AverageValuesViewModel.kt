@@ -2,7 +2,7 @@ package com.alextos.darts.statistics.presentation.average_values
 
 import com.alextos.darts.core.domain.useCases.GetPlayersUseCase
 import com.alextos.darts.core.util.toCommonStateFlow
-import com.alextos.darts.statistics.domain.use_cases.average_values.GetAverageSetScoreUseCase
+import com.alextos.darts.statistics.domain.use_cases.average_values.GetAverageTurnScoreUseCase
 import com.alextos.darts.statistics.domain.use_cases.average_values.GetPlayersAverageValuesUseCase
 import com.alextos.darts.statistics.domain.use_cases.average_values.GetAverageShotValueUseCase
 import kotlinx.coroutines.CoroutineScope
@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.*
 
 class AverageValuesViewModel(
     getPlayersUseCase: GetPlayersUseCase,
-    getAverageSetScoreUseCase: GetAverageSetScoreUseCase,
+    getAverageTurnScoreUseCase: GetAverageTurnScoreUseCase,
     getAverageShotValueUseCase: GetAverageShotValueUseCase,
     getPlayersAverageValuesUseCase: GetPlayersAverageValuesUseCase,
     coroutineScope: CoroutineScope?
@@ -27,7 +27,7 @@ class AverageValuesViewModel(
             .flatMapLatest { players ->
                 getPlayersAverageValuesUseCase.execute(players)
             },
-        getAverageSetScoreUseCase.execute(),
+        getAverageTurnScoreUseCase.execute(),
         getAverageShotValueUseCase.execute()
     ) { state, playersValues, averageSet, averageShot ->
             state.copy(

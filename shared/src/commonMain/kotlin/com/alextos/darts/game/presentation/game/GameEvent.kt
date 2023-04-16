@@ -1,11 +1,11 @@
 package com.alextos.darts.game.presentation.game
 
 import com.alextos.darts.core.domain.model.Sector
-import com.alextos.darts.core.domain.model.Set
+import com.alextos.darts.core.domain.model.Turn
 
 sealed class GameEvent {
     data class MakeShot(val sector: Sector): GameEvent()
-    data class ShowDarts(val turns: List<Set>, val currentSet: Set): GameEvent()
+    data class ShowDarts(val turns: List<Turn>, val currentSet: Turn): GameEvent()
     object BackButtonPressed: GameEvent()
     object CloseGame: GameEvent()
     object ReturnToGame: GameEvent()

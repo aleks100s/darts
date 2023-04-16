@@ -28,12 +28,12 @@ import com.alextos.darts.android.common.presentation.extensions.inputString
 import com.alextos.darts.android.common.presentation.extensions.textColor
 import com.alextos.darts.android.common.presentation.rememberScreenType
 import com.alextos.darts.core.domain.model.Sector
-import com.alextos.darts.core.domain.model.Set
+import com.alextos.darts.core.domain.model.Turn
 import com.alextos.darts.game.domain.models.GamePlayerResult
 
 @Composable
 fun GameInputView(
-    currentSet: Set,
+    currentTurn: Turn,
     results: List<GamePlayerResult>,
     currentPlayerIndex: Int,
     eraseShot: () -> Unit,
@@ -59,7 +59,7 @@ fun GameInputView(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 CurrentTurnItem(
-                    currentSet = currentSet,
+                    currentTurn = currentTurn,
                     results = results,
                     currentPlayerIndex = currentPlayerIndex,
                     onClick = onPlayerClick
@@ -83,14 +83,14 @@ fun GameInputView(
 @Composable
 private fun CurrentTurnItem(
     results: List<GamePlayerResult>,
-    currentSet: Set,
+    currentTurn: Turn,
     currentPlayerIndex: Int,
     onClick: () -> Unit
 ) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         GamePlayers(list = results, currentPlayerIndex, onClick)
         PlayerHistoryHeader()
-        SetItem(set = currentSet, onSelect = {})
+        TurnItem(turn = currentTurn, onSelect = {})
     }
 }
 

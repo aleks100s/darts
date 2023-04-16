@@ -8,7 +8,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import com.alextos.darts.game.domain.models.PlayerHistory
-import com.alextos.darts.core.domain.model.Set
+import com.alextos.darts.core.domain.model.Turn
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
@@ -21,7 +21,7 @@ fun GameHistoryView(
     goal: Int,
     currentPage: Int,
     padding: PaddingValues,
-    onSelect: (List<Set>, Set) -> Unit
+    onSelect: (List<Turn>, Turn) -> Unit
 ) {
     val pagerState = rememberPagerState(initialPage = currentPage)
     val scope = rememberCoroutineScope()

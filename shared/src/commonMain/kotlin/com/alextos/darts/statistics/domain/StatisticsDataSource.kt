@@ -2,15 +2,15 @@ package com.alextos.darts.statistics.domain
 
 import com.alextos.darts.core.domain.model.Player
 import com.alextos.darts.core.domain.model.Sector
-import com.alextos.darts.core.domain.model.Set
+import com.alextos.darts.core.domain.model.Turn
 import com.alextos.darts.statistics.domain.models.PlayerShotDistribution
 import com.alextos.darts.statistics.domain.models.PlayerVictoryDistribution
 import com.alextos.darts.statistics.domain.models.ShotDistribution
 import kotlinx.coroutines.flow.Flow
 
 interface StatisticsDataSource {
-    fun getPlayerBestSet(player: Player): Flow<Set?>
-    fun getPlayerBiggestFinalSet(player: Player): Flow<Set?>
+    fun getPlayerBestSet(player: Player): Flow<Turn?>
+    fun getPlayerBiggestFinalSet(player: Player): Flow<Turn?>
     fun getAverageSetScore(): Flow<Double?>
     fun getPlayerAverageSetScore(player: Player): Flow<Double?>
     fun getAverageShotValue(): Flow<Double?>

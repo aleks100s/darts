@@ -1,35 +1,35 @@
-package com.alextos.darts.statistics.presentation.biggest_final_set
+package com.alextos.darts.statistics.presentation.biggest_final_turn
 
 import com.alextos.darts.core.domain.useCases.GetPlayersUseCase
 import com.alextos.darts.core.util.toCommonStateFlow
-import com.alextos.darts.statistics.domain.use_cases.biggest_final_set.GetPlayersBiggestFinalSetUseCase
+import com.alextos.darts.statistics.domain.use_cases.biggest_final_turn.GetPlayersBiggestFinalTurnUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
 
-class BiggestFinalSetViewModel(
+class BiggestFinalTurnViewModel(
     getPlayersUseCase: GetPlayersUseCase,
-    getPlayersBiggestFinalSetUseCase: GetPlayersBiggestFinalSetUseCase,
+    getPlayersBiggestFinalTurnUseCase: GetPlayersBiggestFinalTurnUseCase,
     coroutineScope: CoroutineScope?
 ) {
     private val viewModelScope = coroutineScope ?: CoroutineScope(Dispatchers.Main)
 
-    private val _state = MutableStateFlow(BiggestFinalSetState())
+    private val _state = MutableStateFlow(BiggestFinalTurnState())
     @OptIn(ExperimentalCoroutinesApi::class)
     val state = _state
         .combine(
             getPlayersUseCase.execute()
                 .flatMapLatest { players ->
-                    getPlayersBiggestFinalSetUseCase.execute(players)
+                    getPlayersBiggestFinalTurnUseCase.execute(players)
                 }
-        ) { state, playersSets ->
-            state.copy(playersBiggestFinalSets = playersSets)
+        ) { state, playersTurns ->
+            state.copy(playersBiggestFinalTurns = playersTurns)
         }
         .stateIn(
             viewModelScope,
             SharingStarted.WhileSubscribed(5000),
-            BiggestFinalSetState()
+            BiggestFinalTurnState()
         )
         .toCommonStateFlow()
 }

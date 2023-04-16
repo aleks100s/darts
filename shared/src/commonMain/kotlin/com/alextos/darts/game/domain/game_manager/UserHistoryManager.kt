@@ -3,7 +3,7 @@ package com.alextos.darts.game.domain.game_manager
 import com.alextos.darts.game.domain.models.*
 import com.alextos.darts.core.domain.model.Player
 import com.alextos.darts.core.domain.model.Sector
-import com.alextos.darts.core.domain.model.Set
+import com.alextos.darts.core.domain.model.Turn
 import com.alextos.darts.core.domain.model.Shot
 import com.alextos.darts.core.util.extensions.fill
 import com.alextos.darts.game.presentation.game.TurnState
@@ -16,7 +16,7 @@ class UserHistoryManager(
     goal: Int,
     private val finishWithDoubles: Boolean
 ) {
-    private val currentSet = mutableListOf<Shot>()
+    private val currentTurnShots = mutableListOf<Shot>()
     private val _playerHistory = MutableStateFlow(PlayerHistory(player))
     val playerHistory: StateFlow<PlayerHistory> = _playerHistory
 
@@ -39,8 +39,8 @@ class UserHistoryManager(
     }
 
     fun finishTurn() {
-        if (currentSet.count() == Set.turnLimit) {
-            currentSet.clear()
+        if (currentTurnShots.count() == Turn.turnLimit) {
+            currentTurnShots.clear()
         }
     }
 
@@ -79,14 +79,14 @@ class UserHistoryManager(
 
     private fun countShot(shot: Shot) {
         reminder -= shot.sector.value
-        currentSet.add(shot)
+        currentTurnShots.add(shot)
     }
 
     private fun trackShotResult(shotResult: ShotResult): TurnState {
         _playerHistory.update { history ->
             val turns = history.turns.toMutableList()
-            val newTurn = if (turns.isEmpty() || turns.lastOrNull()?.shots?.count() == Set.turnLimit) {
-                Set(
+            val newTurn = if (turns.isEmpty() || turns.lastOrNull()?.shots?.count() == Turn.turnLimit) {
+                Turn(
                     shots = prepareShots(shotResult),
                     isOverkill = shotResult.isTerminatingTurn(),
                     leftAfter = shotResult.leftAfter
@@ -124,10 +124,10 @@ class UserHistoryManager(
     }
 
     private fun removeLastShotFromCurrentTurn() {
-        if (currentSet.count() == Set.turnLimit || currentSet.isEmpty()) {
+        if (currentTurnShots.count() == Turn.turnLimit || currentTurnShots.isEmpty()) {
             return
         }
-        currentSet.removeLastOrNull()?.let {
+        currentTurnShots.removeLastOrNull()?.let {
             reminder += it.sector.value
         }
     }
@@ -135,12 +135,12 @@ class UserHistoryManager(
     private fun removeLastShotFromHistory() {
         val turns = _playerHistory.value.turns.toMutableList()
         turns.removeLastOrNull()?.let { lastTurn ->
-            if (lastTurn.shots.count() == Set.turnLimit || lastTurn.shots.isEmpty()) {
+            if (lastTurn.shots.count() == Turn.turnLimit || lastTurn.shots.isEmpty()) {
                 return
             }
             val lastShots = lastTurn.shots.toMutableList()
             val lastShot = lastShots.removeLastOrNull()
-            val set = Set(
+            val set = Turn(
                 shots = lastShots,
                 isOverkill = false,
                 leftAfter = lastTurn.leftAfter + (lastShot?.sector?.value ?: 0)
@@ -153,10 +153,10 @@ class UserHistoryManager(
     }
 
     private fun resetCurrentTurnState() {
-        reminder += currentSet.fold(0) { acc, s ->
+        reminder += currentTurnShots.fold(0) { acc, s ->
             acc + s.sector.value
         }
-        currentSet.clear()
+        currentTurnShots.clear()
     }
 
     private fun deleteCurrentTurnFromHistory() {

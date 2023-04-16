@@ -1,26 +1,24 @@
-package com.alextos.darts.statistics.domain.use_cases.best_set
+package com.alextos.darts.statistics.domain.use_cases.biggest_final_turn
 
 import com.alextos.darts.core.domain.model.Player
 import com.alextos.darts.statistics.domain.StatisticsDataSource
 import com.alextos.darts.statistics.domain.models.StatisticsSet
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.*
 
-class GetPlayersBestSetsUseCase(
+class GetPlayersBiggestFinalTurnUseCase(
     private val dataSource: StatisticsDataSource
 ) {
     fun execute(players: List<Player>): Flow<List<StatisticsSet>> {
         val flows = players.map { player ->
-            dataSource.getPlayerBestSet(player)
+            dataSource.getPlayerBiggestFinalSet(player)
                 .map { set ->
                     set?.let {
-                        StatisticsSet(player, it)
+                        StatisticsSet(player, set)
                     }
                 }
         }
         return combine(flows) { data ->
-            data.toList()
+            data.asList()
                 .mapNotNull { it }
                 .sortedByDescending { it.set.score() }
         }

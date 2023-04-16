@@ -1,6 +1,6 @@
 package com.alextos.darts.core.domain.model
 
-data class Set(
+data class Turn(
     val shots: List<Shot>,
     val leftAfter: Int,
     val isOverkill: Boolean

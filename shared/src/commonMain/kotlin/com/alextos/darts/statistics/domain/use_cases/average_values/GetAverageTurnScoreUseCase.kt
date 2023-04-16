@@ -4,7 +4,7 @@ import com.alextos.darts.statistics.domain.StatisticsDataSource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.mapNotNull
 
-class GetAverageSetScoreUseCase(
+class GetAverageTurnScoreUseCase(
     private val dataSource: StatisticsDataSource
 ) {
     fun execute(): Flow<Double> {

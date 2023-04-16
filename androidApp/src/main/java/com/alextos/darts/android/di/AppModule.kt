@@ -12,11 +12,11 @@ import com.alextos.darts.core.domain.useCases.GetPlayersUseCase
 import com.alextos.darts.game.domain.useCases.*
 import com.alextos.darts.statistics.data.SqlDelightStatisticsDataSource
 import com.alextos.darts.statistics.domain.StatisticsDataSource
-import com.alextos.darts.statistics.domain.use_cases.average_values.GetAverageSetScoreUseCase
+import com.alextos.darts.statistics.domain.use_cases.average_values.GetAverageTurnScoreUseCase
 import com.alextos.darts.statistics.domain.use_cases.average_values.GetAverageShotValueUseCase
 import com.alextos.darts.statistics.domain.use_cases.average_values.GetPlayersAverageValuesUseCase
-import com.alextos.darts.statistics.domain.use_cases.best_set.GetPlayersBestSetsUseCase
-import com.alextos.darts.statistics.domain.use_cases.biggest_final_set.GetPlayersBiggestFinalSetUseCase
+import com.alextos.darts.statistics.domain.use_cases.best_turn.GetPlayersBestTurnsUseCase
+import com.alextos.darts.statistics.domain.use_cases.biggest_final_turn.GetPlayersBiggestFinalTurnUseCase
 import com.alextos.darts.statistics.domain.use_cases.heatmap.GetSectorHeatmapUseCase
 import com.alextos.darts.statistics.domain.use_cases.shot_distribution.GetPlayerShotDistributionUseCase
 import com.alextos.darts.statistics.domain.use_cases.victory_distribution.GetPlayerVictoryDistributionUseCase
@@ -92,20 +92,20 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideGetPlayersBestSetsUseCase(dataSource: StatisticsDataSource): GetPlayersBestSetsUseCase {
-        return GetPlayersBestSetsUseCase(dataSource)
+    fun provideGetPlayersBestSetsUseCase(dataSource: StatisticsDataSource): GetPlayersBestTurnsUseCase {
+        return GetPlayersBestTurnsUseCase(dataSource)
     }
 
     @Provides
     @Singleton
-    fun provideGetPlayerBiggestFinalSetUseCase(dataSource: StatisticsDataSource): GetPlayersBiggestFinalSetUseCase {
-        return GetPlayersBiggestFinalSetUseCase(dataSource)
+    fun provideGetPlayerBiggestFinalSetUseCase(dataSource: StatisticsDataSource): GetPlayersBiggestFinalTurnUseCase {
+        return GetPlayersBiggestFinalTurnUseCase(dataSource)
     }
 
     @Provides
     @Singleton
-    fun provideGetAverageSetScoreUseCase(dataSource: StatisticsDataSource): GetAverageSetScoreUseCase {
-        return GetAverageSetScoreUseCase(dataSource)
+    fun provideGetAverageSetScoreUseCase(dataSource: StatisticsDataSource): GetAverageTurnScoreUseCase {
+        return GetAverageTurnScoreUseCase(dataSource)
     }
 
     @Provides

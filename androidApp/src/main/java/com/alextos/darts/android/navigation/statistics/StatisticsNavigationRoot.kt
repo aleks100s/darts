@@ -20,10 +20,10 @@ import com.alextos.darts.android.common.util.toShots
 import com.alextos.darts.android.navigation.game.GameRoute
 import com.alextos.darts.android.statistics.average_values.AndroidAverageValuesViewModel
 import com.alextos.darts.android.statistics.average_values.AverageValuesScreen
-import com.alextos.darts.android.statistics.best_set.AndroidBestSetViewModel
-import com.alextos.darts.android.statistics.best_set.BestSetScreen
-import com.alextos.darts.android.statistics.biggest_final_set.AndroidBiggestFinalSetViewModel
-import com.alextos.darts.android.statistics.biggest_final_set.BiggestFinalSetScreen
+import com.alextos.darts.android.statistics.best_turn.AndroidBestTurnViewModel
+import com.alextos.darts.android.statistics.best_turn.BestTurnScreen
+import com.alextos.darts.android.statistics.biggest_final_turn.AndroidBiggestFinalTurnViewModel
+import com.alextos.darts.android.statistics.biggest_final_turn.BiggestFinalTurnScreen
 import com.alextos.darts.android.statistics.heatmap.AndroidSectorHeatmapViewModel
 import com.alextos.darts.android.statistics.heatmap.SectorHeatmapScreen
 import com.alextos.darts.android.statistics.player_list.AndroidPlayerListViewModel
@@ -34,10 +34,10 @@ import com.alextos.darts.android.statistics.statistics.StatisticsScreen
 import com.alextos.darts.android.statistics.victory_distribution.AndroidVictoryDistributionViewModel
 import com.alextos.darts.android.statistics.victory_distribution.VictoryDistributionScreen
 import com.alextos.darts.statistics.presentation.average_values.AverageValuesState
-import com.alextos.darts.statistics.presentation.best_set.BestSetEvent
-import com.alextos.darts.statistics.presentation.best_set.BestSetState
-import com.alextos.darts.statistics.presentation.biggest_final_set.BiggestFinalSetEvent
-import com.alextos.darts.statistics.presentation.biggest_final_set.BiggestFinalSetState
+import com.alextos.darts.statistics.presentation.best_set.BestTurnEvent
+import com.alextos.darts.statistics.presentation.best_set.BestTurnState
+import com.alextos.darts.statistics.presentation.biggest_final_turn.BiggestFinalTurnEvent
+import com.alextos.darts.statistics.presentation.biggest_final_turn.BiggestFinalTurnState
 import com.alextos.darts.statistics.presentation.heatmap.SectorHeatmapState
 import com.alextos.darts.statistics.presentation.player_list.PlayerListEvent
 import com.alextos.darts.statistics.presentation.player_list.PlayerListState
@@ -56,10 +56,10 @@ fun StatisticsNavigationRoot() {
         composable(route = StatisticsRoute.Statistics.route) {
             StatisticsScreen { event ->
                 when(event) {
-                    is StatisticsEvent.ShowBestSet -> {
+                    is StatisticsEvent.ShowBestTurn -> {
                         navController.navigate(route = StatisticsRoute.BestSet.route)
                     }
-                    is StatisticsEvent.ShowBiggestFinalSet -> {
+                    is StatisticsEvent.ShowBiggestFinalTurn -> {
                         navController.navigate(route = StatisticsRoute.BiggestFinalSet.route)
                     }
                     is StatisticsEvent.ShowAverageValues -> {
@@ -79,13 +79,13 @@ fun StatisticsNavigationRoot() {
         }
 
         composable(route = StatisticsRoute.BestSet.route) {
-            val viewModel: AndroidBestSetViewModel = hiltViewModel()
-            val state by viewModel.state.collectAsState(initial = BestSetState())
-            BestSetScreen(state = state) { event ->
+            val viewModel: AndroidBestTurnViewModel = hiltViewModel()
+            val state by viewModel.state.collectAsState(initial = BestTurnState())
+            BestTurnScreen(state = state) { event ->
                 when(event) {
-                    is BestSetEvent.ShowBestSetOfPlayer -> {
+                    is BestTurnEvent.ShowBestTurnOfPlayer -> {
                         val route = StatisticsRoute.Darts.routeWithArgs(
-                            listOf(event.set).map { set ->
+                            listOf(event.turn).map { set ->
                                 set.shots.map { it.sector }
                             }.toStringNavArgument()
                         )
@@ -98,11 +98,11 @@ fun StatisticsNavigationRoot() {
         }
 
         composable(route = StatisticsRoute.BiggestFinalSet.route) {
-            val viewModel: AndroidBiggestFinalSetViewModel = hiltViewModel()
-            val state by viewModel.state.collectAsState(initial = BiggestFinalSetState())
-            BiggestFinalSetScreen(state = state) { event ->
+            val viewModel: AndroidBiggestFinalTurnViewModel = hiltViewModel()
+            val state by viewModel.state.collectAsState(initial = BiggestFinalTurnState())
+            BiggestFinalTurnScreen(state = state) { event ->
                 when (event) {
-                    is BiggestFinalSetEvent.ShowBiggestFinalSetOfPlayer -> {
+                    is BiggestFinalTurnEvent.ShowBiggestFinalTurnOfPlayer -> {
                         navController.navigate(
                             route = StatisticsRoute.Darts.routeWithArgs(
                                 listOf(event.set).map { set ->

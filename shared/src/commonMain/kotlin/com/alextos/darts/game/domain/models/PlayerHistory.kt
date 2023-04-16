@@ -1,11 +1,11 @@
 package com.alextos.darts.game.domain.models
 
 import com.alextos.darts.core.domain.model.Player
-import com.alextos.darts.core.domain.model.Set
+import com.alextos.darts.core.domain.model.Turn
 
 data class PlayerHistory(
     val player: Player,
-    val turns: List<Set> = listOf()
+    val turns: List<Turn> = listOf()
 ) {
     fun chartData(size: Int): List<Float> {
         val firstSet = turns.firstOrNull()
@@ -17,11 +17,11 @@ data class PlayerHistory(
                 additionalValues
     }
 
-    fun biggestSet(): Set? {
+    fun biggestSet(): Turn? {
         return turns.maxByOrNull { it.score() }
     }
 
-    fun smallestSet(): Set? {
+    fun smallestSet(): Turn? {
         return turns.minByOrNull { it.score() }
     }
 

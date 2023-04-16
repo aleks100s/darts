@@ -1,7 +1,7 @@
 package com.alextos.darts.game.presentation.game
 
 import com.alextos.darts.game.domain.models.PlayerHistory
-import com.alextos.darts.core.domain.model.Set
+import com.alextos.darts.core.domain.model.Turn
 import com.alextos.darts.core.domain.model.Player
 import com.alextos.darts.game.domain.models.GamePlayerResult
 
@@ -57,7 +57,7 @@ data class GameState(
         }
     }
 
-    fun getCurrentSet(): Set {
+    fun getCurrentSet(): Turn {
         var leftAfter = 0
         currentPlayer?.let { player ->
             gameHistory.firstOrNull { it.player == player }?.let { history ->
@@ -71,7 +71,7 @@ data class GameState(
                 }
             }
         }
-        return Set(
+        return Turn(
             shots = listOf(),
             leftAfter = leftAfter,
             isOverkill = false

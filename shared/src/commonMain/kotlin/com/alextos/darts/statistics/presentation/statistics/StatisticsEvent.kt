@@ -1,8 +1,8 @@
 package com.alextos.darts.statistics.presentation.statistics
 
 sealed class StatisticsEvent {
-    object ShowBestSet: StatisticsEvent()
-    object ShowBiggestFinalSet: StatisticsEvent()
+    object ShowBestTurn: StatisticsEvent()
+    object ShowBiggestFinalTurn: StatisticsEvent()
     object ShowAverageValues: StatisticsEvent()
     object ShowShotDistribution: StatisticsEvent()
     object ShowVictoryDistribution: StatisticsEvent()

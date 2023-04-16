@@ -12,15 +12,15 @@ import com.alextos.darts.android.R
 import com.alextos.darts.android.common.presentation.components.PlayerHistoryHeader
 import com.alextos.darts.android.common.presentation.components.SectionHeader
 import com.alextos.darts.android.common.presentation.components.SectionSubHeader
-import com.alextos.darts.android.common.presentation.components.SetItem
+import com.alextos.darts.android.common.presentation.components.TurnItem
 import com.alextos.darts.game.domain.models.PlayerHistory
-import com.alextos.darts.core.domain.model.Set
+import com.alextos.darts.core.domain.model.Turn
 
 @Composable
 fun PlayerHistoryView(
     playerHistory: PlayerHistory,
     goal: Int,
-    onSelect: (Set) -> Unit
+    onSelect: (Turn) -> Unit
 ) {
     Scaffold {
         Column(modifier = Modifier.padding(it)) {
@@ -31,9 +31,9 @@ fun PlayerHistoryView(
                 modifier = Modifier
                     .fillMaxSize()
             ) {
-                items(playerHistory.turns) { set ->
-                    SetItem(set = set) {
-                        onSelect(set)
+                items(playerHistory.turns) { turn ->
+                    TurnItem(turn = turn) {
+                        onSelect(turn)
                     }
                 }
                 item {

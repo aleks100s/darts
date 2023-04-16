@@ -1,17 +1,17 @@
 package com.alextos.darts.statistics.data
 
 import com.alextos.darts.core.domain.model.Sector
-import com.alextos.darts.core.domain.model.Set
+import com.alextos.darts.core.domain.model.Turn
 import com.alextos.darts.core.domain.model.Shot
 import database.GetPlayerBestSet
 import database.GetPlayerBiggestFinalSet
 
-fun List<GetPlayerBestSet>.playerBestSetToSet(): Set? {
+fun List<GetPlayerBestSet>.playerBestSetToSet(): Turn? {
     return groupBy { it.setId }
         .entries
         .map { (_, group) ->
             val shots = group.map { Shot(Sector.getSector(it.sectorId.toInt())) }
-            Set(
+            Turn(
                 shots = shots,
                 leftAfter = group.first().leftAfter.toInt(),
                 isOverkill = group.first().isOverkill == 1L
@@ -19,12 +19,12 @@ fun List<GetPlayerBestSet>.playerBestSetToSet(): Set? {
         }.firstOrNull()
 }
 
-fun List<GetPlayerBiggestFinalSet>.playerBiggestFinalSetToSet(): Set? {
+fun List<GetPlayerBiggestFinalSet>.playerBiggestFinalSetToSet(): Turn? {
     return groupBy { it.setId }
         .entries
         .map { (_, group) ->
             val shots = group.map { Shot(Sector.getSector(it.sectorId.toInt())) }
-            Set(
+            Turn(
                 shots = shots,
                 leftAfter = group.first().leftAfter.toInt(),
                 isOverkill = group.first().isOverkill == 1L

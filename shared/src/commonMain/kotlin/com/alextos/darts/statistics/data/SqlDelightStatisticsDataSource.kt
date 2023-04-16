@@ -3,7 +3,7 @@ package com.alextos.darts.statistics.data
 import com.alextos.darts.database.DartsDatabase
 import com.alextos.darts.core.domain.model.Player
 import com.alextos.darts.core.domain.model.Sector
-import com.alextos.darts.core.domain.model.Set
+import com.alextos.darts.core.domain.model.Turn
 import com.alextos.darts.statistics.domain.StatisticsDataSource
 import com.alextos.darts.statistics.domain.models.*
 import com.squareup.sqldelight.runtime.coroutines.asFlow
@@ -16,14 +16,14 @@ class SqlDelightStatisticsDataSource(
 ): StatisticsDataSource {
     private val queries = database.dartsQueries
 
-    override fun getPlayerBestSet(player: Player): Flow<Set?> {
+    override fun getPlayerBestSet(player: Player): Flow<Turn?> {
         return queries.getPlayerBestSet(player.id, player.id)
             .asFlow()
             .mapToList()
             .map { it.playerBestSetToSet() }
     }
 
-    override fun getPlayerBiggestFinalSet(player: Player): Flow<Set?> {
+    override fun getPlayerBiggestFinalSet(player: Player): Flow<Turn?> {
         return queries.getPlayerBiggestFinalSet(player.id)
             .asFlow()
             .mapToList()

@@ -17,9 +17,9 @@ class GameManager(
     private val goal: Int,
     private val finishWithDoubles: Boolean
 ) {
-    private val userHistoryManagers by lazy {
+    private val playerHistoryManagers by lazy {
         players.map {
-            UserHistoryManager(it, goal, finishWithDoubles)
+            PlayerHistoryManager(it, goal, finishWithDoubles)
         }
     }
 
@@ -32,7 +32,7 @@ class GameManager(
     private val _isGameFinished = MutableStateFlow(false)
     val isGameFinished: StateFlow<Boolean> = _isGameFinished
 
-    val gameHistory = combine(userHistoryManagers.map { it.playerHistory }) { array ->
+    val gameHistory = combine(playerHistoryManagers.map { it.playerHistory }) { array ->
         array.toList()
     }
 
@@ -42,19 +42,19 @@ class GameManager(
         if (_isGameFinished.value) {
             return
         }
-        val trackUserHistoryUseCase = currentTrackUseCaseUseCase()
+        val trackUserHistoryUseCase = currentPlayerHistoryManager()
         val turnState = trackUserHistoryUseCase.makeShot(shot)
         _turnState.update { turnState }
     }
 
     fun resetTurn() {
         _turnState.update { TurnState.IsOngoing }
-        currentTrackUseCaseUseCase().resetCurrentTurn()
+        currentPlayerHistoryManager().resetCurrentTurn()
     }
 
     suspend fun changeTurn() {
         _turnState.update { TurnState.IsOngoing }
-        if (currentTrackUseCaseUseCase().isGameOver()) {
+        if (currentPlayerHistoryManager().isGameOver()) {
             finishGame()
         } else {
             nextTurn()
@@ -62,7 +62,7 @@ class GameManager(
     }
 
     fun eraseShot() {
-        currentTrackUseCaseUseCase().undoLastShot()
+        currentPlayerHistoryManager().undoLastShot()
     }
 
     private suspend fun finishGame() {
@@ -75,7 +75,7 @@ class GameManager(
         )
         val gameHistory = GameHistory(
             game = game,
-            userHistoryManagers.map { it.playerHistory.value }.sortedBy {
+            playerHistoryManagers.map { it.playerHistory.value }.sortedBy {
                 game.players.indexOf(it.player)
             }
         )
@@ -83,12 +83,12 @@ class GameManager(
         _isGameFinished.update { true }
     }
 
-    private fun currentTrackUseCaseUseCase(): UserHistoryManager {
-        return userHistoryManagers[players.indexOf(currentPlayer.value)]
+    private fun currentPlayerHistoryManager(): PlayerHistoryManager {
+        return playerHistoryManagers[players.indexOf(currentPlayer.value)]
     }
 
     private fun nextTurn() {
-        currentTrackUseCaseUseCase().finishTurn()
+        currentPlayerHistoryManager().finishTurn()
         val index = players.indexOf(currentPlayer.value)
         val nextPlayer = players.getOrNull(index + 1) ?: run {
             players[0]

@@ -17,9 +17,6 @@ object Dependencies {
     private const val composeNavigationVersion = "2.5.3"
     const val composeNavigation = "androidx.navigation:navigation-compose:$composeNavigationVersion"
 
-    private const val coilComposeVersion = "2.1.0"
-    const val coilCompose = "io.coil-kt:coil-compose:$coilComposeVersion"
-
     private const val pagerVersion = "0.22.0-rc"
     const val pager = "com.google.accompanist:accompanist-pager:$pagerVersion"
 
@@ -66,15 +63,4 @@ object Dependencies {
 
     private const val turbineVersion = "0.7.0"
     const val turbine = "app.cash.turbine:turbine:$turbineVersion"
-
-    private const val jUnitVersion = "4.13.2"
-    const val jUnit = "junit:junit:$jUnitVersion"
-
-    private const val testRunnerVersion = "1.5.1"
-    const val testRunner = "androidx.test:runner:$testRunnerVersion"
-
-    const val composeTesting = "androidx.compose.ui:ui-test-junit4:$composeVersion"
-    const val composeTestManifest = "androidx.compose.ui:ui-test-manifest:$composeVersion"
-
-    const val hiltTesting = "com.google.dagger:hilt-android-testing:$hiltVersion"
 }

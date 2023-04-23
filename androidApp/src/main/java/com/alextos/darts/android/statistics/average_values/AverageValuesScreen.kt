@@ -18,7 +18,6 @@ import com.alextos.darts.android.R
 import com.alextos.darts.android.common.presentation.screens.Screen
 import com.alextos.darts.android.common.presentation.views.NoDataView
 import com.alextos.darts.statistics.presentation.average_values.AverageValuesState
-import okhttp3.internal.format
 
 @Composable
 fun AverageValuesScreen(
@@ -72,11 +71,11 @@ private fun PlayerValues(
         )
         Text(
             modifier = Modifier.weight(1f),
-            text = format("%.2f", avgSetScore)
+            text = String.format("%.2f", avgSetScore)
         )
         Text(
             modifier = Modifier.weight(1f),
-            text = format("%.2f", avgShotValue)
+            text = String.format("%.2f", avgSetScore)
         )
     }
 }

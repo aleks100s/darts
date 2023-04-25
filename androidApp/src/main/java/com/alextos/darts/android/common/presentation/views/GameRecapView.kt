@@ -1,5 +1,6 @@
 package com.alextos.darts.android.common.presentation.views
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -33,8 +34,13 @@ fun GameRecapView(
     biggestSets: List<PlayerGameValue>,
     smallestSets: List<PlayerGameValue>,
     misses: List<PlayerGameValue>,
-    overkills: List<PlayerGameValue>
+    overkills: List<PlayerGameValue>,
+    onBackPressed: (() -> Unit)?
 ) {
+    BackHandler(onBackPressed != null) {
+        onBackPressed?.invoke()
+    }
+
     Screen(title = stringResource(id = R.string.game_recap)) {
         if (history.isNotEmpty()) {
             LazyColumn(

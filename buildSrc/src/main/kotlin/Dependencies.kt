@@ -17,12 +17,6 @@ object Dependencies {
     private const val composeNavigationVersion = "2.5.3"
     const val composeNavigation = "androidx.navigation:navigation-compose:$composeNavigationVersion"
 
-    private const val pagerVersion = "0.22.0-rc"
-    const val pager = "com.google.accompanist:accompanist-pager:$pagerVersion"
-
-    private const val chartsVersion = "0.2.4-alpha"
-    const val charts = "com.github.tehras:charts:$chartsVersion"
-
     private const val coroutinesVersion = "1.6.4"
     const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
 
@@ -63,4 +57,13 @@ object Dependencies {
 
     private const val turbineVersion = "0.7.0"
     const val turbine = "app.cash.turbine:turbine:$turbineVersion"
+
+    private const val pagerVersion = "0.22.0-rc"
+    const val pager = "com.google.accompanist:accompanist-pager:$pagerVersion"
+
+    private const val chartsVersion = "0.2.4-alpha"
+    const val charts = "com.github.tehras:charts:$chartsVersion"
+
+    private const val capturerVersion = "1.0.1"
+    const val capturer = "dev.shreyaspatil:capturable:$capturerVersion"
 }

@@ -1,5 +1,6 @@
 package com.alextos.darts.android.common.presentation.views
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -38,8 +39,13 @@ fun GameInputView(
     currentPlayerIndex: Int,
     eraseShot: () -> Unit,
     onInputClick: (Sector) -> Unit,
-    onPlayerClick: () -> Unit
+    onPlayerClick: () -> Unit,
+    onBackPressed: (() -> Unit)?
 ) {
+    BackHandler(onBackPressed != null) {
+        onBackPressed?.invoke()
+    }
+
     Scaffold(
         floatingActionButton = {
             FAB(
@@ -51,7 +57,9 @@ fun GameInputView(
         }
     ) {
         Box(
-            modifier = Modifier.fillMaxSize().padding(it),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(it),
             contentAlignment = Alignment.BottomStart
         ) {
             Column(

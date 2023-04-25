@@ -27,15 +27,14 @@ fun GameScreen(
     state: GameState,
     onEvent: (GameEvent) -> Unit
 ) {
-    BackHandler(true) {
-        onEvent(GameEvent.BackButtonPressed)
-    }
     Scaffold {
         when (rememberScreenType()) {
             is ScreenType.Compact -> {
                 AnimatedContent(targetState = state.isInputVisible) { isInputVisible ->
                     if (isInputVisible) {
-                        GameInput(state = state, onEvent = onEvent)
+                        GameInput(state = state, onEvent = onEvent) {
+                            onEvent(GameEvent.BackButtonPressed)
+                        }
                     } else {
                         Column(modifier = Modifier.padding(it)) {
                             Scaffold(
@@ -48,13 +47,19 @@ fun GameScreen(
                                     }
                                 }
                             ) {
-                                GameHistory(paddingValues = it, state = state, onEvent = onEvent)
+                                GameHistory(paddingValues = it, state = state, onEvent = onEvent) {
+                                    onEvent(GameEvent.ShowGameInput)
+                                }
                             }
                         }
                     }
                 }
             }
             is ScreenType.Large -> {
+                BackHandler {
+                    onEvent(GameEvent.BackButtonPressed)
+                }
+
                 TabletScreen(
                     content1 = {
                         GameHistory(paddingValues = it, state = state, onEvent = onEvent)
@@ -65,18 +70,18 @@ fun GameScreen(
                 )
             }
         }
+    }
 
-        if (state.isTurnOver()) {
-            TurnOverDialog(result = state.turnResult(), onEvent = onEvent)
-        }
+    if (state.isTurnOver()) {
+        TurnOverDialog(result = state.turnResult(), onEvent = onEvent)
+    }
 
-        if (state.isCloseGameDialogOpened) {
-            CloseGameDialog(onEvent = onEvent)
-        }
+    if (state.isCloseGameDialogOpened) {
+        CloseGameDialog(onEvent = onEvent)
+    }
 
-        if (state.isGameFinished) {
-            GameFinishedDialog(winner = state.getWinnerName(), onEvent = onEvent)
-        }
+    if (state.isGameFinished) {
+        GameFinishedDialog(winner = state.getWinnerName(), onEvent = onEvent)
     }
 }
 
@@ -84,7 +89,8 @@ fun GameScreen(
 private fun GameHistory(
     paddingValues: PaddingValues,
     state: GameState,
-    onEvent: (GameEvent) -> Unit
+    onEvent: (GameEvent) -> Unit,
+    onBackPressed: (() -> Unit)? = null
 ) {
     GameHistoryView(
         gameHistory = state.gameHistory,
@@ -93,12 +99,17 @@ private fun GameHistory(
         padding = paddingValues,
         onSelect = { turns, set ->
             onEvent(GameEvent.ShowDarts(turns, set))
-        }
+        },
+        onBackPressed = onBackPressed
     )
 }
 
 @Composable
-private fun GameInput(state: GameState, onEvent: (GameEvent) -> Unit) {
+private fun GameInput(
+    state: GameState,
+    onEvent: (GameEvent) -> Unit,
+    onBackPressed: (() -> Unit)? = null
+) {
     GameInputView(
         currentTurn = state.getCurrentTurn(),
         results = state.currentResults(),
@@ -109,7 +120,8 @@ private fun GameInput(state: GameState, onEvent: (GameEvent) -> Unit) {
         },
         onPlayerClick = {
             onEvent(GameEvent.HideGameInput)
-        }
+        },
+        onBackPressed = onBackPressed
     )
 }
 

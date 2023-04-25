@@ -1,5 +1,6 @@
 package com.alextos.darts.android.common.presentation.views
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -21,7 +22,8 @@ fun GameHistoryView(
     goal: Int,
     currentPage: Int,
     padding: PaddingValues,
-    onSelect: (List<Turn>, Turn) -> Unit
+    onSelect: (List<Turn>, Turn) -> Unit,
+    onBackPressed: (() -> Unit)?
 ) {
     val pagerState = rememberPagerState(initialPage = currentPage)
     val scope = rememberCoroutineScope()
@@ -29,6 +31,12 @@ fun GameHistoryView(
     LaunchedEffect(key1 = currentPage) {
         scope.launch {
             pagerState.animateScrollToPage(currentPage)
+        }
+    }
+
+    onBackPressed?.let {
+        BackHandler {
+            onBackPressed()
         }
     }
 

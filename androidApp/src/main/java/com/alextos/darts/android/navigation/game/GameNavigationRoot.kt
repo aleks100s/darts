@@ -203,6 +203,11 @@ fun GameNavigationRoot() {
                             event.turns.indexOf(event.currentSet).toString()
                         ))
                     }
+
+                    is HistoryEvent.BackButtonPressed -> {
+                        navController.popBackStack()
+                    }
+
                     else -> {
                         viewModel.onEvent(event)
                     }

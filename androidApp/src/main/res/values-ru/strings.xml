@@ -76,4 +76,5 @@
     <string name="additional_settings">Дополнительные настройки</string>
     <string name="finish_with_doubles">Заканчивать двойным броском</string>
     <string name="miss">Промах</string>
+    <string name="replay">Переиграть</string>
 </resources>

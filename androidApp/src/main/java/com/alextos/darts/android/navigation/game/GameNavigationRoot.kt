@@ -16,6 +16,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.alextos.darts.android.common.util.toPlayerList
 import com.alextos.darts.android.common.util.toStringNavArgument
 import com.alextos.darts.android.game.create_game.AndroidCreateGameViewModel
 import com.alextos.darts.android.game.create_game.CreateGameScreen
@@ -154,7 +155,11 @@ fun GameNavigationRoot() {
                     type = NavType.BoolType
                 }
             )
-        ) {
+        ) { backStackEntry ->
+            val players = backStackEntry.arguments?.getString("list")?.toPlayerList() ?: listOf()
+            val goal = backStackEntry.arguments?.getString("goal")?.toInt() ?: 0
+            val finishWithDoubles = backStackEntry.arguments?.getBoolean("doubles") ?: false
+
             val viewModel = hiltViewModel<AndroidGameViewModel>()
             val state by viewModel.state.collectAsState(initial = GameState())
             GameScreen(
@@ -162,8 +167,7 @@ fun GameNavigationRoot() {
                 onEvent = { event ->
                     when (event) {
                         is GameEvent.CloseGame -> {
-                            navController.popBackStack()
-                            navController.popBackStack()
+                            navController.popBackStack(GameRoute.GameList.route, inclusive = false)
                         }
                         is GameEvent.ShowDarts -> {
                             navController.navigate(
@@ -171,6 +175,16 @@ fun GameNavigationRoot() {
                                 event.turns.map { it.shots }.map { it.map { it.sector }}.toStringNavArgument(),
                                 event.turns.indexOf(event.currentSet).toString()
                             ))
+                        }
+                        is GameEvent.ReplayGame -> {
+                            navController.popBackStack(GameRoute.GameList.route, inclusive = false)
+                            navController.navigate(
+                                route = GameRoute.Game.routeWithArgs(
+                                    players.toStringNavArgument(),
+                                    goal.toString(),
+                                    finishWithDoubles.toString()
+                                )
+                            )
                         }
                         else -> { viewModel.onEvent(event) }
                     }

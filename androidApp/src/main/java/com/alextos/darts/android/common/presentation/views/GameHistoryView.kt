@@ -23,7 +23,7 @@ fun GameHistoryView(
     currentPage: Int,
     padding: PaddingValues,
     onSelect: (List<Turn>, Turn) -> Unit,
-    onBackPressed: (() -> Unit)?
+    onBackPressed: (() -> Unit)? = null
 ) {
     val pagerState = rememberPagerState(initialPage = currentPage)
     val scope = rememberCoroutineScope()

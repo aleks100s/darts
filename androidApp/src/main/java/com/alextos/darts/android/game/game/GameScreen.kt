@@ -191,6 +191,11 @@ private fun GameFinishedDialog(winner: String?, onEvent: (GameEvent) -> Unit) {
             }
         },
         confirmButton = {
+            Button(onClick = { onEvent(GameEvent.ReplayGame) }) {
+                Text(text = stringResource(id = R.string.replay))
+            }
+        },
+        dismissButton = {
             Button(onClick = { onEvent(GameEvent.CloseGame) }) {
                 Text(text = stringResource(id = R.string.finish_game))
             }

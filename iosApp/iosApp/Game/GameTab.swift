@@ -63,6 +63,11 @@ internal struct GameTab: View {
 				},
 				onTurnSelected: { turn in
 					navigationStack.append(.dartsBoard(turn))
+				},
+				onGameReplaySelected: {
+					navigationStack.append(
+						.game(players: players, goal: goal, isFinishWithDoublesChecked: isFinishWithDoublesChecked)
+					)
 				}
 			)
 				.toolbar(.hidden, for: .tabBar)

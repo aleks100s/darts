@@ -8,11 +8,17 @@ internal struct GameView: View {
 	var body: some View {
 		return gameView
 			.alert("game_finished", isPresented: $viewModel.isGameFinishedDialogShown) {
-				Button {
+				Button(role: .cancel) {
 					viewModel.onEvent(.CloseGame())
 					viewModel.finishGame()
 				} label: {
-					Text("OK")
+					Text("finish_game")
+				}
+				
+				Button {
+					viewModel.replayGame()
+				} label: {
+					Text("replay")
 				}
 			} message: {
 				Text(gameFinishedMessage)

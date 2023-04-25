@@ -18,22 +18,29 @@ internal final class IOSGameViewModel: ObservableObject {
 	private let onGameFinished: () -> Void
 	private let onShowInGameHistory: ([PlayerHistory], Int32, Int) -> Void
 	private let onTurnSelected: (Turn) -> Void
+	private let onGameReplaySelected: () -> Void
 	private var handle: DisposableHandle?
 	
 	init(
 		viewModel: GameViewModel,
 		onGameFinished: @escaping () -> Void,
 		onShowInGameHistory: @escaping ([PlayerHistory], Int32, Int) -> Void,
-		onTurnSelected: @escaping (Turn) -> Void
+		onTurnSelected: @escaping (Turn) -> Void,
+		onGameReplaySelected: @escaping () -> Void
 	) {
 		self.onGameFinished = onGameFinished
 		self.onShowInGameHistory = onShowInGameHistory
 		self.onTurnSelected = onTurnSelected
+		self.onGameReplaySelected = onGameReplaySelected
 		self.viewModel = viewModel
 	}
 	
 	func finishGame() {
 		onGameFinished()
+	}
+	
+	func replayGame() {
+		onGameReplaySelected()
 	}
 	
 	func showGameHistory(index: Int) {

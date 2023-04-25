@@ -13,8 +13,8 @@ android {
         applicationId = "com.alextos.darts.android"
         minSdk = Dependencies.minimumSDKVersion
         targetSdk = Dependencies.targetSDKVersion
-        versionCode = 31
-        versionName = "1.5.4"
+        versionCode = 32
+        versionName = "1.6"
     }
     buildFeatures {
         compose = true
@@ -51,5 +51,4 @@ dependencies {
     kaptAndroidTest(Dependencies.hiltAndroidCompiler)
     implementation(Dependencies.charts)
     implementation(Dependencies.pager)
-    implementation(Dependencies.capturer)
 }

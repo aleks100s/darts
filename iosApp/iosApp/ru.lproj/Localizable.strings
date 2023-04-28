@@ -62,7 +62,8 @@
 "game_goal_value %d" = "Цель игры %d";
 "game_recap" = "Результаты игры";
 "average_set_recap" = "Средний подход";
-"game_player_result %d" = "%d";
+"game_player_result %d %d" = "Счет: %d";
+"game_player_avg %d" = "(Среднее: %d)";
 "view_turn" = "Просмотр хода";
 "delete_player" = "Удалить игрока и все связанные с ним игры";
 "player_data_will_be_lost" = "Данные игрока будут потеряны";

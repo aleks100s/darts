@@ -90,12 +90,15 @@ internal struct GameInputView: View {
 		Button {
 			onClick()
 		} label: {
-			VStack(spacing: 8) {
+			VStack(spacing: 4) {
 				Text(result.player.name)
-				Text("game_player_result \(result.result)")
+				Text("game_player_result \(result.score)")
+				Text("game_player_avg \(result.average)")
+					.font(.caption)
 			}
 			.lineLimit(1)
-			.padding(16)
+			.padding(.horizontal, 12)
+			.padding(.vertical, 8)
 			.frame(minWidth: itemWidth, maxWidth: itemWidth)
 			.background(backgroundColor)
 		}

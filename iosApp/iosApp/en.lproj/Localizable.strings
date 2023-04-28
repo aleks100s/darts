@@ -29,7 +29,7 @@
 "next_turn" = "Next turn";
 "single" = "Single";
 "double_" = "Double";
-"triplet" = "Triplet";
+"triplet" = "Triple";
 "best_set_statistics" = "Best turn statistics";
 "biggest_final_set_statistics" = "Best final turn statistics";
 "average_values_statistics" = "Average turn score and hit value";
@@ -45,7 +45,7 @@
 "misses_percent" = "%.2f%% misses";
 "singles_percent" = "%.2f%% singles";
 "doubles_percent" = "%.2f%% doubles";
-"triplets_percent" = "%.2f%% triplets";
+"triplets_percent" = "%.2f%% triples";
 "bullseye_percent" = "%.2f%% bullseye";
 "double_bullseye_percent" = "%.2f%% double bullseye";
 "no_statistics" = "There is no data yet";
@@ -62,7 +62,8 @@
 "game_goal_value %d" = "Game goal %d";
 "game_recap" = "Game recap";
 "average_set_recap" = "Average turn";
-"game_player_result %d" = "%d";
+"game_player_result %d" = "Score: %d";
+"game_player_avg %d" = "(Avg: %d)";
 "view_turn" = "View turn";
 "delete_player" = "Delete player and all related games";
 "player_data_will_be_lost" = "Player data will be lost";
@@ -77,4 +78,4 @@
 "additional_settings" = "Additional settings";
 "finish_with_doubles" = "Finish with doubles";
 "miss" = "Miss";
-"replay" = "Replay";
+"replay" = "Rematch";

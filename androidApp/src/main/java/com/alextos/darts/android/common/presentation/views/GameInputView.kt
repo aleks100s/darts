@@ -129,7 +129,11 @@ private fun GamePlayers(
         state = listState
     ) {
         items(list) { result ->
-            GamePlayerItem(result = result, width = itemWidth, onClick = onClick)
+            GamePlayerItem(
+                result = result,
+                width = itemWidth,
+                onClick = onClick
+            )
         }
     }
 }
@@ -156,7 +160,7 @@ private fun GamePlayerItem(
             .background(backgroundColor)
             .clickable { onClick() }
             .width(width)
-            .padding(vertical = 16.dp)
+            .padding(vertical = 8.dp)
     ) {
         Text(
             text = result.player.name,
@@ -165,7 +169,12 @@ private fun GamePlayerItem(
             maxLines = 1
         )
         Text(
-            text = stringResource(id = R.string.game_player_result, result.result),
+            text = stringResource(id = R.string.game_player_result, result.score),
+            color = textColor
+        )
+        Text(
+            text = stringResource(id = R.string.game_player_avg, result.average),
+            style = MaterialTheme.typography.caption,
             color = textColor
         )
     }

@@ -126,7 +126,8 @@ private fun RecapLineChart(history: List<PlayerHistory>) {
     ) {
         LineChart(
             linesChartData = data,
-            modifier = Modifier.fillMaxSize(0.8f),
+            modifier = Modifier.fillMaxSize(0.8f)
+                .aspectRatio(1f),
             pointDrawer = FilledCircularPointDrawer(),
             horizontalOffset = 5f,
             labels = listOf(),

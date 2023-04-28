@@ -35,11 +35,14 @@ data class GameState(
             }
         }
     }
+
     fun currentResults(): List<GamePlayerResult> {
         return gameHistory.map { playerHistory ->
-            GamePlayerResult(
+            val lastTurn = playerHistory.turns.lastOrNull()
+            return@map GamePlayerResult(
                 player = playerHistory.player,
-                result = playerHistory.turns.lastOrNull()?.leftAfter ?: gameGoal,
+                score = lastTurn?.leftAfter ?: gameGoal,
+                average = playerHistory.average(),
                 isCurrentPlayer = playerHistory.player == currentPlayer
             )
         }
@@ -77,9 +80,4 @@ data class GameState(
             isOverkill = false
         )
     }
-}
-
-sealed class TurnState {
-    object IsOngoing: TurnState()
-    data class IsOver(val result: Int): TurnState()
 }

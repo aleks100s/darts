@@ -62,7 +62,8 @@
     <string name="game_goal_value">Цель игры %1$d</string>
     <string name="game_recap">Результаты игры</string>
     <string name="average_set_recap">Средний подход</string>
-    <string name="game_player_result">Остаток: %1$d</string>
+    <string name="game_player_result">Cчет: %1$d</string>
+    <string name="game_player_avg"> (Среднее:  %1$d)</string>
     <string name="view_turn">Просмотр хода</string>
     <string name="delete_player">Удалить игрока и все связанные с ним игры</string>
     <string name="erase_hit">Отменить</string>

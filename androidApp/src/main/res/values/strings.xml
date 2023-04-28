@@ -30,7 +30,7 @@
     <string name="next_turn">Next turn</string>
     <string name="single">Single</string>
     <string name="double_">Double</string>
-    <string name="triplet">Triplet</string>
+    <string name="triplet">Triple</string>
     <string name="best_set_statistics">Best turn statistics</string>
     <string name="biggest_final_set_statistics">Best final turn statistics</string>
     <string name="average_values_statistics">Average turn score and hit value</string>
@@ -46,7 +46,7 @@
     <string name="misses_percent">%.2f%% misses</string>
     <string name="singles_percent">%.2f%% singles</string>
     <string name="doubles_percent">%.2f%% doubles</string>
-    <string name="triplets_percent">%.2f%% triplets</string>
+    <string name="triplets_percent">%.2f%% triples</string>
     <string name="bullseye_percent">%.2f%% bullseye</string>
     <string name="double_bullseye_percent">%.2f%% double bullseye</string>
     <string name="no_statistics">There is no data yet</string>
@@ -62,7 +62,8 @@
     <string name="game_goal_value">Game goal %1$d</string>
     <string name="game_recap">Game recap</string>
     <string name="average_set_recap">Average turn</string>
-    <string name="game_player_result">Reminder: %1$d</string>
+    <string name="game_player_result">Score: %1$d</string>
+    <string name="game_player_avg"> (Avg:  %1$d)</string>
     <string name="view_turn">View turn</string>
     <string name="delete_player">Delete player and all related games</string>
     <string name="erase_hit">Undo</string>
@@ -76,5 +77,5 @@
     <string name="additional_settings">Additional settings</string>
     <string name="finish_with_doubles">Finish with doubles</string>
     <string name="miss">Miss</string>
-    <string name="replay">Replay</string>
+    <string name="replay">Rematch</string>
 </resources>

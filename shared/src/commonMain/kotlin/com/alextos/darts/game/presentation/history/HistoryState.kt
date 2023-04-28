@@ -10,13 +10,7 @@ data class HistoryState(
 ) {
     fun averageTurns(): List<PlayerGameValue> {
         return gameHistory.map { playerHistory ->
-            val sum =  playerHistory.turns.sumOf { it.score() }
-            val count = playerHistory.turns.count()
-            if (count != 0) {
-                PlayerGameValue(playerHistory.player, sum / count)
-            } else {
-                PlayerGameValue(playerHistory.player, gameGoal)
-            }
+            PlayerGameValue(playerHistory.player, playerHistory.average())
         }
     }
 

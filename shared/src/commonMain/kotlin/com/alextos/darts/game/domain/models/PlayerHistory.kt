@@ -34,4 +34,14 @@ data class PlayerHistory(
     fun numberOfOverkills(): Int {
         return turns.count { it.isOverkill }
     }
+
+    fun average(): Int {
+        val sum =  turns.sumOf { it.score() }
+        val count = turns.count()
+        return if (count != 0) {
+            sum / count
+        } else {
+            0
+        }
+    }
 }

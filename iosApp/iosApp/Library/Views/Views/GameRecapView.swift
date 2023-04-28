@@ -41,7 +41,7 @@ internal struct GameRecapView: View {
 				.symbol(by: .value("Player", playerHistory.id))
 			}
 		}
-		.frame(height: 300)
+		.aspectRatio(1.0, contentMode: .fit)
 		.padding()
 	}
 	

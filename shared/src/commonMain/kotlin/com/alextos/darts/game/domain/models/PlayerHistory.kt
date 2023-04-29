@@ -2,7 +2,9 @@ package com.alextos.darts.game.domain.models
 
 import com.alextos.darts.core.domain.model.Player
 import com.alextos.darts.core.domain.model.Turn
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class PlayerHistory(
     val player: Player,
     val turns: List<Turn> = listOf()

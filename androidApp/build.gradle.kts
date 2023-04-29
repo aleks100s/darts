@@ -51,4 +51,5 @@ dependencies {
     kaptAndroidTest(Dependencies.hiltAndroidCompiler)
     implementation(Dependencies.charts)
     implementation(Dependencies.pager)
+    implementation(Dependencies.serialization)
 }

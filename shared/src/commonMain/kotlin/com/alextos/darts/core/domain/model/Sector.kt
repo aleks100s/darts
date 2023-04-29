@@ -1,5 +1,8 @@
 package com.alextos.darts.core.domain.model
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 enum class Sector(
     val id: Int,
     val value: Int

@@ -66,4 +66,8 @@ object Dependencies {
 
     private const val capturerVersion = "1.0.1"
     const val capturer = "dev.shreyaspatil:capturable:$capturerVersion"
+
+    // SERIALIZATION
+    private const val serializationVersion = "1.4.1"
+    const val serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion"
 }

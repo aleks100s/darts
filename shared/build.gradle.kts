@@ -25,6 +25,7 @@ kotlin {
                 implementation(Dependencies.sqlDelightCoroutinesExtensions)
                 implementation(Dependencies.kotlinDateTime)
                 implementation(Dependencies.coroutines)
+                implementation(Dependencies.serialization)
             }
         }
         val commonTest by getting {
@@ -39,7 +40,6 @@ kotlin {
                 implementation(Dependencies.sqlDelightAndroidDriver)
             }
         }
-        val androidTest by getting
         val iosX64Main by getting
         val iosArm64Main by getting
         val iosSimulatorArm64Main by getting

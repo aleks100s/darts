@@ -27,16 +27,4 @@ class HistoryViewModel(
             HistoryState()
         )
         .toCommonStateFlow()
-
-    fun onEvent(event: HistoryEvent) {
-        when (event) {
-            is HistoryEvent.ShowRecap -> {
-                _state.update { it.copy(isRecapVisible = true) }
-            }
-            is HistoryEvent.ShowHistory -> {
-                _state.update { it.copy(isRecapVisible = false) }
-            }
-            else -> {}
-        }
-    }
 }

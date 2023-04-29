@@ -1,5 +1,8 @@
 package com.alextos.darts.core.domain.model
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class Turn(
     val shots: List<Shot>,
     val leftAfter: Int,

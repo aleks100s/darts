@@ -30,6 +30,8 @@ import com.alextos.darts.android.game.game_list.AndroidGameListViewModel
 import com.alextos.darts.android.game.game_list.GameListScreen
 import com.alextos.darts.android.game.history.AndroidHistoryViewModel
 import com.alextos.darts.android.game.history.HistoryScreen
+import com.alextos.darts.android.game.in_game_history.InGameHistory
+import com.alextos.darts.android.game.recap.RecapScreen
 import com.alextos.darts.game.presentation.create_game.CreateGameEvent
 import com.alextos.darts.game.presentation.create_game.CreateGameState
 import com.alextos.darts.game.presentation.create_player.CreatePlayerEvent
@@ -41,6 +43,9 @@ import com.alextos.darts.game.presentation.game_list.GameListState
 import com.alextos.darts.game.presentation.history.HistoryEvent
 import com.alextos.darts.game.presentation.history.HistoryState
 import kotlinx.coroutines.launch
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -155,10 +160,10 @@ fun GameNavigationRoot() {
                     type = NavType.BoolType
                 }
             )
-        ) { backStackEntry ->
-            val players = backStackEntry.arguments?.getString("list")?.toPlayerList() ?: listOf()
-            val goal = backStackEntry.arguments?.getString("goal")?.toInt() ?: 0
-            val finishWithDoubles = backStackEntry.arguments?.getBoolean("doubles") ?: false
+        ) { navBackStackEntry ->
+            val players = navBackStackEntry.arguments?.getString("list")?.toPlayerList() ?: listOf()
+            val goal = navBackStackEntry.arguments?.getString("goal")?.toInt() ?: 0
+            val finishWithDoubles = navBackStackEntry.arguments?.getBoolean("doubles") ?: false
 
             val viewModel = hiltViewModel<AndroidGameViewModel>()
             val state by viewModel.state.collectAsState(initial = GameState())
@@ -186,10 +191,38 @@ fun GameNavigationRoot() {
                                 )
                             )
                         }
+                        is GameEvent.ShowHistory -> {
+                            navController.navigate(
+                                route = GameRoute.InGameHistory.routeWithArgs(
+                                    Json.encodeToString(state)
+                                )
+                            )
+                        }
                         else -> { viewModel.onEvent(event) }
                     }
                 }
             )
+        }
+
+        composable(
+            route = GameRoute.InGameHistory.route + "/{gameState}",
+            arguments = listOf(
+                navArgument("gameState") {
+                    type = NavType.StringType
+                }
+            )
+        ) { backStackEntry ->
+            val state = backStackEntry.arguments?.getString("gameState")
+                ?.let { Json.decodeFromString<GameState>(it) }
+            state?.let {
+                InGameHistory(gameState = it) { turns, currentTurn ->
+                    navController.navigate(
+                        GameRoute.Darts.routeWithArgs(
+                            turns.map { it.shots }.map { it.map { it.sector }}.toStringNavArgument(),
+                            turns.indexOf(currentTurn).toString()
+                        ))
+                }
+            }
         }
 
         composable(
@@ -213,19 +246,35 @@ fun GameNavigationRoot() {
                     is HistoryEvent.ShowDarts -> {
                         navController.navigate(
                             GameRoute.Darts.routeWithArgs(
-                            event.turns.map { it.shots }.map { it.map { it.sector }}.toStringNavArgument(),
-                            event.turns.indexOf(event.currentSet).toString()
-                        ))
+                                event.turns.map { it.shots }.map { it.map { it.sector }}.toStringNavArgument(),
+                                event.turns.indexOf(event.currentSet).toString()
+                            )
+                        )
                     }
 
-                    is HistoryEvent.BackButtonPressed -> {
-                        navController.popBackStack()
-                    }
-
-                    else -> {
-                        viewModel.onEvent(event)
+                    is HistoryEvent.ShowRecap -> {
+                        navController.navigate(
+                            GameRoute.Recap.routeWithArgs(
+                                Json.encodeToString(state)
+                            )
+                        )
                     }
                 }
+            }
+        }
+
+        composable(
+            route = GameRoute.Recap.route + "/{historyState}",
+            arguments = listOf(
+                navArgument("historyState") {
+                    type = NavType.StringType
+                }
+            )
+        ) { navBackStackEntry ->
+            val historyState = navBackStackEntry.arguments?.getString("historyState")
+                ?.let { Json.decodeFromString<HistoryState>(it) }
+            historyState?.let {
+                RecapScreen(historyState = it)
             }
         }
 
@@ -239,9 +288,9 @@ fun GameNavigationRoot() {
                     type = NavType.StringType
                 }
             )
-        ) { backStackEntry ->
-            val turns = backStackEntry.arguments?.getString("turns")?.toShots() ?: listOf()
-            val currentPage = backStackEntry.arguments?.getString("currentPage")?.toInt() ?: 0
+        ) { navBackStackEntry ->
+            val turns = navBackStackEntry.arguments?.getString("turns")?.toShots() ?: listOf()
+            val currentPage = navBackStackEntry.arguments?.getString("currentPage")?.toInt() ?: 0
             DartsScreen(turns = turns, currentPage = currentPage)
         }
     }

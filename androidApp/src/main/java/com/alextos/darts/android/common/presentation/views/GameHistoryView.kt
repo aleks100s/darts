@@ -22,8 +22,7 @@ fun GameHistoryView(
     goal: Int,
     currentPage: Int,
     padding: PaddingValues,
-    onSelect: (List<Turn>, Turn) -> Unit,
-    onBackPressed: (() -> Unit)? = null
+    onSelect: (List<Turn>, Turn) -> Unit
 ) {
     val pagerState = rememberPagerState(initialPage = currentPage)
     val scope = rememberCoroutineScope()
@@ -31,12 +30,6 @@ fun GameHistoryView(
     LaunchedEffect(key1 = currentPage) {
         scope.launch {
             pagerState.animateScrollToPage(currentPage)
-        }
-    }
-
-    onBackPressed?.let {
-        BackHandler {
-            onBackPressed()
         }
     }
 

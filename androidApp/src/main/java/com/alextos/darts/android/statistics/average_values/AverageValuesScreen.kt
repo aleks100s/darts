@@ -75,7 +75,7 @@ private fun PlayerValues(
         )
         Text(
             modifier = Modifier.weight(1f),
-            text = String.format("%.2f", avgSetScore)
+            text = String.format("%.2f", avgShotValue)
         )
     }
 }

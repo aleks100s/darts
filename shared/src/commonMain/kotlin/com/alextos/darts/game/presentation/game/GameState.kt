@@ -4,14 +4,15 @@ import com.alextos.darts.game.domain.models.PlayerHistory
 import com.alextos.darts.core.domain.model.Turn
 import com.alextos.darts.core.domain.model.Player
 import com.alextos.darts.game.domain.models.GamePlayerResult
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class GameState(
     val gameHistory: List<PlayerHistory> = listOf(),
     val currentPlayer: Player? = null,
     val isGameFinished: Boolean = false,
     val isCloseGameDialogOpened: Boolean = false,
     val turnState: TurnState = TurnState.IsOngoing,
-    val isInputVisible: Boolean = true,
     val gameGoal: Int = 0
 ) {
     fun isTurnOver(): Boolean {

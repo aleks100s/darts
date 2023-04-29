@@ -1,19 +1,13 @@
 package com.alextos.darts.android.game.game
 
 import androidx.activity.compose.BackHandler
-import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import com.alextos.darts.android.R
 import com.alextos.darts.android.common.presentation.ScreenType
-import com.alextos.darts.android.common.presentation.components.FAB
 import com.alextos.darts.android.common.presentation.views.GameHistoryView
 import com.alextos.darts.android.common.presentation.rememberScreenType
 import com.alextos.darts.android.common.presentation.screens.TabletScreen
@@ -21,54 +15,28 @@ import com.alextos.darts.android.common.presentation.views.GameInputView
 import com.alextos.darts.game.presentation.game.GameEvent
 import com.alextos.darts.game.presentation.game.GameState
 
-@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun GameScreen(
     state: GameState,
     onEvent: (GameEvent) -> Unit
 ) {
-    Scaffold {
-        when (rememberScreenType()) {
-            is ScreenType.Compact -> {
-                AnimatedContent(targetState = state.isInputVisible) { isInputVisible ->
-                    if (isInputVisible) {
-                        GameInput(state = state, onEvent = onEvent) {
-                            onEvent(GameEvent.BackButtonPressed)
-                        }
-                    } else {
-                        Column(modifier = Modifier.padding(it)) {
-                            Scaffold(
-                                floatingActionButton = {
-                                    FAB(
-                                        text = stringResource(id = R.string.back_to_game),
-                                        icon = Icons.Default.PlayArrow
-                                    ) {
-                                        onEvent(GameEvent.ShowGameInput)
-                                    }
-                                }
-                            ) {
-                                GameHistory(paddingValues = it, state = state, onEvent = onEvent) {
-                                    onEvent(GameEvent.ShowGameInput)
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            is ScreenType.Large -> {
-                BackHandler {
-                    onEvent(GameEvent.BackButtonPressed)
-                }
+    BackHandler {
+        onEvent(GameEvent.BackButtonPressed)
+    }
 
-                TabletScreen(
-                    content1 = {
-                        GameHistory(paddingValues = it, state = state, onEvent = onEvent)
-                    },
-                    content2 = {
-                        GameInput(state = state, onEvent = onEvent)
-                    }
-                )
-            }
+    when (rememberScreenType()) {
+        is ScreenType.Compact -> {
+            GameInput(state = state, onEvent = onEvent)
+        }
+        is ScreenType.Large -> {
+            TabletScreen(
+                content1 = {
+                    GameHistory(state = state, onEvent = onEvent)
+                },
+                content2 = {
+                    GameInput(state = state, onEvent = onEvent)
+                }
+            )
         }
     }
 
@@ -87,28 +55,24 @@ fun GameScreen(
 
 @Composable
 private fun GameHistory(
-    paddingValues: PaddingValues,
     state: GameState,
-    onEvent: (GameEvent) -> Unit,
-    onBackPressed: (() -> Unit)? = null
+    onEvent: (GameEvent) -> Unit
 ) {
     GameHistoryView(
         gameHistory = state.gameHistory,
         goal = state.gameGoal,
         currentPage = state.currentPage(),
-        padding = paddingValues,
+        padding = PaddingValues(),
         onSelect = { turns, set ->
             onEvent(GameEvent.ShowDarts(turns, set))
-        },
-        onBackPressed = onBackPressed
+        }
     )
 }
 
 @Composable
 private fun GameInput(
     state: GameState,
-    onEvent: (GameEvent) -> Unit,
-    onBackPressed: (() -> Unit)? = null
+    onEvent: (GameEvent) -> Unit
 ) {
     GameInputView(
         currentTurn = state.getCurrentTurn(),
@@ -119,9 +83,8 @@ private fun GameInput(
             onEvent(GameEvent.MakeShot(sector))
         },
         onPlayerClick = {
-            onEvent(GameEvent.HideGameInput)
-        },
-        onBackPressed = onBackPressed
+            onEvent(GameEvent.ShowHistory)
+        }
     )
 }
 

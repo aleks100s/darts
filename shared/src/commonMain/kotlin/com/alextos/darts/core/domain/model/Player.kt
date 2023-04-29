@@ -1,5 +1,8 @@
 package com.alextos.darts.core.domain.model
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class Player(
     val id: Long,
     val name: String

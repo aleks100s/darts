@@ -48,12 +48,6 @@ class GameViewModel(
             is GameEvent.ReturnToGame -> {
                 _state.update { it.copy(isCloseGameDialogOpened = false) }
             }
-            is GameEvent.ShowGameInput -> {
-                _state.update { it.copy(isInputVisible = true) }
-            }
-            is GameEvent.HideGameInput -> {
-                _state.update { it.copy(isInputVisible = false ) }
-            }
             is GameEvent.ResetCurrentTurn -> {
                 gameManager.resetTurn()
             }

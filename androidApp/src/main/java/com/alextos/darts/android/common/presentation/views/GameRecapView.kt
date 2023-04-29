@@ -1,6 +1,5 @@
 package com.alextos.darts.android.common.presentation.views
 
-import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -30,17 +29,12 @@ private val colors = listOf(Color.Red, Color.Green, Color.Blue, Color.Yellow, Co
 @Composable
 fun GameRecapView(
     history: List<PlayerHistory>,
-    averageSets: List<PlayerGameValue>,
-    biggestSets: List<PlayerGameValue>,
-    smallestSets: List<PlayerGameValue>,
+    averageTurns: List<PlayerGameValue>,
+    biggestTurns: List<PlayerGameValue>,
+    smallestTurns: List<PlayerGameValue>,
     misses: List<PlayerGameValue>,
-    overkills: List<PlayerGameValue>,
-    onBackPressed: (() -> Unit)?
+    overkills: List<PlayerGameValue>
 ) {
-    BackHandler(onBackPressed != null) {
-        onBackPressed?.invoke()
-    }
-
     Screen(title = stringResource(id = R.string.game_recap)) {
         if (history.isNotEmpty()) {
             LazyColumn(
@@ -55,13 +49,13 @@ fun GameRecapView(
                     RecapLineChartLegend(players = history.map { it.player })
                 }
                 item {
-                    ValuesBlock(values = averageSets, title = stringResource(id = R.string.average_set_recap))
+                    ValuesBlock(values = averageTurns, title = stringResource(id = R.string.average_set_recap))
                 }
                 item {
-                    ValuesBlock(values = biggestSets, title = stringResource(id = R.string.biggest_sets))
+                    ValuesBlock(values = biggestTurns, title = stringResource(id = R.string.biggest_sets))
                 }
                 item {
-                    ValuesBlock(values = smallestSets, title = stringResource(id = R.string.smallest_sets))
+                    ValuesBlock(values = smallestTurns, title = stringResource(id = R.string.smallest_sets))
                 }
                 item {
                     ValuesBlock(values = misses, title = stringResource(id = R.string.misses_count))

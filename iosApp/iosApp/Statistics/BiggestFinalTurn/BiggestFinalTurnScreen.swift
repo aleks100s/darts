@@ -1,7 +1,7 @@
 import SwiftUI
 import shared
 
-internal struct BiggestFinalTurnView: View {
+internal struct BiggestFinalTurnScreen: View {
 	@StateObject var viewModel: IOSBiggestFinalTurnViewModel
 	
 	var body: some View {

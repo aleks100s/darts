@@ -10,6 +10,6 @@ internal enum ShotDistributionScene {
 			coroutineScope: nil
 		)
 		let iOSViewModel = IOSShotDistributionViewModel(viewModel: viewModel)
-		return ShotDistributionView(viewModel: iOSViewModel)
+		return ShotDistributionScreen(viewModel: iOSViewModel)
 	}
 }

@@ -25,6 +25,6 @@ internal enum CreateGameScene {
 			createPlayerViewModel: createPlayerViewModel,
 			startGame: startGame
 		)
-		return CreateGameView(viewModel: viewModel)
+		return CreateGameScreen(viewModel: viewModel)
 	}
 }

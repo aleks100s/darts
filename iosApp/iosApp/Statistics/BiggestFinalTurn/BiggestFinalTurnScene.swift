@@ -14,6 +14,6 @@ internal enum BiggestFinalTurnScene {
 			coroutineScope: nil
 		)
 		let iOSViewModel = IOSBiggestFinalTurnViewModel(viewModel: viewModel, onTurnSelected: onTurnSelected)
-		return BiggestFinalTurnView(viewModel: iOSViewModel)
+		return BiggestFinalTurnScreen(viewModel: iOSViewModel)
 	}
 }

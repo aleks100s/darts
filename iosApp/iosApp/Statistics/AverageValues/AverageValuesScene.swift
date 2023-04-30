@@ -15,6 +15,6 @@ internal enum AverageValuesScene {
 			coroutineScope: nil
 		)
 		let iosViewModel = IOSAverageValuesViewModel(viewModel: viewModel)
-		return AverageValuesView(viewModel: iosViewModel)
+		return AverageValuesScreen(viewModel: iosViewModel)
 	}
 }

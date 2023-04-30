@@ -1,7 +1,7 @@
 import SwiftUI
 import shared
 
-internal struct DartsBoardView: View {
+internal struct DartsBoardScreen: View {
 	let turn: Turn
 		
 	var body: some View {

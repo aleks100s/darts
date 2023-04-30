@@ -18,7 +18,7 @@ internal enum GameListScene {
 			viewModel: viewModel,
 			onGameSelected: onGameSelected
 		)
-		let view = GameListView(viewModel: iOSViewModel)
+		let view = GameListScreen(viewModel: iOSViewModel)
 		return view
 	}
 }

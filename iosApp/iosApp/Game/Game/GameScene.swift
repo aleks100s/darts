@@ -26,6 +26,6 @@ internal enum GameScene {
 			onTurnSelected: onTurnSelected,
 			onGameReplaySelected: onGameReplaySelected
 		)
-		return GameView(viewModel: iOSViewModel)
+		return GameScreen(viewModel: iOSViewModel)
 	}
 }

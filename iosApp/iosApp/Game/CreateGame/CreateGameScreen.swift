@@ -1,7 +1,7 @@
 import SwiftUI
 import shared
 
-internal struct CreateGameView: View {
+internal struct CreateGameScreen: View {
 	@StateObject var viewModel: IOSCreateGameViewModel
 	@State private var newPlayerName = ""
 	@State private var isFinishWithDoublesChecked = false

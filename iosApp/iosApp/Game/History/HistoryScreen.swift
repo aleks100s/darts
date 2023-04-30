@@ -1,6 +1,6 @@
 import SwiftUI
 
-internal struct HistoryView: View {
+internal struct HistoryScreen: View {
 	@StateObject var viewModel: IOSHistoryViewModel
 	
 	private var idiom : UIUserInterfaceIdiom { UIDevice.current.userInterfaceIdiom }

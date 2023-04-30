@@ -14,6 +14,6 @@ internal enum BestTurnScene {
 			coroutineScope: nil
 		)
 		let iOSViewModel = IOSBestTurnViewModel(viewModel: viewModel, onTurnSelected: onTurnSelected)
-		return BestTurnView(viewModel: iOSViewModel)
+		return BestTurnScreen(viewModel: iOSViewModel)
 	}
 }

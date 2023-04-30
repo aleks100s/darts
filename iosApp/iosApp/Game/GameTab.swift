@@ -100,7 +100,7 @@ internal struct GameTab: View {
 				.navigationTitle("history")
 			
 		case let .dartsBoard(turn):
-			DartsBoardView(turn: turn)
+			DartsBoardScreen(turn: turn)
 				.navigationBarTitleDisplayMode(.inline)
 				.navigationTitle("view_turn")
 			

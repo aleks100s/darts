@@ -15,6 +15,6 @@ internal enum PlayerListScene {
 			viewModel: viewModel,
 			onPlayerSelected: onPlayerSelected
 		)
-		return PlayerListView(viewModel: iOSViewModel)
+		return PlayerListScreen(viewModel: iOSViewModel)
 	}
 }

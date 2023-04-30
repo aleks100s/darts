@@ -8,7 +8,7 @@ internal struct StatisticsTab: View {
 	
 	var body: some View {
 		NavigationStack(path: $navigationStack) {
-			StatisticsView(
+			StatisticsScreen(
 				onSelect: { event in
 					switch event {
 					case .ShowVictoryDistribution():
@@ -96,7 +96,7 @@ internal struct StatisticsTab: View {
 				.navigationBarTitleDisplayMode(.inline)
 			
 		case let .dartsBoard(turn):
-			DartsBoardView(turn: turn)
+			DartsBoardScreen(turn: turn)
 				.navigationBarTitleDisplayMode(.inline)
 				.navigationTitle("view_turn")
 		}

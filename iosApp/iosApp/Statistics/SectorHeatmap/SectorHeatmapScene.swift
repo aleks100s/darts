@@ -10,6 +10,6 @@ internal enum SectorHeatmapScene {
 			coroutineScope: nil
 		)
 		let iOSViewModel = IOSSectorHeatmapViewModel(viewModel: viewModel)
-		return SectorHeatmapView(viewModel: iOSViewModel)
+		return SectorHeatmapScreen(viewModel: iOSViewModel)
 	}
 }

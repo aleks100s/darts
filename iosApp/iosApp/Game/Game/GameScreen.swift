@@ -1,6 +1,6 @@
 import SwiftUI
 
-internal struct GameView: View {
+internal struct GameScreen: View {
 	@StateObject var viewModel: IOSGameViewModel
 	
 	private var idiom : UIUserInterfaceIdiom { UIDevice.current.userInterfaceIdiom }

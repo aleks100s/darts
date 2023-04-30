@@ -19,6 +19,6 @@ internal enum HistoryScene {
 			onTurnSelected: onTurnSelected,
 			onShowRecap: onShowRecap
 		)
-		return HistoryView(viewModel: iOSViewModel)
+		return HistoryScreen(viewModel: iOSViewModel)
 	}
 }

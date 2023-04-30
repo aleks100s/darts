@@ -1,7 +1,8 @@
 import SwiftUI
+import Charts
 
-internal struct ShotDistributionView: View {
-	@StateObject var viewModel: IOSShotDistributionViewModel
+internal struct VictoryDistributionScreen: View {
+	@StateObject var viewModel: IOSVictoryDistributionViewModel
 	
 	var body: some View {
 		content
@@ -23,7 +24,7 @@ internal struct ShotDistributionView: View {
 				VStack(spacing: 32) {
 					ZStack {
 						Pie(slices: $viewModel.data)
-						Text("throws_count \(viewModel.totalCount)")
+						Text("games_count \(viewModel.totalCount)")
 					}
 					ChartLegend(legend: $viewModel.legend)
 				}

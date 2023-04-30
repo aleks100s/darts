@@ -1,7 +1,7 @@
 import SwiftUI
 import shared
 
-internal struct StatisticsView: View {
+internal struct StatisticsScreen: View {
 	let data: [StatisticsEvent] = [
 		.ShowBestTurn(),
 		.ShowBiggestFinalTurn(),

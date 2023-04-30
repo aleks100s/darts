@@ -1,6 +1,6 @@
 import SwiftUI
 
-internal struct AverageValuesView: View {
+internal struct AverageValuesScreen: View {
 	@StateObject var viewModel: IOSAverageValuesViewModel
 	
 	var body: some View {

@@ -10,6 +10,6 @@ internal enum VictoryDistributionScene {
 			coroutineScope: nil
 		)
 		let iOSViewModel = IOSVictoryDistributionViewModel(viewModel: viewModel)
-		return VictoryDistributionView(viewModel: iOSViewModel)
+		return VictoryDistributionScreen(viewModel: iOSViewModel)
 	}
 }

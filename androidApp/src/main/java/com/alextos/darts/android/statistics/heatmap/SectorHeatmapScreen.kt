@@ -26,10 +26,16 @@ import com.alextos.darts.statistics.domain.models.SectorHeatmapDistribution
 import com.alextos.darts.statistics.presentation.heatmap.SectorHeatmapState
 
 @Composable
-fun SectorHeatmapScreen(state: SectorHeatmapState) {
-    state.distribution?.let { distribution ->
-        Screen(title = distribution.player.name) {
-            LazyColumn {
+fun SectorHeatmapScreen(
+    state: SectorHeatmapState,
+    onBackPressed: () -> Unit
+) {
+    Screen(
+        title = state.distribution?.player?.name ?: stringResource(id = R.string.no_data_yet),
+        onBackPressed = onBackPressed
+    ) { modifier ->
+        state.distribution?.let { distribution ->
+            LazyColumn(modifier = modifier) {
                 item {
                     HeatmapDartsDisk(distribution = distribution)
                 }
@@ -38,9 +44,9 @@ fun SectorHeatmapScreen(state: SectorHeatmapState) {
                     SectorItem(sectorHeat = it)
                 }
             }
+        } ?: run {
+            NoDataView(modifier = Modifier)
         }
-    } ?: run {
-        NoDataView()
     }
 }
 

@@ -25,6 +25,7 @@ import com.alextos.darts.android.R
 import com.alextos.darts.android.common.presentation.components.FAB
 import com.alextos.darts.android.common.presentation.components.PlayerItem
 import com.alextos.darts.android.common.presentation.components.SectionHeader
+import com.alextos.darts.android.common.presentation.screens.Screen
 import com.alextos.darts.core.domain.model.Player
 import com.alextos.darts.game.presentation.create_game.CreateGameEvent
 import com.alextos.darts.game.presentation.create_game.CreateGameState
@@ -32,7 +33,8 @@ import com.alextos.darts.game.presentation.create_game.CreateGameState
 @Composable
 fun CreateGameScreen(
     state: CreateGameState,
-    onEvent: (CreateGameEvent) -> Unit
+    onEvent: (CreateGameEvent) -> Unit,
+    onBackPressed: () -> Unit
 ) {
     Scaffold(
         floatingActionButton = {
@@ -45,73 +47,80 @@ fun CreateGameScreen(
             }
         }
     ) {
-        Column(modifier = Modifier
-            .fillMaxSize()
-            .padding(it)) {
-            SectionHeader(title = stringResource(id = R.string.select_players))
+        Screen(
+            title = stringResource(id = R.string.create_game),
+            onBackPressed = onBackPressed
+        ) { modifier ->
+            Column(
+                modifier = modifier
+                    .fillMaxSize()
+                    .padding(it)
+            ) {
+                SectionHeader(title = stringResource(id = R.string.select_players))
 
-            LazyColumn(modifier = Modifier.weight(1f)) {
-                item {
-                    Row(
-                        horizontalArrangement = Arrangement.Center,
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Button(onClick = {
-                            onEvent(CreateGameEvent.CreatePlayer)
-                        }) {
-                            Text(
-                                text = stringResource(id = R.string.add_new_player),
-                                textAlign = TextAlign.Center
-                            )
+                LazyColumn(modifier = Modifier.weight(1f)) {
+                    item {
+                        Row(
+                            horizontalArrangement = Arrangement.Center,
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Button(onClick = {
+                                onEvent(CreateGameEvent.CreatePlayer)
+                            }) {
+                                Text(
+                                    text = stringResource(id = R.string.add_new_player),
+                                    textAlign = TextAlign.Center
+                                )
+                            }
                         }
+                    }
+
+                    items(state.allPlayers) { player ->
+                        PlayerCheckbox(
+                            player = player,
+                            isChecked = state.isPlayerSelected(player),
+                            onClick = {
+                                onEvent(CreateGameEvent.SelectPlayer(it))
+                            },
+                            onLongClick = {
+                                onEvent(CreateGameEvent.ShowDeletePlayerDialog(it))
+                            }
+                        )
                     }
                 }
 
-                items(state.allPlayers) { player ->
-                    PlayerCheckbox(
-                        player = player,
-                        isChecked = state.isPlayerSelected(player),
-                        onClick = {
-                            onEvent(CreateGameEvent.SelectPlayer(it))
-                        },
-                        onLongClick = {
-                            onEvent(CreateGameEvent.ShowDeletePlayerDialog(it))
-                        }
-                    )
+                SectionHeader(title = stringResource(id = R.string.game_goal))
+
+                GoalSelector(
+                    goals = state.goalOptions,
+                    selectedGoal = state.selectedGoal
+                ) { goal ->
+                    onEvent(CreateGameEvent.SelectGoal(goal))
                 }
+
+                SectionHeader(title = stringResource(id = R.string.additional_settings))
+
+                FinishWithDoublesItem(
+                    isChecked = state.isFinishWithDoublesChecked,
+                    onCheckedChanged = { isChecked ->
+                        onEvent(CreateGameEvent.ToggleFinishWithDoubles(isChecked))
+                    }
+                )
+
+                Spacer(modifier = Modifier.height(64.dp))
             }
+        }
+    }
 
-            SectionHeader(title = stringResource(id = R.string.game_goal))
-
-            GoalSelector(
-                goals = state.goalOptions,
-                selectedGoal = state.selectedGoal
-            ) { goal ->
-                onEvent(CreateGameEvent.SelectGoal(goal))
+    if (state.isDeletePlayerDialogShown) {
+        DeletePlayerDialog(
+            onClick = {
+                onEvent(CreateGameEvent.DeletePlayer)
+            },
+            onDismiss = {
+                onEvent(CreateGameEvent.HideDeletePlayerDialog)
             }
-
-            SectionHeader(title = stringResource(id = R.string.additional_settings))
-
-            FinishWithDoublesItem(
-                isChecked = state.isFinishWithDoublesChecked,
-                onCheckedChanged = { isChecked ->
-                    onEvent(CreateGameEvent.ToggleFinishWithDoubles(isChecked))
-                }
-            )
-
-            Spacer(modifier = Modifier.height(64.dp))
-        }
-
-        if (state.isDeletePlayerDialogShown) {
-            DeletePlayerDialog(
-                onClick = {
-                    onEvent(CreateGameEvent.DeletePlayer)
-                },
-                onDismiss = {
-                    onEvent(CreateGameEvent.HideDeletePlayerDialog)
-                }
-            )
-        }
+        )
     }
 }
 

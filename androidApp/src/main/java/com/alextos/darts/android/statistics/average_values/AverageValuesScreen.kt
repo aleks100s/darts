@@ -21,13 +21,17 @@ import com.alextos.darts.statistics.presentation.average_values.AverageValuesSta
 
 @Composable
 fun AverageValuesScreen(
-    state: AverageValuesState
+    state: AverageValuesState,
+    onBackPressed: () -> Unit
 ) {
-    Screen(title = stringResource(id = R.string.average_values_statistics)) {
+    Screen(
+        title = stringResource(id = R.string.average_values_statistics),
+        onBackPressed = onBackPressed
+    ) { modifier ->
         if (state.isEmpty()) {
-            NoDataView()
+            NoDataView(modifier)
         } else {
-            LazyColumn {
+            LazyColumn(modifier) {
                 item {
                     Header()
                 }

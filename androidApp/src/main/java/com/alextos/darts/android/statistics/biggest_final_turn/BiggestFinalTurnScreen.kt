@@ -12,13 +12,18 @@ import com.alextos.darts.statistics.presentation.biggest_final_turn.BiggestFinal
 @Composable
 fun BiggestFinalTurnScreen(
     state: BiggestFinalTurnState,
-    onEvent: (BiggestFinalTurnEvent) -> Unit
+    onEvent: (BiggestFinalTurnEvent) -> Unit,
+    onBackPressed: () -> Unit
 ) {
-    Screen(title = stringResource(id = R.string.biggest_final_set_statistics)) {
+    Screen(
+        title = stringResource(id = R.string.biggest_final_set_statistics),
+        onBackPressed = onBackPressed
+    ) { modifier ->
         if (state.playersBiggestFinalTurns.isEmpty()) {
-            NoDataView()
+            NoDataView(modifier)
         } else {
             StatisticPlayersListView(
+                modifier,
                 values = state.playersBiggestFinalTurns.map { it.player to it.set.score().toString() },
                 onValueClick = { index ->
                     onEvent(BiggestFinalTurnEvent.ShowBiggestFinalTurnOfPlayer(state.playersBiggestFinalTurns[index].set))

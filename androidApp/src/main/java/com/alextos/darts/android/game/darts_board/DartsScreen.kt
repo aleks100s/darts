@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.alextos.darts.android.R
 import com.alextos.darts.android.common.presentation.screens.Screen
@@ -16,7 +15,10 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun DartsScreen(state: DartsState) {
+fun DartsScreen(
+    state: DartsState,
+    onBackPressed: () -> Unit
+) {
     val pagerState = rememberPagerState(initialPage = state.currentPage)
     val scope = rememberCoroutineScope()
 
@@ -26,12 +28,14 @@ fun DartsScreen(state: DartsState) {
         }
     }
 
-    Screen(title = stringResource(id = R.string.view_turn)) {
+    Screen(
+        title = stringResource(id = R.string.view_turn),
+        onBackPressed = onBackPressed
+    ) { modifier ->
         HorizontalPager(
             count = state.turns.count(),
             state = pagerState,
-            modifier = Modifier
-                .fillMaxSize()
+            modifier = modifier.fillMaxSize()
         ) { page ->
             DartsTurnView(turn = state.turns[page])
         }

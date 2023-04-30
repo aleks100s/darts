@@ -1,9 +1,6 @@
 package com.alextos.darts.android.common.presentation.views
 
-import androidx.activity.compose.BackHandler
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
@@ -18,10 +15,10 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun GameHistoryView(
+    modifier: Modifier,
     gameHistory: List<PlayerHistory>,
     goal: Int,
     currentPage: Int,
-    padding: PaddingValues,
     onSelect: (List<Turn>, Int) -> Unit
 ) {
     val pagerState = rememberPagerState(initialPage = currentPage)
@@ -36,9 +33,7 @@ fun GameHistoryView(
     HorizontalPager(
         count = gameHistory.count(),
         state = pagerState,
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(padding)
+        modifier = modifier.fillMaxSize()
     ) { page ->
         PlayerHistoryView(
             playerHistory = gameHistory[page],

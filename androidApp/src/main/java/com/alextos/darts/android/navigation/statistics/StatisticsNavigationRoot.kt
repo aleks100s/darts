@@ -56,7 +56,7 @@ fun StatisticsNavigationRoot() {
         modifier = Modifier.background(MaterialTheme.colors.background)
     ) {
         composable(route = StatisticsRoute.Statistics.route) {
-            StatisticsScreen { event ->
+            StatisticsScreen(onEvent = { event ->
                 when(event) {
                     is StatisticsEvent.ShowBestTurn -> {
                         navController.navigate(route = StatisticsRoute.BestSet.route)
@@ -77,55 +77,69 @@ fun StatisticsNavigationRoot() {
                         navController.navigate(route = StatisticsRoute.PlayerList.routeWithArgs("heatmap"))
                     }
                 }
+            }) {
+                navController.popBackStack()
             }
         }
 
         composable(route = StatisticsRoute.BestSet.route) {
             val viewModel: AndroidBestTurnViewModel = hiltViewModel()
             val state by viewModel.state.collectAsState(initial = BestTurnState())
-            BestTurnScreen(state = state) { event ->
-                when(event) {
-                    is BestTurnEvent.ShowBestTurnOfPlayer -> {
-                        navController.navigate(
-                            route = StatisticsRoute.Darts.routeWithArgs(
-                                Json.encodeToString(
-                                    DartsState(
-                                        turns = listOf(event.turn),
-                                        currentPage = 0
+            BestTurnScreen(
+                state = state,
+                onEvent = { event ->
+                    when(event) {
+                        is BestTurnEvent.ShowBestTurnOfPlayer -> {
+                            navController.navigate(
+                                route = StatisticsRoute.Darts.routeWithArgs(
+                                    Json.encodeToString(
+                                        DartsState(
+                                            turns = listOf(event.turn),
+                                            currentPage = 0
+                                        )
                                     )
                                 )
                             )
-                        )
+                        }
                     }
                 }
+            ) {
+                navController.popBackStack()
             }
         }
 
         composable(route = StatisticsRoute.BiggestFinalSet.route) {
             val viewModel: AndroidBiggestFinalTurnViewModel = hiltViewModel()
             val state by viewModel.state.collectAsState(initial = BiggestFinalTurnState())
-            BiggestFinalTurnScreen(state = state) { event ->
-                when (event) {
-                    is BiggestFinalTurnEvent.ShowBiggestFinalTurnOfPlayer -> {
-                        navController.navigate(
-                            route = StatisticsRoute.Darts.routeWithArgs(
-                                Json.encodeToString(
-                                    DartsState(
-                                        turns = listOf(event.turn),
-                                        currentPage = 0
+            BiggestFinalTurnScreen(
+                state = state,
+                onEvent = { event ->
+                    when (event) {
+                        is BiggestFinalTurnEvent.ShowBiggestFinalTurnOfPlayer -> {
+                            navController.navigate(
+                                route = StatisticsRoute.Darts.routeWithArgs(
+                                    Json.encodeToString(
+                                        DartsState(
+                                            turns = listOf(event.turn),
+                                            currentPage = 0
+                                        )
                                     )
                                 )
                             )
-                        )
+                        }
                     }
                 }
+            ) {
+                navController.popBackStack()
             }
         }
 
         composable(route = StatisticsRoute.AverageValues.route) {
             val viewModel: AndroidAverageValuesViewModel = hiltViewModel()
             val state by viewModel.state.collectAsState(initial = AverageValuesState())
-            AverageValuesScreen(state = state)
+            AverageValuesScreen(state = state) {
+                navController.popBackStack()
+            }
         }
 
         composable(
@@ -147,35 +161,38 @@ fun StatisticsNavigationRoot() {
             }
             PlayerListScreen(
                 title = title,
-                state = state
-            ) { event ->
-                when (event) {
-                    is PlayerListEvent.SelectPlayer -> {
-                        when (mode) {
-                            "shot" -> {
-                                navController.navigate(
-                                    StatisticsRoute.ShotDistribution.routeWithArgs(
-                                        Json.encodeToString(event.player)
+                state = state,
+                onEvent = { event ->
+                    when (event) {
+                        is PlayerListEvent.SelectPlayer -> {
+                            when (mode) {
+                                "shot" -> {
+                                    navController.navigate(
+                                        StatisticsRoute.ShotDistribution.routeWithArgs(
+                                            Json.encodeToString(event.player)
+                                        )
                                     )
-                                )
-                            }
-                            "victory" -> {
-                                navController.navigate(
-                                    StatisticsRoute.VictoryDistribution.routeWithArgs(
-                                        Json.encodeToString(event.player)
+                                }
+                                "victory" -> {
+                                    navController.navigate(
+                                        StatisticsRoute.VictoryDistribution.routeWithArgs(
+                                            Json.encodeToString(event.player)
+                                        )
                                     )
-                                )
-                            }
-                            "heatmap" -> {
-                                navController.navigate(
-                                    StatisticsRoute.SectorHeatmapDistribution.routeWithArgs(
-                                        Json.encodeToString(event.player)
+                                }
+                                "heatmap" -> {
+                                    navController.navigate(
+                                        StatisticsRoute.SectorHeatmapDistribution.routeWithArgs(
+                                            Json.encodeToString(event.player)
+                                        )
                                     )
-                                )
+                                }
                             }
                         }
                     }
                 }
+            ) {
+                navController.popBackStack()
             }
         }
 
@@ -189,7 +206,9 @@ fun StatisticsNavigationRoot() {
         ) {
             val viewModel: AndroidShotDistributionViewModel = hiltViewModel()
             val state by viewModel.state.collectAsState(initial = ShotDistributionState())
-            ShotDistributionScreen(state = state)
+            ShotDistributionScreen(state = state) {
+                navController.popBackStack()
+            }
         }
 
         composable(
@@ -202,7 +221,9 @@ fun StatisticsNavigationRoot() {
         ) {
             val viewModel: AndroidVictoryDistributionViewModel = hiltViewModel()
             val state by viewModel.state.collectAsState(initial = VictoryDistributionState())
-            VictoryDistributionScreen(state = state)
+            VictoryDistributionScreen(state = state) {
+                navController.popBackStack()
+            }
         }
 
         composable(
@@ -215,7 +236,9 @@ fun StatisticsNavigationRoot() {
         ) {
             val viewModel: AndroidSectorHeatmapViewModel = hiltViewModel()
             val state by viewModel.state.collectAsState(initial = SectorHeatmapState())
-            SectorHeatmapScreen(state = state)
+            SectorHeatmapScreen(state = state) {
+                navController.popBackStack()
+            }
         }
 
         composable(
@@ -228,7 +251,9 @@ fun StatisticsNavigationRoot() {
         ) { navBackStackEntry ->
             val state: DartsState = navBackStackEntry.arguments?.getString("state")
                 ?.let { Json.decodeFromString(it) } ?: run { return@composable }
-            DartsScreen(state = state)
+            DartsScreen(state = state) {
+                navController.popBackStack()
+            }
         }
     }
 }

@@ -20,6 +20,6 @@ fun SectionHeader(title: String) {
             .background(MaterialTheme.colors.surface)
             .padding(vertical = 8.dp),
         textAlign = TextAlign.Center,
-        style = MaterialTheme.typography.h2
+        style = MaterialTheme.typography.h3
     )
 }

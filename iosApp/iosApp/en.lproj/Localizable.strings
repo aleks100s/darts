@@ -48,7 +48,7 @@
 "triplets_percent" = "%.2f%% triples";
 "bullseye_percent" = "%.2f%% bullseye";
 "double_bullseye_percent" = "%.2f%% double bullseye";
-"no_statistics" = "There is no data yet";
+"no_data_yet" = "There is no data yet";
 "throws_count %d" = "Hits total: %d";
 "throw_number" = "#%@";
 "progress" = "Recap";

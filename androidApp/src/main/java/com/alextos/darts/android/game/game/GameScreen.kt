@@ -1,16 +1,19 @@
 package com.alextos.darts.android.game.game
 
 import androidx.activity.compose.BackHandler
-import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import com.alextos.darts.android.R
 import com.alextos.darts.android.common.presentation.ScreenType
 import com.alextos.darts.android.common.presentation.views.GameHistoryView
 import com.alextos.darts.android.common.presentation.rememberScreenType
-import com.alextos.darts.android.common.presentation.screens.TabletScreen
+import com.alextos.darts.android.common.presentation.screens.Screen
+import com.alextos.darts.android.common.presentation.screens.SplitScreen
 import com.alextos.darts.android.common.presentation.views.GameInputView
 import com.alextos.darts.game.presentation.game.GameEvent
 import com.alextos.darts.game.presentation.game.GameState
@@ -26,15 +29,29 @@ fun GameScreen(
 
     when (rememberScreenType()) {
         is ScreenType.Compact -> {
-            GameInput(state = state, onEvent = onEvent)
+            Screen(
+                title = stringResource(id = R.string.game),
+                backIcon = Icons.Filled.Close,
+                onBackPressed = { onEvent(GameEvent.BackButtonPressed) }) { modifier ->
+                GameInput(
+                    modifier = modifier,
+                    state = state,
+                    onEvent = onEvent
+                )
+            }
         }
         is ScreenType.Large -> {
-            TabletScreen(
+            SplitScreen(
+                title = stringResource(id = R.string.game),
+                isBackButtonVisible = false,
                 content1 = {
                     GameHistory(state = state, onEvent = onEvent)
                 },
                 content2 = {
-                    GameInput(state = state, onEvent = onEvent)
+                    GameInput(state = state, onEvent = onEvent, modifier = Modifier)
+                },
+                onBackPressed = {
+                    onEvent(GameEvent.BackButtonPressed)
                 }
             )
         }
@@ -59,10 +76,10 @@ private fun GameHistory(
     onEvent: (GameEvent) -> Unit
 ) {
     GameHistoryView(
+        modifier = Modifier,
         gameHistory = state.gameHistory,
         goal = state.gameGoal,
         currentPage = state.currentPage(),
-        padding = PaddingValues(),
         onSelect = { turns, currentPage ->
             onEvent(GameEvent.ShowDarts(turns, currentPage))
         }
@@ -71,10 +88,12 @@ private fun GameHistory(
 
 @Composable
 private fun GameInput(
+    modifier: Modifier,
     state: GameState,
     onEvent: (GameEvent) -> Unit
 ) {
     GameInputView(
+        modifier = modifier,
         currentTurn = state.getCurrentTurn(),
         results = state.currentResults(),
         eraseShot = { onEvent(GameEvent.EraseHit) },

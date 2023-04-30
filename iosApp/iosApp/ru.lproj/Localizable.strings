@@ -48,7 +48,7 @@
 "triplets_percent" = "%.2f%% тройные броски";
 "bullseye_percent" = "%.2f%% яблочко";
 "double_bullseye_percent" = "%.2f%% сердцевина";
-"no_statistics" = "В этом разделе пока нет данных";
+"no_data_yet" = "В этом разделе пока нет данных";
 "throws_count" = "Всего бросков: %@";
 "throw_number" = "№%@";
 "progress" = "Результаты";

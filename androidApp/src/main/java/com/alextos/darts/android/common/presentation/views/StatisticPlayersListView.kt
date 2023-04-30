@@ -10,15 +10,15 @@ import com.alextos.darts.core.domain.model.Player
 
 @Composable
 fun StatisticPlayersListView(
+    modifier: Modifier,
     values: List<Pair<Player, String>>,
     onValueClick: (Int) -> Unit
 ) {
     if (values.isEmpty()) {
-        NoDataView()
+        NoDataView(modifier)
     } else {
         LazyColumn(
-            modifier = Modifier
-                .fillMaxSize()
+            modifier = modifier.fillMaxSize()
         ) {
             items(values) { value ->
                 PlayerDisclosureItem(player = value.first, rightText = value.second) {

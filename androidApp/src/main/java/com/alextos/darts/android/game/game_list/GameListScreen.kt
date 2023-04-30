@@ -26,7 +26,8 @@ import com.alextos.darts.game.presentation.game_list.GameListState
 @Composable
 fun GameListScreen(
     state: GameListState,
-    onEvent: (GameListEvent) -> Unit
+    onEvent: (GameListEvent) -> Unit,
+    onBackPressed: () -> Unit
 ) {
     Scaffold(
         floatingActionButton = {
@@ -38,12 +39,16 @@ fun GameListScreen(
             }
         }
     ) { padding ->
-        Screen(title = stringResource(id = R.string.games)) {
+        Screen(
+            title = stringResource(id = R.string.games),
+            isBackButtonVisible = false,
+            onBackPressed = onBackPressed
+        ) { modifier ->
             if (state.games.isEmpty()) {
-                NoDataView()
+                NoDataView(modifier)
             } else {
                 LazyColumn(
-                    modifier = Modifier
+                    modifier = modifier
                         .fillMaxSize()
                         .padding(padding),
                     verticalArrangement = Arrangement.spacedBy(16.dp)

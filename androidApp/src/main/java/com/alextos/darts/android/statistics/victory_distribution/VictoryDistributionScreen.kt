@@ -24,21 +24,27 @@ import com.github.tehras.charts.piechart.PieChartData
 
 @Composable
 fun VictoryDistributionScreen(
-    state: VictoryDistributionState
+    state: VictoryDistributionState,
+    onBackPressed: () -> Unit
 ) {
-    state.distribution?.let { distribution ->
-        Screen(title = distribution.player.name) {
+    Screen(
+        title = state.distribution?.player?.name ?: stringResource(id = R.string.no_data_yet),
+        onBackPressed = onBackPressed
+    ) { modifier ->
+        state.distribution?.let { distribution ->
             if (distribution.isEmpty()) {
-                NoDataView()
+                NoDataView(modifier)
             } else {
                 LazyColumn(
-                    modifier = Modifier.fillMaxSize(),
+                    modifier = modifier.fillMaxSize(),
                 ) {
                     item {
                         VictoryDistributionChart(distribution = distribution)
                     }
                 }
             }
+        } ?: run {
+            NoDataView(modifier)
         }
     }
 }

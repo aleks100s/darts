@@ -59,23 +59,29 @@ fun GameNavigationRoot() {
             val viewModel = hiltViewModel<AndroidGameListViewModel>()
             val state by viewModel.state.collectAsState(initial = GameListState())
 
-            GameListScreen(state = state, onEvent = {
-                when (it) {
-                    is GameListEvent.CreateGame -> {
-                        navController.navigate(route = GameRoute.CreateGame.route)
-                    }
-                    is GameListEvent.SelectGame -> {
-                        navController.navigate(
-                            route = GameRoute.History.routeWithArgs(
-                                Json.encodeToString(it.game)
+            GameListScreen(
+                state = state,
+                onEvent = {
+                    when (it) {
+                        is GameListEvent.CreateGame -> {
+                            navController.navigate(route = GameRoute.CreateGame.route)
+                        }
+
+                        is GameListEvent.SelectGame -> {
+                            navController.navigate(
+                                route = GameRoute.History.routeWithArgs(
+                                    Json.encodeToString(it.game)
+                                )
                             )
-                        )
-                    }
-                    else -> {
-                        viewModel.onEvent(it)
+                        }
+                        else -> {
+                            viewModel.onEvent(it)
+                        }
                     }
                 }
-            })
+            ) {
+                navController.popBackStack()
+            }
         }
 
         composable(route = GameRoute.CreateGame.route) {
@@ -138,7 +144,9 @@ fun GameNavigationRoot() {
                             }
                         }
                     }
-                )
+                ) {
+                    navController.popBackStack()
+                }
             }
         }
 
@@ -206,17 +214,22 @@ fun GameNavigationRoot() {
             val state = backStackEntry.arguments?.getString("gameState")
                 ?.let { Json.decodeFromString<GameState>(it) }
                 ?: run { return@composable }
-            InGameHistoryScreen(gameState = state) { turns, currentPage ->
-                navController.navigate(
-                    GameRoute.Darts.routeWithArgs(
-                        Json.encodeToString(
-                            DartsState(
-                                turns = turns,
-                                currentPage = currentPage
+            InGameHistoryScreen(
+                gameState = state,
+                onSelect = { turns, currentPage ->
+                    navController.navigate(
+                        GameRoute.Darts.routeWithArgs(
+                            Json.encodeToString(
+                                DartsState(
+                                    turns = turns,
+                                    currentPage = currentPage
+                                )
                             )
                         )
                     )
-                )
+                }
+            ) {
+                navController.popBackStack()
             }
         }
 
@@ -230,30 +243,36 @@ fun GameNavigationRoot() {
         ) {
             val viewModel = hiltViewModel<AndroidHistoryViewModel>()
             val state by viewModel.state.collectAsState(initial = HistoryState())
-            HistoryScreen(state = state) { event ->
-                when (event) {
-                    is HistoryEvent.ShowDarts -> {
-                        navController.navigate(
-                            GameRoute.Darts.routeWithArgs(
-                                Json.encodeToString(
-                                    DartsState(
-                                        turns = event.turns,
-                                        currentPage = event.currentPage
+            HistoryScreen(
+                state = state,
+                onEvent = { event ->
+                    when (event) {
+                        is HistoryEvent.ShowDarts -> {
+                            navController.navigate(
+                                GameRoute.Darts.routeWithArgs(
+                                    Json.encodeToString(
+                                        DartsState(
+                                            turns = event.turns,
+                                            currentPage = event.currentPage
+                                        )
                                     )
                                 )
                             )
-                        )
-                    }
+                        }
 
-                    is HistoryEvent.ShowRecap -> {
-                        navController.navigate(
-                            GameRoute.Recap.routeWithArgs(
-                                Json.encodeToString(state)
+                        is HistoryEvent.ShowRecap -> {
+                            navController.navigate(
+                                GameRoute.Recap.routeWithArgs(
+                                    Json.encodeToString(state)
+                                )
                             )
-                        )
+                        }
                     }
+                },
+                onBackPressed = {
+                    navController.popBackStack()
                 }
-            }
+            )
         }
 
         composable(
@@ -267,7 +286,9 @@ fun GameNavigationRoot() {
             val historyState = navBackStackEntry.arguments?.getString("historyState")
                 ?.let { Json.decodeFromString<HistoryState>(it) }
                 ?: run { return@composable }
-            RecapScreen(historyState = historyState)
+            RecapScreen(historyState = historyState) {
+                navController.popBackStack()
+            }
         }
 
         composable(
@@ -280,7 +301,9 @@ fun GameNavigationRoot() {
         ) { navBackStackEntry ->
             val state: DartsState = navBackStackEntry.arguments?.getString("state")
                 ?.let { Json.decodeFromString(it) } ?: run { return@composable }
-            DartsScreen(state = state)
+            DartsScreen(state = state) {
+                navController.popBackStack()
+            }
         }
     }
 }

@@ -49,7 +49,7 @@
     <string name="triplets_percent">%.2f%% triples</string>
     <string name="bullseye_percent">%.2f%% bullseye</string>
     <string name="double_bullseye_percent">%.2f%% double bullseye</string>
-    <string name="no_statistics">There is no data yet</string>
+    <string name="no_data_yet">There is no data yet</string>
     <string name="throws_count">Hits total: %1$d</string>
     <string name="recap">Recap</string>
     <string name="games_count">Games total: %1$d</string>
@@ -77,4 +77,5 @@
     <string name="finish_with_doubles">Finish with doubles</string>
     <string name="miss">Miss</string>
     <string name="replay">Rematch</string>
+    <string name="navigate_back">Navigate back</string>
 </resources>

@@ -13,7 +13,6 @@ import androidx.compose.ui.unit.dp
 import com.alextos.darts.android.R
 import com.alextos.darts.android.common.presentation.components.ChartLegendItem
 import com.alextos.darts.android.common.presentation.components.SectionHeader
-import com.alextos.darts.android.common.presentation.screens.Screen
 import com.alextos.darts.core.domain.model.Player
 import com.alextos.darts.core.util.numberOfTurns
 import com.alextos.darts.game.domain.models.PlayerGameValue
@@ -35,37 +34,35 @@ fun GameRecapView(
     misses: List<PlayerGameValue>,
     overkills: List<PlayerGameValue>
 ) {
-    Screen(title = stringResource(id = R.string.game_recap)) {
-        if (history.isNotEmpty()) {
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxSize(),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                item {
-                    RecapLineChart(history = history)
-                }
-                item {
-                    RecapLineChartLegend(players = history.map { it.player })
-                }
-                item {
-                    ValuesBlock(values = averageTurns, title = stringResource(id = R.string.average_set_recap))
-                }
-                item {
-                    ValuesBlock(values = biggestTurns, title = stringResource(id = R.string.biggest_sets))
-                }
-                item {
-                    ValuesBlock(values = smallestTurns, title = stringResource(id = R.string.smallest_sets))
-                }
-                item {
-                    ValuesBlock(values = misses, title = stringResource(id = R.string.misses_count))
-                }
-                item {
-                    ValuesBlock(values = overkills, title = stringResource(id = R.string.overkill_count))
-                }
-                item {
-                    Spacer(modifier = Modifier.height(72.dp))
-                }
+    if (history.isNotEmpty()) {
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            item {
+                RecapLineChart(history = history)
+            }
+            item {
+                RecapLineChartLegend(players = history.map { it.player })
+            }
+            item {
+                ValuesBlock(values = averageTurns, title = stringResource(id = R.string.average_set_recap))
+            }
+            item {
+                ValuesBlock(values = biggestTurns, title = stringResource(id = R.string.biggest_sets))
+            }
+            item {
+                ValuesBlock(values = smallestTurns, title = stringResource(id = R.string.smallest_sets))
+            }
+            item {
+                ValuesBlock(values = misses, title = stringResource(id = R.string.misses_count))
+            }
+            item {
+                ValuesBlock(values = overkills, title = stringResource(id = R.string.overkill_count))
+            }
+            item {
+                Spacer(modifier = Modifier.height(72.dp))
             }
         }
     }

@@ -49,7 +49,7 @@
     <string name="triplets_percent">%.2f%% тройные броски</string>
     <string name="bullseye_percent">%.2f%% яблочко</string>
     <string name="double_bullseye_percent">%.2f%% сердцевина</string>
-    <string name="no_statistics">В этом разделе пока нет данных</string>
+    <string name="no_data_yet">В этом разделе пока нет данных</string>
     <string name="throws_count">Всего бросков: %1$d</string>
     <string name="recap">Результаты</string>
     <string name="games_count">Всего игр: %1$d</string>
@@ -77,4 +77,5 @@
     <string name="finish_with_doubles">Заканчивать двойным броском</string>
     <string name="miss">Промах</string>
     <string name="replay">Переиграть</string>
+    <string name="navigate_back">Перейти назад</string>
 </resources>

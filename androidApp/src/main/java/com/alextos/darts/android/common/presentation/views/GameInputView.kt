@@ -33,6 +33,7 @@ import com.alextos.darts.game.domain.models.GamePlayerResult
 
 @Composable
 fun GameInputView(
+    modifier: Modifier,
     currentTurn: Turn,
     results: List<GamePlayerResult>,
     currentPlayerIndex: Int,
@@ -51,7 +52,7 @@ fun GameInputView(
         }
     ) {
         Box(
-            modifier = Modifier
+            modifier = modifier
                 .fillMaxSize()
                 .padding(it),
             contentAlignment = Alignment.BottomStart

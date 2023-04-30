@@ -1,17 +1,18 @@
 package com.alextos.darts.android.game.history
 
-import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ShowChart
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import com.alextos.darts.android.R
 import com.alextos.darts.android.common.presentation.components.FAB
 import com.alextos.darts.android.common.presentation.ScreenType
 import com.alextos.darts.android.common.presentation.rememberScreenType
-import com.alextos.darts.android.common.presentation.screens.TabletScreen
+import com.alextos.darts.android.common.presentation.screens.Screen
+import com.alextos.darts.android.common.presentation.screens.SplitScreen
 import com.alextos.darts.android.common.presentation.views.GameHistoryView
 import com.alextos.darts.android.common.presentation.views.GameRecapView
 import com.alextos.darts.game.presentation.history.HistoryEvent
@@ -20,7 +21,8 @@ import com.alextos.darts.game.presentation.history.HistoryState
 @Composable
 fun HistoryScreen(
     state: HistoryState,
-    onEvent: (HistoryEvent) -> Unit
+    onEvent: (HistoryEvent) -> Unit,
+    onBackPressed: () -> Unit
 ) {
     when (rememberScreenType()) {
         is ScreenType.Compact -> {
@@ -33,26 +35,32 @@ fun HistoryScreen(
                         onEvent(HistoryEvent.ShowRecap)
                     }
                 }
-            ) {
-                GameHistory(
-                    paddingValues = it,
-                    state = state,
-                    onEvent = onEvent
-                )
+            ) { paddingValues ->
+                Screen(
+                    title = stringResource(id = R.string.history),
+                    onBackPressed = onBackPressed) { modifier ->
+                    GameHistory(
+                        modifier = modifier.padding(paddingValues),
+                        state = state,
+                        onEvent = onEvent
+                    )
+                }
             }
         }
         is ScreenType.Large -> {
-            TabletScreen(
+            SplitScreen(
+                title = stringResource(id = R.string.history),
                 content1 = {
                     GameHistory(
-                        paddingValues = PaddingValues(0.dp),
+                        modifier = Modifier,
                         state = state,
                         onEvent = onEvent
                     )
                 },
                 content2 = {
                     GameRecap(state = state)
-                }
+                },
+                onBackPressed = onBackPressed
             )
         }
     }
@@ -60,15 +68,15 @@ fun HistoryScreen(
 
 @Composable
 private fun GameHistory(
-    paddingValues: PaddingValues,
+    modifier: Modifier,
     state: HistoryState,
     onEvent: (HistoryEvent) -> Unit
 ) {
     GameHistoryView(
+        modifier = modifier,
         gameHistory = state.gameHistory,
         currentPage = 0,
         goal = state.gameGoal,
-        padding = paddingValues,
         onSelect = { turns, page ->
             onEvent(HistoryEvent.ShowDarts(turns, page))
         }

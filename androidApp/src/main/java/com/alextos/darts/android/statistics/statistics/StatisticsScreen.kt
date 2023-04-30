@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.alextos.darts.android.R
 import com.alextos.darts.android.common.presentation.components.SingleSelectableItem
@@ -12,7 +11,10 @@ import com.alextos.darts.android.common.presentation.screens.Screen
 import com.alextos.darts.statistics.presentation.statistics.StatisticsEvent
 
 @Composable
-fun StatisticsScreen(onEvent: (StatisticsEvent) -> Unit) {
+fun StatisticsScreen(
+    onEvent: (StatisticsEvent) -> Unit,
+    onBackPressed: () -> Unit
+) {
     val events = listOf(
         StatisticsEvent.ShowBestTurn to stringResource(id = R.string.best_set_statistics),
         StatisticsEvent.ShowBiggestFinalTurn to stringResource(id = R.string.biggest_final_set_statistics),
@@ -22,10 +24,13 @@ fun StatisticsScreen(onEvent: (StatisticsEvent) -> Unit) {
         StatisticsEvent.ShowSectorHeatmapDistribution to stringResource(id = R.string.sector_heatmap_statistics)
     )
 
-    Screen(title = stringResource(id = R.string.statistics)) {
+    Screen(
+        title = stringResource(id = R.string.statistics),
+        isBackButtonVisible = false,
+        onBackPressed = onBackPressed
+    ) { modifier ->
         LazyColumn(
-            modifier = Modifier
-                .fillMaxSize()
+            modifier = modifier.fillMaxSize()
         ) {
             items(events) { event ->
                 SingleSelectableItem(text = event.second) {

@@ -12,11 +12,11 @@ import androidx.compose.ui.unit.dp
 import com.alextos.darts.android.R
 
 @Composable
-fun NoDataView() {
+fun NoDataView(modifier: Modifier) {
     Box(
-        modifier = Modifier.fillMaxSize().padding(horizontal = 16.dp),
+        modifier = modifier.fillMaxSize().padding(horizontal = 16.dp),
         contentAlignment = Alignment.Center
     ) {
-        Text(stringResource(id = R.string.no_statistics))
+        Text(stringResource(id = R.string.no_data_yet))
     }
 }

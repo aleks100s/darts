@@ -12,13 +12,18 @@ import com.alextos.darts.statistics.presentation.best_set.BestTurnState
 @Composable
 fun BestTurnScreen(
     state: BestTurnState,
-    onEvent: (BestTurnEvent) -> Unit
+    onEvent: (BestTurnEvent) -> Unit,
+    onBackPressed: () -> Unit
 ) {
-    Screen(title = stringResource(id = R.string.best_set_statistics)) {
+    Screen(
+        title = stringResource(id = R.string.best_set_statistics),
+        onBackPressed = onBackPressed
+    ) { modifier ->
         if (state.playersBestTurns.isEmpty()) {
-            NoDataView()
+            NoDataView(modifier)
         } else {
             StatisticPlayersListView(
+                modifier,
                 values = state.playersBestTurns.map { set ->
                     set.player to set.set.score().toString()
                 },

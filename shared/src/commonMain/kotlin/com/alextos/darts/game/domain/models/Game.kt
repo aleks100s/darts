@@ -2,7 +2,9 @@ package com.alextos.darts.game.domain.models
 
 import com.alextos.darts.core.domain.model.Player
 import kotlinx.datetime.LocalDateTime
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class Game(
     val id: Long? = null,
     val players: List<Player>,

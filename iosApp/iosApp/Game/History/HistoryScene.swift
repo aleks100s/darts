@@ -12,9 +12,7 @@ internal enum HistoryScene {
 		let viewModel = HistoryViewModel(
 		   getGameHistoryUseCase: getGameHistoryUseCase,
 		   coroutineScope: nil,
-		   gameId: game.id?.int64Value ?? 0,
-		   gameGoal: game.gameGoal,
-		   players: game.players
+		   game: game
 		)
 		let iOSViewModel = IOSHistoryViewModel(
 			viewModel: viewModel,

@@ -7,7 +7,7 @@ import com.alextos.darts.core.domain.model.Turn
 import com.alextos.darts.game.presentation.game.GameState
 
 @Composable
-fun InGameHistory(gameState: GameState, onSelect: (List<Turn>, Turn) -> Unit) {
+fun InGameHistoryScreen(gameState: GameState, onSelect: (List<Turn>, Int) -> Unit) {
     GameHistoryView(
         gameHistory = gameState.gameHistory,
         goal = gameState.gameGoal,

@@ -14,11 +14,12 @@ import androidx.compose.ui.unit.dp
 import com.alextos.darts.android.common.presentation.components.DartsDisk
 import com.alextos.darts.android.common.presentation.extensions.inputString
 import com.alextos.darts.core.domain.model.Shot
+import com.alextos.darts.core.domain.model.Turn
 
 @Composable
-fun DartsSetView(set: List<Shot>) {
+fun DartsTurnView(turn: Turn) {
     LazyColumn {
-        items(set) {
+        items(turn.shots) {
             DartsShotView(shot = it)
         }
     }

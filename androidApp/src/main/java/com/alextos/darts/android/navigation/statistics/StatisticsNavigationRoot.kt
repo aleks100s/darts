@@ -14,9 +14,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.alextos.darts.android.R
-import com.alextos.darts.android.common.util.toStringNavArgument
 import com.alextos.darts.android.game.darts_board.DartsScreen
-import com.alextos.darts.android.common.util.toShots
+import com.alextos.darts.android.game.darts_board.DartsState
 import com.alextos.darts.android.navigation.game.GameRoute
 import com.alextos.darts.android.statistics.average_values.AndroidAverageValuesViewModel
 import com.alextos.darts.android.statistics.average_values.AverageValuesScreen
@@ -44,6 +43,9 @@ import com.alextos.darts.statistics.presentation.player_list.PlayerListState
 import com.alextos.darts.statistics.presentation.shot_distribution.ShotDistributionState
 import com.alextos.darts.statistics.presentation.statistics.StatisticsEvent
 import com.alextos.darts.statistics.presentation.victory_distribution.VictoryDistributionState
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
 @Composable
 fun StatisticsNavigationRoot() {
@@ -84,13 +86,15 @@ fun StatisticsNavigationRoot() {
             BestTurnScreen(state = state) { event ->
                 when(event) {
                     is BestTurnEvent.ShowBestTurnOfPlayer -> {
-                        val route = StatisticsRoute.Darts.routeWithArgs(
-                            listOf(event.turn).map { set ->
-                                set.shots.map { it.sector }
-                            }.toStringNavArgument()
-                        )
                         navController.navigate(
-                            route = route
+                            route = StatisticsRoute.Darts.routeWithArgs(
+                                Json.encodeToString(
+                                    DartsState(
+                                        turns = listOf(event.turn),
+                                        currentPage = 0
+                                    )
+                                )
+                            )
                         )
                     }
                 }
@@ -105,9 +109,12 @@ fun StatisticsNavigationRoot() {
                     is BiggestFinalTurnEvent.ShowBiggestFinalTurnOfPlayer -> {
                         navController.navigate(
                             route = StatisticsRoute.Darts.routeWithArgs(
-                                listOf(event.set).map { set ->
-                                    set.shots.map { it.sector }
-                                }.toStringNavArgument()
+                                Json.encodeToString(
+                                    DartsState(
+                                        turns = listOf(event.turn),
+                                        currentPage = 0
+                                    )
+                                )
                             )
                         )
                     }
@@ -148,21 +155,21 @@ fun StatisticsNavigationRoot() {
                             "shot" -> {
                                 navController.navigate(
                                     StatisticsRoute.ShotDistribution.routeWithArgs(
-                                        listOf(event.player).toStringNavArgument()
+                                        Json.encodeToString(event.player)
                                     )
                                 )
                             }
                             "victory" -> {
                                 navController.navigate(
                                     StatisticsRoute.VictoryDistribution.routeWithArgs(
-                                        listOf(event.player).toStringNavArgument()
+                                        Json.encodeToString(event.player)
                                     )
                                 )
                             }
                             "heatmap" -> {
                                 navController.navigate(
                                     StatisticsRoute.SectorHeatmapDistribution.routeWithArgs(
-                                        listOf(event.player).toStringNavArgument()
+                                        Json.encodeToString(event.player)
                                     )
                                 )
                             }
@@ -212,16 +219,16 @@ fun StatisticsNavigationRoot() {
         }
 
         composable(
-            route = GameRoute.Darts.route + "/{turns}",
+            route = GameRoute.Darts.route + "/{state}",
             arguments = listOf(
-                navArgument("turns") {
+                navArgument("state") {
                     type = NavType.StringType
                 }
             )
-        ) { backStackEntry ->
-            val turns = backStackEntry.arguments?.getString("turns")?.toShots() ?: listOf()
-            val currentPage = backStackEntry.arguments?.getString("currentPage")?.toInt() ?: 0
-            DartsScreen(turns, currentPage)
+        ) { navBackStackEntry ->
+            val state: DartsState = navBackStackEntry.arguments?.getString("state")
+                ?.let { Json.decodeFromString(it) } ?: run { return@composable }
+            DartsScreen(state = state)
         }
     }
 }

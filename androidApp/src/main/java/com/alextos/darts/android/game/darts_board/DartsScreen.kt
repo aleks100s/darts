@@ -8,8 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.alextos.darts.android.R
 import com.alextos.darts.android.common.presentation.screens.Screen
-import com.alextos.darts.android.common.presentation.views.DartsSetView
-import com.alextos.darts.core.domain.model.Shot
+import com.alextos.darts.android.common.presentation.views.DartsTurnView
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
@@ -17,27 +16,24 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun DartsScreen(
-    turns: List<List<Shot>>,
-    currentPage: Int
-) {
-    val pagerState = rememberPagerState(initialPage = currentPage)
+fun DartsScreen(state: DartsState) {
+    val pagerState = rememberPagerState(initialPage = state.currentPage)
     val scope = rememberCoroutineScope()
 
-    LaunchedEffect(key1 = currentPage) {
+    LaunchedEffect(key1 = state.currentPage) {
         scope.launch {
-            pagerState.animateScrollToPage(currentPage)
+            pagerState.animateScrollToPage(state.currentPage)
         }
     }
 
     Screen(title = stringResource(id = R.string.view_turn)) {
         HorizontalPager(
-            count = turns.count(),
+            count = state.turns.count(),
             state = pagerState,
             modifier = Modifier
                 .fillMaxSize()
         ) { page ->
-            DartsSetView(set = turns[page])
+            DartsTurnView(turn = state.turns[page])
         }
     }
 }

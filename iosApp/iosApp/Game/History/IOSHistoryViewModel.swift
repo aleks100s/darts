@@ -1,7 +1,7 @@
 import shared
 
 internal final class IOSHistoryViewModel: ObservableObject {
-	@Published var state = HistoryState(gameHistory: [], isRecapVisible: false, gameGoal: 0)
+	@Published var state = HistoryState(gameHistory: [], gameGoal: 0)
 	
 	private let onTurnSelected: (Turn) -> Void
 	private let onShowRecap: (HistoryState) -> Void
@@ -32,10 +32,6 @@ internal final class IOSHistoryViewModel: ObservableObject {
 	
 	func showRecap() {
 		onShowRecap(state)
-	}
-	
-	func onEvent(_ event: HistoryEvent) {
-		viewModel.onEvent(event: event)
 	}
 	
 	func dispose() {

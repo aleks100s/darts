@@ -22,7 +22,7 @@ fun GameHistoryView(
     goal: Int,
     currentPage: Int,
     padding: PaddingValues,
-    onSelect: (List<Turn>, Turn) -> Unit
+    onSelect: (List<Turn>, Int) -> Unit
 ) {
     val pagerState = rememberPagerState(initialPage = currentPage)
     val scope = rememberCoroutineScope()
@@ -44,7 +44,9 @@ fun GameHistoryView(
             playerHistory = gameHistory[page],
             goal = goal
         ) {
-            onSelect(gameHistory[page].turns, it)
+            val turns = gameHistory[page].turns
+            val currentPage = turns.indexOf(it)
+            onSelect(gameHistory[page].turns, currentPage)
         }
     }
 }

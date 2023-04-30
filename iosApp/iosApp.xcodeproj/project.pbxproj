@@ -159,8 +159,8 @@
 		279827D2298E657600D497F2 /* Navigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
 		279827D4298E65A600D497F2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		279827D7298E6B8A00D497F2 /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
-		279827DA298E6F2600D497F2 /* IOSGameListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSGameListViewModel.swift; sourceTree = "<group>"; };
-		279827DC298E71E000D497F2 /* GameListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameListView.swift; sourceTree = "<group>"; };
+		279827DA298E6F2600D497F2 /* IOSGameListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSGameListViewModel.swift; sourceTree = "<group>"; tabWidth = 4; };
+		279827DC298E71E000D497F2 /* GameListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameListView.swift; sourceTree = "<group>"; tabWidth = 4; };
 		279827DE298E723D00D497F2 /* GameListScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameListScene.swift; sourceTree = "<group>"; };
 		279827E129A7CD9700D497F2 /* CreateGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGameView.swift; sourceTree = "<group>"; };
 		279827E329A7CD9F00D497F2 /* CreateGameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGameScene.swift; sourceTree = "<group>"; };
@@ -194,8 +194,8 @@
 		279E829529DA058200CDCA1E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; name = Base; path = Base.lproj/DartsWidget.intentdefinition; sourceTree = "<group>"; };
 		279E829829DA058300CDCA1E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/DartsWidget.strings; sourceTree = "<group>"; };
 		279E829A29DA058400CDCA1E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/DartsWidget.strings; sourceTree = "<group>"; };
-		27CF107229A8BBB600174D02 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
-		27CF107429A8BBBE00174D02 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		27CF107229A8BBB600174D02 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; tabWidth = 4; };
+		27CF107429A8BBBE00174D02 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; tabWidth = 4; };
 		27CF107629A8BBC800174D02 /* IOSGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSGameViewModel.swift; sourceTree = "<group>"; };
 		27CF107829A9049900174D02 /* GameInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInputView.swift; sourceTree = "<group>"; };
 		27CF107A29A905A600174D02 /* Sector+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sector+Extensions.swift"; sourceTree = "<group>"; };
@@ -205,14 +205,14 @@
 		27CF108429AB9A8100174D02 /* PlayerHistoryHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerHistoryHeader.swift; sourceTree = "<group>"; };
 		27CF108629AB9AA500174D02 /* Row.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Row.swift; sourceTree = "<group>"; };
 		27CF108829AB9FCD00174D02 /* GamePlayerResult+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GamePlayerResult+Extensions.swift"; sourceTree = "<group>"; };
-		27CF108A29ABA17200174D02 /* TurnItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnItem.swift; sourceTree = "<group>"; };
+		27CF108A29ABA17200174D02 /* TurnItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnItem.swift; sourceTree = "<group>"; tabWidth = 4; };
 		27CF108C29ABA23F00174D02 /* Shot+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shot+Extensions.swift"; sourceTree = "<group>"; };
 		27CF108E29ABA2CE00174D02 /* Turn+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Turn+Extensions.swift"; sourceTree = "<group>"; };
 		27CF109329AD126300174D02 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		27CF109529AD126800174D02 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		27CF109629AD273B00174D02 /* Game+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Game+Extensions.swift"; sourceTree = "<group>"; };
-		27CF109929AD2A5600174D02 /* HistoryScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryScene.swift; sourceTree = "<group>"; };
-		27CF109B29AD2A6B00174D02 /* IOSHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSHistoryViewModel.swift; sourceTree = "<group>"; };
+		27CF109929AD2A5600174D02 /* HistoryScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryScene.swift; sourceTree = "<group>"; tabWidth = 4; };
+		27CF109B29AD2A6B00174D02 /* IOSHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSHistoryViewModel.swift; sourceTree = "<group>"; tabWidth = 4; };
 		27CF109D29AD2C9E00174D02 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		27D659EC29B3B97E00A921C6 /* PlayerHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerHistoryView.swift; sourceTree = "<group>"; };
 		27D659EF29B3BC0800A921C6 /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
@@ -231,7 +231,7 @@
 		27D65A1229BDF40800A921C6 /* AverageValuesScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AverageValuesScene.swift; sourceTree = "<group>"; };
 		27D65A1429BDF41600A921C6 /* AverageValuesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AverageValuesView.swift; sourceTree = "<group>"; };
 		27D65A1629BDF7E900A921C6 /* AveragePlayerValue+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AveragePlayerValue+Extensions.swift"; sourceTree = "<group>"; };
-		27D65A1829BE414700A921C6 /* StatisticsPlayerListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsPlayerListView.swift; sourceTree = "<group>"; };
+		27D65A1829BE414700A921C6 /* StatisticsPlayerListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsPlayerListView.swift; sourceTree = "<group>"; tabWidth = 4; };
 		27D65A1B29BE42EC00A921C6 /* IOSBestTurnViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSBestTurnViewModel.swift; sourceTree = "<group>"; };
 		27D65A1D29BE435C00A921C6 /* BestTurnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestTurnView.swift; sourceTree = "<group>"; };
 		27D65A1F29BE43A000A921C6 /* BestTurnScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestTurnScene.swift; sourceTree = "<group>"; };

@@ -69,8 +69,8 @@ private fun GameHistory(
         currentPage = 0,
         goal = state.gameGoal,
         padding = paddingValues,
-        onSelect = { turns, set ->
-            onEvent(HistoryEvent.ShowDarts(turns, set))
+        onSelect = { turns, page ->
+            onEvent(HistoryEvent.ShowDarts(turns, page))
         }
     )
 }

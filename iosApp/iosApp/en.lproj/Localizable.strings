@@ -72,7 +72,6 @@
 "this_cannot_be_undone" = "This cannot be undone";
 "delete" = "Delete";
 "cancel" = "Cancel";
-"back_to_game" = "Back to the game";
 "training %d %d" = "Training %d, goal is %d";
 "sector_count %@ %d" = "%@ (%d hits)";
 "additional_settings" = "Additional settings";

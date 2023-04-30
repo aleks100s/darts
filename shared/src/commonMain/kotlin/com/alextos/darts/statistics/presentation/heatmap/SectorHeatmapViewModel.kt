@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.*
 
 class SectorHeatmapViewModel(
     getSectorHeatmapUseCase: GetSectorHeatmapUseCase,
-    player: Player,
+    player: Player?,
     coroutineScope: CoroutineScope?
 ) {
     private val viewModelScope = coroutineScope ?: CoroutineScope(Dispatchers.Main)

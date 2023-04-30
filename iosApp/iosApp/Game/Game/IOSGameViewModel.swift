@@ -10,7 +10,6 @@ internal final class IOSGameViewModel: ObservableObject {
 		isGameFinished: false,
 		isCloseGameDialogOpened: false,
 		turnState: .IsOngoing(),
-		isInputVisible: true,
 		gameGoal: 0
 	)
 	

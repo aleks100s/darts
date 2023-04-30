@@ -16,22 +16,21 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.alextos.darts.android.common.util.toPlayerList
-import com.alextos.darts.android.common.util.toStringNavArgument
 import com.alextos.darts.android.game.create_game.AndroidCreateGameViewModel
 import com.alextos.darts.android.game.create_game.CreateGameScreen
 import com.alextos.darts.android.game.create_player.AndroidCreatePlayerViewModel
 import com.alextos.darts.android.game.create_player.CreatePlayerScreen
 import com.alextos.darts.android.game.darts_board.DartsScreen
-import com.alextos.darts.android.common.util.toShots
+import com.alextos.darts.android.game.darts_board.DartsState
 import com.alextos.darts.android.game.game.AndroidGameViewModel
 import com.alextos.darts.android.game.game.GameScreen
 import com.alextos.darts.android.game.game_list.AndroidGameListViewModel
 import com.alextos.darts.android.game.game_list.GameListScreen
 import com.alextos.darts.android.game.history.AndroidHistoryViewModel
 import com.alextos.darts.android.game.history.HistoryScreen
-import com.alextos.darts.android.game.in_game_history.InGameHistory
+import com.alextos.darts.android.game.in_game_history.InGameHistoryScreen
 import com.alextos.darts.android.game.recap.RecapScreen
+import com.alextos.darts.game.domain.models.GameSettings
 import com.alextos.darts.game.presentation.create_game.CreateGameEvent
 import com.alextos.darts.game.presentation.create_game.CreateGameState
 import com.alextos.darts.game.presentation.create_player.CreatePlayerEvent
@@ -68,9 +67,7 @@ fun GameNavigationRoot() {
                     is GameListEvent.SelectGame -> {
                         navController.navigate(
                             route = GameRoute.History.routeWithArgs(
-                                it.game.players.toStringNavArgument(),
-                                it.game.id.toString(),
-                                it.game.gameGoal.toString()
+                                Json.encodeToString(it.game)
                             )
                         )
                     }
@@ -124,9 +121,7 @@ fun GameNavigationRoot() {
                             is CreateGameEvent.CreateGame -> {
                                 navController.navigate(
                                     route = GameRoute.Game.routeWithArgs(
-                                        state.selectedPlayers.toStringNavArgument(),
-                                        state.selectedGoal.toString(),
-                                        state.isFinishWithDoublesChecked.toString()
+                                        Json.encodeToString(state.getSettings())
                                     )
                                 )
                             }
@@ -148,23 +143,16 @@ fun GameNavigationRoot() {
         }
 
         composable(
-            route = GameRoute.Game.route + "/{list}/{goal}/{doubles}",
+            route = GameRoute.Game.route + "/{settings}",
             arguments = listOf(
-                navArgument("list") {
+                navArgument("settings") {
                     type = NavType.StringType
-                },
-                navArgument("goal") {
-                    type = NavType.StringType
-                },
-                navArgument("doubles") {
-                    type = NavType.BoolType
                 }
             )
         ) { navBackStackEntry ->
-            val players = navBackStackEntry.arguments?.getString("list")?.toPlayerList() ?: listOf()
-            val goal = navBackStackEntry.arguments?.getString("goal")?.toInt() ?: 0
-            val finishWithDoubles = navBackStackEntry.arguments?.getBoolean("doubles") ?: false
-
+            val settings: GameSettings = navBackStackEntry.arguments?.getString("settings")
+                ?.let { Json.decodeFromString(it) }
+                ?: run { return@composable }
             val viewModel = hiltViewModel<AndroidGameViewModel>()
             val state by viewModel.state.collectAsState(initial = GameState())
             GameScreen(
@@ -177,17 +165,20 @@ fun GameNavigationRoot() {
                         is GameEvent.ShowDarts -> {
                             navController.navigate(
                                 GameRoute.Darts.routeWithArgs(
-                                event.turns.map { it.shots }.map { it.map { it.sector }}.toStringNavArgument(),
-                                event.turns.indexOf(event.currentSet).toString()
-                            ))
+                                    Json.encodeToString(
+                                        DartsState(
+                                            event.turns,
+                                            event.currentPage
+                                        )
+                                    )
+                                )
+                            )
                         }
                         is GameEvent.ReplayGame -> {
                             navController.popBackStack(GameRoute.GameList.route, inclusive = false)
                             navController.navigate(
                                 route = GameRoute.Game.routeWithArgs(
-                                    players.toStringNavArgument(),
-                                    goal.toString(),
-                                    finishWithDoubles.toString()
+                                    Json.encodeToString(settings)
                                 )
                             )
                         }
@@ -214,27 +205,25 @@ fun GameNavigationRoot() {
         ) { backStackEntry ->
             val state = backStackEntry.arguments?.getString("gameState")
                 ?.let { Json.decodeFromString<GameState>(it) }
-            state?.let {
-                InGameHistory(gameState = it) { turns, currentTurn ->
-                    navController.navigate(
-                        GameRoute.Darts.routeWithArgs(
-                            turns.map { it.shots }.map { it.map { it.sector }}.toStringNavArgument(),
-                            turns.indexOf(currentTurn).toString()
-                        ))
-                }
+                ?: run { return@composable }
+            InGameHistoryScreen(gameState = state) { turns, currentPage ->
+                navController.navigate(
+                    GameRoute.Darts.routeWithArgs(
+                        Json.encodeToString(
+                            DartsState(
+                                turns = turns,
+                                currentPage = currentPage
+                            )
+                        )
+                    )
+                )
             }
         }
 
         composable(
-            route = GameRoute.History.route + "/{list}/{gameId}/{gameGoal}",
+            route = GameRoute.History.route + "/{game}",
             arguments = listOf(
-                navArgument("list") {
-                    type = NavType.StringType
-                },
-                navArgument("gameId") {
-                    type = NavType.StringType
-                },
-                navArgument("gameGoal") {
+                navArgument("game") {
                     type = NavType.StringType
                 }
             )
@@ -246,8 +235,12 @@ fun GameNavigationRoot() {
                     is HistoryEvent.ShowDarts -> {
                         navController.navigate(
                             GameRoute.Darts.routeWithArgs(
-                                event.turns.map { it.shots }.map { it.map { it.sector }}.toStringNavArgument(),
-                                event.turns.indexOf(event.currentSet).toString()
+                                Json.encodeToString(
+                                    DartsState(
+                                        turns = event.turns,
+                                        currentPage = event.currentPage
+                                    )
+                                )
                             )
                         )
                     }
@@ -273,25 +266,21 @@ fun GameNavigationRoot() {
         ) { navBackStackEntry ->
             val historyState = navBackStackEntry.arguments?.getString("historyState")
                 ?.let { Json.decodeFromString<HistoryState>(it) }
-            historyState?.let {
-                RecapScreen(historyState = it)
-            }
+                ?: run { return@composable }
+            RecapScreen(historyState = historyState)
         }
 
         composable(
-            route = GameRoute.Darts.route + "/{turns}/{currentPage}",
+            route = GameRoute.Darts.route + "/{state}",
             arguments = listOf(
-                navArgument("turns") {
-                    type = NavType.StringType
-                },
-                navArgument("currentPage") {
+                navArgument("state") {
                     type = NavType.StringType
                 }
             )
         ) { navBackStackEntry ->
-            val turns = navBackStackEntry.arguments?.getString("turns")?.toShots() ?: listOf()
-            val currentPage = navBackStackEntry.arguments?.getString("currentPage")?.toInt() ?: 0
-            DartsScreen(turns = turns, currentPage = currentPage)
+            val state: DartsState = navBackStackEntry.arguments?.getString("state")
+                ?.let { Json.decodeFromString(it) } ?: run { return@composable }
+            DartsScreen(state = state)
         }
     }
 }

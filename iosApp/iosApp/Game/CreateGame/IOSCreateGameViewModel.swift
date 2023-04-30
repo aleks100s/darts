@@ -17,14 +17,14 @@ internal final class IOSCreateGameViewModel: ObservableObject {
 	
 	private let viewModel: CreateGameViewModel
 	private let createPlayerViewModel: CreatePlayerViewModel
-	private let startGame: ([Player], Int32, Bool) -> ()
+	private let startGame: (GameSettings) -> ()
 	private var handle: DisposableHandle?
 	private var createPlayerHandle: DisposableHandle?
 	
 	init(
 		viewModel: CreateGameViewModel,
 		createPlayerViewModel: CreatePlayerViewModel,
-		startGame: @escaping ([Player], Int32, Bool) -> ()
+		startGame: @escaping (GameSettings) -> ()
 	) {
 		self.viewModel = viewModel
 		self.createPlayerViewModel = createPlayerViewModel
@@ -33,9 +33,11 @@ internal final class IOSCreateGameViewModel: ObservableObject {
 	
 	func start(isFinishWithDoubles: Bool) {
 		startGame(
-			state.selectedPlayers,
-			state.selectedGoal?.int32Value ?? 0,
-			isFinishWithDoubles
+			GameSettings(
+				selectedPlayers: state.selectedPlayers,
+				selectedGameGoal: state.selectedGoal?.int32Value ?? 0,
+				isFinishWithDoublesChecked: isFinishWithDoubles
+			)
 		)
 	}
 	

@@ -40,19 +40,17 @@ internal struct GameTab: View {
 		case .createGame:
 			CreateGameScene.create(
 				using: module,
-				startGame: { players, goal, isFinishWithDoublesChecked in
-					navigationStack.append(.game(players: players, goal: goal, isFinishWithDoublesChecked: isFinishWithDoublesChecked))
+				startGame: { settings in
+					navigationStack.append(.game(settings: settings))
 				}
 			)
 			.navigationTitle("create_game")
 			.navigationBarTitleDisplayMode(.inline)
 			
-		case let .game(players, goal, isFinishWithDoublesChecked):
+		case let .game(settings):
 			GameScene.create(
 				using: module,
-				players: players,
-				goal: goal,
-				isFinishWithDoublesChecked: isFinishWithDoublesChecked,
+				gameSettings: settings,
 				onGameFinished: {
 					navigationStack = []
 				},
@@ -66,7 +64,7 @@ internal struct GameTab: View {
 				},
 				onGameReplaySelected: {
 					navigationStack.append(
-						.game(players: players, goal: goal, isFinishWithDoublesChecked: isFinishWithDoublesChecked)
+						.game(settings: settings)
 					)
 				}
 			)

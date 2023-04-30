@@ -4,6 +4,7 @@ import com.alextos.darts.core.domain.model.Player
 import com.alextos.darts.game.domain.models.Game
 import com.alextos.darts.game.domain.models.GameHistory
 import com.alextos.darts.core.domain.model.Shot
+import com.alextos.darts.game.domain.models.GameSettings
 import com.alextos.darts.game.domain.useCases.SaveGameHistoryUseCase
 import com.alextos.darts.game.presentation.game.TurnState
 import kotlinx.coroutines.flow.*
@@ -13,10 +14,12 @@ import kotlinx.datetime.toLocalDateTime
 
 class GameManager(
     private val saveGameHistoryUseCase: SaveGameHistoryUseCase,
-    private val players: List<Player>,
-    private val goal: Int,
-    private val finishWithDoubles: Boolean
+    gameSettings: GameSettings?
 ) {
+    private val players = gameSettings?.selectedPlayers ?: listOf()
+    private val goal = gameSettings?.selectedGameGoal ?: 0
+    private val finishWithDoubles = gameSettings?.isFinishWithDoublesChecked ?: false
+
     private val playerHistoryManagers by lazy {
         players.map {
             PlayerHistoryManager(it, goal, finishWithDoubles)

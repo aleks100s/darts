@@ -5,7 +5,7 @@ import com.alextos.darts.core.domain.model.Turn
 
 sealed class GameEvent {
     data class MakeShot(val sector: Sector): GameEvent()
-    data class ShowDarts(val turns: List<Turn>, val currentSet: Turn): GameEvent()
+    data class ShowDarts(val turns: List<Turn>, val currentPage: Int): GameEvent()
     object BackButtonPressed: GameEvent()
     object CloseGame: GameEvent()
     object ReturnToGame: GameEvent()

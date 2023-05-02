@@ -28,7 +28,7 @@ fun VictoryDistributionScreen(
     onBackPressed: () -> Unit
 ) {
     Screen(
-        title = state.distribution?.player?.name ?: stringResource(id = R.string.no_data_yet),
+        title = state.distribution?.player?.name ?: stringResource(id = R.string.statistics),
         onBackPressed = onBackPressed
     ) { modifier ->
         state.distribution?.let { distribution ->

@@ -78,8 +78,10 @@ class PlayerHistoryManager(
     }
 
     private fun countShot(shot: Shot) {
-        reminder -= shot.sector.value
-        currentTurnShots.add(shot)
+        if (currentTurnShots.count() < 3) {
+            reminder -= shot.sector.value
+            currentTurnShots.add(shot)
+        }
     }
 
     private fun trackShotResult(shotResult: ShotResult): TurnState {

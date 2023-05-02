@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.window.DialogProperties
 import com.alextos.darts.android.R
 import com.alextos.darts.android.common.presentation.ScreenType
 import com.alextos.darts.android.common.presentation.views.GameHistoryView
@@ -110,7 +111,7 @@ private fun GameInput(
 @Composable
 private fun TurnOverDialog(result: Int, onEvent: (GameEvent) -> Unit) {
     AlertDialog(
-        onDismissRequest = { onEvent(GameEvent.ChangeTurn) },
+        onDismissRequest = { },
         title = {
             Text(text = stringResource(id = R.string.turn_is_over))
         },
@@ -133,7 +134,8 @@ private fun TurnOverDialog(result: Int, onEvent: (GameEvent) -> Unit) {
             ) {
                 Text(text = stringResource(id = R.string.reset_turn))
             }
-        }
+        },
+        properties = DialogProperties(dismissOnBackPress = false, dismissOnClickOutside = false)
     )
 }
 
@@ -181,6 +183,7 @@ private fun GameFinishedDialog(winner: String?, onEvent: (GameEvent) -> Unit) {
             Button(onClick = { onEvent(GameEvent.CloseGame) }) {
                 Text(text = stringResource(id = R.string.finish_game))
             }
-        }
+        },
+        properties = DialogProperties(dismissOnBackPress = false, dismissOnClickOutside = false)
     )
 }

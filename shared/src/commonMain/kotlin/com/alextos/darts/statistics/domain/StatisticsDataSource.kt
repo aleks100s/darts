@@ -11,8 +11,8 @@ import kotlinx.coroutines.flow.Flow
 interface StatisticsDataSource {
     fun getPlayerBestSet(player: Player): Flow<Turn?>
     fun getPlayerBiggestFinalSet(player: Player): Flow<Turn?>
-    fun getAverageSetScore(): Flow<Double?>
-    fun getPlayerAverageSetScore(player: Player): Flow<Double?>
+    fun getAverageTurnScore(): Flow<Double?>
+    fun getPlayerAverageTurnScore(player: Player): Flow<Double?>
     fun getAverageShotValue(): Flow<Double?>
     fun getPlayerAverageShotValue(player: Player): Flow<Double?>
     fun getShotDistribution(): Flow<ShotDistribution>

@@ -30,13 +30,13 @@ class SqlDelightStatisticsDataSource(
             .map { it.playerBiggestFinalSetToSet() }
     }
 
-    override fun getAverageSetScore(): Flow<Double?> {
+    override fun getAverageTurnScore(): Flow<Double?> {
         return queries.getAverageSetScore()
             .asFlow()
             .map { it.executeAsOne().averageScore }
     }
 
-    override fun getPlayerAverageSetScore(player: Player): Flow<Double?> {
+    override fun getPlayerAverageTurnScore(player: Player): Flow<Double?> {
         return queries.getPlayerAverageSetScore(player.id)
             .asFlow()
             .map { it.executeAsOne().averageScore }

@@ -11,7 +11,7 @@ class GetPlayersAverageValuesUseCase(
 ) {
     fun execute(players: List<Player>): Flow<List<AveragePlayerValue>> {
         val flows = players.map { player ->
-            val setScoreFlow = dataSource.getPlayerAverageSetScore(player)
+            val setScoreFlow = dataSource.getPlayerAverageTurnScore(player)
             val shotValueFlow = dataSource.getPlayerAverageShotValue(player)
             setScoreFlow.combine(shotValueFlow) { setScore, shotValue ->
                 if (setScore != null && shotValue != null) {

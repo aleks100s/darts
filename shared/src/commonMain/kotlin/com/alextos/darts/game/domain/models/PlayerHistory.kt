@@ -38,8 +38,9 @@ data class PlayerHistory(
     }
 
     fun average(): Int {
-        val sum =  turns.sumOf { it.score() }
-        val count = turns.count()
+        val finishedTurns = turns.filter { it.shots.count() == 3 }
+        val sum =  finishedTurns.sumOf { it.score() }
+        val count = finishedTurns.count()
         return if (count != 0) {
             sum / count
         } else {

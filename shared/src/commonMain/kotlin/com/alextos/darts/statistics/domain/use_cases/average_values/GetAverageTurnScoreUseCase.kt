@@ -8,7 +8,7 @@ class GetAverageTurnScoreUseCase(
     private val dataSource: StatisticsDataSource
 ) {
     fun execute(): Flow<Double> {
-        return dataSource.getAverageSetScore()
+        return dataSource.getAverageTurnScore()
             .mapNotNull { it ?: 0.0 }
     }
 }

@@ -4,11 +4,11 @@ import com.alextos.darts.statistics.domain.StatisticsDataSource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.mapNotNull
 
-class GetAverageTurnScoreUseCase(
+class GetOverallAverageShotValueUseCase(
     private val dataSource: StatisticsDataSource
 ) {
     fun execute(): Flow<Double> {
-        return dataSource.getAverageTurnScore()
+        return dataSource.getAverageShotValue()
             .mapNotNull { it ?: 0.0 }
     }
 }

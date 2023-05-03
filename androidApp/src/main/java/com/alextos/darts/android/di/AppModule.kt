@@ -12,8 +12,8 @@ import com.alextos.darts.core.domain.useCases.GetPlayersUseCase
 import com.alextos.darts.game.domain.useCases.*
 import com.alextos.darts.statistics.data.SqlDelightStatisticsDataSource
 import com.alextos.darts.statistics.domain.StatisticsDataSource
-import com.alextos.darts.statistics.domain.use_cases.average_values.GetAverageTurnScoreUseCase
-import com.alextos.darts.statistics.domain.use_cases.average_values.GetAverageShotValueUseCase
+import com.alextos.darts.statistics.domain.use_cases.average_values.GetOverallAverageTurnScoreUseCase
+import com.alextos.darts.statistics.domain.use_cases.average_values.GetOverallAverageShotValueUseCase
 import com.alextos.darts.statistics.domain.use_cases.average_values.GetPlayersAverageValuesUseCase
 import com.alextos.darts.statistics.domain.use_cases.best_turn.GetPlayersBestTurnsUseCase
 import com.alextos.darts.statistics.domain.use_cases.biggest_final_turn.GetPlayersBiggestFinalTurnUseCase
@@ -104,14 +104,14 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideGetAverageSetScoreUseCase(dataSource: StatisticsDataSource): GetAverageTurnScoreUseCase {
-        return GetAverageTurnScoreUseCase(dataSource)
+    fun provideGetAverageSetScoreUseCase(dataSource: StatisticsDataSource): GetOverallAverageTurnScoreUseCase {
+        return GetOverallAverageTurnScoreUseCase(dataSource)
     }
 
     @Provides
     @Singleton
-    fun provideGetAverageShotValueUseCase(dataSource: StatisticsDataSource): GetAverageShotValueUseCase {
-        return GetAverageShotValueUseCase(dataSource)
+    fun provideGetAverageShotValueUseCase(dataSource: StatisticsDataSource): GetOverallAverageShotValueUseCase {
+        return GetOverallAverageShotValueUseCase(dataSource)
     }
 
     @Provides
@@ -148,5 +148,11 @@ object AppModule {
     @Singleton
     fun provideDeletePlayerUseCase(dataSource: PlayersDataSource): DeletePlayerUseCase {
         return DeletePlayerUseCase(dataSource)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetPlayerAverageTurnUseCase(dataSource: StatisticsDataSource): GetPlayerAverageTurnUseCase {
+        return GetPlayerAverageTurnUseCase(dataSource)
     }
 }

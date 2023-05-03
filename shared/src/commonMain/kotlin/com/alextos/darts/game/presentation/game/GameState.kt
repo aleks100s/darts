@@ -13,7 +13,8 @@ data class GameState(
     val isGameFinished: Boolean = false,
     val isCloseGameDialogOpened: Boolean = false,
     val turnState: TurnState = TurnState.IsOngoing,
-    val gameGoal: Int = 0
+    val gameGoal: Int = 0,
+    val averageTurns: Map<Player, Int> = mapOf()
 ) {
     fun isTurnOver(): Boolean {
         return when (turnState) {
@@ -43,7 +44,8 @@ data class GameState(
             return@map GamePlayerResult(
                 player = playerHistory.player,
                 score = lastTurn?.leftAfter ?: gameGoal,
-                average = playerHistory.average(),
+                turnAverage = playerHistory.average(),
+                overallTurnAverage = averageTurns[playerHistory.player] ?: 0,
                 isCurrentPlayer = playerHistory.player == currentPlayer
             )
         }

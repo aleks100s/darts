@@ -168,7 +168,7 @@ private fun GamePlayerItem(
             color = textColor
         )
         Text(
-            text = stringResource(id = R.string.game_player_avg, result.average),
+            text = stringResource(id = R.string.game_player_avg, result.turnAverage, result.overallTurnAverage),
             style = MaterialTheme.typography.caption,
             color = textColor
         )

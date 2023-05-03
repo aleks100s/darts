@@ -7,6 +7,7 @@ import com.alextos.darts.core.domain.model.Shot
 import com.alextos.darts.game.domain.models.GameSettings
 import com.alextos.darts.game.domain.useCases.SaveGameHistoryUseCase
 import com.alextos.darts.game.presentation.game.TurnState
+import com.alextos.darts.game.domain.useCases.GetPlayerAverageTurnUseCase
 import kotlinx.coroutines.flow.*
 import kotlinx.datetime.Clock
 import kotlinx.datetime.TimeZone
@@ -14,6 +15,7 @@ import kotlinx.datetime.toLocalDateTime
 
 class GameManager(
     private val saveGameHistoryUseCase: SaveGameHistoryUseCase,
+    getPlayerAverageTurnUseCase: GetPlayerAverageTurnUseCase,
     gameSettings: GameSettings?
 ) {
     private val players = gameSettings?.selectedPlayers ?: listOf()
@@ -38,6 +40,10 @@ class GameManager(
     val gameHistory = combine(playerHistoryManagers.map { it.playerHistory }) { array ->
         array.toList()
     }
+
+    val averageTurns = combine(
+        players.map { getPlayerAverageTurnUseCase.execute(it) }
+    ) { it.toMap() }
 
     fun getGoal(): Int = goal
 

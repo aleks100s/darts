@@ -16,18 +16,17 @@ class GameViewModel(
     private val _state = MutableStateFlow(GameState())
 
     val state = combine(
-        _state,
-        gameManager.gameHistory,
-        gameManager.currentPlayer,
-        gameManager.isGameFinished,
-        gameManager.turnState
-    ) { state, history, player, isGameFinished, turnState ->
-        state.copy(
-            gameHistory = history,
-            currentPlayer = player,
-            isGameFinished = isGameFinished,
-            turnState = turnState,
-            gameGoal = gameManager.getGoal()
+        combine(_state, gameManager.gameHistory) { state, history -> state to history },
+        combine(gameManager.currentPlayer, gameManager.isGameFinished) { currentPlayer, isGameFinished -> currentPlayer to isGameFinished },
+        combine(gameManager.turnState, gameManager.averageTurns) { turnState, averageTurns -> turnState to averageTurns },
+    ) { stateAndHistory, playerAndIsGameFinished, turnStateAndAverageTurns ->
+        stateAndHistory.first.copy(
+            gameHistory = stateAndHistory.second,
+            currentPlayer = playerAndIsGameFinished.first,
+            isGameFinished = playerAndIsGameFinished.second,
+            turnState = turnStateAndAverageTurns.first,
+            gameGoal = gameManager.getGoal(),
+            averageTurns = turnStateAndAverageTurns.second
         )
     }
         .stateIn(

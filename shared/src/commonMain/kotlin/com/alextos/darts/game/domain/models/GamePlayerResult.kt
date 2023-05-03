@@ -5,6 +5,7 @@ import com.alextos.darts.core.domain.model.Player
 data class GamePlayerResult(
     val player: Player,
     val score: Int,
-    val average: Int,
+    val turnAverage: Int,
+    val overallTurnAverage: Int,
     val isCurrentPlayer: Boolean
 )

@@ -10,7 +10,8 @@ internal final class IOSGameViewModel: ObservableObject {
 		isGameFinished: false,
 		isCloseGameDialogOpened: false,
 		turnState: .IsOngoing(),
-		gameGoal: 0
+		gameGoal: 0,
+		averageTurns: [:]
 	)
 	
 	private let viewModel: GameViewModel

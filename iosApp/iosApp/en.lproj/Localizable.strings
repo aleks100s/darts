@@ -63,7 +63,7 @@
 "game_recap" = "Game recap";
 "average_set_recap" = "Average turn";
 "game_player_result %d" = "Score: %d";
-"game_player_avg %d" = "(Avg: %d)";
+"game_player_avg %d %d" = "Avg: %d (%d)";
 "view_turn" = "View turn";
 "delete_player" = "Delete player and all related games";
 "player_data_will_be_lost" = "Player data will be lost";

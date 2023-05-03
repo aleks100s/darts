@@ -63,7 +63,7 @@
     <string name="game_recap">Game recap</string>
     <string name="average_set_recap">Average turn</string>
     <string name="game_player_result">Score: %1$d</string>
-    <string name="game_player_avg"> (Avg:  %1$d)</string>
+    <string name="game_player_avg"> Avg: %1$d (%2$d)</string>
     <string name="view_turn">View turn</string>
     <string name="delete_player">Delete player and all related games</string>
     <string name="erase_hit">Undo</string>

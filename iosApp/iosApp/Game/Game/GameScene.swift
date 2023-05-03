@@ -11,8 +11,10 @@ internal enum GameScene {
 		onGameReplaySelected: @escaping () -> Void
 	) -> some View {
 		let saveGameHistoryUseCase = SaveGameHistoryUseCase(dataSource: module.gameDataSource)
+		let getPlayerAverageTurnUseCase = GetPlayerAverageTurnUseCase(dataSource: module.statisticsDataSource)
 		let gameManager = GameManager(
 			saveGameHistoryUseCase: saveGameHistoryUseCase,
+			getPlayerAverageTurnUseCase: getPlayerAverageTurnUseCase,
 			gameSettings: gameSettings
 		)
 		let viewModel = GameViewModel(

@@ -19,11 +19,11 @@ data class PlayerHistory(
                 additionalValues
     }
 
-    fun biggestSet(): Turn? {
+    fun biggestTurn(): Turn? {
         return turns.maxByOrNull { it.score() }
     }
 
-    fun smallestSet(): Turn? {
+    fun smallestTurn(): Turn? {
         return turns.minByOrNull { it.score() }
     }
 

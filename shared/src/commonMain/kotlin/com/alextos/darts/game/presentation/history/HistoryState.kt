@@ -17,13 +17,13 @@ data class HistoryState(
 
     fun biggestTurns(): List<PlayerGameValue> {
         return gameHistory.map { playerHistory ->
-            PlayerGameValue(playerHistory.player, playerHistory.biggestSet()?.score() ?: 0)
+            PlayerGameValue(playerHistory.player, playerHistory.biggestTurn()?.score() ?: 0)
         }
     }
 
     fun smallestTurns(): List<PlayerGameValue> {
         return gameHistory.map { playerHistory ->
-            PlayerGameValue(playerHistory.player, playerHistory.smallestSet()?.score() ?: 0)
+            PlayerGameValue(playerHistory.player, playerHistory.smallestTurn()?.score() ?: 0)
         }
     }
 

@@ -317,4 +317,95 @@ class PlayerHistoryManagerTest {
     private fun sumUpShotsValue(shots: List<Shot>): Int {
         return shots.fold(0) { acc, shot -> acc + shot.sector.value }
     }
+
+    // write tests for undo shot when last turn has one shot removes last shot
+    @Test
+    fun `test undo shot when last turn has one shot removes last shot`() = runBlocking {
+        val initialScore = 101
+        val sut = PlayerHistoryManager(
+            player = defaultPlayer,
+            goal = initialScore,
+            finishWithDoubles = false
+        )
+
+        val shot1 = Shot(Sector.Triple2)
+        val shot2 = Shot(Sector.Triple3)
+        val shot3 = Shot(Sector.SingleInner1)
+        val shot4 = Shot(Sector.Double5)
+        sut.makeShot(shot1)
+        sut.makeShot(shot2)
+        sut.makeShot(shot3)
+        sut.makeShot(shot4)
+        sut.undoLastShot()
+        sut.undoLastShot()
+
+        sut.playerHistory.test {
+            val value = awaitItem()
+            assertThat(value.turns).isEqualTo(listOf(
+                createTurn(listOf(shot1, shot2, shot3), initialScore = 101),
+                createTurn(listOf(), initialScore = 101 - sumUpShotsValue(shots = listOf(shot1, shot2, shot3)))
+            ))
+        }
+    }
+
+    @Test
+    fun `test undo shot when last turn has one shot removes last shot 2`() = runBlocking {
+        val initialScore = 101
+        val sut = PlayerHistoryManager(
+            player = defaultPlayer,
+            goal = initialScore,
+            finishWithDoubles = false
+        )
+
+        val shot1 = Shot(Sector.Triple2)
+        val shot2 = Shot(Sector.Triple3)
+        val shot3 = Shot(Sector.SingleInner1)
+        val shot4 = Shot(Sector.Double5)
+        sut.makeShot(shot1)
+        sut.makeShot(shot2)
+        sut.makeShot(shot3)
+        sut.makeShot(shot4)
+        sut.undoLastShot()
+        sut.undoLastShot()
+        sut.undoLastShot()
+
+        sut.playerHistory.test {
+            val value = awaitItem()
+            assertThat(value.turns).isEqualTo(listOf(
+                createTurn(listOf(shot1, shot2, shot3), initialScore = 101),
+                createTurn(listOf(), initialScore = 101 - sumUpShotsValue(shots = listOf(shot1, shot2, shot3)))
+            ))
+        }
+    }
+
+    @Test
+    fun `test undo shot when last turn has one shot removes last shot 3`() = runBlocking {
+        val initialScore = 101
+        val sut = PlayerHistoryManager(
+            player = defaultPlayer,
+            goal = initialScore,
+            finishWithDoubles = false
+        )
+
+        val shot1 = Shot(Sector.Triple2)
+        val shot2 = Shot(Sector.Triple3)
+        val shot3 = Shot(Sector.SingleInner1)
+        val shot4 = Shot(Sector.Double5)
+        sut.makeShot(shot1)
+        sut.makeShot(shot2)
+        sut.makeShot(shot3)
+        sut.makeShot(shot4)
+        sut.undoLastShot()
+        sut.undoLastShot()
+        sut.undoLastShot()
+        sut.undoLastShot()
+
+        sut.playerHistory.test {
+            val value = awaitItem()
+            assertThat(value.turns).isEqualTo(listOf(
+                createTurn(listOf(shot1, shot2, shot3), initialScore = 101),
+                createTurn(listOf(), initialScore = 101 - sumUpShotsValue(shots = listOf(shot1, shot2, shot3)))
+            ))
+        }
+    }
 }

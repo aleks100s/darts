@@ -43,7 +43,7 @@ class GameManager(
 
     val averageTurns = combine(
         players.map { getPlayerAverageTurnUseCase.execute(it) }
-    ) { it.toMap() }
+    ) { it.toList() }
 
     fun getGoal(): Int = goal
 

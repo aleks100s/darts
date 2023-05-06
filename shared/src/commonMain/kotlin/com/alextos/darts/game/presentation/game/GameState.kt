@@ -4,6 +4,7 @@ import com.alextos.darts.game.domain.models.PlayerHistory
 import com.alextos.darts.core.domain.model.Turn
 import com.alextos.darts.core.domain.model.Player
 import com.alextos.darts.game.domain.models.GamePlayerResult
+import com.alextos.darts.game.domain.models.PlayerGameValue
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -14,7 +15,7 @@ data class GameState(
     val isCloseGameDialogOpened: Boolean = false,
     val turnState: TurnState = TurnState.IsOngoing,
     val gameGoal: Int = 0,
-    val averageTurns: Map<Player, Int> = mapOf()
+    val averageTurns: List<PlayerGameValue> = listOf()
 ) {
     fun isTurnOver(): Boolean {
         return when (turnState) {
@@ -45,7 +46,7 @@ data class GameState(
                 player = playerHistory.player,
                 score = lastTurn?.leftAfter ?: gameGoal,
                 turnAverage = playerHistory.average(),
-                overallTurnAverage = averageTurns[playerHistory.player] ?: 0,
+                overallTurnAverage = averageTurns.find { it.player == playerHistory.player }?.value ?: 0,
                 isCurrentPlayer = playerHistory.player == currentPlayer
             )
         }

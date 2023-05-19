@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import com.alextos.darts.android.R
 import com.alextos.darts.android.common.presentation.components.ChartLegendItem
 import com.alextos.darts.android.common.presentation.screens.Screen
+import com.alextos.darts.android.common.presentation.views.LoadingView
 import com.alextos.darts.android.common.presentation.views.NoDataView
 import com.alextos.darts.statistics.domain.models.PlayerVictoryDistribution
 import com.alextos.darts.statistics.presentation.victory_distribution.VictoryDistributionState
@@ -31,20 +32,24 @@ fun VictoryDistributionScreen(
         title = state.distribution?.player?.name ?: stringResource(id = R.string.statistics),
         onBackPressed = onBackPressed
     ) { modifier ->
-        state.distribution?.let { distribution ->
-            if (distribution.isEmpty()) {
-                NoDataView(modifier)
-            } else {
-                LazyColumn(
-                    modifier = modifier.fillMaxSize(),
-                ) {
-                    item {
-                        VictoryDistributionChart(distribution = distribution)
+        if (state.isLoading) {
+            LoadingView()
+        } else {
+            state.distribution?.let { distribution ->
+                if (distribution.isEmpty()) {
+                    NoDataView(modifier)
+                } else {
+                    LazyColumn(
+                        modifier = modifier.fillMaxSize(),
+                    ) {
+                        item {
+                            VictoryDistributionChart(distribution = distribution)
+                        }
                     }
                 }
+            } ?: run {
+                NoDataView(modifier)
             }
-        } ?: run {
-            NoDataView(modifier)
         }
     }
 }

@@ -18,6 +18,7 @@ import com.alextos.darts.android.R
 import com.alextos.darts.android.common.presentation.components.FAB
 import com.alextos.darts.android.common.presentation.extensions.getTitle
 import com.alextos.darts.android.common.presentation.screens.Screen
+import com.alextos.darts.android.common.presentation.views.LoadingView
 import com.alextos.darts.android.common.presentation.views.NoDataView
 import com.alextos.darts.game.domain.models.Game
 import com.alextos.darts.game.presentation.game_list.GameListEvent
@@ -31,11 +32,13 @@ fun GameListScreen(
 ) {
     Scaffold(
         floatingActionButton = {
-            FAB(
-                text = stringResource(id = R.string.create_game),
-                icon = Icons.Filled.Create
-            ) {
-                onEvent(GameListEvent.CreateGame)
+            if (!state.isLoading) {
+                FAB(
+                    text = stringResource(id = R.string.create_game),
+                    icon = Icons.Filled.Create
+                ) {
+                    onEvent(GameListEvent.CreateGame)
+                }
             }
         }
     ) { padding ->
@@ -44,7 +47,9 @@ fun GameListScreen(
             isBackButtonVisible = false,
             onBackPressed = onBackPressed
         ) { modifier ->
-            if (state.games.isEmpty()) {
+            if (state.isLoading) {
+                LoadingView()
+            } else if (state.games.isEmpty()) {
                 NoDataView(modifier)
             } else {
                 LazyColumn(

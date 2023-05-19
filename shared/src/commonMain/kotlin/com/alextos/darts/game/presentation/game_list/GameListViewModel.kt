@@ -21,7 +21,7 @@ class GameListViewModel(
         getGamesUseCase.execute()
     ) { state, games ->
         if (games != state.games) {
-            state.copy(games = games)
+            state.copy(games = games, isLoading = false)
         } else {
             state
         }

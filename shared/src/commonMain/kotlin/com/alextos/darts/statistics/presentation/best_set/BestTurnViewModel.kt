@@ -24,7 +24,7 @@ class BestTurnViewModel(
                     getPlayersBestTurnsUseCase.execute(players)
                 }
         ) { state, playersTurns ->
-            state.copy(playersBestTurns = playersTurns)
+            state.copy(playersBestTurns = playersTurns, isLoading = false)
         }
         .stateIn(
             viewModelScope,

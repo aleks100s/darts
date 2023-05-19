@@ -19,6 +19,7 @@ import com.alextos.darts.android.common.presentation.extensions.arc
 import com.alextos.darts.android.common.presentation.extensions.color
 import com.alextos.darts.android.common.presentation.extensions.drawNumbers
 import com.alextos.darts.android.common.presentation.screens.Screen
+import com.alextos.darts.android.common.presentation.views.LoadingView
 import com.alextos.darts.android.common.presentation.views.NoDataView
 import com.alextos.darts.core.domain.model.Sector
 import com.alextos.darts.statistics.domain.models.SectorHeat
@@ -34,18 +35,22 @@ fun SectorHeatmapScreen(
         title = state.distribution?.player?.name ?: stringResource(id = R.string.statistics),
         onBackPressed = onBackPressed
     ) { modifier ->
-        state.distribution?.let { distribution ->
-            LazyColumn(modifier = modifier) {
-                item {
-                    HeatmapDartsDisk(distribution = distribution)
-                }
+        if (state.isLoading) {
+            LoadingView()
+        } else {
+            state.distribution?.let { distribution ->
+                LazyColumn(modifier = modifier) {
+                    item {
+                        HeatmapDartsDisk(distribution = distribution)
+                    }
 
-                items(distribution.heatmap) {
-                    SectorItem(sectorHeat = it)
+                    items(distribution.heatmap) {
+                        SectorItem(sectorHeat = it)
+                    }
                 }
+            } ?: run {
+                NoDataView(modifier = Modifier)
             }
-        } ?: run {
-            NoDataView(modifier = Modifier)
         }
     }
 }

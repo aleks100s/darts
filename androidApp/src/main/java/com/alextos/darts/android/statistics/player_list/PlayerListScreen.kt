@@ -6,6 +6,8 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import com.alextos.darts.android.common.presentation.components.PlayerDisclosureItem
 import com.alextos.darts.android.common.presentation.screens.Screen
+import com.alextos.darts.android.common.presentation.views.LoadingView
+import com.alextos.darts.android.common.presentation.views.NoDataView
 import com.alextos.darts.statistics.presentation.player_list.PlayerListEvent
 import com.alextos.darts.statistics.presentation.player_list.PlayerListState
 
@@ -17,10 +19,16 @@ fun PlayerListScreen(
     onBackPressed: () -> Unit
 ) {
     Screen(title = title, onBackPressed = onBackPressed) { modifier ->
-        LazyColumn(modifier = modifier.fillMaxSize()) {
-            items(state.players) { player ->
-                PlayerDisclosureItem(player = player) {
-                    onEvent(PlayerListEvent.SelectPlayer(player))
+        if (state.isLoading) {
+            LoadingView()
+        } else if (state.players.isEmpty()) {
+            NoDataView(modifier = modifier)
+        } else {
+            LazyColumn(modifier = modifier.fillMaxSize()) {
+                items(state.players) { player ->
+                    PlayerDisclosureItem(player = player) {
+                        onEvent(PlayerListEvent.SelectPlayer(player))
+                    }
                 }
             }
         }

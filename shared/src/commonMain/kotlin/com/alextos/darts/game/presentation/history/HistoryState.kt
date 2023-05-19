@@ -7,7 +7,8 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class HistoryState(
     val gameHistory: List<PlayerHistory> = listOf(),
-    val gameGoal: Int = 0
+    val gameGoal: Int = 0,
+    val isLoading: Boolean = true
 ) {
     fun averageTurns(): List<PlayerGameValue> {
         return gameHistory.map { playerHistory ->

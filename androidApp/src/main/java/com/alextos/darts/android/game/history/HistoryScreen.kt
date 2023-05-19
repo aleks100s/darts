@@ -15,6 +15,8 @@ import com.alextos.darts.android.common.presentation.screens.Screen
 import com.alextos.darts.android.common.presentation.screens.SplitScreen
 import com.alextos.darts.android.common.presentation.views.GameHistoryView
 import com.alextos.darts.android.common.presentation.views.GameRecapView
+import com.alextos.darts.android.common.presentation.views.LoadingView
+import com.alextos.darts.android.common.presentation.views.NoDataView
 import com.alextos.darts.game.presentation.history.HistoryEvent
 import com.alextos.darts.game.presentation.history.HistoryState
 
@@ -28,22 +30,29 @@ fun HistoryScreen(
         is ScreenType.Compact -> {
             Scaffold(
                 floatingActionButton = {
-                    FAB(
-                        text = stringResource(id = R.string.recap),
-                        icon = Icons.Filled.ShowChart
-                    ) {
-                        onEvent(HistoryEvent.ShowRecap)
+                    if (!state.isLoading) {
+                        FAB(
+                            text = stringResource(id = R.string.recap),
+                            icon = Icons.Filled.ShowChart
+                        ) {
+                            onEvent(HistoryEvent.ShowRecap)
+                        }
                     }
                 }
             ) { paddingValues ->
                 Screen(
                     title = stringResource(id = R.string.history),
                     onBackPressed = onBackPressed) { modifier ->
-                    GameHistory(
-                        modifier = modifier.padding(paddingValues),
-                        state = state,
-                        onEvent = onEvent
-                    )
+                    ContentLoading(
+                        isLoading = state.isLoading,
+                        isEmpty = state.gameHistory.isEmpty()
+                    ) {
+                        GameHistory(
+                            modifier = modifier.padding(paddingValues),
+                            state = state,
+                            onEvent = onEvent
+                        )
+                    }
                 }
             }
         }
@@ -51,18 +60,43 @@ fun HistoryScreen(
             SplitScreen(
                 title = stringResource(id = R.string.history),
                 content1 = {
-                    GameHistory(
-                        modifier = Modifier,
-                        state = state,
-                        onEvent = onEvent
-                    )
+                    ContentLoading(
+                        isLoading = state.isLoading,
+                        isEmpty = state.gameHistory.isEmpty()
+                    ) {
+                        GameHistory(
+                            modifier = Modifier,
+                            state = state,
+                            onEvent = onEvent
+                        )
+                    }
                 },
                 content2 = {
-                    GameRecap(state = state)
+                    ContentLoading(
+                        isLoading = state.isLoading,
+                        isEmpty = state.gameHistory.isEmpty()
+                    ) {
+                        GameRecap(state = state)
+                    }
                 },
                 onBackPressed = onBackPressed
             )
         }
+    }
+}
+
+@Composable
+private fun ContentLoading(
+    isLoading: Boolean,
+    isEmpty: Boolean,
+    content: @Composable () -> Unit
+) {
+    if (isLoading) {
+        LoadingView()
+    } else if (isEmpty) {
+        NoDataView(Modifier)
+    } else {
+        content()
     }
 }
 

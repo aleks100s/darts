@@ -16,7 +16,7 @@ class VictoryDistributionViewModel(
 
     private val _state = MutableStateFlow(VictoryDistributionState())
     val state = _state.combine(getPlayerVictoryDistributionUseCase.execute(player)) { state, distribution ->
-        state.copy(distribution = distribution)
+        state.copy(distribution = distribution, isLoading = false)
     }
         .stateIn(
             viewModelScope,

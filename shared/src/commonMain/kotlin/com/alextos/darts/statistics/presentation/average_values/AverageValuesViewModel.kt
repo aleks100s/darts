@@ -33,7 +33,8 @@ class AverageValuesViewModel(
             state.copy(
                 averageTurnOfAll = averageSet,
                 averageShotOfAll = averageShot,
-                playersAverageValues = playersValues
+                playersAverageValues = playersValues,
+                isLoading = false
             )
         }
         .stateIn(

@@ -5,6 +5,7 @@ import androidx.compose.ui.res.stringResource
 import com.alextos.darts.android.R
 import com.alextos.darts.android.common.presentation.views.StatisticPlayersListView
 import com.alextos.darts.android.common.presentation.screens.Screen
+import com.alextos.darts.android.common.presentation.views.LoadingView
 import com.alextos.darts.android.common.presentation.views.NoDataView
 import com.alextos.darts.statistics.presentation.biggest_final_turn.BiggestFinalTurnEvent
 import com.alextos.darts.statistics.presentation.biggest_final_turn.BiggestFinalTurnState
@@ -19,7 +20,9 @@ fun BiggestFinalTurnScreen(
         title = stringResource(id = R.string.biggest_final_set_statistics),
         onBackPressed = onBackPressed
     ) { modifier ->
-        if (state.playersBiggestFinalTurns.isEmpty()) {
+        if (state.isLoading) {
+            LoadingView()
+        } else if (state.playersBiggestFinalTurns.isEmpty()) {
             NoDataView(modifier)
         } else {
             StatisticPlayersListView(

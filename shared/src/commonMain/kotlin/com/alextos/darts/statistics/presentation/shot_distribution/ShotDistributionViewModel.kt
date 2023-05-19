@@ -17,7 +17,7 @@ class ShotDistributionViewModel(
     private val _state = MutableStateFlow(ShotDistributionState())
     val state = _state
         .combine(getPlayerShotDistributionUseCase.execute(player)) { state, distribution ->
-            state.copy(distribution = distribution)
+            state.copy(distribution = distribution, isLoading = false)
         }
         .stateIn(
             viewModelScope,

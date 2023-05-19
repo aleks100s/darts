@@ -15,7 +15,7 @@ class PlayerListViewModel(
     private val _state = MutableStateFlow(PlayerListState())
     val state = getPlayersUseCase.execute()
         .combine(_state) { players, state ->
-            state.copy(players = players)
+            state.copy(players = players, isLoading = false)
         }
         .stateIn(
             viewModelScope,

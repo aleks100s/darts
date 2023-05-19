@@ -13,9 +13,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.alextos.darts.android.R
 import com.alextos.darts.android.common.presentation.screens.Screen
+import com.alextos.darts.android.common.presentation.views.LoadingView
 import com.alextos.darts.android.common.presentation.views.NoDataView
 import com.alextos.darts.statistics.presentation.average_values.AverageValuesState
 
@@ -28,7 +30,9 @@ fun AverageValuesScreen(
         title = stringResource(id = R.string.average_values_statistics),
         onBackPressed = onBackPressed
     ) { modifier ->
-        if (state.isEmpty()) {
+        if (state.isLoading) {
+            LoadingView()
+        } else if (state.isEmpty()) {
             NoDataView(modifier)
         } else {
             LazyColumn(modifier) {
@@ -71,15 +75,18 @@ private fun PlayerValues(
     ) {
         Text(
             modifier = Modifier.weight(1f),
-            text = title
+            text = title,
+            textAlign = TextAlign.Center
         )
         Text(
             modifier = Modifier.weight(1f),
-            text = String.format("%.2f", avgSetScore)
+            text = String.format("%.2f", avgSetScore),
+            textAlign = TextAlign.Center
         )
         Text(
             modifier = Modifier.weight(1f),
-            text = String.format("%.2f", avgShotValue)
+            text = String.format("%.2f", avgShotValue),
+            textAlign = TextAlign.Center
         )
     }
 }
@@ -96,15 +103,18 @@ private fun Header() {
     ) {
         Text(
             modifier = Modifier.weight(1f),
-            text = stringResource(id = R.string.player)
+            text = stringResource(id = R.string.player),
+            textAlign = TextAlign.Center
         )
         Text(
             modifier = Modifier.weight(1f),
-            text = stringResource(id = R.string.average_set)
+            text = stringResource(id = R.string.average_set),
+            textAlign = TextAlign.Center
         )
         Text(
             modifier = Modifier.weight(1f),
-            text = stringResource(id = R.string.average_shot)
+            text = stringResource(id = R.string.average_shot),
+            textAlign = TextAlign.Center
         )
     }
 }

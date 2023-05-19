@@ -5,6 +5,7 @@ import androidx.compose.ui.res.stringResource
 import com.alextos.darts.android.R
 import com.alextos.darts.android.common.presentation.views.StatisticPlayersListView
 import com.alextos.darts.android.common.presentation.screens.Screen
+import com.alextos.darts.android.common.presentation.views.LoadingView
 import com.alextos.darts.android.common.presentation.views.NoDataView
 import com.alextos.darts.statistics.presentation.best_set.BestTurnEvent
 import com.alextos.darts.statistics.presentation.best_set.BestTurnState
@@ -19,7 +20,9 @@ fun BestTurnScreen(
         title = stringResource(id = R.string.best_set_statistics),
         onBackPressed = onBackPressed
     ) { modifier ->
-        if (state.playersBestTurns.isEmpty()) {
+        if (state.isLoading) {
+            LoadingView()
+        } else if (state.playersBestTurns.isEmpty()) {
             NoDataView(modifier)
         } else {
             StatisticPlayersListView(

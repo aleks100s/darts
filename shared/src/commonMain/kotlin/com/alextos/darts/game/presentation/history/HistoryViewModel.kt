@@ -18,7 +18,7 @@ class HistoryViewModel(
     private val _state = MutableStateFlow(HistoryState(gameGoal = game?.gameGoal ?: 0))
     val state = _state
         .combine(getGameHistoryUseCase.execute(game?.id ?: 0, game?.players ?: listOf())) { state, history ->
-            state.copy(gameHistory = history)
+            state.copy(gameHistory = history, isLoading = false)
         }
         .stateIn(
             viewModelScope,

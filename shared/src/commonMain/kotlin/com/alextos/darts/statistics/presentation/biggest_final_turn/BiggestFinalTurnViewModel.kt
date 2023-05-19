@@ -24,7 +24,7 @@ class BiggestFinalTurnViewModel(
                     getPlayersBiggestFinalTurnUseCase.execute(players)
                 }
         ) { state, playersTurns ->
-            state.copy(playersBiggestFinalTurns = playersTurns)
+            state.copy(playersBiggestFinalTurns = playersTurns, isLoading = false)
         }
         .stateIn(
             viewModelScope,

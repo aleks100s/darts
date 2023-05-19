@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import com.alextos.darts.android.R
 import com.alextos.darts.android.common.presentation.components.ChartLegendItem
 import com.alextos.darts.android.common.presentation.screens.Screen
+import com.alextos.darts.android.common.presentation.views.LoadingView
 import com.alextos.darts.android.common.presentation.views.NoDataView
 import com.alextos.darts.statistics.domain.models.ShotDistribution
 import com.alextos.darts.statistics.presentation.shot_distribution.ShotDistributionState
@@ -31,20 +32,24 @@ fun ShotDistributionScreen(
         title = state.distribution?.player?.name ?: stringResource(id = R.string.statistics),
         onBackPressed = onBackPressed
     ) { modifier ->
-        state.distribution?.let { distribution ->
-            if (distribution.distribution.isEmpty()) {
-                NoDataView(modifier)
-            } else {
-                LazyColumn(
-                    modifier = modifier.fillMaxSize(),
-                ) {
-                    item {
-                        PlayerDistributionItem(distribution = distribution.distribution)
+        if (state.isLoading) {
+            LoadingView()
+        } else {
+            state.distribution?.let { distribution ->
+                if (distribution.distribution.isEmpty()) {
+                    NoDataView(modifier)
+                } else {
+                    LazyColumn(
+                        modifier = modifier.fillMaxSize(),
+                    ) {
+                        item {
+                            PlayerDistributionItem(distribution = distribution.distribution)
+                        }
                     }
                 }
+            } ?: run {
+                NoDataView(modifier = modifier)
             }
-        } ?: run {
-            NoDataView(modifier = modifier)
         }
     }
 }

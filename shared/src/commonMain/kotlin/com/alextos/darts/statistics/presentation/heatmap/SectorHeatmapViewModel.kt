@@ -16,7 +16,7 @@ class SectorHeatmapViewModel(
 
     private val _state = MutableStateFlow(SectorHeatmapState())
     val state = _state.combine(getSectorHeatmapUseCase.execute(player)) { state, distribution ->
-        state.copy(distribution = distribution)
+        state.copy(distribution = distribution, isLoading = false)
     }
         .stateIn(
             viewModelScope,

@@ -9,9 +9,15 @@ internal struct GameTab: View {
 	
 	var body: some View {
 		NavigationStack(path: $navigationStack) {
-			GameListScene.create(using: module) { game in
-				navigationStack.append(.history(game: game))
-			}
+			GameListScene.create(
+				using: module,
+				onGameSelected: { game in
+					navigationStack.append(.history(game: game))
+				},
+				onReplay: { game in
+					navigationStack.append(.game(settings: game.getGameSettings()))
+				}
+			)
 				.navigationTitle("games")
 				.toolbar {
 					Button {

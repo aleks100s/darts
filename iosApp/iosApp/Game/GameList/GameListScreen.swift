@@ -41,6 +41,14 @@ internal struct GameListScreen: View {
 						.onTapGesture {
 							viewModel.select(game: game)
 						}
+						.swipeActions(edge: .leading, allowsFullSwipe: true) {
+							Button {
+								viewModel.replay(game: game)
+							} label: {
+								Label(LocalizedStringKey("replay"), systemImage: "goforward")
+							}
+							.tint(.green)
+						}
 				}
 				.onDelete { indexTurn in
 					if let index = indexTurn.first {

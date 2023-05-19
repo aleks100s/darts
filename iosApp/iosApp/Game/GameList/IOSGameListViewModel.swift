@@ -7,20 +7,24 @@ internal final class IOSGameListViewModel: ObservableObject {
 	@Published var state = GameListState(
 		games: [],
 		isDeleteGameDialogShown: false,
-		gameToDelete: nil,
-		isLoading: true
+		selectedGame: nil,
+		isLoading: true,
+		isActionsDialogShown: false
 	)
 	
 	private let viewModel: GameListViewModel
 	private let onGameSelected: (Game) -> Void
+	private let onReplay: (Game) -> Void
 	private var handle: DisposableHandle?
 	
 	init(
 		viewModel: GameListViewModel,
-		onGameSelected: @escaping (Game) -> Void
+		onGameSelected: @escaping (Game) -> Void,
+		onReplay: @escaping (Game) -> Void
 	) {
 		self.onGameSelected = onGameSelected
 		self.viewModel = viewModel
+		self.onReplay = onReplay
 	}
 	
 	func startObserving() {
@@ -39,6 +43,10 @@ internal final class IOSGameListViewModel: ObservableObject {
 	
 	func select(game: Game) {
 		onGameSelected(game)
+	}
+	
+	func replay(game: Game) {
+		onReplay(game)
 	}
 	
 	func onEvent(_ event: GameListEvent) {

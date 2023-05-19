@@ -103,7 +103,7 @@ private fun GameInput(
             onEvent(GameEvent.MakeShot(sector))
         },
         onPlayerClick = {
-            onEvent(GameEvent.ShowHistory)
+            onEvent(GameEvent.ShowHistory(it))
         }
     )
 }

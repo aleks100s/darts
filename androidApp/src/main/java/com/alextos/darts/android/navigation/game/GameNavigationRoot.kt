@@ -193,7 +193,8 @@ fun GameNavigationRoot() {
                         is GameEvent.ShowHistory -> {
                             navController.navigate(
                                 route = GameRoute.InGameHistory.routeWithArgs(
-                                    Json.encodeToString(state)
+                                    Json.encodeToString(state),
+                                    event.page.toString()
                                 )
                             )
                         }
@@ -204,18 +205,23 @@ fun GameNavigationRoot() {
         }
 
         composable(
-            route = GameRoute.InGameHistory.route + "/{gameState}",
+            route = GameRoute.InGameHistory.route + "/{gameState}/{page}",
             arguments = listOf(
                 navArgument("gameState") {
                     type = NavType.StringType
+                },
+                navArgument("page") {
+                    type = NavType.IntType
                 }
             )
         ) { backStackEntry ->
             val state = backStackEntry.arguments?.getString("gameState")
                 ?.let { Json.decodeFromString<GameState>(it) }
                 ?: run { return@composable }
+            val page = backStackEntry.arguments?.getInt("page") ?: run { return@composable }
             InGameHistoryScreen(
                 gameState = state,
+                currentPage = page,
                 onSelect = { turns, currentPage ->
                     navController.navigate(
                         GameRoute.Darts.routeWithArgs(

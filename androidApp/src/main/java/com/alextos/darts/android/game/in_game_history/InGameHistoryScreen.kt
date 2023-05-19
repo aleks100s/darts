@@ -11,6 +11,7 @@ import com.alextos.darts.game.presentation.game.GameState
 @Composable
 fun InGameHistoryScreen(
     gameState: GameState,
+    currentPage: Int,
     onSelect: (List<Turn>, Int) -> Unit,
     onBackPressed: () -> Unit
 ) {
@@ -22,7 +23,7 @@ fun InGameHistoryScreen(
             modifier = modifier,
             gameHistory = gameState.gameHistory,
             goal = gameState.gameGoal,
-            currentPage = gameState.currentPage(),
+            currentPage = currentPage,
             onSelect = onSelect
         )
     }

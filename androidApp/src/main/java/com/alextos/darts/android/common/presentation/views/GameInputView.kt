@@ -39,7 +39,7 @@ fun GameInputView(
     currentPlayerIndex: Int,
     eraseShot: () -> Unit,
     onInputClick: (Sector) -> Unit,
-    onPlayerClick: () -> Unit
+    onPlayerClick: (Int) -> Unit
 ) {
     Scaffold(
         floatingActionButton = {
@@ -88,7 +88,7 @@ private fun CurrentTurnItem(
     results: List<GamePlayerResult>,
     currentTurn: Turn,
     currentPlayerIndex: Int,
-    onClick: () -> Unit
+    onClick: (Int) -> Unit
 ) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         GamePlayers(list = results, currentPlayerIndex, onClick)
@@ -101,7 +101,7 @@ private fun CurrentTurnItem(
 private fun GamePlayers(
     list: List<GamePlayerResult>,
     currentPlayerIndex: Int,
-    onClick: () -> Unit
+    onClick: (Int) -> Unit
 ) {
     val screenWidth = when (rememberScreenType()) {
         is ScreenType.Compact -> {
@@ -127,7 +127,7 @@ private fun GamePlayers(
             GamePlayerItem(
                 result = result,
                 width = itemWidth,
-                onClick = onClick
+                onClick = { onClick(list.indexOf(result)) }
             )
         }
     }

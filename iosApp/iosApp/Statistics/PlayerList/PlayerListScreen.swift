@@ -15,7 +15,9 @@ internal struct PlayerListScreen: View {
 	
 	@ViewBuilder
 	private var content: some View {
-		if viewModel.state.players.isEmpty {
+		if viewModel.state.isLoading {
+			LoadingView()
+		} else if viewModel.state.players.isEmpty {
 			NoDataView()
 		} else {
 			StatisticsPlayerListView(

@@ -16,7 +16,9 @@ internal struct ShotDistributionScreen: View {
 	
 	@ViewBuilder
 	private var content: some View {
-		if viewModel.totalCount == 0 {
+		if viewModel.isLoading {
+			LoadingView()
+		} else if viewModel.totalCount == 0 {
 			NoDataView()
 		} else {
 			ScrollView {

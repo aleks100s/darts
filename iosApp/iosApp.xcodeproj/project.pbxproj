@@ -72,6 +72,7 @@
 		27CF109A29AD2A5600174D02 /* HistoryScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CF109929AD2A5600174D02 /* HistoryScene.swift */; };
 		27CF109C29AD2A6B00174D02 /* IOSHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CF109B29AD2A6B00174D02 /* IOSHistoryViewModel.swift */; };
 		27CF109E29AD2C9E00174D02 /* HistoryScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CF109D29AD2C9E00174D02 /* HistoryScreen.swift */; };
+		27D42F8E2A17EEF300CE41C0 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D42F8D2A17EEF300CE41C0 /* LoadingView.swift */; };
 		27D659EB29B3B8B200A921C6 /* SwiftUIPager in Frameworks */ = {isa = PBXBuildFile; productRef = 27D659EA29B3B8B200A921C6 /* SwiftUIPager */; };
 		27D659ED29B3B97E00A921C6 /* PlayerHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D659EC29B3B97E00A921C6 /* PlayerHistoryView.swift */; };
 		27D659F029B3BC0800A921C6 /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D659EF29B3BC0800A921C6 /* SectionHeader.swift */; };
@@ -214,6 +215,7 @@
 		27CF109929AD2A5600174D02 /* HistoryScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryScene.swift; sourceTree = "<group>"; tabWidth = 4; };
 		27CF109B29AD2A6B00174D02 /* IOSHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSHistoryViewModel.swift; sourceTree = "<group>"; tabWidth = 4; };
 		27CF109D29AD2C9E00174D02 /* HistoryScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryScreen.swift; sourceTree = "<group>"; };
+		27D42F8D2A17EEF300CE41C0 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		27D659EC29B3B97E00A921C6 /* PlayerHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerHistoryView.swift; sourceTree = "<group>"; };
 		27D659EF29B3BC0800A921C6 /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
 		27D659F429B493DD00A921C6 /* DartsBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DartsBoard.swift; sourceTree = "<group>"; };
@@ -475,6 +477,7 @@
 				27D65A0E29BDF2D500A921C6 /* NoDataView.swift */,
 				27D65A1829BE414700A921C6 /* StatisticsPlayerListView.swift */,
 				275B871E29C617B800505281 /* TabletView.swift */,
+				27D42F8D2A17EEF300CE41C0 /* LoadingView.swift */,
 			);
 			name = Views;
 			path = Views/Views;
@@ -788,6 +791,7 @@
 				27CF107D29AB952400174D02 /* GameHistoryView.swift in Sources */,
 				27D65A1329BDF40800A921C6 /* AverageValuesScene.swift in Sources */,
 				274E404A29CEECF7000E9027 /* Arc.swift in Sources */,
+				27D42F8E2A17EEF300CE41C0 /* LoadingView.swift in Sources */,
 				27D65A0029BC86F400A921C6 /* KotlinFloat+Extensions.swift in Sources */,
 				27D65A0B29BDED5800A921C6 /* StatisticsEvent+Extensions.swift in Sources */,
 				27CF109A29AD2A5600174D02 /* HistoryScene.swift in Sources */,

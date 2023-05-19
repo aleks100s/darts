@@ -16,7 +16,9 @@ internal struct BiggestFinalTurnScreen: View {
 	
 	@ViewBuilder
 	private var content: some View {
-		if viewModel.state.playersBiggestFinalTurns.isEmpty {
+		if viewModel.state.isLoading {
+			LoadingView()
+		} else if viewModel.state.playersBiggestFinalTurns.isEmpty {
 			NoDataView()
 		} else {
 			StatisticsPlayerListView(

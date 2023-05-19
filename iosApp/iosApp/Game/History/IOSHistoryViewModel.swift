@@ -1,7 +1,7 @@
 import shared
 
 internal final class IOSHistoryViewModel: ObservableObject {
-	@Published var state = HistoryState(gameHistory: [], gameGoal: 0)
+	@Published var state = HistoryState(gameHistory: [], gameGoal: 0, isLoading: true)
 	
 	private let onTurnSelected: (Turn) -> Void
 	private let onShowRecap: (HistoryState) -> Void

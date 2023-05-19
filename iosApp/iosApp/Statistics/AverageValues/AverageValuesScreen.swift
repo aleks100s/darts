@@ -16,7 +16,9 @@ internal struct AverageValuesScreen: View {
 	
 	@ViewBuilder
 	private var content: some View {
-		if viewModel.state.isEmpty() {
+		if viewModel.state.isLoading {
+			LoadingView()
+		} else if viewModel.state.isEmpty() {
 			NoDataView()
 		} else {
 			ScrollView(showsIndicators: false) {

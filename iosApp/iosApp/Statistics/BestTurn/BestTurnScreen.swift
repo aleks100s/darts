@@ -16,7 +16,9 @@ internal struct BestTurnScreen: View {
 	
 	@ViewBuilder
 	private var content: some View {
-		if viewModel.state.playersBestTurns.isEmpty {
+		if viewModel.state.isLoading {
+			LoadingView()
+		} else if viewModel.state.playersBestTurns.isEmpty {
 			NoDataView()
 		} else {
 			StatisticsPlayerListView(

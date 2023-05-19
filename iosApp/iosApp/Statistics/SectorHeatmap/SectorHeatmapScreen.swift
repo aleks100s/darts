@@ -17,7 +17,9 @@ internal struct SectorHeatmapScreen: View {
 	
 	@ViewBuilder
 	var content: some View {
-		if let distribution = viewModel.state.distribution {
+		if viewModel.state.isLoading {
+			LoadingView()
+		} else if let distribution = viewModel.state.distribution {
 			ScrollView {
 				VStack(alignment: .leading, spacing: 32) {
 					HeatmapBoard(heatmap: distribution)

@@ -1,7 +1,7 @@
 import shared
 
 internal final class IOSBestTurnViewModel: ObservableObject {
-	@Published var state = BestTurnState(playersBestTurns: [])
+	@Published var state = BestTurnState(playersBestTurns: [], isLoading: true)
 	
 	private let viewModel: BestTurnViewModel
 	private let onTurnSelected: (Turn) -> Void

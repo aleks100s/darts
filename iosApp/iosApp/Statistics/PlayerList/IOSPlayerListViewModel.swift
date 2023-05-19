@@ -1,7 +1,7 @@
 import shared
 
 internal final class IOSPlayerListViewModel: ObservableObject {
-	@Published var state = PlayerListState(players: [])
+	@Published var state = PlayerListState(players: [], isLoading: true)
 	
 	private let viewModel: PlayerListViewModel
 	private let onPlayerSelected: (Player) -> Void

@@ -5,6 +5,7 @@ internal final class IOSVictoryDistributionViewModel: ObservableObject {
 	@Published var data: [(Float, Color)] = []
 	@Published var legend: [(Color, String)] = []
 	@Published var totalCount: Int32 = 0
+	@Published var isLoading: Bool = true
 	
 	private let viewModel: VictoryDistributionViewModel
 	private var handle: DisposableHandle?
@@ -16,6 +17,7 @@ internal final class IOSVictoryDistributionViewModel: ObservableObject {
 	func startObserving() {
 		handle = viewModel.state
 			.subscribe { [weak self] state in
+				self?.isLoading = state?.isLoading ?? true
 				guard let distribution = state?.distribution else { return }
 				
 				self?.data = [

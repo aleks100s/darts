@@ -4,7 +4,8 @@ internal final class IOSAverageValuesViewModel: ObservableObject {
 	@Published var state = AverageValuesState(
 		averageTurnOfAll: 0,
 		averageShotOfAll: 0,
-		playersAverageValues: []
+		playersAverageValues: [],
+		isLoading: true
 	)
 	
 	private let viewModel: AverageValuesViewModel

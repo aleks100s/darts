@@ -4,7 +4,12 @@ import Foundation
 @MainActor
 internal final class IOSGameListViewModel: ObservableObject {
 	@Published var isDeleteGameDialogShown = false
-	@Published var state = GameListState(games: [], isDeleteGameDialogShown: false, gameToDelete: nil)
+	@Published var state = GameListState(
+		games: [],
+		isDeleteGameDialogShown: false,
+		gameToDelete: nil,
+		isLoading: true
+	)
 	
 	private let viewModel: GameListViewModel
 	private let onGameSelected: (Game) -> Void

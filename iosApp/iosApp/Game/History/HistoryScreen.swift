@@ -25,13 +25,17 @@ internal struct HistoryScreen: View {
 	
 	@ViewBuilder
 	private var content: some View {
-		if idiom == .pad {
-			TabletView(
-				view1: { history },
-				view2: { recap }
-			)
+		if viewModel.state.isLoading {
+			LoadingView()
 		} else {
-			history
+			if idiom == .pad {
+				TabletView(
+					view1: { history },
+					view2: { recap }
+				)
+			} else {
+				history
+			}
 		}
 	}
 	

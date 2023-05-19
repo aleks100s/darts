@@ -29,7 +29,9 @@ internal struct GameListScreen: View {
 	
 	@ViewBuilder
 	private var content: some View {
-		if viewModel.state.games.isEmpty {
+		if viewModel.state.isLoading {
+			LoadingView()
+		} else if viewModel.state.games.isEmpty {
 			NoDataView()
 		} else {
 			List {

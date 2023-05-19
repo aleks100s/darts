@@ -66,11 +66,18 @@ fun GameNavigationRoot() {
                         is GameListEvent.CreateGame -> {
                             navController.navigate(route = GameRoute.CreateGame.route)
                         }
-
                         is GameListEvent.SelectGame -> {
                             navController.navigate(
                                 route = GameRoute.History.routeWithArgs(
                                     Json.encodeToString(it.game)
+                                )
+                            )
+                        }
+                        is GameListEvent.ReplayGame -> {
+                            viewModel.onEvent(it)
+                            navController.navigate(
+                                route = GameRoute.Game.routeWithArgs(
+                                    Json.encodeToString(it.game.getGameSettings())
                                 )
                             )
                         }

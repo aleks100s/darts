@@ -16,6 +16,10 @@ data class Game(
         return "${getDayString()} ${getTimeString()}"
     }
 
+    fun getGameSettings(): GameSettings {
+        return GameSettings(players, gameGoal, false)
+    }
+
     internal fun getDayString(): String {
         return "${timestamp.dayOfMonth}.${timestamp.monthNumber}.${timestamp.year}"
     }

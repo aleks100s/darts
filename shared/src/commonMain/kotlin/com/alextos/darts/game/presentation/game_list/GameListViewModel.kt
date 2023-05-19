@@ -38,7 +38,7 @@ class GameListViewModel(
             is GameListEvent.CreateGame -> {}
             is GameListEvent.SelectGame -> {}
             is GameListEvent.DeleteGame -> {
-                _state.value.gameToDelete?.let {
+                _state.value.selectedGame?.let {
                     viewModelScope.launch(Dispatchers.Default) {
                         deleteGameUseCase.execute(it)
                     }
@@ -51,12 +51,27 @@ class GameListViewModel(
                 _state.update {
                     it.copy(
                         isDeleteGameDialogShown = true,
-                        gameToDelete = event.game
+                        isActionsDialogShown = false,
+                        selectedGame = event.game
                     )
                 }
             }
             is GameListEvent.HideDeleteGameDialog -> {
                 _state.update { it.copy(isDeleteGameDialogShown = false) }
+            }
+            is GameListEvent.ShowActionsDialog -> {
+                _state.update {
+                    it.copy(
+                        isActionsDialogShown = true,
+                        selectedGame = event.game
+                    )
+                }
+            }
+            is GameListEvent.HideActionsDialog -> {
+                _state.update { it.copy(isActionsDialogShown = false) }
+            }
+            is GameListEvent.ReplayGame -> {
+                _state.update { it.copy(isActionsDialogShown = false) }
             }
         }
     }

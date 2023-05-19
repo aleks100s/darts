@@ -5,6 +5,7 @@ import com.alextos.darts.game.domain.models.Game
 data class GameListState(
     val games: List<Game> = listOf(),
     val isDeleteGameDialogShown: Boolean = false,
-    val gameToDelete: Game? = null,
-    val isLoading: Boolean = true
+    val selectedGame: Game? = null,
+    val isLoading: Boolean = true,
+    val isActionsDialogShown: Boolean = false
 )

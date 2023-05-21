@@ -6,19 +6,27 @@ internal struct GameListScreen: View {
 	
 	var body: some View {
 		content
-		.alert("delete_game", isPresented: $viewModel.isDeleteGameDialogShown) {
-			Button(role: .destructive) {
-				viewModel.onEvent(.DeleteGame())
-			} label: {
-				Text("delete")
+			.toolbar(viewModel.state.isLoading ? .hidden : .visible, for: .navigationBar)
+			.toolbar {
+				Button {
+					viewModel.createGame()
+				} label: {
+					Label("create_game", systemImage: "plus")
+				}
 			}
-			
-			Button(role: .cancel) {
-				viewModel.onEvent(.HideDeleteGameDialog())
-			} label: {
-				Text("cancel")
+			.alert("delete_game", isPresented: $viewModel.isDeleteGameDialogShown) {
+				Button(role: .destructive) {
+					viewModel.onEvent(.DeleteGame())
+				} label: {
+					Text("delete")
+				}
+				
+				Button(role: .cancel) {
+					viewModel.onEvent(.HideDeleteGameDialog())
+				} label: {
+					Text("cancel")
+				}
 			}
-		}
 			.onAppear {
 				viewModel.startObserving()
 			}

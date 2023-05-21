@@ -4,8 +4,8 @@ import SwiftUI
 internal final class IOSShotDistributionViewModel: ObservableObject {
 	@Published var data: [(Float, Color)] = []
 	@Published var legend: [(Color, String)] = []
-	@Published var totalCount: Int32 = 0
-	@Published var isLoading: Bool = true
+	@Published private(set) var totalCount: Int32 = 0
+	@Published private(set) var isLoading: Bool = true
 	
 	private let viewModel: ShotDistributionViewModel
 	private var handle: DisposableHandle?

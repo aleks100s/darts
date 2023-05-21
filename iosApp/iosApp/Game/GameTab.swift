@@ -11,6 +11,9 @@ internal struct GameTab: View {
 		NavigationStack(path: $navigationStack) {
 			GameListScene.create(
 				using: module,
+				onCreateGame: {
+					navigationStack.append(.createGame)
+				},
 				onGameSelected: { game in
 					navigationStack.append(.history(game: game))
 				},
@@ -19,13 +22,6 @@ internal struct GameTab: View {
 				}
 			)
 				.navigationTitle("games")
-				.toolbar {
-					Button {
-						navigationStack.append(.createGame)
-					} label: {
-						Label("create_game", systemImage: "plus")
-					}
-				}
 				.navigationDestination(for: GameNavigation.self) {
 					navigate(to: $0)
 				}
@@ -74,7 +70,6 @@ internal struct GameTab: View {
 					)
 				}
 			)
-				.toolbar(.hidden, for: .tabBar)
 				.navigationTitle("game")
 				.navigationBarTitleDisplayMode(.inline)
 				.navigationBarBackButtonHidden()

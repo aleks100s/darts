@@ -4,7 +4,7 @@ import Foundation
 @MainActor
 internal final class IOSGameListViewModel: ObservableObject {
 	@Published var isDeleteGameDialogShown = false
-	@Published var state = GameListState(
+	@Published private(set) var state = GameListState(
 		games: [],
 		isDeleteGameDialogShown: false,
 		selectedGame: nil,
@@ -13,17 +13,20 @@ internal final class IOSGameListViewModel: ObservableObject {
 	)
 	
 	private let viewModel: GameListViewModel
+	private let onCreateGame: () -> Void
 	private let onGameSelected: (Game) -> Void
 	private let onReplay: (Game) -> Void
 	private var handle: DisposableHandle?
 	
 	init(
 		viewModel: GameListViewModel,
+		onCreateGame: @escaping () -> Void,
 		onGameSelected: @escaping (Game) -> Void,
 		onReplay: @escaping (Game) -> Void
 	) {
-		self.onGameSelected = onGameSelected
 		self.viewModel = viewModel
+		self.onCreateGame = onCreateGame
+		self.onGameSelected = onGameSelected
 		self.onReplay = onReplay
 	}
 	
@@ -34,6 +37,10 @@ internal final class IOSGameListViewModel: ObservableObject {
 				self?.state = state
 				self?.isDeleteGameDialogShown = state.isDeleteGameDialogShown
 			}
+	}
+	
+	func createGame() {
+		onCreateGame()
 	}
 	
 	func deleteGame(index: Int) {

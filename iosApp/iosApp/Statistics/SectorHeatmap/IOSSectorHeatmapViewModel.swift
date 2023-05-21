@@ -1,7 +1,7 @@
 import shared
 
 internal final class IOSSectorHeatmapViewModel: ObservableObject {
-	@Published var state = SectorHeatmapState(distribution: nil, isLoading: true)
+	@Published private(set) var state = SectorHeatmapState(distribution: nil, isLoading: true)
 	
 	private let viewModel: SectorHeatmapViewModel
 	private var handle: DisposableHandle?

@@ -82,7 +82,9 @@ class CreateGameViewModel(
                     it.copy(isFinishWithDoublesChecked = event.isChecked)
                 }
             }
-            else -> {}
+
+            CreateGameEvent.CreateGame -> {}
+            CreateGameEvent.CreatePlayer -> {}
         }
     }
 }

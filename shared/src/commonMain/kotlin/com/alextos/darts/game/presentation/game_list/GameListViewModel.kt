@@ -23,7 +23,7 @@ class GameListViewModel(
         if (games != state.games) {
             state.copy(games = games, isLoading = false)
         } else {
-            state
+            state.copy(isLoading = false)
         }
     }
         .stateIn(

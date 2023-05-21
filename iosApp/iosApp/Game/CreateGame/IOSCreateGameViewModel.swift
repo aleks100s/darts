@@ -4,7 +4,7 @@ import shared
 internal final class IOSCreateGameViewModel: ObservableObject {
 	@Published var isCreatePlayerDialogShown = false
 	@Published var isDeletePlayerDialogShown = false
-	@Published var state = CreateGameState(
+	@Published private(set) var state = CreateGameState(
 		allPlayers: [],
 		selectedPlayers: [],
 		selectedGoal: nil,
@@ -13,7 +13,7 @@ internal final class IOSCreateGameViewModel: ObservableObject {
 		isDeletePlayerDialogShown: false,
 		isFinishWithDoublesChecked: false
 	)
-	@Published var createPlayerState = CreatePlayerState(name: "", allPlayers: [])
+	@Published private(set) var createPlayerState = CreatePlayerState(name: "", allPlayers: [])
 	
 	private let viewModel: CreateGameViewModel
 	private let createPlayerViewModel: CreatePlayerViewModel

@@ -112,14 +112,16 @@ fun GameNavigationRoot() {
                     CreatePlayerScreen(
                         state = state,
                         onEvent = {
-                            viewModel.onEvent(it)
                             when (it) {
                                 is CreatePlayerEvent.SavePlayer -> {
+                                    viewModel.onEvent(it)
                                     coroutineScope.launch {
                                         modalSheetState.hide()
                                     }
                                 }
-                                else -> { }
+                                else -> {
+                                    viewModel.onEvent(it)
+                                }
                             }
                         }
                     )

@@ -2,7 +2,7 @@ import SwiftUI
 import shared
 
 internal final class IOSBiggestFinalTurnViewModel: ObservableObject {
-	@Published var state = BiggestFinalTurnState(playersBiggestFinalTurns: [], isLoading: true)
+	@Published private(set) var state = BiggestFinalTurnState(playersBiggestFinalTurns: [], isLoading: true)
 	
 	private let viewModel: BiggestFinalTurnViewModel
 	private let onTurnSelected: (Turn) -> Void

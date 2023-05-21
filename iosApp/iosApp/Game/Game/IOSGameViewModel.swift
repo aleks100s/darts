@@ -4,7 +4,7 @@ internal final class IOSGameViewModel: ObservableObject {
 	@Published var isTurnOverDialogShown = false
 	@Published var isCloseGameDialogShown = false
 	@Published var isGameFinishedDialogShown = false
-	@Published var state = GameState(
+	@Published private(set) var state = GameState(
 		gameHistory: [],
 		currentPlayer: nil,
 		isGameFinished: false,

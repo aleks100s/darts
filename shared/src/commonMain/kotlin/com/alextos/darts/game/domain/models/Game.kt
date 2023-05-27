@@ -53,7 +53,13 @@ data class Game(
     }
 
     fun getPlayersListString(): String {
-        return "\uD83D\uDC65 " + players.joinToString(", ") { it.name }
+        return if (players.isEmpty()) {
+            ""
+        } else if (players.size == 1) {
+            "\uD83D\uDC64 ${players[0].name}"
+        } else {
+            "\uD83D\uDC65 " + players.joinToString(", ") { it.name }
+        }
     }
 
     fun getFinishDateString(): String {

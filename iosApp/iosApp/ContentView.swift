@@ -15,15 +15,17 @@ internal struct ContentView: View {
 		TabView(selection: $selection) {
 			GameTab(module: module)
 				.tabItem {
-					Label("Game", systemImage: "play")
+					Label("game", systemImage: "play")
 				}
 				.tag(Tab.game)
+				.accessibilityIdentifier("tabPlay")
 			
 			StatisticsTab(module: module)
 				.tabItem {
-					Label("Statistics", systemImage: "chart.pie")
+					Label("statistics", systemImage: "chart.pie")
 				}
 				.tag(Tab.statistics)
+				.accessibilityIdentifier("tapStatistics")
 		}
 		.onOpenURL { url in
 			if url.canBeNavigated(to: GameNavigation.createGame.urlComponent)  {

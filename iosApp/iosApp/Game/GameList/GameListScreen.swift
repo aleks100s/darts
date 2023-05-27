@@ -13,6 +13,7 @@ internal struct GameListScreen: View {
 				} label: {
 					Label("create_game", systemImage: "plus")
 				}
+				.accessibilityIdentifier("createGame")
 			}
 			.alert("delete_game", isPresented: $viewModel.isDeleteGameDialogShown) {
 				Button(role: .destructive) {
@@ -53,7 +54,7 @@ internal struct GameListScreen: View {
 							Button {
 								viewModel.replay(game: game)
 							} label: {
-								Label(LocalizedStringKey("replay"), systemImage: "goforward")
+								Text("replay")
 							}
 							.tint(.green)
 						}

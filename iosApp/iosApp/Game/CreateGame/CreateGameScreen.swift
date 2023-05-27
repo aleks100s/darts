@@ -14,6 +14,7 @@ internal struct CreateGameScreen: View {
 				} label: {
 					Text("add_new_player")
 				}
+				.accessibilityIdentifier("addNewPlayer")
 
 				ForEach(viewModel.state.allPlayers) { player in
 					let isChecked = viewModel.state.isPlayerSelected(player: player)
@@ -59,6 +60,7 @@ internal struct CreateGameScreen: View {
 			} label: {
 				Text("cancel")
 			}
+			.accessibilityIdentifier("createPlayerCancel")
 		}
 		.alert("delete_player", isPresented: $viewModel.isDeletePlayerDialogShown) {
 			Button(role: .destructive) {
@@ -72,6 +74,7 @@ internal struct CreateGameScreen: View {
 			} label: {
 				Text("cancel")
 			}
+			.accessibilityIdentifier("deletePlayerCancel")
 		}
 		.toolbar {
 			Button {
@@ -80,6 +83,7 @@ internal struct CreateGameScreen: View {
 				Text("start_game")
 			}
 			.disabled(!viewModel.state.isReadyToCreateGame())
+			.accessibilityIdentifier("startGame")
 		}
 			.onAppear {
 				viewModel.startObserving()

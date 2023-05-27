@@ -13,7 +13,7 @@ internal struct HistoryScreen: View {
 			} label: {
 				Text("progress")
 			}
-
+			.accessibilityIdentifier("recap")
 		}
 			.onAppear {
 				viewModel.startObserving()

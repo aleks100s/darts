@@ -23,7 +23,7 @@
 "history" = "История";
 "game_title %d %d" = "Игра №%d, цель %d";
 "games" = "Игры";
-"turn_is_over" = "Ваш ход окончен";
+"turn_is_over" = "Ход окончен";
 "proceed_to_the_next_turn %d" = "Результат %d\nПерейти к следующему ходу?";
 "reset_turn" = "Сбросить этот ход";
 "next_turn" = "Следующий ход";

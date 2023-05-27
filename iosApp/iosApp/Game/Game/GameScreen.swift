@@ -14,12 +14,14 @@ internal struct GameScreen: View {
 				} label: {
 					Text("finish_game")
 				}
+				.accessibilityIdentifier("finishGame")
 				
 				Button {
 					viewModel.replayGame()
 				} label: {
 					Text("replay")
 				}
+				.accessibilityIdentifier("replay")
 			} message: {
 				Text(gameFinishedMessage)
 			}
@@ -29,12 +31,14 @@ internal struct GameScreen: View {
 				} label: {
 					Text("next_turn")
 				}
+				.accessibilityIdentifier("nextTurn")
 				
 				Button(role: .destructive) {
 					viewModel.onEvent(.ResetCurrentTurn())
 				} label: {
 					Text("reset_turn")
 				}
+				.accessibilityIdentifier("resetTurn")
 			} message: {
 				Text("proceed_to_the_next_turn \(viewModel.state.turnResult())")
 			}
@@ -44,12 +48,14 @@ internal struct GameScreen: View {
 				} label: {
 					Text("leave")
 				}
+				.accessibilityIdentifier("leave")
 
 				Button(role: .cancel) {
 					viewModel.onEvent(.ReturnToGame())
 				} label: {
 					Text("cancel")
 				}
+				.accessibilityIdentifier("cancel")
 			} message: {
 				Text("your_progress_will_be_lost")
 			}
@@ -60,6 +66,7 @@ internal struct GameScreen: View {
 					} label: {
 						Text("leave")
 					}
+					.accessibilityIdentifier("leaveGame")
 				}
 				ToolbarItem(placement: .navigationBarTrailing) {
 					Button {
@@ -67,6 +74,7 @@ internal struct GameScreen: View {
 					} label: {
 						Text("erase_hit")
 					}
+					.accessibilityIdentifier("eraseHit")
 				}
 			}
 			.onAppear {

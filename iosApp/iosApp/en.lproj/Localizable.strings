@@ -23,7 +23,7 @@
 "history" = "History";
 "game_title %d %d" = "Game %d, goal is %d";
 "games" = "Games";
-"turn_is_over" = "Your turn is over";
+"turn_is_over" = "Turn is over";
 "proceed_to_the_next_turn %d" = "Your result is %d\nProceed to the next turn?";
 "reset_turn" = "Reset this turn";
 "next_turn" = "Next turn";

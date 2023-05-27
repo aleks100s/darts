@@ -24,7 +24,7 @@
     <string name="history">История</string>
     <string name="game_title">Игра №%1$d, цель %2$d</string>
     <string name="games">Игры</string>
-    <string name="turn_is_over">Ваш ход окончен</string>
+    <string name="turn_is_over">Ход окончен</string>
     <string name="proceed_to_the_next_turn">Результат %1$d\nПерейти к следующему ходу?</string>
     <string name="reset_turn">Сбросить этот ход</string>
     <string name="next_turn">Следующий ход</string>

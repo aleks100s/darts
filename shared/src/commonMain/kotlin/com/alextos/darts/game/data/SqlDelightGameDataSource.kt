@@ -44,7 +44,7 @@ class SqlDelightGameDataSource(
                     game_id = gameId,
                     player_id = it.id,
                     game_order = game.players.indexOf(it).toLong(),
-                    is_winner = if (game.winner == it) 1 else 0
+                    is_winner = if (game.winner == it) 1 else if (game.winner == null) -1 else 0
                 )
             }
 

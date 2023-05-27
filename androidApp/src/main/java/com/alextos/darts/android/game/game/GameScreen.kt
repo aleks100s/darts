@@ -22,16 +22,19 @@ import com.alextos.darts.game.presentation.game.GameState
 @Composable
 fun GameScreen(
     state: GameState,
+    finishWithDoubles: Boolean,
     onEvent: (GameEvent) -> Unit
 ) {
     BackHandler {
         onEvent(GameEvent.BackButtonPressed)
     }
 
+    val title = if (finishWithDoubles) stringResource(id = R.string.game_with_doubles) else stringResource(id = R.string.game)
+
     when (rememberScreenType()) {
         is ScreenType.Compact -> {
             Screen(
-                title = stringResource(id = R.string.game),
+                title = title,
                 backIcon = Icons.Filled.Close,
                 onBackPressed = { onEvent(GameEvent.BackButtonPressed) }) { modifier ->
                 GameInput(
@@ -43,7 +46,7 @@ fun GameScreen(
         }
         is ScreenType.Large -> {
             SplitScreen(
-                title = stringResource(id = R.string.game),
+                title = title,
                 isBackButtonVisible = false,
                 content1 = {
                     GameHistory(state = state, onEvent = onEvent)

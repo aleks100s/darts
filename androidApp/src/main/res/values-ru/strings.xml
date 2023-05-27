@@ -80,4 +80,5 @@
     <string name="navigate_back">Перейти назад</string>
     <string name="game_duration">Длительность игры %1$d мин %2$d сек</string>
     <string name="open_game">Открыть игру</string>
+    <string name="game_with_doubles">Игра (✅ x2)</string>
 </resources>

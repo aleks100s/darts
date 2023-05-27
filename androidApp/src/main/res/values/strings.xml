@@ -80,4 +80,5 @@
     <string name="navigate_back">Navigate back</string>
     <string name="game_duration">Game duration is %1$d min %2$d sec</string>
     <string name="open_game">Open game</string>
+    <string name="game_with_doubles">Game (✅ x2)</string>
 </resources>

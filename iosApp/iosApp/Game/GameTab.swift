@@ -70,7 +70,7 @@ internal struct GameTab: View {
 					)
 				}
 			)
-				.navigationTitle("game")
+				.navigationTitle(settings.isFinishWithDoublesChecked ? "game_with_doubles" : "game")
 				.navigationBarTitleDisplayMode(.inline)
 				.navigationBarBackButtonHidden()
 			

@@ -208,13 +208,13 @@ private fun GameItem(
         verticalAlignment = Alignment.CenterVertically
     ) {
         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            Column {
-                Text(
-                    text = game.getTitle(),
-                    style = MaterialTheme.typography.caption
-                )
-                Text(text = game.getPlayersListString())
-            }
+            Text(
+                text = game.getTitle(),
+                style = MaterialTheme.typography.caption
+            )
+
+            Text(text = game.getPlayersListString())
+
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 Text(text = game.getUIGoalString())
                 if (!game.duration.isEmpty) {
@@ -222,6 +222,10 @@ private fun GameItem(
                 }
                 if (game.winner != null) {
                     Text(text = game.getUIWinnerString())
+                }
+
+                if (game.finishWithDoubles) {
+                    Text(text = game.getUIDoublesString())
                 }
             }
         }

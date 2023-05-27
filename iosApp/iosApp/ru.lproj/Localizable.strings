@@ -79,3 +79,4 @@
 "miss" = "Промах";
 "replay" = "Переиграть";
 "game_duration %d %d" = "Длительность игры %d мин %d сек";
+"game_with_doubles" = "Игра (✅ x2)";

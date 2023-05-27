@@ -174,6 +174,7 @@ fun GameNavigationRoot() {
             val state by viewModel.state.collectAsState(initial = GameState())
             GameScreen(
                 state = state,
+                finishWithDoubles = settings.isFinishWithDoublesChecked,
                 onEvent = { event ->
                     when (event) {
                         is GameEvent.CloseGame -> {

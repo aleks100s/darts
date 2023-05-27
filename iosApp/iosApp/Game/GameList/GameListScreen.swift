@@ -72,11 +72,11 @@ internal struct GameListScreen: View {
 	private func gameItem(game: Game) -> some View {
 		HStack(alignment: .center, spacing: 16) {
 			VStack(alignment: .leading, spacing: 8) {
-				VStack(alignment: .leading) {
-					Text(game.titleUIString)
-						.font(.caption)
-					Text(game.getPlayersListString())
-				}
+				Text(game.titleUIString)
+					.font(.caption)
+				
+				Text(game.getPlayersListString())
+				
 				HStack(spacing: 8) {
 					Text(game.getUIGoalString())
 					if !game.duration.isEmpty {
@@ -85,7 +85,11 @@ internal struct GameListScreen: View {
 					if game.winner != nil {
 						Text(game.getUIWinnerString())
 					}
+					if game.finishWithDoubles {
+						Text(game.getUIDoublesString())
+					}
 				}
+				.font(.caption)
 			}
 			
 			Spacer()

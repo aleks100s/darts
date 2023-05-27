@@ -28,12 +28,24 @@ data class Game(
             return GameDuration(minutes.toInt(), seconds.toInt())
         }
 
+    fun getUIDoublesString(): String {
+        return if (finishWithDoubles) "✅ x2" else "❌ x2"
+    }
+
     fun getUIGoalString(): String {
         return "🎯 $gameGoal"
     }
 
     fun getUIDurationString(): String {
-        return "⏱ ${duration.minutes}:${duration.seconds}"
+        return "⏱ ${getDurationMinutesString()}:${getDurationSecondsString()}"
+    }
+
+    private fun getDurationMinutesString(): String {
+        return if (duration.minutes > 9) "${duration.minutes}" else "0${duration.minutes}"
+    }
+
+    private fun getDurationSecondsString(): String {
+        return if (duration.seconds > 9) "${duration.seconds}" else "0${duration.seconds}"
     }
 
     fun getUIWinnerString(): String {
@@ -41,7 +53,7 @@ data class Game(
     }
 
     fun getPlayersListString(): String {
-        return players.joinToString(", ") { it.name }
+        return "\uD83D\uDC65 " + players.joinToString(", ") { it.name }
     }
 
     fun getFinishDateString(): String {

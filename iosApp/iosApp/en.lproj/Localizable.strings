@@ -79,3 +79,4 @@
 "miss" = "Miss";
 "replay" = "Rematch";
 "game_duration %d %d" = "Game duration is %d min %d sec";
+"game_with_doubles" = "Game (✅ x2)";

@@ -20,8 +20,8 @@ fun BottomNavigation(navController: NavController) {
     )
 
     androidx.compose.material.BottomNavigation(
-        backgroundColor = MaterialTheme.colors.background,
-        contentColor = MaterialTheme.colors.primary
+        backgroundColor = MaterialTheme.colors.surface,
+        contentColor = MaterialTheme.colors.onSurface
     ) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentRoute = navBackStackEntry?.destination?.route

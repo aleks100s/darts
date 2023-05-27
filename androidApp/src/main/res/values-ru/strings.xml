@@ -22,7 +22,7 @@
     <string name="finish_game">Закончить игру</string>
     <string name="game_goal">Цель игры</string>
     <string name="history">История</string>
-    <string name="game_title">Игра №%1$d, цель %2$d</string>
+    <string name="game_title">Игра №%1$d・%2$s</string>
     <string name="games">Игры</string>
     <string name="turn_is_over">Ход окончен</string>
     <string name="proceed_to_the_next_turn">Результат %1$d\nПерейти к следующему ходу?</string>
@@ -71,7 +71,7 @@
     <string name="this_cannot_be_undone">Это действие необратимо</string>
     <string name="delete">Удалить</string>
     <string name="cancel">Отмена</string>
-    <string name="training">Тренировка №%1$d, цель %2$d</string>
+    <string name="training">Тренировка №%1$d・%2$s</string>
     <string name="sector_count">%1$s (%2$d попаданий)</string>
     <string name="additional_settings">Дополнительные настройки</string>
     <string name="finish_with_doubles">Заканчивать двойным броском</string>
@@ -79,4 +79,5 @@
     <string name="replay">Переиграть</string>
     <string name="navigate_back">Перейти назад</string>
     <string name="game_duration">Длительность игры %1$d мин %2$d сек</string>
+    <string name="open_game">Открыть игру</string>
 </resources>

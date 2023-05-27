@@ -2,6 +2,7 @@ package com.alextos.darts.android.common.presentation.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.Divider
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -18,6 +19,7 @@ import com.alextos.darts.core.domain.model.Player
 fun PlayerDisclosureItem(
     player: Player,
     rightText: String = "",
+    showDivider: Boolean,
     onSelect: () -> Unit
 ) {
     Row(
@@ -40,5 +42,8 @@ fun PlayerDisclosureItem(
                 modifier = Modifier.padding(16.dp)
             )
         }
+    }
+    if (showDivider) {
+        Divider(startIndent = 16.dp)
     }
 }

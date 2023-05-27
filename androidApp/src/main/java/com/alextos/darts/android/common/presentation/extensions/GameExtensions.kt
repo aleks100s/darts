@@ -8,8 +8,8 @@ import com.alextos.darts.game.domain.models.Game
 @Composable
 fun Game.getTitle(): String {
     return if (winner == null) {
-        stringResource(id = R.string.training, id ?: 0, gameGoal)
+        stringResource(id = R.string.training, id ?: 0, getFinishDateString())
     } else {
-        stringResource(id = R.string.game_title, id ?: 0, gameGoal)
+        stringResource(id = R.string.game_title, id ?: 0, getFinishDateString())
     }
 }

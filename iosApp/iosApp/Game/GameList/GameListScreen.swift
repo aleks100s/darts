@@ -71,20 +71,26 @@ internal struct GameListScreen: View {
 	@ViewBuilder
 	private func gameItem(game: Game) -> some View {
 		HStack(alignment: .center, spacing: 16) {
-			VStack(alignment: .leading) {
-				if game.winner == nil {
-					Text("training \(game.id?.int32Value ?? 0) \(game.gameGoal)")
-				} else {
-					Text("game_title \(game.id?.int32Value ?? 0) \(game.gameGoal)")
+			VStack(alignment: .leading, spacing: 8) {
+				VStack(alignment: .leading) {
+					Text(game.titleUIString)
+						.font(.caption)
+					Text(game.getPlayersListString())
 				}
-				Text(game.getFinishDateString())
+				HStack(spacing: 8) {
+					Text(game.getUIGoalString())
+					if !game.duration.isEmpty {
+						Text(game.getUIDurationString())
+					}
+					if game.winner != nil {
+						Text(game.getUIWinnerString())
+					}
+				}
 			}
 			
 			Spacer()
 			
-			if let winner = game.winner {
-				Text("🏆 \(winner.name) 🏆")
-			}
+			Image(systemName: "chevron.right")
 		}
 		.lineLimit(1)
 	}

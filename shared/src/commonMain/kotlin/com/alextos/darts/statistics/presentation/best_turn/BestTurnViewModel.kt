@@ -1,4 +1,4 @@
-package com.alextos.darts.statistics.presentation.best_set
+package com.alextos.darts.statistics.presentation.best_turn
 
 import com.alextos.darts.core.domain.useCases.GetPlayersUseCase
 import com.alextos.darts.core.util.toCommonStateFlow

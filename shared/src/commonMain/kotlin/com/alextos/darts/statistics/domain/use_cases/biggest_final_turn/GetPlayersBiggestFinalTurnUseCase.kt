@@ -17,8 +17,11 @@ class GetPlayersBiggestFinalTurnUseCase(
                     }
                 }
         }
+        if (flows.isEmpty()) {
+            return flow { emit(emptyList()) }
+        }
         return combine(flows) { data ->
-            data.asList()
+            data.toList()
                 .mapNotNull { it }
                 .sortedByDescending { it.set.score() }
         }

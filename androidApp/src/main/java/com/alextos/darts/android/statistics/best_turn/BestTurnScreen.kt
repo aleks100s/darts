@@ -7,8 +7,8 @@ import com.alextos.darts.android.common.presentation.views.StatisticPlayersListV
 import com.alextos.darts.android.common.presentation.screens.Screen
 import com.alextos.darts.android.common.presentation.views.LoadingView
 import com.alextos.darts.android.common.presentation.views.NoDataView
-import com.alextos.darts.statistics.presentation.best_set.BestTurnEvent
-import com.alextos.darts.statistics.presentation.best_set.BestTurnState
+import com.alextos.darts.statistics.presentation.best_turn.BestTurnEvent
+import com.alextos.darts.statistics.presentation.best_turn.BestTurnState
 
 @Composable
 fun BestTurnScreen(

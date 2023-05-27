@@ -21,7 +21,7 @@
 "game_goal" = "Game goal";
 "shoot" = "Hit";
 "history" = "History";
-"game_title %d %d" = "Game %d, goal is %d";
+"game_title %d %@" = "Game %d・%@";
 "games" = "Games";
 "turn_is_over" = "Turn is over";
 "proceed_to_the_next_turn %d" = "Your result is %d\nProceed to the next turn?";
@@ -72,7 +72,7 @@
 "this_cannot_be_undone" = "This cannot be undone";
 "delete" = "Delete";
 "cancel" = "Cancel";
-"training %d %d" = "Training %d, goal is %d";
+"training %d %@" = "Training %d・%@";
 "sector_count %@ %d" = "%@ (%d hits)";
 "additional_settings" = "Additional settings";
 "finish_with_doubles" = "Finish with doubles";

@@ -28,6 +28,22 @@ data class Game(
             return GameDuration(minutes.toInt(), seconds.toInt())
         }
 
+    fun getUIGoalString(): String {
+        return "🎯 $gameGoal"
+    }
+
+    fun getUIDurationString(): String {
+        return "⏱ ${duration.minutes}:${duration.seconds}"
+    }
+
+    fun getUIWinnerString(): String {
+        return "🏆 ${winner?.name}"
+    }
+
+    fun getPlayersListString(): String {
+        return players.joinToString(", ") { it.name }
+    }
+
     fun getFinishDateString(): String {
         return "${getDayString(finishTimestamp)} ${getTimeString(finishTimestamp)}"
     }

@@ -5,10 +5,11 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ChevronRight
 import androidx.compose.material.icons.filled.Create
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -19,7 +20,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.alextos.darts.android.R
 import com.alextos.darts.android.common.presentation.components.FAB
+import com.alextos.darts.android.common.presentation.components.RoundedView
 import com.alextos.darts.android.common.presentation.extensions.getTitle
+import com.alextos.darts.android.common.presentation.extensions.surfaceBackground
 import com.alextos.darts.android.common.presentation.screens.Screen
 import com.alextos.darts.android.common.presentation.views.LoadingView
 import com.alextos.darts.android.common.presentation.views.NoDataView
@@ -55,27 +58,11 @@ fun GameListScreen(
             } else if (state.games.isEmpty()) {
                 NoDataView(modifier)
             } else {
-                LazyColumn(
-                    modifier = modifier
-                        .fillMaxSize()
-                        .padding(padding),
-                    verticalArrangement = Arrangement.spacedBy(16.dp)
-                ) {
-                    items(state.games) {
-                        GameItem(
-                            game = it,
-                            onClick = {
-                                onEvent(GameListEvent.SelectGame(it))
-                            },
-                            onLongClick = {
-                                onEvent(GameListEvent.ShowActionsDialog(it))
-                            }
-                        )
-                    }
-
-                    item {
-                        Spacer(modifier = Modifier.height(72.dp))
-                    }
+                RoundedView(modifier.padding(padding)) {
+                    GamesList(
+                        games = state.games,
+                        onEvent = onEvent
+                    )
                 }
             }
         }
@@ -102,6 +89,29 @@ fun GameListScreen(
                 onClick = { onEvent(GameListEvent.DeleteGame) },
                 onDismiss = { onEvent(GameListEvent.HideDeleteGameDialog) }
             )
+        }
+    }
+}
+
+@Composable
+private fun GamesList(
+    games: List<Game>,
+    onEvent: (GameListEvent) -> Unit
+) {
+    LazyColumn(modifier = Modifier.surfaceBackground()) {
+        itemsIndexed(games) { index, game ->
+            GameItem(
+                game = game,
+                onClick = {
+                    onEvent(GameListEvent.SelectGame(game))
+                },
+                onLongClick = {
+                    onEvent(GameListEvent.ShowActionsDialog(game))
+                }
+            )
+            if (index != games.lastIndex) {
+                Divider(startIndent = 16.dp)
+            }
         }
     }
 }
@@ -197,15 +207,27 @@ private fun GameItem(
             .padding(horizontal = 16.dp, vertical = 12.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Column {
-            Text(text = game.getTitle())
-            Text(text = game.getFinishDateString())
+        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Column {
+                Text(
+                    text = game.getTitle(),
+                    style = MaterialTheme.typography.caption
+                )
+                Text(text = game.getPlayersListString())
+            }
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                Text(text = game.getUIGoalString())
+                if (!game.duration.isEmpty) {
+                    Text(text = game.getUIDurationString())
+                }
+                if (game.winner != null) {
+                    Text(text = game.getUIWinnerString())
+                }
+            }
         }
 
         Spacer(modifier = Modifier.weight(1f))
 
-        game.winner?.let { winner ->
-            Text(text = "\uD83C\uDFC6 ${winner.name} \uD83C\uDFC6")
-        }
+        Icon(imageVector = Icons.Filled.ChevronRight, contentDescription = stringResource(id = R.string.open_game))
     }
 }

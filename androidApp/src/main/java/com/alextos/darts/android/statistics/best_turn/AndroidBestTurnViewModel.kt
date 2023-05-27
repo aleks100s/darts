@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alextos.darts.core.domain.useCases.GetPlayersUseCase
 import com.alextos.darts.statistics.domain.use_cases.best_turn.GetPlayersBestTurnsUseCase
-import com.alextos.darts.statistics.presentation.best_set.BestTurnViewModel
+import com.alextos.darts.statistics.presentation.best_turn.BestTurnViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

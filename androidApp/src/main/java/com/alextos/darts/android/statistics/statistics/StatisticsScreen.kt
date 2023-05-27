@@ -1,12 +1,14 @@
 package com.alextos.darts.android.statistics.statistics
 
-import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.alextos.darts.android.R
+import com.alextos.darts.android.common.presentation.components.RoundedView
 import com.alextos.darts.android.common.presentation.components.SingleSelectableItem
+import com.alextos.darts.android.common.presentation.extensions.surfaceBackground
 import com.alextos.darts.android.common.presentation.screens.Screen
 import com.alextos.darts.statistics.presentation.statistics.StatisticsEvent
 
@@ -29,12 +31,12 @@ fun StatisticsScreen(
         isBackButtonVisible = false,
         onBackPressed = onBackPressed
     ) { modifier ->
-        LazyColumn(
-            modifier = modifier.fillMaxSize()
-        ) {
-            items(events) { event ->
-                SingleSelectableItem(text = event.second) {
-                    onEvent(event.first)
+        RoundedView(modifier) {
+            LazyColumn(modifier = Modifier.surfaceBackground()) {
+                items(events) { event ->
+                    SingleSelectableItem(text = event.second, showDivider = events.last() != event) {
+                        onEvent(event.first)
+                    }
                 }
             }
         }

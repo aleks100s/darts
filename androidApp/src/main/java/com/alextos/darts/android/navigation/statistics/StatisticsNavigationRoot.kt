@@ -33,8 +33,8 @@ import com.alextos.darts.android.statistics.statistics.StatisticsScreen
 import com.alextos.darts.android.statistics.victory_distribution.AndroidVictoryDistributionViewModel
 import com.alextos.darts.android.statistics.victory_distribution.VictoryDistributionScreen
 import com.alextos.darts.statistics.presentation.average_values.AverageValuesState
-import com.alextos.darts.statistics.presentation.best_set.BestTurnEvent
-import com.alextos.darts.statistics.presentation.best_set.BestTurnState
+import com.alextos.darts.statistics.presentation.best_turn.BestTurnEvent
+import com.alextos.darts.statistics.presentation.best_turn.BestTurnState
 import com.alextos.darts.statistics.presentation.biggest_final_turn.BiggestFinalTurnEvent
 import com.alextos.darts.statistics.presentation.biggest_final_turn.BiggestFinalTurnState
 import com.alextos.darts.statistics.presentation.heatmap.SectorHeatmapState

@@ -5,6 +5,7 @@ import com.alextos.darts.statistics.domain.StatisticsDataSource
 import com.alextos.darts.statistics.domain.models.StatisticsSet
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 
 class GetPlayersBestTurnsUseCase(
@@ -18,6 +19,9 @@ class GetPlayersBestTurnsUseCase(
                         StatisticsSet(player, it)
                     }
                 }
+        }
+        if (flows.isEmpty()) {
+            return flow { emit(emptyList()) }
         }
         return combine(flows) { data ->
             data.toList()

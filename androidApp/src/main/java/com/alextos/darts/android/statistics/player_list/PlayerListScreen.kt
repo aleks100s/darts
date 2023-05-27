@@ -1,10 +1,12 @@
 package com.alextos.darts.android.statistics.player_list
 
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import com.alextos.darts.android.common.presentation.components.PlayerDisclosureItem
+import com.alextos.darts.android.common.presentation.components.RoundedView
+import com.alextos.darts.android.common.presentation.extensions.surfaceBackground
 import com.alextos.darts.android.common.presentation.screens.Screen
 import com.alextos.darts.android.common.presentation.views.LoadingView
 import com.alextos.darts.android.common.presentation.views.NoDataView
@@ -24,10 +26,15 @@ fun PlayerListScreen(
         } else if (state.players.isEmpty()) {
             NoDataView(modifier = modifier)
         } else {
-            LazyColumn(modifier = modifier.fillMaxSize()) {
-                items(state.players) { player ->
-                    PlayerDisclosureItem(player = player) {
-                        onEvent(PlayerListEvent.SelectPlayer(player))
+            RoundedView(modifier) {
+                LazyColumn(modifier = Modifier.surfaceBackground()) {
+                    items(state.players) { player ->
+                        PlayerDisclosureItem(
+                            player = player,
+                            showDivider = state.players.last() != player
+                        ) {
+                            onEvent(PlayerListEvent.SelectPlayer(player))
+                        }
                     }
                 }
             }

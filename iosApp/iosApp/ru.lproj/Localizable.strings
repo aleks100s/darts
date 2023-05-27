@@ -21,7 +21,7 @@
 "game_goal" = "Цель игры";
 "shoot" = "Бросок";
 "history" = "История";
-"game_title %d %d" = "Игра №%d, цель %d";
+"game_title %d %@" = "Игра №%d・%@";
 "games" = "Игры";
 "turn_is_over" = "Ход окончен";
 "proceed_to_the_next_turn %d" = "Результат %d\nПерейти к следующему ходу?";
@@ -72,7 +72,7 @@
 "this_cannot_be_undone" = "Это действие необратимо";
 "delete" = "Удалить";
 "cancel" = "Отмена";
-"training %d %d" = "Тренировка №%d, цель %d";
+"training %d %@" = "Тренировка №%d・%@";
 "sector_count %@ %d" = "%@ (%d попаданий)";
 "additional_settings" = "Дополнительные настройки";
 "finish_with_doubles" = "Заканчивать двойным броском";

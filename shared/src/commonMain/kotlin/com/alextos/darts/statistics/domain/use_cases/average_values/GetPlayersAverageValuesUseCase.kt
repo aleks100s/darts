@@ -5,6 +5,7 @@ import com.alextos.darts.statistics.domain.StatisticsDataSource
 import com.alextos.darts.statistics.domain.models.AveragePlayerValue
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flow
 
 class GetPlayersAverageValuesUseCase(
     private val dataSource: StatisticsDataSource
@@ -23,8 +24,11 @@ class GetPlayersAverageValuesUseCase(
                 } else null
             }
         }
+        if (flows.isEmpty()) {
+            return flow { emit(emptyList()) }
+        }
         return combine(flows) { data ->
-            data.asList()
+            data.toList()
                 .mapNotNull { it }
                 .sortedByDescending { it.shotValue }
                 .sortedByDescending { it.setScore }

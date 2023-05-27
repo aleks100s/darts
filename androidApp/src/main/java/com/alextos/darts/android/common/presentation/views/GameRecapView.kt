@@ -15,6 +15,7 @@ import com.alextos.darts.android.common.presentation.components.ChartLegendItem
 import com.alextos.darts.android.common.presentation.components.SectionHeader
 import com.alextos.darts.core.domain.model.Player
 import com.alextos.darts.core.util.numberOfTurns
+import com.alextos.darts.game.domain.models.GameDuration
 import com.alextos.darts.game.domain.models.PlayerGameValue
 import com.alextos.darts.game.domain.models.PlayerHistory
 import com.github.tehras.charts.line.LineChart
@@ -32,7 +33,8 @@ fun GameRecapView(
     biggestTurns: List<PlayerGameValue>,
     smallestTurns: List<PlayerGameValue>,
     misses: List<PlayerGameValue>,
-    overkills: List<PlayerGameValue>
+    overkills: List<PlayerGameValue>,
+    duration: GameDuration
 ) {
     if (history.isNotEmpty()) {
         LazyColumn(
@@ -45,6 +47,11 @@ fun GameRecapView(
             }
             item {
                 RecapLineChartLegend(players = history.map { it.player })
+            }
+            if (!duration.isEmpty) {
+                item {
+                    GameDuration(duration = duration)
+                }
             }
             item {
                 ValuesBlock(values = averageTurns, title = stringResource(id = R.string.average_set_recap))
@@ -117,7 +124,8 @@ private fun RecapLineChart(history: List<PlayerHistory>) {
     ) {
         LineChart(
             linesChartData = data,
-            modifier = Modifier.fillMaxSize(0.8f)
+            modifier = Modifier
+                .fillMaxSize(0.8f)
                 .aspectRatio(1f),
             pointDrawer = FilledCircularPointDrawer(),
             horizontalOffset = 5f,
@@ -134,5 +142,17 @@ private fun RecapLineChartLegend(players: List<Player>) {
             val color = colors.getOrNull(players.indexOf(it)) ?: Color.DarkGray
             ChartLegendItem(text = it.name, color = color)
         }
+    }
+}
+
+@Composable
+private fun GameDuration(duration: GameDuration) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp),
+        horizontalArrangement = Arrangement.End
+    ) {
+        Text(stringResource(id = R.string.game_duration, duration.minutes, duration.seconds))
     }
 }

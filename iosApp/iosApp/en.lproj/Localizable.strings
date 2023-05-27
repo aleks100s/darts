@@ -78,3 +78,4 @@
 "finish_with_doubles" = "Finish with doubles";
 "miss" = "Miss";
 "replay" = "Rematch";
+"game_duration %d %d" = "Game duration is %d min %d sec";

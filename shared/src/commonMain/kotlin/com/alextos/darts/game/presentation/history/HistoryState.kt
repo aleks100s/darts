@@ -1,5 +1,6 @@
 package com.alextos.darts.game.presentation.history
 
+import com.alextos.darts.game.domain.models.GameDuration
 import com.alextos.darts.game.domain.models.PlayerGameValue
 import com.alextos.darts.game.domain.models.PlayerHistory
 import kotlinx.serialization.Serializable
@@ -8,7 +9,8 @@ import kotlinx.serialization.Serializable
 data class HistoryState(
     val gameHistory: List<PlayerHistory> = listOf(),
     val gameGoal: Int = 0,
-    val isLoading: Boolean = true
+    val isLoading: Boolean = true,
+    val duration: GameDuration = GameDuration(0, 0)
 ) {
     fun averageTurns(): List<PlayerGameValue> {
         return gameHistory.map { playerHistory ->

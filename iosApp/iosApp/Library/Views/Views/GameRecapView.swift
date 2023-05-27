@@ -9,11 +9,15 @@ internal struct GameRecapView: View {
 	let smallestTurns: [PlayerGameValue]
 	let misses: [PlayerGameValue]
 	let overkills: [PlayerGameValue]
+	let duration: GameDuration
 	
 	var body: some View {
 		ScrollView {
 			VStack {
 				chart
+				if !duration.isEmpty {
+					gameDuration
+				}
 				valuesBlock(values: averageTurns, title: String(localized: "average_set_recap"))
 				valuesBlock(values: biggestTurns, title: String(localized: "biggest_sets"))
 				valuesBlock(values: smallestTurns, title: String(localized: "smallest_sets"))
@@ -24,7 +28,8 @@ internal struct GameRecapView: View {
 		.background(Color.background)
 	}
 	
-	@ViewBuilder private var chart: some View {
+	@ViewBuilder
+	private var chart: some View {
 		Chart {
 			let maxSize = history.max(by: { $0.turns.count < $1.turns.count })?.turns.count ?? 0
 			
@@ -43,6 +48,16 @@ internal struct GameRecapView: View {
 		}
 		.aspectRatio(1.0, contentMode: .fit)
 		.padding()
+	}
+	
+	@ViewBuilder
+	private var gameDuration: some View {
+		HStack {
+			Spacer()
+			Text("game_duration \(duration.minutes) \(duration.seconds)")
+				.font(.caption)
+		}
+		.padding(.horizontal, 16)
 	}
 	
 	@ViewBuilder

@@ -1,0 +1,1 @@
+ALTER TABLE gameEntity ADD COLUMN timestamp_start INTEGER;

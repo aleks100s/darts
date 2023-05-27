@@ -20,8 +20,10 @@ fun List<GetGames>.mapToGames(): List<Game> {
                 players = players,
                 winner = winner,
                 gameGoal = gameEntity?.goal?.toInt() ?: 0,
-                timestamp = Instant.fromEpochMilliseconds(gameEntity?.timestamp ?: 0)
-                    .toLocalDateTime(TimeZone.currentSystemDefault())
+                finishTimestamp = Instant.fromEpochMilliseconds(gameEntity?.timestamp ?: 0)
+                    .toLocalDateTime(TimeZone.currentSystemDefault()),
+                startTimestamp = Instant.fromEpochMilliseconds(gameEntity?.timestampStart ?: gameEntity?.timestamp ?: 0)
+                    .toLocalDateTime(TimeZone.currentSystemDefault()),
             )
         }
 }

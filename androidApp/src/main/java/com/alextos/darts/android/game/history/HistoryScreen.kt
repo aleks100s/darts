@@ -125,6 +125,7 @@ private fun GameRecap(state: HistoryState) {
         biggestTurns = state.biggestTurns(),
         smallestTurns = state.smallestTurns(),
         misses = state.misses(),
-        overkills = state.overkills()
+        overkills = state.overkills(),
+        duration = state.duration
     )
 }

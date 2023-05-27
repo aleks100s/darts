@@ -112,7 +112,8 @@ internal struct GameTab: View {
 				biggestTurns: historyState.biggestTurns(),
 				smallestTurns: historyState.smallestTurns(),
 				misses: historyState.misses(),
-				overkills: historyState.overkills()
+				overkills: historyState.overkills(),
+				duration: historyState.duration
 			)
 			.navigationBarTitleDisplayMode(.inline)
 			.navigationTitle("game_recap")

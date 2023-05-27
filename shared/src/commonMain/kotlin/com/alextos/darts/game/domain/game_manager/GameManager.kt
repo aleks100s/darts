@@ -21,6 +21,7 @@ class GameManager(
     private val players = gameSettings?.selectedPlayers ?: listOf()
     private val goal = gameSettings?.selectedGameGoal ?: 0
     private val finishWithDoubles = gameSettings?.isFinishWithDoublesChecked ?: false
+    private val startTime = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
 
     private val playerHistoryManagers by lazy {
         players.map {
@@ -80,7 +81,8 @@ class GameManager(
             players = players,
             winner = winner,
             gameGoal = goal,
-            timestamp = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
+            finishTimestamp = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()),
+            startTimestamp = startTime
         )
         val gameHistory = GameHistory(
             game = game,

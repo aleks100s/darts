@@ -77,7 +77,7 @@ internal struct GameListScreen: View {
 				} else {
 					Text("game_title \(game.id?.int32Value ?? 0) \(game.gameGoal)")
 				}
-				Text(game.getDateString())
+				Text(game.getFinishDateString())
 			}
 			
 			Spacer()

@@ -78,4 +78,5 @@
     <string name="miss">Промах</string>
     <string name="replay">Переиграть</string>
     <string name="navigate_back">Перейти назад</string>
+    <string name="game_duration">Длительность игры %1$d мин %2$d сек</string>
 </resources>

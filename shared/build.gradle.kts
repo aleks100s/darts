@@ -77,6 +77,6 @@ android {
 sqldelight {
     database("DartsDatabase") {
         packageName = "com.alextos.darts.database"
-        sourceFolders = listOf("sqldelight")
+        schemaOutputDirectory = file("src/commonMain/sqldelight/database")
     }
 }

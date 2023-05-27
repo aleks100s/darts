@@ -14,9 +14,10 @@ class GameTests {
             id = 1,
             players = listOf(),
             gameGoal = 501,
-            timestamp = LocalDateTime(2021, 10, 10, 10, 10)
+            finishTimestamp = LocalDateTime(2021, 10, 10, 10, 10),
+            startTimestamp = LocalDateTime(2021, 10, 10, 10, 10)
         )
-        val date = game.getDateString()
+        val date = game.getFinishDateString()
         assertThat(date).isNotNull()
     }
 
@@ -27,9 +28,10 @@ class GameTests {
             id = 1,
             players = listOf(),
             gameGoal = 501,
-            timestamp = LocalDateTime(2021, 10, 10, 10, 10)
+            finishTimestamp = LocalDateTime(2021, 10, 10, 10, 10),
+            startTimestamp = LocalDateTime(2021, 10, 10, 10, 10)
         )
-        val day = game.getDayString()
+        val day = game.getDayString(game.finishTimestamp)
         assertThat(day).isEqualTo("10.10.2021")
     }
 
@@ -40,9 +42,10 @@ class GameTests {
             id = 1,
             players = listOf(),
             gameGoal = 501,
-            timestamp = LocalDateTime(2021, 10, 10, 10, 10)
+            finishTimestamp = LocalDateTime(2021, 10, 10, 10, 10),
+            startTimestamp = LocalDateTime(2021, 10, 10, 10, 10)
         )
-        val time = game.getTimeString()
+        val time = game.getTimeString(game.finishTimestamp)
         assertThat(time).isEqualTo("10:10")
     }
 
@@ -53,9 +56,10 @@ class GameTests {
             id = 1,
             players = listOf(),
             gameGoal = 501,
-            timestamp = LocalDateTime(2021, 10, 10, 10, 10)
+            finishTimestamp = LocalDateTime(2021, 10, 10, 10, 10),
+            startTimestamp = LocalDateTime(2021, 10, 10, 10, 10)
         )
-        val hour = game.getHourString()
+        val hour = game.getHourString(game.finishTimestamp)
         assertThat(hour).isEqualTo("10")
     }
 
@@ -66,9 +70,10 @@ class GameTests {
             id = 1,
             players = listOf(),
             gameGoal = 501,
-            timestamp = LocalDateTime(2021, 10, 10, 1, 10)
+            finishTimestamp = LocalDateTime(2021, 10, 10, 1, 10),
+            startTimestamp = LocalDateTime(2021, 10, 10, 10, 10)
         )
-        val hour = game.getHourString()
+        val hour = game.getHourString(game.finishTimestamp)
         assertThat(hour).isEqualTo("01")
     }
 
@@ -79,9 +84,10 @@ class GameTests {
             id = 1,
             players = listOf(),
             gameGoal = 501,
-            timestamp = LocalDateTime(2021, 10, 10, 10, 10)
+            finishTimestamp = LocalDateTime(2021, 10, 10, 10, 10),
+            startTimestamp = LocalDateTime(2021, 10, 10, 10, 10)
         )
-        val minute = game.getMinuteString()
+        val minute = game.getMinuteString(game.finishTimestamp)
         assertThat(minute).isEqualTo("10")
     }
 
@@ -92,9 +98,10 @@ class GameTests {
             id = 1,
             players = listOf(),
             gameGoal = 501,
-            timestamp = LocalDateTime(2021, 10, 10, 10, 1)
+            finishTimestamp = LocalDateTime(2021, 10, 10, 10, 1),
+            startTimestamp = LocalDateTime(2021, 10, 10, 10, 10)
         )
-        val minute = game.getMinuteString()
+        val minute = game.getMinuteString(game.finishTimestamp)
         assertThat(minute).isEqualTo("01")
     }
 }

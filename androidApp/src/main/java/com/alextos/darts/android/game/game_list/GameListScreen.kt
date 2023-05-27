@@ -199,7 +199,7 @@ private fun GameItem(
     ) {
         Column {
             Text(text = game.getTitle())
-            Text(text = game.getDateString())
+            Text(text = game.getFinishDateString())
         }
 
         Spacer(modifier = Modifier.weight(1f))

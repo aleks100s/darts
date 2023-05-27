@@ -78,4 +78,5 @@
     <string name="miss">Miss</string>
     <string name="replay">Rematch</string>
     <string name="navigate_back">Navigate back</string>
+    <string name="game_duration">Game duration is %1$d min %2$d sec</string>
 </resources>

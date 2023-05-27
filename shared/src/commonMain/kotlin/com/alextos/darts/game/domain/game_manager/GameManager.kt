@@ -18,7 +18,13 @@ class GameManager(
     getPlayerAverageTurnUseCase: GetPlayerAverageTurnUseCase,
     gameSettings: GameSettings?
 ) {
-    private val players = gameSettings?.selectedPlayers ?: listOf()
+    private val randomPlayerOrder = gameSettings?.isRandomPlayersOrderChecked ?: false
+    private val players = if (randomPlayerOrder) {
+        gameSettings?.selectedPlayers?.shuffled() ?: listOf()
+    } else {
+        gameSettings?.selectedPlayers ?: listOf()
+    }
+
     private val goal = gameSettings?.selectedGameGoal ?: 0
     private val finishWithDoubles = gameSettings?.isFinishWithDoublesChecked ?: false
     private val startTime = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
@@ -83,7 +89,8 @@ class GameManager(
             gameGoal = goal,
             finishTimestamp = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()),
             startTimestamp = startTime,
-            finishWithDoubles = finishWithDoubles
+            finishWithDoubles = finishWithDoubles,
+            randomPlayerOrder = randomPlayerOrder
         )
         val gameHistory = GameHistory(
             game = game,

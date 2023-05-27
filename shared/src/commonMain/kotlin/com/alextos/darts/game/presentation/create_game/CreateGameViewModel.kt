@@ -82,6 +82,11 @@ class CreateGameViewModel(
                     it.copy(isFinishWithDoublesChecked = event.isChecked)
                 }
             }
+            is CreateGameEvent.ToggleRandomPlayersOrder -> {
+                _state.update {
+                    it.copy(isRandomPlayersOrderChecked = event.isChecked)
+                }
+            }
 
             CreateGameEvent.CreateGame -> {}
             CreateGameEvent.CreatePlayer -> {}

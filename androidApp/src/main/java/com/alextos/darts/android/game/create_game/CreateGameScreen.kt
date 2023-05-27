@@ -107,6 +107,13 @@ fun CreateGameScreen(
                     }
                 )
 
+                RandomizeOrderItem(
+                    isChecked = state.isRandomPlayersOrderChecked,
+                    onCheckedChanged = { isChecked ->
+                        onEvent(CreateGameEvent.ToggleRandomPlayersOrder(isChecked))
+                    }
+                )
+
                 Spacer(modifier = Modifier.height(64.dp))
             }
         }
@@ -235,13 +242,38 @@ fun FinishWithDoublesItem(
     isChecked: Boolean,
     onCheckedChanged: (Boolean) -> Unit
 ) {
+    AdditionalSettingSwitch(
+        title = stringResource(id = R.string.finish_with_doubles),
+        isChecked = isChecked,
+        onCheckedChanged = onCheckedChanged
+    )
+}
+
+@Composable
+fun RandomizeOrderItem(
+    isChecked: Boolean,
+    onCheckedChanged: (Boolean) -> Unit
+) {
+    AdditionalSettingSwitch(
+        title = stringResource(id = R.string.randomize_player_order),
+        isChecked = isChecked,
+        onCheckedChanged = onCheckedChanged
+    )
+}
+
+@Composable
+fun AdditionalSettingSwitch(
+    title: String,
+    isChecked: Boolean,
+    onCheckedChanged: (Boolean) -> Unit
+) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.padding(horizontal = 16.dp)
     ) {
         Text(
             modifier = Modifier.weight(1f),
-            text = stringResource(id = R.string.finish_with_doubles)
+            text = title
         )
         Switch(checked = isChecked, onCheckedChange = onCheckedChanged)
     }

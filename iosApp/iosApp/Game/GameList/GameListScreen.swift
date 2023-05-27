@@ -88,6 +88,9 @@ internal struct GameListScreen: View {
 					if game.finishWithDoubles {
 						Text(game.getUIDoublesString())
 					}
+					if game.randomPlayerOrder {
+						Text(game.getUIRandomOrderString())
+					}
 				}
 				.font(.caption)
 			}

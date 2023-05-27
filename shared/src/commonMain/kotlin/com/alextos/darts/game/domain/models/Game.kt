@@ -14,7 +14,8 @@ data class Game(
     val gameGoal: Int,
     val finishTimestamp: LocalDateTime,
     val startTimestamp: LocalDateTime?,
-    val finishWithDoubles: Boolean
+    val finishWithDoubles: Boolean,
+    val randomPlayerOrder: Boolean
 ) {
     val duration: GameDuration
         get() {
@@ -52,6 +53,10 @@ data class Game(
         return "🏆 ${winner?.name}"
     }
 
+    fun getUIRandomOrderString(): String {
+        return if (randomPlayerOrder) "\uD83C\uDFB2" else ""
+    }
+
     fun getPlayersListString(): String {
         return if (players.isEmpty()) {
             ""
@@ -67,7 +72,7 @@ data class Game(
     }
 
     fun getGameSettings(): GameSettings {
-        return GameSettings(players, gameGoal, finishWithDoubles)
+        return GameSettings(players, gameGoal, finishWithDoubles, randomPlayerOrder)
     }
 
     internal fun getDayString(timestamp: LocalDateTime): String {

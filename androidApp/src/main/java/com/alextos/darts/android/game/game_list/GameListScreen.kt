@@ -223,9 +223,11 @@ private fun GameItem(
                 if (game.winner != null) {
                     Text(text = game.getUIWinnerString())
                 }
-
                 if (game.finishWithDoubles) {
                     Text(text = game.getUIDoublesString())
+                }
+                if (game.randomPlayerOrder) {
+                    Text(text = game.getUIRandomOrderString())
                 }
             }
         }

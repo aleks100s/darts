@@ -80,3 +80,4 @@
 "replay" = "Rematch";
 "game_duration %d %d" = "Game duration is %d min %d sec";
 "game_with_doubles" = "Game (✅ x2)";
+"randomize_player_order" = "Random player order";

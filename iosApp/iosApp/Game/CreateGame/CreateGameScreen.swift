@@ -5,6 +5,7 @@ internal struct CreateGameScreen: View {
 	@StateObject var viewModel: IOSCreateGameViewModel
 	@State private var newPlayerName = ""
 	@State private var isFinishWithDoublesChecked = false
+	@State private var isRandomPlayerOrderChecked = false
 	
 	var body: some View {
 		List {
@@ -40,6 +41,7 @@ internal struct CreateGameScreen: View {
 			
 			Section("additional_settings") {
 				Toggle("finish_with_doubles", isOn: $isFinishWithDoublesChecked)
+				Toggle("randomize_player_order", isOn: $isRandomPlayerOrderChecked)
 			}
 		}
 		.alert("enter_new_player_name", isPresented: $viewModel.isCreatePlayerDialogShown) {
@@ -78,7 +80,10 @@ internal struct CreateGameScreen: View {
 		}
 		.toolbar {
 			Button {
-				viewModel.start(isFinishWithDoubles: isFinishWithDoublesChecked)
+				viewModel.start(
+					isFinishWithDoubles: isFinishWithDoublesChecked,
+					isRandomPlayerOrder: isRandomPlayerOrderChecked
+				)
 			} label: {
 				Text("start_game")
 			}

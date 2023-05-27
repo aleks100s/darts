@@ -7,5 +7,6 @@ import kotlinx.serialization.Serializable
 data class GameSettings(
     val selectedPlayers: List<Player>,
     val selectedGameGoal: Int,
-    val isFinishWithDoublesChecked: Boolean
+    val isFinishWithDoublesChecked: Boolean,
+    val isRandomPlayersOrderChecked: Boolean
 )

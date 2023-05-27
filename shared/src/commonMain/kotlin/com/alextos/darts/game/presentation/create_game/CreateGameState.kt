@@ -10,7 +10,8 @@ data class CreateGameState(
     val goalOptions: List<Int> = listOf(101, 301, 501),
     val playerToDelete: Player? = null,
     val isDeletePlayerDialogShown: Boolean = false,
-    val isFinishWithDoublesChecked: Boolean = false
+    val isFinishWithDoublesChecked: Boolean = false,
+    val isRandomPlayersOrderChecked: Boolean = false
 ) {
     fun isReadyToCreateGame() = selectedPlayers.isNotEmpty() && selectedGoal != null
 
@@ -19,6 +20,9 @@ data class CreateGameState(
     fun isGoalSelected(goal: Int): Boolean = selectedGoal == goal
 
     fun getSettings(): GameSettings = GameSettings(
-        selectedPlayers, selectedGoal ?: 0, isFinishWithDoublesChecked
+        selectedPlayers,
+        selectedGoal ?: 0,
+        isFinishWithDoublesChecked,
+        isRandomPlayersOrderChecked
     )
 }

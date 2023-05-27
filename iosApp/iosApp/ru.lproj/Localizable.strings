@@ -80,3 +80,4 @@
 "replay" = "Переиграть";
 "game_duration %d %d" = "Длительность игры %d мин %d сек";
 "game_with_doubles" = "Игра (✅ x2)";
+"randomize_player_order" = "Случайный порядок игроков";

@@ -1,0 +1,1 @@
+ALTER TABLE gameEntity ADD COLUMN finish_with_doubles INTEGER;

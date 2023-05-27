@@ -20,7 +20,8 @@ fun List<GetPlayerGames>.mapToGames(): List<Game> {
                 finishTimestamp = Instant.fromEpochMilliseconds(0)
                     .toLocalDateTime(TimeZone.currentSystemDefault()),
                 startTimestamp = Instant.fromEpochMilliseconds(0)
-                    .toLocalDateTime(TimeZone.currentSystemDefault())
+                    .toLocalDateTime(TimeZone.currentSystemDefault()),
+                finishWithDoubles = false
             )
         }
 }

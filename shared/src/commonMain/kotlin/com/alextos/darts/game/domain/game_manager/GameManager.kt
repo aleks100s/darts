@@ -82,7 +82,8 @@ class GameManager(
             winner = winner,
             gameGoal = goal,
             finishTimestamp = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()),
-            startTimestamp = startTime
+            startTimestamp = startTime,
+            finishWithDoubles = finishWithDoubles
         )
         val gameHistory = GameHistory(
             game = game,

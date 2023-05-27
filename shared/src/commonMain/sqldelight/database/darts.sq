@@ -31,7 +31,8 @@ CREATE TABLE gameEntity(
     id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     game_goal INTEGER NOT NULL,
     timestamp INTEGER NOT NULL,
-    timestamp_start INTEGER
+    timestamp_start INTEGER,
+    finish_with_doubles INTEGER
 );
 
 getGames:
@@ -40,6 +41,7 @@ ge.id AS gameId,
 ge.game_goal AS goal,
 ge.timestamp AS timestamp,
 ge.timestamp_start AS timestampStart,
+ge.finish_with_doubles AS finishWithDoubles,
 pe.id AS playerId,
 pe.name AS playerName,
 gpe.game_order AS gameOrder,
@@ -54,9 +56,10 @@ INSERT OR REPLACE INTO gameEntity(
     id,
     game_goal,
     timestamp,
-    timestamp_start
+    timestamp_start,
+    finish_with_doubles
 )
-VALUES(?, ?, ?, ?);
+VALUES(?, ?, ?, ?, ?);
 
 deleteGame:
 DELETE FROM gameEntity
@@ -68,6 +71,7 @@ ge.id AS gameId,
 ge.game_goal AS goal,
 ge.timestamp AS timestamp,
 ge.timestamp_start AS timestampStart,
+ge.finish_with_doubles AS finishWithDoubles,
 pe.id AS playerId,
 pe.name AS playerName,
 gpe.game_order AS gameOrder,

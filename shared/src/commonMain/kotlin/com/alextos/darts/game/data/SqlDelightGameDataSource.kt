@@ -32,7 +32,8 @@ class SqlDelightGameDataSource(
                 id = null,
                 game_goal = game.gameGoal.toLong(),
                 timestamp = game.finishTimestamp.toInstant(TimeZone.currentSystemDefault()).toEpochMilliseconds(),
-                timestamp_start = game.startTimestamp?.toInstant(TimeZone.currentSystemDefault())?.toEpochMilliseconds()
+                timestamp_start = game.startTimestamp?.toInstant(TimeZone.currentSystemDefault())?.toEpochMilliseconds(),
+                finish_with_doubles = if (game.finishWithDoubles) 1 else 0
             )
 
             val gameId = getLastInsertedId()

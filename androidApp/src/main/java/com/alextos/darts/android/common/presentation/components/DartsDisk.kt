@@ -1,6 +1,7 @@
 package com.alextos.darts.android.common.presentation.components
 
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -18,13 +19,14 @@ private val hitColor = Color.Blue
 
 @Composable
 fun DartsDisk(selectedSector: Sector) {
+    val color = if (isSystemInDarkTheme()) Color(0xFF333333) else Color(0xFF222222)
     Canvas(
         modifier = Modifier
             .fillMaxWidth()
             .aspectRatio(1f)
             .padding(16.dp)
     ) {
-        drawMiss()
+        drawMiss(color)
         drawDoubles(selectedSector)
         drawOuters(selectedSector)
         drawTriplets(selectedSector)
@@ -35,10 +37,10 @@ fun DartsDisk(selectedSector: Sector) {
     }
 }
 
-private fun DrawScope.drawMiss() {
+private fun DrawScope.drawMiss(color: Color) {
     val boardRadius = size.width / 2
     drawCircle(
-        color = Color.Black,
+        color = color,
         radius = boardRadius
     )
 }

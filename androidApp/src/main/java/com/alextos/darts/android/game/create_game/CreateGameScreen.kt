@@ -61,17 +61,17 @@ fun CreateGameScreen(
                 LazyColumn(modifier = Modifier.weight(1f)) {
                     item {
                         Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clickable { onEvent(CreateGameEvent.CreatePlayer) }
+                                .padding(horizontal = 16.dp, vertical = 12.dp),
                             horizontalArrangement = Arrangement.Center,
-                            modifier = Modifier.fillMaxWidth()
                         ) {
-                            Button(onClick = {
-                                onEvent(CreateGameEvent.CreatePlayer)
-                            }) {
-                                Text(
-                                    text = stringResource(id = R.string.add_new_player),
-                                    textAlign = TextAlign.Center
-                                )
-                            }
+                            Text(
+                                text = stringResource(id = R.string.add_new_player),
+                                textAlign = TextAlign.Center,
+                                color = MaterialTheme.colors.primary
+                            )
                         }
                     }
 

@@ -17,3 +17,16 @@ fun Turn.rowColor(): Color {
         }
     }
 }
+
+@Composable
+fun Turn.textColor(): Color {
+    return if (isOverkill) {
+        Color.White
+    } else {
+        if (leftAfter == 0) {
+            MaterialTheme.colors.onSecondary
+        } else {
+            Color.Unspecified
+        }
+    }
+}

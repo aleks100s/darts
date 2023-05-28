@@ -9,10 +9,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.alextos.darts.android.common.presentation.extensions.rowColor
+import com.alextos.darts.android.common.presentation.extensions.textColor
 import com.alextos.darts.core.domain.model.Turn
 
 @Composable
 fun TurnItem(turn: Turn, onSelect: () -> Unit) {
+    val textColor = turn.textColor()
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -21,13 +23,29 @@ fun TurnItem(turn: Turn, onSelect: () -> Unit) {
             .padding(16.dp)
     ) {
         turn.shots.forEach {
-            Cell(modifier = Modifier.weight(1f), text = it.sector.valueString())
+            Cell(
+                modifier = Modifier.weight(1f),
+                text = it.sector.valueString(),
+                textColor = textColor
+            )
         }
         (0 until turn.shotsLeft()).forEach { _ ->
-            Cell(modifier = Modifier.weight(1f), text = "")
+            Cell(
+                modifier = Modifier.weight(1f),
+                text = "",
+                textColor = textColor
+            )
         }
-        Cell(modifier = Modifier.weight(1f), text = turn.score().toString())
-        Cell(modifier = Modifier.weight(1f), text = turn.leftAfter.toString())
+        Cell(
+            modifier = Modifier.weight(1f),
+            text = turn.score().toString(),
+            textColor = textColor
+        )
+        Cell(
+            modifier = Modifier.weight(1f),
+            text = turn.leftAfter.toString(),
+            textColor = textColor
+        )
     }
 }
 

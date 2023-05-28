@@ -2,6 +2,7 @@ package com.alextos.darts.android.statistics.heatmap
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -73,13 +74,15 @@ private fun SectorItem(sectorHeat: SectorHeat) {
 
 @Composable
 private fun HeatmapDartsDisk(distribution: SectorHeatmapDistribution) {
+    val color = if (isSystemInDarkTheme()) Color(0xFF333333) else Color(0xFF222222)
+
     Canvas(
         modifier = Modifier
             .fillMaxWidth()
             .aspectRatio(1f)
             .padding(16.dp)
     ) {
-        drawHeatmapMiss()
+        drawHeatmapMiss(color)
         drawHeatmapDoubles(distribution.getDoubles())
         drawHeatmapOuters(distribution.getOuters())
         drawHeatmapTriplets(distribution.getTriples())
@@ -90,10 +93,10 @@ private fun HeatmapDartsDisk(distribution: SectorHeatmapDistribution) {
     }
 }
 
-private fun DrawScope.drawHeatmapMiss() {
+private fun DrawScope.drawHeatmapMiss(color: Color) {
     val boardRadius = size.width / 2
     drawCircle(
-        color = Color.Black,
+        color = color,
         radius = boardRadius
     )
 }

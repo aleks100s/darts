@@ -1,5 +1,6 @@
 package com.alextos.darts.android.navigation
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
@@ -10,7 +11,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
-
 
 @Composable
 fun BottomNavigation(navController: NavController) {
@@ -36,7 +36,7 @@ fun BottomNavigation(navController: NavController) {
                 },
                 label = { Text(text = stringResource(id = item.title)) },
                 selectedContentColor = MaterialTheme.colors.primary,
-                unselectedContentColor = MaterialTheme.colors.primary.copy(alpha = 0.5f),
+                unselectedContentColor = MaterialTheme.colors.primary.copy(alpha = 0.6f),
                 alwaysShowLabel = true,
                 selected = currentRoute == item.route,
                 onClick = {

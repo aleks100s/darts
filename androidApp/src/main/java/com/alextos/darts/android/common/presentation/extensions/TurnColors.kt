@@ -8,10 +8,10 @@ import com.alextos.darts.core.domain.model.Turn
 @Composable
 fun Turn.rowColor(): Color {
     return if (isOverkill) {
-        MaterialTheme.colors.error
+        Color.Red
     } else {
         if (leftAfter == 0) {
-            MaterialTheme.colors.secondary
+            Color.Green
         } else {
             Color.Transparent
         }
@@ -24,7 +24,7 @@ fun Turn.textColor(): Color {
         Color.White
     } else {
         if (leftAfter == 0) {
-            MaterialTheme.colors.onSecondary
+            Color.Black
         } else {
             Color.Unspecified
         }

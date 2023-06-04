@@ -13,7 +13,7 @@ internal struct DoubleSelectableItem: View {
 				Text(leftText)
 				Spacer()
 				Text(rightText)
-				Image(systemName: "chevron.right")
+				Chevron()
 			}
 			.padding(.vertical, 4)
 		}

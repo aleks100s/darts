@@ -97,7 +97,7 @@ internal struct GameListScreen: View {
 			
 			Spacer()
 			
-			Image(systemName: "chevron.right")
+			Chevron()
 		}
 		.lineLimit(1)
 	}

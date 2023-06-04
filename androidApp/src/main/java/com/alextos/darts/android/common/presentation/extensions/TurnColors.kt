@@ -1,6 +1,5 @@
 package com.alextos.darts.android.common.presentation.extensions
 
-import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import com.alextos.darts.core.domain.model.Turn
@@ -8,10 +7,10 @@ import com.alextos.darts.core.domain.model.Turn
 @Composable
 fun Turn.rowColor(): Color {
     return if (isOverkill) {
-        Color.Red
+        Color.Red.copy(alpha = 0.7f)
     } else {
         if (leftAfter == 0) {
-            Color.Green
+            Color.Green.copy(alpha = 0.7f)
         } else {
             Color.Transparent
         }

@@ -30,8 +30,9 @@ fun GameScreen(
     }
 
     val title = if (finishWithDoubles) stringResource(id = R.string.game_with_doubles) else stringResource(id = R.string.game)
+    val screenType = rememberScreenType()
 
-    when (rememberScreenType()) {
+    when (screenType) {
         is ScreenType.Compact -> {
             Screen(
                 title = title,
@@ -39,6 +40,7 @@ fun GameScreen(
                 onBackPressed = { onEvent(GameEvent.BackButtonPressed) }) { modifier ->
                 GameInput(
                     modifier = modifier,
+                    screenType = screenType,
                     state = state,
                     onEvent = onEvent
                 )
@@ -49,10 +51,15 @@ fun GameScreen(
                 title = title,
                 isBackButtonVisible = false,
                 content1 = {
-                    GameHistory(state = state, onEvent = onEvent)
+                    GameInput(
+                        modifier = Modifier,
+                        screenType = screenType,
+                        state = state,
+                        onEvent = onEvent
+                    )
                 },
                 content2 = {
-                    GameInput(state = state, onEvent = onEvent, modifier = Modifier)
+                    GameHistory(state = state, onEvent = onEvent)
                 },
                 onBackPressed = {
                     onEvent(GameEvent.BackButtonPressed)
@@ -93,6 +100,7 @@ private fun GameHistory(
 @Composable
 private fun GameInput(
     modifier: Modifier,
+    screenType: ScreenType,
     state: GameState,
     onEvent: (GameEvent) -> Unit
 ) {
@@ -106,7 +114,10 @@ private fun GameInput(
             onEvent(GameEvent.MakeShot(sector))
         },
         onPlayerClick = {
-            onEvent(GameEvent.ShowHistory(it))
+            when (screenType) {
+                is ScreenType.Compact -> onEvent(GameEvent.ShowHistory(it))
+                else -> {}
+            }
         }
     )
 }

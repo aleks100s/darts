@@ -8,12 +8,14 @@ internal struct HistoryScreen: View {
 	var body: some View {
 		content
 		.toolbar {
-			Button {
-				viewModel.showRecap()
-			} label: {
-				Text("progress")
+			if idiom == .phone {
+				Button {
+					viewModel.showRecap()
+				} label: {
+					Text("progress")
+				}
+				.accessibilityIdentifier("recap")
 			}
-			.accessibilityIdentifier("recap")
 		}
 			.onAppear {
 				viewModel.startObserving()

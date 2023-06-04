@@ -111,7 +111,9 @@ internal struct GameScreen: View {
 				viewModel.onEvent(.MakeShot(sector: sector))
 			},
 			onPlayerClick: { index in
-				viewModel.showGameHistory(index: index)
+				if idiom == .phone {
+					viewModel.showGameHistory(index: index)
+				}
 			}
 		)
 	}

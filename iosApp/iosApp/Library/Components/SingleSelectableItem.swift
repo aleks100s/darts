@@ -11,7 +11,7 @@ internal struct SignleSelectableItem: View {
 			HStack {
 				Text(title)
 				Spacer()
-				Image(systemName: "chevron.right")
+				Chevron()
 			}
 			.padding(.vertical, 4)
 		}

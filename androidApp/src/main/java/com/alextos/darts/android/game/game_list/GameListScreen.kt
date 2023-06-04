@@ -9,7 +9,6 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ChevronRight
 import androidx.compose.material.icons.filled.Create
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -19,6 +18,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.alextos.darts.android.R
+import com.alextos.darts.android.common.presentation.components.Chevron
 import com.alextos.darts.android.common.presentation.components.FAB
 import com.alextos.darts.android.common.presentation.components.RoundedView
 import com.alextos.darts.android.common.presentation.extensions.getTitle
@@ -234,6 +234,6 @@ private fun GameItem(
 
         Spacer(modifier = Modifier.weight(1f))
 
-        Icon(imageVector = Icons.Filled.ChevronRight, contentDescription = stringResource(id = R.string.open_game))
+        Chevron(contentDescription = stringResource(id = R.string.open_game))
     }
 }

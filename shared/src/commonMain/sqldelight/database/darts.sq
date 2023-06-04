@@ -232,7 +232,8 @@ WHERE se.player_id = ?;
 getAverageShotValue:
 SELECT
 AVG(she.shot_value) AS averageShotValue
-FROM shotEntity she;
+FROM shotEntity she
+WHERE she.sector >= 0;
 
 getPlayerAverageShotValue:
 SELECT

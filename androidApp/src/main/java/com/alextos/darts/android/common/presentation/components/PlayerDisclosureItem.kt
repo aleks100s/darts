@@ -22,7 +22,7 @@ fun PlayerDisclosureItem(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp)
+            .padding(end = 16.dp)
             .clickable { onSelect() },
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween

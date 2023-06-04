@@ -11,8 +11,15 @@ internal enum GameListScene {
 	) -> some View {
 		let getGamesUseCase = GetGamesUseCase(dataSource: module.gameDataSource)
 		let deleteGameUseCase = DeleteGameUseCase(dataSource: module.gameDataSource)
+		let createPlayerUseCase = CreatePlayerUseCase(dataSource: module.playerDataSource)
+		let saveGameHistoryUseCase = SaveGameHistoryUseCase(dataSource: module.gameDataSource)
+		let prepopulateDatabaseUseCase = PrepopulateDatabaseUseCase(
+			createPlayerUseCase: createPlayerUseCase,
+			saveGameHistoryUseCase: saveGameHistoryUseCase
+		)
 		let viewModel = GameListViewModel(
 			deleteGameUseCase: deleteGameUseCase,
+			prepopulateDatabaseUseCase: prepopulateDatabaseUseCase,
 			getGamesUseCase: getGamesUseCase,
 			coroutineScope: nil
 		)

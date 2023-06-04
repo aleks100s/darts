@@ -9,6 +9,7 @@ import com.alextos.darts.database.DartsDatabase
 import com.alextos.darts.game.data.SqlDelightGameDataSource
 import com.alextos.darts.game.domain.GameDataSource
 import com.alextos.darts.core.domain.useCases.GetPlayersUseCase
+import com.alextos.darts.debug.PrepopulateDatabaseUseCase
 import com.alextos.darts.game.domain.useCases.*
 import com.alextos.darts.statistics.data.SqlDelightStatisticsDataSource
 import com.alextos.darts.statistics.domain.StatisticsDataSource
@@ -154,5 +155,14 @@ object AppModule {
     @Singleton
     fun provideGetPlayerAverageTurnUseCase(dataSource: StatisticsDataSource): GetPlayerAverageTurnUseCase {
         return GetPlayerAverageTurnUseCase(dataSource)
+    }
+
+    @Provides
+    @Singleton
+    fun providePrepopulateDatabaseUseCase(
+        createPlayerUseCase: CreatePlayerUseCase,
+        saveGameHistoryUseCase: SaveGameHistoryUseCase
+    ): PrepopulateDatabaseUseCase {
+        return PrepopulateDatabaseUseCase(createPlayerUseCase, saveGameHistoryUseCase)
     }
 }

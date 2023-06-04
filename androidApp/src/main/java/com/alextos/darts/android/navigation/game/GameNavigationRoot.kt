@@ -85,6 +85,9 @@ fun GameNavigationRoot() {
                             viewModel.onEvent(it)
                         }
                     }
+                },
+                populateDB = {
+                    viewModel.prepopulateDatabase()
                 }
             ) {
                 navController.popBackStack()

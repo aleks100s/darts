@@ -64,6 +64,10 @@ internal final class IOSGameListViewModel: ObservableObject {
 		handle?.dispose()
 	}
 	
+	func prepopulateDatabase() {
+		viewModel.prepopulateDatabase()
+	}
+	
 	deinit {
 		handle?.dispose()
 	}

@@ -34,6 +34,11 @@ internal struct GameListScreen: View {
 			.onDisappear {
 				viewModel.dispose()
 			}
+#if DEBUG
+			.onShake {
+				viewModel.prepopulateDatabase()
+			}
+#endif
 	}
 	
 	@ViewBuilder

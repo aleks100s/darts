@@ -1,6 +1,7 @@
 package com.alextos.darts.game.presentation.game_list
 
 import com.alextos.darts.core.util.toCommonStateFlow
+import com.alextos.darts.debug.PrepopulateDatabaseUseCase
 import com.alextos.darts.game.domain.useCases.DeleteGameUseCase
 import com.alextos.darts.game.domain.useCases.GetGamesUseCase
 import kotlinx.coroutines.CoroutineScope
@@ -10,6 +11,7 @@ import kotlinx.coroutines.launch
 
 class GameListViewModel(
     private val deleteGameUseCase: DeleteGameUseCase,
+    private val prepopulateDatabaseUseCase: PrepopulateDatabaseUseCase,
     getGamesUseCase: GetGamesUseCase,
     coroutineScope: CoroutineScope?
 ) {
@@ -73,6 +75,12 @@ class GameListViewModel(
             is GameListEvent.ReplayGame -> {
                 _state.update { it.copy(isActionsDialogShown = false) }
             }
+        }
+    }
+
+    fun prepopulateDatabase() {
+        viewModelScope.launch(Dispatchers.Default) {
+            prepopulateDatabaseUseCase.execute()
         }
     }
 }

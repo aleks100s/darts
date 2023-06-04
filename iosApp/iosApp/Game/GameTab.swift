@@ -73,7 +73,6 @@ internal struct GameTab: View {
 				.navigationTitle(settings.isFinishWithDoublesChecked ? "game_with_doubles" : "game")
 				.navigationBarTitleDisplayMode(.inline)
 				.navigationBarBackButtonHidden()
-				.tabViewStyle(.page)
 			
 		case let .history(game):
 			HistoryScene.create(

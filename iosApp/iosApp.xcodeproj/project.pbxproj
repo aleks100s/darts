@@ -54,6 +54,7 @@
 		279E829329DA058200CDCA1E /* DartsWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 279E829629DA058200CDCA1E /* DartsWidget.intentdefinition */; };
 		279E829429DA058200CDCA1E /* DartsWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 279E829629DA058200CDCA1E /* DartsWidget.intentdefinition */; };
 		27B3799D2A2C6C5C00B64094 /* Chevron.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B3799C2A2C6C5B00B64094 /* Chevron.swift */; };
+		27B3799F2A2D077300B64094 /* ShakeGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B3799E2A2D077300B64094 /* ShakeGesture.swift */; };
 		27CF107329A8BBB600174D02 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CF107229A8BBB600174D02 /* GameScene.swift */; };
 		27CF107529A8BBBE00174D02 /* GameScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CF107429A8BBBE00174D02 /* GameScreen.swift */; };
 		27CF107729A8BBC800174D02 /* IOSGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CF107629A8BBC800174D02 /* IOSGameViewModel.swift */; };
@@ -206,6 +207,7 @@
 		279E829829DA058300CDCA1E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/DartsWidget.strings; sourceTree = "<group>"; };
 		279E829A29DA058400CDCA1E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/DartsWidget.strings; sourceTree = "<group>"; };
 		27B3799C2A2C6C5B00B64094 /* Chevron.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chevron.swift; sourceTree = "<group>"; };
+		27B3799E2A2D077300B64094 /* ShakeGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShakeGesture.swift; sourceTree = "<group>"; };
 		27CF107229A8BBB600174D02 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; tabWidth = 4; };
 		27CF107429A8BBBE00174D02 /* GameScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScreen.swift; sourceTree = "<group>"; tabWidth = 4; };
 		27CF107629A8BBC800174D02 /* IOSGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSGameViewModel.swift; sourceTree = "<group>"; };
@@ -474,6 +476,7 @@
 				27D65A0A29BDED5800A921C6 /* StatisticsEvent+Extensions.swift */,
 				27D65A1629BDF7E900A921C6 /* AveragePlayerValue+Extensions.swift */,
 				274E404B29CEEE73000E9027 /* SectorHeat+Extensions.swift */,
+				27B3799E2A2D077300B64094 /* ShakeGesture.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -865,6 +868,7 @@
 				274E404A29CEECF7000E9027 /* Arc.swift in Sources */,
 				27D42F8E2A17EEF300CE41C0 /* LoadingView.swift in Sources */,
 				27D65A0029BC86F400A921C6 /* KotlinFloat+Extensions.swift in Sources */,
+				27B3799F2A2D077300B64094 /* ShakeGesture.swift in Sources */,
 				27D65A0B29BDED5800A921C6 /* StatisticsEvent+Extensions.swift in Sources */,
 				27CF109A29AD2A5600174D02 /* HistoryScene.swift in Sources */,
 				27D65A3C29BE511500A921C6 /* ShotDistributionScene.swift in Sources */,

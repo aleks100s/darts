@@ -17,6 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import com.alextos.darts.android.BuildConfig
 import com.alextos.darts.android.R
 import com.alextos.darts.android.common.presentation.components.Chevron
 import com.alextos.darts.android.common.presentation.components.FAB
@@ -34,7 +35,8 @@ import com.alextos.darts.game.presentation.game_list.GameListState
 fun GameListScreen(
     state: GameListState,
     onEvent: (GameListEvent) -> Unit,
-    onBackPressed: () -> Unit
+    populateDB: () -> Unit,
+    onBackPressed: () -> Unit,
 ) {
     Scaffold(
         floatingActionButton = {
@@ -56,7 +58,14 @@ fun GameListScreen(
             if (state.isLoading) {
                 LoadingView()
             } else if (state.games.isEmpty()) {
-                NoDataView(modifier)
+                Column {
+                    if (BuildConfig.DEBUG) {
+                        Button(onClick = populateDB) {
+                            Text("Populate DB")
+                        }
+                    }
+                    NoDataView(modifier)
+                }
             } else {
                 RoundedView(modifier.padding(padding)) {
                     GamesList(

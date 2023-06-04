@@ -8,8 +8,7 @@ import com.alextos.darts.android.common.presentation.extensions.rounded
 @Composable
 fun RoundedView(modifier: Modifier = Modifier, content: @Composable () -> Unit) {
     Box(
-        modifier = modifier
-            .rounded()
+        modifier = modifier.rounded()
     ) {
         content()
     }

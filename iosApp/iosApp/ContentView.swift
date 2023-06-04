@@ -32,5 +32,11 @@ internal struct ContentView: View {
 				selection = .game
 			}
 		}
+		.onAppear {
+			// correct the transparency bug for Tab bars
+			let tabBarAppearance = UITabBarAppearance()
+			tabBarAppearance.configureWithOpaqueBackground()
+			UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+		}
 	}
 }

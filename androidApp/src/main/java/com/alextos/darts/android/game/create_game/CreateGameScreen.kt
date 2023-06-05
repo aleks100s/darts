@@ -100,17 +100,24 @@ fun CreateGameScreen(
 
                 SectionHeader(title = stringResource(id = R.string.additional_settings))
 
-                FinishWithDoublesItem(
+                FinishWithDoublesCheckbox(
                     isChecked = state.isFinishWithDoublesChecked,
                     onCheckedChanged = { isChecked ->
                         onEvent(CreateGameEvent.ToggleFinishWithDoubles(isChecked))
                     }
                 )
 
-                RandomizeOrderItem(
+                RandomizeOrderCheckbox(
                     isChecked = state.isRandomPlayersOrderChecked,
                     onCheckedChanged = { isChecked ->
                         onEvent(CreateGameEvent.ToggleRandomPlayersOrder(isChecked))
+                    }
+                )
+
+                DisableStatisticsCheckbox(
+                    isChecked = state.isStatisticsDisabled,
+                    onCheckedChanged = { isChecked ->
+                        onEvent(CreateGameEvent.ToggleDisableStatistics(isChecked))
                     }
                 )
 
@@ -238,7 +245,7 @@ fun GoalOptionItem(
 }
 
 @Composable
-fun FinishWithDoublesItem(
+fun FinishWithDoublesCheckbox(
     isChecked: Boolean,
     onCheckedChanged: (Boolean) -> Unit
 ) {
@@ -250,12 +257,24 @@ fun FinishWithDoublesItem(
 }
 
 @Composable
-fun RandomizeOrderItem(
+fun RandomizeOrderCheckbox(
     isChecked: Boolean,
     onCheckedChanged: (Boolean) -> Unit
 ) {
     AdditionalSettingSwitch(
         title = stringResource(id = R.string.randomize_player_order),
+        isChecked = isChecked,
+        onCheckedChanged = onCheckedChanged
+    )
+}
+
+@Composable
+fun DisableStatisticsCheckbox(
+    isChecked: Boolean,
+    onCheckedChanged: (Boolean) -> Unit
+) {
+    AdditionalSettingSwitch(
+        title = stringResource(id = R.string.disable_statistics),
         isChecked = isChecked,
         onCheckedChanged = onCheckedChanged
     )

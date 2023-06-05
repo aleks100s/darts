@@ -80,6 +80,7 @@
     <string name="navigate_back">Перейти назад</string>
     <string name="game_duration">Длительность игры %1$d мин %2$d сек</string>
     <string name="open_game">Открыть игру</string>
-    <string name="game_with_doubles">Игра (✅ x2)</string>
+    <string name="game_title_with_settings">Игра%1$s</string>
     <string name="randomize_player_order">Случайный порядок игроков</string>
+    <string name="disable_statistics">Не учитывать в статистике</string>
 </resources>

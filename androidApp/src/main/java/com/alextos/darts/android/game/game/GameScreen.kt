@@ -21,18 +21,17 @@ import com.alextos.darts.game.presentation.game.GameState
 
 @Composable
 fun GameScreen(
+    settingsTitle: String,
     state: GameState,
-    finishWithDoubles: Boolean,
     onEvent: (GameEvent) -> Unit
 ) {
     BackHandler {
         onEvent(GameEvent.BackButtonPressed)
     }
 
-    val title = if (finishWithDoubles) stringResource(id = R.string.game_with_doubles) else stringResource(id = R.string.game)
-    val screenType = rememberScreenType()
+    val title = stringResource(id = R.string.game_title_with_settings, settingsTitle)
 
-    when (screenType) {
+    when (val screenType = rememberScreenType()) {
         is ScreenType.Compact -> {
             Screen(
                 title = title,

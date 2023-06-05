@@ -31,7 +31,7 @@ data class Game(
         }
 
     fun getUIDoublesString(): String {
-        return if (finishWithDoubles) "✅ x2" else "❌ x2"
+        return if (finishWithDoubles) "\uD83C\uDFC1 x2" else ""
     }
 
     fun getUIGoalString(): String {
@@ -56,6 +56,10 @@ data class Game(
 
     fun getUIRandomOrderString(): String {
         return if (randomPlayerOrder) "\uD83C\uDFB2" else ""
+    }
+
+    fun getUIEnabledStatisticsString(): String {
+        return if (!disableStatistics) "\uD83D\uDCCA" else ""
     }
 
     fun getPlayersListString(): String {

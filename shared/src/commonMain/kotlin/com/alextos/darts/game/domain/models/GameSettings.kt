@@ -9,5 +9,19 @@ data class GameSettings(
     val selectedGameGoal: Int,
     val isFinishWithDoublesChecked: Boolean,
     val isRandomPlayersOrderChecked: Boolean,
-    val disableStatistics: Boolean
-)
+    val isStatisticsDisabled: Boolean
+) {
+    fun getUIGameTitleSettingsString(): String {
+        if (!isStatisticsDisabled && !isFinishWithDoublesChecked) {
+            return ""
+        }
+        val settings = mutableListOf<String>()
+        if (isStatisticsDisabled) {
+            settings.add("\uD83D\uDCCA")
+        }
+        if (isFinishWithDoublesChecked) {
+            settings.add("\uD83C\uDFC1 x2")
+        }
+        return " (${settings.joinToString(separator = ", ")})"
+    }
+}

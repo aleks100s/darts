@@ -9,42 +9,7 @@ internal struct CreateGameScreen: View {
 	@State private var isStatisticsDisabled = false
 	
 	var body: some View {
-		List {
-			Section("all_players") {
-				Button {
-					viewModel.onEvent(.CreatePlayer())
-				} label: {
-					Text("add_new_player")
-				}
-				.accessibilityIdentifier("addNewPlayer")
-
-				ForEach(viewModel.state.allPlayers) { player in
-					let isChecked = viewModel.state.isPlayerSelected(player: player)
-					PlayerCheckbox(player: player, isChecked: isChecked) {
-						viewModel.onEvent(.SelectPlayer(player: player))
-					}
-				}
-				.onDelete { indexTurn in
-					if let index = indexTurn.first {
-						viewModel.deletePlayer(index: index)
-					}
-				}
-			}
-			
-			Section("game_goal") {
-				ForEach(viewModel.state.goalOptions) { option in
-					let isSelected = viewModel.state.isGoalSelected(goal: option.int32Value)
-					GoalOption(option: option.intValue, isSelected: isSelected) {
-						viewModel.onEvent(.SelectGoal(option: option.int32Value))
-					}
-				}
-			}
-			
-			Section("additional_settings") {
-				Toggle("finish_with_doubles", isOn: $isFinishWithDoublesChecked)
-				Toggle("randomize_player_order", isOn: $isRandomPlayerOrderChecked)
-			}
-		}
+		content
 		.alert("enter_new_player_name", isPresented: $viewModel.isCreatePlayerDialogShown) {
 			TextField("enter_new_player_name", text: $newPlayerName)
 			
@@ -98,6 +63,47 @@ internal struct CreateGameScreen: View {
 			.onDisappear {
 				viewModel.dispose()
 			}
+	}
+	
+	@ViewBuilder
+	private var content: some View {
+		List {
+			Section("all_players") {
+				Button {
+					viewModel.onEvent(.CreatePlayer())
+				} label: {
+					Text("add_new_player")
+				}
+				.accessibilityIdentifier("addNewPlayer")
+
+				ForEach(viewModel.state.allPlayers) { player in
+					let isChecked = viewModel.state.isPlayerSelected(player: player)
+					PlayerCheckbox(player: player, isChecked: isChecked) {
+						viewModel.onEvent(.SelectPlayer(player: player))
+					}
+				}
+				.onDelete { indexTurn in
+					if let index = indexTurn.first {
+						viewModel.deletePlayer(index: index)
+					}
+				}
+			}
+			
+			Section("game_goal") {
+				ForEach(viewModel.state.goalOptions) { option in
+					let isSelected = viewModel.state.isGoalSelected(goal: option.int32Value)
+					GoalOption(option: option.intValue, isSelected: isSelected) {
+						viewModel.onEvent(.SelectGoal(option: option.int32Value))
+					}
+				}
+			}
+			
+			Section("additional_settings") {
+				Toggle("finish_with_doubles", isOn: $isFinishWithDoublesChecked)
+				Toggle("randomize_player_order", isOn: $isRandomPlayerOrderChecked)
+				Toggle("disable_statistics", isOn: $isStatisticsDisabled)
+			}
+		}
 	}
 	
 	@ViewBuilder

@@ -96,6 +96,9 @@ internal struct GameListScreen: View {
 					if game.randomPlayerOrder {
 						Text(game.getUIRandomOrderString())
 					}
+					if !game.disableStatistics {
+						Text(game.getUIEnabledStatisticsString())
+					}
 				}
 				.font(.caption)
 			}

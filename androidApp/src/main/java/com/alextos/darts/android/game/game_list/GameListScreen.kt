@@ -238,6 +238,9 @@ private fun GameItem(
                 if (game.randomPlayerOrder) {
                     Text(text = game.getUIRandomOrderString())
                 }
+                if (!game.disableStatistics) {
+                    Text(text = game.getUIEnabledStatisticsString())
+                }
             }
         }
 

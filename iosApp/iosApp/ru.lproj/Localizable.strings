@@ -49,10 +49,10 @@
 "bullseye_percent" = "%.2f%% яблочко";
 "double_bullseye_percent" = "%.2f%% сердцевина";
 "no_data_yet" = "В этом разделе пока нет данных";
-"throws_count" = "Всего бросков: %@";
+"throws_count %d" = "Всего бросков: %d";
 "throw_number" = "№%@";
 "progress" = "Результаты";
-"games_count" = "Всего игр: %@";
+"games_count %d" = "Всего игр: %d";
 "victory_percent" = "%.2f%% побед";
 "lose_percent" = "%.2f%% поражений";
 "biggest_sets" = "Лучшие подходы";
@@ -79,5 +79,6 @@
 "miss" = "Промах";
 "replay" = "Переиграть";
 "game_duration %d %d" = "Длительность игры %d мин %d сек";
-"game_with_doubles" = "Игра (✅ x2)";
+"game_title_with_settings %@" = "Игра%@";
 "randomize_player_order" = "Случайный порядок игроков";
+"disable_statistics" = "Не учитывать в статистике";

@@ -13,7 +13,7 @@ internal final class IOSCreateGameViewModel: ObservableObject {
 		isDeletePlayerDialogShown: false,
 		isFinishWithDoublesChecked: false,
 		isRandomPlayersOrderChecked: false,
-		disableStatistics: false
+		isStatisticsDisabled: false
 	)
 	@Published private(set) var createPlayerState = CreatePlayerState(name: "", allPlayers: [])
 	
@@ -44,7 +44,7 @@ internal final class IOSCreateGameViewModel: ObservableObject {
 				selectedGameGoal: state.selectedGoal?.int32Value ?? 0,
 				isFinishWithDoublesChecked: isFinishWithDoubles,
 				isRandomPlayersOrderChecked: isRandomPlayerOrder,
-				disableStatistics: isStatisticsDisabled
+				isStatisticsDisabled: isStatisticsDisabled
 			)
 		)
 	}

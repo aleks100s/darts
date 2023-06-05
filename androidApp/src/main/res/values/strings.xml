@@ -80,6 +80,7 @@
     <string name="navigate_back">Navigate back</string>
     <string name="game_duration">Game duration is %1$d min %2$d sec</string>
     <string name="open_game">Open game</string>
-    <string name="game_with_doubles">Game (✅ x2)</string>
+    <string name="game_title_with_settings">Game%1$s</string>
     <string name="randomize_player_order">Random player order</string>
+    <string name="disable_statistics">Do not count in statistics</string>
 </resources>

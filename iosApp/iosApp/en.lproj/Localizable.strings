@@ -79,5 +79,6 @@
 "miss" = "Miss";
 "replay" = "Rematch";
 "game_duration %d %d" = "Game duration is %d min %d sec";
-"game_with_doubles" = "Game (✅ x2)";
+"game_title_with_settings %@" = "Game%@";
 "randomize_player_order" = "Random player order";
+"disable_statistics" = "Do not count in statistics";

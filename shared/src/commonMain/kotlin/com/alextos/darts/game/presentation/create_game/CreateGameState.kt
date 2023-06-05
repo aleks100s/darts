@@ -11,7 +11,8 @@ data class CreateGameState(
     val playerToDelete: Player? = null,
     val isDeletePlayerDialogShown: Boolean = false,
     val isFinishWithDoublesChecked: Boolean = false,
-    val isRandomPlayersOrderChecked: Boolean = false
+    val isRandomPlayersOrderChecked: Boolean = false,
+    val disableStatistics: Boolean = false
 ) {
     fun isReadyToCreateGame() = selectedPlayers.isNotEmpty() && selectedGoal != null
 
@@ -23,6 +24,7 @@ data class CreateGameState(
         selectedPlayers,
         selectedGoal ?: 0,
         isFinishWithDoublesChecked,
-        isRandomPlayersOrderChecked
+        isRandomPlayersOrderChecked,
+        disableStatistics
     )
 }

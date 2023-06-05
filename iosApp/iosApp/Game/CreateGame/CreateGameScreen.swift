@@ -6,6 +6,7 @@ internal struct CreateGameScreen: View {
 	@State private var newPlayerName = ""
 	@State private var isFinishWithDoublesChecked = false
 	@State private var isRandomPlayerOrderChecked = false
+	@State private var isStatisticsDisabled = false
 	
 	var body: some View {
 		List {
@@ -82,7 +83,8 @@ internal struct CreateGameScreen: View {
 			Button {
 				viewModel.start(
 					isFinishWithDoubles: isFinishWithDoublesChecked,
-					isRandomPlayerOrder: isRandomPlayerOrderChecked
+					isRandomPlayerOrder: isRandomPlayerOrderChecked,
+					isStatisticsDisabled: isStatisticsDisabled
 				)
 			} label: {
 				Text("start_game")

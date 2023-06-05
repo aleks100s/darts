@@ -1,0 +1,3 @@
+ALTER TABLE shotEntity ADD COLUMN disable_statistics INTEGER;
+ALTER TABLE setEntity ADD COLUMN disable_statistics INTEGER;
+ALTER TABLE gamePlayerEntity ADD COLUMN disable_statistics INTEGER;

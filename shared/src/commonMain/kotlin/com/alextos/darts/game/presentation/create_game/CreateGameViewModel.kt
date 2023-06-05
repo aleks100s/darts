@@ -87,6 +87,11 @@ class CreateGameViewModel(
                     it.copy(isRandomPlayersOrderChecked = event.isChecked)
                 }
             }
+            is CreateGameEvent.ToggleDisableStatistics -> {
+                _state.update {
+                    it.copy(disableStatistics = event.isChecked)
+                }
+            }
 
             CreateGameEvent.CreateGame -> {}
             CreateGameEvent.CreatePlayer -> {}

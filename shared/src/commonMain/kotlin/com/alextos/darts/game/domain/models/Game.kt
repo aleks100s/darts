@@ -15,7 +15,8 @@ data class Game(
     val finishTimestamp: LocalDateTime,
     val startTimestamp: LocalDateTime?,
     val finishWithDoubles: Boolean,
-    val randomPlayerOrder: Boolean
+    val randomPlayerOrder: Boolean,
+    val disableStatistics: Boolean
 ) {
     val duration: GameDuration
         get() {
@@ -72,7 +73,7 @@ data class Game(
     }
 
     fun getGameSettings(): GameSettings {
-        return GameSettings(players, gameGoal, finishWithDoubles, randomPlayerOrder)
+        return GameSettings(players, gameGoal, finishWithDoubles, randomPlayerOrder, disableStatistics)
     }
 
     internal fun getDayString(timestamp: LocalDateTime): String {

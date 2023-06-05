@@ -33,7 +33,8 @@ CREATE TABLE gameEntity(
     timestamp INTEGER NOT NULL,
     timestamp_start INTEGER,
     finish_with_doubles INTEGER,
-    random_player_order INTEGER
+    random_player_order INTEGER,
+    disable_statistics INTEGER
 );
 
 getGames:
@@ -44,6 +45,7 @@ ge.timestamp AS timestamp,
 ge.timestamp_start AS timestampStart,
 ge.finish_with_doubles AS finishWithDoubles,
 ge.random_player_order AS randomPlayerOrder,
+ge.disable_statistics AS disableStatistics,
 pe.id AS playerId,
 pe.name AS playerName,
 gpe.game_order AS gameOrder,
@@ -60,9 +62,10 @@ INSERT OR REPLACE INTO gameEntity(
     timestamp,
     timestamp_start,
     finish_with_doubles,
-    random_player_order
+    random_player_order,
+    disable_statistics
 )
-VALUES(?, ?, ?, ?, ?, ?);
+VALUES(?, ?, ?, ?, ?, ?, ?);
 
 deleteGame:
 DELETE FROM gameEntity
@@ -76,6 +79,7 @@ ge.timestamp AS timestamp,
 ge.timestamp_start AS timestampStart,
 ge.finish_with_doubles AS finishWithDoubles,
 ge.random_player_order AS randomPlayerOrder,
+ge.disable_statistics AS disableStatistics,
 pe.id AS playerId,
 pe.name AS playerName,
 gpe.game_order AS gameOrder,
@@ -94,6 +98,7 @@ CREATE TABLE gamePlayerEntity(
     player_id INTEGER NOT NULL,
     game_order INTEGER NOT NULL,
     is_winner INTEGER NOT NULL,
+    disable_statistics INTEGER,
     FOREIGN KEY (game_id) REFERENCES gameEntity(id) ON DELETE CASCADE,
     FOREIGN KEY (player_id) REFERENCES playerEntity(id) ON DELETE CASCADE
 );
@@ -104,9 +109,10 @@ INSERT OR REPLACE INTO gamePlayerEntity(
     game_id,
     player_id,
     game_order,
-    is_winner
+    is_winner,
+    disable_statistics
 )
-VALUES(?, ?, ?, ?, ?);
+VALUES(?, ?, ?, ?, ?, ?);
 
 deleteGamePlayer:
 DELETE FROM gamePlayerEntity
@@ -121,6 +127,7 @@ CREATE TABLE setEntity(
     score INTEGER NOT NULL,
     leftAfter INTEGER NOT NULL,
     isOverkill INTEGER NOT NULL,
+    disable_statistics INTEGER,
     FOREIGN KEY (game_id) REFERENCES gameEntity(id) ON DELETE CASCADE,
     FOREIGN KEY (player_id) REFERENCES playerEntity(id) ON DELETE CASCADE
 );
@@ -132,9 +139,10 @@ INSERT OR REPLACE INTO setEntity(
     player_id,
     score,
     leftAfter,
-    isOverkill
+    isOverkill,
+    disable_statistics
 )
-VALUES(?, ?, ?, ?, ?, ?);
+VALUES(?, ?, ?, ?, ?, ?, ?);
 
 getGameSets:
 SELECT * FROM setEntity
@@ -153,6 +161,7 @@ CREATE TABLE shotEntity(
     order_number INTEGER NOT NULL,
     sector INTEGER NOT NULL,
     shot_value INTEGER NOT NULL,
+    disable_statistics INTEGER,
     FOREIGN KEY (set_id) REFERENCES setEntity(id) ON DELETE CASCADE,
     FOREIGN KEY (player_id) REFERENCES playerEntity(id) ON DELETE CASCADE
 );
@@ -164,9 +173,10 @@ INSERT OR REPLACE INTO shotEntity(
     player_id,
     order_number,
     sector,
-    shot_value
+    shot_value,
+    disable_statistics
 )
-VALUES(?, ?, ?, ?, ?, ?);
+VALUES(?, ?, ?, ?, ?, ?, ?);
 
 deleteShots:
 DELETE FROM shotEntity
@@ -200,7 +210,9 @@ she.shot_value AS sectorValue
 FROM setEntity se
 JOIN shotEntity she ON se.id = she.set_id
 WHERE score = (SELECT MAX(score) FROM setEntity WHERE setEntity.player_id = ?)
-AND se.player_id = ?;
+AND se.player_id = ?
+AND (se.disable_statistics IS NULL OR se.disable_statistics = 0)
+AND (she.disable_statistics IS NULL OR she.disable_statistics = 0);
 
 getPlayerBiggestFinalSet:
 SELECT
@@ -215,56 +227,62 @@ FROM setEntity se
 JOIN shotEntity she ON se.id = she.set_id
 WHERE she.player_id = ?
 AND leftAfter = 0
+AND (se.disable_statistics IS NULL OR se.disable_statistics = 0)
+AND (she.disable_statistics IS NULL OR she.disable_statistics = 0)
 ORDER BY se.score DESC, se.id ASC
 LIMIT 3;
 
 getAverageSetScore:
 SELECT
 AVG(se.score) AS averageScore
-FROM setEntity se;
+FROM setEntity se
+WHERE (se.disable_statistics IS NULL OR se.disable_statistics = 0);
 
 getPlayerAverageSetScore:
 SELECT
 AVG(se.score) AS averageScore
 FROM setEntity se
-WHERE se.player_id = ?;
+WHERE se.player_id = ?
+AND (se.disable_statistics IS NULL OR se.disable_statistics = 0);
 
 getAverageShotValue:
 SELECT
 AVG(she.shot_value) AS averageShotValue
 FROM shotEntity she
-WHERE she.sector >= 0;
+WHERE she.sector >= 0
+AND (she.disable_statistics IS NULL OR she.disable_statistics = 0);
 
 getPlayerAverageShotValue:
 SELECT
 AVG(she.shot_value) AS averageShotValue
 FROM shotEntity she
 WHERE she.player_id = ?
-AND she.sector >= 0;
+AND she.sector >= 0
+AND (she.disable_statistics IS NULL OR she.disable_statistics = 0);
 
 getShotDistribution:
 SELECT
-(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she WHERE she.sector = 0) AS missesCount,
-(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she WHERE she.sector = 1) AS doubleBullseyeCount,
-(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she WHERE she.sector = 2) AS singleBullseyeCount,
-(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she WHERE she.sector IN (3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 39, 41, 43, 45, 47, 49, 51, 53, 55, 57, 59, 61, 63, 65, 67, 69, 71, 73, 75, 77, 79, 81)) AS singlesCount,
-(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she WHERE she.sector IN (6, 10, 14, 18, 22, 26, 30, 34, 38, 42, 46, 50, 54, 58, 62, 66, 70, 74, 78, 82)) AS doublesCount,
-(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she WHERE she.sector IN (4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, 68, 72, 76, 80)) AS triplesCount;
+(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she WHERE she.sector = 0 AND (she.disable_statistics IS NULL OR she.disable_statistics = 0)) AS missesCount,
+(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she WHERE she.sector = 1 AND (she.disable_statistics IS NULL OR she.disable_statistics = 0)) AS doubleBullseyeCount,
+(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she WHERE she.sector = 2 AND (she.disable_statistics IS NULL OR she.disable_statistics = 0)) AS singleBullseyeCount,
+(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she WHERE she.sector IN (3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 39, 41, 43, 45, 47, 49, 51, 53, 55, 57, 59, 61, 63, 65, 67, 69, 71, 73, 75, 77, 79, 81) AND (she.disable_statistics IS NULL OR she.disable_statistics = 0)) AS singlesCount,
+(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she WHERE she.sector IN (6, 10, 14, 18, 22, 26, 30, 34, 38, 42, 46, 50, 54, 58, 62, 66, 70, 74, 78, 82) AND (she.disable_statistics IS NULL OR she.disable_statistics = 0)) AS doublesCount,
+(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she WHERE she.sector IN (4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, 68, 72, 76, 80) AND (she.disable_statistics IS NULL OR she.disable_statistics = 0)) AS triplesCount;
 
 
 getPlayerShotDistribution:
 SELECT
-(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she WHERE she.sector = 0 AND she.player_id = ?) AS missesCount,
-(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she WHERE she.sector = 1 AND she.player_id = ?) AS doubleBullseyeCount,
-(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she WHERE she.sector = 2 AND she.player_id = ?) AS singleBullseyeCount,
-(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she WHERE she.sector IN (3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 39, 41, 43, 45, 47, 49, 51, 53, 55, 57, 59, 61, 63, 65, 67, 69, 71, 73, 75, 77, 79, 81) AND she.player_id = ?) AS singlesCount,
-(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she WHERE she.sector IN (6, 10, 14, 18, 22, 26, 30, 34, 38, 42, 46, 50, 54, 58, 62, 66, 70, 74, 78, 82) AND she.player_id = ?) AS doublesCount,
-(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she WHERE she.sector IN (4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, 68, 72, 76, 80) AND she.player_id = ?) AS triplesCount;
+(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she WHERE she.sector = 0 AND she.player_id = ? AND (she.disable_statistics IS NULL OR she.disable_statistics = 0)) AS missesCount,
+(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she WHERE she.sector = 1 AND she.player_id = ? AND (she.disable_statistics IS NULL OR she.disable_statistics = 0)) AS doubleBullseyeCount,
+(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she WHERE she.sector = 2 AND she.player_id = ? AND (she.disable_statistics IS NULL OR she.disable_statistics = 0)) AS singleBullseyeCount,
+(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she WHERE she.sector IN (3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 39, 41, 43, 45, 47, 49, 51, 53, 55, 57, 59, 61, 63, 65, 67, 69, 71, 73, 75, 77, 79, 81) AND she.player_id = ? AND (she.disable_statistics IS NULL OR she.disable_statistics = 0)) AS singlesCount,
+(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she WHERE she.sector IN (6, 10, 14, 18, 22, 26, 30, 34, 38, 42, 46, 50, 54, 58, 62, 66, 70, 74, 78, 82) AND she.player_id = ? AND (she.disable_statistics IS NULL OR she.disable_statistics = 0)) AS doublesCount,
+(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she WHERE she.sector IN (4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, 68, 72, 76, 80) AND she.player_id = ? AND (she.disable_statistics IS NULL OR she.disable_statistics = 0)) AS triplesCount;
 
 getVictoryDistribution:
 SELECT
-(SELECT COUNT(gpe.id) FROM gamePlayerEntity gpe WHERE gpe.player_id = ? AND gpe.is_winner = 1) AS victoriesCount,
-(SELECT COUNT(gpe.id) FROM gamePlayerEntity gpe WHERE gpe.player_id = ? AND (gpe.is_winner = 0 OR gpe.is_winner = 1)) AS gamesCount;
+(SELECT COUNT(gpe.id) FROM gamePlayerEntity gpe WHERE gpe.player_id = ? AND gpe.is_winner = 1 AND (gpe.disable_statistics IS NULL OR gpe.disable_statistics = 0)) AS victoriesCount,
+(SELECT COUNT(gpe.id) FROM gamePlayerEntity gpe WHERE gpe.player_id = ? AND (gpe.is_winner = 0 OR gpe.is_winner = 1) AND (gpe.disable_statistics IS NULL OR gpe.disable_statistics = 0)) AS gamesCount;
 
 getSectorCount:
-SELECT COUNT (she.id) AS sectorCount FROM shotEntity she WHERE she.sector = ? AND she.player_id = ?;
+SELECT COUNT (she.id) AS sectorCount FROM shotEntity she WHERE she.sector = ? AND she.player_id = ? AND (she.disable_statistics IS NULL OR she.disable_statistics = 0);

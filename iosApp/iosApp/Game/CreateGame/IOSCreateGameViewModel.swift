@@ -12,7 +12,8 @@ internal final class IOSCreateGameViewModel: ObservableObject {
 		playerToDelete: nil,
 		isDeletePlayerDialogShown: false,
 		isFinishWithDoublesChecked: false,
-		isRandomPlayersOrderChecked: false
+		isRandomPlayersOrderChecked: false,
+		disableStatistics: false
 	)
 	@Published private(set) var createPlayerState = CreatePlayerState(name: "", allPlayers: [])
 	
@@ -32,13 +33,18 @@ internal final class IOSCreateGameViewModel: ObservableObject {
 		self.startGame = startGame
 	}
 	
-	func start(isFinishWithDoubles: Bool, isRandomPlayerOrder: Bool) {
+	func start(
+		isFinishWithDoubles: Bool,
+		isRandomPlayerOrder: Bool,
+		isStatisticsDisabled: Bool
+	) {
 		startGame(
 			GameSettings(
 				selectedPlayers: state.selectedPlayers,
 				selectedGameGoal: state.selectedGoal?.int32Value ?? 0,
 				isFinishWithDoublesChecked: isFinishWithDoubles,
-				isRandomPlayersOrderChecked: isRandomPlayerOrder
+				isRandomPlayersOrderChecked: isRandomPlayerOrder,
+				disableStatistics: isStatisticsDisabled
 			)
 		)
 	}

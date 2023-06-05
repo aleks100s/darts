@@ -25,7 +25,8 @@ fun List<GetGames>.mapToGames(): List<Game> {
                 startTimestamp = Instant.fromEpochMilliseconds(gameEntity?.timestampStart ?: gameEntity?.timestamp ?: 0)
                     .toLocalDateTime(TimeZone.currentSystemDefault()),
                 finishWithDoubles = gameEntity?.finishWithDoubles == 1L,
-                randomPlayerOrder = gameEntity?.randomPlayerOrder == 1L
+                randomPlayerOrder = gameEntity?.randomPlayerOrder == 1L,
+                disableStatistics = gameEntity?.disableStatistics == 1L
             )
         }
 }

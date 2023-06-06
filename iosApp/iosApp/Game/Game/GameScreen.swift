@@ -7,6 +7,7 @@ internal struct GameScreen: View {
 	
 	var body: some View {
 		return gameView
+			.navigationTitle("game_title_with_settings \(viewModel.state.settingsTitle)")
 			.alert("game_finished", isPresented: $viewModel.isGameFinishedDialogShown) {
 				Button(role: .cancel) {
 					viewModel.onEvent(.CloseGame())

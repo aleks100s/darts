@@ -21,7 +21,6 @@ import com.alextos.darts.game.presentation.game.GameState
 
 @Composable
 fun GameScreen(
-    settingsTitle: String,
     state: GameState,
     onEvent: (GameEvent) -> Unit
 ) {
@@ -29,7 +28,7 @@ fun GameScreen(
         onEvent(GameEvent.BackButtonPressed)
     }
 
-    val title = stringResource(id = R.string.game_title_with_settings, settingsTitle)
+    val title = stringResource(id = R.string.game_title_with_settings, state.settingsTitle)
 
     when (val screenType = rememberScreenType()) {
         is ScreenType.Compact -> {
@@ -108,6 +107,7 @@ private fun GameInput(
         currentTurn = state.getCurrentTurn(),
         results = state.currentResults(),
         eraseShot = { onEvent(GameEvent.EraseHit) },
+        isStatisticsEnabled = state.isStatisticsEnabled,
         currentPlayerIndex = state.currentPage(),
         onInputClick = { sector ->
             onEvent(GameEvent.MakeShot(sector))

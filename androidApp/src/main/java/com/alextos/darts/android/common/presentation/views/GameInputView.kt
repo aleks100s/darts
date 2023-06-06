@@ -37,6 +37,7 @@ fun GameInputView(
     currentTurn: Turn,
     results: List<GamePlayerResult>,
     currentPlayerIndex: Int,
+    isStatisticsEnabled: Boolean,
     eraseShot: () -> Unit,
     onInputClick: (Sector) -> Unit,
     onPlayerClick: (Int) -> Unit
@@ -65,6 +66,7 @@ fun GameInputView(
                     currentTurn = currentTurn,
                     results = results,
                     currentPlayerIndex = currentPlayerIndex,
+                    isStatisticsEnabled = isStatisticsEnabled,
                     onClick = onPlayerClick
                 )
                 HintRow()
@@ -88,10 +90,11 @@ private fun CurrentTurnItem(
     results: List<GamePlayerResult>,
     currentTurn: Turn,
     currentPlayerIndex: Int,
+    isStatisticsEnabled: Boolean,
     onClick: (Int) -> Unit
 ) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        GamePlayers(list = results, currentPlayerIndex, onClick)
+        GamePlayers(list = results, currentPlayerIndex, isStatisticsEnabled, onClick)
         PlayerHistoryHeader()
         TurnItem(turn = currentTurn, onSelect = {})
     }
@@ -101,6 +104,7 @@ private fun CurrentTurnItem(
 private fun GamePlayers(
     list: List<GamePlayerResult>,
     currentPlayerIndex: Int,
+    isStatisticsEnabled: Boolean,
     onClick: (Int) -> Unit
 ) {
     val screenWidth = when (rememberScreenType()) {
@@ -126,6 +130,7 @@ private fun GamePlayers(
         items(list) { result ->
             GamePlayerItem(
                 result = result,
+                isStatisticsEnabled = isStatisticsEnabled,
                 width = itemWidth,
                 onClick = { onClick(list.indexOf(result)) }
             )
@@ -136,6 +141,7 @@ private fun GamePlayers(
 @Composable
 private fun GamePlayerItem(
     result: GamePlayerResult,
+    isStatisticsEnabled: Boolean,
     width: Dp,
     onClick: () -> Unit
 ) {
@@ -167,11 +173,17 @@ private fun GamePlayerItem(
             text = stringResource(id = R.string.game_player_result, result.score),
             color = textColor
         )
-        Text(
-            text = stringResource(id = R.string.game_player_avg, result.turnAverage, result.overallTurnAverage),
-            style = MaterialTheme.typography.caption,
-            color = textColor
-        )
+        if (isStatisticsEnabled) {
+            Text(
+                text = stringResource(
+                    id = R.string.game_player_avg,
+                    result.turnAverage,
+                    result.overallTurnAverage
+                ),
+                style = MaterialTheme.typography.caption,
+                color = textColor
+            )
+        }
     }
 }
 

@@ -15,7 +15,9 @@ data class GameState(
     val isCloseGameDialogOpened: Boolean = false,
     val turnState: TurnState = TurnState.IsOngoing,
     val gameGoal: Int = 0,
-    val averageTurns: List<PlayerGameValue> = listOf()
+    val averageTurns: List<PlayerGameValue> = listOf(),
+    val settingsTitle: String = "",
+    val isStatisticsEnabled: Boolean = true
 ) {
     fun isTurnOver(): Boolean {
         return when (turnState) {

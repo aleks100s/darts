@@ -176,7 +176,6 @@ fun GameNavigationRoot() {
             val viewModel = hiltViewModel<AndroidGameViewModel>()
             val state by viewModel.state.collectAsState(initial = GameState())
             GameScreen(
-                settingsTitle = settings.getUIGameTitleSettingsString(),
                 state = state,
                 onEvent = { event ->
                     when (event) {

@@ -93,8 +93,10 @@ internal struct GameInputView: View {
 			VStack(spacing: 4) {
 				Text(result.player.name)
 				Text("game_player_result \(result.score)")
-				Text("game_player_avg \(result.turnAverage) \(result.overallTurnAverage)")
-					.font(.caption)
+				if state.isStatisticsEnabled {
+					Text("game_player_avg \(result.turnAverage) \(result.overallTurnAverage)")
+						.font(.caption)
+				}
 			}
 			.lineLimit(1)
 			.padding(.horizontal, 12)

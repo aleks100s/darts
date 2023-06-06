@@ -27,7 +27,7 @@ class AndroidGameViewModel @Inject constructor(
             getPlayerAverageTurnUseCase,
             settings
         )
-        GameViewModel(gameManager, viewModelScope)
+        GameViewModel(gameManager, settings, viewModelScope)
     }
 
     val state = viewModel.state

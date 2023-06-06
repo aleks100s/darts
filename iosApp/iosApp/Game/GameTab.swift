@@ -70,7 +70,6 @@ internal struct GameTab: View {
 					)
 				}
 			)
-			.navigationTitle("game_title_with_settings \(settings.getUIGameTitleSettingsString())")
 				.navigationBarTitleDisplayMode(.inline)
 				.navigationBarBackButtonHidden()
 			

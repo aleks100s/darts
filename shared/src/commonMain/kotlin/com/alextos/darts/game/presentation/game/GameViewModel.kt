@@ -3,6 +3,7 @@ package com.alextos.darts.game.presentation.game
 import com.alextos.darts.core.domain.model.Shot
 import com.alextos.darts.core.util.toCommonStateFlow
 import com.alextos.darts.game.domain.game_manager.GameManager
+import com.alextos.darts.game.domain.models.GameSettings
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
@@ -10,6 +11,7 @@ import kotlinx.coroutines.launch
 
 class GameViewModel(
     private val gameManager: GameManager,
+    gameSettings: GameSettings?,
     coroutineScope: CoroutineScope?
 ) {
     private val viewModelScope = coroutineScope ?: CoroutineScope(Dispatchers.Main)
@@ -26,7 +28,9 @@ class GameViewModel(
             isGameFinished = playerAndIsGameFinished.second,
             turnState = turnStateAndAverageTurns.first,
             gameGoal = gameManager.getGoal(),
-            averageTurns = turnStateAndAverageTurns.second
+            averageTurns = turnStateAndAverageTurns.second,
+            settingsTitle = gameSettings?.getUIGameTitleSettingsString() ?: "",
+            isStatisticsEnabled = gameSettings?.isStatisticsDisabled == false
         )
     }
         .stateIn(

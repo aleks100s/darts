@@ -19,6 +19,7 @@ internal enum GameScene {
 		)
 		let viewModel = GameViewModel(
 		   gameManager: gameManager,
+		   gameSettings: gameSettings,
 		   coroutineScope: nil
 		)
 		let iOSViewModel = IOSGameViewModel(

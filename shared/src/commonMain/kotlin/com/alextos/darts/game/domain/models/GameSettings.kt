@@ -12,13 +12,10 @@ data class GameSettings(
     val isStatisticsDisabled: Boolean
 ) {
     fun getUIGameTitleSettingsString(): String {
-        if (!isStatisticsDisabled && !isFinishWithDoublesChecked) {
+        if (!isFinishWithDoublesChecked) {
             return ""
         }
         val settings = mutableListOf<String>()
-        if (isStatisticsDisabled) {
-            settings.add("\uD83D\uDCCA")
-        }
         if (isFinishWithDoublesChecked) {
             settings.add("\uD83C\uDFC1 x2")
         }

@@ -56,7 +56,7 @@ class GameManager(
     fun getGoal(): Int = goal
 
     fun makeShot(shot: Shot) {
-        if (_isGameFinished.value) {
+        if (_isGameFinished.value || turnState.value.isInputDisabled()) {
             return
         }
         val trackUserHistoryUseCase = currentPlayerHistoryManager()

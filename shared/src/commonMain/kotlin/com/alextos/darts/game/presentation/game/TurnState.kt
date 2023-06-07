@@ -6,4 +6,11 @@ import kotlinx.serialization.Serializable
 sealed class TurnState {
     object IsOngoing: TurnState()
     data class IsOver(val result: Int): TurnState()
+
+    fun isInputDisabled(): Boolean {
+        return when(this) {
+            is IsOngoing -> false
+            is IsOver -> true
+        }
+    }
 }

@@ -75,7 +75,7 @@ internal struct GameInputView: View {
 			}
 			.scrollIndicators(.hidden)
 		}
-		.frame(height: 80)
+		.frame(height: state.isStatisticsEnabled ? 80 : 56)
 	}
 	
 	@ViewBuilder

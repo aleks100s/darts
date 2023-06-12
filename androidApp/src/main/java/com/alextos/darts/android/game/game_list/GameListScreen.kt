@@ -2,6 +2,7 @@ package com.alextos.darts.android.game.game_list
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -15,6 +16,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.alextos.darts.android.BuildConfig
@@ -138,27 +141,55 @@ private fun GameActionsDialog(
             verticalArrangement = Arrangement.SpaceEvenly,
             modifier = Modifier
                 .background(MaterialTheme.colors.surface, shape = RoundedCornerShape(8.dp))
-                .padding(16.dp)
         ) {
             Text(
                 text = title,
-                style = MaterialTheme.typography.h6
+                style = MaterialTheme.typography.h6,
+                modifier = Modifier.padding(16.dp)
             )
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            Button(onClick = onReplay) {
-                Text(text = stringResource(id = R.string.replay))
-            }
+            CustomDialogButton(
+                title = stringResource(id = R.string.replay),
+                onClick = onReplay
+            )
 
-            Button(onClick = onDelete) {
-                Text(text = stringResource(id = R.string.delete))
-            }
+            CustomDialogButton(
+                title = stringResource(id = R.string.delete),
+                color = MaterialTheme.colors.error,
+                onClick = onDelete
+            )
 
-            Button(onClick = onDismiss) {
-                Text(text = stringResource(id = R.string.cancel))
-            }
+            CustomDialogButton(
+                title = stringResource(id = R.string.cancel),
+                fontWeight = FontWeight.Bold,
+                onClick = onDismiss
+            )
         }
+    }
+}
+
+@Composable
+private fun CustomDialogButton(
+    title: String,
+    color: Color = MaterialTheme.colors.primary,
+    fontWeight: FontWeight = FontWeight.Normal,
+    onClick: () -> Unit
+) {
+    Column {
+        Divider()
+
+        Text(
+            text = title,
+            color = color,
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable { onClick() }
+                .padding(16.dp),
+            textAlign = TextAlign.Center,
+            fontWeight = fontWeight
+        )
     }
 }
 

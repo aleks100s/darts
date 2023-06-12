@@ -1,14 +1,11 @@
 package com.alextos.darts.android.game.create_game
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckBox
@@ -212,7 +209,9 @@ private fun GoalSelector(
     selectedGoal: Int? = null,
     onClick: (Int) -> Unit
 ) {
-    LazyRow(modifier = Modifier.padding(vertical = 8.dp, horizontal = 16.dp)) {
+    LazyColumn(
+        modifier = Modifier.fillMaxWidth()
+    ) {
         items(goals) {
             GoalOptionItem(
                 goal = it,
@@ -230,18 +229,17 @@ fun GoalOptionItem(
     isSelected: Boolean,
     onClick: () -> Unit
 ) {
-    Text(
-        modifier = Modifier
-            .border(
-                width = 2.dp,
-                color = if (isSelected) MaterialTheme.colors.primary else Color.Transparent,
-                shape = CircleShape
-            )
+    Row(
+        modifier = Modifier.fillMaxWidth()
             .clickable { onClick() }
-            .padding(horizontal = 16.dp, vertical = 8.dp),
-        text = goal.toString(),
-        textAlign = TextAlign.Center
-    )
+            .padding(start = 16.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        Text(text = goal.toString())
+
+        RadioButton(selected = isSelected, onClick = onClick)
+    }
 }
 
 @Composable

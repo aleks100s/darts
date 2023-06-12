@@ -63,6 +63,21 @@ internal struct GameListScreen: View {
 							}
 							.tint(.green)
 						}
+						.contextMenu(
+							menuItems: {
+								Button {
+									viewModel.replay(game: game)
+								} label: {
+									Label("replay", systemImage: "repeat")
+								}
+								
+								Button(role: .destructive) {
+									viewModel.onEvent(.ShowDeleteGameDialog(game: game))
+								} label: {
+									Label("delete", systemImage: "trash")
+								}
+							}
+						)
 				}
 				.onDelete { indexTurn in
 					if let index = indexTurn.first {

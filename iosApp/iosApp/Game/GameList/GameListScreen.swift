@@ -98,21 +98,9 @@ internal struct GameListScreen: View {
 				Text(game.getPlayersListString())
 				
 				HStack(spacing: 8) {
-					Text(game.getUIGoalString())
-					if !game.duration.isEmpty {
-						Text(game.getUIDurationString())
-					}
-					if game.winner != nil {
-						Text(game.getUIWinnerString())
-					}
-					if game.finishWithDoubles {
-						Text(game.getUIDoublesString())
-					}
-					if game.randomPlayerOrder {
-						Text(game.getUIRandomOrderString())
-					}
-					if !game.disableStatistics {
-						Text(game.getUIEnabledStatisticsString())
+					let parts = game.getUITitleStringParts()
+					ForEach(parts) { part in
+						Text(part)
 					}
 				}
 				.font(.caption)

@@ -256,21 +256,9 @@ private fun GameItem(
             Text(text = game.getPlayersListString())
 
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                Text(text = game.getUIGoalString())
-                if (!game.duration.isEmpty) {
-                    Text(text = game.getUIDurationString())
-                }
-                if (game.winner != null) {
-                    Text(text = game.getUIWinnerString())
-                }
-                if (game.finishWithDoubles) {
-                    Text(text = game.getUIDoublesString())
-                }
-                if (game.randomPlayerOrder) {
-                    Text(text = game.getUIRandomOrderString())
-                }
-                if (!game.disableStatistics) {
-                    Text(text = game.getUIEnabledStatisticsString())
+                val parts = game.getUITitleStringParts()
+                for (part in parts) {
+                    Text(text = part)
                 }
             }
         }

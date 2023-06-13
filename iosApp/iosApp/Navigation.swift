@@ -7,6 +7,7 @@ internal enum GameNavigation: Hashable {
 	case history(game: Game)
 	case dartsBoard(Turn)
 	case gameRecap(historyState: HistoryState)
+	case calculator
 	
 	var urlComponent: String? {
 		switch self {

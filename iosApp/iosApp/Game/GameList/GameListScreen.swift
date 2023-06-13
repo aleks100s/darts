@@ -8,12 +8,23 @@ internal struct GameListScreen: View {
 		content
 			.toolbar(viewModel.state.isLoading ? .hidden : .visible, for: .navigationBar)
 			.toolbar {
-				Button {
-					viewModel.createGame()
-				} label: {
-					Label("create_game", systemImage: "plus")
+				ToolbarItem(placement: .navigationBarTrailing) {
+					Button {
+						viewModel.createGame()
+					} label: {
+						Label("create_game", systemImage: "plus")
+					}
+					.accessibilityIdentifier("createGame")
 				}
-				.accessibilityIdentifier("createGame")
+
+				ToolbarItem(placement: .navigationBarLeading) {
+					Button {
+						viewModel.showCalculator()
+					} label: {
+						Text("🧮")
+					}
+					.accessibilityIdentifier("calculator")
+				}
 			}
 			.alert("delete_game", isPresented: $viewModel.isDeleteGameDialogShown) {
 				Button(role: .destructive) {

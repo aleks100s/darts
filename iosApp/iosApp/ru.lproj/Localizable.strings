@@ -82,3 +82,4 @@
 "game_title_with_settings %@" = "Игра%@";
 "randomize_player_order" = "Случайный порядок игроков";
 "disable_statistics" = "Не учитывать в статистике";
+"calculator" = "Калькулятор";

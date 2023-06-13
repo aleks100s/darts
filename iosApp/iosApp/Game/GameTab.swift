@@ -19,6 +19,9 @@ internal struct GameTab: View {
 				},
 				onReplay: { game in
 					navigationStack.append(.game(settings: game.getGameSettings()))
+				},
+				onShowCalculator: {
+					navigationStack.append(.calculator)
 				}
 			)
 				.navigationTitle("games")
@@ -116,6 +119,11 @@ internal struct GameTab: View {
 			)
 			.navigationBarTitleDisplayMode(.inline)
 			.navigationTitle("game_recap")
+			
+		case .calculator:
+			CalculatorScene.create()
+				.navigationBarTitleDisplayMode(.inline)
+				.navigationTitle("calculator")
 		}
 	}
 }

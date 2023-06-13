@@ -16,18 +16,21 @@ internal final class IOSGameListViewModel: ObservableObject {
 	private let onCreateGame: () -> Void
 	private let onGameSelected: (Game) -> Void
 	private let onReplay: (Game) -> Void
+	private let onShowCalculator: () -> Void
 	private var handle: DisposableHandle?
 	
 	init(
 		viewModel: GameListViewModel,
 		onCreateGame: @escaping () -> Void,
 		onGameSelected: @escaping (Game) -> Void,
-		onReplay: @escaping (Game) -> Void
+		onReplay: @escaping (Game) -> Void,
+		onShowCalculator: @escaping () -> Void
 	) {
 		self.viewModel = viewModel
 		self.onCreateGame = onCreateGame
 		self.onGameSelected = onGameSelected
 		self.onReplay = onReplay
+		self.onShowCalculator = onShowCalculator
 	}
 	
 	func startObserving() {
@@ -66,6 +69,10 @@ internal final class IOSGameListViewModel: ObservableObject {
 	
 	func prepopulateDatabase() {
 		viewModel.prepopulateDatabase()
+	}
+	
+	func showCalculator() {
+		onShowCalculator()
 	}
 	
 	deinit {

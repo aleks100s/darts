@@ -7,7 +7,8 @@ internal enum GameListScene {
 		using module: AppModule,
 		onCreateGame: @escaping () -> Void,
 		onGameSelected: @escaping (Game) -> Void,
-		onReplay: @escaping (Game) -> Void
+		onReplay: @escaping (Game) -> Void,
+		onShowCalculator: @escaping () -> Void
 	) -> some View {
 		let getGamesUseCase = GetGamesUseCase(dataSource: module.gameDataSource)
 		let deleteGameUseCase = DeleteGameUseCase(dataSource: module.gameDataSource)
@@ -27,7 +28,8 @@ internal enum GameListScene {
 			viewModel: viewModel,
 			onCreateGame: onCreateGame,
 			onGameSelected: onGameSelected,
-			onReplay: onReplay
+			onReplay: onReplay,
+			onShowCalculator: onShowCalculator
 		)
 		let view = GameListScreen(viewModel: iOSViewModel)
 		return view

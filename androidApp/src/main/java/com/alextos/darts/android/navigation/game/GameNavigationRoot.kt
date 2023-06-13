@@ -16,6 +16,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.alextos.darts.android.game.calculator.AndroidCalculatorViewModel
+import com.alextos.darts.android.game.calculator.CalculatorScreen
 import com.alextos.darts.android.game.create_game.AndroidCreateGameViewModel
 import com.alextos.darts.android.game.create_game.CreateGameScreen
 import com.alextos.darts.android.game.create_player.AndroidCreatePlayerViewModel
@@ -31,14 +33,12 @@ import com.alextos.darts.android.game.history.HistoryScreen
 import com.alextos.darts.android.game.in_game_history.InGameHistoryScreen
 import com.alextos.darts.android.game.recap.RecapScreen
 import com.alextos.darts.game.domain.models.GameSettings
+import com.alextos.darts.game.presentation.calculator.CalculatorEvent
 import com.alextos.darts.game.presentation.create_game.CreateGameEvent
-import com.alextos.darts.game.presentation.create_game.CreateGameState
 import com.alextos.darts.game.presentation.create_player.CreatePlayerEvent
-import com.alextos.darts.game.presentation.create_player.CreatePlayerState
 import com.alextos.darts.game.presentation.game.GameEvent
 import com.alextos.darts.game.presentation.game.GameState
 import com.alextos.darts.game.presentation.game_list.GameListEvent
-import com.alextos.darts.game.presentation.game_list.GameListState
 import com.alextos.darts.game.presentation.history.HistoryEvent
 import com.alextos.darts.game.presentation.history.HistoryState
 import kotlinx.coroutines.launch
@@ -57,7 +57,7 @@ fun GameNavigationRoot() {
     ) {
         composable(route = GameRoute.GameList.route) {
             val viewModel = hiltViewModel<AndroidGameListViewModel>()
-            val state by viewModel.state.collectAsState(initial = GameListState())
+            val state by viewModel.state.collectAsState()
 
             GameListScreen(
                 state = state,
@@ -88,10 +88,14 @@ fun GameNavigationRoot() {
                 },
                 populateDB = {
                     viewModel.prepopulateDatabase()
+                },
+                onCalculatorPressed = {
+                    navController.navigate(route = GameRoute.Calculator.route)
+                },
+                onBackPressed = {
+                    navController.popBackStack()
                 }
-            ) {
-                navController.popBackStack()
-            }
+            )
         }
 
         composable(route = GameRoute.CreateGame.route) {
@@ -111,7 +115,7 @@ fun GameNavigationRoot() {
                 sheetShape = RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp),
                 sheetContent = {
                     val viewModel = hiltViewModel<AndroidCreatePlayerViewModel>()
-                    val state by viewModel.state.collectAsState(initial = CreatePlayerState())
+                    val state by viewModel.state.collectAsState()
                     CreatePlayerScreen(
                         state = state,
                         onEvent = {
@@ -131,7 +135,7 @@ fun GameNavigationRoot() {
                 }
             ) {
                 val viewModel = hiltViewModel<AndroidCreateGameViewModel>()
-                val state by viewModel.state.collectAsState(initial = CreateGameState())
+                val state by viewModel.state.collectAsState()
                 CreateGameScreen(
                     state = state,
                     onEvent = {
@@ -174,7 +178,7 @@ fun GameNavigationRoot() {
                 ?.let { Json.decodeFromString(it) }
                 ?: run { return@composable }
             val viewModel = hiltViewModel<AndroidGameViewModel>()
-            val state by viewModel.state.collectAsState(initial = GameState())
+            val state by viewModel.state.collectAsState()
             GameScreen(
                 state = state,
                 onEvent = { event ->
@@ -260,7 +264,7 @@ fun GameNavigationRoot() {
             )
         ) {
             val viewModel = hiltViewModel<AndroidHistoryViewModel>()
-            val state by viewModel.state.collectAsState(initial = HistoryState())
+            val state by viewModel.state.collectAsState()
             HistoryScreen(
                 state = state,
                 onEvent = { event ->
@@ -322,6 +326,21 @@ fun GameNavigationRoot() {
             DartsScreen(state = state) {
                 navController.popBackStack()
             }
+        }
+
+        composable(route = GameRoute.Calculator.route) {
+            val viewModel = hiltViewModel<AndroidCalculatorViewModel>()
+            val state by viewModel.state.collectAsState()
+            CalculatorScreen(
+                state = state,
+                onEvent = { event ->
+                    when (event) {
+                        CalculatorEvent.BackButtonPressed -> {
+                            navController.popBackStack()
+                        }
+                    }
+                }
+            )
         }
     }
 }

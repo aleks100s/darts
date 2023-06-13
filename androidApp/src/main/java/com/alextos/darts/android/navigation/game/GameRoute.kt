@@ -8,6 +8,7 @@ sealed class GameRoute(val route: String) {
     object Darts: GameRoute("darts")
     object InGameHistory: GameRoute("in_game_history")
     object Recap: GameRoute("recap")
+    object Calculator: GameRoute("calculator")
 
     fun routeWithArgs(vararg args: String): String {
         return buildString {

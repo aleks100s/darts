@@ -39,6 +39,7 @@ fun GameListScreen(
     state: GameListState,
     onEvent: (GameListEvent) -> Unit,
     populateDB: () -> Unit,
+    onCalculatorPressed: () -> Unit,
     onBackPressed: () -> Unit,
 ) {
     Scaffold(

@@ -1,5 +1,6 @@
 package com.alextos.darts.android.game.game_list
 
+import android.graphics.drawable.shapes.OvalShape
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -57,7 +58,18 @@ fun GameListScreen(
         Screen(
             title = stringResource(id = R.string.games),
             isBackButtonVisible = false,
-            onBackPressed = onBackPressed
+            onBackPressed = onBackPressed,
+            additionalNavBarContent = {
+                Button(
+                    onClick = onCalculatorPressed,
+                    colors = ButtonDefaults.buttonColors(
+                        backgroundColor = MaterialTheme.colors.secondary.copy(alpha = 0.8f),
+                        contentColor = MaterialTheme.colors.onSecondary
+                    )
+                ) {
+                    Text(stringResource(id = R.string.calculator))
+                }
+            }
         ) { modifier ->
             if (state.isLoading) {
                 LoadingView()

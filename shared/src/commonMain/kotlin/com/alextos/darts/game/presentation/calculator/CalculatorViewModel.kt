@@ -27,7 +27,10 @@ class CalculatorViewModel(
 
     fun onEvent(event: CalculatorEvent) {
         when (event) {
-            CalculatorEvent.BackButtonPressed -> {}
+            is CalculatorEvent.BackButtonPressed -> {}
+            is CalculatorEvent.MakeShot -> {
+
+            }
         }
     }
 }

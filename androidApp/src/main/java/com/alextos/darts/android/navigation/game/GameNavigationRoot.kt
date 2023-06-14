@@ -335,8 +335,11 @@ fun GameNavigationRoot() {
                 state = state,
                 onEvent = { event ->
                     when (event) {
-                        CalculatorEvent.BackButtonPressed -> {
+                        is CalculatorEvent.BackButtonPressed -> {
                             navController.popBackStack()
+                        }
+                        is CalculatorEvent.MakeShot -> {
+                            viewModel.onEvent(event)
                         }
                     }
                 }

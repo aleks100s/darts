@@ -19,7 +19,8 @@ fun Screen(
     isBackButtonVisible: Boolean = true,
     backIcon: ImageVector = Icons.Filled.ArrowBack,
     onBackPressed: () -> Unit,
-    content: @Composable (Modifier) -> Unit
+    additionalNavBarContent: @Composable (() -> Unit)? = null,
+    content: @Composable (Modifier) -> Unit,
 ) {
     Scaffold(
         topBar = {
@@ -28,7 +29,8 @@ fun Screen(
                     title,
                     isBackButtonVisible,
                     backIcon,
-                    onBackPressed
+                    onBackPressed,
+                    additionalNavBarContent
                 )
             }
         }
@@ -42,29 +44,38 @@ private fun NavigationBar(
     title: String,
     isBackButtonVisible: Boolean,
     backIcon: ImageVector,
-    onBackPressed: () -> Unit
+    onBackPressed: () -> Unit,
+    additionalContent: @Composable (() -> Unit)?
 ) {
     Row(
         modifier = Modifier.padding(horizontal = 16.dp),
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        if (isBackButtonVisible) {
-            IconButton(onClick = onBackPressed) {
-                Icon(
-                    imageVector = backIcon,
-                    contentDescription = stringResource(id = R.string.navigate_back)
-                )
+        Row(
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            if (isBackButtonVisible) {
+                IconButton(onClick = onBackPressed) {
+                    Icon(
+                        imageVector = backIcon,
+                        contentDescription = stringResource(id = R.string.navigate_back)
+                    )
+                }
+
+                Spacer(modifier = Modifier.width(8.dp))
             }
 
-            Spacer(modifier = Modifier.width(8.dp))
+            Text(
+                text = title,
+                style = MaterialTheme.typography.h2,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
+            )
         }
 
-        Text(
-            modifier = Modifier.weight(1f),
-            text = title,
-            style = MaterialTheme.typography.h2,
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis
-        )
+        Spacer(modifier = Modifier.weight(1f))
+
+        additionalContent?.invoke()
     }
 }

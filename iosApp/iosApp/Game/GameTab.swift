@@ -122,7 +122,7 @@ internal struct GameTab: View {
 			
 		case .calculator:
 			CalculatorScene.create(
-				onPlayerClick: { index in
+				onShowHistoryClick: {
 					//
 				}
 			)

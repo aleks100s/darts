@@ -3,12 +3,16 @@ import SwiftUI
 
 enum CalculatorScene {
 	static func create(
-		onPlayerClick: @escaping (Int) -> Void
+		onShowHistoryClick: @escaping () -> Void
 	) -> some View {
-		let viewModel = CalculatorViewModel(coroutineScope: nil)
+		let calculatorManager = CalculatorManager()
+		let viewModel = CalculatorViewModel(
+			calculatorManager: calculatorManager,
+			coroutineScope: nil
+		)
 		let iOSViewModel = IOSCalculatorViewModel(
 			viewModel: viewModel,
-			onPlayerClick: onPlayerClick
+			onShowHistoryClick: onShowHistoryClick
 		)
 		let view = CalculatorScreen(viewModel: iOSViewModel)
 		return view

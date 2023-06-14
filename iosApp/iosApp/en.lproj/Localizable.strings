@@ -83,3 +83,4 @@
 "randomize_player_order" = "Random player order";
 "disable_statistics" = "Do not count in statistics";
 "calculator" = "Calculator";
+"turn_number %d" = "Turn #%d";

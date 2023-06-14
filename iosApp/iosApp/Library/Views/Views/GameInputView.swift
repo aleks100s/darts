@@ -11,8 +11,8 @@ internal struct GameInputView: View {
 	var body: some View {
 		VStack(spacing: 0) {
 			header
-			hintRow
-			inputTable
+			InputHintRowView()
+			InputMatrixView(onInputClick: onInputClick)
 		}
 	}
 	
@@ -23,33 +23,6 @@ internal struct GameInputView: View {
 			PlayerHistoryHeader()
 			currentTurn(turn: currentTurn)
 		}
-	}
-	
-	@ViewBuilder
-	private var hintRow: some View {
-		let cells = [
-			String(localized: "single"),
-			String(localized: "double_"),
-			String(localized: "triplet")
-		]
-		Row(cells: cells, spacing: 0)
-			.background(Color.surface)
-	}
-	
-	@ViewBuilder
-	private var inputTable: some View {
-		ScrollView {
-			VStack(spacing: 2) {
-				ForEach(Sector.companion.sectors) { sectors in
-					InputRow(sectors: sectors, onInputClick: onInputClick)
-				}
-				.listRowSeparator(.hidden)
-			}
-			.background(ScrollViewConfigurator {
-				$0?.bounces = false
-			})
-		}
-		.background(Color.background)
 	}
 	
 	@ViewBuilder
@@ -108,67 +81,12 @@ internal struct GameInputView: View {
 	
 	@ViewBuilder
 	private func currentTurn(turn: Turn) -> some View {
-		TurnItem(turn: turn, shotsLeft: Int(turn.shotsLeft()), onSelect: {})
+		TurnItem(
+			turn: turn,
+			shotsLeft: Int(turn.shotsLeft()),
+			useTurnColors: true,
+			onSelect: {}
+		)
 			.background(Color.background)
-	}
-	
-	@ViewBuilder
-	private func InputRow(
-		sectors: [Sector],
-		onInputClick: @escaping (Sector) -> ()
-	) -> some View {
-		HStack(spacing: 2) {
-			ForEach(sectors) { sector in
-				InputCell(sector: sector) {
-					onInputClick(sector)
-				}
-			}
-			.background(Color.background)
-		}
-		.frame(maxWidth: .infinity)
-	}
-	
-	@ViewBuilder
-	private func InputCell(
-		sector: Sector,
-		onInputClick: @escaping () -> ()
-	) -> some View {
-		Button {
-			onInputClick()
-		} label: {
-			HStack(alignment: .center) {
-				Text(sector.inputString)
-			}
-			.padding(.vertical, 12)
-			.frame(maxWidth: .infinity)
-			.background(sector.backgroundColor)
-		}
-		.tint(sector.textColor)
-	}
-}
-
-struct ScrollViewConfigurator: UIViewRepresentable {
-	let configure: (UIScrollView?) -> ()
-	func makeUIView(context: Context) -> UIView {
-		let view = UIView()
-		DispatchQueue.main.async {
-			configure(view.enclosingScrollView())
-		}
-		return view
-	}
-
-	func updateUIView(_ uiView: UIView, context: Context) {}
-}
-
-extension UIView {
-	func enclosingScrollView() -> UIScrollView? {
-		var next: UIView? = self
-		repeat {
-			next = next?.superview
-			if let scrollview = next as? UIScrollView {
-				return scrollview
-			}
-		} while next != nil
-		return nil
 	}
 }

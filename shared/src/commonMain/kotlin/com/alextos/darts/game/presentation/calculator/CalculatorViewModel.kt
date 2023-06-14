@@ -19,10 +19,9 @@ class CalculatorViewModel(
 
     val state = combine(
         _state,
-        calculatorManager.score,
         calculatorManager.turns
-    ) { state, score, turns ->
-        state.copy(score = score, turns = turns)
+    ) { state, turns ->
+        state.copy(turns = turns)
     }
         .stateIn(
             viewModelScope,

@@ -83,3 +83,4 @@
 "randomize_player_order" = "Случайный порядок игроков";
 "disable_statistics" = "Не учитывать в статистике";
 "calculator" = "Калькулятор";
+"turn_number %d" = "Ход №%d";

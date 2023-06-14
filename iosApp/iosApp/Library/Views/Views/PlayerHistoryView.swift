@@ -15,7 +15,11 @@ internal struct PlayerHistoryView: View {
 			ScrollView(showsIndicators: false) {
 				VStack(spacing: 0) {
 					ForEach(playerHistory.turns) { turn in
-						TurnItem(turn: turn, shotsLeft: Int(turn.shotsLeft())) {
+						TurnItem(
+							turn: turn,
+							shotsLeft: Int(turn.shotsLeft()),
+							useTurnColors: true
+						) {
 							onTurnSelected(turn)
 						}
 					}

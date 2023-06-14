@@ -1,29 +1,27 @@
 import shared
 
 final class IOSCalculatorViewModel: ObservableObject {
-	@Published private(set) var state = CalculatorState(
-		turns: []
-	)
+	@Published private(set) var state = CalculatorState(turns: [])
 	
 	private let viewModel: CalculatorViewModel
-	private let onPlayerClick: (Int) -> Void
+	private let onShowHistoryClick: () -> Void
 	
 	private var handle: DisposableHandle?
 	
 	init(
 		viewModel: CalculatorViewModel,
-		onPlayerClick: @escaping (Int) -> Void
+		onShowHistoryClick: @escaping () -> Void
 	) {
 		self.viewModel = viewModel
-		self.onPlayerClick = onPlayerClick
+		self.onShowHistoryClick = onShowHistoryClick
 	}
 	
-	func onEvent(event: CalculatorEvent) {
+	func onEvent(_ event: CalculatorEvent) {
 		viewModel.onEvent(event: event)
 	}
 	
-	func playerClick(index: Int) {
-		onPlayerClick(index)
+	func showHistory() {
+		onShowHistoryClick()
 	}
 	
 	func startObserving() {

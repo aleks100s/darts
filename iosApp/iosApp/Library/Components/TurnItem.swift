@@ -4,6 +4,7 @@ import shared
 internal struct TurnItem: View {
 	let turn: Turn
 	let shotsLeft: Int
+	let useTurnColors: Bool
 	let onSelect: () -> Void
 	
 	var body: some View {
@@ -32,7 +33,7 @@ internal struct TurnItem: View {
 		.onTapGesture {
 			onSelect()
 		}
-		.background(turn.rowColor)
+		.background(useTurnColors ? turn.rowColor : .clear)
 		.frame(maxWidth: .infinity)
 	}
 }

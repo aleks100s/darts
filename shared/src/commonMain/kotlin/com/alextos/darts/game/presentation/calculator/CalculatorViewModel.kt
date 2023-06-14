@@ -1,22 +1,28 @@
 package com.alextos.darts.game.presentation.calculator
 
+import com.alextos.darts.core.domain.model.Shot
 import com.alextos.darts.core.util.toCommonStateFlow
+import com.alextos.darts.game.domain.calculator.CalculatorManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.stateIn
 
 class CalculatorViewModel(
+    private val calculatorManager: CalculatorManager,
     coroutineScope: CoroutineScope?
 ) {
     private val viewModelScope = coroutineScope ?: CoroutineScope(Dispatchers.Main)
     private val _state = MutableStateFlow(CalculatorState())
 
-    val state = _state.combine(emptyFlow<String>()) { state, _ ->
-        state
+    val state = combine(
+        _state,
+        calculatorManager.score,
+        calculatorManager.turns
+    ) { state, score, turns ->
+        state.copy(score = score, turns = turns)
     }
         .stateIn(
             viewModelScope,
@@ -29,7 +35,10 @@ class CalculatorViewModel(
         when (event) {
             is CalculatorEvent.BackButtonPressed -> {}
             is CalculatorEvent.MakeShot -> {
-
+                calculatorManager.countShot(Shot(event.sector))
+            }
+            is CalculatorEvent.UndoLastShot -> {
+                calculatorManager.undoLastShot()
             }
         }
     }

@@ -4,5 +4,6 @@ import com.alextos.darts.core.domain.model.Sector
 
 sealed class CalculatorEvent {
     data class MakeShot(val sector: Sector): CalculatorEvent()
+    object UndoLastShot: CalculatorEvent()
     object BackButtonPressed: CalculatorEvent()
 }

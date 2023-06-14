@@ -341,6 +341,9 @@ fun GameNavigationRoot() {
                         is CalculatorEvent.MakeShot -> {
                             viewModel.onEvent(event)
                         }
+                        is CalculatorEvent.UndoLastShot -> {
+                            viewModel.onEvent(event)
+                        }
                     }
                 }
             )

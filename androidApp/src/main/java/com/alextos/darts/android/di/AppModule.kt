@@ -10,6 +10,7 @@ import com.alextos.darts.game.data.SqlDelightGameDataSource
 import com.alextos.darts.game.domain.GameDataSource
 import com.alextos.darts.core.domain.useCases.GetPlayersUseCase
 import com.alextos.darts.debug.PrepopulateDatabaseUseCase
+import com.alextos.darts.game.domain.calculator.CalculatorManager
 import com.alextos.darts.game.domain.useCases.*
 import com.alextos.darts.statistics.data.SqlDelightStatisticsDataSource
 import com.alextos.darts.statistics.domain.StatisticsDataSource
@@ -164,5 +165,11 @@ object AppModule {
         saveGameHistoryUseCase: SaveGameHistoryUseCase
     ): PrepopulateDatabaseUseCase {
         return PrepopulateDatabaseUseCase(createPlayerUseCase, saveGameHistoryUseCase)
+    }
+
+    @Provides
+    @Singleton
+    fun provideCalculatorManager(): CalculatorManager {
+        return CalculatorManager()
     }
 }

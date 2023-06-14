@@ -107,7 +107,9 @@ internal struct GameScreen: View {
 	@ViewBuilder
 	var gameInput: some View {
 		GameInputView(
-			state: viewModel.state,
+			isStatisticsEnabled: viewModel.state.isStatisticsEnabled,
+			currentTurn: viewModel.state.getCurrentTurn(),
+			currentResults: viewModel.state.currentResults(),
 			onInputClick: { sector in
 				viewModel.onEvent(.MakeShot(sector: sector))
 			},

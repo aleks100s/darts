@@ -21,7 +21,7 @@ internal struct GameListScreen: View {
 					Button {
 						viewModel.showCalculator()
 					} label: {
-						Text("🧮")
+						Text("calculator")
 					}
 					.accessibilityIdentifier("calculator")
 				}

@@ -121,7 +121,11 @@ internal struct GameTab: View {
 			.navigationTitle("game_recap")
 			
 		case .calculator:
-			CalculatorScene.create()
+			CalculatorScene.create(
+				onPlayerClick: { index in
+					//
+				}
+			)
 				.navigationBarTitleDisplayMode(.inline)
 				.navigationTitle("calculator")
 		}

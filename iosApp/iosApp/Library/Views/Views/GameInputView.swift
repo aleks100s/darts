@@ -2,7 +2,9 @@ import SwiftUI
 import shared
 
 internal struct GameInputView: View {
-	let state: GameState
+	let isStatisticsEnabled: Bool
+	let currentTurn: Turn
+	let currentResults: [GamePlayerResult]
 	let onInputClick: (Sector) -> ()
 	let onPlayerClick: (Int) -> ()
 	
@@ -16,13 +18,10 @@ internal struct GameInputView: View {
 	
 	@ViewBuilder
 	private var header: some View {
-		let turn = state.getCurrentTurn()
-		let currentResults = state.currentResults()
-		
 		VStack(spacing: 0) {
 			gamePlayers(results: currentResults, onClick: onPlayerClick)
 			PlayerHistoryHeader()
-			currentTurn(turn: turn)
+			currentTurn(turn: currentTurn)
 		}
 	}
 	
@@ -75,7 +74,7 @@ internal struct GameInputView: View {
 			}
 			.scrollIndicators(.hidden)
 		}
-		.frame(height: state.isStatisticsEnabled ? 80 : 56)
+		.frame(height: isStatisticsEnabled ? 80 : 56)
 	}
 	
 	@ViewBuilder
@@ -93,7 +92,7 @@ internal struct GameInputView: View {
 			VStack(spacing: 4) {
 				Text(result.player.name)
 				Text("game_player_result \(result.score)")
-				if state.isStatisticsEnabled {
+				if isStatisticsEnabled {
 					Text("game_player_avg \(result.turnAverage) \(result.overallTurnAverage)")
 						.font(.caption)
 				}

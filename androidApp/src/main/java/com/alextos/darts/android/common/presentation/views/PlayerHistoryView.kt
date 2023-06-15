@@ -32,7 +32,7 @@ fun PlayerHistoryView(
                     .fillMaxSize()
             ) {
                 items(playerHistory.turns) { turn ->
-                    TurnItem(turn = turn) {
+                    TurnItem(turn = turn, useTurnColors = true) {
                         onSelect(turn)
                     }
                 }

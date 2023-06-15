@@ -85,4 +85,5 @@
     <string name="disable_statistics">Do not count in statistics</string>
     <string name="calculator">Calculator</string>
     <string name="number_of_turns">Number of turns: %1$d</string>
+    <string name="turn_number">Turn #%1$d</string>
 </resources>

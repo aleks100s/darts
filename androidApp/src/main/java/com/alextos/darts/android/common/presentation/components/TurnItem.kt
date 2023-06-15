@@ -7,18 +7,24 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.alextos.darts.android.common.presentation.extensions.rowColor
 import com.alextos.darts.android.common.presentation.extensions.textColor
 import com.alextos.darts.core.domain.model.Turn
 
 @Composable
-fun TurnItem(turn: Turn, onSelect: () -> Unit) {
+fun TurnItem(
+    turn: Turn,
+    useTurnColors: Boolean,
+    onSelect: () -> Unit
+) {
     val textColor = turn.textColor()
+    val backgroundColor = if (useTurnColors) turn.rowColor() else Color.Transparent
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .background(turn.rowColor())
+            .background(backgroundColor)
             .clickable { onSelect() }
             .padding(16.dp)
     ) {

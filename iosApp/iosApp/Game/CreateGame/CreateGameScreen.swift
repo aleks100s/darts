@@ -3,28 +3,21 @@ import shared
 
 internal struct CreateGameScreen: View {
 	@StateObject var viewModel: IOSCreateGameViewModel
-	@State private var newPlayerName = ""
-	@State private var isFinishWithDoublesChecked = false
-	@State private var isRandomPlayerOrderChecked = false
-	@State private var isStatisticsDisabled = false
 	
 	var body: some View {
 		content
-		.alert("enter_new_player_name", isPresented: $viewModel.isCreatePlayerDialogShown) {
-			TextField("enter_new_player_name", text: $newPlayerName)
+		.alert("enter_new_player_name", isPresented: $viewModel.isCreatePlayerDialogShown) {			
+			TextField("enter_new_player_name", text: $viewModel.newPlayerName)
 			
 			Button {
-				if newPlayerName.trimmingCharacters(in: .whitespacesAndNewlines).count > 2 {
-					viewModel.createPlayer(name: newPlayerName)
-					newPlayerName = ""
-				}
+				viewModel.createPlayer()
 			} label: {
 				Text("create_player")
 			}
 
 			Button {
 				viewModel.isCreatePlayerDialogShown = false
-				newPlayerName = ""
+				viewModel.newPlayerName = ""
 			} label: {
 				Text("cancel")
 			}
@@ -46,11 +39,7 @@ internal struct CreateGameScreen: View {
 		}
 		.toolbar {
 			Button {
-				viewModel.start(
-					isFinishWithDoubles: isFinishWithDoublesChecked,
-					isRandomPlayerOrder: isRandomPlayerOrderChecked,
-					isStatisticsDisabled: isStatisticsDisabled
-				)
+				viewModel.start()
 			} label: {
 				Text("start_game")
 			}
@@ -99,9 +88,9 @@ internal struct CreateGameScreen: View {
 			}
 			
 			Section("additional_settings") {
-				Toggle("finish_with_doubles", isOn: $isFinishWithDoublesChecked)
-				Toggle("randomize_player_order", isOn: $isRandomPlayerOrderChecked)
-				Toggle("disable_statistics", isOn: $isStatisticsDisabled)
+				Toggle("finish_with_doubles", isOn: $viewModel.isFinishWithDoublesChecked)
+				Toggle("randomize_player_order", isOn: $viewModel.isRandomPlayerOrderChecked)
+				Toggle("disable_statistics", isOn: $viewModel.isStatisticsDisabled)
 			}
 		}
 	}

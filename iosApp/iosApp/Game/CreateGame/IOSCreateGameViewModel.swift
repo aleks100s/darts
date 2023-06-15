@@ -4,6 +4,11 @@ import shared
 internal final class IOSCreateGameViewModel: ObservableObject {
 	@Published var isCreatePlayerDialogShown = false
 	@Published var isDeletePlayerDialogShown = false
+	@Published var newPlayerName = ""
+	@Published var isFinishWithDoublesChecked = false
+	@Published var isRandomPlayerOrderChecked = true
+	@Published var isStatisticsDisabled = false
+	
 	@Published private(set) var state = CreateGameState(
 		allPlayers: [],
 		selectedPlayers: [],
@@ -15,13 +20,14 @@ internal final class IOSCreateGameViewModel: ObservableObject {
 		isRandomPlayersOrderChecked: false,
 		isStatisticsDisabled: false
 	)
-	@Published private(set) var createPlayerState = CreatePlayerState(name: "", allPlayers: [])
-	
+		
 	private let viewModel: CreateGameViewModel
 	private let createPlayerViewModel: CreatePlayerViewModel
 	private let startGame: (GameSettings) -> ()
+	
 	private var handle: DisposableHandle?
 	private var createPlayerHandle: DisposableHandle?
+	private var createPlayerState = CreatePlayerState(name: "", allPlayers: [])
 	
 	init(
 		viewModel: CreateGameViewModel,
@@ -33,17 +39,13 @@ internal final class IOSCreateGameViewModel: ObservableObject {
 		self.startGame = startGame
 	}
 	
-	func start(
-		isFinishWithDoubles: Bool,
-		isRandomPlayerOrder: Bool,
-		isStatisticsDisabled: Bool
-	) {
+	func start() {
 		startGame(
 			GameSettings(
 				selectedPlayers: state.selectedPlayers,
 				selectedGameGoal: state.selectedGoal?.int32Value ?? 0,
-				isFinishWithDoublesChecked: isFinishWithDoubles,
-				isRandomPlayersOrderChecked: isRandomPlayerOrder,
+				isFinishWithDoublesChecked: isFinishWithDoublesChecked,
+				isRandomPlayersOrderChecked: isRandomPlayerOrderChecked,
 				isStatisticsDisabled: isStatisticsDisabled
 			)
 		)
@@ -61,6 +63,7 @@ internal final class IOSCreateGameViewModel: ObservableObject {
 			.subscribe { [weak self] state in
 				guard let state else { return }
 				self?.createPlayerState = state
+				self?.newPlayerName = state.name
 			}
 	}
 	
@@ -79,9 +82,9 @@ internal final class IOSCreateGameViewModel: ObservableObject {
 		onEvent(.ShowDeletePlayerDialog(player: player))
 	}
 	
-	func createPlayer(name: String) {
-		let name = name.trimmingCharacters(in: .whitespacesAndNewlines)
-		if !createPlayerState.allPlayers.map(\.name).contains(name), name.count > 2 {
+	func createPlayer() {
+		let name = newPlayerName.trimmingCharacters(in: .whitespacesAndNewlines)
+		if isNewPlayerNameValid(name) {
 			createPlayerViewModel.onEvent(event: .SavePlayer(name: name))
 		}
 	}
@@ -89,6 +92,13 @@ internal final class IOSCreateGameViewModel: ObservableObject {
 	func dispose() {
 		handle?.dispose()
 		createPlayerHandle?.dispose()
+	}
+	
+	private func isNewPlayerNameValid(_ name: String) -> Bool {
+		name.count > 2
+			&& !createPlayerState.allPlayers
+				.map(\.name)
+				.contains(name)
 	}
 	
 	deinit {

@@ -80,9 +80,11 @@ internal struct GameScreen: View {
 			}
 			.onAppear {
 				viewModel.startObserving()
+				UIApplication.shared.isIdleTimerDisabled = true
 			}
 			.onDisappear {
 				viewModel.dispose()
+				UIApplication.shared.isIdleTimerDisabled = false
 			}
 	}
 	

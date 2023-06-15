@@ -28,7 +28,8 @@ internal struct ContentView: View {
 				.accessibilityIdentifier("tapStatistics")
 		}
 		.onOpenURL { url in
-			if url.canBeNavigated(to: GameNavigation.createGame.urlComponent)  {
+			if url.canBeNavigated(to: GameNavigation.createGame.urlComponent)
+				|| url.canBeNavigated(to: GameNavigation.calculator.urlComponent) {
 				selection = .game
 			}
 		}

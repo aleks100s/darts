@@ -30,9 +30,13 @@ internal struct GameTab: View {
 				}
 		}
 		.onOpenURL { url in
-			if url.canBeNavigated(to: GameNavigation.createGame.urlComponent)  {
+			if url.canBeNavigated(to: GameNavigation.createGame.urlComponent) {
 				if !navigationStack.isGameRunning {
 					navigationStack = [.createGame]
+				}
+			} else if url.canBeNavigated(to: GameNavigation.calculator.urlComponent) {
+				if !navigationStack.isGameRunning {
+					navigationStack = [.calculator]
 				}
 			}
 		}

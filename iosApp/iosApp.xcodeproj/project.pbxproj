@@ -60,6 +60,11 @@
 		27B379AD2A38F4E600B64094 /* IOSCalculatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B379AC2A38F4E600B64094 /* IOSCalculatorViewModel.swift */; };
 		27B379AF2A3A527A00B64094 /* InputMatrixView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B379AE2A3A527A00B64094 /* InputMatrixView.swift */; };
 		27B379B12A3A54A900B64094 /* InputHintRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B379B02A3A54A900B64094 /* InputHintRowView.swift */; };
+		27B379BD2A3BAC8B00B64094 /* CalculatorWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B379B72A3BAA9300B64094 /* CalculatorWidget.swift */; };
+		27B379BE2A3BAC8B00B64094 /* CalculatorWidgetEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B379B92A3BAA9C00B64094 /* CalculatorWidgetEntryView.swift */; };
+		27B379BF2A3BAC8B00B64094 /* CalculatorProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B379B52A3BAA8A00B64094 /* CalculatorProvider.swift */; };
+		27B379C02A3BAC8B00B64094 /* CalculatorEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B379B32A3BAA8300B64094 /* CalculatorEntry.swift */; };
+		27B379C12A3BAC8B00B64094 /* CalculatorLockScreenWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B379BB2A3BAAAA00B64094 /* CalculatorLockScreenWidgetView.swift */; };
 		27CF107329A8BBB600174D02 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CF107229A8BBB600174D02 /* GameScene.swift */; };
 		27CF107529A8BBBE00174D02 /* GameScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CF107429A8BBBE00174D02 /* GameScreen.swift */; };
 		27CF107729A8BBC800174D02 /* IOSGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CF107629A8BBC800174D02 /* IOSGameViewModel.swift */; };
@@ -218,6 +223,11 @@
 		27B379AC2A38F4E600B64094 /* IOSCalculatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSCalculatorViewModel.swift; sourceTree = "<group>"; };
 		27B379AE2A3A527A00B64094 /* InputMatrixView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputMatrixView.swift; sourceTree = "<group>"; };
 		27B379B02A3A54A900B64094 /* InputHintRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputHintRowView.swift; sourceTree = "<group>"; };
+		27B379B32A3BAA8300B64094 /* CalculatorEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorEntry.swift; sourceTree = "<group>"; };
+		27B379B52A3BAA8A00B64094 /* CalculatorProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorProvider.swift; sourceTree = "<group>"; };
+		27B379B72A3BAA9300B64094 /* CalculatorWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorWidget.swift; sourceTree = "<group>"; };
+		27B379B92A3BAA9C00B64094 /* CalculatorWidgetEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorWidgetEntryView.swift; sourceTree = "<group>"; };
+		27B379BB2A3BAAAA00B64094 /* CalculatorLockScreenWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorLockScreenWidgetView.swift; sourceTree = "<group>"; };
 		27CF107229A8BBB600174D02 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; tabWidth = 4; };
 		27CF107429A8BBBE00174D02 /* GameScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScreen.swift; sourceTree = "<group>"; tabWidth = 4; };
 		27CF107629A8BBC800174D02 /* IOSGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSGameViewModel.swift; sourceTree = "<group>"; };
@@ -405,6 +415,7 @@
 		279E825429D9B25500CDCA1E /* Widgets */ = {
 			isa = PBXGroup;
 			children = (
+				27B379B22A3BAA7200B64094 /* Calculator */,
 				279E826F29D9ED7600CDCA1E /* Last */,
 				279E826329D9BABB00CDCA1E /* CreateGame */,
 			);
@@ -465,6 +476,18 @@
 				27B379A82A38F4CF00B64094 /* CalculatorScene.swift */,
 				27B379AA2A38F4DC00B64094 /* CalculatorScreen.swift */,
 				27B379AC2A38F4E600B64094 /* IOSCalculatorViewModel.swift */,
+			);
+			path = Calculator;
+			sourceTree = "<group>";
+		};
+		27B379B22A3BAA7200B64094 /* Calculator */ = {
+			isa = PBXGroup;
+			children = (
+				27B379BB2A3BAAAA00B64094 /* CalculatorLockScreenWidgetView.swift */,
+				27B379B92A3BAA9C00B64094 /* CalculatorWidgetEntryView.swift */,
+				27B379B72A3BAA9300B64094 /* CalculatorWidget.swift */,
+				27B379B52A3BAA8A00B64094 /* CalculatorProvider.swift */,
+				27B379B32A3BAA8300B64094 /* CalculatorEntry.swift */,
 			);
 			path = Calculator;
 			sourceTree = "<group>";
@@ -849,19 +872,24 @@
 			files = (
 				279E827B29D9F3B400CDCA1E /* LastGamesProvider.swift in Sources */,
 				279E827329D9F27400CDCA1E /* LastGamesWidget.swift in Sources */,
+				27B379BF2A3BAC8B00B64094 /* CalculatorProvider.swift in Sources */,
 				279E827F29D9F51600CDCA1E /* LastGamesMediumWidgetView.swift in Sources */,
 				279E825D29D9B43B00CDCA1E /* RingView.swift in Sources */,
+				27B379C12A3BAC8B00B64094 /* CalculatorLockScreenWidgetView.swift in Sources */,
 				279E826129D9B57600CDCA1E /* URL+Extensions.swift in Sources */,
 				279E824629D9AC5900CDCA1E /* Example.swift in Sources */,
 				279E827529D9F2B700CDCA1E /* CreateGameProvider.swift in Sources */,
+				27B379C02A3BAC8B00B64094 /* CalculatorEntry.swift in Sources */,
 				279E827729D9F32800CDCA1E /* CreateGameEntry.swift in Sources */,
 				279E826729D9BB3700CDCA1E /* CreateGameWidget.swift in Sources */,
 				279E826529D9BACB00CDCA1E /* CreateGameWidgetEntryView.swift in Sources */,
 				279E825729D9B2B400CDCA1E /* CreateGameLockScreenWidgetView.swift in Sources */,
 				279E824429D9AC5900CDCA1E /* DartsWidgetBundle.swift in Sources */,
 				279E827D29D9F3C700CDCA1E /* LastGamesWidgetEntryView.swift in Sources */,
+				27B379BE2A3BAC8B00B64094 /* CalculatorWidgetEntryView.swift in Sources */,
 				279E827929D9F34400CDCA1E /* LastGamesEntry.swift in Sources */,
 				279E829429DA058200CDCA1E /* DartsWidget.intentdefinition in Sources */,
+				27B379BD2A3BAC8B00B64094 /* CalculatorWidget.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

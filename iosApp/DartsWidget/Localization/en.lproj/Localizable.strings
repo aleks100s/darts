@@ -1,6 +1,9 @@
 "play" = "Play";
 "play_darts" = "Play darts";
-"lock_screen_widget" = "Lock Screen Widget";
-"lock_screen_widget_description" = "This widget can navigate you directly to game creation!";
+"calculator" = "Calculator";
+"create_game_widget" = "Create Game Widget";
+"create_game_widget_description" = "This widget can navigate you directly to game creation!";
 "last_games_widget" = "Last Games Widget";
 "last_games_widget_description" = "This widget shows last games results.";
+"calculator_widget" = "Calculator Widget";
+"calculator_widget_description" = "This widget can navigate you directly to darts calculator!";

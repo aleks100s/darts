@@ -7,6 +7,12 @@ extension URL {
 		return urlComponents.url
 	}
 	
+	static var calculator: URL? {
+		var urlComponents = URLComponents()
+		urlComponents.path = "darts-helper/calculator"
+		return urlComponents.url
+	}
+	
 	private var queryParameters: [String: String]? {
 		guard
 			let components = URLComponents(url: self, resolvingAgainstBaseURL: true),

@@ -14,6 +14,9 @@ internal enum GameNavigation: Hashable {
 		case .createGame:
 			return "createGame"
 			
+		case .calculator:
+			return "calculator"
+			
 		default:
 			return nil
 		}

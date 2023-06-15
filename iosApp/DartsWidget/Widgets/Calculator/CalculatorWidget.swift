@@ -1,19 +1,19 @@
 import SwiftUI
 import WidgetKit
 
-struct CreateGameWidget: Widget {
+struct CalculatorWidget: Widget {
 	let kind: String = String(describing: Self.self)
 
 	var body: some WidgetConfiguration {
 		IntentConfiguration(
 			kind: kind,
 			intent: ConfigurationIntent.self,
-			provider: CreateGameProvider()
+			provider: CalculatorProvider()
 		) { entry in
-			CreateGameWidgetEntryView(entry: entry)
+			CalculatorWidgetEntryView(entry: entry)
 		}
-		.configurationDisplayName("create_game_widget")
-		.description("create_game_widget_description")
+		.configurationDisplayName("calculator_widget")
+		.description("calculator_widget_description")
 		.supportedFamilies([.accessoryCircular])
 	}
 }

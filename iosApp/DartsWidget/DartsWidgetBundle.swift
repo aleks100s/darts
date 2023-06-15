@@ -5,5 +5,6 @@ import SwiftUI
 struct DartsWidgetBundle: WidgetBundle {
     var body: some Widget {
         CreateGameWidget()
+		CalculatorWidget()
     }
 }

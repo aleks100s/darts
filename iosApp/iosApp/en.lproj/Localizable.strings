@@ -84,3 +84,4 @@
 "disable_statistics" = "Do not count in statistics";
 "calculator" = "Calculator";
 "turn_number %d" = "Turn #%d";
+"number_of_turns %d" = "Number of turns: %d";

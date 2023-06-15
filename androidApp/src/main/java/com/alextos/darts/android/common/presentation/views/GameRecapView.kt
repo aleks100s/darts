@@ -34,7 +34,8 @@ fun GameRecapView(
     smallestTurns: List<PlayerGameValue>,
     misses: List<PlayerGameValue>,
     overkills: List<PlayerGameValue>,
-    duration: GameDuration
+    duration: GameDuration,
+    numberOfTurns: Int
 ) {
     if (history.isNotEmpty()) {
         LazyColumn(
@@ -53,6 +54,11 @@ fun GameRecapView(
                     GameDuration(duration = duration)
                 }
             }
+
+            item {
+                NumberOfTurns(numberOfTurns = numberOfTurns)
+            }
+
             item {
                 ValuesBlock(values = averageTurns, title = stringResource(id = R.string.average_set_recap))
             }
@@ -154,5 +160,17 @@ private fun GameDuration(duration: GameDuration) {
         horizontalArrangement = Arrangement.End
     ) {
         Text(stringResource(id = R.string.game_duration, duration.minutes, duration.seconds))
+    }
+}
+
+@Composable
+private fun NumberOfTurns(numberOfTurns: Int) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp),
+        horizontalArrangement = Arrangement.End
+    ) {
+        Text(stringResource(id = R.string.number_of_turns, numberOfTurns))
     }
 }

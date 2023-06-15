@@ -23,7 +23,8 @@ fun RecapScreen(
             smallestTurns = historyState.smallestTurns(),
             misses = historyState.misses(),
             overkills = historyState.overkills(),
-            duration = historyState.duration
+            duration = historyState.duration,
+            numberOfTurns = historyState.numberOfTurns
         )
     }
 }

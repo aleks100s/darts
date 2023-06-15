@@ -10,14 +10,16 @@ internal struct GameRecapView: View {
 	let misses: [PlayerGameValue]
 	let overkills: [PlayerGameValue]
 	let duration: GameDuration
+	let numberOfTurns: Int32
 	
 	var body: some View {
 		ScrollView {
 			VStack {
 				chart
 				if !duration.isEmpty {
-					gameDuration
+					gameDurationItem
 				}
+				numberOfTurnsItem
 				valuesBlock(values: averageTurns, title: String(localized: "average_set_recap"))
 				valuesBlock(values: biggestTurns, title: String(localized: "biggest_sets"))
 				valuesBlock(values: smallestTurns, title: String(localized: "smallest_sets"))
@@ -51,10 +53,20 @@ internal struct GameRecapView: View {
 	}
 	
 	@ViewBuilder
-	private var gameDuration: some View {
+	private var gameDurationItem: some View {
 		HStack {
 			Spacer()
 			Text("game_duration \(duration.minutes) \(duration.seconds)")
+				.font(.caption)
+		}
+		.padding(.horizontal, 16)
+	}
+	
+	@ViewBuilder
+	private var numberOfTurnsItem: some View {
+		HStack {
+			Spacer()
+			Text("number_of_turns \(numberOfTurns)")
 				.font(.caption)
 		}
 		.padding(.horizontal, 16)

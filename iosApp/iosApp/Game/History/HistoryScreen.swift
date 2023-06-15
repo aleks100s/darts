@@ -60,7 +60,8 @@ internal struct HistoryScreen: View {
 			smallestTurns: viewModel.state.smallestTurns(),
 			misses: viewModel.state.misses(),
 			overkills: viewModel.state.overkills(),
-			duration: viewModel.state.duration
+			duration: viewModel.state.duration,
+			numberOfTurns: viewModel.state.numberOfTurns
 		)
 	}
 }

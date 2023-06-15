@@ -84,4 +84,5 @@
     <string name="randomize_player_order">Random player order</string>
     <string name="disable_statistics">Do not count in statistics</string>
     <string name="calculator">Calculator</string>
+    <string name="number_of_turns">Number of turns: %1$d</string>
 </resources>

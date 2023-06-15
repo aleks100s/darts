@@ -12,6 +12,9 @@ data class HistoryState(
     val isLoading: Boolean = true,
     val duration: GameDuration = GameDuration(0, 0)
 ) {
+    val numberOfTurns: Int
+        get() { return gameHistory.maxBy { it.turns.count() }.turns.count() }
+
     fun averageTurns(): List<PlayerGameValue> {
         return gameHistory.map { playerHistory ->
             PlayerGameValue(playerHistory.player, playerHistory.average())

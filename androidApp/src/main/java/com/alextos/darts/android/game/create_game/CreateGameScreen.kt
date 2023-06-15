@@ -48,77 +48,91 @@ fun CreateGameScreen(
             title = stringResource(id = R.string.create_game),
             onBackPressed = onBackPressed
         ) { modifier ->
-            Column(
+            LazyColumn(
                 modifier = modifier
                     .fillMaxSize()
                     .padding(it)
             ) {
-                SectionHeader(title = stringResource(id = R.string.select_players))
+                item {
+                    SectionHeader(title = stringResource(id = R.string.select_players))
+                }
 
-                LazyColumn(modifier = Modifier.weight(1f)) {
-                    item {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .clickable { onEvent(CreateGameEvent.CreatePlayer) }
-                                .padding(horizontal = 16.dp, vertical = 12.dp),
-                            horizontalArrangement = Arrangement.Center,
-                        ) {
-                            Text(
-                                text = stringResource(id = R.string.add_new_player),
-                                textAlign = TextAlign.Center,
-                                color = MaterialTheme.colors.primary
-                            )
-                        }
-                    }
-
-                    items(state.allPlayers) { player ->
-                        PlayerCheckbox(
-                            player = player,
-                            isChecked = state.isPlayerSelected(player),
-                            onClick = {
-                                onEvent(CreateGameEvent.SelectPlayer(it))
-                            },
-                            onLongClick = {
-                                onEvent(CreateGameEvent.ShowDeletePlayerDialog(it))
-                            }
+                item {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable { onEvent(CreateGameEvent.CreatePlayer) }
+                            .padding(horizontal = 16.dp, vertical = 12.dp),
+                        horizontalArrangement = Arrangement.Center,
+                    ) {
+                        Text(
+                            text = stringResource(id = R.string.add_new_player),
+                            textAlign = TextAlign.Center,
+                            color = MaterialTheme.colors.primary
                         )
                     }
                 }
 
-                SectionHeader(title = stringResource(id = R.string.game_goal))
-
-                GoalSelector(
-                    goals = state.goalOptions,
-                    selectedGoal = state.selectedGoal
-                ) { goal ->
-                    onEvent(CreateGameEvent.SelectGoal(goal))
+                items(state.allPlayers) { player ->
+                    PlayerCheckbox(
+                        player = player,
+                        isChecked = state.isPlayerSelected(player),
+                        onClick = {
+                            onEvent(CreateGameEvent.SelectPlayer(it))
+                        },
+                        onLongClick = {
+                            onEvent(CreateGameEvent.ShowDeletePlayerDialog(it))
+                        }
+                    )
                 }
 
-                SectionHeader(title = stringResource(id = R.string.additional_settings))
+                item {
+                    SectionHeader(title = stringResource(id = R.string.game_goal))
+                }
 
-                FinishWithDoublesCheckbox(
-                    isChecked = state.isFinishWithDoublesChecked,
-                    onCheckedChanged = { isChecked ->
-                        onEvent(CreateGameEvent.ToggleFinishWithDoubles(isChecked))
+                items(state.goalOptions) {
+                    GoalOptionItem(
+                        goal = it,
+                        isSelected = state.selectedGoal == it
+                    ) {
+                        onEvent(CreateGameEvent.SelectGoal(it))
                     }
-                )
+                }
 
-                RandomizeOrderCheckbox(
-                    isChecked = state.isRandomPlayersOrderChecked,
-                    onCheckedChanged = { isChecked ->
-                        onEvent(CreateGameEvent.ToggleRandomPlayersOrder(isChecked))
-                    }
-                )
+                item {
+                    SectionHeader(title = stringResource(id = R.string.additional_settings))
+                }
 
-                DisableStatisticsCheckbox(
-                    isChecked = state.isStatisticsDisabled,
-                    onCheckedChanged = { isChecked ->
-                        onEvent(CreateGameEvent.ToggleDisableStatistics(isChecked))
-                    }
-                )
+                item {
+                    FinishWithDoublesCheckbox(
+                        isChecked = state.isFinishWithDoublesChecked,
+                        onCheckedChanged = { isChecked ->
+                            onEvent(CreateGameEvent.ToggleFinishWithDoubles(isChecked))
+                        }
+                    )
+                }
 
-                Spacer(modifier = Modifier.height(64.dp))
+                item {
+                    RandomizeOrderCheckbox(
+                        isChecked = state.isRandomPlayersOrderChecked,
+                        onCheckedChanged = { isChecked ->
+                            onEvent(CreateGameEvent.ToggleRandomPlayersOrder(isChecked))
+                        }
+                    )
+                }
+
+                item {
+                    DisableStatisticsCheckbox(
+                        isChecked = state.isStatisticsDisabled,
+                        onCheckedChanged = { isChecked ->
+                            onEvent(CreateGameEvent.ToggleDisableStatistics(isChecked))
+                        }
+                    )
+                }
+
+                item {
+                    Spacer(modifier = Modifier.height(64.dp))
+                }
             }
         }
     }
@@ -204,33 +218,14 @@ private fun PlayerCheckbox(
 }
 
 @Composable
-private fun GoalSelector(
-    goals: List<Int>,
-    selectedGoal: Int? = null,
-    onClick: (Int) -> Unit
-) {
-    LazyColumn(
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        items(goals) {
-            GoalOptionItem(
-                goal = it,
-                isSelected = selectedGoal == it
-            ) {
-                onClick(it)
-            }
-        }
-    }
-}
-
-@Composable
 fun GoalOptionItem(
     goal: Int,
     isSelected: Boolean,
     onClick: () -> Unit
 ) {
     Row(
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier
+            .fillMaxWidth()
             .clickable { onClick() }
             .padding(start = 16.dp),
         verticalAlignment = Alignment.CenterVertically,

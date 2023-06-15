@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -19,7 +20,7 @@ fun TurnItem(
     useTurnColors: Boolean,
     onSelect: () -> Unit
 ) {
-    val textColor = turn.textColor()
+    val textColor = if (useTurnColors) turn.textColor() else MaterialTheme.colors.onBackground
     val backgroundColor = if (useTurnColors) turn.rowColor() else Color.Transparent
     Row(
         modifier = Modifier

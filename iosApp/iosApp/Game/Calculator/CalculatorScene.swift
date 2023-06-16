@@ -3,7 +3,7 @@ import SwiftUI
 
 enum CalculatorScene {
 	static func create(
-		onShowHistoryClick: @escaping () -> Void
+		onShowHistoryClick: @escaping ([Turn]) -> Void
 	) -> some View {
 		let calculatorManager = CalculatorManager()
 		let viewModel = CalculatorViewModel(

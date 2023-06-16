@@ -10,25 +10,7 @@ internal struct PlayerHistoryView: View {
 		VStack(spacing: 0) {
 			SectionHeader(title: playerHistory.player.name)
 			gameGoalView(goal: gameGoal)
-			PlayerHistoryHeader()
-			
-			ScrollView(showsIndicators: false) {
-				VStack(spacing: 0) {
-					ForEach(playerHistory.turns) { turn in
-						TurnItem(
-							turn: turn,
-							shotsLeft: Int(turn.shotsLeft()),
-							useTurnColors: true
-						) {
-							onTurnSelected(turn)
-						}
-					}
-						.background(Color.background)
-						.listRowSeparator(.hidden)
-						.listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
-					Spacer()
-				}
-			}
+			TurnsHistoryView(turns: playerHistory.turns, onTurnSelected: onTurnSelected)
 		}
 		.frame(maxWidth: .infinity, maxHeight: .infinity)
 		.background(Color.background)

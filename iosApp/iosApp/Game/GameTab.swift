@@ -127,12 +127,21 @@ internal struct GameTab: View {
 			
 		case .calculator:
 			CalculatorScene.create(
-				onShowHistoryClick: {
-					//
+				onShowHistoryClick: { turns in
+					navigationStack.append(.calculatorHistory(turns: turns))
 				}
 			)
 				.navigationBarTitleDisplayMode(.inline)
 				.navigationTitle("calculator")
+			
+		case let .calculatorHistory(turns):
+			CalculatorHistoryScreen(turns: turns) { turn in
+				guard !turn.shots.isEmpty else { return }
+				
+				navigationStack.append(.dartsBoard(turn))
+			}
+				.navigationBarTitleDisplayMode(.inline)
+				.navigationTitle("history")
 		}
 	}
 }

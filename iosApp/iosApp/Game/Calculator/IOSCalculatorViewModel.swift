@@ -4,13 +4,13 @@ final class IOSCalculatorViewModel: ObservableObject {
 	@Published private(set) var state = CalculatorState(turns: [])
 	
 	private let viewModel: CalculatorViewModel
-	private let onShowHistoryClick: () -> Void
+	private let onShowHistoryClick: ([Turn]) -> Void
 	
 	private var handle: DisposableHandle?
 	
 	init(
 		viewModel: CalculatorViewModel,
-		onShowHistoryClick: @escaping () -> Void
+		onShowHistoryClick: @escaping ([Turn]) -> Void
 	) {
 		self.viewModel = viewModel
 		self.onShowHistoryClick = onShowHistoryClick
@@ -21,7 +21,9 @@ final class IOSCalculatorViewModel: ObservableObject {
 	}
 	
 	func showHistory() {
-		onShowHistoryClick()
+		guard state.turnNumber > 0 else { return }
+		
+		onShowHistoryClick(state.turns)
 	}
 	
 	func startObserving() {

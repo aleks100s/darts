@@ -13,6 +13,9 @@ struct CalculatorScreen: View {
 					.font(.caption)
 			}
 			.padding()
+			.onTapGesture {
+				viewModel.showHistory()
+			}
 
 			if let turn = viewModel.state.lastTurn {
 				TurnItem(

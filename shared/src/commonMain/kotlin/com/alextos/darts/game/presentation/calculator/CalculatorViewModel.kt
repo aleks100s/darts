@@ -32,13 +32,14 @@ class CalculatorViewModel(
 
     fun onEvent(event: CalculatorEvent) {
         when (event) {
-            is CalculatorEvent.BackButtonPressed -> {}
             is CalculatorEvent.MakeShot -> {
                 calculatorManager.countShot(Shot(event.sector))
             }
             is CalculatorEvent.UndoLastShot -> {
                 calculatorManager.undoLastShot()
             }
+            is CalculatorEvent.BackButtonPressed -> {}
+            is CalculatorEvent.ShowHistory -> {}
         }
     }
 }

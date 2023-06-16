@@ -9,11 +9,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class AndroidCalculatorViewModel @Inject constructor(
-    calculatorManager: CalculatorManager
-): ViewModel(){
+class AndroidCalculatorViewModel @Inject constructor(): ViewModel(){
     private val viewModel by lazy {
-        CalculatorViewModel(calculatorManager, viewModelScope)
+        CalculatorViewModel(CalculatorManager(), viewModelScope)
     }
 
     val state = viewModel.state

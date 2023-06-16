@@ -18,6 +18,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.alextos.darts.android.game.calculator.AndroidCalculatorViewModel
 import com.alextos.darts.android.game.calculator.CalculatorScreen
+import com.alextos.darts.android.game.calculator_history.CalculatorHistoryScreen
 import com.alextos.darts.android.game.create_game.AndroidCreateGameViewModel
 import com.alextos.darts.android.game.create_game.CreateGameScreen
 import com.alextos.darts.android.game.create_player.AndroidCreatePlayerViewModel
@@ -32,6 +33,7 @@ import com.alextos.darts.android.game.history.AndroidHistoryViewModel
 import com.alextos.darts.android.game.history.HistoryScreen
 import com.alextos.darts.android.game.in_game_history.InGameHistoryScreen
 import com.alextos.darts.android.game.recap.RecapScreen
+import com.alextos.darts.core.domain.model.Turn
 import com.alextos.darts.game.domain.models.GameSettings
 import com.alextos.darts.game.presentation.calculator.CalculatorEvent
 import com.alextos.darts.game.presentation.create_game.CreateGameEvent
@@ -338,6 +340,15 @@ fun GameNavigationRoot() {
                         is CalculatorEvent.BackButtonPressed -> {
                             navController.popBackStack()
                         }
+                        is CalculatorEvent.ShowHistory -> {
+                            if (state.turnNumber > 0) {
+                                navController.navigate(
+                                    route = GameRoute.CalculatorHistory.routeWithArgs(
+                                        Json.encodeToString(event.turns)
+                                    )
+                                )
+                            }
+                        }
                         is CalculatorEvent.MakeShot -> {
                             viewModel.onEvent(event)
                         }
@@ -345,6 +356,38 @@ fun GameNavigationRoot() {
                             viewModel.onEvent(event)
                         }
                     }
+                }
+            )
+        }
+
+        composable(
+            route = GameRoute.CalculatorHistory.route + "/{turns}",
+            arguments = listOf(
+                navArgument("turns") {
+                    type = NavType.StringType
+                }
+            )
+        ) { navBackStackEntry ->
+            val turns: List<Turn> = navBackStackEntry.arguments?.getString("turns")
+                ?.let { Json.decodeFromString(it) } ?: run { return@composable }
+            CalculatorHistoryScreen(
+                turns = turns,
+                onSelect = { turn ->
+                    if (turn.shots.isNotEmpty()) {
+                        navController.navigate(
+                            GameRoute.Darts.routeWithArgs(
+                                Json.encodeToString(
+                                    DartsState(
+                                        turns = turns,
+                                        currentPage = turns.indexOf(turn)
+                                    )
+                                )
+                            )
+                        )
+                    }
+                },
+                onBackPressed = {
+                    navController.popBackStack()
                 }
             )
         }

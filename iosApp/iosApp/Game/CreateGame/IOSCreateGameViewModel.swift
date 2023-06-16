@@ -86,6 +86,7 @@ internal final class IOSCreateGameViewModel: ObservableObject {
 		let name = newPlayerName.trimmingCharacters(in: .whitespacesAndNewlines)
 		if isNewPlayerNameValid(name) {
 			createPlayerViewModel.onEvent(event: .SavePlayer(name: name))
+			newPlayerName = ""
 		}
 	}
 	

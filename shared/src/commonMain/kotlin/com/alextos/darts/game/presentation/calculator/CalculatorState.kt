@@ -16,4 +16,13 @@ data class CalculatorState(
             return turns.lastOrNull { it.shots.isNotEmpty() }
                 ?: Turn(shots = listOf(), leftAfter = 0, isOverkill = false)
         }
+
+    val average: Int?
+        get() {
+            if (turnNumber == 0) {
+                return null
+            }
+
+            return score / turnNumber
+        }
 }

@@ -86,4 +86,5 @@
     <string name="calculator">Calculator</string>
     <string name="number_of_turns">Number of turns: %1$d</string>
     <string name="turn_number">Turn #%1$d</string>
+    <string name="average_calculator">Average turn: %1$d</string>
 </resources>

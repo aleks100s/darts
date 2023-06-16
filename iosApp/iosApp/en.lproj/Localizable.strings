@@ -85,3 +85,4 @@
 "calculator" = "Calculator";
 "turn_number %d" = "Turn #%d";
 "number_of_turns %d" = "Number of turns: %d";
+"average_calculator %d" = "Average turn: %d";

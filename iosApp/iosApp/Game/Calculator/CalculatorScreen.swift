@@ -9,6 +9,11 @@ struct CalculatorScreen: View {
 				Text("game_player_result \(viewModel.state.score)")
 					.font(.title)
 				
+				if let average = viewModel.state.average {
+					Text("average_calculator \(average.int32Value)")
+						.font(.caption)
+				}
+				
 				Text("turn_number \(viewModel.state.turnNumber)")
 					.font(.caption)
 			}

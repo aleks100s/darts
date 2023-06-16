@@ -56,6 +56,14 @@ fun CalculatorScreen(
                         text = stringResource(id = R.string.game_player_result, state.score),
                         style = MaterialTheme.typography.h2
                     )
+
+                    state.average?.let { average ->
+                        Text(
+                            text = stringResource(id = R.string.average_calculator, average),
+                            style = MaterialTheme.typography.caption
+                        )
+                    }
+
                     Text(
                         text = stringResource(id = R.string.turn_number, state.turnNumber),
                         style = MaterialTheme.typography.caption

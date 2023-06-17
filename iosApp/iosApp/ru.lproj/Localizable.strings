@@ -86,3 +86,5 @@
 "turn_number %d" = "Ход №%d";
 "number_of_turns %d" = "Количество ходов: %d";
 "average_calculator %d" = "Средний подход: %d";
+"time_statistics" = "Время игры";
+"time_duration %d %d %d" = "%d час %d мин %d сек";

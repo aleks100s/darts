@@ -65,6 +65,7 @@ internal enum StatisticsNavigation: Hashable {
 	case biggestFinalTurn
 	case bestTurn
 	case averageValues
+	case time
 	case players(Mode)
 	case dartsBoard(Turn)
 }

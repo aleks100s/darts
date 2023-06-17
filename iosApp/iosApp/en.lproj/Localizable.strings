@@ -86,3 +86,5 @@
 "turn_number %d" = "Turn #%d";
 "number_of_turns %d" = "Number of turns: %d";
 "average_calculator %d" = "Average turn: %d";
+"time_statistics" = "Time played";
+"time_duration %d %d %d" = "%d hour %d min %d ses";

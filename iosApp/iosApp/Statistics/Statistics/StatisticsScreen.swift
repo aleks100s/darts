@@ -8,7 +8,8 @@ internal struct StatisticsScreen: View {
 		.ShowAverageValues(),
 		.ShowShotDistribution(),
 		.ShowVictoryDistribution(),
-		.ShowSectorHeatmapDistribution()
+		.ShowSectorHeatmapDistribution(),
+		.ShowTimeStatistics()
 	]
 	let onSelect: (StatisticsEvent) -> Void
 	

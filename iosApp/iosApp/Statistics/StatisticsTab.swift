@@ -29,8 +29,11 @@ internal struct StatisticsTab: View {
 					case .ShowSectorHeatmapDistribution():
 						navigationStack.append(.players(.heatmapDistribution))
 						
+					case .ShowTimeStatistics():
+						navigationStack.append(.time)
+						
 					default:
-						break
+						return
 					}
 				}
 			)
@@ -93,6 +96,11 @@ internal struct StatisticsTab: View {
 		case .averageValues:
 			AverageValuesScene.create(module: module)
 				.navigationTitle("average_values_statistics")
+				.navigationBarTitleDisplayMode(.inline)
+			
+		case .time:
+			TimeScene.create(module: module)
+				.navigationTitle("time_statistics")
 				.navigationBarTitleDisplayMode(.inline)
 			
 		case let .dartsBoard(turn):

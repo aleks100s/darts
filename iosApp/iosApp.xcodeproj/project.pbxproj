@@ -67,6 +67,9 @@
 		27B379C12A3BAC8B00B64094 /* CalculatorLockScreenWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B379BB2A3BAAAA00B64094 /* CalculatorLockScreenWidgetView.swift */; };
 		27B379C42A3C8A7600B64094 /* CalculatorHistoryScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B379C32A3C8A7600B64094 /* CalculatorHistoryScreen.swift */; };
 		27B379C62A3C8B7600B64094 /* TurnsHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B379C52A3C8B7600B64094 /* TurnsHistoryView.swift */; };
+		27B379C92A3DF1C600B64094 /* IOSTimeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B379C82A3DF1C600B64094 /* IOSTimeViewModel.swift */; };
+		27B379CB2A3DF20900B64094 /* TimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B379CA2A3DF20900B64094 /* TimeView.swift */; };
+		27B379CD2A3DF3D100B64094 /* TimeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B379CC2A3DF3D100B64094 /* TimeScene.swift */; };
 		27CF107329A8BBB600174D02 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CF107229A8BBB600174D02 /* GameScene.swift */; };
 		27CF107529A8BBBE00174D02 /* GameScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CF107429A8BBBE00174D02 /* GameScreen.swift */; };
 		27CF107729A8BBC800174D02 /* IOSGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CF107629A8BBC800174D02 /* IOSGameViewModel.swift */; };
@@ -232,6 +235,9 @@
 		27B379BB2A3BAAAA00B64094 /* CalculatorLockScreenWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorLockScreenWidgetView.swift; sourceTree = "<group>"; };
 		27B379C32A3C8A7600B64094 /* CalculatorHistoryScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorHistoryScreen.swift; sourceTree = "<group>"; };
 		27B379C52A3C8B7600B64094 /* TurnsHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnsHistoryView.swift; sourceTree = "<group>"; };
+		27B379C82A3DF1C600B64094 /* IOSTimeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSTimeViewModel.swift; sourceTree = "<group>"; };
+		27B379CA2A3DF20900B64094 /* TimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeView.swift; sourceTree = "<group>"; };
+		27B379CC2A3DF3D100B64094 /* TimeScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeScene.swift; sourceTree = "<group>"; };
 		27CF107229A8BBB600174D02 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; tabWidth = 4; };
 		27CF107429A8BBBE00174D02 /* GameScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScreen.swift; sourceTree = "<group>"; tabWidth = 4; };
 		27CF107629A8BBC800174D02 /* IOSGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSGameViewModel.swift; sourceTree = "<group>"; };
@@ -359,6 +365,7 @@
 		279827CF298E656400D497F2 /* Statistics */ = {
 			isa = PBXGroup;
 			children = (
+				27B379C72A3DF19D00B64094 /* Time */,
 				274E404229CEE9D9000E9027 /* SectorHeatmap */,
 				27D65A3D29BE522D00A921C6 /* VictoryDistribution */,
 				27D65A3629BE503100A921C6 /* ShotDistribution */,
@@ -503,6 +510,16 @@
 				27B379C32A3C8A7600B64094 /* CalculatorHistoryScreen.swift */,
 			);
 			path = CalculatorHistory;
+			sourceTree = "<group>";
+		};
+		27B379C72A3DF19D00B64094 /* Time */ = {
+			isa = PBXGroup;
+			children = (
+				27B379C82A3DF1C600B64094 /* IOSTimeViewModel.swift */,
+				27B379CA2A3DF20900B64094 /* TimeView.swift */,
+				27B379CC2A3DF3D100B64094 /* TimeScene.swift */,
+			);
+			path = Time;
 			sourceTree = "<group>";
 		};
 		27CF107129A8BBA800174D02 /* Game */ = {
@@ -975,9 +992,11 @@
 				27D65A3829BE504300A921C6 /* IOSShotDistributionViewModel.swift in Sources */,
 				27CF108F29ABA2CE00174D02 /* Turn+Extensions.swift in Sources */,
 				27B379AB2A38F4DC00B64094 /* CalculatorScreen.swift in Sources */,
+				27B379C92A3DF1C600B64094 /* IOSTimeViewModel.swift in Sources */,
 				279E829329DA058200CDCA1E /* DartsWidget.intentdefinition in Sources */,
 				27CF107529A8BBBE00174D02 /* GameScreen.swift in Sources */,
 				27CF108729AB9AA500174D02 /* Row.swift in Sources */,
+				27B379CD2A3DF3D100B64094 /* TimeScene.swift in Sources */,
 				279827E629A7CDB100D497F2 /* IOSCreateGameViewModel.swift in Sources */,
 				27CF108D29ABA23F00174D02 /* Shot+Extensions.swift in Sources */,
 				279827DD298E71E000D497F2 /* GameListScreen.swift in Sources */,
@@ -1004,6 +1023,7 @@
 				279827F129A7D5C100D497F2 /* KotlinInt+Extensions.swift in Sources */,
 				27B3799D2A2C6C5C00B64094 /* Chevron.swift in Sources */,
 				27D65A3329BE4E1900A921C6 /* PlayerListScreen.swift in Sources */,
+				27B379CB2A3DF20900B64094 /* TimeView.swift in Sources */,
 				27D65A1C29BE42EC00A921C6 /* IOSBestTurnViewModel.swift in Sources */,
 				27CF108929AB9FCD00174D02 /* GamePlayerResult+Extensions.swift in Sources */,
 				27B379AD2A38F4E600B64094 /* IOSCalculatorViewModel.swift in Sources */,

@@ -23,6 +23,9 @@ extension StatisticsEvent {
 		case .ShowSectorHeatmapDistribution():
 			return String(localized: "sector_heatmap_statistics")
 			
+		case .ShowTimeStatistics():
+			return String(localized: "time_statistics")
+			
 		default:
 			return ""
 		}

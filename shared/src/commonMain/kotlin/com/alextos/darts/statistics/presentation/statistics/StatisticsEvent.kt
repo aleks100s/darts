@@ -7,4 +7,5 @@ sealed class StatisticsEvent {
     object ShowShotDistribution: StatisticsEvent()
     object ShowVictoryDistribution: StatisticsEvent()
     object ShowSectorHeatmapDistribution: StatisticsEvent()
+    object ShowTimeStatistics: StatisticsEvent()
 }

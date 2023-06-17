@@ -23,7 +23,8 @@ fun StatisticsScreen(
         StatisticsEvent.ShowAverageValues to stringResource(id = R.string.average_values_statistics),
         StatisticsEvent.ShowShotDistribution to stringResource(id = R.string.shot_distribution_statistics),
         StatisticsEvent.ShowVictoryDistribution to stringResource(id = R.string.victory_distribution_statistics),
-        StatisticsEvent.ShowSectorHeatmapDistribution to stringResource(id = R.string.sector_heatmap_statistics)
+        StatisticsEvent.ShowSectorHeatmapDistribution to stringResource(id = R.string.sector_heatmap_statistics),
+        StatisticsEvent.ShowTimeStatistics to stringResource(id = R.string.time_statistics)
     )
 
     Screen(

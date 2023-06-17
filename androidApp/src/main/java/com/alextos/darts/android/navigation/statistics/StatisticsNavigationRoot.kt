@@ -30,19 +30,14 @@ import com.alextos.darts.android.statistics.player_list.PlayerListScreen
 import com.alextos.darts.android.statistics.shot_distribution.AndroidShotDistributionViewModel
 import com.alextos.darts.android.statistics.shot_distribution.ShotDistributionScreen
 import com.alextos.darts.android.statistics.statistics.StatisticsScreen
+import com.alextos.darts.android.statistics.time.AndroidTimeViewModel
+import com.alextos.darts.android.statistics.time.TimeScreen
 import com.alextos.darts.android.statistics.victory_distribution.AndroidVictoryDistributionViewModel
 import com.alextos.darts.android.statistics.victory_distribution.VictoryDistributionScreen
-import com.alextos.darts.statistics.presentation.average_values.AverageValuesState
 import com.alextos.darts.statistics.presentation.best_turn.BestTurnEvent
-import com.alextos.darts.statistics.presentation.best_turn.BestTurnState
 import com.alextos.darts.statistics.presentation.biggest_final_turn.BiggestFinalTurnEvent
-import com.alextos.darts.statistics.presentation.biggest_final_turn.BiggestFinalTurnState
-import com.alextos.darts.statistics.presentation.heatmap.SectorHeatmapState
 import com.alextos.darts.statistics.presentation.player_list.PlayerListEvent
-import com.alextos.darts.statistics.presentation.player_list.PlayerListState
-import com.alextos.darts.statistics.presentation.shot_distribution.ShotDistributionState
 import com.alextos.darts.statistics.presentation.statistics.StatisticsEvent
-import com.alextos.darts.statistics.presentation.victory_distribution.VictoryDistributionState
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -76,6 +71,9 @@ fun StatisticsNavigationRoot() {
                     is StatisticsEvent.ShowSectorHeatmapDistribution -> {
                         navController.navigate(route = StatisticsRoute.PlayerList.routeWithArgs("heatmap"))
                     }
+                    is StatisticsEvent.ShowTimeStatistics -> {
+                        navController.navigate(route = StatisticsRoute.Time.route)
+                    }
                 }
             }) {
                 navController.popBackStack()
@@ -84,7 +82,7 @@ fun StatisticsNavigationRoot() {
 
         composable(route = StatisticsRoute.BestSet.route) {
             val viewModel: AndroidBestTurnViewModel = hiltViewModel()
-            val state by viewModel.state.collectAsState(initial = BestTurnState())
+            val state by viewModel.state.collectAsState()
             BestTurnScreen(
                 state = state,
                 onEvent = { event ->
@@ -110,7 +108,7 @@ fun StatisticsNavigationRoot() {
 
         composable(route = StatisticsRoute.BiggestFinalSet.route) {
             val viewModel: AndroidBiggestFinalTurnViewModel = hiltViewModel()
-            val state by viewModel.state.collectAsState(initial = BiggestFinalTurnState())
+            val state by viewModel.state.collectAsState()
             BiggestFinalTurnScreen(
                 state = state,
                 onEvent = { event ->
@@ -136,7 +134,7 @@ fun StatisticsNavigationRoot() {
 
         composable(route = StatisticsRoute.AverageValues.route) {
             val viewModel: AndroidAverageValuesViewModel = hiltViewModel()
-            val state by viewModel.state.collectAsState(initial = AverageValuesState())
+            val state by viewModel.state.collectAsState()
             AverageValuesScreen(state = state) {
                 navController.popBackStack()
             }
@@ -152,7 +150,7 @@ fun StatisticsNavigationRoot() {
         ) {
             val mode = it.arguments?.getString("mode")
             val viewModel: AndroidPlayerListViewModel = hiltViewModel()
-            val state by viewModel.state.collectAsState(initial = PlayerListState())
+            val state by viewModel.state.collectAsState()
             val title = when (mode) {
                 "shot" -> stringResource(id = R.string.shot_distribution_statistics)
                 "victory" -> stringResource(id = R.string.victory_distribution_statistics)
@@ -205,7 +203,7 @@ fun StatisticsNavigationRoot() {
             )
         ) {
             val viewModel: AndroidShotDistributionViewModel = hiltViewModel()
-            val state by viewModel.state.collectAsState(initial = ShotDistributionState())
+            val state by viewModel.state.collectAsState()
             ShotDistributionScreen(state = state) {
                 navController.popBackStack()
             }
@@ -220,7 +218,7 @@ fun StatisticsNavigationRoot() {
             )
         ) {
             val viewModel: AndroidVictoryDistributionViewModel = hiltViewModel()
-            val state by viewModel.state.collectAsState(initial = VictoryDistributionState())
+            val state by viewModel.state.collectAsState()
             VictoryDistributionScreen(state = state) {
                 navController.popBackStack()
             }
@@ -235,8 +233,16 @@ fun StatisticsNavigationRoot() {
             )
         ) {
             val viewModel: AndroidSectorHeatmapViewModel = hiltViewModel()
-            val state by viewModel.state.collectAsState(initial = SectorHeatmapState())
+            val state by viewModel.state.collectAsState()
             SectorHeatmapScreen(state = state) {
+                navController.popBackStack()
+            }
+        }
+
+        composable(route = StatisticsRoute.Time.route) {
+            val viewModel: AndroidTimeViewModel = hiltViewModel()
+            val state by viewModel.state.collectAsState()
+            TimeScreen(state = state) {
                 navController.popBackStack()
             }
         }

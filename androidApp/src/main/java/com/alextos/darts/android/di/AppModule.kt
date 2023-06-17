@@ -20,6 +20,7 @@ import com.alextos.darts.statistics.domain.use_cases.best_turn.GetPlayersBestTur
 import com.alextos.darts.statistics.domain.use_cases.biggest_final_turn.GetPlayersBiggestFinalTurnUseCase
 import com.alextos.darts.statistics.domain.use_cases.heatmap.GetSectorHeatmapUseCase
 import com.alextos.darts.statistics.domain.use_cases.shot_distribution.GetPlayerShotDistributionUseCase
+import com.alextos.darts.statistics.domain.use_cases.time.GetGlobalTotalTimePlayedUseCase
 import com.alextos.darts.statistics.domain.use_cases.victory_distribution.GetPlayerVictoryDistributionUseCase
 import com.squareup.sqldelight.db.SqlDriver
 import dagger.Module
@@ -164,5 +165,13 @@ object AppModule {
         saveGameHistoryUseCase: SaveGameHistoryUseCase
     ): PrepopulateDatabaseUseCase {
         return PrepopulateDatabaseUseCase(createPlayerUseCase, saveGameHistoryUseCase)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetGlobalTotalTimePlayedUseCase(
+        dataSource: StatisticsDataSource
+    ): GetGlobalTotalTimePlayedUseCase {
+        return GetGlobalTotalTimePlayedUseCase(dataSource)
     }
 }

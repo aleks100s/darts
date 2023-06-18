@@ -1,16 +1,21 @@
 package com.alextos.darts.statistics.presentation.time
 
+import com.alextos.darts.core.domain.useCases.GetPlayersUseCase
 import com.alextos.darts.core.util.toCommonStateFlow
 import com.alextos.darts.statistics.domain.use_cases.time.GetGlobalTotalTimePlayedUseCase
+import com.alextos.darts.statistics.domain.use_cases.time.GetPlayersTotalTimePlayed
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.stateIn
 
 class TimeViewModel(
     getGlobalTotalTimePlayedUseCase: GetGlobalTotalTimePlayedUseCase,
+    getPlayersTotalTimePlayed: GetPlayersTotalTimePlayed,
+    getPlayersUseCase: GetPlayersUseCase,
     coroutineScope: CoroutineScope?
 ) {
     private val viewModelScope = coroutineScope ?: CoroutineScope(Dispatchers.Main)
@@ -19,10 +24,15 @@ class TimeViewModel(
 
     val state = combine(
         _state,
-        getGlobalTotalTimePlayedUseCase.execute()
-    ) { state, totalTime ->
+        getGlobalTotalTimePlayedUseCase.execute(),
+        getPlayersUseCase.execute()
+            .flatMapLatest { players ->
+                getPlayersTotalTimePlayed.execute(players)
+            }
+    ) { state, totalTime, playersDuration ->
         state.copy(
             totalTimePlayed = totalTime,
+            playersDuration = playersDuration,
             isLoading = false
         )
     }

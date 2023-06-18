@@ -88,4 +88,11 @@ class SqlDelightStatisticsDataSource(
             .map { it.executeAsOne() }
             .map { it.difference }
     }
+
+    override fun getPlayerTotalTimePlayed(player: Player): Flow<Double?> {
+        return queries.getPlayerTotalTimePlayed(player.id)
+            .asFlow()
+            .map { it.executeAsOne() }
+            .map { it.difference }
+    }
 }

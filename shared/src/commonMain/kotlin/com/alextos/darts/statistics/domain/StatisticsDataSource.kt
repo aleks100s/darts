@@ -20,4 +20,5 @@ interface StatisticsDataSource {
     fun getPlayerVictoryDistribution(player: Player): Flow<PlayerVictoryDistribution>
     fun getSectorCount(player: Player, sector: Sector): Flow<Pair<Sector, Int>>
     fun getGlobalTotalTimePlayed(): Flow<Double?>
+    fun getPlayerTotalTimePlayed(player: Player): Flow<Double?>
 }

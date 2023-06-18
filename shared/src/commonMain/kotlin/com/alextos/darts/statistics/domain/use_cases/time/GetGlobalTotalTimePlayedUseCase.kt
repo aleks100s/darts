@@ -7,22 +7,14 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.mapNotNull
 
 class GetGlobalTotalTimePlayedUseCase(
-    private val dataSource: StatisticsDataSource
+    private val dataSource: StatisticsDataSource,
+    private val converter: TimeDurationConverter
 ) {
     fun execute(): Flow<TimeDuration> {
         return dataSource.getGlobalTotalTimePlayed()
             .mapNotNull { it ?: 0.0 }
             .map { milliseconds ->
-                val totalSeconds = milliseconds / 1000
-                val hours = totalSeconds / 3600
-                val hourReminder = (totalSeconds % 3600)
-                val minutes = hourReminder / 60
-                val seconds = hourReminder % 60
-                TimeDuration(
-                    hours = hours.toInt(),
-                    minutes = minutes.toInt(),
-                    seconds = seconds.toInt()
-                )
+                converter.convert(milliseconds)
             }
     }
 }

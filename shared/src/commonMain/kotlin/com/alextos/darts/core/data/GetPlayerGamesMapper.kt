@@ -23,7 +23,7 @@ fun List<GetPlayerGames>.mapToGames(): List<Game> {
                     .toLocalDateTime(TimeZone.currentSystemDefault()),
                 finishWithDoubles = false,
                 randomPlayerOrder = false,
-                disableStatistics = false
+                enableStatistics = true
             )
         }
 }

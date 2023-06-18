@@ -122,8 +122,8 @@ fun CreateGameScreen(
                 }
 
                 item {
-                    DisableStatisticsCheckbox(
-                        isChecked = state.isStatisticsDisabled,
+                    EnableStatisticsCheckbox(
+                        isChecked = state.isStatisticsEnabled,
                         onCheckedChanged = { isChecked ->
                             onEvent(CreateGameEvent.ToggleDisableStatistics(isChecked))
                         }
@@ -262,12 +262,12 @@ fun RandomizeOrderCheckbox(
 }
 
 @Composable
-fun DisableStatisticsCheckbox(
+fun EnableStatisticsCheckbox(
     isChecked: Boolean,
     onCheckedChanged: (Boolean) -> Unit
 ) {
     AdditionalSettingSwitch(
-        title = stringResource(id = R.string.disable_statistics),
+        title = stringResource(id = R.string.enable_statistics),
         isChecked = isChecked,
         onCheckedChanged = onCheckedChanged
     )

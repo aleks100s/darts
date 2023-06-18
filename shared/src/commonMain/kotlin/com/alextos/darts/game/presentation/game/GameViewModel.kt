@@ -30,7 +30,7 @@ class GameViewModel(
             gameGoal = gameManager.getGoal(),
             averageTurns = turnStateAndAverageTurns.second,
             settingsTitle = gameSettings?.getUIGameTitleSettingsString() ?: "",
-            isStatisticsEnabled = gameSettings?.isStatisticsDisabled == false
+            isStatisticsEnabled = gameSettings?.isStatisticsEnabled == true
         )
     }
         .stateIn(

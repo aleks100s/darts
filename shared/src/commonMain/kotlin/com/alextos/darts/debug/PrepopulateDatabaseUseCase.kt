@@ -69,7 +69,7 @@ class PrepopulateDatabaseUseCase(
                 finishTimestamp = randomTime(inPast = false),
                 finishWithDoubles = finishWithDoubles,
                 randomPlayerOrder = randomPlayerOrder,
-                disableStatistics = false
+                enableStatistics = true
             ),
             playerHistories = allPlayers().map { player ->
                 PlayerHistory(
@@ -95,7 +95,7 @@ class PrepopulateDatabaseUseCase(
                 finishTimestamp = randomTime(inPast = false),
                 finishWithDoubles = finishWithDoubles,
                 randomPlayerOrder = randomPlayerOrder,
-                disableStatistics = false
+                enableStatistics = true
             ),
             playerHistories = listOf(
                 PlayerHistory(

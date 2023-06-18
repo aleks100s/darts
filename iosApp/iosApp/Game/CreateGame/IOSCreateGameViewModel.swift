@@ -7,7 +7,7 @@ internal final class IOSCreateGameViewModel: ObservableObject {
 	@Published var newPlayerName = ""
 	@Published var isFinishWithDoublesChecked = false
 	@Published var isRandomPlayerOrderChecked = true
-	@Published var isStatisticsDisabled = false
+	@Published var isStatisticsEnabled = true
 	
 	@Published private(set) var state = CreateGameState(
 		allPlayers: [],
@@ -18,7 +18,7 @@ internal final class IOSCreateGameViewModel: ObservableObject {
 		isDeletePlayerDialogShown: false,
 		isFinishWithDoublesChecked: false,
 		isRandomPlayersOrderChecked: false,
-		isStatisticsDisabled: false
+		isStatisticsEnabled: true
 	)
 		
 	private let viewModel: CreateGameViewModel
@@ -46,7 +46,7 @@ internal final class IOSCreateGameViewModel: ObservableObject {
 				selectedGameGoal: state.selectedGoal?.int32Value ?? 0,
 				isFinishWithDoublesChecked: isFinishWithDoublesChecked,
 				isRandomPlayersOrderChecked: isRandomPlayerOrderChecked,
-				isStatisticsDisabled: isStatisticsDisabled
+				isStatisticsEnabled: isStatisticsEnabled
 			)
 		)
 	}

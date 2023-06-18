@@ -16,7 +16,7 @@ data class Game(
     val startTimestamp: LocalDateTime?,
     val finishWithDoubles: Boolean,
     val randomPlayerOrder: Boolean,
-    val disableStatistics: Boolean
+    val enableStatistics: Boolean
 ) {
     val duration: GameDuration
         get() {
@@ -45,7 +45,7 @@ data class Game(
         if (randomPlayerOrder) {
             parts.add(getUIRandomOrderString())
         }
-        if (!disableStatistics) {
+        if (enableStatistics) {
             parts.add(getUIEnabledStatisticsString())
         }
         return parts
@@ -80,7 +80,7 @@ data class Game(
     }
 
     private fun getUIEnabledStatisticsString(): String {
-        return if (!disableStatistics) "\uD83D\uDCCA" else ""
+        return if (enableStatistics) "\uD83D\uDCCA" else ""
     }
 
     fun getPlayersListString(): String {
@@ -98,7 +98,7 @@ data class Game(
     }
 
     fun getGameSettings(): GameSettings {
-        return GameSettings(players, gameGoal, finishWithDoubles, randomPlayerOrder, disableStatistics)
+        return GameSettings(players, gameGoal, finishWithDoubles, randomPlayerOrder, enableStatistics)
     }
 
     internal fun getDayString(timestamp: LocalDateTime): String {

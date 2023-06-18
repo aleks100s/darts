@@ -89,7 +89,7 @@ class CreateGameViewModel(
             }
             is CreateGameEvent.ToggleDisableStatistics -> {
                 _state.update {
-                    it.copy(isStatisticsDisabled = event.isChecked)
+                    it.copy(isStatisticsEnabled = event.isChecked)
                 }
             }
 

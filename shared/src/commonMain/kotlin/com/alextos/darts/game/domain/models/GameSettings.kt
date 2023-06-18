@@ -9,7 +9,7 @@ data class GameSettings(
     val selectedGameGoal: Int,
     val isFinishWithDoublesChecked: Boolean,
     val isRandomPlayersOrderChecked: Boolean,
-    val isStatisticsDisabled: Boolean
+    val isStatisticsEnabled: Boolean
 ) {
     fun getUIGameTitleSettingsString(): String {
         if (!isFinishWithDoublesChecked) {

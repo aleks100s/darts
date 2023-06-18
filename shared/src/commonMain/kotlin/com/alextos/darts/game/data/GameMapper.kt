@@ -26,7 +26,7 @@ fun List<GetGames>.mapToGames(): List<Game> {
                     .toLocalDateTime(TimeZone.currentSystemDefault()),
                 finishWithDoubles = gameEntity?.finishWithDoubles == 1L,
                 randomPlayerOrder = gameEntity?.randomPlayerOrder == 1L,
-                disableStatistics = gameEntity?.disableStatistics == 1L
+                enableStatistics = gameEntity?.disableStatistics != 1L
             )
         }
 }

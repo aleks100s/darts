@@ -81,7 +81,7 @@
 "game_duration %d %d" = "Game duration is %d min %d sec";
 "game_title_with_settings %@" = "Game%@";
 "randomize_player_order" = "Random player order";
-"disable_statistics" = "Do not count in statistics";
+"enable_statistics" = "Count in shot statistics";
 "calculator" = "Calculator";
 "turn_number %d" = "Turn #%d";
 "number_of_turns %d" = "Number of turns: %d";

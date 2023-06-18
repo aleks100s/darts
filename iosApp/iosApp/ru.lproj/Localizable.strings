@@ -81,7 +81,7 @@
 "game_duration %d %d" = "Длительность игры %d мин %d сек";
 "game_title_with_settings %@" = "Игра%@";
 "randomize_player_order" = "Случайный порядок игроков";
-"disable_statistics" = "Не учитывать в статистике";
+"enable_statistics" = "Учитывать в статистике бросков";
 "calculator" = "Калькулятор";
 "turn_number %d" = "Ход №%d";
 "number_of_turns %d" = "Количество ходов: %d";

@@ -18,7 +18,7 @@ class GameManager(
     getPlayerAverageTurnUseCase: GetPlayerAverageTurnUseCase,
     gameSettings: GameSettings?
 ) {
-    private val disableStatistics = gameSettings?.isStatisticsDisabled ?: false
+    private val enableStatistics = gameSettings?.isStatisticsEnabled ?: true
     private val randomPlayerOrder = gameSettings?.isRandomPlayersOrderChecked ?: false
     private val players = if (randomPlayerOrder) {
         gameSettings?.selectedPlayers?.shuffled() ?: listOf()
@@ -92,7 +92,7 @@ class GameManager(
             startTimestamp = startTime,
             finishWithDoubles = finishWithDoubles,
             randomPlayerOrder = randomPlayerOrder,
-            disableStatistics = disableStatistics
+            enableStatistics = enableStatistics
         )
         val gameHistory = GameHistory(
             game = game,

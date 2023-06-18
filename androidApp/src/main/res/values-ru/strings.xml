@@ -82,7 +82,7 @@
     <string name="open_game">Открыть игру</string>
     <string name="game_title_with_settings">Игра%1$s</string>
     <string name="randomize_player_order">Случайный порядок игроков</string>
-    <string name="disable_statistics">Не учитывать в статистике</string>
+    <string name="enable_statistics">Учитывать в статистике бросков</string>
     <string name="calculator">Калькулятор</string>
     <string name="number_of_turns">Количество ходов: %1$d</string>
     <string name="turn_number">Ход №%1$d</string>

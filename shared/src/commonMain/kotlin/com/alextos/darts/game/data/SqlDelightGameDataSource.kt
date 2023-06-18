@@ -35,7 +35,7 @@ class SqlDelightGameDataSource(
                 timestamp_start = game.startTimestamp?.toInstant(TimeZone.currentSystemDefault())?.toEpochMilliseconds(),
                 finish_with_doubles = if (game.finishWithDoubles) 1 else 0,
                 random_player_order = if (game.randomPlayerOrder) 1 else 0,
-                disable_statistics = if (game.disableStatistics) 1 else 0
+                disable_statistics = if (game.enableStatistics) 0 else 1
             )
 
             val gameId = getLastInsertedId()
@@ -47,7 +47,7 @@ class SqlDelightGameDataSource(
                     player_id = it.id,
                     game_order = game.players.indexOf(it).toLong(),
                     is_winner = if (game.winner == it) 1 else if (game.winner == null) -1 else 0,
-                    disable_statistics = if (game.disableStatistics) 1 else 0
+                    disable_statistics = if (game.enableStatistics) 0 else 1
                 )
             }
 
@@ -61,7 +61,7 @@ class SqlDelightGameDataSource(
                         score = set.score().toLong(),
                         leftAfter = set.leftAfter.toLong(),
                         isOverkill = if (set.isOverkill) 1 else 0,
-                        disable_statistics = if (game.disableStatistics) 1 else 0
+                        disable_statistics = if (game.enableStatistics) 0 else 1
                     )
 
                     val setId = getLastInsertedId()
@@ -74,7 +74,7 @@ class SqlDelightGameDataSource(
                             order_number = set.shots.indexOf(shot).toLong(),
                             sector = shot.sector.id.toLong(),
                             shot_value = shot.sector.value.toLong(),
-                            disable_statistics = if (game.disableStatistics) 1 else 0
+                            disable_statistics = if (game.enableStatistics) 0 else 1
                         )
                     }
                 }

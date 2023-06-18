@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.alextos.darts.android.common.presentation.extensions.surfaceBackground
 
 @Composable
 fun SectionHeader(title: String) {
@@ -17,7 +18,7 @@ fun SectionHeader(title: String) {
         color = MaterialTheme.colors.onSurface,
         modifier = Modifier
             .fillMaxWidth()
-            .background(MaterialTheme.colors.surface)
+            .surfaceBackground()
             .padding(vertical = 8.dp),
         textAlign = TextAlign.Center,
         style = MaterialTheme.typography.h3

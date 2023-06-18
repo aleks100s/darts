@@ -21,7 +21,7 @@ import com.alextos.darts.statistics.domain.use_cases.biggest_final_turn.GetPlaye
 import com.alextos.darts.statistics.domain.use_cases.heatmap.GetSectorHeatmapUseCase
 import com.alextos.darts.statistics.domain.use_cases.shot_distribution.GetPlayerShotDistributionUseCase
 import com.alextos.darts.statistics.domain.use_cases.time.GetGlobalTotalTimePlayedUseCase
-import com.alextos.darts.statistics.domain.use_cases.time.GetPlayersTotalTimePlayed
+import com.alextos.darts.statistics.domain.use_cases.time.GetPlayersTotalTimePlayedUseCase
 import com.alextos.darts.statistics.domain.use_cases.time.TimeDurationConverter
 import com.alextos.darts.statistics.domain.use_cases.victory_distribution.GetPlayerVictoryDistributionUseCase
 import com.squareup.sqldelight.db.SqlDriver
@@ -189,7 +189,7 @@ object AppModule {
     fun provideGetPlayersTotalTimePlayedUseCase(
         dataSource: StatisticsDataSource,
         converter: TimeDurationConverter
-    ): GetPlayersTotalTimePlayed {
-        return GetPlayersTotalTimePlayed(dataSource, converter)
+    ): GetPlayersTotalTimePlayedUseCase {
+        return GetPlayersTotalTimePlayedUseCase(dataSource, converter)
     }
 }

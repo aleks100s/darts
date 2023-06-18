@@ -2,7 +2,6 @@ package com.alextos.darts.statistics.domain.use_cases.time
 
 import com.alextos.darts.core.domain.model.Player
 import com.alextos.darts.statistics.domain.StatisticsDataSource
-import com.alextos.darts.statistics.domain.models.AveragePlayerValue
 import com.alextos.darts.statistics.domain.models.PlayerTimeDuration
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
@@ -10,7 +9,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.mapNotNull
 
-class GetPlayersTotalTimePlayed(
+class GetPlayersTotalTimePlayedUseCase(
     private val dataSource: StatisticsDataSource,
     private val converter: TimeDurationConverter
 ) {

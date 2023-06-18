@@ -3,7 +3,7 @@ package com.alextos.darts.statistics.presentation.time
 import com.alextos.darts.core.domain.useCases.GetPlayersUseCase
 import com.alextos.darts.core.util.toCommonStateFlow
 import com.alextos.darts.statistics.domain.use_cases.time.GetGlobalTotalTimePlayedUseCase
-import com.alextos.darts.statistics.domain.use_cases.time.GetPlayersTotalTimePlayed
+import com.alextos.darts.statistics.domain.use_cases.time.GetPlayersTotalTimePlayedUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.stateIn
 
 class TimeViewModel(
     getGlobalTotalTimePlayedUseCase: GetGlobalTotalTimePlayedUseCase,
-    getPlayersTotalTimePlayed: GetPlayersTotalTimePlayed,
+    getPlayersTotalTimePlayedUseCase: GetPlayersTotalTimePlayedUseCase,
     getPlayersUseCase: GetPlayersUseCase,
     coroutineScope: CoroutineScope?
 ) {
@@ -27,7 +27,7 @@ class TimeViewModel(
         getGlobalTotalTimePlayedUseCase.execute(),
         getPlayersUseCase.execute()
             .flatMapLatest { players ->
-                getPlayersTotalTimePlayed.execute(players)
+                getPlayersTotalTimePlayedUseCase.execute(players)
             }
     ) { state, totalTime, playersDuration ->
         state.copy(

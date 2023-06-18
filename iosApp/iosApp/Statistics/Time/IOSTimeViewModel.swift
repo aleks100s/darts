@@ -1,7 +1,11 @@
 import shared
 
 final class IOSTimeViewModel: ObservableObject {
-	@Published private(set) var state = TimeState(totalTimePlayed: nil, isLoading: true)
+	@Published private(set) var state = TimeState(
+		totalTimePlayed: nil,
+		playersDuration: [],
+		isLoading: true
+	)
 	
 	private let viewModel: TimeViewModel
 	private var handle: DisposableHandle?

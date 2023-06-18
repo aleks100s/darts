@@ -24,8 +24,15 @@ struct TimeView: View {
 		} else {
 			ScrollView(showsIndicators: false) {
 				VStack(spacing: 0) {
+					TableHeader(columns: [
+						String(localized: "player"),
+						String(localized: "time_statistics")
+					])
 					if let totalTimePlayed = viewModel.state.totalTimePlayed {
 						item(title: String(localized: "all_players"), value: totalTimePlayed)
+					}
+					ForEach(viewModel.state.playersDuration) { duration in
+						item(title: duration.player.name, value: duration.duration)
 					}
 				}
 			}
@@ -34,12 +41,9 @@ struct TimeView: View {
 	
 	@ViewBuilder
 	private func item(title: String, value: TimeDuration) -> some View {
-		HStack {
-			Text(title)
-			Spacer()
-			Text("time_duration \(value.hours) \(value.minutes) \(value.seconds)")
-		}
-		.padding(.horizontal, 16)
-		.padding(.vertical, 4)
+		TableRow(columns: [
+			title,
+			String(localized: "time_duration \(value.hours) \(value.minutes) \(value.seconds)")
+		])
 	}
 }

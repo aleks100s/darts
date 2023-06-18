@@ -9,6 +9,7 @@ internal struct Cell: View {
 				.foregroundColor(Color.onSurface)
 		}
 		.padding(.vertical, 12)
+		.padding(.horizontal, 16)
 		.frame(maxWidth: .infinity)
 	}
 }

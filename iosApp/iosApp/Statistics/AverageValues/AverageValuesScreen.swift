@@ -45,15 +45,11 @@ internal struct AverageValuesScreen: View {
 	
 	@ViewBuilder
 	private var header: some View {
-		Row(
-			cells: [
-				String(localized: "player"),
-				String(localized: "average_set"),
-				String(localized: "average_shot")
-			],
-			spacing: 0
-		)
-		.background(Color.surface)
+		TableHeader(columns: [
+			String(localized: "player"),
+			String(localized: "average_set"),
+			String(localized: "average_shot")
+		])
 	}
 	
 	@ViewBuilder
@@ -62,14 +58,10 @@ internal struct AverageValuesScreen: View {
 		avgTurnScore: Double,
 		avgShotScore: Double
 	) -> some View {
-		Row(
-			cells: [
-				title,
-				String(format: "%.2f", avgTurnScore),
-				String(format: "%.2f", avgShotScore)
-			],
-			spacing: 0
-		)
-		.background(Color.background)
+		TableRow(columns: [
+			title,
+			String(format: "%.2f", avgTurnScore),
+			String(format: "%.2f", avgShotScore)
+		])
 	}
 }

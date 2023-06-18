@@ -288,7 +288,9 @@ getSectorCount:
 SELECT COUNT (she.id) AS sectorCount FROM shotEntity she WHERE she.sector = ? AND she.player_id = ? AND (she.disable_statistics IS NULL OR she.disable_statistics = 0);
 
 getGlobalTotalTimePlayed:
-SELECT SUM(ge.timestamp - ge.timestamp_start) AS difference FROM gameEntity ge;
+SELECT SUM(ge.timestamp - ge.timestamp_start) AS difference
+FROM gameEntity ge
+JOIN gamePlayerEntity gpe ON gpe.game_id = ge.id;
 
 getPlayerTotalTimePlayed:
 SELECT SUM(ge.timestamp - ge.timestamp_start) AS difference

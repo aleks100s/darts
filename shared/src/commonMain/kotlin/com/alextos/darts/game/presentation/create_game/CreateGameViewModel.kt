@@ -82,6 +82,11 @@ class CreateGameViewModel(
                     it.copy(isFinishWithDoublesChecked = event.isChecked)
                 }
             }
+            is CreateGameEvent.ToggleTurnLimit -> {
+                _state.update {
+                    it.copy(isTurnLimitEnabled = event.isChecked)
+                }
+            }
             is CreateGameEvent.ToggleRandomPlayersOrder -> {
                 _state.update {
                     it.copy(isRandomPlayersOrderChecked = event.isChecked)

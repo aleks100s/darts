@@ -88,3 +88,4 @@
 "average_calculator %d" = "Средний подход: %d";
 "time_statistics" = "Время игры";
 "time_duration %d %d %d" = "%d час %d мин %d сек";
+"turn_limit" = "Ограничить количество ходов (20)";

@@ -89,4 +89,5 @@
     <string name="average_calculator">Средний подход: %1$d</string>
     <string name="time_statistics">Время игры</string>
     <string name="time_duration">%1$d час %2$d мин %3$d сек</string>
+    <string name="turn_limit">Ограничить количество ходов (20)</string>
 </resources>

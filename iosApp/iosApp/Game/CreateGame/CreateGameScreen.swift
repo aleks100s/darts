@@ -89,6 +89,7 @@ internal struct CreateGameScreen: View {
 			
 			Section("additional_settings") {
 				Toggle("finish_with_doubles", isOn: $viewModel.isFinishWithDoublesChecked)
+				Toggle("turn_limit", isOn: $viewModel.isTurnLimitEnabled)
 				Toggle("randomize_player_order", isOn: $viewModel.isRandomPlayerOrderChecked)
 				Toggle("enable_statistics", isOn: $viewModel.isStatisticsEnabled)
 			}

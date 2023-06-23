@@ -113,6 +113,15 @@ fun CreateGameScreen(
                 }
 
                 item {
+                    TurnLimitCheckbox(
+                        isChecked = state.isTurnLimitEnabled,
+                        onCheckedChanged = { isChecked ->
+                            onEvent(CreateGameEvent.ToggleTurnLimit(isChecked))
+                        }
+                    )
+                }
+
+                item {
                     RandomizeOrderCheckbox(
                         isChecked = state.isRandomPlayersOrderChecked,
                         onCheckedChanged = { isChecked ->
@@ -244,6 +253,18 @@ fun FinishWithDoublesCheckbox(
 ) {
     AdditionalSettingSwitch(
         title = stringResource(id = R.string.finish_with_doubles),
+        isChecked = isChecked,
+        onCheckedChanged = onCheckedChanged
+    )
+}
+
+@Composable
+fun TurnLimitCheckbox(
+    isChecked: Boolean,
+    onCheckedChanged: (Boolean) -> Unit
+) {
+    AdditionalSettingSwitch(
+        title = stringResource(id = R.string.turn_limit),
         isChecked = isChecked,
         onCheckedChanged = onCheckedChanged
     )

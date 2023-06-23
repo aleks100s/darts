@@ -7,6 +7,7 @@ sealed class CreateGameEvent {
     data class SelectGoal(val option: Int): CreateGameEvent()
     data class ShowDeletePlayerDialog(val player: Player): CreateGameEvent()
     data class ToggleFinishWithDoubles(val isChecked: Boolean): CreateGameEvent()
+    data class ToggleTurnLimit(val isChecked: Boolean): CreateGameEvent()
     data class ToggleRandomPlayersOrder(val isChecked: Boolean): CreateGameEvent()
     data class ToggleDisableStatistics(val isChecked: Boolean): CreateGameEvent()
     object CreateGame: CreateGameEvent()

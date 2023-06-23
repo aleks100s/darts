@@ -88,3 +88,4 @@
 "average_calculator %d" = "Average turn: %d";
 "time_statistics" = "Time played";
 "time_duration %d %d %d" = "%d hour %d min %d ses";
+"turn_limit" = "Limit number of turns (20)";

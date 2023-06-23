@@ -1,9 +1,12 @@
 package com.alextos.darts.game.presentation.game
 
+import com.alextos.darts.core.domain.model.Player
 import com.alextos.darts.core.domain.model.Shot
 import com.alextos.darts.core.util.toCommonStateFlow
 import com.alextos.darts.game.domain.game_manager.GameManager
 import com.alextos.darts.game.domain.models.GameSettings
+import com.alextos.darts.game.domain.models.PlayerGameValue
+import com.alextos.darts.game.domain.models.PlayerHistory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
@@ -18,18 +21,27 @@ class GameViewModel(
     private val _state = MutableStateFlow(GameState())
 
     val state = combine(
-        combine(_state, gameManager.gameHistory) { state, history -> state to history },
-        combine(gameManager.currentPlayer, gameManager.gameResult) { currentPlayer, isGameFinished -> currentPlayer to isGameFinished },
-        combine(gameManager.turnState, gameManager.averageTurns) { turnState, averageTurns -> turnState to averageTurns },
-    ) { stateAndHistory, playerAndGameResult, turnStateAndAverageTurns ->
-        stateAndHistory.first.copy(
-            gameHistory = stateAndHistory.second,
-            currentPlayer = playerAndGameResult.first,
-            turnState = turnStateAndAverageTurns.first,
+        _state,
+        gameManager.gameHistory,
+        gameManager.currentPlayer,
+        gameManager.gameResult,
+        gameManager.turnState,
+        gameManager.averageTurns
+    ) { data ->
+        val state = data[0] as GameState
+        val gameHistory = (data[1] as List<*>).filterIsInstance<PlayerHistory>()
+        val currentPlayer = data[2] as Player?
+        val gameResult = data[3] as GameResult?
+        val turnState = data[4] as TurnState
+        val averageTurns = (data[5] as List<*>).filterIsInstance<PlayerGameValue>()
+        state.copy(
+            gameHistory = gameHistory,
+            currentPlayer = currentPlayer,
+            turnState = turnState,
             gameGoal = gameManager.getGoal(),
-            averageTurns = turnStateAndAverageTurns.second,
+            averageTurns = averageTurns,
             isStatisticsEnabled = gameSettings?.isStatisticsEnabled == true,
-            gameResult = playerAndGameResult.second
+            gameResult = gameResult
         )
     }
         .stateIn(

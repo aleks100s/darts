@@ -21,7 +21,7 @@ class GameManager(
     gameSettings: GameSettings?
 ) {
     companion object {
-        private const val TURNS_LIMIT = 2
+        private const val TURNS_LIMIT = 20
     }
 
     val goal = gameSettings?.selectedGameGoal ?: 0

@@ -18,18 +18,23 @@ class GameManager(
     getPlayerAverageTurnUseCase: GetPlayerAverageTurnUseCase,
     gameSettings: GameSettings?
 ) {
-    private val enableStatistics = gameSettings?.isStatisticsEnabled ?: true
-    private val randomPlayerOrder = gameSettings?.isRandomPlayersOrderChecked ?: false
-    private val players = if (randomPlayerOrder) {
-        gameSettings?.selectedPlayers?.shuffled() ?: listOf()
-    } else {
-        gameSettings?.selectedPlayers ?: listOf()
+    companion object {
+        private const val TURNS_LIMIT = 2
     }
 
     private val goal = gameSettings?.selectedGameGoal ?: 0
     private val finishWithDoubles = gameSettings?.isFinishWithDoublesChecked ?: false
     private val turnsLimitEnabled = gameSettings?.isTurnLimitEnabled ?: true
+    private val isRandomPlayerOrderEnabled = gameSettings?.isRandomPlayersOrderChecked ?: false
+    private val isStatisticsEnabled = gameSettings?.isStatisticsEnabled ?: true
+
     private val startTime = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
+
+    private val players = if (isRandomPlayerOrderEnabled) {
+        gameSettings?.selectedPlayers?.shuffled() ?: listOf()
+    } else {
+        gameSettings?.selectedPlayers ?: listOf()
+    }
 
     private val playerHistoryManagers by lazy {
         players.map {
@@ -73,7 +78,10 @@ class GameManager(
     suspend fun changeTurn() {
         _turnState.update { TurnState.IsOngoing }
         if (currentPlayerHistoryManager().isGameOver()) {
-            finishGame()
+            val winner = if (players.count() == 1) null else currentPlayer.value
+            finishGame(winner)
+        } else if (turnsLimitEnabled && isTurnLimitReached()) {
+            terminateGame()
         } else {
             nextTurn()
         }
@@ -83,8 +91,17 @@ class GameManager(
         currentPlayerHistoryManager().undoLastShot()
     }
 
-    private suspend fun finishGame() {
-        val winner = if (players.count() == 1) null else currentPlayer.value
+    private fun currentPlayerHistoryManager(): PlayerHistoryManager {
+        return playerHistoryManagers[players.indexOf(currentPlayer.value)]
+    }
+
+    private fun isTurnLimitReached(): Boolean {
+        return playerHistoryManagers
+            .map { it.playerHistory.value }
+            .all { it.turnsNumber == TURNS_LIMIT }
+    }
+
+    private suspend fun finishGame(winner: Player?) {
         val game = Game(
             players = players,
             winner = winner,
@@ -92,8 +109,8 @@ class GameManager(
             finishTimestamp = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()),
             startTimestamp = startTime,
             isWinWithDoublesEnabled = finishWithDoubles,
-            isRandomPlayerOrderEnabled = randomPlayerOrder,
-            isStatisticsEnabled = enableStatistics,
+            isRandomPlayerOrderEnabled = isRandomPlayerOrderEnabled,
+            isStatisticsEnabled = isStatisticsEnabled,
             isTurnLimitEnabled = turnsLimitEnabled
         )
         val gameHistory = GameHistory(
@@ -106,8 +123,15 @@ class GameManager(
         _isGameFinished.update { true }
     }
 
-    private fun currentPlayerHistoryManager(): PlayerHistoryManager {
-        return playerHistoryManagers[players.indexOf(currentPlayer.value)]
+    private suspend fun terminateGame() {
+        val playerHistories = playerHistoryManagers.map { it.playerHistory.value }
+        val playerHistoryWithHighestScore = playerHistories.maxBy { it.score }
+        val highestScoreCount = playerHistories.count { it.score == playerHistoryWithHighestScore.score }
+        if (highestScoreCount > 1) {
+            finishGame(winner = null)
+        } else {
+            finishGame(playerHistoryWithHighestScore.player)
+        }
     }
 
     private fun nextTurn() {

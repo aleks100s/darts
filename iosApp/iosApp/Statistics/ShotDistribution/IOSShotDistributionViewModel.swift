@@ -1,7 +1,7 @@
 import shared
 import SwiftUI
 
-internal final class IOSShotDistributionViewModel: ObservableObject {
+final class IOSShotDistributionViewModel: ObservableObject {
 	@Published var data: [(Float, Color)] = []
 	@Published var legend: [(Color, String)] = []
 	@Published private(set) var totalCount: Int32 = 0

@@ -1,7 +1,7 @@
 import SwiftUI
 import shared
 
-internal enum ShotDistributionScene {
+enum ShotDistributionScene {
 	static func create(module: AppModule, player: Player) -> some View {
 		let getPlayerShotDistributionUseCase = GetPlayerShotDistributionUseCase(statisticsDataSource: module.statisticsDataSource)
 		let viewModel = ShotDistributionViewModel(

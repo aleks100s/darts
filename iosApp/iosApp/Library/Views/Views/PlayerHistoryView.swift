@@ -1,7 +1,7 @@
 import SwiftUI
 import shared
 
-internal struct PlayerHistoryView: View {
+struct PlayerHistoryView: View {
 	let playerHistory: PlayerHistory
 	let gameGoal: Int32
 	let onTurnSelected: (Turn) -> Void

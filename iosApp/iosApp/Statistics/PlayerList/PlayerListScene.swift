@@ -1,7 +1,7 @@
 import SwiftUI
 import shared
 
-internal enum PlayerListScene {
+enum PlayerListScene {
 	static func create(
 		module: AppModule,
 		onPlayerSelected: @escaping (Player) -> Void

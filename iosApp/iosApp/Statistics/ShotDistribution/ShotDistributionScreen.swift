@@ -1,6 +1,6 @@
 import SwiftUI
 
-internal struct ShotDistributionScreen: View {
+struct ShotDistributionScreen: View {
 	@StateObject var viewModel: IOSShotDistributionViewModel
 	
 	var body: some View {

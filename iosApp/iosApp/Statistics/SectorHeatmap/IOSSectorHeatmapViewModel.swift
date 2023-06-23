@@ -1,6 +1,6 @@
 import shared
 
-internal final class IOSSectorHeatmapViewModel: ObservableObject {
+final class IOSSectorHeatmapViewModel: ObservableObject {
 	@Published private(set) var state = SectorHeatmapState(distribution: nil, isLoading: true)
 	
 	private let viewModel: SectorHeatmapViewModel

@@ -1,6 +1,6 @@
 import SwiftUI
 
-internal struct PlayerListScreen: View {
+struct PlayerListScreen: View {
 	@StateObject var viewModel: IOSPlayerListViewModel
 	
 	var body: some View {

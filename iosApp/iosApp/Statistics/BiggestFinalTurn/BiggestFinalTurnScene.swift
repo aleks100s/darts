@@ -1,7 +1,7 @@
 import SwiftUI
 import shared
 
-internal enum BiggestFinalTurnScene {
+enum BiggestFinalTurnScene {
 	static func create(
 		module: AppModule,
 		onTurnSelected: @escaping (Turn) -> Void

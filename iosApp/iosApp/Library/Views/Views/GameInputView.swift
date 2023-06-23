@@ -1,7 +1,7 @@
 import SwiftUI
 import shared
 
-internal struct GameInputView: View {
+struct GameInputView: View {
 	let isStatisticsEnabled: Bool
 	let currentTurn: Turn
 	let currentResults: [GamePlayerResult]

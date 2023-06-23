@@ -1,6 +1,6 @@
 import SwiftUI
 
-internal struct NoDataView: View {
+struct NoDataView: View {
 	var body: some View {
 		VStack(alignment: .center) {
 			Spacer()

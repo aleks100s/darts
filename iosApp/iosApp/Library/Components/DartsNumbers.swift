@@ -1,7 +1,7 @@
 import SwiftUI
 import shared
 
-internal struct DartsNumbers: View {
+struct DartsNumbers: View {
 	let center: CGPoint
 	let radius: CGFloat
 	

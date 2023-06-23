@@ -1,6 +1,6 @@
 import shared
 
-internal final class IOSGameViewModel: ObservableObject {
+final class IOSGameViewModel: ObservableObject {
 	@Published var isTurnOverDialogShown = false
 	@Published var isCloseGameDialogShown = false
 	@Published var isGameFinishedDialogShown = false
@@ -12,7 +12,8 @@ internal final class IOSGameViewModel: ObservableObject {
 		gameGoal: 0,
 		averageTurns: [],
 		isStatisticsEnabled: true,
-		gameResult: nil
+		gameResult: nil,
+		turnNumber: 0
 	)
 	
 	var gameFinishedTitle: String {
@@ -49,6 +50,7 @@ internal final class IOSGameViewModel: ObservableObject {
 	private let onShowInGameHistory: ([PlayerHistory], Int32, Int) -> Void
 	private let onTurnSelected: (Turn) -> Void
 	private let onGameReplaySelected: () -> Void
+	private let onShowGameSettings: () -> Void
 	private var handle: DisposableHandle?
 	
 	init(
@@ -56,21 +58,19 @@ internal final class IOSGameViewModel: ObservableObject {
 		onGameFinished: @escaping () -> Void,
 		onShowInGameHistory: @escaping ([PlayerHistory], Int32, Int) -> Void,
 		onTurnSelected: @escaping (Turn) -> Void,
-		onGameReplaySelected: @escaping () -> Void
+		onGameReplaySelected: @escaping () -> Void,
+		onShowGameSettings: @escaping () -> Void
 	) {
 		self.onGameFinished = onGameFinished
 		self.onShowInGameHistory = onShowInGameHistory
 		self.onTurnSelected = onTurnSelected
 		self.onGameReplaySelected = onGameReplaySelected
+		self.onShowGameSettings = onShowGameSettings
 		self.viewModel = viewModel
 	}
 	
 	func finishGame() {
 		onGameFinished()
-	}
-	
-	func replayGame() {
-		onGameReplaySelected()
 	}
 	
 	func showGameHistory(index: Int) {
@@ -93,7 +93,16 @@ internal final class IOSGameViewModel: ObservableObject {
 	}
 	
 	func onEvent(_ event: GameEvent) {
-		viewModel.onEvent(event: event)
+		switch event {
+		case .ShowGameSettings():
+			onShowGameSettings()
+			
+		case .ReplayGame():
+			onGameReplaySelected()
+						
+		default:
+			viewModel.onEvent(event: event)
+		}
 	}
 	
 	func dispose() {

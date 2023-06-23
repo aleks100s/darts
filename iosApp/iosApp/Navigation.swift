@@ -1,6 +1,6 @@
 import shared
 
-internal enum GameNavigation: Hashable {
+enum GameNavigation: Hashable {
 	case createGame
 	case game(settings: GameSettings)
 	case inGameHistory(gameHistory: [PlayerHistory], goal: Int32, page: Int)
@@ -39,7 +39,7 @@ extension [GameNavigation] {
 	}
 }
 
-internal enum StatisticsNavigation: Hashable {
+enum StatisticsNavigation: Hashable {
 	enum Mode {
 		case victoryDistribution
 		case shotDistribution

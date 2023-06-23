@@ -1,6 +1,6 @@
 import shared
 
-internal final class IOSBestTurnViewModel: ObservableObject {
+final class IOSBestTurnViewModel: ObservableObject {
 	@Published private(set) var state = BestTurnState(playersBestTurns: [], isLoading: true)
 	
 	private let viewModel: BestTurnViewModel

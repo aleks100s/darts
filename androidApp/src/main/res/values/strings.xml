@@ -74,14 +74,14 @@
     <string name="training">Training %1$d・%2$s</string>
     <string name="sector_count">%1$s (%2$d hits)</string>
     <string name="additional_settings">Additional settings</string>
-    <string name="finish_with_doubles">Win with doubles</string>
+    <string name="finish_with_doubles">Win with doubles 🏁 x2</string>
     <string name="miss">Miss</string>
     <string name="replay">Rematch</string>
     <string name="navigate_back">Navigate back</string>
     <string name="game_duration">Game duration is %1$d min %2$d sec</string>
     <string name="open_game">Open game</string>
-    <string name="randomize_player_order">Random player order</string>
-    <string name="enable_statistics">Сount in shot statistics</string>
+    <string name="randomize_player_order">Random player order 🎲</string>
+    <string name="enable_statistics">Сount in shot statistics 📊</string>
     <string name="calculator">Calculator</string>
     <string name="number_of_turns">Number of turns: %1$d</string>
     <string name="turn_number">Turn #%1$d</string>
@@ -92,4 +92,5 @@
     <string name="game_title_with_turn_counter">Game (turn %1$d)</string>
     <string name="training_finished">Training is over</string>
     <string name="game_result_is_draw">Draw</string>
+    <string name="game_settings">Game settings</string>
 </resources>

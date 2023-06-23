@@ -1,6 +1,6 @@
 import SwiftUI
 
-internal struct PlayerHistoryHeader: View {
+struct PlayerHistoryHeader: View {
 	private let cells = [
 		String(localized: "shot1"),
 		String(localized: "shot2"),

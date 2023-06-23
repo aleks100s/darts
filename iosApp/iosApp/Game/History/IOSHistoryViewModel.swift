@@ -1,6 +1,6 @@
 import shared
 
-internal final class IOSHistoryViewModel: ObservableObject {
+final class IOSHistoryViewModel: ObservableObject {
 	@Published private(set) var state = HistoryState(
 		gameHistory: [],
 		gameGoal: 0,

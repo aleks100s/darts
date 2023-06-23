@@ -1,4 +1,4 @@
-package com.alextos.darts.android.game.create_player
+package com.alextos.darts.android.game.create_game.create_player
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardActions

@@ -4,6 +4,7 @@ import com.alextos.darts.core.domain.model.Player
 import com.alextos.darts.game.domain.models.Game
 import com.alextos.darts.game.domain.models.GameHistory
 import com.alextos.darts.core.domain.model.Shot
+import com.alextos.darts.game.domain.TurnLimitReachedException
 import com.alextos.darts.game.domain.models.GameSettings
 import com.alextos.darts.game.domain.useCases.SaveGameHistoryUseCase
 import com.alextos.darts.game.presentation.game.TurnState
@@ -20,10 +21,11 @@ class GameManager(
     gameSettings: GameSettings?
 ) {
     companion object {
-        private const val TURNS_LIMIT = 20
+        private const val TURNS_LIMIT = 2
     }
 
-    private val goal = gameSettings?.selectedGameGoal ?: 0
+    val goal = gameSettings?.selectedGameGoal ?: 0
+
     private val finishWithDoubles = gameSettings?.isFinishWithDoublesChecked ?: false
     private val turnsLimitEnabled = gameSettings?.isTurnLimitEnabled ?: true
     private val isRandomPlayerOrderEnabled = gameSettings?.isRandomPlayersOrderChecked ?: false
@@ -38,8 +40,8 @@ class GameManager(
     }
 
     private val playerHistoryManagers by lazy {
-        players.map {
-            PlayerHistoryManager(it, goal, finishWithDoubles)
+        players.map { player ->
+            PlayerHistoryManager(player, goal, finishWithDoubles)
         }
     }
 
@@ -60,7 +62,7 @@ class GameManager(
         players.map { getPlayerAverageTurnUseCase.execute(it) }
     ) { it.toList() }
 
-    fun getGoal(): Int = goal
+    var currentTurn = 1
 
     fun makeShot(shot: Shot) {
         if (_gameResult.value != null || turnState.value.isInputDisabled()) {
@@ -81,10 +83,12 @@ class GameManager(
         if (currentPlayerHistoryManager().isGameOver()) {
             val winner = if (players.count() == 1) null else currentPlayer.value
             finishGame(winner)
-        } else if (turnsLimitEnabled && isTurnLimitReached()) {
-            terminateGame()
         } else {
-            nextTurn()
+            try {
+                nextTurn()
+            } catch (e: TurnLimitReachedException) {
+                terminateGame()
+            }
         }
     }
 
@@ -96,10 +100,39 @@ class GameManager(
         return playerHistoryManagers[players.indexOf(currentPlayer.value)]
     }
 
-    private fun isTurnLimitReached(): Boolean {
-        return playerHistoryManagers
-            .map { it.playerHistory.value }
-            .all { it.turnsNumber == TURNS_LIMIT }
+    private fun nextTurn() {
+        currentPlayerHistoryManager().finishTurn()
+        val nextPlayer = getNextPlayer()
+        if (nextPlayer == null) {
+            restartPlayerOrder()
+        } else {
+            _currentPlayer.update { nextPlayer }
+        }
+    }
+
+    private fun getNextPlayer(): Player? {
+        val index = players.indexOf(currentPlayer.value)
+        return players.getOrNull(index + 1)
+    }
+
+    private fun restartPlayerOrder() {
+        if (turnsLimitEnabled && currentTurn == TURNS_LIMIT) {
+            throw TurnLimitReachedException()
+        } else {
+            _currentPlayer.update { players[0] }
+        }
+        currentTurn += 1
+    }
+
+    private suspend fun terminateGame() {
+        val playerHistories = playerHistoryManagers.map { it.playerHistory.value }
+        val playerHistoryWithHighestScore = playerHistories.minBy { it.leftAfter }
+        val highestScoreCount = playerHistories.count { it.leftAfter == playerHistoryWithHighestScore.leftAfter }
+        if (highestScoreCount > 1) {
+            finishGame(winner = null)
+        } else {
+            finishGame(playerHistoryWithHighestScore.player)
+        }
     }
 
     private suspend fun finishGame(winner: Player?) {
@@ -132,25 +165,5 @@ class GameManager(
                 }
             }
         }
-    }
-
-    private suspend fun terminateGame() {
-        val playerHistories = playerHistoryManagers.map { it.playerHistory.value }
-        val playerHistoryWithHighestScore = playerHistories.maxBy { it.score }
-        val highestScoreCount = playerHistories.count { it.score == playerHistoryWithHighestScore.score }
-        if (highestScoreCount > 1) {
-            finishGame(winner = null)
-        } else {
-            finishGame(playerHistoryWithHighestScore.player)
-        }
-    }
-
-    private fun nextTurn() {
-        currentPlayerHistoryManager().finishTurn()
-        val index = players.indexOf(currentPlayer.value)
-        val nextPlayer = players.getOrNull(index + 1) ?: run {
-            players[0]
-        }
-        _currentPlayer.update { nextPlayer }
     }
 }

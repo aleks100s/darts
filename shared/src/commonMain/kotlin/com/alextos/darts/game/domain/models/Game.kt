@@ -33,35 +33,23 @@ data class Game(
 
     fun getUITitleStringParts(): List<String> {
         val parts = mutableListOf<String>()
-        parts.add(getUIGoalString())
+        parts.add("🎯 $gameGoal")
         if (!duration.isEmpty) {
-            parts.add(getUIDurationString())
+            parts.add("⏱ ${getDurationMinutesString()}:${getDurationSecondsString()}")
         }
         if (winner != null) {
-            parts.add(getUIWinnerString())
+            parts.add("🏆 ${winner?.name}")
         }
         if (isWinWithDoublesEnabled) {
-            parts.add(getUIDoublesString())
+            parts.add("\uD83C\uDFC1 x2")
         }
         if (isRandomPlayerOrderEnabled) {
-            parts.add(getUIRandomOrderString())
+            parts.add("\uD83C\uDFB2")
         }
         if (isStatisticsEnabled) {
-            parts.add(getUIEnabledStatisticsString())
+            parts.add("\uD83D\uDCCA")
         }
         return parts
-    }
-
-    private fun getUIDoublesString(): String {
-        return if (isWinWithDoublesEnabled) "\uD83C\uDFC1 x2" else ""
-    }
-
-    private fun getUIGoalString(): String {
-        return "🎯 $gameGoal"
-    }
-
-    private fun getUIDurationString(): String {
-        return "⏱ ${getDurationMinutesString()}:${getDurationSecondsString()}"
     }
 
     private fun getDurationMinutesString(): String {
@@ -70,18 +58,6 @@ data class Game(
 
     private fun getDurationSecondsString(): String {
         return if (duration.seconds > 9) "${duration.seconds}" else "0${duration.seconds}"
-    }
-
-    private fun getUIWinnerString(): String {
-        return "🏆 ${winner?.name}"
-    }
-
-    private fun getUIRandomOrderString(): String {
-        return if (isRandomPlayerOrderEnabled) "\uD83C\uDFB2" else ""
-    }
-
-    private fun getUIEnabledStatisticsString(): String {
-        return if (isStatisticsEnabled) "\uD83D\uDCCA" else ""
     }
 
     fun getPlayersListString(): String {

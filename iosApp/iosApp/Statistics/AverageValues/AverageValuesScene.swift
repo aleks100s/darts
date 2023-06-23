@@ -1,7 +1,7 @@
 import shared
 import SwiftUI
 
-internal enum AverageValuesScene {
+enum AverageValuesScene {
 	static func create(module: AppModule) -> some View {
 		let getPlayersUseCase = GetPlayersUseCase(dataSource: module.playerDataSource)
 		let getOverallAverageTurnScoreUseCase = GetOverallAverageTurnScoreUseCase(dataSource: module.statisticsDataSource)

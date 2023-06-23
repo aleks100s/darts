@@ -1,6 +1,6 @@
 import SwiftUI
 
-internal struct Cell: View {
+struct Cell: View {
 	let text: String
 	
 	var body: some View {

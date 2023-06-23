@@ -16,11 +16,9 @@ data class GameState(
     val gameGoal: Int = 0,
     val averageTurns: List<PlayerGameValue> = listOf(),
     val isStatisticsEnabled: Boolean = true,
-    val gameResult: GameResult? = null
+    val gameResult: GameResult? = null,
+    val turnNumber: Int = 0
 ) {
-    val turnNumber: Int
-        get() { return gameHistory.maxOfOrNull { it.turnsNumber } ?: 0 }
-
     fun isTurnOver(): Boolean {
         return when (turnState) {
             is TurnState.IsOver -> { true }

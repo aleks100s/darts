@@ -75,12 +75,12 @@
 "training %d %@" = "Training %d・%@";
 "sector_count %@ %d" = "%@ (%d hits)";
 "additional_settings" = "Additional settings";
-"finish_with_doubles" = "Win with doubles";
+"finish_with_doubles" = "Win with doubles 🏁 x2";
 "miss" = "Miss";
 "replay" = "Rematch";
 "game_duration %d %d" = "Game duration is %d min %d sec";
-"randomize_player_order" = "Random player order";
-"enable_statistics" = "Count in shot statistics";
+"randomize_player_order" = "Random player order 🎲";
+"enable_statistics" = "Count in shot statistics 📊";
 "calculator" = "Calculator";
 "turn_number %d" = "Turn #%d";
 "number_of_turns %d" = "Number of turns: %d";
@@ -91,3 +91,4 @@
 "game_title_with_turn_counter %d" = "Game (turn %d)";
 "training_finished" = "Training is over";
 "game_result_is_draw" = "Draw";
+"game_settings" = "Game settings";

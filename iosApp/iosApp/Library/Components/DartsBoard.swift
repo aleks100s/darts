@@ -1,7 +1,7 @@
 import SwiftUI
 import shared
 
-internal struct DartsBoard: View {
+struct DartsBoard: View {
 	let highlightedSector: Sector
 	
 	private let hitColor = Color.blue
@@ -132,7 +132,7 @@ internal struct DartsBoard: View {
 	}
 }
 
-internal struct DartsBoard_Preview: PreviewProvider {
+struct DartsBoard_Preview: PreviewProvider {
 	static var previews: some View {
 		DartsBoard(highlightedSector: .singleinner20)
 	}

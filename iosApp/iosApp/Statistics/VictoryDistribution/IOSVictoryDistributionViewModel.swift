@@ -1,7 +1,7 @@
 import shared
 import SwiftUI
 
-internal final class IOSVictoryDistributionViewModel: ObservableObject {
+final class IOSVictoryDistributionViewModel: ObservableObject {
 	@Published var data: [(Float, Color)] = []
 	@Published var legend: [(Color, String)] = []
 	@Published private(set) var totalCount: Int32 = 0

@@ -1,7 +1,7 @@
 import SwiftUI
 import shared
 
-internal struct TurnItem: View {
+struct TurnItem: View {
 	let turn: Turn
 	let shotsLeft: Int
 	let useTurnColors: Bool

@@ -1,7 +1,7 @@
 import SwiftUI
 import shared
 
-internal enum CreateGameScene {
+enum CreateGameScene {
 	@MainActor
 	static func create(
 		using module: AppModule,

@@ -1,6 +1,6 @@
 import SwiftUI
 
-internal struct TabletView<V1: View, V2: View>: View {
+struct TabletView<V1: View, V2: View>: View {
 	@ViewBuilder var view1: V1
 	@ViewBuilder var view2: V2
 	

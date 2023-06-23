@@ -1,7 +1,7 @@
 import SwiftUI
 import shared
 
-internal struct ContentView: View {
+struct ContentView: View {
 	private enum Tab: Hashable {
 		case game
 		case statistics

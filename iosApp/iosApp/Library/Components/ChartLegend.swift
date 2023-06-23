@@ -1,6 +1,6 @@
 import SwiftUI
 
-internal struct ChartLegend: View {
+struct ChartLegend: View {
 	@Binding var legend: [(Color, String)]
 	
 	var body: some View {

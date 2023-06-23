@@ -1,6 +1,6 @@
 import SwiftUI
 
-internal struct Row: View {
+struct Row: View {
 	let cells: [String]
 	let spacing: CGFloat
 	

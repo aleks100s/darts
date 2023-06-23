@@ -1,6 +1,6 @@
 import shared
 
-internal final class IOSPlayerListViewModel: ObservableObject {
+final class IOSPlayerListViewModel: ObservableObject {
 	@Published private(set) var state = PlayerListState(players: [], isLoading: true)
 	
 	private let viewModel: PlayerListViewModel

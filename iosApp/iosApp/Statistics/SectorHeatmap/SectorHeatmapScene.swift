@@ -1,7 +1,7 @@
 import SwiftUI
 import shared
 
-internal enum SectorHeatmapScene {
+enum SectorHeatmapScene {
 	static func create(module: AppModule, player: Player) -> some View {
 		let getSectorHeatmapUseCase = GetSectorHeatmapUseCase(dataSource: module.statisticsDataSource)
 		let viewModel = SectorHeatmapViewModel(

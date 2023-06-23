@@ -4,6 +4,7 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -36,7 +37,13 @@ fun GameScreen(
             Screen(
                 title = title,
                 backIcon = Icons.Filled.Close,
-                onBackPressed = { onEvent(GameEvent.BackButtonPressed) }) { modifier ->
+                onBackPressed = { onEvent(GameEvent.BackButtonPressed) },
+                additionalNavBarContent = {
+                    InfoButton {
+                        onEvent(GameEvent.ShowGameSettings)
+                    }
+                }
+            ) { modifier ->
                 GameInput(
                     modifier = modifier,
                     screenType = screenType,
@@ -59,6 +66,11 @@ fun GameScreen(
                 },
                 content2 = {
                     GameHistory(state = state, onEvent = onEvent)
+                },
+                additionalNavBarContent = {
+                    InfoButton {
+                        onEvent(GameEvent.ShowGameSettings)
+                    }
                 },
                 onBackPressed = {
                     onEvent(GameEvent.BackButtonPressed)
@@ -220,4 +232,14 @@ private fun GameFinishedDialog(gameResult: GameResult, onEvent: (GameEvent) -> U
         },
         properties = DialogProperties(dismissOnBackPress = false, dismissOnClickOutside = false)
     )
+}
+
+@Composable
+private fun InfoButton(onClick: () -> Unit) {
+    IconButton(onClick = onClick) {
+        Icon(
+            imageVector = Icons.Default.Info,
+            contentDescription = stringResource(id = R.string.game_settings)
+        )
+    }
 }

@@ -2,7 +2,7 @@ import shared
 import Foundation
 
 @MainActor
-internal final class IOSGameListViewModel: ObservableObject {
+final class IOSGameListViewModel: ObservableObject {
 	@Published var isDeleteGameDialogShown = false
 	@Published private(set) var state = GameListState(
 		games: [],

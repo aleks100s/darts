@@ -1,6 +1,6 @@
 import SwiftUI
 
-internal struct SignleSelectableItem: View {
+struct SignleSelectableItem: View {
 	let title: String
 	let onSelect: () -> Void
 	

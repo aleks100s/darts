@@ -2,7 +2,7 @@ import SwiftUI
 import shared
 import Charts
 
-internal struct GameRecapView: View {
+struct GameRecapView: View {
 	let history: [PlayerHistory]
 	let averageTurns: [PlayerGameValue]
 	let biggestTurns: [PlayerGameValue]

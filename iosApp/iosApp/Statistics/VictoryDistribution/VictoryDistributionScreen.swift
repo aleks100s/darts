@@ -1,7 +1,7 @@
 import SwiftUI
 import Charts
 
-internal struct VictoryDistributionScreen: View {
+struct VictoryDistributionScreen: View {
 	@StateObject var viewModel: IOSVictoryDistributionViewModel
 	
 	var body: some View {

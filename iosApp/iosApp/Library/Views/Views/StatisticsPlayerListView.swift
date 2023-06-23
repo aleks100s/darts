@@ -1,7 +1,7 @@
 import SwiftUI
 import shared
 
-internal struct StatisticsPlayerListView: View {
+struct StatisticsPlayerListView: View {
 	let values: [(Player, String)]
 	let onValueSelected: (Int) -> Void
 	

@@ -1,6 +1,6 @@
 import SwiftUI
 
-internal struct GameScreen: View {
+struct GameScreen: View {
 	@StateObject var viewModel: IOSGameViewModel
 	
 	private var idiom : UIUserInterfaceIdiom { UIDevice.current.userInterfaceIdiom }
@@ -18,7 +18,7 @@ internal struct GameScreen: View {
 				.accessibilityIdentifier("finishGame")
 				
 				Button {
-					viewModel.replayGame()
+					viewModel.onEvent(.ReplayGame())
 				} label: {
 					Text("replay")
 				}
@@ -68,6 +68,14 @@ internal struct GameScreen: View {
 						Text("leave")
 					}
 					.accessibilityIdentifier("leaveGame")
+				}
+				ToolbarItem(placement: .navigationBarTrailing) {
+					Button {
+						viewModel.onEvent(.ShowGameSettings())
+					} label: {
+						Image(systemName: "info.circle")
+					}
+					.accessibilityIdentifier("info")
 				}
 				ToolbarItem(placement: .navigationBarTrailing) {
 					Button {

@@ -1,7 +1,7 @@
 import SwiftUI
 import shared
 
-internal struct BestTurnScreen: View {
+struct BestTurnScreen: View {
 	@StateObject var viewModel: IOSBestTurnViewModel
 	
 	var body: some View {

@@ -1,7 +1,7 @@
 import SwiftUI
 import shared
 
-internal struct StatisticsTab: View {
+struct StatisticsTab: View {
 	let module: AppModule
 	
 	@State private var navigationStack: [StatisticsNavigation] = []

@@ -1,7 +1,7 @@
 import SwiftUI
 import shared
 
-internal enum HistoryScene {
+enum HistoryScene {
 	static func create(
 		using module: AppModule,
 		game: Game,

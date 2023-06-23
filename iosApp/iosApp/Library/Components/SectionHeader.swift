@@ -1,6 +1,6 @@
 import SwiftUI
 
-internal struct SectionHeader: View {
+struct SectionHeader: View {
 	let title: String
 	
 	var body: some View {

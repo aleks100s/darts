@@ -11,12 +11,14 @@ fun SplitScreen(
     isBackButtonVisible: Boolean = true,
     content1: @Composable () -> Unit,
     content2: @Composable () -> Unit,
+    additionalNavBarContent: @Composable (() -> Unit)? = null,
     onBackPressed: () -> Unit
 ) {
     Screen(
         title = title,
         isBackButtonVisible = isBackButtonVisible,
-        onBackPressed = onBackPressed
+        onBackPressed = onBackPressed,
+        additionalNavBarContent = additionalNavBarContent
     ) { modifier ->
         Row(modifier = modifier.fillMaxSize()) {
             Box(Modifier.weight(1f)) {

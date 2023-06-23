@@ -1,11 +1,11 @@
 import SwiftUI
 import shared
 
-internal struct GameTab: View {
+struct GameTab: View {
 	let module: AppModule
 	
 	@State private var navigationStack: [GameNavigation] = []
-	@State private var isCreatePlayerShown: Bool = false
+	@State private var isGameSettingsSheetShown = false
 	
 	var body: some View {
 		NavigationStack(path: $navigationStack) {
@@ -75,10 +75,19 @@ internal struct GameTab: View {
 					navigationStack.append(
 						.game(settings: settings)
 					)
+				},
+				onShowGameSettings: {
+					isGameSettingsSheetShown = true
 				}
 			)
 				.navigationBarTitleDisplayMode(.inline)
 				.navigationBarBackButtonHidden()
+				.sheet(isPresented: $isGameSettingsSheetShown) {
+					GameSettingsScreen(gameSettings: settings) {
+						isGameSettingsSheetShown = false
+					}
+					.presentationDetents([.medium])
+				}
 			
 		case let .history(game):
 			HistoryScene.create(

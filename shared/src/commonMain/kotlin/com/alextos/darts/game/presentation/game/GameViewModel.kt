@@ -38,10 +38,11 @@ class GameViewModel(
             gameHistory = gameHistory,
             currentPlayer = currentPlayer,
             turnState = turnState,
-            gameGoal = gameManager.getGoal(),
+            gameGoal = gameManager.goal,
             averageTurns = averageTurns,
             isStatisticsEnabled = gameSettings?.isStatisticsEnabled == true,
-            gameResult = gameResult
+            gameResult = gameResult,
+            turnNumber = gameManager.currentTurn
         )
     }
         .stateIn(
@@ -77,6 +78,7 @@ class GameViewModel(
             is GameEvent.ReplayGame -> {}
             is GameEvent.ShowDarts -> {}
             is GameEvent.ShowHistory -> {}
+            is GameEvent.ShowGameSettings -> {}
         }
     }
 }

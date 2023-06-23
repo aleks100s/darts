@@ -2,7 +2,7 @@ import SwiftUI
 import SwiftUIPager
 import shared
 
-internal struct GameHistoryView: View {
+struct GameHistoryView: View {
 	let gameHistory: [PlayerHistory]
 	let gameGoal: Int32
 	let onTurnSelected: (Turn) -> Void

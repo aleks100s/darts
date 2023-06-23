@@ -1,7 +1,7 @@
 import Combine
 import shared
 
-internal final class IOSCreateGameViewModel: ObservableObject {
+final class IOSCreateGameViewModel: ObservableObject {
 	@Published var isCreatePlayerDialogShown = false
 	@Published var isDeletePlayerDialogShown = false
 	@Published var newPlayerName = ""

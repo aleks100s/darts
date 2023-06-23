@@ -1,7 +1,7 @@
 import SwiftUI
 import shared
 
-internal extension Color {
+extension Color {
 	init(hex: Int64, alpha: Double = 1) {
 		self.init(
 			.sRGB,

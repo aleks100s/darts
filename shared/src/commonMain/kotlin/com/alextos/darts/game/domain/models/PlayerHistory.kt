@@ -9,11 +9,8 @@ data class PlayerHistory(
     val player: Player,
     val turns: List<Turn> = listOf()
 ) {
-    val turnsNumber: Int
-        get() { return turns.count() }
-
-    val score: Int
-        get() { return turns.lastOrNull()?.score() ?: 0 }
+    val leftAfter: Int
+        get() { return turns.lastOrNull()?.leftAfter ?: 0 }
 
     fun chartData(size: Int): List<Float> {
         val firstSet = turns.firstOrNull()

@@ -1,7 +1,7 @@
 import SwiftUI
 import shared
 
-internal struct SectorHeatmapScreen: View {
+struct SectorHeatmapScreen: View {
 	@StateObject var viewModel: IOSSectorHeatmapViewModel
 	
 	var body: some View {

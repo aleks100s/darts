@@ -1,6 +1,6 @@
 import SwiftUI
 
-internal struct DoubleSelectableItem: View {
+struct DoubleSelectableItem: View {
 	let leftText: String
 	let rightText: String
 	let onSelect: () -> Void

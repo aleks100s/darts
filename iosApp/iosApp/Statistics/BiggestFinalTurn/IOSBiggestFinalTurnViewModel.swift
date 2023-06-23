@@ -1,7 +1,7 @@
 import SwiftUI
 import shared
 
-internal final class IOSBiggestFinalTurnViewModel: ObservableObject {
+final class IOSBiggestFinalTurnViewModel: ObservableObject {
 	@Published private(set) var state = BiggestFinalTurnState(playersBiggestFinalTurns: [], isLoading: true)
 	
 	private let viewModel: BiggestFinalTurnViewModel

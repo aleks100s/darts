@@ -1,7 +1,7 @@
 import SwiftUI
 import shared
 
-internal struct GameListScreen: View {
+struct GameListScreen: View {
 	@StateObject var viewModel: IOSGameListViewModel
 	
 	var body: some View {

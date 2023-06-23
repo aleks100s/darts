@@ -1,7 +1,7 @@
 import shared
 import SwiftUI
 
-internal extension Turn {
+extension Turn {
 	var rowColor: Color {
 		if isOverkill {
 			return .red

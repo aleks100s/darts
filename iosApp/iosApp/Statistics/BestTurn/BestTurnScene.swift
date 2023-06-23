@@ -1,7 +1,7 @@
 import shared
 import SwiftUI
 
-internal enum BestTurnScene {
+enum BestTurnScene {
 	static func create(
 		module: AppModule,
 		onTurnSelected: @escaping (Turn) -> Void

@@ -21,12 +21,13 @@ import com.alextos.darts.android.game.calculator.CalculatorScreen
 import com.alextos.darts.android.game.calculator_history.CalculatorHistoryScreen
 import com.alextos.darts.android.game.create_game.AndroidCreateGameViewModel
 import com.alextos.darts.android.game.create_game.CreateGameScreen
-import com.alextos.darts.android.game.create_player.AndroidCreatePlayerViewModel
-import com.alextos.darts.android.game.create_player.CreatePlayerScreen
+import com.alextos.darts.android.game.create_game.create_player.AndroidCreatePlayerViewModel
+import com.alextos.darts.android.game.create_game.create_player.CreatePlayerScreen
 import com.alextos.darts.android.game.darts_board.DartsScreen
 import com.alextos.darts.android.game.darts_board.DartsState
 import com.alextos.darts.android.game.game.AndroidGameViewModel
 import com.alextos.darts.android.game.game.GameScreen
+import com.alextos.darts.android.game.game.game_settings.GameSettingsScreen
 import com.alextos.darts.android.game.game_list.AndroidGameListViewModel
 import com.alextos.darts.android.game.game_list.GameListScreen
 import com.alextos.darts.android.game.history.AndroidHistoryViewModel
@@ -181,45 +182,76 @@ fun GameNavigationRoot() {
                 ?: run { return@composable }
             val viewModel = hiltViewModel<AndroidGameViewModel>()
             val state by viewModel.state.collectAsState()
-            GameScreen(
-                state = state,
-                onEvent = { event ->
-                    when (event) {
-                        is GameEvent.CloseGame -> {
-                            navController.popBackStack(GameRoute.GameList.route, inclusive = false)
+
+            val coroutineScope = rememberCoroutineScope()
+            val modalSheetState = rememberModalBottomSheetState(
+                initialValue = ModalBottomSheetValue.Hidden,
+                confirmStateChange = { it != ModalBottomSheetValue.HalfExpanded },
+                skipHalfExpanded = true
+            )
+            BackHandler(modalSheetState.isVisible) {
+                coroutineScope.launch { modalSheetState.hide() }
+            }
+
+            ModalBottomSheetLayout(
+                sheetState = modalSheetState,
+                sheetShape = RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp),
+                sheetContent = {
+                    GameSettingsScreen(gameSettings = settings) {
+                        coroutineScope.launch {
+                            modalSheetState.hide()
                         }
-                        is GameEvent.ShowDarts -> {
-                            navController.navigate(
-                                GameRoute.Darts.routeWithArgs(
-                                    Json.encodeToString(
-                                        DartsState(
-                                            event.turns,
-                                            event.currentPage
+                    }
+                }
+            ) {
+                GameScreen(
+                    state = state,
+                    onEvent = { event ->
+                        when (event) {
+                            is GameEvent.CloseGame -> {
+                                navController.popBackStack(GameRoute.GameList.route, inclusive = false)
+                            }
+                            is GameEvent.ShowDarts -> {
+                                navController.navigate(
+                                    GameRoute.Darts.routeWithArgs(
+                                        Json.encodeToString(
+                                            DartsState(
+                                                event.turns,
+                                                event.currentPage
+                                            )
                                         )
                                     )
                                 )
-                            )
-                        }
-                        is GameEvent.ReplayGame -> {
-                            navController.popBackStack(GameRoute.GameList.route, inclusive = false)
-                            navController.navigate(
-                                route = GameRoute.Game.routeWithArgs(
-                                    Json.encodeToString(settings)
+                            }
+                            is GameEvent.ReplayGame -> {
+                                navController.popBackStack(GameRoute.GameList.route, inclusive = false)
+                                navController.navigate(
+                                    route = GameRoute.Game.routeWithArgs(
+                                        Json.encodeToString(settings)
+                                    )
                                 )
-                            )
-                        }
-                        is GameEvent.ShowHistory -> {
-                            navController.navigate(
-                                route = GameRoute.InGameHistory.routeWithArgs(
-                                    Json.encodeToString(state),
-                                    event.page.toString()
+                            }
+                            is GameEvent.ShowHistory -> {
+                                navController.navigate(
+                                    route = GameRoute.InGameHistory.routeWithArgs(
+                                        Json.encodeToString(state),
+                                        event.page.toString()
+                                    )
                                 )
-                            )
+                            }
+                            is GameEvent.ShowGameSettings -> {
+                                coroutineScope.launch {
+                                    if (modalSheetState.isVisible)
+                                        modalSheetState.hide()
+                                    else
+                                        modalSheetState.animateTo(ModalBottomSheetValue.Expanded)
+                                }
+                            }
+                            else -> { viewModel.onEvent(event) }
                         }
-                        else -> { viewModel.onEvent(event) }
                     }
-                }
-            )
+                )
+            }
         }
 
         composable(

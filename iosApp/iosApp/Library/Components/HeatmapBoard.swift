@@ -1,7 +1,7 @@
 import SwiftUI
 import shared
 
-internal struct HeatmapBoard: View {
+struct HeatmapBoard: View {
 	let heatmap: SectorHeatmapDistribution
 	
 	var body: some View {

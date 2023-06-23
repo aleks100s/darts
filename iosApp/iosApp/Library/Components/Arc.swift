@@ -1,6 +1,6 @@
 import SwiftUI
 
-internal struct Arc: View {
+struct Arc: View {
 	let center: CGPoint
 	let radius: CGFloat
 	let startAngle: Angle

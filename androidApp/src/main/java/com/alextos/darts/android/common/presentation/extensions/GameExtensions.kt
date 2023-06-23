@@ -7,7 +7,7 @@ import com.alextos.darts.game.domain.models.Game
 
 @Composable
 fun Game.getTitle(): String {
-    return if (winner == null) {
+    return if (players.count() == 1) {
         stringResource(id = R.string.training, id ?: 0, getFinishDateString())
     } else {
         stringResource(id = R.string.game_title, id ?: 0, getFinishDateString())

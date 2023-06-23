@@ -11,33 +11,27 @@ import kotlinx.serialization.Serializable
 data class GameState(
     val gameHistory: List<PlayerHistory> = listOf(),
     val currentPlayer: Player? = null,
-    val isGameFinished: Boolean = false,
     val isCloseGameDialogOpened: Boolean = false,
     val turnState: TurnState = TurnState.IsOngoing,
     val gameGoal: Int = 0,
     val averageTurns: List<PlayerGameValue> = listOf(),
-    val settingsTitle: String = "",
-    val isStatisticsEnabled: Boolean = true
+    val isStatisticsEnabled: Boolean = true,
+    val gameResult: GameResult? = null
 ) {
+    val turnNumber: Int
+        get() { return gameHistory.maxOfOrNull { it.turnsNumber } ?: 0 }
+
     fun isTurnOver(): Boolean {
         return when (turnState) {
-            is TurnState.IsOver -> {
-                true
-            }
-            else -> {
-                false
-            }
+            is TurnState.IsOver -> { true }
+            else -> { false }
         }
     }
 
     fun turnResult(): Int {
         return when (turnState) {
-            is TurnState.IsOver -> {
-                turnState.result
-            }
-            else -> {
-                0
-            }
+            is TurnState.IsOver -> { turnState.result }
+            else -> { 0 }
         }
     }
 
@@ -57,14 +51,6 @@ data class GameState(
     fun currentPage(): Int = currentPlayer?.let { player ->
         gameHistory.map { it.player }.indexOf(player)
     } ?: 0
-
-    fun getWinnerName(): String? {
-        return if (gameHistory.count() == 1) {
-            null
-        } else {
-            currentPlayer?.name
-        }
-    }
 
     fun getCurrentTurn(): Turn {
         var leftAfter = 0

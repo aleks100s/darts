@@ -19,7 +19,7 @@
     <string name="return_to_game">Return to game</string>
     <string name="game_finished">Game is over</string>
     <string name="winner">The winner is %1$s</string>
-    <string name="finish_game">Finish game</string>
+    <string name="finish_game">Finish</string>
     <string name="game_goal">Game goal</string>
     <string name="history">History</string>
     <string name="game_title">Game #%1$d・%2$s</string>
@@ -80,7 +80,6 @@
     <string name="navigate_back">Navigate back</string>
     <string name="game_duration">Game duration is %1$d min %2$d sec</string>
     <string name="open_game">Open game</string>
-    <string name="game_title_with_settings">Game%1$s</string>
     <string name="randomize_player_order">Random player order</string>
     <string name="enable_statistics">Сount in shot statistics</string>
     <string name="calculator">Calculator</string>
@@ -90,4 +89,7 @@
     <string name="time_statistics">Time played</string>
     <string name="time_duration">%1$d hour %2$d min %3$d sec</string>
     <string name="turn_limit">Limit number of turns (20)</string>
+    <string name="game_title_with_turn_counter">Game (turn %1$d)</string>
+    <string name="training_finished">Training is over</string>
+    <string name="game_result_is_draw">Draw</string>
 </resources>

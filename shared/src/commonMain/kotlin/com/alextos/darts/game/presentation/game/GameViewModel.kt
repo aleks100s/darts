@@ -19,18 +19,17 @@ class GameViewModel(
 
     val state = combine(
         combine(_state, gameManager.gameHistory) { state, history -> state to history },
-        combine(gameManager.currentPlayer, gameManager.isGameFinished) { currentPlayer, isGameFinished -> currentPlayer to isGameFinished },
+        combine(gameManager.currentPlayer, gameManager.gameResult) { currentPlayer, isGameFinished -> currentPlayer to isGameFinished },
         combine(gameManager.turnState, gameManager.averageTurns) { turnState, averageTurns -> turnState to averageTurns },
-    ) { stateAndHistory, playerAndIsGameFinished, turnStateAndAverageTurns ->
+    ) { stateAndHistory, playerAndGameResult, turnStateAndAverageTurns ->
         stateAndHistory.first.copy(
             gameHistory = stateAndHistory.second,
-            currentPlayer = playerAndIsGameFinished.first,
-            isGameFinished = playerAndIsGameFinished.second,
+            currentPlayer = playerAndGameResult.first,
             turnState = turnStateAndAverageTurns.first,
             gameGoal = gameManager.getGoal(),
             averageTurns = turnStateAndAverageTurns.second,
-            settingsTitle = gameSettings?.getUIGameTitleSettingsString() ?: "",
-            isStatisticsEnabled = gameSettings?.isStatisticsEnabled == true
+            isStatisticsEnabled = gameSettings?.isStatisticsEnabled == true,
+            gameResult = playerAndGameResult.second
         )
     }
         .stateIn(

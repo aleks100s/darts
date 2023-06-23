@@ -10,7 +10,7 @@ data class PlayerHistory(
     val turns: List<Turn> = listOf()
 ) {
     val turnsNumber: Int
-        get() { return turns.count { it.shots.count() == 3 } }
+        get() { return turns.count() }
 
     val score: Int
         get() { return turns.lastOrNull()?.score() ?: 0 }

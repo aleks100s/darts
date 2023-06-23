@@ -7,8 +7,8 @@ internal struct GameScreen: View {
 	
 	var body: some View {
 		return gameView
-			.navigationTitle("game_title_with_settings \(viewModel.state.settingsTitle)")
-			.alert("game_finished", isPresented: $viewModel.isGameFinishedDialogShown) {
+			.navigationTitle("game_title_with_turn_counter \(viewModel.state.turnNumber)")
+			.alert(viewModel.gameFinishedTitle, isPresented: $viewModel.isGameFinishedDialogShown) {
 				Button(role: .cancel) {
 					viewModel.onEvent(.CloseGame())
 					viewModel.finishGame()
@@ -24,7 +24,7 @@ internal struct GameScreen: View {
 				}
 				.accessibilityIdentifier("replay")
 			} message: {
-				Text(gameFinishedMessage)
+				Text(viewModel.gameFinishedText)
 			}
 			.alert("turn_is_over", isPresented: $viewModel.isTurnOverDialogShown) {
 				Button(role: .cancel) {
@@ -133,13 +133,5 @@ internal struct GameScreen: View {
 				viewModel.selectTurn(turn: turn)
 			}
 		)
-	}
-	
-	private var gameFinishedMessage: String {
-		if let winner = viewModel.state.getWinnerName() {
-			return String(localized: "winner \(winner)")
-		} else {
-			return ""
-		}
 	}
 }

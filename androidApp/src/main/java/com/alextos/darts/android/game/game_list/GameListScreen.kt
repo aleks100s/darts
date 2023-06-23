@@ -1,6 +1,5 @@
 package com.alextos.darts.android.game.game_list
 
-import android.graphics.drawable.shapes.OvalShape
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable

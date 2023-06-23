@@ -11,12 +11,4 @@ data class GameSettings(
     val isRandomPlayersOrderChecked: Boolean,
     val isStatisticsEnabled: Boolean,
     val isTurnLimitEnabled: Boolean
-) {
-    fun getUIGameTitleSettingsString(): String {
-        return if (!isFinishWithDoublesChecked) {
-            ""
-        } else {
-            "\uD83C\uDFC1 x2"
-        }
-    }
-}
+)

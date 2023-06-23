@@ -17,6 +17,7 @@ import com.alextos.darts.android.common.presentation.screens.Screen
 import com.alextos.darts.android.common.presentation.screens.SplitScreen
 import com.alextos.darts.android.common.presentation.views.GameInputView
 import com.alextos.darts.game.presentation.game.GameEvent
+import com.alextos.darts.game.presentation.game.GameResult
 import com.alextos.darts.game.presentation.game.GameState
 
 @Composable
@@ -28,7 +29,7 @@ fun GameScreen(
         onEvent(GameEvent.BackButtonPressed)
     }
 
-    val title = stringResource(id = R.string.game_title_with_settings, state.settingsTitle)
+    val title = stringResource(id = R.string.game_title_with_turn_counter, state.turnNumber)
 
     when (val screenType = rememberScreenType()) {
         is ScreenType.Compact -> {
@@ -74,8 +75,8 @@ fun GameScreen(
         CloseGameDialog(onEvent = onEvent)
     }
 
-    if (state.isGameFinished) {
-        GameFinishedDialog(winner = state.getWinnerName(), onEvent = onEvent)
+    state.gameResult?.let {
+        GameFinishedDialog(gameResult = it, onEvent = onEvent)
     }
 }
 
@@ -176,16 +177,36 @@ private fun CloseGameDialog(onEvent: (GameEvent) -> Unit) {
 }
 
 @Composable
-private fun GameFinishedDialog(winner: String?, onEvent: (GameEvent) -> Unit) {
+private fun GameFinishedDialog(gameResult: GameResult, onEvent: (GameEvent) -> Unit) {
+    val title = when (gameResult) {
+        is GameResult.TrainingFinished -> {
+            stringResource(id = R.string.training_finished)
+        }
+        is GameResult.Draw -> {
+            stringResource(id = R.string.game_finished)
+        }
+        is GameResult.Winner -> {
+            stringResource(id = R.string.game_finished)
+        }
+    }
+    val text = when (gameResult) {
+        is GameResult.TrainingFinished -> {
+            ""
+        }
+        is GameResult.Draw -> {
+            stringResource(id = R.string.game_result_is_draw)
+        }
+        is GameResult.Winner -> {
+            stringResource(id = R.string.winner, gameResult.name)
+        }
+    }
     AlertDialog(
         onDismissRequest = {  },
         title = {
-            Text(text = stringResource(id = R.string.game_finished))
+            Text(text = title)
         },
         text = {
-            winner?.let {
-                Text(text = stringResource(id = R.string.winner, it))
-            }
+            Text(text = text)
         },
         confirmButton = {
             Button(onClick = { onEvent(GameEvent.ReplayGame) }) {

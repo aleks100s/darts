@@ -17,7 +17,7 @@
 "return_to_game" = "Return to game";
 "game_finished" = "Game is over";
 "winner %@" = "The winner is %@";
-"finish_game" = "Finish game";
+"finish_game" = "Finish";
 "game_goal" = "Game goal";
 "shoot" = "Hit";
 "history" = "History";
@@ -79,7 +79,6 @@
 "miss" = "Miss";
 "replay" = "Rematch";
 "game_duration %d %d" = "Game duration is %d min %d sec";
-"game_title_with_settings %@" = "Game%@";
 "randomize_player_order" = "Random player order";
 "enable_statistics" = "Count in shot statistics";
 "calculator" = "Calculator";
@@ -89,3 +88,6 @@
 "time_statistics" = "Time played";
 "time_duration %d %d %d" = "%d hour %d min %d ses";
 "turn_limit" = "Limit number of turns (20)";
+"game_title_with_turn_counter %d" = "Game (turn %d)";
+"training_finished" = "Training is over";
+"game_result_is_draw" = "Draw";

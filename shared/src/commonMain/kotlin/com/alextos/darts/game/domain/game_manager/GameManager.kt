@@ -8,6 +8,7 @@ import com.alextos.darts.game.domain.models.GameSettings
 import com.alextos.darts.game.domain.useCases.SaveGameHistoryUseCase
 import com.alextos.darts.game.presentation.game.TurnState
 import com.alextos.darts.game.domain.useCases.GetPlayerAverageTurnUseCase
+import com.alextos.darts.game.presentation.game.GameResult
 import kotlinx.coroutines.flow.*
 import kotlinx.datetime.Clock
 import kotlinx.datetime.TimeZone
@@ -19,7 +20,7 @@ class GameManager(
     gameSettings: GameSettings?
 ) {
     companion object {
-        private const val TURNS_LIMIT = 2
+        private const val TURNS_LIMIT = 20
     }
 
     private val goal = gameSettings?.selectedGameGoal ?: 0
@@ -48,8 +49,8 @@ class GameManager(
     private val _currentPlayer = MutableStateFlow(players[0])
     val currentPlayer: StateFlow<Player> = _currentPlayer
 
-    private val _isGameFinished = MutableStateFlow(false)
-    val isGameFinished: StateFlow<Boolean> = _isGameFinished
+    private val _gameResult = MutableStateFlow<GameResult?>(null)
+    val gameResult: StateFlow<GameResult?> = _gameResult
 
     val gameHistory = combine(playerHistoryManagers.map { it.playerHistory }) { array ->
         array.toList()
@@ -62,7 +63,7 @@ class GameManager(
     fun getGoal(): Int = goal
 
     fun makeShot(shot: Shot) {
-        if (_isGameFinished.value || turnState.value.isInputDisabled()) {
+        if (_gameResult.value != null || turnState.value.isInputDisabled()) {
             return
         }
         val trackUserHistoryUseCase = currentPlayerHistoryManager()
@@ -120,7 +121,17 @@ class GameManager(
             }
         )
         saveGameHistoryUseCase.execute(gameHistory = gameHistory)
-        _isGameFinished.update { true }
+        _gameResult.update {
+            if (players.count() == 1) {
+                GameResult.TrainingFinished
+            } else {
+                if (winner == null) {
+                    GameResult.Draw
+                } else {
+                    GameResult.Winner(winner.name)
+                }
+            }
+        }
     }
 
     private suspend fun terminateGame() {

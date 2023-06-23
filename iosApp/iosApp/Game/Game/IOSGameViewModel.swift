@@ -7,14 +7,42 @@ internal final class IOSGameViewModel: ObservableObject {
 	@Published private(set) var state = GameState(
 		gameHistory: [],
 		currentPlayer: nil,
-		isGameFinished: false,
 		isCloseGameDialogOpened: false,
 		turnState: .IsOngoing(),
 		gameGoal: 0,
 		averageTurns: [],
-		settingsTitle: "",
-		isStatisticsEnabled: true
+		isStatisticsEnabled: true,
+		gameResult: nil
 	)
+	
+	var gameFinishedTitle: String {
+		guard let result = state.gameResult else { return "" }
+		
+		switch result {
+		case .TrainingFinished():
+			return String(localized: "training_finished")
+			
+		default:
+			return String(localized: "game_finished")
+		}
+	}
+	
+	var gameFinishedText: String {
+		guard let result = state.gameResult else { return "" }
+		
+		switch result {
+		case .TrainingFinished():
+			return ""
+			
+		case .Draw():
+			return String(localized: "game_result_is_draw")
+			
+		default:
+			guard let name = result.winnerName else { return "" }
+			
+			return String(localized: "winner \(name)")
+		}
+	}
 	
 	private let viewModel: GameViewModel
 	private let onGameFinished: () -> Void
@@ -60,7 +88,7 @@ internal final class IOSGameViewModel: ObservableObject {
 				self?.state = state
 				self?.isTurnOverDialogShown = state.isTurnOver()
 				self?.isCloseGameDialogShown = state.isCloseGameDialogOpened
-				self?.isGameFinishedDialogShown = state.isGameFinished
+				self?.isGameFinishedDialogShown = state.gameResult != nil
 			}
 	}
 	

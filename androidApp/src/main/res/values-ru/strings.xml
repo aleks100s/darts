@@ -19,7 +19,7 @@
     <string name="return_to_game">Вернуться в игру</string>
     <string name="game_finished">Игра окончена</string>
     <string name="winner">Победитель %1$s</string>
-    <string name="finish_game">Закончить игру</string>
+    <string name="finish_game">Закончить</string>
     <string name="game_goal">Цель игры</string>
     <string name="history">История</string>
     <string name="game_title">Игра №%1$d・%2$s</string>
@@ -80,7 +80,6 @@
     <string name="navigate_back">Перейти назад</string>
     <string name="game_duration">Длительность игры %1$d мин %2$d сек</string>
     <string name="open_game">Открыть игру</string>
-    <string name="game_title_with_settings">Игра%1$s</string>
     <string name="randomize_player_order">Случайный порядок игроков</string>
     <string name="enable_statistics">Учитывать в статистике бросков</string>
     <string name="calculator">Калькулятор</string>
@@ -90,4 +89,7 @@
     <string name="time_statistics">Время игры</string>
     <string name="time_duration">%1$d час %2$d мин %3$d сек</string>
     <string name="turn_limit">Ограничить количество ходов (20)</string>
+    <string name="game_title_with_turn_counter">Игра (ход %1$d)</string>
+    <string name="training_finished">Тренировка окончена</string>
+    <string name="game_result_is_draw">Ничья</string>
 </resources>

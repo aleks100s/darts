@@ -17,7 +17,7 @@
 "return_to_game" = "Вернуться в игру";
 "game_finished" = "Игра окончена";
 "winner %@" = "Победитель %@";
-"finish_game" = "Закончить игру";
+"finish_game" = "Закончить";
 "game_goal" = "Цель игры";
 "shoot" = "Бросок";
 "history" = "История";
@@ -79,7 +79,6 @@
 "miss" = "Промах";
 "replay" = "Переиграть";
 "game_duration %d %d" = "Длительность игры %d мин %d сек";
-"game_title_with_settings %@" = "Игра%@";
 "randomize_player_order" = "Случайный порядок игроков";
 "enable_statistics" = "Учитывать в статистике бросков";
 "calculator" = "Калькулятор";
@@ -89,3 +88,6 @@
 "time_statistics" = "Время игры";
 "time_duration %d %d %d" = "%d час %d мин %d сек";
 "turn_limit" = "Ограничить количество ходов (20)";
+"game_title_with_turn_counter %d" = "Игра (ход %d)";
+"training_finished" = "Тренировка окончена";
+"game_result_is_draw" = "Ничья";

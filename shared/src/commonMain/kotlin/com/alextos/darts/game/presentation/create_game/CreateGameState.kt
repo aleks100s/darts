@@ -12,7 +12,8 @@ data class CreateGameState(
     val isDeletePlayerDialogShown: Boolean = false,
     val isFinishWithDoublesChecked: Boolean = false,
     val isRandomPlayersOrderChecked: Boolean = true,
-    val isStatisticsEnabled: Boolean = true
+    val isStatisticsEnabled: Boolean = true,
+    val isTurnLimitEnabled: Boolean = true
 ) {
     fun isReadyToCreateGame() = selectedPlayers.isNotEmpty() && selectedGoal != null
 
@@ -25,6 +26,7 @@ data class CreateGameState(
         selectedGoal ?: 0,
         isFinishWithDoublesChecked,
         isRandomPlayersOrderChecked,
-        isStatisticsEnabled
+        isStatisticsEnabled,
+        isTurnLimitEnabled
     )
 }

@@ -34,7 +34,8 @@ CREATE TABLE gameEntity(
     timestamp_start INTEGER,
     finish_with_doubles INTEGER,
     random_player_order INTEGER,
-    disable_statistics INTEGER
+    disable_statistics INTEGER,
+    turns_limit INTEGER
 );
 
 getGames:
@@ -46,6 +47,7 @@ ge.timestamp_start AS timestampStart,
 ge.finish_with_doubles AS finishWithDoubles,
 ge.random_player_order AS randomPlayerOrder,
 ge.disable_statistics AS disableStatistics,
+ge.turns_limit AS turnsLimitEnabled,
 pe.id AS playerId,
 pe.name AS playerName,
 gpe.game_order AS gameOrder,
@@ -63,9 +65,10 @@ INSERT OR REPLACE INTO gameEntity(
     timestamp_start,
     finish_with_doubles,
     random_player_order,
-    disable_statistics
+    disable_statistics,
+    turns_limit
 )
-VALUES(?, ?, ?, ?, ?, ?, ?);
+VALUES(?, ?, ?, ?, ?, ?, ?, ?);
 
 deleteGame:
 DELETE FROM gameEntity
@@ -80,6 +83,7 @@ ge.timestamp_start AS timestampStart,
 ge.finish_with_doubles AS finishWithDoubles,
 ge.random_player_order AS randomPlayerOrder,
 ge.disable_statistics AS disableStatistics,
+ge.turns_limit AS turnsLimitEnabled,
 pe.id AS playerId,
 pe.name AS playerName,
 gpe.game_order AS gameOrder,

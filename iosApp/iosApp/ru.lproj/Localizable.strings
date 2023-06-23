@@ -75,7 +75,7 @@
 "training %d %@" = "Тренировка №%d・%@";
 "sector_count %@ %d" = "%@ (%d попаданий)";
 "additional_settings" = "Дополнительные настройки";
-"finish_with_doubles" = "Заканчивать двойным броском";
+"finish_with_doubles" = "Побеждать двойным броском";
 "miss" = "Промах";
 "replay" = "Переиграть";
 "game_duration %d %d" = "Длительность игры %d мин %d сек";

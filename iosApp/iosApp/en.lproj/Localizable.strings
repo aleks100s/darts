@@ -75,7 +75,7 @@
 "training %d %@" = "Training %d・%@";
 "sector_count %@ %d" = "%@ (%d hits)";
 "additional_settings" = "Additional settings";
-"finish_with_doubles" = "Finish with doubles";
+"finish_with_doubles" = "Win with doubles";
 "miss" = "Miss";
 "replay" = "Rematch";
 "game_duration %d %d" = "Game duration is %d min %d sec";

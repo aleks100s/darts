@@ -14,9 +14,10 @@ data class Game(
     val gameGoal: Int,
     val finishTimestamp: LocalDateTime,
     val startTimestamp: LocalDateTime?,
-    val finishWithDoubles: Boolean,
-    val randomPlayerOrder: Boolean,
-    val enableStatistics: Boolean
+    val isWinWithDoublesEnabled: Boolean,
+    val isRandomPlayerOrderEnabled: Boolean,
+    val isStatisticsEnabled: Boolean,
+    val isTurnLimitEnabled: Boolean
 ) {
     val duration: GameDuration
         get() {
@@ -39,20 +40,20 @@ data class Game(
         if (winner != null) {
             parts.add(getUIWinnerString())
         }
-        if (finishWithDoubles) {
+        if (isWinWithDoublesEnabled) {
             parts.add(getUIDoublesString())
         }
-        if (randomPlayerOrder) {
+        if (isRandomPlayerOrderEnabled) {
             parts.add(getUIRandomOrderString())
         }
-        if (enableStatistics) {
+        if (isStatisticsEnabled) {
             parts.add(getUIEnabledStatisticsString())
         }
         return parts
     }
 
     private fun getUIDoublesString(): String {
-        return if (finishWithDoubles) "\uD83C\uDFC1 x2" else ""
+        return if (isWinWithDoublesEnabled) "\uD83C\uDFC1 x2" else ""
     }
 
     private fun getUIGoalString(): String {
@@ -76,11 +77,11 @@ data class Game(
     }
 
     private fun getUIRandomOrderString(): String {
-        return if (randomPlayerOrder) "\uD83C\uDFB2" else ""
+        return if (isRandomPlayerOrderEnabled) "\uD83C\uDFB2" else ""
     }
 
     private fun getUIEnabledStatisticsString(): String {
-        return if (enableStatistics) "\uD83D\uDCCA" else ""
+        return if (isStatisticsEnabled) "\uD83D\uDCCA" else ""
     }
 
     fun getPlayersListString(): String {
@@ -98,7 +99,7 @@ data class Game(
     }
 
     fun getGameSettings(): GameSettings {
-        return GameSettings(players, gameGoal, finishWithDoubles, randomPlayerOrder, enableStatistics)
+        return GameSettings(players, gameGoal, isWinWithDoublesEnabled, isRandomPlayerOrderEnabled, isStatisticsEnabled, isTurnLimitEnabled)
     }
 
     internal fun getDayString(timestamp: LocalDateTime): String {

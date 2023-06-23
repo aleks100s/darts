@@ -21,9 +21,10 @@ fun List<GetPlayerGames>.mapToGames(): List<Game> {
                     .toLocalDateTime(TimeZone.currentSystemDefault()),
                 startTimestamp = Instant.fromEpochMilliseconds(0)
                     .toLocalDateTime(TimeZone.currentSystemDefault()),
-                finishWithDoubles = false,
-                randomPlayerOrder = false,
-                enableStatistics = true
+                isWinWithDoublesEnabled = false,
+                isRandomPlayerOrderEnabled = false,
+                isStatisticsEnabled = true,
+                isTurnLimitEnabled = true
             )
         }
 }

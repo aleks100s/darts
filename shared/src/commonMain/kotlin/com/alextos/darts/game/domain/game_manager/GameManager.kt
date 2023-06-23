@@ -28,6 +28,7 @@ class GameManager(
 
     private val goal = gameSettings?.selectedGameGoal ?: 0
     private val finishWithDoubles = gameSettings?.isFinishWithDoublesChecked ?: false
+    private val turnsLimitEnabled = gameSettings?.isTurnLimitEnabled ?: true
     private val startTime = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
 
     private val playerHistoryManagers by lazy {
@@ -90,9 +91,10 @@ class GameManager(
             gameGoal = goal,
             finishTimestamp = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()),
             startTimestamp = startTime,
-            finishWithDoubles = finishWithDoubles,
-            randomPlayerOrder = randomPlayerOrder,
-            enableStatistics = enableStatistics
+            isWinWithDoublesEnabled = finishWithDoubles,
+            isRandomPlayerOrderEnabled = randomPlayerOrder,
+            isStatisticsEnabled = enableStatistics,
+            isTurnLimitEnabled = turnsLimitEnabled
         )
         val gameHistory = GameHistory(
             game = game,

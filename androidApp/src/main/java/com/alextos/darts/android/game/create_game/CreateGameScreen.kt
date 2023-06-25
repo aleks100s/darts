@@ -58,19 +58,7 @@ fun CreateGameScreen(
                 }
 
                 item {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clickable { onEvent(CreateGameEvent.CreatePlayer) }
-                            .padding(horizontal = 16.dp, vertical = 12.dp),
-                        horizontalArrangement = Arrangement.Center,
-                    ) {
-                        Text(
-                            text = stringResource(id = R.string.add_new_player),
-                            textAlign = TextAlign.Center,
-                            color = MaterialTheme.colors.primary
-                        )
-                    }
+                    CreatePlayerButton(onEvent = onEvent)
                 }
 
                 items(state.allPlayers) { player ->
@@ -104,39 +92,7 @@ fun CreateGameScreen(
                 }
 
                 item {
-                    FinishWithDoublesCheckbox(
-                        isChecked = state.isFinishWithDoublesChecked,
-                        onCheckedChanged = { isChecked ->
-                            onEvent(CreateGameEvent.ToggleFinishWithDoubles(isChecked))
-                        }
-                    )
-                }
-
-                item {
-                    TurnLimitCheckbox(
-                        isChecked = state.isTurnLimitEnabled,
-                        onCheckedChanged = { isChecked ->
-                            onEvent(CreateGameEvent.ToggleTurnLimit(isChecked))
-                        }
-                    )
-                }
-
-                item {
-                    RandomizeOrderCheckbox(
-                        isChecked = state.isRandomPlayersOrderChecked,
-                        onCheckedChanged = { isChecked ->
-                            onEvent(CreateGameEvent.ToggleRandomPlayersOrder(isChecked))
-                        }
-                    )
-                }
-
-                item {
-                    EnableStatisticsCheckbox(
-                        isChecked = state.isStatisticsEnabled,
-                        onCheckedChanged = { isChecked ->
-                            onEvent(CreateGameEvent.ToggleDisableStatistics(isChecked))
-                        }
-                    )
+                    AdditionalSettings(state = state, onEvent = onEvent)
                 }
 
                 item {
@@ -153,6 +109,56 @@ fun CreateGameScreen(
             },
             onDismiss = {
                 onEvent(CreateGameEvent.HideDeletePlayerDialog)
+            }
+        )
+    }
+}
+
+@Composable
+private fun CreatePlayerButton(onEvent: (CreateGameEvent) -> Unit) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable { onEvent(CreateGameEvent.CreatePlayer) }
+            .padding(horizontal = 16.dp, vertical = 12.dp),
+        horizontalArrangement = Arrangement.Center,
+    ) {
+        Text(
+            text = stringResource(id = R.string.add_new_player),
+            textAlign = TextAlign.Center,
+            color = MaterialTheme.colors.primary
+        )
+    }
+}
+
+@Composable
+private fun AdditionalSettings(state: CreateGameState, onEvent: (CreateGameEvent) -> Unit) {
+    Column {
+        FinishWithDoublesCheckbox(
+            isChecked = state.isFinishWithDoublesChecked,
+            onCheckedChanged = { isChecked ->
+                onEvent(CreateGameEvent.ToggleFinishWithDoubles(isChecked))
+            }
+        )
+
+        TurnLimitCheckbox(
+            isChecked = state.isTurnLimitEnabled,
+            onCheckedChanged = { isChecked ->
+                onEvent(CreateGameEvent.ToggleTurnLimit(isChecked))
+            }
+        )
+
+        RandomizeOrderCheckbox(
+            isChecked = state.isRandomPlayersOrderChecked,
+            onCheckedChanged = { isChecked ->
+                onEvent(CreateGameEvent.ToggleRandomPlayersOrder(isChecked))
+            }
+        )
+
+        EnableStatisticsCheckbox(
+            isChecked = state.isStatisticsEnabled,
+            onCheckedChanged = { isChecked ->
+                onEvent(CreateGameEvent.ToggleDisableStatistics(isChecked))
             }
         )
     }

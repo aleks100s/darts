@@ -93,18 +93,8 @@ fun GameListScreen(
 
         if (state.isActionsDialogShown) {
             GameActionsDialog(
-                title = state.selectedGame?.getTitle() ?: "",
-                onDismiss = { onEvent(GameListEvent.HideActionsDialog) },
-                onReplay = {
-                    state.selectedGame?.let {
-                        onEvent(GameListEvent.ReplayGame(it))
-                    }
-                },
-                onDelete = {
-                    state.selectedGame?.let {
-                        onEvent(GameListEvent.ShowDeleteGameDialog(it))
-                    }
-                }
+                state = state,
+                onEvent = onEvent
             )
         }
 
@@ -142,12 +132,10 @@ private fun GamesList(
 
 @Composable
 private fun GameActionsDialog(
-    title: String,
-    onDismiss: () -> Unit,
-    onReplay: () -> Unit,
-    onDelete: () -> Unit
+    state: GameListState,
+    onEvent: (GameListEvent) -> Unit
 ) {
-    Dialog(onDismissRequest = onDismiss) {
+    Dialog(onDismissRequest = { onEvent(GameListEvent.HideActionsDialog) }) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceEvenly,
@@ -155,7 +143,7 @@ private fun GameActionsDialog(
                 .background(MaterialTheme.colors.surface, shape = RoundedCornerShape(8.dp))
         ) {
             Text(
-                text = title,
+                text = state.selectedGame?.getTitle() ?: "",
                 style = MaterialTheme.typography.h6,
                 modifier = Modifier.padding(16.dp)
             )
@@ -164,19 +152,27 @@ private fun GameActionsDialog(
 
             CustomDialogButton(
                 title = stringResource(id = R.string.replay),
-                onClick = onReplay
+                onClick = {
+                    state.selectedGame?.let {
+                        onEvent(GameListEvent.ReplayGame(it))
+                    }
+                }
             )
 
             CustomDialogButton(
                 title = stringResource(id = R.string.delete),
                 color = MaterialTheme.colors.error,
-                onClick = onDelete
+                onClick = {
+                    state.selectedGame?.let {
+                        onEvent(GameListEvent.ShowDeleteGameDialog(it))
+                    }
+                }
             )
 
             CustomDialogButton(
                 title = stringResource(id = R.string.cancel),
                 fontWeight = FontWeight.Bold,
-                onClick = onDismiss
+                onClick =  { onEvent(GameListEvent.HideActionsDialog) }
             )
         }
     }

@@ -8,10 +8,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 
 @Composable
-fun Cell(modifier: Modifier, text: String, textColor: Color = Color.Unspecified) {
+fun Cell(
+    modifier: Modifier,
+    text: String,
+    textColor: Color = Color.Unspecified
+) {
     Text(
-        modifier = modifier
-            .fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(),
         text = text,
         textAlign = TextAlign.Center,
         color = textColor

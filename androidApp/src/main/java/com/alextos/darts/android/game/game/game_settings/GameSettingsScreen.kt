@@ -21,37 +21,43 @@ fun GameSettingsScreen(
     gameSettings: GameSettings,
     onClose: () -> Unit
 ) {
+
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Title()
+        Settings(gameSettings = gameSettings)
+        CloseButton(onClose = onClose)
+    }
+}
+
+@Composable
+private fun Title() {
+    Text(
+        modifier = Modifier.padding(16.dp),
+        text = stringResource(id = R.string.game_settings),
+        style = MaterialTheme.typography.h3
+    )
+}
+
+@Composable
+private fun Settings(gameSettings: GameSettings) {
     val yes = "✅"
     val no = "❌"
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        Text(
-            modifier = Modifier.padding(16.dp),
-            text = stringResource(id = R.string.game_settings),
-            style = MaterialTheme.typography.h3
-        )
-        LabeledText(
-            label = stringResource(id = R.string.finish_with_doubles),
-            text = if (gameSettings.isFinishWithDoublesChecked) yes else no
-        )
-        LabeledText(
-            label = stringResource(id = R.string.turn_limit),
-            text = if (gameSettings.isTurnLimitEnabled) yes else no
-        )
-        LabeledText(
-            label = stringResource(id = R.string.randomize_player_order),
-            text = if (gameSettings.isRandomPlayersOrderChecked) yes else no
-        )
-        LabeledText(
-            label = stringResource(id = R.string.enable_statistics),
-            text = if (gameSettings.isStatisticsEnabled) yes else no
-        )
-        Button(
-            modifier = Modifier.padding(16.dp),
-            onClick = onClose
-        ) {
-            Text(text = stringResource(id = R.string.return_to_game))
-        }
-    }
+    LabeledText(
+        label = stringResource(id = R.string.finish_with_doubles),
+        text = if (gameSettings.isFinishWithDoublesChecked) yes else no
+    )
+    LabeledText(
+        label = stringResource(id = R.string.turn_limit),
+        text = if (gameSettings.isTurnLimitEnabled) yes else no
+    )
+    LabeledText(
+        label = stringResource(id = R.string.randomize_player_order),
+        text = if (gameSettings.isRandomPlayersOrderChecked) yes else no
+    )
+    LabeledText(
+        label = stringResource(id = R.string.enable_statistics),
+        text = if (gameSettings.isStatisticsEnabled) yes else no
+    )
 }
 
 @Composable
@@ -65,5 +71,15 @@ private fun LabeledText(label: String, text: String) {
     ) {
         Text(text = label)
         Text(text = text)
+    }
+}
+
+@Composable
+private fun CloseButton(onClose: () -> Unit) {
+    Button(
+        modifier = Modifier.padding(16.dp),
+        onClick = onClose
+    ) {
+        Text(text = stringResource(id = R.string.return_to_game))
     }
 }

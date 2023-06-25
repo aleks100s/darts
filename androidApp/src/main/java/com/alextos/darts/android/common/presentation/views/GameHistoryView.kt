@@ -40,8 +40,8 @@ fun GameHistoryView(
             goal = goal
         ) {
             val turns = gameHistory[page].turns
-            val currentPage = turns.indexOf(it)
-            onSelect(gameHistory[page].turns, currentPage)
+            val turnPage = turns.indexOf(it)
+            onSelect(gameHistory[page].turns, turnPage)
         }
     }
 }

@@ -4,9 +4,23 @@ import shared
 struct SectorHeatmapScreen: View {
 	@StateObject var viewModel: IOSSectorHeatmapViewModel
 	
+	@Environment(\.displayScale) var displayScale
+	@State private var renderedImage = Image(systemName: "photo")
+	
 	var body: some View {
-		content
+		viewBody
 			.background(Color.surface)
+			.toolbar {
+				ToolbarItem(placement: .navigationBarTrailing) {
+					ShareLink("share", item: renderedImage, preview: SharePreview("preview", image: renderedImage))
+				}
+			}
+			.task {
+				do {
+					try await Task.sleep(nanoseconds: 1_000_000_000)
+					render()
+				} catch {}
+			}
 			.onAppear {
 				viewModel.startObserving()
 			}
@@ -16,18 +30,23 @@ struct SectorHeatmapScreen: View {
 	}
 	
 	@ViewBuilder
-	var content: some View {
+	var viewBody: some View {
 		if viewModel.state.isLoading {
 			LoadingView()
 		} else if let distribution = viewModel.state.distribution {
 			ScrollView {
-				VStack(alignment: .leading, spacing: 32) {
-					HeatmapBoard(heatmap: distribution)
-					countList(list: distribution.heatmap)
-				}
+				content(distribution)
 			}
 		} else {
 			NoDataView()
+		}
+	}
+	
+	@ViewBuilder
+	private func content(_ distribution: SectorHeatmapDistribution) -> some View {
+		VStack(alignment: .leading, spacing: 32) {
+			HeatmapBoard(heatmap: distribution)
+			countList(list: distribution.heatmap)
 		}
 	}
 	
@@ -49,6 +68,21 @@ struct SectorHeatmapScreen: View {
 				.foregroundColor(heat.color)
 			Text("sector_count \(heat.sector.valueString()) \(heat.count)")
 			Spacer()
+		}
+	}
+	
+	@MainActor
+	private func render() {
+		guard let distribution = viewModel.state.distribution else { return }
+		
+		let content = content(distribution)
+			.background(Color.background)
+			.frame(width: 300)
+		let renderer = ImageRenderer(content: content)
+		// make sure and use the correct display scale for this device
+		renderer.scale = displayScale
+		if let uiImage = renderer.uiImage {
+			renderedImage = Image(uiImage: uiImage)
 		}
 	}
 }

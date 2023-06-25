@@ -92,3 +92,5 @@
 "training_finished" = "Тренировка окончена";
 "game_result_is_draw" = "Ничья";
 "game_settings" = "Настройки игры";
+"share" = "Поделиться";
+"preview" = "Превью";

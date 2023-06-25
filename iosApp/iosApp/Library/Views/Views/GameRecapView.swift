@@ -12,22 +12,41 @@ struct GameRecapView: View {
 	let duration: GameDuration
 	let numberOfTurns: Int32
 	
+	@Environment(\.displayScale) var displayScale
+	@State private var renderedImage = Image(systemName: "photo")
+	
 	var body: some View {
 		ScrollView {
-			VStack {
-				chart
-				if !duration.isEmpty {
-					gameDurationItem
-				}
-				numberOfTurnsItem
-				valuesBlock(values: averageTurns, title: String(localized: "average_set_recap"))
-				valuesBlock(values: biggestTurns, title: String(localized: "biggest_sets"))
-				valuesBlock(values: smallestTurns, title: String(localized: "smallest_sets"))
-				valuesBlock(values: misses, title: String(localized: "misses_count"))
-				valuesBlock(values: overkills, title: String(localized: "overkill_count"))
-			}
+			content
 		}
 		.background(Color.background)
+		.toolbar {
+			ToolbarItem(placement: .navigationBarTrailing) {
+				ShareLink("share", item: renderedImage, preview: SharePreview("preview", image: renderedImage))
+			}
+		}
+		.task {
+			do {
+				try await Task.sleep(nanoseconds: 1_000_000_000)
+				render()
+			} catch {}
+		}
+	}
+	
+	@ViewBuilder
+	private var content: some View {
+		VStack {
+			chart
+			if !duration.isEmpty {
+				gameDurationItem
+			}
+			numberOfTurnsItem
+			valuesBlock(values: averageTurns, title: String(localized: "average_set_recap"))
+			valuesBlock(values: biggestTurns, title: String(localized: "biggest_sets"))
+			valuesBlock(values: smallestTurns, title: String(localized: "smallest_sets"))
+			valuesBlock(values: misses, title: String(localized: "misses_count"))
+			valuesBlock(values: overkills, title: String(localized: "overkill_count"))
+		}
 	}
 	
 	@ViewBuilder
@@ -92,5 +111,17 @@ struct GameRecapView: View {
 		}
 		.padding(.horizontal, 16)
 		.padding(.vertical, 4)
+	}
+	
+	@MainActor
+	private func render() {
+		let content = content.background(Color.background)
+			.frame(width: 300)
+		let renderer = ImageRenderer(content: content)
+		// make sure and use the correct display scale for this device
+		renderer.scale = displayScale
+		if let uiImage = renderer.uiImage {
+			renderedImage = Image(uiImage: uiImage)
+		}
 	}
 }

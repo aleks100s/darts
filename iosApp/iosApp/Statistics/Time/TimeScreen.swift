@@ -1,13 +1,14 @@
 import SwiftUI
+import shared
 
-struct ShotDistributionScreen: View {
-	@StateObject var viewModel: IOSShotDistributionViewModel
+struct TimeScreen: View {
+	@StateObject var viewModel: IOSTimeViewModel
 	
 	@Environment(\.displayScale) var displayScale
 	@State private var renderedImage = Image(systemName: "photo")
 	
 	var body: some View {
-		viewBody
+		viewContent
 			.background(Color.background)
 			.toolbar {
 				ToolbarItem(placement: .navigationBarTrailing) {
@@ -29,13 +30,13 @@ struct ShotDistributionScreen: View {
 	}
 	
 	@ViewBuilder
-	private var viewBody: some View {
-		if viewModel.isLoading {
+	var viewContent: some View {
+		if viewModel.state.isLoading {
 			LoadingView()
-		} else if viewModel.totalCount == 0 {
+		} else if viewModel.state.isEmpty {
 			NoDataView()
 		} else {
-			ScrollView {
+			ScrollView(showsIndicators: false) {
 				content
 			}
 		}
@@ -43,14 +44,26 @@ struct ShotDistributionScreen: View {
 	
 	@ViewBuilder
 	private var content: some View {
-		VStack(spacing: 32) {
-			ZStack {
-				Pie(slices: $viewModel.data)
-				Text("throws_count \(viewModel.totalCount)")
+		VStack(spacing: 0) {
+			TableHeader(columns: [
+				String(localized: "player"),
+				String(localized: "time_statistics")
+			])
+			if let totalTimePlayed = viewModel.state.totalTimePlayed {
+				item(title: String(localized: "all_players"), value: totalTimePlayed)
 			}
-			ChartLegend(legend: $viewModel.legend)
+			ForEach(viewModel.state.playersDuration) { duration in
+				item(title: duration.player.name, value: duration.duration)
+			}
 		}
-		.padding()
+	}
+	
+	@ViewBuilder
+	private func item(title: String, value: TimeDuration) -> some View {
+		TableRow(columns: [
+			title,
+			String(localized: "time_duration \(value.hours) \(value.minutes) \(value.seconds)")
+		])
 	}
 	
 	@MainActor

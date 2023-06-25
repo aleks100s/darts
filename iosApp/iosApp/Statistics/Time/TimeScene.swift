@@ -20,6 +20,6 @@ enum TimeScene {
 			coroutineScope: nil
 		)
 		let iOSViewModel = IOSTimeViewModel(viewModel: viewModel)
-		return TimeView(viewModel: iOSViewModel)
+		return TimeScreen(viewModel: iOSViewModel)
 	}
 }

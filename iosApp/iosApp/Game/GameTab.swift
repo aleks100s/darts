@@ -121,7 +121,7 @@ struct GameTab: View {
 				.navigationTitle("view_turn")
 			
 		case let .gameRecap(historyState):
-			GameRecapView(
+			RecapScreen(
 				history: historyState.gameHistory,
 				averageTurns: historyState.averageTurns(),
 				biggestTurns: historyState.biggestTurns(),

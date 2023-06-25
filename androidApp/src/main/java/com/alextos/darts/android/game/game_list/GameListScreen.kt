@@ -38,9 +38,8 @@ import com.alextos.darts.game.presentation.game_list.GameListState
 fun GameListScreen(
     state: GameListState,
     onEvent: (GameListEvent) -> Unit,
-    populateDB: () -> Unit,
-    onCalculatorPressed: () -> Unit,
-    onBackPressed: () -> Unit,
+    onNavigation: (GameListNavigationEvent) -> Unit,
+    populateDB: () -> Unit
 ) {
     Scaffold(
         floatingActionButton = {
@@ -49,7 +48,7 @@ fun GameListScreen(
                     text = stringResource(id = R.string.create_game),
                     icon = Icons.Filled.Create
                 ) {
-                    onEvent(GameListEvent.CreateGame)
+                    onNavigation(GameListNavigationEvent.CreateGame)
                 }
             }
         }
@@ -57,10 +56,10 @@ fun GameListScreen(
         Screen(
             title = stringResource(id = R.string.games),
             isBackButtonVisible = false,
-            onBackPressed = onBackPressed,
+            onBackPressed = { onNavigation(GameListNavigationEvent.BackButtonPressed) },
             additionalNavBarContent = {
                 Button(
-                    onClick = onCalculatorPressed,
+                    onClick = { onNavigation(GameListNavigationEvent.ShowCalculator) },
                     colors = ButtonDefaults.buttonColors(
                         backgroundColor = MaterialTheme.colors.secondary.copy(alpha = 0.8f),
                         contentColor = MaterialTheme.colors.onSecondary
@@ -85,7 +84,8 @@ fun GameListScreen(
                 RoundedView(modifier.padding(padding)) {
                     GamesList(
                         games = state.games,
-                        onEvent = onEvent
+                        onEvent = onEvent,
+                        onNavigation = onNavigation
                     )
                 }
             }
@@ -94,7 +94,8 @@ fun GameListScreen(
         if (state.isActionsDialogShown) {
             GameActionsDialog(
                 state = state,
-                onEvent = onEvent
+                onEvent = onEvent,
+                onNavigation = onNavigation
             )
         }
 
@@ -110,14 +111,15 @@ fun GameListScreen(
 @Composable
 private fun GamesList(
     games: List<Game>,
-    onEvent: (GameListEvent) -> Unit
+    onEvent: (GameListEvent) -> Unit,
+    onNavigation: (GameListNavigationEvent) -> Unit
 ) {
     LazyColumn(modifier = Modifier.surfaceBackground()) {
         itemsIndexed(games) { index, game ->
             GameItem(
                 game = game,
                 onClick = {
-                    onEvent(GameListEvent.SelectGame(game))
+                    onNavigation(GameListNavigationEvent.SelectGame(game))
                 },
                 onLongClick = {
                     onEvent(GameListEvent.ShowActionsDialog(game))
@@ -133,7 +135,8 @@ private fun GamesList(
 @Composable
 private fun GameActionsDialog(
     state: GameListState,
-    onEvent: (GameListEvent) -> Unit
+    onEvent: (GameListEvent) -> Unit,
+    onNavigation: (GameListNavigationEvent) -> Unit
 ) {
     Dialog(onDismissRequest = { onEvent(GameListEvent.HideActionsDialog) }) {
         Column(
@@ -154,7 +157,8 @@ private fun GameActionsDialog(
                 title = stringResource(id = R.string.replay),
                 onClick = {
                     state.selectedGame?.let {
-                        onEvent(GameListEvent.ReplayGame(it))
+                        onEvent(GameListEvent.ReplayGame)
+                        onNavigation(GameListNavigationEvent.ReplayGame(it))
                     }
                 }
             )

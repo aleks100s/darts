@@ -20,7 +20,8 @@ import com.alextos.darts.game.presentation.create_player.CreatePlayerState
 @Composable
 fun CreatePlayerScreen(
     state: CreatePlayerState,
-    onEvent: (CreatePlayerEvent) -> Unit
+    onEvent: (CreatePlayerEvent) -> Unit,
+    onNavigateBack: () -> Unit
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
 
@@ -44,6 +45,7 @@ fun CreatePlayerScreen(
                 if (state.isNameValid()) {
                     onEvent(CreatePlayerEvent.SavePlayer(state.name))
                     keyboardController?.hide()
+                    onNavigateBack()
                 }
             })
         )

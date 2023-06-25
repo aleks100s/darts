@@ -54,6 +54,10 @@ final class IOSCreateGameViewModel: ObservableObject {
 		)
 	}
 	
+	func showCreatePlayerDialog() {
+		isCreatePlayerDialogShown = true
+	}
+	
 	func startObserving() {
 		handle = viewModel.state
 			.subscribe { [weak self] state in
@@ -71,13 +75,7 @@ final class IOSCreateGameViewModel: ObservableObject {
 	}
 	
 	func onEvent(_ event: CreateGameEvent) {
-		switch event {
-		case .CreatePlayer():
-			isCreatePlayerDialogShown = true
-			
-		default:
-			viewModel.onEvent(event: event)
-		}
+		viewModel.onEvent(event: event)
 	}
 	
 	func deletePlayer(index: Int) {

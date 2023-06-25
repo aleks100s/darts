@@ -17,13 +17,12 @@ import com.alextos.darts.android.common.presentation.views.GameHistoryView
 import com.alextos.darts.android.common.presentation.views.GameRecapView
 import com.alextos.darts.android.common.presentation.views.LoadingView
 import com.alextos.darts.android.common.presentation.views.NoDataView
-import com.alextos.darts.game.presentation.history.HistoryEvent
 import com.alextos.darts.game.presentation.history.HistoryState
 
 @Composable
 fun HistoryScreen(
     state: HistoryState,
-    onEvent: (HistoryEvent) -> Unit,
+    onNavigation: (HistoryNavigationEvent) -> Unit,
     onBackPressed: () -> Unit
 ) {
     when (rememberScreenType()) {
@@ -35,7 +34,7 @@ fun HistoryScreen(
                             text = stringResource(id = R.string.recap),
                             icon = Icons.Filled.ShowChart
                         ) {
-                            onEvent(HistoryEvent.ShowRecap)
+                            onNavigation(HistoryNavigationEvent.ShowRecap)
                         }
                     }
                 }
@@ -50,7 +49,7 @@ fun HistoryScreen(
                         GameHistory(
                             modifier = modifier.padding(paddingValues),
                             state = state,
-                            onEvent = onEvent
+                            onNavigation = onNavigation
                         )
                     }
                 }
@@ -67,7 +66,7 @@ fun HistoryScreen(
                         GameHistory(
                             modifier = Modifier,
                             state = state,
-                            onEvent = onEvent
+                            onNavigation = onNavigation
                         )
                     }
                 },
@@ -104,7 +103,7 @@ private fun ContentLoading(
 private fun GameHistory(
     modifier: Modifier,
     state: HistoryState,
-    onEvent: (HistoryEvent) -> Unit
+    onNavigation: (HistoryNavigationEvent) -> Unit
 ) {
     GameHistoryView(
         modifier = modifier,
@@ -112,7 +111,7 @@ private fun GameHistory(
         currentPage = 0,
         goal = state.gameGoal,
         onSelect = { turns, page ->
-            onEvent(HistoryEvent.ShowDarts(turns, page))
+            onNavigation(HistoryNavigationEvent.ShowDarts(turns, page))
         }
     )
 }

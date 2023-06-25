@@ -10,7 +10,6 @@ struct GameScreen: View {
 			.navigationTitle("game_title_with_turn_counter \(viewModel.state.turnNumber)")
 			.alert(viewModel.gameFinishedTitle, isPresented: $viewModel.isGameFinishedDialogShown) {
 				Button(role: .cancel) {
-					viewModel.onEvent(.CloseGame())
 					viewModel.finishGame()
 				} label: {
 					Text("finish_game")
@@ -18,7 +17,7 @@ struct GameScreen: View {
 				.accessibilityIdentifier("finishGame")
 				
 				Button {
-					viewModel.onEvent(.ReplayGame())
+					viewModel.replayGame()
 				} label: {
 					Text("replay")
 				}
@@ -71,7 +70,7 @@ struct GameScreen: View {
 				}
 				ToolbarItem(placement: .navigationBarTrailing) {
 					Button {
-						viewModel.onEvent(.ShowGameSettings())
+						viewModel.showGameSettings()
 					} label: {
 						Image(systemName: "info.circle")
 					}

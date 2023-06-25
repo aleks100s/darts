@@ -27,11 +27,12 @@ import com.alextos.darts.game.presentation.calculator.CalculatorState
 @Composable
 fun CalculatorScreen(
     state: CalculatorState,
-    onEvent: (CalculatorEvent) -> Unit
+    onEvent: (CalculatorEvent) -> Unit,
+    onNavigation: (CalculatorNavigationEvent) -> Unit
 ) {
     Screen(
         title = stringResource(id = R.string.calculator),
-        onBackPressed = { onEvent(CalculatorEvent.BackButtonPressed) }
+        onBackPressed = { onNavigation(CalculatorNavigationEvent.BackButtonPressed) }
     ) {
         Scaffold(
             floatingActionButton = {
@@ -49,7 +50,7 @@ fun CalculatorScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .surfaceBackground()
-                        .clickable { onEvent(CalculatorEvent.ShowHistory(state.turns)) }
+                        .clickable { onNavigation(CalculatorNavigationEvent.ShowHistory(state.turns)) }
                         .padding(16.dp)
                 ) {
                     Text(

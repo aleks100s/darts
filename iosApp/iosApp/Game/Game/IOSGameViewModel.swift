@@ -81,6 +81,14 @@ final class IOSGameViewModel: ObservableObject {
 		onTurnSelected(turn)
 	}
 	
+	func showGameSettings() {
+		onShowGameSettings()
+	}
+	
+	func replayGame() {
+		onGameReplaySelected()
+	}
+	
 	func startObserving() {
 		handle = viewModel.state
 			.subscribe { [weak self] state in
@@ -93,16 +101,7 @@ final class IOSGameViewModel: ObservableObject {
 	}
 	
 	func onEvent(_ event: GameEvent) {
-		switch event {
-		case .ShowGameSettings():
-			onShowGameSettings()
-			
-		case .ReplayGame():
-			onGameReplaySelected()
-						
-		default:
-			viewModel.onEvent(event: event)
-		}
+		viewModel.onEvent(event: event)
 	}
 	
 	func dispose() {

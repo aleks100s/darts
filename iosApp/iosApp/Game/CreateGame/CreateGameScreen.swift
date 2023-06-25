@@ -67,7 +67,7 @@ struct CreateGameScreen: View {
 	private var allPlayersSection: some View {
 		Section("all_players") {
 			Button {
-				viewModel.onEvent(.CreatePlayer())
+				viewModel.showCreatePlayerDialog()
 			} label: {
 				Text("add_new_player")
 			}

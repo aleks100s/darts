@@ -31,6 +31,7 @@ import com.alextos.darts.game.presentation.create_game.CreateGameState
 fun CreateGameScreen(
     state: CreateGameState,
     onEvent: (CreateGameEvent) -> Unit,
+    onNavigation: (CreateGameNavigationEvent) -> Unit,
     onBackPressed: () -> Unit
 ) {
     Scaffold(
@@ -40,7 +41,7 @@ fun CreateGameScreen(
                 icon = Icons.Filled.Start,
                 isEnabled = state.isReadyToCreateGame()
             ) {
-                onEvent(CreateGameEvent.CreateGame)
+                onNavigation(CreateGameNavigationEvent.CreateGame)
             }
         }
     ) {
@@ -58,7 +59,7 @@ fun CreateGameScreen(
                 }
 
                 item {
-                    CreatePlayerButton(onEvent = onEvent)
+                    CreatePlayerButton(onNavigation = onNavigation)
                 }
 
                 items(state.allPlayers) { player ->
@@ -115,11 +116,11 @@ fun CreateGameScreen(
 }
 
 @Composable
-private fun CreatePlayerButton(onEvent: (CreateGameEvent) -> Unit) {
+private fun CreatePlayerButton(onNavigation: (CreateGameNavigationEvent) -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable { onEvent(CreateGameEvent.CreatePlayer) }
+            .clickable { onNavigation(CreateGameNavigationEvent.CreatePlayer) }
             .padding(horizontal = 16.dp, vertical = 12.dp),
         horizontalArrangement = Arrangement.Center,
     ) {

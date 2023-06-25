@@ -38,8 +38,6 @@ class CalculatorViewModel(
             is CalculatorEvent.UndoLastShot -> {
                 calculatorManager.undoLastShot()
             }
-            is CalculatorEvent.BackButtonPressed -> {}
-            is CalculatorEvent.ShowHistory -> {}
         }
     }
 }

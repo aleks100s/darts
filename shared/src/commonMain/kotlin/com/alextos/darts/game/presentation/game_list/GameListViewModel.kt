@@ -37,8 +37,6 @@ class GameListViewModel(
 
     fun onEvent(event: GameListEvent) {
         when (event) {
-            is GameListEvent.CreateGame -> {}
-            is GameListEvent.SelectGame -> {}
             is GameListEvent.DeleteGame -> {
                 _state.value.selectedGame?.let {
                     viewModelScope.launch(Dispatchers.Default) {

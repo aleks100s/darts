@@ -24,7 +24,8 @@ import com.alextos.darts.game.presentation.game.GameState
 @Composable
 fun GameScreen(
     state: GameState,
-    onEvent: (GameEvent) -> Unit
+    onEvent: (GameEvent) -> Unit,
+    onNavigation: (GameNavigationEvent) -> Unit
 ) {
     BackHandler {
         onEvent(GameEvent.BackButtonPressed)
@@ -40,7 +41,7 @@ fun GameScreen(
                 onBackPressed = { onEvent(GameEvent.BackButtonPressed) },
                 additionalNavBarContent = {
                     InfoButton {
-                        onEvent(GameEvent.ShowGameSettings)
+                        onNavigation(GameNavigationEvent.ShowGameSettings)
                     }
                 }
             ) { modifier ->
@@ -48,7 +49,8 @@ fun GameScreen(
                     modifier = modifier,
                     screenType = screenType,
                     state = state,
-                    onEvent = onEvent
+                    onEvent = onEvent,
+                    onNavigation = onNavigation
                 )
             }
         }
@@ -61,15 +63,16 @@ fun GameScreen(
                         modifier = Modifier,
                         screenType = screenType,
                         state = state,
-                        onEvent = onEvent
+                        onEvent = onEvent,
+                        onNavigation = onNavigation
                     )
                 },
                 content2 = {
-                    GameHistory(state = state, onEvent = onEvent)
+                    GameHistory(state = state, onNavigation = onNavigation)
                 },
                 additionalNavBarContent = {
                     InfoButton {
-                        onEvent(GameEvent.ShowGameSettings)
+                        onNavigation(GameNavigationEvent.ShowGameSettings)
                     }
                 },
                 onBackPressed = {
@@ -84,18 +87,18 @@ fun GameScreen(
     }
 
     if (state.isCloseGameDialogOpened) {
-        CloseGameDialog(onEvent = onEvent)
+        CloseGameDialog(onEvent, onNavigation)
     }
 
     state.gameResult?.let {
-        GameFinishedDialog(gameResult = it, onEvent = onEvent)
+        GameFinishedDialog(gameResult = it, onNavigation = onNavigation)
     }
 }
 
 @Composable
 private fun GameHistory(
     state: GameState,
-    onEvent: (GameEvent) -> Unit
+    onNavigation: (GameNavigationEvent) -> Unit
 ) {
     GameHistoryView(
         modifier = Modifier,
@@ -103,7 +106,7 @@ private fun GameHistory(
         goal = state.gameGoal,
         currentPage = state.currentPage(),
         onSelect = { turns, currentPage ->
-            onEvent(GameEvent.ShowDarts(turns, currentPage))
+            onNavigation(GameNavigationEvent.ShowDarts(turns, currentPage))
         }
     )
 }
@@ -113,7 +116,8 @@ private fun GameInput(
     modifier: Modifier,
     screenType: ScreenType,
     state: GameState,
-    onEvent: (GameEvent) -> Unit
+    onEvent: (GameEvent) -> Unit,
+    onNavigation: (GameNavigationEvent) -> Unit
 ) {
     GameInputView(
         modifier = modifier,
@@ -127,7 +131,7 @@ private fun GameInput(
         },
         onPlayerClick = {
             when (screenType) {
-                is ScreenType.Compact -> onEvent(GameEvent.ShowHistory(it))
+                is ScreenType.Compact -> onNavigation(GameNavigationEvent.ShowHistory(it))
                 else -> {}
             }
         }
@@ -166,7 +170,10 @@ private fun TurnOverDialog(result: Int, onEvent: (GameEvent) -> Unit) {
 }
 
 @Composable
-private fun CloseGameDialog(onEvent: (GameEvent) -> Unit) {
+private fun CloseGameDialog(
+    onEvent: (GameEvent) -> Unit,
+    onNavigation: (GameNavigationEvent) -> Unit
+) {
     AlertDialog(
         onDismissRequest = { onEvent(GameEvent.ReturnToGame) },
         title = {
@@ -176,7 +183,7 @@ private fun CloseGameDialog(onEvent: (GameEvent) -> Unit) {
             Text(text = stringResource(id = R.string.your_progress_will_be_lost))
         },
         confirmButton = {
-            Button(onClick = { onEvent(GameEvent.CloseGame) }) {
+            Button(onClick = { onNavigation(GameNavigationEvent.CloseGame) }) {
                 Text(text = stringResource(id = R.string.leave))
             }
         },
@@ -189,7 +196,10 @@ private fun CloseGameDialog(onEvent: (GameEvent) -> Unit) {
 }
 
 @Composable
-private fun GameFinishedDialog(gameResult: GameResult, onEvent: (GameEvent) -> Unit) {
+private fun GameFinishedDialog(
+    gameResult: GameResult,
+    onNavigation: (GameNavigationEvent) -> Unit
+) {
     val title = when (gameResult) {
         is GameResult.TrainingFinished -> {
             stringResource(id = R.string.training_finished)
@@ -221,12 +231,12 @@ private fun GameFinishedDialog(gameResult: GameResult, onEvent: (GameEvent) -> U
             Text(text = text)
         },
         confirmButton = {
-            Button(onClick = { onEvent(GameEvent.ReplayGame) }) {
+            Button(onClick = { onNavigation(GameNavigationEvent.ReplayGame) }) {
                 Text(text = stringResource(id = R.string.replay))
             }
         },
         dismissButton = {
-            Button(onClick = { onEvent(GameEvent.CloseGame) }) {
+            Button(onClick = { onNavigation(GameNavigationEvent.CloseGame) }) {
                 Text(text = stringResource(id = R.string.finish_game))
             }
         },

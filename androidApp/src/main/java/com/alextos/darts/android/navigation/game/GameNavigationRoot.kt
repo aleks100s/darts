@@ -17,32 +17,32 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.alextos.darts.android.game.calculator.AndroidCalculatorViewModel
+import com.alextos.darts.android.game.calculator.CalculatorNavigationEvent
 import com.alextos.darts.android.game.calculator.CalculatorScreen
 import com.alextos.darts.android.game.calculator_history.CalculatorHistoryScreen
 import com.alextos.darts.android.game.create_game.AndroidCreateGameViewModel
+import com.alextos.darts.android.game.create_game.CreateGameNavigationEvent
 import com.alextos.darts.android.game.create_game.CreateGameScreen
 import com.alextos.darts.android.game.create_game.create_player.AndroidCreatePlayerViewModel
 import com.alextos.darts.android.game.create_game.create_player.CreatePlayerScreen
 import com.alextos.darts.android.game.darts_board.DartsScreen
 import com.alextos.darts.android.game.darts_board.DartsState
 import com.alextos.darts.android.game.game.AndroidGameViewModel
+import com.alextos.darts.android.game.game.GameNavigationEvent
 import com.alextos.darts.android.game.game.GameScreen
 import com.alextos.darts.android.game.game.game_settings.GameSettingsScreen
 import com.alextos.darts.android.game.game_list.AndroidGameListViewModel
+import com.alextos.darts.android.game.game_list.GameListNavigationEvent
 import com.alextos.darts.android.game.game_list.GameListScreen
 import com.alextos.darts.android.game.history.AndroidHistoryViewModel
+import com.alextos.darts.android.game.history.HistoryNavigationEvent
 import com.alextos.darts.android.game.history.HistoryScreen
+import com.alextos.darts.android.game.in_game_history.InGameHistoryNavigationEvent
 import com.alextos.darts.android.game.in_game_history.InGameHistoryScreen
 import com.alextos.darts.android.game.recap.RecapScreen
 import com.alextos.darts.core.domain.model.Turn
 import com.alextos.darts.game.domain.models.GameSettings
-import com.alextos.darts.game.presentation.calculator.CalculatorEvent
-import com.alextos.darts.game.presentation.create_game.CreateGameEvent
-import com.alextos.darts.game.presentation.create_player.CreatePlayerEvent
-import com.alextos.darts.game.presentation.game.GameEvent
 import com.alextos.darts.game.presentation.game.GameState
-import com.alextos.darts.game.presentation.game_list.GameListEvent
-import com.alextos.darts.game.presentation.history.HistoryEvent
 import com.alextos.darts.game.presentation.history.HistoryState
 import kotlinx.coroutines.launch
 import kotlinx.serialization.decodeFromString
@@ -64,39 +64,36 @@ fun GameNavigationRoot() {
 
             GameListScreen(
                 state = state,
-                onEvent = {
+                onEvent = viewModel::onEvent,
+                onNavigation = {
                     when (it) {
-                        is GameListEvent.CreateGame -> {
+                        is GameListNavigationEvent.CreateGame -> {
                             navController.navigate(route = GameRoute.CreateGame.route)
                         }
-                        is GameListEvent.SelectGame -> {
+                        is GameListNavigationEvent.SelectGame -> {
                             navController.navigate(
                                 route = GameRoute.History.routeWithArgs(
                                     Json.encodeToString(it.game)
                                 )
                             )
                         }
-                        is GameListEvent.ReplayGame -> {
-                            viewModel.onEvent(it)
+                        is GameListNavigationEvent.ReplayGame -> {
                             navController.navigate(
                                 route = GameRoute.Game.routeWithArgs(
                                     Json.encodeToString(it.game.getGameSettings())
                                 )
                             )
                         }
-                        else -> {
-                            viewModel.onEvent(it)
+                        is GameListNavigationEvent.ShowCalculator -> {
+                            navController.navigate(route = GameRoute.Calculator.route)
+                        }
+                        is GameListNavigationEvent.BackButtonPressed -> {
+                            navController.popBackStack()
                         }
                     }
                 },
                 populateDB = {
                     viewModel.prepopulateDatabase()
-                },
-                onCalculatorPressed = {
-                    navController.navigate(route = GameRoute.Calculator.route)
-                },
-                onBackPressed = {
-                    navController.popBackStack()
                 }
             )
         }
@@ -121,17 +118,10 @@ fun GameNavigationRoot() {
                     val state by viewModel.state.collectAsState()
                     CreatePlayerScreen(
                         state = state,
-                        onEvent = {
-                            when (it) {
-                                is CreatePlayerEvent.SavePlayer -> {
-                                    viewModel.onEvent(it)
-                                    coroutineScope.launch {
-                                        modalSheetState.hide()
-                                    }
-                                }
-                                else -> {
-                                    viewModel.onEvent(it)
-                                }
+                        onEvent = viewModel::onEvent,
+                        onNavigateBack = {
+                            coroutineScope.launch {
+                                modalSheetState.hide()
                             }
                         }
                     )
@@ -141,25 +131,23 @@ fun GameNavigationRoot() {
                 val state by viewModel.state.collectAsState()
                 CreateGameScreen(
                     state = state,
-                    onEvent = {
-                        when(it) {
-                            is CreateGameEvent.CreateGame -> {
+                    onEvent = viewModel::onEvent,
+                    onNavigation = { event ->
+                        when (event) {
+                            is CreateGameNavigationEvent.CreateGame -> {
                                 navController.navigate(
                                     route = GameRoute.Game.routeWithArgs(
                                         Json.encodeToString(state.getSettings())
                                     )
                                 )
                             }
-                            is CreateGameEvent.CreatePlayer -> {
+                            is CreateGameNavigationEvent.CreatePlayer -> {
                                 coroutineScope.launch {
                                     if (modalSheetState.isVisible)
                                         modalSheetState.hide()
                                     else
                                         modalSheetState.animateTo(ModalBottomSheetValue.Expanded)
                                 }
-                            }
-                            else -> {
-                                viewModel.onEvent(it)
                             }
                         }
                     }
@@ -206,12 +194,17 @@ fun GameNavigationRoot() {
             ) {
                 GameScreen(
                     state = state,
-                    onEvent = { event ->
+                    onEvent = viewModel::onEvent,
+                    onNavigation = { event ->
                         when (event) {
-                            is GameEvent.CloseGame -> {
-                                navController.popBackStack(GameRoute.GameList.route, inclusive = false)
+                            is GameNavigationEvent.CloseGame -> {
+                                navController.popBackStack(
+                                    GameRoute.GameList.route,
+                                    inclusive = false
+                                )
                             }
-                            is GameEvent.ShowDarts -> {
+
+                            is GameNavigationEvent.ShowDarts -> {
                                 navController.navigate(
                                     GameRoute.Darts.routeWithArgs(
                                         Json.encodeToString(
@@ -223,15 +216,20 @@ fun GameNavigationRoot() {
                                     )
                                 )
                             }
-                            is GameEvent.ReplayGame -> {
-                                navController.popBackStack(GameRoute.GameList.route, inclusive = false)
+
+                            is GameNavigationEvent.ReplayGame -> {
+                                navController.popBackStack(
+                                    GameRoute.GameList.route,
+                                    inclusive = false
+                                )
                                 navController.navigate(
                                     route = GameRoute.Game.routeWithArgs(
                                         Json.encodeToString(settings)
                                     )
                                 )
                             }
-                            is GameEvent.ShowHistory -> {
+
+                            is GameNavigationEvent.ShowHistory -> {
                                 navController.navigate(
                                     route = GameRoute.InGameHistory.routeWithArgs(
                                         Json.encodeToString(state),
@@ -239,7 +237,8 @@ fun GameNavigationRoot() {
                                     )
                                 )
                             }
-                            is GameEvent.ShowGameSettings -> {
+
+                            is GameNavigationEvent.ShowGameSettings -> {
                                 coroutineScope.launch {
                                     if (modalSheetState.isVisible)
                                         modalSheetState.hide()
@@ -247,7 +246,6 @@ fun GameNavigationRoot() {
                                         modalSheetState.animateTo(ModalBottomSheetValue.Expanded)
                                 }
                             }
-                            else -> { viewModel.onEvent(event) }
                         }
                     }
                 )
@@ -272,21 +270,26 @@ fun GameNavigationRoot() {
             InGameHistoryScreen(
                 gameState = state,
                 currentPage = page,
-                onSelect = { turns, currentPage ->
-                    navController.navigate(
-                        GameRoute.Darts.routeWithArgs(
-                            Json.encodeToString(
-                                DartsState(
-                                    turns = turns,
-                                    currentPage = currentPage
+                onNavigation = {
+                    when (it) {
+                        is InGameHistoryNavigationEvent.SelectTurn -> {
+                            navController.navigate(
+                                GameRoute.Darts.routeWithArgs(
+                                    Json.encodeToString(
+                                        DartsState(
+                                            turns = it.list,
+                                            currentPage = it.index
+                                        )
+                                    )
                                 )
                             )
-                        )
-                    )
+                        }
+                        is InGameHistoryNavigationEvent.BackButtonPressed -> {
+                            navController.popBackStack()
+                        }
+                    }
                 }
-            ) {
-                navController.popBackStack()
-            }
+            )
         }
 
         composable(
@@ -301,9 +304,9 @@ fun GameNavigationRoot() {
             val state by viewModel.state.collectAsState()
             HistoryScreen(
                 state = state,
-                onEvent = { event ->
+                onNavigation = { event ->
                     when (event) {
-                        is HistoryEvent.ShowDarts -> {
+                        is HistoryNavigationEvent.ShowDarts -> {
                             navController.navigate(
                                 GameRoute.Darts.routeWithArgs(
                                     Json.encodeToString(
@@ -316,7 +319,7 @@ fun GameNavigationRoot() {
                             )
                         }
 
-                        is HistoryEvent.ShowRecap -> {
+                        is HistoryNavigationEvent.ShowRecap -> {
                             navController.navigate(
                                 GameRoute.Recap.routeWithArgs(
                                     Json.encodeToString(state)
@@ -367,12 +370,13 @@ fun GameNavigationRoot() {
             val state by viewModel.state.collectAsState()
             CalculatorScreen(
                 state = state,
-                onEvent = { event ->
+                onEvent = viewModel::onEvent,
+                onNavigation = { event ->
                     when (event) {
-                        is CalculatorEvent.BackButtonPressed -> {
+                        is CalculatorNavigationEvent.BackButtonPressed -> {
                             navController.popBackStack()
                         }
-                        is CalculatorEvent.ShowHistory -> {
+                        is CalculatorNavigationEvent.ShowHistory -> {
                             if (state.turnNumber > 0) {
                                 navController.navigate(
                                     route = GameRoute.CalculatorHistory.routeWithArgs(
@@ -380,12 +384,6 @@ fun GameNavigationRoot() {
                                     )
                                 )
                             }
-                        }
-                        is CalculatorEvent.MakeShot -> {
-                            viewModel.onEvent(event)
-                        }
-                        is CalculatorEvent.UndoLastShot -> {
-                            viewModel.onEvent(event)
                         }
                     }
                 }

@@ -97,9 +97,6 @@ class CreateGameViewModel(
                     it.copy(isStatisticsEnabled = event.isChecked)
                 }
             }
-
-            CreateGameEvent.CreateGame -> {}
-            CreateGameEvent.CreatePlayer -> {}
         }
     }
 }

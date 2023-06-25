@@ -74,11 +74,6 @@ class GameViewModel(
             is GameEvent.EraseHit -> {
                 gameManager.eraseShot()
             }
-            is GameEvent.CloseGame -> {}
-            is GameEvent.ReplayGame -> {}
-            is GameEvent.ShowDarts -> {}
-            is GameEvent.ShowHistory -> {}
-            is GameEvent.ShowGameSettings -> {}
         }
     }
 }

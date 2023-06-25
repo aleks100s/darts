@@ -53,4 +53,5 @@ dependencies {
     implementation(Dependencies.charts)
     implementation(Dependencies.pager)
     implementation(Dependencies.serialization)
+    implementation("dev.shreyaspatil:capturable:1.0.3")
 }

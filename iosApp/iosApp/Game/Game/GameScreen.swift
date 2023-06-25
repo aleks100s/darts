@@ -6,7 +6,7 @@ struct GameScreen: View {
 	private var idiom : UIUserInterfaceIdiom { UIDevice.current.userInterfaceIdiom }
 	
 	var body: some View {
-		return gameView
+		return content
 			.navigationTitle("game_title_with_turn_counter \(viewModel.state.turnNumber)")
 			.alert(viewModel.gameFinishedTitle, isPresented: $viewModel.isGameFinishedDialogShown) {
 				Button(role: .cancel) {
@@ -97,7 +97,7 @@ struct GameScreen: View {
 	}
 	
 	@ViewBuilder
-	private var gameView: some View {
+	private var content: some View {
 		if idiom == .pad {
 			TabletView(
 				view1: {

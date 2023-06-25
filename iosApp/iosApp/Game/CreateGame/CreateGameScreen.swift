@@ -57,42 +57,55 @@ struct CreateGameScreen: View {
 	@ViewBuilder
 	private var content: some View {
 		List {
-			Section("all_players") {
-				Button {
-					viewModel.onEvent(.CreatePlayer())
-				} label: {
-					Text("add_new_player")
-				}
-				.accessibilityIdentifier("addNewPlayer")
+			allPlayersSection
+			gameGoalSection
+			additionalSettings
+		}
+	}
+	
+	@ViewBuilder
+	private var allPlayersSection: some View {
+		Section("all_players") {
+			Button {
+				viewModel.onEvent(.CreatePlayer())
+			} label: {
+				Text("add_new_player")
+			}
+			.accessibilityIdentifier("addNewPlayer")
 
-				ForEach(viewModel.state.allPlayers) { player in
-					let isChecked = viewModel.state.isPlayerSelected(player: player)
-					PlayerCheckbox(player: player, isChecked: isChecked) {
-						viewModel.onEvent(.SelectPlayer(player: player))
-					}
-				}
-				.onDelete { indexTurn in
-					if let index = indexTurn.first {
-						viewModel.deletePlayer(index: index)
-					}
+			ForEach(viewModel.state.allPlayers) { player in
+				let isChecked = viewModel.state.isPlayerSelected(player: player)
+				PlayerCheckbox(player: player, isChecked: isChecked) {
+					viewModel.onEvent(.SelectPlayer(player: player))
 				}
 			}
-			
-			Section("game_goal") {
-				ForEach(viewModel.state.goalOptions) { option in
-					let isSelected = viewModel.state.isGoalSelected(goal: option.int32Value)
-					GoalOption(option: option.intValue, isSelected: isSelected) {
-						viewModel.onEvent(.SelectGoal(option: option.int32Value))
-					}
+			.onDelete { indexTurn in
+				if let index = indexTurn.first {
+					viewModel.deletePlayer(index: index)
 				}
 			}
-			
-			Section("additional_settings") {
-				Toggle("finish_with_doubles", isOn: $viewModel.isFinishWithDoublesChecked)
-				Toggle("turn_limit", isOn: $viewModel.isTurnLimitEnabled)
-				Toggle("randomize_player_order", isOn: $viewModel.isRandomPlayerOrderChecked)
-				Toggle("enable_statistics", isOn: $viewModel.isStatisticsEnabled)
+		}
+	}
+	
+	@ViewBuilder
+	private var gameGoalSection: some View {
+		Section("game_goal") {
+			ForEach(viewModel.state.goalOptions) { option in
+				let isSelected = viewModel.state.isGoalSelected(goal: option.int32Value)
+				GoalOption(option: option.intValue, isSelected: isSelected) {
+					viewModel.onEvent(.SelectGoal(option: option.int32Value))
+				}
 			}
+		}
+	}
+	
+	@ViewBuilder
+	private var additionalSettings: some View {
+		Section("additional_settings") {
+			Toggle("finish_with_doubles", isOn: $viewModel.isFinishWithDoublesChecked)
+			Toggle("turn_limit", isOn: $viewModel.isTurnLimitEnabled)
+			Toggle("randomize_player_order", isOn: $viewModel.isRandomPlayerOrderChecked)
+			Toggle("enable_statistics", isOn: $viewModel.isStatisticsEnabled)
 		}
 	}
 	

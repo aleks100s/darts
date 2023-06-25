@@ -4,6 +4,27 @@ struct CalculatorScreen: View {
 	@StateObject var viewModel: IOSCalculatorViewModel
 	
 	var body: some View {
+		content
+			.toolbar {
+				ToolbarItem(placement: .navigationBarTrailing) {
+					Button {
+						viewModel.onEvent(.UndoLastShot())
+					} label: {
+						Text("erase_hit")
+					}
+					.accessibilityIdentifier("eraseHit")
+				}
+			}
+			.onAppear {
+				viewModel.startObserving()
+			}
+			.onDisappear {
+				viewModel.dispose()
+			}
+	}
+	
+	@ViewBuilder
+	private var content: some View {
 		VStack(spacing: 0) {
 			VStack(alignment: .center) {
 				Text("game_player_result \(viewModel.state.score)")
@@ -35,22 +56,6 @@ struct CalculatorScreen: View {
 			InputMatrixView { sector in
 				viewModel.onEvent(.MakeShot(sector: sector))
 			}
-		}
-		.toolbar {
-			ToolbarItem(placement: .navigationBarTrailing) {
-				Button {
-					viewModel.onEvent(.UndoLastShot())
-				} label: {
-					Text("erase_hit")
-				}
-				.accessibilityIdentifier("eraseHit")
-			}
-		}
-		.onAppear {
-			viewModel.startObserving()
-		}
-		.onDisappear {
-			viewModel.dispose()
 		}
 	}
 }

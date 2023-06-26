@@ -128,7 +128,7 @@ class GameManager(
         val playerHistories = playerHistoryManagers.map { it.playerHistory.value }
         val playerHistoryWithHighestScore = playerHistories.minBy { it.leftAfter }
         val highestScoreCount = playerHistories.count { it.leftAfter == playerHistoryWithHighestScore.leftAfter }
-        if (highestScoreCount > 1) {
+        if (highestScoreCount > 1 || playerHistories.count() == 1) {
             finishGame(winner = null)
         } else {
             finishGame(playerHistoryWithHighestScore.player)

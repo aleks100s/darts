@@ -14,11 +14,10 @@ struct AverageValuesScreen: View {
 					ShareLink("share", item: renderedImage, preview: SharePreview("preview", image: renderedImage))
 				}
 			}
-			.task {
-				do {
-					try await Task.sleep(nanoseconds: 1_000_000_000)
+			.onReceive(viewModel.$state) { _ in
+				Task {
 					render()
-				} catch {}
+				}
 			}
 			.onAppear {
 				viewModel.startObserving()

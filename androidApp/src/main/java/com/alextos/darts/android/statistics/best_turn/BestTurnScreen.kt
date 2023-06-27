@@ -7,13 +7,12 @@ import com.alextos.darts.android.common.presentation.views.StatisticPlayersListV
 import com.alextos.darts.android.common.presentation.screens.Screen
 import com.alextos.darts.android.common.presentation.views.LoadingView
 import com.alextos.darts.android.common.presentation.views.NoDataView
-import com.alextos.darts.statistics.presentation.best_turn.BestTurnEvent
 import com.alextos.darts.statistics.presentation.best_turn.BestTurnState
 
 @Composable
 fun BestTurnScreen(
     state: BestTurnState,
-    onEvent: (BestTurnEvent) -> Unit,
+    onNavigationEvent: (BestTurnNavigationEvent) -> Unit,
     onBackPressed: () -> Unit
 ) {
     Screen(
@@ -31,7 +30,7 @@ fun BestTurnScreen(
                     set.player to set.set.score().toString()
                 },
                 onValueClick = { index ->
-                    onEvent(BestTurnEvent.ShowBestTurnOfPlayer(state.playersBestTurns[index].set))
+                    onNavigationEvent(BestTurnNavigationEvent.ShowBestTurnOfPlayer(state.playersBestTurns[index].set))
                 }
             )
         }

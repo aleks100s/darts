@@ -7,13 +7,12 @@ import com.alextos.darts.android.common.presentation.views.StatisticPlayersListV
 import com.alextos.darts.android.common.presentation.screens.Screen
 import com.alextos.darts.android.common.presentation.views.LoadingView
 import com.alextos.darts.android.common.presentation.views.NoDataView
-import com.alextos.darts.statistics.presentation.biggest_final_turn.BiggestFinalTurnEvent
 import com.alextos.darts.statistics.presentation.biggest_final_turn.BiggestFinalTurnState
 
 @Composable
 fun BiggestFinalTurnScreen(
     state: BiggestFinalTurnState,
-    onEvent: (BiggestFinalTurnEvent) -> Unit,
+    onNavigationEvent: (BiggestFinalTurnNavigationEvent) -> Unit,
     onBackPressed: () -> Unit
 ) {
     Screen(
@@ -29,7 +28,7 @@ fun BiggestFinalTurnScreen(
                 modifier,
                 values = state.playersBiggestFinalTurns.map { it.player to it.set.score().toString() },
                 onValueClick = { index ->
-                    onEvent(BiggestFinalTurnEvent.ShowBiggestFinalTurnOfPlayer(state.playersBiggestFinalTurns[index].set))
+                    onNavigationEvent(BiggestFinalTurnNavigationEvent.ShowBiggestFinalTurnNavigationOfPlayer(state.playersBiggestFinalTurns[index].set))
                 }
             )
         }

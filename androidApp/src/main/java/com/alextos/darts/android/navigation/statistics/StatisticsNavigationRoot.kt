@@ -20,24 +20,24 @@ import com.alextos.darts.android.navigation.game.GameRoute
 import com.alextos.darts.android.statistics.average_values.AndroidAverageValuesViewModel
 import com.alextos.darts.android.statistics.average_values.AverageValuesScreen
 import com.alextos.darts.android.statistics.best_turn.AndroidBestTurnViewModel
+import com.alextos.darts.android.statistics.best_turn.BestTurnNavigationEvent
 import com.alextos.darts.android.statistics.best_turn.BestTurnScreen
 import com.alextos.darts.android.statistics.biggest_final_turn.AndroidBiggestFinalTurnViewModel
+import com.alextos.darts.android.statistics.biggest_final_turn.BiggestFinalTurnNavigationEvent
 import com.alextos.darts.android.statistics.biggest_final_turn.BiggestFinalTurnScreen
 import com.alextos.darts.android.statistics.heatmap.AndroidSectorHeatmapViewModel
 import com.alextos.darts.android.statistics.heatmap.SectorHeatmapScreen
 import com.alextos.darts.android.statistics.player_list.AndroidPlayerListViewModel
+import com.alextos.darts.android.statistics.player_list.PlayerListNavigationEvent
 import com.alextos.darts.android.statistics.player_list.PlayerListScreen
 import com.alextos.darts.android.statistics.shot_distribution.AndroidShotDistributionViewModel
 import com.alextos.darts.android.statistics.shot_distribution.ShotDistributionScreen
+import com.alextos.darts.android.statistics.statistics.StatisticsNavigationEvent
 import com.alextos.darts.android.statistics.statistics.StatisticsScreen
 import com.alextos.darts.android.statistics.time.AndroidTimeViewModel
 import com.alextos.darts.android.statistics.time.TimeScreen
 import com.alextos.darts.android.statistics.victory_distribution.AndroidVictoryDistributionViewModel
 import com.alextos.darts.android.statistics.victory_distribution.VictoryDistributionScreen
-import com.alextos.darts.statistics.presentation.best_turn.BestTurnEvent
-import com.alextos.darts.statistics.presentation.biggest_final_turn.BiggestFinalTurnEvent
-import com.alextos.darts.statistics.presentation.player_list.PlayerListEvent
-import com.alextos.darts.statistics.presentation.statistics.StatisticsEvent
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -51,27 +51,27 @@ fun StatisticsNavigationRoot() {
         modifier = Modifier.background(MaterialTheme.colors.background)
     ) {
         composable(route = StatisticsRoute.Statistics.route) {
-            StatisticsScreen(onEvent = { event ->
+            StatisticsScreen(onNavigationEvent = { event ->
                 when(event) {
-                    is StatisticsEvent.ShowBestTurn -> {
+                    is StatisticsNavigationEvent.ShowBestTurn -> {
                         navController.navigate(route = StatisticsRoute.BestSet.route)
                     }
-                    is StatisticsEvent.ShowBiggestFinalTurn -> {
+                    is StatisticsNavigationEvent.ShowBiggestFinalTurn -> {
                         navController.navigate(route = StatisticsRoute.BiggestFinalSet.route)
                     }
-                    is StatisticsEvent.ShowAverageValues -> {
+                    is StatisticsNavigationEvent.ShowAverageValues -> {
                         navController.navigate(route = StatisticsRoute.AverageValues.route)
                     }
-                    is StatisticsEvent.ShowShotDistribution -> {
+                    is StatisticsNavigationEvent.ShowShotDistribution -> {
                         navController.navigate(route = StatisticsRoute.PlayerList.routeWithArgs("shot"))
                     }
-                    is StatisticsEvent.ShowVictoryDistribution -> {
+                    is StatisticsNavigationEvent.ShowVictoryDistribution -> {
                         navController.navigate(route = StatisticsRoute.PlayerList.routeWithArgs("victory"))
                     }
-                    is StatisticsEvent.ShowSectorHeatmapDistribution -> {
+                    is StatisticsNavigationEvent.ShowSectorHeatmapDistribution -> {
                         navController.navigate(route = StatisticsRoute.PlayerList.routeWithArgs("heatmap"))
                     }
-                    is StatisticsEvent.ShowTimeStatistics -> {
+                    is StatisticsNavigationEvent.ShowTimeStatistics -> {
                         navController.navigate(route = StatisticsRoute.Time.route)
                     }
                 }
@@ -85,9 +85,9 @@ fun StatisticsNavigationRoot() {
             val state by viewModel.state.collectAsState()
             BestTurnScreen(
                 state = state,
-                onEvent = { event ->
+                onNavigationEvent = { event ->
                     when(event) {
-                        is BestTurnEvent.ShowBestTurnOfPlayer -> {
+                        is BestTurnNavigationEvent.ShowBestTurnOfPlayer -> {
                             navController.navigate(
                                 route = StatisticsRoute.Darts.routeWithArgs(
                                     Json.encodeToString(
@@ -111,9 +111,9 @@ fun StatisticsNavigationRoot() {
             val state by viewModel.state.collectAsState()
             BiggestFinalTurnScreen(
                 state = state,
-                onEvent = { event ->
+                onNavigationEvent = { event ->
                     when (event) {
-                        is BiggestFinalTurnEvent.ShowBiggestFinalTurnOfPlayer -> {
+                        is BiggestFinalTurnNavigationEvent.ShowBiggestFinalTurnNavigationOfPlayer -> {
                             navController.navigate(
                                 route = StatisticsRoute.Darts.routeWithArgs(
                                     Json.encodeToString(
@@ -160,9 +160,9 @@ fun StatisticsNavigationRoot() {
             PlayerListScreen(
                 title = title,
                 state = state,
-                onEvent = { event ->
+                onNavigationEvent = { event ->
                     when (event) {
-                        is PlayerListEvent.SelectPlayer -> {
+                        is PlayerListNavigationEvent.SelectNavigationPlayer -> {
                             when (mode) {
                                 "shot" -> {
                                     navController.navigate(

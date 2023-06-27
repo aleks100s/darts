@@ -1,33 +1,28 @@
 import shared
 
-extension StatisticsEvent: Identifiable {}
-
-extension StatisticsEvent {
+extension StatisticsNavigationEvent {
 	var title: String {
 		switch self {
-		case .ShowVictoryDistribution():
+		case .showVictoryDistribution:
 			return String(localized: "victory_distribution_statistics")
 			
-		case .ShowShotDistribution():
+		case .showShotDistribution:
 			return String(localized: "shot_distribution_statistics")
 			
-		case .ShowBiggestFinalTurn():
+		case .showBiggestFinalTurn:
 			return String(localized: "biggest_final_set_statistics")
 			
-		case .ShowBestTurn():
+		case .showBestTurn:
 			return String(localized: "best_set_statistics")
 			
-		case .ShowAverageValues():
+		case .showAverageValues:
 			return String(localized: "average_values_statistics")
 			
-		case .ShowSectorHeatmapDistribution():
+		case .showSectorHeatmapDistribution:
 			return String(localized: "sector_heatmap_statistics")
 			
-		case .ShowTimeStatistics():
+		case .showTimeStatistics:
 			return String(localized: "time_statistics")
-			
-		default:
-			return ""
 		}
 	}
 }

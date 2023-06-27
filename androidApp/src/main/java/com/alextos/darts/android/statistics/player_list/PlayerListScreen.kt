@@ -10,14 +10,13 @@ import com.alextos.darts.android.common.presentation.extensions.surfaceBackgroun
 import com.alextos.darts.android.common.presentation.screens.Screen
 import com.alextos.darts.android.common.presentation.views.LoadingView
 import com.alextos.darts.android.common.presentation.views.NoDataView
-import com.alextos.darts.statistics.presentation.player_list.PlayerListEvent
 import com.alextos.darts.statistics.presentation.player_list.PlayerListState
 
 @Composable
 fun PlayerListScreen(
     title: String,
     state: PlayerListState,
-    onEvent: (PlayerListEvent) -> Unit,
+    onNavigationEvent: (PlayerListNavigationEvent) -> Unit,
     onBackPressed: () -> Unit
 ) {
     Screen(title = title, onBackPressed = onBackPressed) { modifier ->
@@ -33,7 +32,7 @@ fun PlayerListScreen(
                             player = player,
                             showDivider = state.players.last() != player
                         ) {
-                            onEvent(PlayerListEvent.SelectPlayer(player))
+                            onNavigationEvent(PlayerListNavigationEvent.SelectNavigationPlayer(player))
                         }
                     }
                 }

@@ -10,21 +10,20 @@ import com.alextos.darts.android.common.presentation.components.RoundedView
 import com.alextos.darts.android.common.presentation.components.SingleSelectableItem
 import com.alextos.darts.android.common.presentation.extensions.surfaceBackground
 import com.alextos.darts.android.common.presentation.screens.Screen
-import com.alextos.darts.statistics.presentation.statistics.StatisticsEvent
 
 @Composable
 fun StatisticsScreen(
-    onEvent: (StatisticsEvent) -> Unit,
+    onNavigationEvent: (StatisticsNavigationEvent) -> Unit,
     onBackPressed: () -> Unit
 ) {
     val events = listOf(
-        StatisticsEvent.ShowBestTurn to stringResource(id = R.string.best_set_statistics),
-        StatisticsEvent.ShowBiggestFinalTurn to stringResource(id = R.string.biggest_final_set_statistics),
-        StatisticsEvent.ShowAverageValues to stringResource(id = R.string.average_values_statistics),
-        StatisticsEvent.ShowShotDistribution to stringResource(id = R.string.shot_distribution_statistics),
-        StatisticsEvent.ShowVictoryDistribution to stringResource(id = R.string.victory_distribution_statistics),
-        StatisticsEvent.ShowSectorHeatmapDistribution to stringResource(id = R.string.sector_heatmap_statistics),
-        StatisticsEvent.ShowTimeStatistics to stringResource(id = R.string.time_statistics)
+        StatisticsNavigationEvent.ShowBestTurn to stringResource(id = R.string.best_set_statistics),
+        StatisticsNavigationEvent.ShowBiggestFinalTurn to stringResource(id = R.string.biggest_final_set_statistics),
+        StatisticsNavigationEvent.ShowAverageValues to stringResource(id = R.string.average_values_statistics),
+        StatisticsNavigationEvent.ShowShotDistribution to stringResource(id = R.string.shot_distribution_statistics),
+        StatisticsNavigationEvent.ShowVictoryDistribution to stringResource(id = R.string.victory_distribution_statistics),
+        StatisticsNavigationEvent.ShowSectorHeatmapDistribution to stringResource(id = R.string.sector_heatmap_statistics),
+        StatisticsNavigationEvent.ShowTimeStatistics to stringResource(id = R.string.time_statistics)
     )
 
     Screen(
@@ -36,7 +35,7 @@ fun StatisticsScreen(
             LazyColumn(modifier = Modifier.surfaceBackground()) {
                 items(events) { event ->
                     SingleSelectableItem(text = event.second, showDivider = events.last() != event) {
-                        onEvent(event.first)
+                        onNavigationEvent(event.first)
                     }
                 }
             }

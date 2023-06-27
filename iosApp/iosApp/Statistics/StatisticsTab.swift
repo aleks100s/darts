@@ -11,25 +11,25 @@ struct StatisticsTab: View {
 			StatisticsScreen(
 				onSelect: { event in
 					switch event {
-					case .ShowVictoryDistribution():
+					case .showVictoryDistribution:
 						navigationStack.append(.players(.victoryDistribution))
 						
-					case .ShowShotDistribution():
+					case .showShotDistribution:
 						navigationStack.append(.players(.shotDistribution))
 						
-					case .ShowBiggestFinalTurn():
+					case .showBiggestFinalTurn:
 						navigationStack.append(.biggestFinalTurn)
 						
-					case .ShowBestTurn():
+					case .showBestTurn:
 						navigationStack.append(.bestTurn)
 						
-					case .ShowAverageValues():
+					case .showAverageValues:
 						navigationStack.append(.averageValues)
 						
-					case .ShowSectorHeatmapDistribution():
+					case .showSectorHeatmapDistribution:
 						navigationStack.append(.players(.heatmapDistribution))
 						
-					case .ShowTimeStatistics():
+					case .showTimeStatistics:
 						navigationStack.append(.time)
 						
 					default:

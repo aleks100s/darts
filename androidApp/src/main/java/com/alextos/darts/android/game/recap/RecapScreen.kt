@@ -23,7 +23,6 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 
-
 @Composable
 fun RecapScreen(
     historyState: HistoryState,
@@ -35,14 +34,14 @@ fun RecapScreen(
     Screen(
         title = stringResource(id = R.string.game_recap),
         onBackPressed = onBackPressed,
-        additionalNavBarContent = {
-            IconButton(onClick = { captureController.capture() }) {
-                Icon(
-                    imageVector = Icons.Default.Share,
-                    contentDescription = stringResource(id = R.string.share)
-                )
-            }
-        }
+//        additionalNavBarContent = {
+//            IconButton(onClick = { captureController.capture() }) {
+//                Icon(
+//                    imageVector = Icons.Default.Share,
+//                    contentDescription = stringResource(id = R.string.share)
+//                )
+//            }
+//        }
     ) {
         Capturable(
             controller = captureController,

@@ -5,8 +5,7 @@ enum HistoryScene {
 	static func create(
 		using module: AppModule,
 		game: Game,
-		onTurnSelected: @escaping (Turn) -> Void,
-		onShowRecap: @escaping (HistoryState) -> Void
+		onNavigate: @escaping (HistoryNavigation) -> Void
 	) -> some View {
 		let getGameHistoryUseCase = GetGameHistoryUseCase(dataSource: module.gameDataSource)
 		let viewModel = HistoryViewModel(
@@ -16,8 +15,7 @@ enum HistoryScene {
 		)
 		let iOSViewModel = IOSHistoryViewModel(
 			viewModel: viewModel,
-			onTurnSelected: onTurnSelected,
-			onShowRecap: onShowRecap
+			onNavigate: onNavigate
 		)
 		return HistoryScreen(viewModel: iOSViewModel)
 	}

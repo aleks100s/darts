@@ -1,6 +1,6 @@
 import shared
 
-enum GameNavigation: Hashable {
+enum GameTabNavigation: Hashable {
 	case createGame
 	case game(settings: GameSettings)
 	case inGameHistory(gameHistory: [PlayerHistory], goal: Int32, page: Int)
@@ -24,7 +24,7 @@ enum GameNavigation: Hashable {
 	}
 }
 
-extension [GameNavigation] {
+extension [GameTabNavigation] {
 	var isGameRunning: Bool {
 		for element in self {
 			switch element {

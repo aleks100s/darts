@@ -10,7 +10,7 @@ struct GameListScreen: View {
 			.toolbar {
 				ToolbarItem(placement: .navigationBarTrailing) {
 					Button {
-						viewModel.createGame()
+						viewModel.navigate(.createGame)
 					} label: {
 						Label("create_game", systemImage: "plus")
 					}
@@ -19,7 +19,7 @@ struct GameListScreen: View {
 
 				ToolbarItem(placement: .navigationBarLeading) {
 					Button {
-						viewModel.showCalculator()
+						viewModel.navigate(.showCalculator)
 					} label: {
 						Text("calculator")
 					}
@@ -64,11 +64,11 @@ struct GameListScreen: View {
 					gameItem(game: game)
 						.contentShape(Rectangle())
 						.onTapGesture {
-							viewModel.select(game: game)
+							viewModel.navigate(.gameSelected(game))
 						}
 						.swipeActions(edge: .leading, allowsFullSwipe: true) {
 							Button {
-								viewModel.replay(game: game)
+								viewModel.navigate(.replay(game))
 							} label: {
 								Text("replay")
 							}
@@ -77,7 +77,7 @@ struct GameListScreen: View {
 						.contextMenu(
 							menuItems: {
 								Button {
-									viewModel.replay(game: game)
+									viewModel.navigate(.replay(game))
 								} label: {
 									Label("replay", systemImage: "repeat")
 								}

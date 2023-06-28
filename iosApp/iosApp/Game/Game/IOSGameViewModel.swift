@@ -16,77 +16,16 @@ final class IOSGameViewModel: ObservableObject {
 		turnNumber: 0
 	)
 	
-	var gameFinishedTitle: String {
-		guard let result = state.gameResult else { return "" }
-		
-		switch result {
-		case .TrainingFinished():
-			return String(localized: "training_finished")
-			
-		default:
-			return String(localized: "game_finished")
-		}
-	}
-	
-	var gameFinishedText: String {
-		guard let result = state.gameResult else { return "" }
-		
-		switch result {
-		case .TrainingFinished():
-			return ""
-			
-		case .Draw():
-			return String(localized: "game_result_is_draw")
-			
-		default:
-			guard let name = result.winnerName else { return "" }
-			
-			return String(localized: "winner \(name)")
-		}
-	}
-	
 	private let viewModel: GameViewModel
-	private let onGameFinished: () -> Void
-	private let onShowInGameHistory: ([PlayerHistory], Int32, Int) -> Void
-	private let onTurnSelected: (Turn) -> Void
-	private let onGameReplaySelected: () -> Void
-	private let onShowGameSettings: () -> Void
+	private let onNavigation: (GameNavigation) -> Void
 	private var handle: DisposableHandle?
 	
 	init(
 		viewModel: GameViewModel,
-		onGameFinished: @escaping () -> Void,
-		onShowInGameHistory: @escaping ([PlayerHistory], Int32, Int) -> Void,
-		onTurnSelected: @escaping (Turn) -> Void,
-		onGameReplaySelected: @escaping () -> Void,
-		onShowGameSettings: @escaping () -> Void
+		onNavigation: @escaping (GameNavigation) -> Void
 	) {
-		self.onGameFinished = onGameFinished
-		self.onShowInGameHistory = onShowInGameHistory
-		self.onTurnSelected = onTurnSelected
-		self.onGameReplaySelected = onGameReplaySelected
-		self.onShowGameSettings = onShowGameSettings
 		self.viewModel = viewModel
-	}
-	
-	func finishGame() {
-		onGameFinished()
-	}
-	
-	func showGameHistory(index: Int) {
-		onShowInGameHistory(state.gameHistory, state.gameGoal, index)
-	}
-	
-	func selectTurn(turn: Turn) {
-		onTurnSelected(turn)
-	}
-	
-	func showGameSettings() {
-		onShowGameSettings()
-	}
-	
-	func replayGame() {
-		onGameReplaySelected()
+		self.onNavigation = onNavigation
 	}
 	
 	func startObserving() {
@@ -98,6 +37,10 @@ final class IOSGameViewModel: ObservableObject {
 				self?.isCloseGameDialogShown = state.isCloseGameDialogOpened
 				self?.isGameFinishedDialogShown = state.gameResult != nil
 			}
+	}
+	
+	func navigate(_ navigation: GameNavigation) {
+		onNavigation(navigation)
 	}
 	
 	func onEvent(_ event: GameEvent) {

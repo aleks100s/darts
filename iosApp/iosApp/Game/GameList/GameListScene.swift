@@ -5,10 +5,7 @@ enum GameListScene {
 	@MainActor
 	static func create(
 		using module: AppModule,
-		onCreateGame: @escaping () -> Void,
-		onGameSelected: @escaping (Game) -> Void,
-		onReplay: @escaping (Game) -> Void,
-		onShowCalculator: @escaping () -> Void
+		onNavigation: @escaping (GameListNavigation) -> Void
 	) -> some View {
 		let getGamesUseCase = GetGamesUseCase(dataSource: module.gameDataSource)
 		let deleteGameUseCase = DeleteGameUseCase(dataSource: module.gameDataSource)
@@ -26,10 +23,7 @@ enum GameListScene {
 		)
 		let iOSViewModel = IOSGameListViewModel(
 			viewModel: viewModel,
-			onCreateGame: onCreateGame,
-			onGameSelected: onGameSelected,
-			onReplay: onReplay,
-			onShowCalculator: onShowCalculator
+			onNavigation: onNavigation
 		)
 		let view = GameListScreen(viewModel: iOSViewModel)
 		return view

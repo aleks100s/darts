@@ -4,37 +4,40 @@ import shared
 struct GameTab: View {
 	let module: AppModule
 	
-	@State private var navigationStack: [GameNavigation] = []
+	@State private var navigationStack: [GameTabNavigation] = []
 	@State private var isGameSettingsSheetShown = false
 	
 	var body: some View {
 		NavigationStack(path: $navigationStack) {
 			GameListScene.create(
 				using: module,
-				onCreateGame: {
-					navigationStack.append(.createGame)
-				},
-				onGameSelected: { game in
-					navigationStack.append(.history(game: game))
-				},
-				onReplay: { game in
-					navigationStack.append(.game(settings: game.getGameSettings()))
-				},
-				onShowCalculator: {
-					navigationStack.append(.calculator)
+				onNavigation: { navigation in
+					switch navigation {
+					case .createGame:
+						navigationStack.append(.createGame)
+						
+					case let .gameSelected(game):
+						navigationStack.append(.history(game: game))
+						
+					case let .replay(game):
+						navigationStack.append(.game(settings: game.getGameSettings()))
+						
+					case .showCalculator:
+						navigationStack.append(.calculator)
+					}
 				}
 			)
 				.navigationTitle("games")
-				.navigationDestination(for: GameNavigation.self) {
+				.navigationDestination(for: GameTabNavigation.self) {
 					navigate(to: $0)
 				}
 		}
 		.onOpenURL { url in
-			if url.canBeNavigated(to: GameNavigation.createGame.urlComponent) {
+			if url.canBeNavigated(to: GameTabNavigation.createGame.urlComponent) {
 				if !navigationStack.isGameRunning {
 					navigationStack = [.createGame]
 				}
-			} else if url.canBeNavigated(to: GameNavigation.calculator.urlComponent) {
+			} else if url.canBeNavigated(to: GameTabNavigation.calculator.urlComponent) {
 				if !navigationStack.isGameRunning {
 					navigationStack = [.calculator]
 				}
@@ -44,7 +47,7 @@ struct GameTab: View {
 	
 	@MainActor
 	@ViewBuilder
-	private func navigate(to scene: GameNavigation) -> some View {
+	private func navigate(to scene: GameTabNavigation) -> some View {
 		switch scene {
 		case .createGame:
 			CreateGameScene.create(
@@ -60,24 +63,27 @@ struct GameTab: View {
 			GameScene.create(
 				using: module,
 				gameSettings: settings,
-				onGameFinished: {
-					navigationStack = []
-				},
-				onShowInGameHistory: { history, goal, page in
-					navigationStack.append(
-						.inGameHistory(gameHistory: history, goal: goal, page: page)
-					)
-				},
-				onTurnSelected: { turn in
-					navigationStack.append(.dartsBoard(turn))
-				},
-				onGameReplaySelected: {
-					navigationStack.append(
-						.game(settings: settings)
-					)
-				},
-				onShowGameSettings: {
-					isGameSettingsSheetShown = true
+				onNavigation: { navigation in
+					switch navigation {
+					case .gameFinished:
+						navigationStack = []
+						
+					case let .showInGameHistory(history, goal, page):
+						navigationStack.append(
+							.inGameHistory(gameHistory: history, goal: goal, page: page)
+						)
+						
+					case let .turnSelected(turn):
+						navigationStack.append(.dartsBoard(turn))
+						
+					case .replayGame:
+						navigationStack.append(
+							.game(settings: settings)
+						)
+						
+					case .showGameSettings:
+						isGameSettingsSheetShown = true
+					}
 				}
 			)
 				.navigationBarTitleDisplayMode(.inline)
@@ -93,11 +99,14 @@ struct GameTab: View {
 			HistoryScene.create(
 				using: module,
 				game: game,
-				onTurnSelected: { turn in
-					navigationStack.append(.dartsBoard(turn))
-				},
-				onShowRecap: { state in
-					navigationStack.append(.gameRecap(historyState: state))
+				onNavigate: { navigation in
+					switch navigation {
+					case let .turnSelected(turn):
+						navigationStack.append(.dartsBoard(turn))
+						
+					case let .showRecap(state):
+						navigationStack.append(.gameRecap(historyState: state))
+					}
 				}
 			)
 				.navigationBarTitleDisplayMode(.inline)

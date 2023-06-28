@@ -8,22 +8,22 @@ struct GameScreen: View {
 	var body: some View {
 		return content
 			.navigationTitle("game_title_with_turn_counter \(viewModel.state.turnNumber)")
-			.alert(viewModel.gameFinishedTitle, isPresented: $viewModel.isGameFinishedDialogShown) {
+			.alert(viewModel.state.gameFinishedTitle, isPresented: $viewModel.isGameFinishedDialogShown) {
 				Button(role: .cancel) {
-					viewModel.finishGame()
+					viewModel.navigate(.gameFinished)
 				} label: {
 					Text("finish_game")
 				}
 				.accessibilityIdentifier("finishGame")
 				
 				Button {
-					viewModel.replayGame()
+					viewModel.navigate(.replayGame)
 				} label: {
 					Text("replay")
 				}
 				.accessibilityIdentifier("replay")
 			} message: {
-				Text(viewModel.gameFinishedText)
+				Text(viewModel.state.gameFinishedText)
 			}
 			.alert("turn_is_over", isPresented: $viewModel.isTurnOverDialogShown) {
 				Button(role: .cancel) {
@@ -44,7 +44,7 @@ struct GameScreen: View {
 			}
 			.alert("leave_game", isPresented: $viewModel.isCloseGameDialogShown) {
 				Button(role: .destructive) {
-					viewModel.finishGame()
+					viewModel.navigate(.gameFinished)
 				} label: {
 					Text("leave")
 				}
@@ -70,7 +70,7 @@ struct GameScreen: View {
 				}
 				ToolbarItem(placement: .navigationBarTrailing) {
 					Button {
-						viewModel.showGameSettings()
+						viewModel.navigate(.showGameSettings)
 					} label: {
 						Image(systemName: "info.circle")
 					}
@@ -124,7 +124,7 @@ struct GameScreen: View {
 			},
 			onPlayerClick: { index in
 				if idiom == .phone {
-					viewModel.showGameHistory(index: index)
+					viewModel.navigate(.showInGameHistory(viewModel.state.gameHistory, viewModel.state.gameGoal, index))
 				}
 			}
 		)
@@ -137,7 +137,7 @@ struct GameScreen: View {
 			gameGoal: viewModel.state.gameGoal,
 			page: Int(viewModel.state.currentPage()),
 			onTurnSelected: { turn in
-				viewModel.selectTurn(turn: turn)
+				viewModel.navigate(.turnSelected(turn))
 			}
 		)
 	}

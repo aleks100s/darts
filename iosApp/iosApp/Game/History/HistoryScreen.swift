@@ -10,7 +10,7 @@ struct HistoryScreen: View {
 		.toolbar {
 			if idiom == .phone {
 				Button {
-					viewModel.showRecap()
+					viewModel.navigate(.showRecap(viewModel.state))
 				} label: {
 					Text("progress")
 				}
@@ -47,7 +47,9 @@ struct HistoryScreen: View {
 			gameHistory: viewModel.state.gameHistory,
 			gameGoal: viewModel.state.gameGoal,
 			page: 0,
-			onTurnSelected: viewModel.select
+			onTurnSelected: { turn in
+				viewModel.navigate(.turnSelected(turn))
+			}
 		)
 	}
 	

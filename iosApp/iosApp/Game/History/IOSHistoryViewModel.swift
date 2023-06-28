@@ -8,19 +8,17 @@ final class IOSHistoryViewModel: ObservableObject {
 		duration: GameDuration(minutes: 0, seconds: 0)
 	)
 	
-	private let onTurnSelected: (Turn) -> Void
-	private let onShowRecap: (HistoryState) -> Void
 	private let viewModel: HistoryViewModel
+	private let onNavigate: (HistoryNavigation) -> Void
+	
 	private var handle: DisposableHandle?
 	
 	init(
 		viewModel: HistoryViewModel,
-		onTurnSelected: @escaping (Turn) -> Void,
-		onShowRecap: @escaping (HistoryState) -> Void
+		onNavigate: @escaping (HistoryNavigation) -> Void
 	) {
 		self.viewModel = viewModel
-		self.onTurnSelected = onTurnSelected
-		self.onShowRecap = onShowRecap
+		self.onNavigate = onNavigate
 	}
 	
 	func startObserving() {
@@ -31,12 +29,8 @@ final class IOSHistoryViewModel: ObservableObject {
 			}
 	}
 	
-	func select(turn: Turn) {
-		onTurnSelected(turn)
-	}
-	
-	func showRecap() {
-		onShowRecap(state)
+	func navigate(_ navigation: HistoryNavigation) {
+		onNavigate(navigation)
 	}
 	
 	func dispose() {

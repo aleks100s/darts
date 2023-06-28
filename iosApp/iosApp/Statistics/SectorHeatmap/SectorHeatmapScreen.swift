@@ -13,6 +13,7 @@ struct SectorHeatmapScreen: View {
 			.toolbar {
 				ToolbarItem(placement: .navigationBarTrailing) {
 					ShareLink("share", item: renderedImage, preview: SharePreview("preview", image: renderedImage))
+						.disabled(viewModel.state.isLoading)
 				}
 			}
 			.onReceive(viewModel.$state) { _ in

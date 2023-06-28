@@ -13,6 +13,7 @@ struct VictoryDistributionScreen: View {
 			.toolbar {
 				ToolbarItem(placement: .navigationBarTrailing) {
 					ShareLink("share", item: renderedImage, preview: SharePreview("preview", image: renderedImage))
+						.disabled(viewModel.isLoading)
 				}
 			}
 			.onReceive(viewModel.$totalCount) { _ in

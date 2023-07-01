@@ -311,6 +311,7 @@
 		27199CF32A50AA15001463E2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		27199CF52A50AA15001463E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		27199CF62A50AA15001463E2 /* DartsAppClip.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DartsAppClip.entitlements; sourceTree = "<group>"; };
+		27199D662A50BDA2001463E2 /* iosApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = iosApp.entitlements; sourceTree = "<group>"; };
 		274E404329CEE9F0000E9027 /* SectorHeatmapScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectorHeatmapScreen.swift; sourceTree = "<group>"; };
 		274E404529CEEA24000E9027 /* IOSSectorHeatmapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSSectorHeatmapViewModel.swift; sourceTree = "<group>"; };
 		274E404729CEEA5D000E9027 /* SectorHeatmapScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectorHeatmapScene.swift; sourceTree = "<group>"; };
@@ -926,6 +927,7 @@
 				7555FF8C242A565B00829871 /* Info.plist */,
 				279E828229D9FAC000CDCA1E /* Configuration.xcconfig */,
 				058557D7273AAEEB004C7B11 /* Preview Content */,
+				27199D662A50BDA2001463E2 /* iosApp.entitlements */,
 			);
 			path = iosApp;
 			sourceTree = "<group>";
@@ -1767,6 +1769,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = iosApp/iosApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
 				DEVELOPMENT_TEAM = 579X949DTW;
@@ -1799,6 +1802,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = iosApp/iosApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
 				DEVELOPMENT_TEAM = 579X949DTW;

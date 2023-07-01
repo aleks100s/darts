@@ -43,15 +43,15 @@ struct CalculatorScreen: View {
 				viewModel.showHistory()
 			}
 
-			if let turn = viewModel.state.lastTurn {
-				TurnItem(
-					turn: turn,
-					shotsLeft: Int(turn.shotsLeft()),
-					useTurnColors: false,
-					onSelect: {}
-				)
-					.background(Color.background)
-			}
+			let turn = viewModel.state.lastTurn
+			TurnItem(
+				turn: turn,
+				shotsLeft: Int(turn.shotsLeft()),
+				useTurnColors: false,
+				onSelect: {}
+			)
+				.background(Color.background)
+			
 			InputHintRowView()
 			InputMatrixView { sector in
 				viewModel.onEvent(.MakeShot(sector: sector))

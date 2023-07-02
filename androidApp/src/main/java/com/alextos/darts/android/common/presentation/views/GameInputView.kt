@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.alextos.darts.android.R
@@ -156,7 +157,8 @@ private fun GamePlayerItem(
         )
         Text(
             text = stringResource(id = R.string.game_player_result, result.score),
-            color = textColor
+            color = MaterialTheme.colors.primary,
+            textDecoration = TextDecoration.Underline
         )
         if (isStatisticsEnabled) {
             Text(

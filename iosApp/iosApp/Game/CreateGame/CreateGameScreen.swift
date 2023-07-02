@@ -65,7 +65,7 @@ struct CreateGameScreen: View {
 	
 	@ViewBuilder
 	private var allPlayersSection: some View {
-		Section("all_players") {
+		Section {
 			Button {
 				viewModel.showCreatePlayerDialog()
 			} label: {
@@ -84,19 +84,35 @@ struct CreateGameScreen: View {
 					viewModel.deletePlayer(index: index)
 				}
 			}
+		} header: {
+			Text("all_players")
+		} footer: {
+			if viewModel.state.allPlayers.isEmpty {
+				Text("create_game_players_empty_hint")
+			} else {
+				Text("create_game_players_not_empty_hint")
+			}
 		}
+
 	}
 	
 	@ViewBuilder
 	private var gameGoalSection: some View {
-		Section("game_goal") {
+		Section {
 			ForEach(viewModel.state.goalOptions) { option in
 				let isSelected = viewModel.state.isGoalSelected(goal: option.int32Value)
 				GoalOption(option: option.intValue, isSelected: isSelected) {
 					viewModel.onEvent(.SelectGoal(option: option.int32Value))
 				}
 			}
+		} header: {
+			Text("game_goal")
+		} footer: {
+			if viewModel.state.selectedGoal == nil {
+				Text("create_game_goal_hint")
+			}
 		}
+
 	}
 	
 	@ViewBuilder

@@ -57,7 +57,7 @@ struct GameListScreen: View {
 		if viewModel.state.isLoading {
 			LoadingView()
 		} else if viewModel.state.games.isEmpty {
-			NoDataView()
+			emptyView
 		} else {
 			List {
 				ForEach(viewModel.state.games) { game in
@@ -95,6 +95,17 @@ struct GameListScreen: View {
 						viewModel.deleteGame(index: index)
 					}
 				}
+			}
+		}
+	}
+	
+	@ViewBuilder
+	private var emptyView: some View {
+		VStack(spacing: 16) {
+			Text("no_data_yet")
+			
+			Button("create_game") {
+				viewModel.navigate(.createGame)
 			}
 		}
 	}

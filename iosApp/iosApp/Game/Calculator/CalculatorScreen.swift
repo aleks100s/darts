@@ -43,6 +43,8 @@ struct CalculatorScreen: View {
 				viewModel.showHistory()
 			}
 
+			PlayerHistoryHeader()
+			
 			let turn = viewModel.state.lastTurn
 			TurnItem(
 				turn: turn,

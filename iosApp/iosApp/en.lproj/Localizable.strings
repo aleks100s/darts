@@ -94,3 +94,6 @@
 "game_settings" = "Game settings";
 "share" = "Share";
 "preview" = "Preview";
+"create_game_players_empty_hint" = "⚠️ Add new player to start a new game";
+"create_game_players_not_empty_hint" = "Select player(s) to start a new game";
+"create_game_goal_hint" = "⚠️ Choose a goal to start a new game";

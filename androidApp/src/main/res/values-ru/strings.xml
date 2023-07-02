@@ -94,4 +94,7 @@
     <string name="game_result_is_draw">Ничья</string>
     <string name="game_settings">Настройки игры</string>
     <string name="share">Поделиться</string>
+    <string name="create_game_players_empty_hint">⚠️ Создай нового игрока, чтобы начать игру</string>
+    <string name="create_game_players_not_empty_hint">Выбери игрока (игроков), чтобы начать игру</string>
+    <string name="create_game_goal_hint">⚠️ Выбери цель, чтобы начать игру</string>
 </resources>

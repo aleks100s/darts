@@ -6,6 +6,7 @@ struct Cell: View {
 	var body: some View {
 		HStack(alignment: .center) {
 			Text(text)
+				.lineLimit(1)
 				.foregroundColor(Color.onSurface)
 		}
 		.padding(.vertical, 12)

@@ -67,7 +67,7 @@
 "view_turn" = "Просмотр хода";
 "delete_player" = "Удалить игрока и все связанные с ним игры";
 "player_data_will_be_lost" = "Данные игрока будут потеряны";
-"erase_hit" = "Отменить";
+"erase_hit" = "Стереть";
 "delete_game" = "Удалить игру";
 "this_cannot_be_undone" = "Это действие необратимо";
 "delete" = "Удалить";
@@ -94,3 +94,6 @@
 "game_settings" = "Настройки игры";
 "share" = "Поделиться";
 "preview" = "Превью";
+"create_game_players_empty_hint" = "⚠️ Создай нового игрока, чтобы начать игру";
+"create_game_players_not_empty_hint" = "Выбери игрока (игроков), чтобы начать игру";
+"create_game_goal_hint" = "⚠️ Выбери цель, чтобы начать игру";

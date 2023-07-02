@@ -94,4 +94,7 @@
     <string name="game_result_is_draw">Draw</string>
     <string name="game_settings">Game settings</string>
     <string name="share">Share</string>
+    <string name="create_game_players_empty_hint">⚠️ Add new player to start a new game</string>
+    <string name="create_game_players_not_empty_hint">Select player(s) to start a new game</string>
+    <string name="create_game_goal_hint">⚠️ Choose a goal to start a new game</string>
 </resources>

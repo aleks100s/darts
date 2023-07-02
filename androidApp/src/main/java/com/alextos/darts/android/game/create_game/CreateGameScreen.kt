@@ -76,6 +76,10 @@ fun CreateGameScreen(
                 }
 
                 item {
+                    PlayersHint(isEmpty = state.allPlayers.isEmpty())
+                }
+
+                item {
                     SectionHeader(title = stringResource(id = R.string.game_goal))
                 }
 
@@ -86,6 +90,10 @@ fun CreateGameScreen(
                     ) {
                         onEvent(CreateGameEvent.SelectGoal(it))
                     }
+                }
+
+                item {
+                    GoalHint(isSelected = state.selectedGoal != null)
                 }
 
                 item {
@@ -113,6 +121,30 @@ fun CreateGameScreen(
             }
         )
     }
+}
+
+@Composable
+private fun PlayersHint(isEmpty: Boolean) {
+    if (isEmpty) {
+        SectionFooter(text = stringResource(id = R.string.create_game_players_empty_hint))
+    } else {
+        SectionFooter(text = stringResource(id = R.string.create_game_players_not_empty_hint))
+    }
+}
+
+@Composable fun GoalHint(isSelected: Boolean) {
+    if (!isSelected) {
+        SectionFooter(text = stringResource(id = R.string.create_game_goal_hint))
+    }
+}
+
+@Composable
+private fun SectionFooter(text: String) {
+    Text(
+        modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+        text = text,
+        style = MaterialTheme.typography.caption
+    )
 }
 
 @Composable

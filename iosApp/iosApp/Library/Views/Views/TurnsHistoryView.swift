@@ -27,5 +27,6 @@ struct TurnsHistoryView: View {
 				}
 			}
 		}
+		.background(Color.background)
 	}
 }

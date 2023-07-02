@@ -54,4 +54,5 @@ dependencies {
     implementation(Dependencies.pager)
     implementation(Dependencies.serialization)
     implementation("dev.shreyaspatil:capturable:1.0.3")
+    implementation("com.google.android.gms:play-services-instantapps:18.0.1")
 }

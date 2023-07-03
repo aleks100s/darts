@@ -1,13 +1,10 @@
 package com.alextos.darts.android.game.game_list
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Create
@@ -16,13 +13,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.Dialog
 import com.alextos.darts.android.BuildConfig
 import com.alextos.darts.android.R
 import com.alextos.darts.android.common.presentation.components.Chevron
+import com.alextos.darts.android.common.presentation.components.CustomDialog
 import com.alextos.darts.android.common.presentation.components.FAB
 import com.alextos.darts.android.common.presentation.components.RoundedView
 import com.alextos.darts.android.common.presentation.extensions.getTitle
@@ -138,71 +133,26 @@ private fun GameActionsDialog(
     onEvent: (GameListEvent) -> Unit,
     onNavigation: (GameListNavigationEvent) -> Unit
 ) {
-    Dialog(onDismissRequest = { onEvent(GameListEvent.HideActionsDialog) }) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.SpaceEvenly,
-            modifier = Modifier
-                .background(MaterialTheme.colors.surface, shape = RoundedCornerShape(8.dp))
-        ) {
-            Text(
-                text = state.selectedGame?.getTitle() ?: "",
-                style = MaterialTheme.typography.h6,
-                modifier = Modifier.padding(16.dp)
-            )
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            CustomDialogButton(
-                title = stringResource(id = R.string.replay),
-                onClick = {
-                    state.selectedGame?.let {
-                        onEvent(GameListEvent.ReplayGame)
-                        onNavigation(GameListNavigationEvent.ReplayGame(it))
-                    }
-                }
-            )
-
-            CustomDialogButton(
-                title = stringResource(id = R.string.delete),
-                color = MaterialTheme.colors.error,
-                onClick = {
-                    state.selectedGame?.let {
-                        onEvent(GameListEvent.ShowDeleteGameDialog(it))
-                    }
-                }
-            )
-
-            CustomDialogButton(
-                title = stringResource(id = R.string.cancel),
-                fontWeight = FontWeight.Bold,
-                onClick =  { onEvent(GameListEvent.HideActionsDialog) }
-            )
+    CustomDialog(
+        title = state.selectedGame?.getTitle() ?: "",
+        defaultActionTitle = stringResource(id = R.string.replay),
+        defaultAction = {
+            state.selectedGame?.let {
+                onEvent(GameListEvent.ReplayGame)
+                onNavigation(GameListNavigationEvent.ReplayGame(it))
+            }
+        },
+        destructiveActionTitle = stringResource(id = R.string.delete),
+        destructiveAction = {
+            state.selectedGame?.let {
+                onEvent(GameListEvent.ShowDeleteGameDialog(it))
+            }
+        },
+        cancelActionTitle = stringResource(id = R.string.cancel),
+        cancelAction = {
+            onEvent(GameListEvent.HideActionsDialog)
         }
-    }
-}
-
-@Composable
-private fun CustomDialogButton(
-    title: String,
-    color: Color = MaterialTheme.colors.primary,
-    fontWeight: FontWeight = FontWeight.Normal,
-    onClick: () -> Unit
-) {
-    Column {
-        Divider()
-
-        Text(
-            text = title,
-            color = color,
-            modifier = Modifier
-                .fillMaxWidth()
-                .clickable { onClick() }
-                .padding(16.dp),
-            textAlign = TextAlign.Center,
-            fontWeight = fontWeight
-        )
-    }
+    )
 }
 
 @Composable

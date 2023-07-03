@@ -12,6 +12,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.window.DialogProperties
 import com.alextos.darts.android.R
 import com.alextos.darts.android.common.presentation.ScreenType
+import com.alextos.darts.android.common.presentation.components.CustomDialog
 import com.alextos.darts.android.common.presentation.views.GameHistoryView
 import com.alextos.darts.android.common.presentation.rememberScreenType
 import com.alextos.darts.android.common.presentation.screens.Screen
@@ -174,23 +175,19 @@ private fun CloseGameDialog(
     onEvent: (GameEvent) -> Unit,
     onNavigation: (GameNavigationEvent) -> Unit
 ) {
-    AlertDialog(
-        onDismissRequest = { onEvent(GameEvent.ReturnToGame) },
-        title = {
-            Text(text = stringResource(id = R.string.leave_game))
+    CustomDialog(
+        title = stringResource(id = R.string.leave_game),
+        defaultActionTitle = stringResource(id = R.string.pause_game),
+        defaultAction = {
+
         },
-        text = {
-            Text(text = stringResource(id = R.string.your_progress_will_be_lost))
+        destructiveActionTitle = stringResource(id = R.string.leave_without_saving),
+        destructiveAction = {
+            onNavigation(GameNavigationEvent.CloseGame)
         },
-        confirmButton = {
-            Button(onClick = { onNavigation(GameNavigationEvent.CloseGame) }) {
-                Text(text = stringResource(id = R.string.leave))
-            }
-        },
-        dismissButton = {
-            Button(onClick = { onEvent(GameEvent.ReturnToGame) }) {
-                Text(text = stringResource(id = R.string.return_to_game))
-            }
+        cancelActionTitle = stringResource(id = R.string.return_to_game),
+        cancelAction = {
+            onEvent(GameEvent.ReturnToGame)
         }
     )
 }

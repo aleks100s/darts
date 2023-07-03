@@ -14,7 +14,6 @@
     <string name="shot_sum">Hits sum</string>
     <string name="reminder">Reminder</string>
     <string name="leave_game">Leave the game</string>
-    <string name="your_progress_will_be_lost">Your progress will be lost</string>
     <string name="leave">Leave</string>
     <string name="return_to_game">Return to game</string>
     <string name="game_finished">Game is over</string>
@@ -97,4 +96,6 @@
     <string name="create_game_players_empty_hint">⚠️ Add new player to start a new game</string>
     <string name="create_game_players_not_empty_hint">Select player(s) to start a new game</string>
     <string name="create_game_goal_hint">⚠️ Choose a goal to start a new game</string>
+    <string name="pause_game">Save game progress</string>
+    <string name="leave_without_saving">Leave the game without saving</string>
 </resources>

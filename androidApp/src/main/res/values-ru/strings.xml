@@ -14,7 +14,6 @@
     <string name="shot_sum">Сумма</string>
     <string name="reminder">Остаток</string>
     <string name="leave_game">Покинуть игру</string>
-    <string name="your_progress_will_be_lost">Ваш прогресс будет потерян</string>
     <string name="leave">Покинуть</string>
     <string name="return_to_game">Вернуться в игру</string>
     <string name="game_finished">Игра окончена</string>
@@ -97,4 +96,6 @@
     <string name="create_game_players_empty_hint">⚠️ Создай нового игрока, чтобы начать игру</string>
     <string name="create_game_players_not_empty_hint">Выбери игрока (игроков), чтобы начать игру</string>
     <string name="create_game_goal_hint">⚠️ Выбери цель, чтобы начать игру</string>
+    <string name="pause_game">Сохранить прогресс игры</string>
+    <string name="leave_without_saving">Покинуть игру без сохранения</string>
 </resources>

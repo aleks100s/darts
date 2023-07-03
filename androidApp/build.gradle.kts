@@ -13,8 +13,8 @@ android {
         applicationId = "com.alextos.darts.android"
         minSdk = Dependencies.minimumSDKVersion
         targetSdk = Dependencies.targetSDKVersion
-        versionCode = 51
-        versionName = "1.14"
+        versionCode = 52
+        versionName = "1.14.1"
     }
     buildFeatures {
         compose = true
@@ -54,5 +54,4 @@ dependencies {
     implementation(Dependencies.pager)
     implementation(Dependencies.serialization)
     implementation("dev.shreyaspatil:capturable:1.0.3")
-    implementation("com.google.android.gms:play-services-instantapps:18.0.1")
 }

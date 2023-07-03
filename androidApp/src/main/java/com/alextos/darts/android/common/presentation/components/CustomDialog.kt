@@ -24,8 +24,8 @@ import androidx.compose.ui.window.Dialog
 @Composable
 fun CustomDialog(
     title: String,
-    defaultActionTitle: String,
-    defaultAction: () -> Unit,
+    defaultActionTitle: String?,
+    defaultAction: (() -> Unit)?,
     destructiveActionTitle: String,
     destructiveAction: () -> Unit,
     cancelActionTitle: String,
@@ -46,10 +46,12 @@ fun CustomDialog(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            CustomDialogButton(
-                title = defaultActionTitle,
-                onClick = defaultAction
-            )
+            if (defaultActionTitle != null && defaultAction != null) {
+                CustomDialogButton(
+                    title = defaultActionTitle,
+                    onClick = defaultAction
+                )
+            }
 
             CustomDialogButton(
                 title = destructiveActionTitle,

@@ -1,9 +1,11 @@
 package com.alextos.darts.android.game.game_list
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -66,7 +68,7 @@ fun GameListScreen(
         ) { modifier ->
             if (state.isLoading) {
                 LoadingView()
-            } else if (state.games.isEmpty()) {
+            } else if (state.isEmpty) {
                 Column {
                     if (BuildConfig.DEBUG) {
                         Button(onClick = populateDB) {
@@ -77,11 +79,20 @@ fun GameListScreen(
                 }
             } else {
                 RoundedView(modifier.padding(padding)) {
-                    GamesList(
-                        games = state.games,
-                        onEvent = onEvent,
-                        onNavigation = onNavigation
-                    )
+                    LazyColumn(modifier = Modifier.surfaceBackground()) {
+                        gamesList(
+                            games = state.ongoingGames,
+                            isOngoing = true,
+                            onEvent = onEvent,
+                            onNavigation = onNavigation
+                        )
+                        gamesList(
+                            games = state.finishedGames,
+                            isOngoing = false,
+                            onEvent = onEvent,
+                            onNavigation = onNavigation
+                        )
+                    }
                 }
             }
         }
@@ -103,26 +114,26 @@ fun GameListScreen(
     }
 }
 
-@Composable
-private fun GamesList(
+private fun LazyListScope.gamesList(
     games: List<Game>,
+    isOngoing: Boolean,
     onEvent: (GameListEvent) -> Unit,
     onNavigation: (GameListNavigationEvent) -> Unit
 ) {
-    LazyColumn(modifier = Modifier.surfaceBackground()) {
-        itemsIndexed(games) { index, game ->
-            GameItem(
-                game = game,
-                onClick = {
+    itemsIndexed(games) { index, game ->
+        GameItem(
+            game = game,
+            onClick = {
+                if (!isOngoing) {
                     onNavigation(GameListNavigationEvent.SelectGame(game))
-                },
-                onLongClick = {
-                    onEvent(GameListEvent.ShowActionsDialog(game))
                 }
-            )
-            if (index != games.lastIndex) {
-                Divider(startIndent = 16.dp)
+            },
+            onLongClick = {
+                onEvent(GameListEvent.ShowActionsDialog(game))
             }
+        )
+        if (index != games.lastIndex) {
+            Divider(startIndent = 16.dp)
         }
     }
 }
@@ -133,15 +144,25 @@ private fun GameActionsDialog(
     onEvent: (GameListEvent) -> Unit,
     onNavigation: (GameListNavigationEvent) -> Unit
 ) {
-    CustomDialog(
-        title = state.selectedGame?.getTitle() ?: "",
-        defaultActionTitle = stringResource(id = R.string.replay),
-        defaultAction = {
+    val defaultActionTitle = if (state.selectedGame?.isOngoing == true) {
+        null
+    } else {
+        stringResource(id = R.string.replay)
+    }
+    val defaultAction: (() -> Unit)? = if (state.selectedGame?.isOngoing == true) {
+        null
+    } else {
+        {
             state.selectedGame?.let {
                 onEvent(GameListEvent.ReplayGame)
                 onNavigation(GameListNavigationEvent.ReplayGame(it))
             }
-        },
+        }
+    }
+    CustomDialog(
+        title = state.selectedGame?.getTitle() ?: "",
+        defaultActionTitle = defaultActionTitle,
+        defaultAction = defaultAction,
         destructiveActionTitle = stringResource(id = R.string.delete),
         destructiveAction = {
             state.selectedGame?.let {
@@ -195,9 +216,15 @@ private fun GameItem(
     onClick: () -> Unit,
     onLongClick: () -> Unit
 ) {
+    val bgColor = if (game.isOngoing) {
+        Color.Yellow.copy(alpha = 0.5f)
+    } else {
+        Color.Transparent
+    }
     Row(
         modifier = Modifier
             .fillMaxWidth()
+            .background(bgColor)
             .combinedClickable(
                 onClick = {
                     onClick()

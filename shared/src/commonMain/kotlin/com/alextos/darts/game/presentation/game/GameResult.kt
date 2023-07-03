@@ -6,6 +6,7 @@ import kotlinx.serialization.Serializable
 sealed class GameResult {
     object TrainingFinished: GameResult()
     object Draw: GameResult()
+    object GamePaused: GameResult()
     data class Winner(val name: String): GameResult()
 
     val winnerName: String?

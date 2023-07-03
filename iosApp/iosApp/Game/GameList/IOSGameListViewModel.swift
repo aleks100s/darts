@@ -5,11 +5,12 @@ import Foundation
 final class IOSGameListViewModel: ObservableObject {
 	@Published var isDeleteGameDialogShown = false
 	@Published private(set) var state = GameListState(
-		games: [],
 		isDeleteGameDialogShown: false,
 		selectedGame: nil,
 		isLoading: true,
-		isActionsDialogShown: false
+		isActionsDialogShown: false,
+		finishedGames: [],
+		ongoingGames: []
 	)
 	
 	private let viewModel: GameListViewModel
@@ -41,9 +42,14 @@ final class IOSGameListViewModel: ObservableObject {
 		viewModel.prepopulateDatabase()
 	}
 	
-	func deleteGame(index: Int) {
-		let game = state.games[index]
-		onEvent(.ShowDeleteGameDialog(game: game))
+	func deleteFinishedGame(index: Int) {
+		let game = state.finishedGames[index]
+		delete(game: game)
+	}
+	
+	func deleteOngoingGame(index: Int) {
+		let game = state.ongoingGames[index]
+		delete(game: game)
 	}
 	
 	func onEvent(_ event: GameListEvent) {
@@ -52,6 +58,10 @@ final class IOSGameListViewModel: ObservableObject {
 	
 	func dispose() {
 		handle?.dispose()
+	}
+	
+	private func delete(game: Game) {
+		onEvent(.ShowDeleteGameDialog(game: game))
 	}
 	
 	deinit {

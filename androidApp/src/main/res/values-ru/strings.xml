@@ -14,7 +14,7 @@
     <string name="shot_sum">Сумма</string>
     <string name="reminder">Остаток</string>
     <string name="leave_game">Покинуть игру</string>
-    <string name="leave">Покинуть</string>
+    <string name="leave">Выйти</string>
     <string name="return_to_game">Вернуться в игру</string>
     <string name="game_finished">Игра окончена</string>
     <string name="winner">Победитель %1$s</string>
@@ -98,4 +98,5 @@
     <string name="create_game_goal_hint">⚠️ Выбери цель, чтобы начать игру</string>
     <string name="pause_game">Сохранить прогресс игры</string>
     <string name="leave_without_saving">Покинуть игру без сохранения</string>
+    <string name="game_progress_saved">Прогресс игры успешно сохранен</string>
 </resources>

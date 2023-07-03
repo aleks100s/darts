@@ -22,11 +22,13 @@ class GameListViewModel(
         _state,
         getGamesUseCase.execute()
     ) { state, games ->
-        if (games != state.games) {
-            state.copy(games = games, isLoading = false)
-        } else {
-            state.copy(isLoading = false)
-        }
+        val finishedGames = games.filter { !it.isOngoing }
+        val ongoingGames = games.filter { it.isOngoing }
+        state.copy(
+            isLoading = false,
+            finishedGames = finishedGames,
+            ongoingGames = ongoingGames
+        )
     }
         .stateIn(
             viewModelScope,

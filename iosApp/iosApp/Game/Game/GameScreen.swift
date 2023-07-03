@@ -12,16 +12,18 @@ struct GameScreen: View {
 				Button(role: .cancel) {
 					viewModel.navigate(.gameFinished)
 				} label: {
-					Text("finish_game")
+					Text(viewModel.state.gameFinishedDismissButtonTitle)
 				}
-				.accessibilityIdentifier("finishGame")
+				.accessibilityIdentifier(viewModel.state.gameFinishedDismissButtonTitle)
 				
-				Button {
-					viewModel.navigate(.replayGame)
-				} label: {
-					Text("replay")
+				if viewModel.state.gameResult != .GamePaused()  {
+					Button {
+						viewModel.navigate(.replayGame)
+					} label: {
+						Text("replay")
+					}
+					.accessibilityIdentifier("replay")
 				}
-				.accessibilityIdentifier("replay")
 			} message: {
 				Text(viewModel.state.gameFinishedText)
 			}
@@ -44,7 +46,7 @@ struct GameScreen: View {
 			}
 			.alert("leave_game", isPresented: $viewModel.isCloseGameDialogShown) {
 				Button {
-					//
+					viewModel.onEvent(.SaveGameProgress())
 				} label: {
 					Text("pause_game")
 				}

@@ -82,18 +82,22 @@ class GameManager(
         _turnState.update { TurnState.IsOngoing }
         if (currentPlayerHistoryManager().isGameOver()) {
             val winner = if (players.count() == 1) null else currentPlayer.value
-            finishGame(winner)
+            finishGame(winner, isOngoing = false)
         } else {
             try {
                 nextTurn()
             } catch (e: TurnLimitReachedException) {
-                terminateGame()
+                terminateGame(isOngoing = false)
             }
         }
     }
 
     fun eraseShot() {
         currentPlayerHistoryManager().undoLastShot()
+    }
+
+    suspend fun saveGameProgress() {
+        terminateGame(isOngoing = true)
     }
 
     private fun currentPlayerHistoryManager(): PlayerHistoryManager {
@@ -124,18 +128,22 @@ class GameManager(
         currentTurn += 1
     }
 
-    private suspend fun terminateGame() {
+    private suspend fun terminateGame(isOngoing: Boolean) {
+        if (isOngoing) {
+            finishGame(winner = null, isOngoing = isOngoing)
+            return
+        }
         val playerHistories = playerHistoryManagers.map { it.playerHistory.value }
         val playerHistoryWithHighestScore = playerHistories.minBy { it.leftAfter }
         val highestScoreCount = playerHistories.count { it.leftAfter == playerHistoryWithHighestScore.leftAfter }
         if (highestScoreCount > 1 || playerHistories.count() == 1) {
-            finishGame(winner = null)
+            finishGame(winner = null, isOngoing = false)
         } else {
-            finishGame(playerHistoryWithHighestScore.player)
+            finishGame(playerHistoryWithHighestScore.player, isOngoing = false)
         }
     }
 
-    private suspend fun finishGame(winner: Player?) {
+    private suspend fun finishGame(winner: Player?, isOngoing: Boolean) {
         val game = Game(
             players = players,
             winner = winner,
@@ -146,7 +154,7 @@ class GameManager(
             isRandomPlayerOrderEnabled = isRandomPlayerOrderEnabled,
             isStatisticsEnabled = isStatisticsEnabled,
             isTurnLimitEnabled = turnsLimitEnabled,
-            isOngoing = false
+            isOngoing = isOngoing
         )
         val gameHistory = GameHistory(
             game = game,
@@ -156,13 +164,17 @@ class GameManager(
         )
         saveGameHistoryUseCase.execute(gameHistory = gameHistory)
         _gameResult.update {
-            if (players.count() == 1) {
-                GameResult.TrainingFinished
+            if (isOngoing) {
+                GameResult.GamePaused
             } else {
-                if (winner == null) {
-                    GameResult.Draw
+                if (players.count() == 1) {
+                    GameResult.TrainingFinished
                 } else {
-                    GameResult.Winner(winner.name)
+                    if (winner == null) {
+                        GameResult.Draw
+                    } else {
+                        GameResult.Winner(winner.name)
+                    }
                 }
             }
         }

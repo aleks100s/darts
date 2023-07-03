@@ -9,4 +9,5 @@ sealed class GameEvent {
     object ChangeTurn: GameEvent()
     object EraseHit: GameEvent()
     object BackButtonPressed: GameEvent()
+    object SaveGameProgress: GameEvent()
 }

@@ -74,6 +74,12 @@ class GameViewModel(
             is GameEvent.EraseHit -> {
                 gameManager.eraseShot()
             }
+            is GameEvent.SaveGameProgress -> {
+                _state.update { it.copy(isCloseGameDialogOpened = false) }
+                viewModelScope.launch(Dispatchers.Default) {
+                    gameManager.saveGameProgress()
+                }
+            }
         }
     }
 }

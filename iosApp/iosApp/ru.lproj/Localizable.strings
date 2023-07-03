@@ -12,7 +12,7 @@
 "shot_sum" = "Сумма";
 "reminder" = "Остаток";
 "leave_game" = "Покинуть игру";
-"leave" = "Покинуть";
+"leave" = "Выйти";
 "return_to_game" = "Вернуться в игру";
 "game_finished" = "Игра окончена";
 "winner %@" = "Победитель %@";
@@ -98,3 +98,6 @@
 "create_game_goal_hint" = "⚠️ Выбери цель, чтобы начать игру";
 "pause_game" = "Сохранить прогресс игры";
 "leave_without_saving" = "Покинуть игру без сохранения";
+"game_progress_saved" = "Прогресс игры успешно сохранен";
+"finished_games" = "Оконченные игры";
+"ongoing_games" = "Незаконченные игры";

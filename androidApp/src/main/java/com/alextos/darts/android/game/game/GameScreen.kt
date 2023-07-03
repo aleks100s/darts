@@ -179,7 +179,7 @@ private fun CloseGameDialog(
         title = stringResource(id = R.string.leave_game),
         defaultActionTitle = stringResource(id = R.string.pause_game),
         defaultAction = {
-
+            onEvent(GameEvent.SaveGameProgress)
         },
         destructiveActionTitle = stringResource(id = R.string.leave_without_saving),
         destructiveAction = {
@@ -207,6 +207,9 @@ private fun GameFinishedDialog(
         is GameResult.Winner -> {
             stringResource(id = R.string.game_finished)
         }
+        is GameResult.GamePaused -> {
+            stringResource(id = R.string.game_progress_saved)
+        }
     }
     val text = when (gameResult) {
         is GameResult.TrainingFinished -> {
@@ -218,6 +221,17 @@ private fun GameFinishedDialog(
         is GameResult.Winner -> {
             stringResource(id = R.string.winner, gameResult.name)
         }
+        is GameResult.GamePaused -> {
+            ""
+        }
+    }
+    val dismissTitle = when(gameResult) {
+        is GameResult.GamePaused -> {
+            stringResource(id = R.string.leave)
+        }
+        else -> {
+            stringResource(id = R.string.finish_game)
+        }
     }
     AlertDialog(
         onDismissRequest = {  },
@@ -228,13 +242,15 @@ private fun GameFinishedDialog(
             Text(text = text)
         },
         confirmButton = {
-            Button(onClick = { onNavigation(GameNavigationEvent.ReplayGame) }) {
-                Text(text = stringResource(id = R.string.replay))
+            if (gameResult != GameResult.GamePaused) {
+                Button(onClick = { onNavigation(GameNavigationEvent.ReplayGame) }) {
+                    Text(text = stringResource(id = R.string.replay))
+                }
             }
         },
         dismissButton = {
             Button(onClick = { onNavigation(GameNavigationEvent.CloseGame) }) {
-                Text(text = stringResource(id = R.string.finish_game))
+                Text(text = dismissTitle)
             }
         },
         properties = DialogProperties(dismissOnBackPress = false, dismissOnClickOutside = false)

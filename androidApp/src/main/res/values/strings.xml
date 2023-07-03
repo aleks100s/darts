@@ -98,4 +98,5 @@
     <string name="create_game_goal_hint">⚠️ Choose a goal to start a new game</string>
     <string name="pause_game">Save game progress</string>
     <string name="leave_without_saving">Leave the game without saving</string>
+    <string name="game_progress_saved">Game progress successfully saved</string>
 </resources>

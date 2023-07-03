@@ -8,6 +8,9 @@ extension GameState {
 		case .TrainingFinished():
 			return String(localized: "training_finished")
 			
+		case .GamePaused():
+			return String(localized: "game_progress_saved")
+			
 		default:
 			return String(localized: "game_finished")
 		}
@@ -17,7 +20,7 @@ extension GameState {
 		guard let result = gameResult else { return "" }
 		
 		switch result {
-		case .TrainingFinished():
+		case .TrainingFinished(), .GamePaused():
 			return ""
 			
 		case .Draw():
@@ -27,6 +30,18 @@ extension GameState {
 			guard let name = result.winnerName else { return "" }
 			
 			return String(localized: "winner \(name)")
+		}
+	}
+	
+	var gameFinishedDismissButtonTitle: String {
+		guard let result = gameResult else { return "" }
+		
+		switch result {
+		case .TrainingFinished():
+			return String(localized: "leave")
+			
+		default:
+			return String(localized: "finish_game")
 		}
 	}
 }

@@ -56,45 +56,12 @@ struct GameListScreen: View {
 	private var content: some View {
 		if viewModel.state.isLoading {
 			LoadingView()
-		} else if viewModel.state.games.isEmpty {
+		} else if viewModel.state.isEmpty {
 			emptyView
 		} else {
 			List {
-				ForEach(viewModel.state.games) { game in
-					gameItem(game: game)
-						.contentShape(Rectangle())
-						.onTapGesture {
-							viewModel.navigate(.gameSelected(game))
-						}
-						.swipeActions(edge: .leading, allowsFullSwipe: true) {
-							Button {
-								viewModel.navigate(.replay(game))
-							} label: {
-								Text("replay")
-							}
-							.tint(.green)
-						}
-						.contextMenu(
-							menuItems: {
-								Button {
-									viewModel.navigate(.replay(game))
-								} label: {
-									Label("replay", systemImage: "repeat")
-								}
-								
-								Button(role: .destructive) {
-									viewModel.onEvent(.ShowDeleteGameDialog(game: game))
-								} label: {
-									Label("delete", systemImage: "trash")
-								}
-							}
-						)
-				}
-				.onDelete { indexTurn in
-					if let index = indexTurn.first {
-						viewModel.deleteGame(index: index)
-					}
-				}
+				ongoingGamesSection(games: viewModel.state.ongoingGames)
+				finishedGamesSection(games: viewModel.state.finishedGames)
 			}
 		}
 	}
@@ -106,6 +73,68 @@ struct GameListScreen: View {
 			
 			Button("create_game") {
 				viewModel.navigate(.createGame)
+			}
+		}
+	}
+	
+	@ViewBuilder
+	private func ongoingGamesSection(games: [Game]) -> some View {
+		Section("ongoing_games") {
+			gamesList(games: games, isOngoing: true)
+		}
+	}
+	
+	@ViewBuilder
+	private func finishedGamesSection(games: [Game]) -> some View {
+		Section("finished_games") {
+			gamesList(games: games, isOngoing: false)
+		}
+	}
+	
+	@ViewBuilder
+	private func gamesList(games: [Game], isOngoing: Bool) -> some View {
+		ForEach(games) { game in
+			gameItem(game: game)
+				.onTapGesture {
+					if !isOngoing {
+						viewModel.navigate(.gameSelected(game))
+					}
+				}
+				.swipeActions(edge: .leading, allowsFullSwipe: true) {
+					if !isOngoing {
+						Button {
+							viewModel.navigate(.replay(game))
+						} label: {
+							Text("replay")
+						}
+						.tint(.green)
+					}
+				}
+				.contextMenu(
+					menuItems: {
+						if !isOngoing {
+							Button {
+								viewModel.navigate(.replay(game))
+							} label: {
+								Label("replay", systemImage: "repeat")
+							}
+						}
+						
+						Button(role: .destructive) {
+							viewModel.onEvent(.ShowDeleteGameDialog(game: game))
+						} label: {
+							Label("delete", systemImage: "trash")
+						}
+					}
+				)
+		}
+		.onDelete { indexTurn in
+			if let index = indexTurn.first {
+				if isOngoing {
+					viewModel.deleteOngoingGame(index: index)
+				} else {
+					viewModel.deleteFinishedGame(index: index)
+				}
 			}
 		}
 	}
@@ -133,5 +162,6 @@ struct GameListScreen: View {
 			Chevron()
 		}
 		.lineLimit(1)
+		.contentShape(Rectangle())
 	}
 }

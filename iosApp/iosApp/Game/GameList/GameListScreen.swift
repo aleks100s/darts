@@ -60,8 +60,16 @@ struct GameListScreen: View {
 			emptyView
 		} else {
 			List {
-				ongoingGamesSection(games: viewModel.state.ongoingGames)
-				finishedGamesSection(games: viewModel.state.finishedGames)
+				if !viewModel.state.ongoingGames.isEmpty {
+					Section("ongoing_games") {
+						gamesList(games: viewModel.state.ongoingGames, isOngoing: true)
+					}
+				}
+				if !viewModel.state.finishedGames.isEmpty {
+					Section("finished_games") {
+						gamesList(games: viewModel.state.finishedGames, isOngoing: false)
+					}
+				}
 			}
 		}
 	}
@@ -74,20 +82,6 @@ struct GameListScreen: View {
 			Button("create_game") {
 				viewModel.navigate(.createGame)
 			}
-		}
-	}
-	
-	@ViewBuilder
-	private func ongoingGamesSection(games: [Game]) -> some View {
-		Section("ongoing_games") {
-			gamesList(games: games, isOngoing: true)
-		}
-	}
-	
-	@ViewBuilder
-	private func finishedGamesSection(games: [Game]) -> some View {
-		Section("finished_games") {
-			gamesList(games: games, isOngoing: false)
 		}
 	}
 	

@@ -80,18 +80,22 @@ fun GameListScreen(
             } else {
                 RoundedView(modifier.padding(padding)) {
                     LazyColumn(modifier = Modifier.surfaceBackground()) {
-                        gamesList(
-                            games = state.ongoingGames,
-                            isOngoing = true,
-                            onEvent = onEvent,
-                            onNavigation = onNavigation
-                        )
-                        gamesList(
-                            games = state.finishedGames,
-                            isOngoing = false,
-                            onEvent = onEvent,
-                            onNavigation = onNavigation
-                        )
+                        if (state.ongoingGames.isNotEmpty()) {
+                            gamesList(
+                                games = state.ongoingGames,
+                                isOngoing = true,
+                                onEvent = onEvent,
+                                onNavigation = onNavigation
+                            )
+                        }
+                        if (state.finishedGames.isNotEmpty()) {
+                            gamesList(
+                                games = state.finishedGames,
+                                isOngoing = false,
+                                onEvent = onEvent,
+                                onNavigation = onNavigation
+                            )
+                        }
                     }
                 }
             }

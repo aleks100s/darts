@@ -17,7 +17,8 @@ data class Game(
     val isWinWithDoublesEnabled: Boolean,
     val isRandomPlayerOrderEnabled: Boolean,
     val isStatisticsEnabled: Boolean,
-    val isTurnLimitEnabled: Boolean
+    val isTurnLimitEnabled: Boolean,
+    val isOngoing: Boolean
 ) {
     val duration: GameDuration
         get() {

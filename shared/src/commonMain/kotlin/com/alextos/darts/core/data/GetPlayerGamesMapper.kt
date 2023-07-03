@@ -24,7 +24,8 @@ fun List<GetPlayerGames>.mapToGames(): List<Game> {
                 isWinWithDoublesEnabled = false,
                 isRandomPlayerOrderEnabled = false,
                 isStatisticsEnabled = true,
-                isTurnLimitEnabled = true
+                isTurnLimitEnabled = true,
+                isOngoing = false
             )
         }
 }

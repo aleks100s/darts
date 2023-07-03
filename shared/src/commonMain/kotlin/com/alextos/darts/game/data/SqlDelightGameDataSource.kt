@@ -36,7 +36,8 @@ class SqlDelightGameDataSource(
                 finish_with_doubles = if (game.isWinWithDoublesEnabled) 1 else 0,
                 random_player_order = if (game.isRandomPlayerOrderEnabled) 1 else 0,
                 disable_statistics = if (game.isStatisticsEnabled) 0 else 1,
-                turns_limit = if (game.isTurnLimitEnabled) 1 else 0
+                turns_limit = if (game.isTurnLimitEnabled) 1 else 0,
+                is_ongoing = if (game.isOngoing) 1 else 0
             )
 
             val gameId = getLastInsertedId()

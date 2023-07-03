@@ -35,7 +35,8 @@ CREATE TABLE gameEntity(
     finish_with_doubles INTEGER,
     random_player_order INTEGER,
     disable_statistics INTEGER,
-    turns_limit INTEGER
+    turns_limit INTEGER,
+    is_ongoing INTEGER
 );
 
 getGames:
@@ -48,6 +49,7 @@ ge.finish_with_doubles AS finishWithDoubles,
 ge.random_player_order AS randomPlayerOrder,
 ge.disable_statistics AS disableStatistics,
 ge.turns_limit AS turnsLimitEnabled,
+ge.is_ongoing AS isOngoing,
 pe.id AS playerId,
 pe.name AS playerName,
 gpe.game_order AS gameOrder,
@@ -66,9 +68,10 @@ INSERT OR REPLACE INTO gameEntity(
     finish_with_doubles,
     random_player_order,
     disable_statistics,
-    turns_limit
+    turns_limit,
+    is_ongoing
 )
-VALUES(?, ?, ?, ?, ?, ?, ?, ?);
+VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);
 
 deleteGame:
 DELETE FROM gameEntity
@@ -84,6 +87,7 @@ ge.finish_with_doubles AS finishWithDoubles,
 ge.random_player_order AS randomPlayerOrder,
 ge.disable_statistics AS disableStatistics,
 ge.turns_limit AS turnsLimitEnabled,
+ge.is_ongoing AS isOngoing,
 pe.id AS playerId,
 pe.name AS playerName,
 gpe.game_order AS gameOrder,
@@ -213,10 +217,12 @@ she.sector AS sectorId,
 she.shot_value AS sectorValue
 FROM setEntity se
 JOIN shotEntity she ON se.id = she.set_id
+JOIN gameEntity ge ON ge.id = se.game_id
 WHERE score = (SELECT MAX(score) FROM setEntity WHERE setEntity.player_id = ?)
 AND se.player_id = ?
 AND (se.disable_statistics IS NULL OR se.disable_statistics = 0)
-AND (she.disable_statistics IS NULL OR she.disable_statistics = 0);
+AND (she.disable_statistics IS NULL OR she.disable_statistics = 0)
+AND (ge.is_ongoing IS NULL OR ge.is_ongoing = 0);
 
 getPlayerBiggestFinalSet:
 SELECT
@@ -229,10 +235,12 @@ she.sector AS sectorId,
 she.shot_value AS sectorValue
 FROM setEntity se
 JOIN shotEntity she ON se.id = she.set_id
+JOIN gameEntity ge ON ge.id = se.game_id
 WHERE she.player_id = ?
 AND leftAfter = 0
 AND (se.disable_statistics IS NULL OR se.disable_statistics = 0)
 AND (she.disable_statistics IS NULL OR she.disable_statistics = 0)
+AND (ge.is_ongoing IS NULL OR ge.is_ongoing = 0)
 ORDER BY se.score DESC, se.id ASC
 LIMIT 3;
 
@@ -240,64 +248,76 @@ getAverageSetScore:
 SELECT
 AVG(se.score) AS averageScore
 FROM setEntity se
-WHERE (se.disable_statistics IS NULL OR se.disable_statistics = 0);
+JOIN gameEntity ge ON ge.id = se.game_id
+WHERE (se.disable_statistics IS NULL OR se.disable_statistics = 0)
+AND (ge.is_ongoing IS NULL OR ge.is_ongoing = 0);
 
 getPlayerAverageSetScore:
 SELECT
 AVG(se.score) AS averageScore
 FROM setEntity se
+JOIN gameEntity ge ON ge.id = se.game_id
 WHERE se.player_id = ?
-AND (se.disable_statistics IS NULL OR se.disable_statistics = 0);
+AND (se.disable_statistics IS NULL OR se.disable_statistics = 0)
+AND (ge.is_ongoing IS NULL OR ge.is_ongoing = 0);
 
 getAverageShotValue:
 SELECT
 AVG(she.shot_value) AS averageShotValue
 FROM shotEntity she
+JOIN setEntity se ON se.id = she.set_id
+JOIN gameEntity ge ON ge.id = se.game_id
 WHERE she.sector >= 0
-AND (she.disable_statistics IS NULL OR she.disable_statistics = 0);
+AND (she.disable_statistics IS NULL OR she.disable_statistics = 0)
+AND (ge.is_ongoing IS NULL OR ge.is_ongoing = 0);
 
 getPlayerAverageShotValue:
 SELECT
 AVG(she.shot_value) AS averageShotValue
 FROM shotEntity she
+JOIN setEntity se ON se.id = she.set_id
+JOIN gameEntity ge ON ge.id = se.game_id
 WHERE she.player_id = ?
 AND she.sector >= 0
-AND (she.disable_statistics IS NULL OR she.disable_statistics = 0);
+AND (she.disable_statistics IS NULL OR she.disable_statistics = 0)
+AND (ge.is_ongoing IS NULL OR ge.is_ongoing = 0);
 
 getShotDistribution:
 SELECT
-(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she WHERE she.sector = 0 AND (she.disable_statistics IS NULL OR she.disable_statistics = 0)) AS missesCount,
-(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she WHERE she.sector = 1 AND (she.disable_statistics IS NULL OR she.disable_statistics = 0)) AS doubleBullseyeCount,
-(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she WHERE she.sector = 2 AND (she.disable_statistics IS NULL OR she.disable_statistics = 0)) AS singleBullseyeCount,
-(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she WHERE she.sector IN (3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 39, 41, 43, 45, 47, 49, 51, 53, 55, 57, 59, 61, 63, 65, 67, 69, 71, 73, 75, 77, 79, 81) AND (she.disable_statistics IS NULL OR she.disable_statistics = 0)) AS singlesCount,
-(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she WHERE she.sector IN (6, 10, 14, 18, 22, 26, 30, 34, 38, 42, 46, 50, 54, 58, 62, 66, 70, 74, 78, 82) AND (she.disable_statistics IS NULL OR she.disable_statistics = 0)) AS doublesCount,
-(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she WHERE she.sector IN (4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, 68, 72, 76, 80) AND (she.disable_statistics IS NULL OR she.disable_statistics = 0)) AS triplesCount;
+(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she JOIN setEntity se ON se.id = she.set_id JOIN gameEntity ge ON ge.id = se.game_id WHERE she.sector = 0 AND (she.disable_statistics IS NULL OR she.disable_statistics = 0) AND (ge.is_ongoing IS NULL OR ge.is_ongoing = 0)) AS missesCount,
+(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she JOIN setEntity se ON se.id = she.set_id JOIN gameEntity ge ON ge.id = se.game_id WHERE she.sector = 1 AND (she.disable_statistics IS NULL OR she.disable_statistics = 0) AND (ge.is_ongoing IS NULL OR ge.is_ongoing = 0)) AS doubleBullseyeCount,
+(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she JOIN setEntity se ON se.id = she.set_id JOIN gameEntity ge ON ge.id = se.game_id WHERE she.sector = 2 AND (she.disable_statistics IS NULL OR she.disable_statistics = 0) AND (ge.is_ongoing IS NULL OR ge.is_ongoing = 0)) AS singleBullseyeCount,
+(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she JOIN setEntity se ON se.id = she.set_id JOIN gameEntity ge ON ge.id = se.game_id WHERE she.sector IN (3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 39, 41, 43, 45, 47, 49, 51, 53, 55, 57, 59, 61, 63, 65, 67, 69, 71, 73, 75, 77, 79, 81) AND (she.disable_statistics IS NULL OR she.disable_statistics = 0) AND (ge.is_ongoing IS NULL OR ge.is_ongoing = 0)) AS singlesCount,
+(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she JOIN setEntity se ON se.id = she.set_id JOIN gameEntity ge ON ge.id = se.game_id WHERE she.sector IN (6, 10, 14, 18, 22, 26, 30, 34, 38, 42, 46, 50, 54, 58, 62, 66, 70, 74, 78, 82) AND (she.disable_statistics IS NULL OR she.disable_statistics = 0) AND (ge.is_ongoing IS NULL OR ge.is_ongoing = 0)) AS doublesCount,
+(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she JOIN setEntity se ON se.id = she.set_id JOIN gameEntity ge ON ge.id = se.game_id WHERE she.sector IN (4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, 68, 72, 76, 80) AND (she.disable_statistics IS NULL OR she.disable_statistics = 0) AND (ge.is_ongoing IS NULL OR ge.is_ongoing = 0)) AS triplesCount;
 
 
 getPlayerShotDistribution:
 SELECT
-(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she WHERE she.sector = 0 AND she.player_id = ? AND (she.disable_statistics IS NULL OR she.disable_statistics = 0)) AS missesCount,
-(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she WHERE she.sector = 1 AND she.player_id = ? AND (she.disable_statistics IS NULL OR she.disable_statistics = 0)) AS doubleBullseyeCount,
-(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she WHERE she.sector = 2 AND she.player_id = ? AND (she.disable_statistics IS NULL OR she.disable_statistics = 0)) AS singleBullseyeCount,
-(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she WHERE she.sector IN (3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 39, 41, 43, 45, 47, 49, 51, 53, 55, 57, 59, 61, 63, 65, 67, 69, 71, 73, 75, 77, 79, 81) AND she.player_id = ? AND (she.disable_statistics IS NULL OR she.disable_statistics = 0)) AS singlesCount,
-(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she WHERE she.sector IN (6, 10, 14, 18, 22, 26, 30, 34, 38, 42, 46, 50, 54, 58, 62, 66, 70, 74, 78, 82) AND she.player_id = ? AND (she.disable_statistics IS NULL OR she.disable_statistics = 0)) AS doublesCount,
-(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she WHERE she.sector IN (4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, 68, 72, 76, 80) AND she.player_id = ? AND (she.disable_statistics IS NULL OR she.disable_statistics = 0)) AS triplesCount;
+(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she JOIN setEntity se ON se.id = she.set_id JOIN gameEntity ge ON ge.id = se.game_id WHERE she.sector = 0 AND she.player_id = ? AND (she.disable_statistics IS NULL OR she.disable_statistics = 0) AND (ge.is_ongoing IS NULL OR ge.is_ongoing = 0)) AS missesCount,
+(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she JOIN setEntity se ON se.id = she.set_id JOIN gameEntity ge ON ge.id = se.game_id WHERE she.sector = 1 AND she.player_id = ? AND (she.disable_statistics IS NULL OR she.disable_statistics = 0) AND (ge.is_ongoing IS NULL OR ge.is_ongoing = 0)) AS doubleBullseyeCount,
+(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she JOIN setEntity se ON se.id = she.set_id JOIN gameEntity ge ON ge.id = se.game_id WHERE she.sector = 2 AND she.player_id = ? AND (she.disable_statistics IS NULL OR she.disable_statistics = 0) AND (ge.is_ongoing IS NULL OR ge.is_ongoing = 0)) AS singleBullseyeCount,
+(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she JOIN setEntity se ON se.id = she.set_id JOIN gameEntity ge ON ge.id = se.game_id WHERE she.sector IN (3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 39, 41, 43, 45, 47, 49, 51, 53, 55, 57, 59, 61, 63, 65, 67, 69, 71, 73, 75, 77, 79, 81) AND she.player_id = ? AND (she.disable_statistics IS NULL OR she.disable_statistics = 0) AND (ge.is_ongoing IS NULL OR ge.is_ongoing = 0)) AS singlesCount,
+(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she JOIN setEntity se ON se.id = she.set_id JOIN gameEntity ge ON ge.id = se.game_id WHERE she.sector IN (6, 10, 14, 18, 22, 26, 30, 34, 38, 42, 46, 50, 54, 58, 62, 66, 70, 74, 78, 82) AND she.player_id = ? AND (she.disable_statistics IS NULL OR she.disable_statistics = 0) AND (ge.is_ongoing IS NULL OR ge.is_ongoing = 0)) AS doublesCount,
+(SELECT COUNT(she.id) AS shotsCount FROM shotEntity she JOIN setEntity se ON se.id = she.set_id JOIN gameEntity ge ON ge.id = se.game_id WHERE she.sector IN (4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, 68, 72, 76, 80) AND she.player_id = ? AND (she.disable_statistics IS NULL OR she.disable_statistics = 0) AND (ge.is_ongoing IS NULL OR ge.is_ongoing = 0)) AS triplesCount;
 
 getVictoryDistribution:
 SELECT
-(SELECT COUNT(gpe.id) FROM gamePlayerEntity gpe WHERE gpe.player_id = ? AND gpe.is_winner = 1 AND (gpe.disable_statistics IS NULL OR gpe.disable_statistics = 0)) AS victoriesCount,
-(SELECT COUNT(gpe.id) FROM gamePlayerEntity gpe WHERE gpe.player_id = ? AND (gpe.is_winner = 0 OR gpe.is_winner = 1) AND (gpe.disable_statistics IS NULL OR gpe.disable_statistics = 0)) AS gamesCount;
+(SELECT COUNT(gpe.id) FROM gamePlayerEntity gpe JOIN gameEntity ge ON ge.id = gpe.game_id WHERE gpe.player_id = ? AND gpe.is_winner = 1 AND (gpe.disable_statistics IS NULL OR gpe.disable_statistics = 0) AND (ge.is_ongoing IS NULL OR ge.is_ongoing = 0)) AS victoriesCount,
+(SELECT COUNT(gpe.id) FROM gamePlayerEntity gpe JOIN gameEntity ge ON ge.id = gpe.game_id WHERE gpe.player_id = ? AND (gpe.is_winner = 0 OR gpe.is_winner = 1) AND (gpe.disable_statistics IS NULL OR gpe.disable_statistics = 0) AND (ge.is_ongoing IS NULL OR ge.is_ongoing = 0)) AS gamesCount;
 
 getSectorCount:
-SELECT COUNT (she.id) AS sectorCount FROM shotEntity she WHERE she.sector = ? AND she.player_id = ? AND (she.disable_statistics IS NULL OR she.disable_statistics = 0);
+SELECT COUNT (she.id) AS sectorCount FROM shotEntity she JOIN setEntity se ON se.id = she.set_id JOIN gameEntity ge ON ge.id = se.game_id WHERE she.sector = ? AND she.player_id = ? AND (she.disable_statistics IS NULL OR she.disable_statistics = 0) AND (ge.is_ongoing IS NULL OR ge.is_ongoing = 0);
 
 getGlobalTotalTimePlayed:
 SELECT SUM(ge.timestamp - ge.timestamp_start) AS difference
 FROM gameEntity ge
-JOIN gamePlayerEntity gpe ON gpe.game_id = ge.id;
+JOIN gamePlayerEntity gpe ON gpe.game_id = ge.id
+WHERE (ge.is_ongoing IS NULL OR ge.is_ongoing = 0);
 
 getPlayerTotalTimePlayed:
 SELECT SUM(ge.timestamp - ge.timestamp_start) AS difference
 FROM gameEntity ge
 JOIN gamePlayerEntity gpe ON gpe.game_id = ge.id
-WHERE gpe.player_id = ?;
+WHERE gpe.player_id = ?
+AND (ge.is_ongoing IS NULL OR ge.is_ongoing = 0);

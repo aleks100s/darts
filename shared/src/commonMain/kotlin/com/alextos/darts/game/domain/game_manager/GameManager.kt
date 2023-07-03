@@ -145,7 +145,8 @@ class GameManager(
             isWinWithDoublesEnabled = finishWithDoubles,
             isRandomPlayerOrderEnabled = isRandomPlayerOrderEnabled,
             isStatisticsEnabled = isStatisticsEnabled,
-            isTurnLimitEnabled = turnsLimitEnabled
+            isTurnLimitEnabled = turnsLimitEnabled,
+            isOngoing = false
         )
         val gameHistory = GameHistory(
             game = game,

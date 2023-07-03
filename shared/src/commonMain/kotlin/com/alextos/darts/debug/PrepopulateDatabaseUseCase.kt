@@ -70,7 +70,8 @@ class PrepopulateDatabaseUseCase(
                 isWinWithDoublesEnabled = finishWithDoubles,
                 isRandomPlayerOrderEnabled = randomPlayerOrder,
                 isStatisticsEnabled = true,
-                isTurnLimitEnabled = true
+                isTurnLimitEnabled = true,
+                isOngoing = false
             ),
             playerHistories = allPlayers().map { player ->
                 PlayerHistory(
@@ -97,7 +98,8 @@ class PrepopulateDatabaseUseCase(
                 isWinWithDoublesEnabled = finishWithDoubles,
                 isRandomPlayerOrderEnabled = randomPlayerOrder,
                 isStatisticsEnabled = true,
-                isTurnLimitEnabled = true
+                isTurnLimitEnabled = true,
+                isOngoing = false
             ),
             playerHistories = listOf(
                 PlayerHistory(

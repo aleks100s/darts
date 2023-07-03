@@ -60,14 +60,14 @@ struct GameListScreen: View {
 			emptyView
 		} else {
 			List {
-				if !viewModel.state.ongoingGames.isEmpty {
+				if !viewModel.state.pausedGames.isEmpty {
 					Section("ongoing_games") {
-						gamesList(games: viewModel.state.ongoingGames, isOngoing: true)
+						gamesList(games: viewModel.state.pausedGames, isPaused: true)
 					}
 				}
 				if !viewModel.state.finishedGames.isEmpty {
 					Section("finished_games") {
-						gamesList(games: viewModel.state.finishedGames, isOngoing: false)
+						gamesList(games: viewModel.state.finishedGames, isPaused: false)
 					}
 				}
 			}
@@ -86,30 +86,44 @@ struct GameListScreen: View {
 	}
 	
 	@ViewBuilder
-	private func gamesList(games: [Game], isOngoing: Bool) -> some View {
+	private func gamesList(games: [Game], isPaused: Bool) -> some View {
 		ForEach(games) { game in
 			gameItem(game: game)
 				.onTapGesture {
-					if !isOngoing {
+					if isPaused {
+						viewModel.navigate(.resumeGame(game))
+					} else {
 						viewModel.navigate(.gameSelected(game))
 					}
 				}
 				.swipeActions(edge: .leading, allowsFullSwipe: true) {
-					if !isOngoing {
-						Button {
+					Button {
+						if isPaused {
+							viewModel.navigate(.resumeGame(game))
+						} else {
 							viewModel.navigate(.replay(game))
-						} label: {
+						}
+					} label: {
+						if isPaused {
+							Text("continue_game")
+						} else {
 							Text("replay")
 						}
-						.tint(.green)
 					}
+					.tint(.green)
 				}
 				.contextMenu(
 					menuItems: {
-						if !isOngoing {
-							Button {
+						Button {
+							if isPaused {
+								viewModel.navigate(.resumeGame(game))
+							} else {
 								viewModel.navigate(.replay(game))
-							} label: {
+							}
+						} label: {
+							if isPaused {
+								Label("continue_game", systemImage: "play")
+							} else {
 								Label("replay", systemImage: "repeat")
 							}
 						}
@@ -124,8 +138,8 @@ struct GameListScreen: View {
 		}
 		.onDelete { indexTurn in
 			if let index = indexTurn.first {
-				if isOngoing {
-					viewModel.deleteOngoingGame(index: index)
+				if isPaused {
+					viewModel.deletePausedGame(index: index)
 				} else {
 					viewModel.deleteFinishedGame(index: index)
 				}

@@ -22,12 +22,12 @@ class GameListViewModel(
         _state,
         getGamesUseCase.execute()
     ) { state, games ->
-        val finishedGames = games.filter { !it.isOngoing }
-        val ongoingGames = games.filter { it.isOngoing }
+        val finishedGames = games.filter { !it.isPaused }
+        val ongoingGames = games.filter { it.isPaused }
         state.copy(
             isLoading = false,
             finishedGames = finishedGames,
-            ongoingGames = ongoingGames
+            pausedGames = ongoingGames
         )
     }
         .stateIn(
@@ -73,6 +73,9 @@ class GameListViewModel(
                 _state.update { it.copy(isActionsDialogShown = false) }
             }
             is GameListEvent.ReplayGame -> {
+                _state.update { it.copy(isActionsDialogShown = false) }
+            }
+            is GameListEvent.ResumeGame -> {
                 _state.update { it.copy(isActionsDialogShown = false) }
             }
         }

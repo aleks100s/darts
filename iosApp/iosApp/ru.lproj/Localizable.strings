@@ -100,4 +100,5 @@
 "leave_without_saving" = "Покинуть игру без сохранения";
 "game_progress_saved" = "Прогресс игры успешно сохранен";
 "finished_games" = "Оконченные игры";
-"ongoing_games" = "Незаконченные игры";
+"ongoing_games" = "Начатые игры";
+"continue_game" = "Продолжить игру";

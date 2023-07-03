@@ -9,4 +9,5 @@ sealed class GameListEvent {
     object HideDeleteGameDialog: GameListEvent()
     object HideActionsDialog: GameListEvent()
     object ReplayGame: GameListEvent()
+    object ResumeGame: GameListEvent()
 }

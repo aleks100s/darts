@@ -10,7 +10,7 @@ final class IOSGameListViewModel: ObservableObject {
 		isLoading: true,
 		isActionsDialogShown: false,
 		finishedGames: [],
-		ongoingGames: []
+		pausedGames: []
 	)
 	
 	private let viewModel: GameListViewModel
@@ -47,8 +47,8 @@ final class IOSGameListViewModel: ObservableObject {
 		delete(game: game)
 	}
 	
-	func deleteOngoingGame(index: Int) {
-		let game = state.ongoingGames[index]
+	func deletePausedGame(index: Int) {
+		let game = state.pausedGames[index]
 		delete(game: game)
 	}
 	

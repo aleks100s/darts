@@ -18,7 +18,7 @@ data class Game(
     val isRandomPlayerOrderEnabled: Boolean,
     val isStatisticsEnabled: Boolean,
     val isTurnLimitEnabled: Boolean,
-    val isOngoing: Boolean
+    val isPaused: Boolean
 ) {
     val duration: GameDuration
         get() {
@@ -34,6 +34,9 @@ data class Game(
 
     fun getUITitleStringParts(): List<String> {
         val parts = mutableListOf<String>()
+        if (isPaused) {
+            parts.add("⏸️")
+        }
         parts.add("🎯 $gameGoal")
         if (!duration.isEmpty) {
             parts.add("⏱ ${getDurationMinutesString()}:${getDurationSecondsString()}")

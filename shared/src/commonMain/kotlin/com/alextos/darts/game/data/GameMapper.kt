@@ -28,7 +28,7 @@ fun List<GetGames>.mapToGames(): List<Game> {
                 isRandomPlayerOrderEnabled = gameEntity?.randomPlayerOrder == 1L,
                 isStatisticsEnabled = gameEntity?.disableStatistics != 1L,
                 isTurnLimitEnabled = gameEntity?.turnsLimitEnabled == 1L,
-                isOngoing = gameEntity?.isOngoing == 1L
+                isPaused = gameEntity?.isOngoing == 1L
             )
         }
 }

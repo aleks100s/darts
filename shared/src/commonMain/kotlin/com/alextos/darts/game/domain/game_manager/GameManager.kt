@@ -154,7 +154,7 @@ class GameManager(
             isRandomPlayerOrderEnabled = isRandomPlayerOrderEnabled,
             isStatisticsEnabled = isStatisticsEnabled,
             isTurnLimitEnabled = turnsLimitEnabled,
-            isOngoing = isOngoing
+            isPaused = isOngoing
         )
         val gameHistory = GameHistory(
             game = game,

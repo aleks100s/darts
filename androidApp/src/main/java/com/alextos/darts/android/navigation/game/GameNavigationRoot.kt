@@ -90,6 +90,9 @@ fun GameNavigationRoot() {
                         is GameListNavigationEvent.BackButtonPressed -> {
                             navController.popBackStack()
                         }
+                        is GameListNavigationEvent.ResumeGame -> {
+                            // TODO: continue the game
+                        }
                     }
                 },
                 populateDB = {

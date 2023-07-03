@@ -71,7 +71,7 @@ class PrepopulateDatabaseUseCase(
                 isRandomPlayerOrderEnabled = randomPlayerOrder,
                 isStatisticsEnabled = true,
                 isTurnLimitEnabled = true,
-                isOngoing = false
+                isPaused = false
             ),
             playerHistories = allPlayers().map { player ->
                 PlayerHistory(
@@ -99,7 +99,7 @@ class PrepopulateDatabaseUseCase(
                 isRandomPlayerOrderEnabled = randomPlayerOrder,
                 isStatisticsEnabled = true,
                 isTurnLimitEnabled = true,
-                isOngoing = false
+                isPaused = false
             ),
             playerHistories = listOf(
                 PlayerHistory(

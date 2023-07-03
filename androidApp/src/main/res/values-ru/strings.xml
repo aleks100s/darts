@@ -99,4 +99,5 @@
     <string name="pause_game">Сохранить прогресс игры</string>
     <string name="leave_without_saving">Покинуть игру без сохранения</string>
     <string name="game_progress_saved">Прогресс игры успешно сохранен</string>
+    <string name="continue_game">Продолжить игру</string>
 </resources>

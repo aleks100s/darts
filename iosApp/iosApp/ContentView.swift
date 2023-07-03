@@ -15,7 +15,7 @@ struct ContentView: View {
 		TabView(selection: $selection) {
 			GameTab(module: module)
 				.tabItem {
-					Label("game", systemImage: "play")
+					Label("game", systemImage: "gamecontroller")
 				}
 				.tag(Tab.game)
 				.accessibilityIdentifier("tabPlay")

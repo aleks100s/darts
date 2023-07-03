@@ -80,9 +80,9 @@ fun GameListScreen(
             } else {
                 RoundedView(modifier.padding(padding)) {
                     LazyColumn(modifier = Modifier.surfaceBackground()) {
-                        if (state.ongoingGames.isNotEmpty()) {
+                        if (state.pausedGames.isNotEmpty()) {
                             gamesList(
-                                games = state.ongoingGames,
+                                games = state.pausedGames,
                                 isOngoing = true,
                                 onEvent = onEvent,
                                 onNavigation = onNavigation
@@ -128,7 +128,9 @@ private fun LazyListScope.gamesList(
         GameItem(
             game = game,
             onClick = {
-                if (!isOngoing) {
+                if (isOngoing) {
+                    onNavigation(GameListNavigationEvent.ResumeGame(game))
+                } else {
                     onNavigation(GameListNavigationEvent.SelectGame(game))
                 }
             },
@@ -148,13 +150,18 @@ private fun GameActionsDialog(
     onEvent: (GameListEvent) -> Unit,
     onNavigation: (GameListNavigationEvent) -> Unit
 ) {
-    val defaultActionTitle = if (state.selectedGame?.isOngoing == true) {
-        null
+    val defaultActionTitle = if (state.selectedGame?.isPaused == true) {
+        stringResource(id = R.string.continue_game)
     } else {
         stringResource(id = R.string.replay)
     }
-    val defaultAction: (() -> Unit)? = if (state.selectedGame?.isOngoing == true) {
-        null
+    val defaultAction: () -> Unit = if (state.selectedGame?.isPaused == true) {
+        {
+            state.selectedGame?.let {
+                onEvent(GameListEvent.ResumeGame)
+                // TODO: continue the game
+            }
+        }
     } else {
         {
             state.selectedGame?.let {
@@ -220,7 +227,7 @@ private fun GameItem(
     onClick: () -> Unit,
     onLongClick: () -> Unit
 ) {
-    val bgColor = if (game.isOngoing) {
+    val bgColor = if (game.isPaused) {
         Color.Yellow.copy(alpha = 0.5f)
     } else {
         Color.Transparent

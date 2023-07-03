@@ -24,6 +24,10 @@ struct GameTab: View {
 						
 					case .showCalculator:
 						navigationStack.append(.calculator)
+						
+					case let .resumeGame(game):
+						// TODO: continue the game
+						break
 					}
 				}
 			)

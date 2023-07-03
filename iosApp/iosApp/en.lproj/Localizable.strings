@@ -100,4 +100,5 @@
 "leave_without_saving" = "Leave the game without saving";
 "game_progress_saved" = "Game progress successfully saved";
 "finished_games" = "Finished games";
-"ongoing_games" = "Ongoing games";
+"ongoing_games" = "Paused games";
+"continue_game" = "Continue the game";

@@ -8,8 +8,8 @@ data class GameListState(
     val isLoading: Boolean = true,
     val isActionsDialogShown: Boolean = false,
     val finishedGames: List<Game> = listOf(),
-    val ongoingGames: List<Game> = listOf()
+    val pausedGames: List<Game> = listOf()
 ) {
     val isEmpty: Boolean
-        get() { return finishedGames.isEmpty() && ongoingGames.isEmpty() }
+        get() { return finishedGames.isEmpty() && pausedGames.isEmpty() }
 }

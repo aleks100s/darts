@@ -43,12 +43,19 @@ struct GameScreen: View {
 				Text("proceed_to_the_next_turn \(viewModel.state.turnResult())")
 			}
 			.alert("leave_game", isPresented: $viewModel.isCloseGameDialogShown) {
+				Button {
+					//
+				} label: {
+					Text("pause_game")
+				}
+				.accessibilityIdentifier("pause_game")
+				
 				Button(role: .destructive) {
 					viewModel.navigate(.gameFinished)
 				} label: {
-					Text("leave")
+					Text("leave_without_saving")
 				}
-				.accessibilityIdentifier("leave")
+				.accessibilityIdentifier("leave_without_saving")
 
 				Button(role: .cancel) {
 					viewModel.onEvent(.ReturnToGame())
@@ -56,8 +63,6 @@ struct GameScreen: View {
 					Text("cancel")
 				}
 				.accessibilityIdentifier("cancel")
-			} message: {
-				Text("your_progress_will_be_lost")
 			}
 			.toolbar {
 				ToolbarItem(placement: .navigationBarLeading) {

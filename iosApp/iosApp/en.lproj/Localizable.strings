@@ -96,3 +96,5 @@
 "create_game_players_empty_hint" = "⚠️ Add new player to start a new game";
 "create_game_players_not_empty_hint" = "Select player(s) to start a new game";
 "create_game_goal_hint" = "⚠️ Choose a goal to start a new game";
+"pause_game" = "Save game progress";
+"leave_without_saving" = "Leave the game without saving";

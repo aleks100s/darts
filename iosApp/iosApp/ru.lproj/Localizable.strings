@@ -96,3 +96,5 @@
 "create_game_players_empty_hint" = "⚠️ Создай нового игрока, чтобы начать игру";
 "create_game_players_not_empty_hint" = "Выбери игрока (игроков), чтобы начать игру";
 "create_game_goal_hint" = "⚠️ Выбери цель, чтобы начать игру";
+"pause_game" = "Сохранить прогресс игры";
+"leave_without_saving" = "Покинуть игру без сохранения";

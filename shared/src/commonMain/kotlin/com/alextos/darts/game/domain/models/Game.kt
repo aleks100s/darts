@@ -79,7 +79,15 @@ data class Game(
     }
 
     fun getGameSettings(): GameSettings {
-        return GameSettings(players, gameGoal, isWinWithDoublesEnabled, isRandomPlayerOrderEnabled, isStatisticsEnabled, isTurnLimitEnabled)
+        return GameSettings(
+            players,
+            gameGoal,
+            isWinWithDoublesEnabled,
+            isRandomPlayerOrderEnabled,
+            isStatisticsEnabled,
+            isTurnLimitEnabled,
+            isPaused
+        )
     }
 
     internal fun getDayString(timestamp: LocalDateTime): String {

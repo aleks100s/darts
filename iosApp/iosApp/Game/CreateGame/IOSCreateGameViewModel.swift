@@ -49,7 +49,8 @@ final class IOSCreateGameViewModel: ObservableObject {
 				isFinishWithDoublesChecked: isFinishWithDoublesChecked,
 				isRandomPlayersOrderChecked: isRandomPlayerOrderChecked,
 				isStatisticsEnabled: isStatisticsEnabled,
-				isTurnLimitEnabled: isTurnLimitEnabled
+				isTurnLimitEnabled: isTurnLimitEnabled,
+				isResumed: false
 			)
 		)
 	}

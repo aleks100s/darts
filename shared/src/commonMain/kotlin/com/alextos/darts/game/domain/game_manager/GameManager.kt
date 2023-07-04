@@ -6,6 +6,10 @@ import com.alextos.darts.game.domain.models.GameHistory
 import com.alextos.darts.core.domain.model.Shot
 import com.alextos.darts.game.domain.TurnLimitReachedException
 import com.alextos.darts.game.domain.models.GameSettings
+import com.alextos.darts.game.domain.models.PlayerGameValue
+import com.alextos.darts.game.domain.models.PlayerHistory
+import com.alextos.darts.game.domain.useCases.DeleteGameUseCase
+import com.alextos.darts.game.domain.useCases.GetGameHistoryOnceUseCase
 import com.alextos.darts.game.domain.useCases.SaveGameHistoryUseCase
 import com.alextos.darts.game.presentation.game.TurnState
 import com.alextos.darts.game.domain.useCases.GetPlayerAverageTurnUseCase
@@ -17,6 +21,8 @@ import kotlinx.datetime.toLocalDateTime
 
 class GameManager(
     private val saveGameHistoryUseCase: SaveGameHistoryUseCase,
+    private val getGameHistoryOnceUseCase: GetGameHistoryOnceUseCase,
+    private val deleteGameUseCase: DeleteGameUseCase,
     getPlayerAverageTurnUseCase: GetPlayerAverageTurnUseCase,
     gameSettings: GameSettings?
 ) {
@@ -30,39 +36,58 @@ class GameManager(
     private val turnsLimitEnabled = gameSettings?.isTurnLimitEnabled ?: true
     private val isRandomPlayerOrderEnabled = gameSettings?.isRandomPlayersOrderChecked ?: false
     private val isStatisticsEnabled = gameSettings?.isStatisticsEnabled ?: true
-
     private val startTime = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
-
-    private val players = if (isRandomPlayerOrderEnabled) {
-        gameSettings?.selectedPlayers?.shuffled() ?: listOf()
-    } else {
-        gameSettings?.selectedPlayers ?: listOf()
-    }
-
-    private val playerHistoryManagers by lazy {
-        players.map { player ->
-            PlayerHistoryManager(player, goal, finishWithDoubles)
-        }
-    }
+    private val players: List<Player>
+    private val playerHistoryManagers: MutableStateFlow<List<PlayerHistoryManager>>
 
     private val _turnState: MutableStateFlow<TurnState> = MutableStateFlow(TurnState.IsOngoing)
     val turnState: StateFlow<TurnState> = _turnState
 
-    private val _currentPlayer = MutableStateFlow(players[0])
-    val currentPlayer: StateFlow<Player> = _currentPlayer
+    private val _currentPlayer: MutableStateFlow<Player>
+    val currentPlayer: StateFlow<Player>
 
     private val _gameResult = MutableStateFlow<GameResult?>(null)
     val gameResult: StateFlow<GameResult?> = _gameResult
 
-    val gameHistory = combine(playerHistoryManagers.map { it.playerHistory }) { array ->
-        array.toList()
-    }
-
-    val averageTurns = combine(
-        players.map { getPlayerAverageTurnUseCase.execute(it) }
-    ) { it.toList() }
+    val gameHistory: Flow<List<PlayerHistory>>
+    val averageTurns: Flow<List<PlayerGameValue>>
 
     var currentTurn = 1
+
+    init {
+        players = if (isRandomPlayerOrderEnabled && gameSettings?.isResumed != true) {
+            gameSettings?.selectedPlayers?.shuffled() ?: listOf()
+        } else {
+            gameSettings?.selectedPlayers ?: listOf()
+        }
+
+        _currentPlayer = MutableStateFlow(players[0])
+        currentPlayer = _currentPlayer
+
+        playerHistoryManagers = MutableStateFlow(
+            players.map { player ->
+                PlayerHistoryManager(player, goal, finishWithDoubles)
+            }
+        )
+        gameHistory = combine(playerHistoryManagers.value.map { it.playerHistory }) { array ->
+            array.toList()
+        }
+
+        averageTurns = combine(
+            players.map { getPlayerAverageTurnUseCase.execute(it) }
+        ) { it.toList() }
+    }
+
+    suspend fun restorePausedGame(game: Game) {
+        getGameHistoryOnceUseCase.execute(game.id ?: 0, game.players)
+            .map { playerHistory ->
+                playerHistoryManagers.value.firstOrNull { playerHistoryManager ->
+                    playerHistoryManager.player == playerHistory.player
+                }?.setHistory(playerHistory)
+            }
+
+        deleteGameUseCase.execute(game)
+    }
 
     fun makeShot(shot: Shot) {
         if (_gameResult.value != null || turnState.value.isInputDisabled()) {
@@ -101,7 +126,7 @@ class GameManager(
     }
 
     private fun currentPlayerHistoryManager(): PlayerHistoryManager {
-        return playerHistoryManagers[players.indexOf(currentPlayer.value)]
+        return playerHistoryManagers.value[players.indexOf(currentPlayer.value)]
     }
 
     private fun nextTurn() {
@@ -133,7 +158,7 @@ class GameManager(
             finishGame(winner = null, isOngoing = isOngoing)
             return
         }
-        val playerHistories = playerHistoryManagers.map { it.playerHistory.value }
+        val playerHistories = playerHistoryManagers.value.map { it.playerHistory.value }
         val playerHistoryWithHighestScore = playerHistories.minBy { it.leftAfter }
         val highestScoreCount = playerHistories.count { it.leftAfter == playerHistoryWithHighestScore.leftAfter }
         if (highestScoreCount > 1 || playerHistories.count() == 1) {
@@ -158,7 +183,7 @@ class GameManager(
         )
         val gameHistory = GameHistory(
             game = game,
-            playerHistoryManagers.map { it.playerHistory.value }.sortedBy {
+            playerHistoryManagers.value.map { it.playerHistory.value }.sortedBy {
                 game.players.indexOf(it.player)
             }
         )

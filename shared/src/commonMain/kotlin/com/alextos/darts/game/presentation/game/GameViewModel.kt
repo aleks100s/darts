@@ -4,6 +4,7 @@ import com.alextos.darts.core.domain.model.Player
 import com.alextos.darts.core.domain.model.Shot
 import com.alextos.darts.core.util.toCommonStateFlow
 import com.alextos.darts.game.domain.game_manager.GameManager
+import com.alextos.darts.game.domain.models.Game
 import com.alextos.darts.game.domain.models.GameSettings
 import com.alextos.darts.game.domain.models.PlayerGameValue
 import com.alextos.darts.game.domain.models.PlayerHistory
@@ -15,6 +16,7 @@ import kotlinx.coroutines.launch
 class GameViewModel(
     private val gameManager: GameManager,
     gameSettings: GameSettings?,
+    pausedGame: Game?,
     coroutineScope: CoroutineScope?
 ) {
     private val viewModelScope = coroutineScope ?: CoroutineScope(Dispatchers.Main)
@@ -51,6 +53,14 @@ class GameViewModel(
             GameState()
         )
         .toCommonStateFlow()
+
+    init {
+        pausedGame?.let {
+            viewModelScope.launch(Dispatchers.Default) {
+                gameManager.restorePausedGame(it)
+            }
+        }
+    }
 
     fun onEvent(event: GameEvent) {
         when (event) {

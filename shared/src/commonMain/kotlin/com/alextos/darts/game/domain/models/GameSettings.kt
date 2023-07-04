@@ -10,5 +10,6 @@ data class GameSettings(
     val isFinishWithDoublesChecked: Boolean,
     val isRandomPlayersOrderChecked: Boolean,
     val isStatisticsEnabled: Boolean,
-    val isTurnLimitEnabled: Boolean
+    val isTurnLimitEnabled: Boolean,
+    val isResumed: Boolean
 )

@@ -6,7 +6,7 @@ import com.alextos.darts.core.domain.model.Player
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 
-class GetGameHistoryUseCase(private val dataSource: GameDataSource) {
+class GetGameHistoryFlowUseCase(private val dataSource: GameDataSource) {
 
     fun execute(gameId: Long, players: List<Player>): Flow<List<PlayerHistory>> {
         return combine(

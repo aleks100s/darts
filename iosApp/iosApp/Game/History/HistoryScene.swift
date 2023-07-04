@@ -7,7 +7,7 @@ enum HistoryScene {
 		game: Game,
 		onNavigate: @escaping (HistoryNavigation) -> Void
 	) -> some View {
-		let getGameHistoryUseCase = GetGameHistoryUseCase(dataSource: module.gameDataSource)
+		let getGameHistoryUseCase = GetGameHistoryFlowUseCase(dataSource: module.gameDataSource)
 		let viewModel = HistoryViewModel(
 		   getGameHistoryUseCase: getGameHistoryUseCase,
 		   coroutineScope: nil,

@@ -27,6 +27,7 @@ data class CreateGameState(
         isFinishWithDoublesChecked,
         isRandomPlayersOrderChecked,
         isStatisticsEnabled,
-        isTurnLimitEnabled
+        isTurnLimitEnabled,
+        isResumed = false
     )
 }

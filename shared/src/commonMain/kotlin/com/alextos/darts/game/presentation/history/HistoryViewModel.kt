@@ -1,6 +1,6 @@
 package com.alextos.darts.game.presentation.history
 
-import com.alextos.darts.game.domain.useCases.GetGameHistoryUseCase
+import com.alextos.darts.game.domain.useCases.GetGameHistoryFlowUseCase
 import com.alextos.darts.core.util.toCommonStateFlow
 import com.alextos.darts.game.domain.models.Game
 import com.alextos.darts.game.domain.models.GameDuration
@@ -9,7 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 
 class HistoryViewModel(
-    getGameHistoryUseCase: GetGameHistoryUseCase,
+    getGameHistoryUseCase: GetGameHistoryFlowUseCase,
     coroutineScope: CoroutineScope?,
     game: Game?
 ) {

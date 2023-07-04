@@ -41,6 +41,7 @@ import com.alextos.darts.android.game.in_game_history.InGameHistoryNavigationEve
 import com.alextos.darts.android.game.in_game_history.InGameHistoryScreen
 import com.alextos.darts.android.game.recap.RecapScreen
 import com.alextos.darts.core.domain.model.Turn
+import com.alextos.darts.game.domain.models.Game
 import com.alextos.darts.game.domain.models.GameSettings
 import com.alextos.darts.game.presentation.game.GameState
 import com.alextos.darts.game.presentation.history.HistoryState
@@ -78,9 +79,11 @@ fun GameNavigationRoot() {
                             )
                         }
                         is GameListNavigationEvent.ReplayGame -> {
+                            val pausedGame: Game? = null
                             navController.navigate(
                                 route = GameRoute.Game.routeWithArgs(
-                                    Json.encodeToString(it.game.getGameSettings())
+                                    Json.encodeToString(it.game.getGameSettings()),
+                                    Json.encodeToString(pausedGame)
                                 )
                             )
                         }
@@ -91,7 +94,12 @@ fun GameNavigationRoot() {
                             navController.popBackStack()
                         }
                         is GameListNavigationEvent.ResumeGame -> {
-                            // TODO: continue the game
+                            navController.navigate(
+                                route = GameRoute.Game.routeWithArgs(
+                                    Json.encodeToString(it.game.getGameSettings()),
+                                    Json.encodeToString(it.game)
+                                )
+                            )
                         }
                     }
                 },
@@ -138,9 +146,11 @@ fun GameNavigationRoot() {
                     onNavigation = { event ->
                         when (event) {
                             is CreateGameNavigationEvent.CreateGame -> {
+                                val pausedGame: Game? = null
                                 navController.navigate(
                                     route = GameRoute.Game.routeWithArgs(
-                                        Json.encodeToString(state.getSettings())
+                                        Json.encodeToString(state.getSettings()),
+                                        Json.encodeToString(pausedGame)
                                     )
                                 )
                             }
@@ -161,10 +171,15 @@ fun GameNavigationRoot() {
         }
 
         composable(
-            route = GameRoute.Game.route + "/{settings}",
+            route = GameRoute.Game.route + "/{settings}/{pausedGame}",
             arguments = listOf(
                 navArgument("settings") {
                     type = NavType.StringType
+                },
+                navArgument("pausedGame") {
+                    type = NavType.StringType
+                    nullable = true
+                    defaultValue = null
                 }
             )
         ) { navBackStackEntry ->

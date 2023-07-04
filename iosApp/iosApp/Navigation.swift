@@ -2,7 +2,7 @@ import shared
 
 enum GameTabNavigation: Hashable {
 	case createGame
-	case game(settings: GameSettings)
+	case game(settings: GameSettings, pausedGame: Game?)
 	case inGameHistory(gameHistory: [PlayerHistory], goal: Int32, page: Int)
 	case history(game: Game)
 	case dartsBoard(Turn)

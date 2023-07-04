@@ -84,8 +84,14 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideGetGameHistoryUseCase(dataSource: GameDataSource): GetGameHistoryUseCase {
-        return GetGameHistoryUseCase(dataSource)
+    fun provideGetGameHistoryFlowUseCase(dataSource: GameDataSource): GetGameHistoryFlowUseCase {
+        return GetGameHistoryFlowUseCase(dataSource)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetGameHistoryOnceUseCase(dataSource: GameDataSource): GetGameHistoryOnceUseCase {
+        return GetGameHistoryOnceUseCase(dataSource)
     }
 
     @Provides

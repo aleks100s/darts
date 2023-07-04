@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 
 class PlayerHistoryManager(
-    player: Player,
+    val player: Player,
     goal: Int,
     private val finishWithDoubles: Boolean
 ) {
@@ -22,6 +22,10 @@ class PlayerHistoryManager(
 
     private var reminder: Int = goal
     private var currentShotResult: ShotResult? = null
+
+    fun setHistory(history: PlayerHistory) {
+        _playerHistory.update { history }
+    }
 
     fun makeShot(shot: Shot): TurnState {
         val result = checkShot(shot)

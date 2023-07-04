@@ -93,6 +93,12 @@ class SqlDelightGameDataSource(
             }
     }
 
+    override suspend fun getPlayerHistoryOnce(gameId: Long, player: Player): PlayerHistory {
+        return queries.getPlayerHistory(game_id = gameId, player_id = player.id)
+            .executeAsList()
+            .toPlayerHistory(player)
+    }
+
     override suspend fun deleteGame(game: Game) {
         game.id?.let { gameId ->
             queries.transaction {

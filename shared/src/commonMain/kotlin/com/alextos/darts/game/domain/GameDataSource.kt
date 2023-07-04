@@ -10,5 +10,6 @@ interface GameDataSource {
     fun getGames(): Flow<List<Game>>
     suspend fun saveGameHistory(gameHistory: GameHistory)
     fun getPlayerHistory(gameId: Long, player: Player): Flow<PlayerHistory>
+    suspend fun getPlayerHistoryOnce(gameId: Long, player: Player): PlayerHistory
     suspend fun deleteGame(game: Game)
 }

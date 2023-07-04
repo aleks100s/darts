@@ -20,13 +20,13 @@ struct GameTab: View {
 						navigationStack.append(.history(game: game))
 						
 					case let .replay(game):
-						navigationStack.append(.game(settings: game.getGameSettings()))
+						navigationStack.append(.game(settings: game.getGameSettings(), pausedGame: nil))
 						
 					case .showCalculator:
 						navigationStack.append(.calculator)
 						
 					case let .resumeGame(game):
-						// TODO: continue the game
+						navigationStack.append(.game(settings: game.getGameSettings(), pausedGame: game))
 						break
 					}
 				}
@@ -57,16 +57,17 @@ struct GameTab: View {
 			CreateGameScene.create(
 				using: module,
 				startGame: { settings in
-					navigationStack.append(.game(settings: settings))
+					navigationStack.append(.game(settings: settings, pausedGame: nil))
 				}
 			)
 			.navigationTitle("create_game")
 			.navigationBarTitleDisplayMode(.inline)
 			
-		case let .game(settings):
+		case let .game(settings, pausedGame):
 			GameScene.create(
 				using: module,
 				gameSettings: settings,
+				pausedGame: pausedGame,
 				onNavigation: { navigation in
 					switch navigation {
 					case .gameFinished:
@@ -82,7 +83,7 @@ struct GameTab: View {
 						
 					case .replayGame:
 						navigationStack.append(
-							.game(settings: settings)
+							.game(settings: settings, pausedGame: nil)
 						)
 						
 					case .showGameSettings:

@@ -86,6 +86,7 @@ class GameManager(
                 }?.setHistory(playerHistory)
             }
         restoreCurrentPlayer()
+        restoreCurrentTurnNumber()
         deleteOldGame(game)
     }
 
@@ -94,6 +95,14 @@ class GameManager(
         val playerWithOngoingTurn = playerHistories.firstOrNull { it.turns.lastOrNull()?.shots?.count() != 3 }
         if (playerWithOngoingTurn != null) {
             _currentPlayer.update { playerWithOngoingTurn.player }
+        }
+    }
+
+    private fun restoreCurrentTurnNumber() {
+        val turns = currentPlayerHistoryManager().playerHistory.value.turns
+        currentTurn = turns.count()
+        if (turns.lastOrNull()?.shots?.count() == 3) {
+            currentTurn += 1
         }
     }
 

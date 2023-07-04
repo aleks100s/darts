@@ -8,7 +8,6 @@ import com.alextos.darts.game.domain.TurnLimitReachedException
 import com.alextos.darts.game.domain.models.GameSettings
 import com.alextos.darts.game.domain.models.PlayerGameValue
 import com.alextos.darts.game.domain.models.PlayerHistory
-import com.alextos.darts.game.domain.useCases.DeleteGameUseCase
 import com.alextos.darts.game.domain.useCases.RestoreGameHistoryUseCase
 import com.alextos.darts.game.domain.useCases.SaveGameHistoryUseCase
 import com.alextos.darts.game.presentation.game.TurnState
@@ -17,6 +16,7 @@ import com.alextos.darts.game.presentation.game.GameResult
 import kotlinx.coroutines.flow.*
 import kotlinx.datetime.Clock
 import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toInstant
 import kotlinx.datetime.toLocalDateTime
 
 class GameManager(
@@ -35,7 +35,7 @@ class GameManager(
     private val turnsLimitEnabled = gameSettings?.isTurnLimitEnabled ?: true
     private val isRandomPlayerOrderEnabled = gameSettings?.isRandomPlayersOrderChecked ?: false
     private val isStatisticsEnabled = gameSettings?.isStatisticsEnabled ?: true
-    private val startTime = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
+    private var startTime = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
     private val players: List<Player>
     private val playerHistoryManagers: MutableStateFlow<List<PlayerHistoryManager>>
 
@@ -86,6 +86,7 @@ class GameManager(
             }
         restoreCurrentPlayer()
         restoreCurrentTurnNumber()
+        restoreTime(game)
     }
 
     private fun restoreCurrentPlayer() {
@@ -102,6 +103,17 @@ class GameManager(
         if (turns.lastOrNull()?.shots?.count() == 3) {
             currentTurn += 1
         }
+    }
+
+    private fun restoreTime(game: Game) {
+        if (game.startTimestamp == null) {
+            return
+        }
+        val timeZone = TimeZone.currentSystemDefault()
+        val finishInstant = game.finishTimestamp.toInstant(timeZone)
+        val startInstant = game.startTimestamp.toInstant(timeZone)
+        val gap = finishInstant.minus(startInstant)
+        startTime = startTime.toInstant(timeZone).minus(gap).toLocalDateTime(timeZone)
     }
 
     fun makeShot(shot: Shot) {

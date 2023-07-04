@@ -9,7 +9,7 @@ import com.alextos.darts.game.domain.models.GameSettings
 import com.alextos.darts.game.domain.models.PlayerGameValue
 import com.alextos.darts.game.domain.models.PlayerHistory
 import com.alextos.darts.game.domain.useCases.DeleteGameUseCase
-import com.alextos.darts.game.domain.useCases.GetGameHistoryOnceUseCase
+import com.alextos.darts.game.domain.useCases.RestoreGameHistoryUseCase
 import com.alextos.darts.game.domain.useCases.SaveGameHistoryUseCase
 import com.alextos.darts.game.presentation.game.TurnState
 import com.alextos.darts.game.domain.useCases.GetPlayerAverageTurnUseCase
@@ -21,8 +21,7 @@ import kotlinx.datetime.toLocalDateTime
 
 class GameManager(
     private val saveGameHistoryUseCase: SaveGameHistoryUseCase,
-    private val getGameHistoryOnceUseCase: GetGameHistoryOnceUseCase,
-    private val deleteGameUseCase: DeleteGameUseCase,
+    private val restoreGameHistoryUseCase: RestoreGameHistoryUseCase,
     getPlayerAverageTurnUseCase: GetPlayerAverageTurnUseCase,
     gameSettings: GameSettings?
 ) {
@@ -79,7 +78,7 @@ class GameManager(
     }
 
     suspend fun restorePausedGame(game: Game) {
-        getGameHistoryOnceUseCase.execute(game.id ?: 0, game.players)
+        restoreGameHistoryUseCase.execute(game, game.players)
             .map { playerHistory ->
                 playerHistoryManagers.value.firstOrNull { playerHistoryManager ->
                     playerHistoryManager.player == playerHistory.player
@@ -87,7 +86,6 @@ class GameManager(
             }
         restoreCurrentPlayer()
         restoreCurrentTurnNumber()
-        deleteOldGame(game)
     }
 
     private fun restoreCurrentPlayer() {
@@ -104,10 +102,6 @@ class GameManager(
         if (turns.lastOrNull()?.shots?.count() == 3) {
             currentTurn += 1
         }
-    }
-
-    private suspend fun deleteOldGame(game: Game) {
-        deleteGameUseCase.execute(game)
     }
 
     fun makeShot(shot: Shot) {

@@ -9,13 +9,12 @@ enum GameScene {
 		onNavigation: @escaping (GameNavigation) -> Void
 	) -> some View {
 		let saveGameHistoryUseCase = SaveGameHistoryUseCase(dataSource: module.gameDataSource)
-		let getGameHistoryOnceUseCase = GetGameHistoryOnceUseCase(dataSource: module.gameDataSource)
+		let restoreGameHistoryUseCase = RestoreGameHistoryUseCase(dataSource: module.gameDataSource)
 		let deleteGameUseCase = DeleteGameUseCase(dataSource: module.gameDataSource)
 		let getPlayerAverageTurnUseCase = GetPlayerAverageTurnUseCase(dataSource: module.statisticsDataSource)
 		let gameManager = GameManager(
 			saveGameHistoryUseCase: saveGameHistoryUseCase,
-			getGameHistoryOnceUseCase: getGameHistoryOnceUseCase,
-			deleteGameUseCase: deleteGameUseCase,
+			restoreGameHistoryUseCase: restoreGameHistoryUseCase,
 			getPlayerAverageTurnUseCase: getPlayerAverageTurnUseCase,
 			gameSettings: gameSettings
 		)

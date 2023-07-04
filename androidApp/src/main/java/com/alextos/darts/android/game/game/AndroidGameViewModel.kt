@@ -6,9 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.alextos.darts.game.domain.game_manager.GameManager
 import com.alextos.darts.game.domain.models.Game
 import com.alextos.darts.game.domain.models.GameSettings
-import com.alextos.darts.game.domain.useCases.DeleteGameUseCase
-import com.alextos.darts.game.domain.useCases.GetGameHistoryFlowUseCase
-import com.alextos.darts.game.domain.useCases.GetGameHistoryOnceUseCase
+import com.alextos.darts.game.domain.useCases.RestoreGameHistoryUseCase
 import com.alextos.darts.game.domain.useCases.GetPlayerAverageTurnUseCase
 import com.alextos.darts.game.domain.useCases.SaveGameHistoryUseCase
 import com.alextos.darts.game.presentation.game.GameEvent
@@ -21,8 +19,7 @@ import javax.inject.Inject
 @HiltViewModel
 class AndroidGameViewModel @Inject constructor(
     saveGameHistoryUseCase: SaveGameHistoryUseCase,
-    getGameHistoryOnceUseCase: GetGameHistoryOnceUseCase,
-    deleteGameUseCase: DeleteGameUseCase,
+    restoreGameHistoryUseCase: RestoreGameHistoryUseCase,
     getPlayerAverageTurnUseCase: GetPlayerAverageTurnUseCase,
     savedStateHandle: SavedStateHandle
 ): ViewModel() {
@@ -31,8 +28,7 @@ class AndroidGameViewModel @Inject constructor(
         val pausedGame: Game? = savedStateHandle.get<String>("pausedGame")?.let { Json.decodeFromString(it) }
         val gameManager = GameManager(
             saveGameHistoryUseCase,
-            getGameHistoryOnceUseCase,
-            deleteGameUseCase,
+            restoreGameHistoryUseCase,
             getPlayerAverageTurnUseCase,
             settings
         )

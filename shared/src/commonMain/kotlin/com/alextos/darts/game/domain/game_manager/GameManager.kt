@@ -85,7 +85,19 @@ class GameManager(
                     playerHistoryManager.player == playerHistory.player
                 }?.setHistory(playerHistory)
             }
+        restoreCurrentPlayer()
+        deleteOldGame(game)
+    }
 
+    private fun restoreCurrentPlayer() {
+        val playerHistories = playerHistoryManagers.value.map { it.playerHistory.value }
+        val playerWithOngoingTurn = playerHistories.firstOrNull { it.turns.lastOrNull()?.shots?.count() != 3 }
+        if (playerWithOngoingTurn != null) {
+            _currentPlayer.update { playerWithOngoingTurn.player }
+        }
+    }
+
+    private suspend fun deleteOldGame(game: Game) {
         deleteGameUseCase.execute(game)
     }
 

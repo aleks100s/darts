@@ -25,6 +25,7 @@ class PlayerHistoryManager(
 
     fun setHistory(history: PlayerHistory) {
         _playerHistory.update { history }
+        reminder -= history.turns.flatMap { it.shots }.sumOf { it.sector.value }
     }
 
     fun makeShot(shot: Shot): TurnState {

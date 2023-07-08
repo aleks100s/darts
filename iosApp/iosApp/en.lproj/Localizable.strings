@@ -85,9 +85,9 @@
 "number_of_turns %d" = "Number of turns: %d";
 "average_calculator %d" = "Average turn: %d";
 "time_statistics" = "Time played";
-"time_duration %d %d %d" = "%d hour %d min %d ses";
+"time_duration %d %d %d" = "%d hour %d min %d sec";
 "turn_limit" = "Limit number of turns (20)";
-"game_title_with_turn_counter %d" = "Game (turn %d)";
+"game_title_with_turn_counter %d" = "Game・Turn %d";
 "training_finished" = "Training is over";
 "game_result_is_draw" = "Draw";
 "game_settings" = "Game settings";

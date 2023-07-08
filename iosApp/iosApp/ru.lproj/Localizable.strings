@@ -87,7 +87,7 @@
 "time_statistics" = "Время игры";
 "time_duration %d %d %d" = "%d час %d мин %d сек";
 "turn_limit" = "Ограничение количества ходов (20)";
-"game_title_with_turn_counter %d" = "Игра (ход %d)";
+"game_title_with_turn_counter %d" = "Игра・Ход %d";
 "training_finished" = "Тренировка окончена";
 "game_result_is_draw" = "Ничья";
 "game_settings" = "Настройки игры";

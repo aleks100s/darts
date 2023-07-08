@@ -100,6 +100,9 @@ class GameManager(
     private fun restoreCurrentTurnNumber() {
         val turns = currentPlayerHistoryManager().playerHistory.value.turns
         currentTurn = turns.count()
+        if (currentTurn == 0) {
+            currentTurn += 1
+        }
         if (turns.lastOrNull()?.shots?.count() == 3) {
             currentTurn += 1
         }

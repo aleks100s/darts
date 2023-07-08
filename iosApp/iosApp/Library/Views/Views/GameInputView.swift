@@ -65,8 +65,7 @@ struct GameInputView: View {
 			VStack(spacing: 4) {
 				Text(result.player.name)
 				Text("game_player_result \(result.score)")
-					.foregroundColor(Color.accentColor)
-					.underline()
+					.linkStyle()
 				if isStatisticsEnabled {
 					Text("game_player_avg \(result.turnAverage) \(result.overallTurnAverage)")
 						.font(.caption)

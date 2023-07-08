@@ -29,11 +29,10 @@ struct CalculatorScreen: View {
 			VStack(alignment: .center) {
 				Text("game_player_result \(viewModel.state.score)")
 					.font(.title)
+					.linkStyle()
 				
-				if let average = viewModel.state.average {
-					Text("average_calculator \(average.int32Value)")
-						.font(.caption)
-				}
+				Text("average_calculator \(viewModel.state.average?.int32Value ?? 0)")
+					.font(.caption)
 				
 				Text("turn_number \(viewModel.state.turnNumber)")
 					.font(.caption)

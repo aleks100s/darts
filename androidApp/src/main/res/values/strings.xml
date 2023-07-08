@@ -88,7 +88,7 @@
     <string name="time_statistics">Time played</string>
     <string name="time_duration">%1$d hour %2$d min %3$d sec</string>
     <string name="turn_limit">Limit number of turns (20)</string>
-    <string name="game_title_with_turn_counter">Game (turn %1$d)</string>
+    <string name="game_title_with_turn_counter">Game・Turn %1$d</string>
     <string name="training_finished">Training is over</string>
     <string name="game_result_is_draw">Draw</string>
     <string name="game_settings">Game settings</string>

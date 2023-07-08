@@ -88,7 +88,7 @@
     <string name="time_statistics">Время игры</string>
     <string name="time_duration">%1$d час %2$d мин %3$d сек</string>
     <string name="turn_limit">Ограничение количества ходов (20)</string>
-    <string name="game_title_with_turn_counter">Игра (ход %1$d)</string>
+    <string name="game_title_with_turn_counter">Игра・Ход %1$d</string>
     <string name="training_finished">Тренировка окончена</string>
     <string name="game_result_is_draw">Ничья</string>
     <string name="game_settings">Настройки игры</string>

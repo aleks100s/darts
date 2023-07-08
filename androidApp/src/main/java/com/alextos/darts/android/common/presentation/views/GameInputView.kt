@@ -149,16 +149,10 @@ private fun GamePlayerItem(
             .width(width)
             .padding(vertical = 8.dp)
     ) {
-        Text(
-            text = result.player.name,
-            color = textColor,
-            style = MaterialTheme.typography.h3,
-            maxLines = 1
-        )
+        LinkText(text = result.player.name, style = MaterialTheme.typography.h3)
         Text(
             text = stringResource(id = R.string.game_player_result, result.score),
-            color = MaterialTheme.colors.primary,
-            textDecoration = TextDecoration.Underline
+            color = textColor
         )
         if (isStatisticsEnabled) {
             Text(

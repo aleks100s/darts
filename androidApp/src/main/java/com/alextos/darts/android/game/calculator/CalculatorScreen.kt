@@ -18,6 +18,7 @@ import com.alextos.darts.android.R
 import com.alextos.darts.android.common.presentation.components.FAB
 import com.alextos.darts.android.common.presentation.components.InputHintRow
 import com.alextos.darts.android.common.presentation.components.InputMatrix
+import com.alextos.darts.android.common.presentation.components.LinkText
 import com.alextos.darts.android.common.presentation.components.TurnItem
 import com.alextos.darts.android.common.presentation.extensions.surfaceBackground
 import com.alextos.darts.android.common.presentation.screens.Screen
@@ -53,17 +54,15 @@ fun CalculatorScreen(
                         .clickable { onNavigation(CalculatorNavigationEvent.ShowHistory(state.turns)) }
                         .padding(16.dp)
                 ) {
-                    Text(
+                    LinkText(
                         text = stringResource(id = R.string.game_player_result, state.score),
                         style = MaterialTheme.typography.h2
                     )
 
-                    state.average?.let { average ->
-                        Text(
-                            text = stringResource(id = R.string.average_calculator, average),
-                            style = MaterialTheme.typography.caption
-                        )
-                    }
+                    Text(
+                        text = stringResource(id = R.string.average_calculator, state.average ?: 0),
+                        style = MaterialTheme.typography.caption
+                    )
 
                     Text(
                         text = stringResource(id = R.string.turn_number, state.turnNumber),

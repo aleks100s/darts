@@ -92,10 +92,12 @@ class GameManager(
 
     private fun restoreCurrentPlayer() {
         val playerHistories = playerHistoryManagers.value.map { it.playerHistory.value }
-        val playerWithOngoingTurn = playerHistories.minByOrNull { it.turns.count() }
-            ?: playerHistories.firstOrNull { it.turns.lastOrNull()?.shots?.count() != Turn.turnLimit }
-        if (playerWithOngoingTurn != null) {
-            _currentPlayer.update { playerWithOngoingTurn.player }
+        var playerWithOngoingTurn = playerHistories.firstOrNull { it.turns.lastOrNull()?.shots?.count() != Turn.turnLimit }
+        if (playerWithOngoingTurn == null) {
+            playerWithOngoingTurn = playerHistories.minByOrNull { it.turns.count() }
+        }
+        playerWithOngoingTurn?.let { history ->
+            _currentPlayer.update { history.player }
         }
     }
 

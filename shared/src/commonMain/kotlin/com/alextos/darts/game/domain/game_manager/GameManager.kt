@@ -4,6 +4,7 @@ import com.alextos.darts.core.domain.model.Player
 import com.alextos.darts.game.domain.models.Game
 import com.alextos.darts.game.domain.models.GameHistory
 import com.alextos.darts.core.domain.model.Shot
+import com.alextos.darts.core.domain.model.Turn
 import com.alextos.darts.game.domain.TurnLimitReachedException
 import com.alextos.darts.game.domain.models.GameSettings
 import com.alextos.darts.game.domain.models.PlayerGameValue
@@ -91,7 +92,8 @@ class GameManager(
 
     private fun restoreCurrentPlayer() {
         val playerHistories = playerHistoryManagers.value.map { it.playerHistory.value }
-        val playerWithOngoingTurn = playerHistories.firstOrNull { it.turns.lastOrNull()?.shots?.count() != 3 }
+        val playerWithOngoingTurn = playerHistories.minByOrNull { it.turns.count() }
+            ?: playerHistories.firstOrNull { it.turns.lastOrNull()?.shots?.count() != Turn.turnLimit }
         if (playerWithOngoingTurn != null) {
             _currentPlayer.update { playerWithOngoingTurn.player }
         }

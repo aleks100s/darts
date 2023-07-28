@@ -101,4 +101,4 @@
 "game_progress_saved" = "Game progress successfully saved";
 "finished_games" = "Finished games";
 "ongoing_games" = "Paused games";
-"continue_game" = "Continue the game";
+"continue_game" = "Resume game";

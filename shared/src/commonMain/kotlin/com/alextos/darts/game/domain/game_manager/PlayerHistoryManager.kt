@@ -26,6 +26,8 @@ class PlayerHistoryManager(
     fun setHistory(history: PlayerHistory) {
         _playerHistory.update { history }
         reminder -= history.turns.flatMap { it.shots }.sumOf { it.sector.value }
+        val shots = history.turns.lastOrNull { it.shots.count() < Turn.turnLimit }?.shots ?: listOf()
+        currentTurnShots.addAll(shots)
     }
 
     fun makeShot(shot: Shot): TurnState {

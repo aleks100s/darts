@@ -99,5 +99,5 @@
     <string name="pause_game">Save game progress</string>
     <string name="leave_without_saving">Leave the game without saving</string>
     <string name="game_progress_saved">Game progress successfully saved</string>
-    <string name="continue_game">Continue the game</string>
+    <string name="continue_game">Resume game</string>
 </resources>
